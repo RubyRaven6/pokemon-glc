@@ -184,7 +184,7 @@ const struct ItemInfo gItemsInfo[] =
             "An unusual Ball\n"
             "warped through\n"
             "space and time."),
-        .pocket = POCKET_CONSUMABLES,
+        .pocket = POCKET_DUMMY,
         .type = ITEM_USE_BAG_MENU,
         .battleUsage = EFFECT_ITEM_THROW_BALL,
         .secondaryId = BALL_STRANGE,
@@ -200,7 +200,7 @@ const struct ItemInfo gItemsInfo[] =
             "A tool used for\n"
             "catching wild\n"
             "Pokémon."),
-        .pocket = POCKET_CONSUMABLES,
+        .pocket = POCKET_DUMMY,
         .type = ITEM_USE_BAG_MENU,
         .battleUsage = EFFECT_ITEM_THROW_BALL,
         .secondaryId = BALL_POKE,
