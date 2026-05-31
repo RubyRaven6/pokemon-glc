@@ -5,7 +5,7 @@
 #include "battle_pyramid.h"
 #include "frontier_util.h"
 #include "battle_pyramid_bag.h"
-#include "berry_tag_screen.h"
+// #include "berry_tag_screen.h"
 #include "bg.h"
 #include "data.h"
 #include "decompress.h"
@@ -201,7 +201,7 @@ static void ItemMenu_Register(u8);
 static void ItemMenu_Give(u8);
 static void ItemMenu_Cancel(u8);
 static void ItemMenu_UseInBattle(u8);
-static void ItemMenu_CheckTag(u8);
+// static void ItemMenu_CheckTag(u8);
 static void ItemMenu_Show(u8);
 static void ItemMenu_GiveFavorLady(u8);
 static void ItemMenu_ConfirmQuizLady(u8);
@@ -990,7 +990,7 @@ static void BagMenu_ItemPrintCallback(u8 windowId, u32 itemIndex, u8 y)
 {
     if (itemIndex != LIST_CANCEL)
     {
-        s32 offset;
+        // s32 offset;
 
         if (gBagMenu->toSwapPos != NOT_SWAPPING)
         {
@@ -1007,6 +1007,9 @@ static void BagMenu_ItemPrintCallback(u8 windowId, u32 itemIndex, u8 y)
         if (gBagPosition.pocket == POCKET_TM_HM && GetItemTMHMIndex(itemSlot.itemId) > NUM_TECHNICAL_MACHINES)
             BlitBitmapToWindow(windowId, gBagMenuHMIcon_Gfx, 8, y - 1, 16, 16);
 
+        if (gSaveBlock1Ptr->registeredItem != ITEM_NONE && gSaveBlock1Ptr->registeredItem == itemSlot.itemId)
+                BlitBitmapToWindow(windowId, sRegisteredSelect_Gfx, 96, y - 1, 24, 16);
+        /*
         if (gBagPosition.pocket != POCKET_KEY_ITEMS && GetItemImportance(itemSlot.itemId) == FALSE)
         {
             // Print item quantity
@@ -1021,6 +1024,7 @@ static void BagMenu_ItemPrintCallback(u8 windowId, u32 itemIndex, u8 y)
             if (gSaveBlock1Ptr->registeredItem != ITEM_NONE && gSaveBlock1Ptr->registeredItem == itemSlot.itemId)
                 BlitBitmapToWindow(windowId, sRegisteredSelect_Gfx, 96, y - 1, 24, 16);
         }
+        */
     }
 }
 
@@ -2072,11 +2076,11 @@ static void HandleErrorMessage(u8 taskId)
     }
 }
 
-static void ItemMenu_CheckTag(u8 taskId)
-{
-    gBagMenu->newScreenCallback = DoBerryTagScreen;
-    Task_FadeAndCloseBagMenu(taskId);
-}
+// static void ItemMenu_CheckTag(u8 taskId)
+// {
+//     gBagMenu->newScreenCallback = DoBerryTagScreen;
+//     Task_FadeAndCloseBagMenu(taskId);
+// }
 
 static void ItemMenu_Cancel(u8 taskId)
 {
