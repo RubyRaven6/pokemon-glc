@@ -93,9 +93,11 @@ struct ItemSlot NONNULL BagPocket_GetSlotData(struct BagPocket *pocket, u32 pock
 {
     switch (pocket->id)
     {
-    case POCKET_ITEMS:
+    case POCKET_HELD_ITEMS:
     case POCKET_KEY_ITEMS:
-    case POCKET_POKE_BALLS:
+    case POCKET_CONSUMABLES:
+    case POCKET_MEGA_STONES:
+    case POCKET_Z_CRYSTALS:
     case POCKET_TM_HM:
     case POCKET_BERRIES:
         return BagPocket_GetSlotDataGeneric(pocket, pocketPos);
@@ -116,9 +118,11 @@ void NONNULL BagPocket_SetSlotData(struct BagPocket *pocket, u32 pocketPos, stru
 
     switch (pocket->id)
     {
-    case POCKET_ITEMS:
+    case POCKET_HELD_ITEMS:
     case POCKET_KEY_ITEMS:
-    case POCKET_POKE_BALLS:
+    case POCKET_CONSUMABLES:
+    case POCKET_MEGA_STONES:
+    case POCKET_Z_CRYSTALS:
     case POCKET_TM_HM:
     case POCKET_BERRIES:
         BagPocket_SetSlotDataGeneric(pocket, pocketPos, newSlot);
@@ -142,17 +146,17 @@ void ApplyNewEncryptionKeyToBagItems(u32 newKey)
 
 void SetBagItemsPointers(void)
 {
-    gBagPockets[POCKET_ITEMS].itemSlots = gSaveBlock1Ptr->bag.items;
-    gBagPockets[POCKET_ITEMS].capacity = BAG_ITEMS_COUNT;
-    gBagPockets[POCKET_ITEMS].id = POCKET_ITEMS;
+    gBagPockets[POCKET_HELD_ITEMS].itemSlots = gSaveBlock1Ptr->bag.items;
+    gBagPockets[POCKET_HELD_ITEMS].capacity = BAG_ITEMS_COUNT;
+    gBagPockets[POCKET_HELD_ITEMS].id = POCKET_HELD_ITEMS;
 
     gBagPockets[POCKET_KEY_ITEMS].itemSlots = gSaveBlock1Ptr->bag.keyItems;
     gBagPockets[POCKET_KEY_ITEMS].capacity = BAG_KEYITEMS_COUNT;
     gBagPockets[POCKET_KEY_ITEMS].id = POCKET_KEY_ITEMS;
 
-    gBagPockets[POCKET_POKE_BALLS].itemSlots = gSaveBlock1Ptr->bag.pokeBalls;
-    gBagPockets[POCKET_POKE_BALLS].capacity = BAG_POKEBALLS_COUNT;
-    gBagPockets[POCKET_POKE_BALLS].id = POCKET_POKE_BALLS;
+    gBagPockets[POCKET_CONSUMABLES].itemSlots = gSaveBlock1Ptr->bag.pokeBalls;
+    gBagPockets[POCKET_CONSUMABLES].capacity = BAG_POKEBALLS_COUNT;
+    gBagPockets[POCKET_CONSUMABLES].id = POCKET_CONSUMABLES;
 
     gBagPockets[POCKET_TM_HM].itemSlots = gSaveBlock1Ptr->bag.TMsHMs;
     gBagPockets[POCKET_TM_HM].capacity = BAG_TMHM_COUNT;

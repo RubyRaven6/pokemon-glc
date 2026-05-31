@@ -1196,7 +1196,7 @@ static void Task_ReturnToItemListAfterItemPurchase(u8 taskId)
         u16 premierBallsToAdd = tItemCount / 10;
         if (premierBallsToAdd >= 1
          && ((I_PREMIER_BALL_BONUS <= GEN_7 && tItemId == ITEM_POKE_BALL)
-          || (I_PREMIER_BALL_BONUS >= GEN_8 && (GetItemPocket(tItemId) == POCKET_POKE_BALLS))))
+          || (I_PREMIER_BALL_BONUS >= GEN_8 && (GetItemPocket(tItemId) == POCKET_CONSUMABLES))))
         {
             u32 spaceAvailable = GetFreeSpaceForItemInBag(ITEM_PREMIER_BALL);
             if (spaceAvailable < premierBallsToAdd)

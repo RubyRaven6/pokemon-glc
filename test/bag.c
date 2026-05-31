@@ -99,15 +99,15 @@ TEST("Berries are sorted correctly in the bag")
 
 TEST("Items are correctly sorted and compacted in the bag")
 {
-    struct BagPocket *pocket = &gBagPockets[POCKET_ITEMS];
+    struct BagPocket *pocket = &gBagPockets[POCKET_HELD_ITEMS];
     memset(pocket->itemSlots, 0, sizeof(gSaveBlock1Ptr->bag.items));
 
-    ASSUME(GetItemPocket(ITEM_NUGGET) == POCKET_ITEMS);
-    ASSUME(GetItemPocket(ITEM_BIG_NUGGET) == POCKET_ITEMS);
-    ASSUME(GetItemPocket(ITEM_TINY_MUSHROOM) == POCKET_ITEMS);
-    ASSUME(GetItemPocket(ITEM_BIG_MUSHROOM) == POCKET_ITEMS);
-    ASSUME(GetItemPocket(ITEM_PEARL) == POCKET_ITEMS);
-    ASSUME(GetItemPocket(ITEM_BIG_PEARL) == POCKET_ITEMS);
+    ASSUME(GetItemPocket(ITEM_NUGGET) == POCKET_HELD_ITEMS);
+    ASSUME(GetItemPocket(ITEM_BIG_NUGGET) == POCKET_HELD_ITEMS);
+    ASSUME(GetItemPocket(ITEM_TINY_MUSHROOM) == POCKET_HELD_ITEMS);
+    ASSUME(GetItemPocket(ITEM_BIG_MUSHROOM) == POCKET_HELD_ITEMS);
+    ASSUME(GetItemPocket(ITEM_PEARL) == POCKET_HELD_ITEMS);
+    ASSUME(GetItemPocket(ITEM_BIG_PEARL) == POCKET_HELD_ITEMS);
 
     RUN_OVERWORLD_SCRIPT(
         additem ITEM_NUGGET;
@@ -132,7 +132,7 @@ TEST("Items are correctly sorted and compacted in the bag")
     EXPECT_EQ(pocket->itemSlots[5].quantity, 1);
     EXPECT_EQ(pocket->itemSlots[6].itemId, ITEM_NONE);
 
-    SortItemsInBag(&gBagPockets[POCKET_ITEMS], SORT_ALPHABETICALLY);
+    SortItemsInBag(&gBagPockets[POCKET_HELD_ITEMS], SORT_ALPHABETICALLY);
 
     EXPECT_EQ(pocket->itemSlots[0].itemId, ITEM_BIG_MUSHROOM);
     EXPECT_EQ(pocket->itemSlots[1].itemId, ITEM_BIG_NUGGET);
@@ -150,7 +150,7 @@ TEST("Items are correctly sorted and compacted in the bag")
         removeitem ITEM_BIG_PEARL;
     );
 
-    CompactItemsInBagPocket(POCKET_ITEMS);
+    CompactItemsInBagPocket(POCKET_HELD_ITEMS);
 
     EXPECT_EQ(pocket->itemSlots[0].itemId, ITEM_NUGGET);
     EXPECT_EQ(pocket->itemSlots[0].quantity, 1);

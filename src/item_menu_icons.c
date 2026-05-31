@@ -58,31 +58,31 @@ static const union AnimCmd sSpriteAnim_Bag_Closed[] =
     ANIMCMD_END
 };
 
-static const union AnimCmd sSpriteAnim_Bag_Items[] =
+static const union AnimCmd sSpriteAnim_Bag_LeftFront[] =
 {
     ANIMCMD_FRAME(64, 4),
     ANIMCMD_END
 };
 
-static const union AnimCmd sSpriteAnim_Bag_KeyItems[] =
+static const union AnimCmd sSpriteAnim_Bag_MainPocket[] =
 {
     ANIMCMD_FRAME(128, 4),
     ANIMCMD_END
 };
 
-static const union AnimCmd sSpriteAnim_Bag_Pokeballs[] =
+static const union AnimCmd sSpriteAnim_Bag_RightFront[] =
 {
     ANIMCMD_FRAME(192, 4),
     ANIMCMD_END
 };
 
-static const union AnimCmd sSpriteAnim_Bag_TMsHMs[] =
+static const union AnimCmd sSpriteAnim_Bag_LeftSide[] =
 {
     ANIMCMD_FRAME(256, 4),
     ANIMCMD_END
 };
 
-static const union AnimCmd sSpriteAnim_Bag_Berries[] =
+static const union AnimCmd sSpriteAnim_Bag_RightSide[] =
 {
     ANIMCMD_FRAME(320, 4),
     ANIMCMD_END
@@ -90,12 +90,14 @@ static const union AnimCmd sSpriteAnim_Bag_Berries[] =
 
 static const union AnimCmd *const sBagSpriteAnimTable[] =
 {
-    [POCKET_ITEMS]      = sSpriteAnim_Bag_Items,
-    [POCKET_POKE_BALLS] = sSpriteAnim_Bag_Pokeballs,
-    [POCKET_TM_HM]      = sSpriteAnim_Bag_TMsHMs,
-    [POCKET_BERRIES]    = sSpriteAnim_Bag_Berries,
-    [POCKET_KEY_ITEMS]  = sSpriteAnim_Bag_KeyItems,
-    [POCKET_DUMMY]       = sSpriteAnim_Bag_Closed,
+    [POCKET_HELD_ITEMS]   = sSpriteAnim_Bag_LeftFront,
+    [POCKET_CONSUMABLES]  = sSpriteAnim_Bag_LeftFront,
+    [POCKET_TM_HM]        = sSpriteAnim_Bag_RightFront,
+    [POCKET_MEGA_STONES]  = sSpriteAnim_Bag_LeftSide,
+    [POCKET_Z_CRYSTALS]   = sSpriteAnim_Bag_LeftSide,
+    [POCKET_BERRIES]      = sSpriteAnim_Bag_RightSide,
+    [POCKET_KEY_ITEMS]    = sSpriteAnim_Bag_MainPocket,
+    [POCKET_DUMMY]        = sSpriteAnim_Bag_Closed,
 };
 
 static const union AffineAnimCmd sSpriteAffineAnim_BagNormal[] =
