@@ -1,42 +1,111 @@
 script EventScript_PWTBattleFalkner{
-    if(var(VAR_GYM_LEADER_3) == TRAINER_LEADER_FALKNER){setflag(FLAG_JOHTO_LEADER_FALKNER)}
-    trainerbattle_single(TRAINER_LEADER_FALKNER, "TRAINER_LEADER_FALKNER", "TRAINER_LEADER_FALKNER lost")
+    trainerbattle_single(TRAINER_LEADER_FALKNER, "TRAINER_LEADER_FALKNER", "TRAINER_LEADER_FALKNER lost", EventScript_PWTBattleFalkner_Money)
     end
+}
+
+script(local) EventScript_PWTBattleFalkner_Money {
+    if(var(VAR_GYM_LEADER_3) == TRAINER_LEADER_FALKNER) {
+        setflag(FLAG_JOHTO_LEADER_FALKNER)
+        addmoney(500)
+    } else {
+        addmoney(250)
+    }
 }
 
 script EventScript_PWTBattleBugsy{
-    if(var(VAR_GYM_LEADER_3) == TRAINER_LEADER_BUGSY){setflag(FLAG_JOHTO_LEADER_BUGSY)}
-    trainerbattle_single(TRAINER_LEADER_BUGSY, "TRAINER_LEADER_BUGSY", "TRAINER_LEADER_BUGSY lost")
+    trainerbattle_single(TRAINER_LEADER_BUGSY, "TRAINER_LEADER_BUGSY", "TRAINER_LEADER_BUGSY lost", EventScript_PWTBattleBugsy_Money)
     end
 }
 
+script(local) EventScript_PWTBattleBugsy_Money {
+    if(var(VAR_GYM_LEADER_3) == TRAINER_LEADER_BUGSY) {
+        setflag(FLAG_JOHTO_LEADER_BUGSY)
+        addmoney(500)
+    } else {
+        addmoney(250)
+    }
+}
+
 script EventScript_PWTBattleWhitney{
-    if(var(VAR_GYM_LEADER_3) == TRAINER_LEADER_WHITNEY){setflag(FLAG_JOHTO_LEADER_WHITNEY)}
-    trainerbattle_single(TRAINER_LEADER_WHITNEY, "TRAINER_LEADER_WHITNEY", "TRAINER_LEADER_WHITNEY lost")
+    trainerbattle_single(TRAINER_LEADER_WHITNEY, "TRAINER_LEADER_WHITNEY", "TRAINER_LEADER_WHITNEY lost", EventScript_PWTBattleWhitney_Money)
     end
 }
+
+script(local) EventScript_PWTBattleWhitney_Money {
+    if(var(VAR_GYM_LEADER_3) == TRAINER_LEADER_WHITNEY) {
+        setflag(FLAG_JOHTO_LEADER_WHITNEY)
+        addmoney(500)
+    } else {
+        addmoney(250)
+    }
+}
+
 script EventScript_PWTBattleMorty{
-    if(var(VAR_GYM_LEADER_3) == TRAINER_LEADER_MORTY){setflag(FLAG_JOHTO_LEADER_MORTY)}
-    trainerbattle_single(TRAINER_LEADER_MORTY, "TRAINER_LEADER_MORTY", "TRAINER_LEADER_MORTY lost")
+    trainerbattle_single(TRAINER_LEADER_MORTY, "TRAINER_LEADER_MORTY", "TRAINER_LEADER_MORTY lost", EventScript_PWTBattleMorty_Money)
     end
 }
+
+script(local) EventScript_PWTBattleMorty_Money {
+    if(var(VAR_GYM_LEADER_3) == TRAINER_LEADER_MORTY) {
+        setflag(FLAG_JOHTO_LEADER_MORTY)
+        addmoney(500)
+    } else {
+        addmoney(250)
+    }
+}
+
 script EventScript_PWTBattleChuck{
-    if(var(VAR_GYM_LEADER_3) == TRAINER_LEADER_CHUCK){setflag(FLAG_JOHTO_LEADER_CHUCK)}
-    trainerbattle_single(TRAINER_LEADER_CHUCK, "TRAINER_LEADER_CHUCK", "TRAINER_LEADER_CHUCK lost")
+    trainerbattle_single(TRAINER_LEADER_CHUCK, "TRAINER_LEADER_CHUCK", "TRAINER_LEADER_CHUCK lost", EventScript_PWTBattleChuck_Money)
     end
 }
+
+script(local) EventScript_PWTBattleChuck_Money {
+    if(var(VAR_GYM_LEADER_3) == TRAINER_LEADER_CHUCK) {
+        setflag(FLAG_JOHTO_LEADER_CHUCK)
+        addmoney(500)
+    } else {
+        addmoney(250)
+    }
+}
+
 script EventScript_PWTBattleJasmine{
-    if(var(VAR_GYM_LEADER_3) == TRAINER_LEADER_JASMINE){setflag(FLAG_JOHTO_LEADER_JASMINE)}
-    trainerbattle_single(TRAINER_LEADER_JASMINE, "TRAINER_LEADER_JASMINE", "TRAINER_LEADER_JASMINE lost")
+    trainerbattle_single(TRAINER_LEADER_JASMINE, "TRAINER_LEADER_JASMINE", "TRAINER_LEADER_JASMINE lost", EventScript_PWTBattleJasmine_Money)
     end
 }
+
+script(local) EventScript_PWTBattleJasmine_Money {
+    if(var(VAR_GYM_LEADER_3) == TRAINER_LEADER_JASMINE) {
+        setflag(FLAG_JOHTO_LEADER_JASMINE)
+        addmoney(500)
+    } else {
+        addmoney(250)
+    }
+}
+
 script EventScript_PWTBattlePryce{
-    if(var(VAR_GYM_LEADER_3) == TRAINER_LEADER_PRYCE){setflag(FLAG_JOHTO_LEADER_PRYCE)}
-    trainerbattle_single(TRAINER_LEADER_PRYCE, "TRAINER_LEADER_PRYCE", "TRAINER_LEADER_PRYCE lost")
+    trainerbattle_single(TRAINER_LEADER_PRYCE, "TRAINER_LEADER_PRYCE", "TRAINER_LEADER_PRYCE lost", EventScript_PWTBattlePryce_Money)
     end
 }
+
+script(local) EventScript_PWTBattlePryce_Money {
+    if(var(VAR_GYM_LEADER_3) == TRAINER_LEADER_PRYCE) {
+        setflag(FLAG_JOHTO_LEADER_PRYCE)
+        addmoney(500)
+    } else {
+        addmoney(250)
+    }
+}
+
 script EventScript_PWTBattleClair{
-    if(var(VAR_GYM_LEADER_3) == TRAINER_LEADER_CLAIR){setflag(FLAG_JOHTO_LEADER_CLAIR)}
-    trainerbattle_single(TRAINER_LEADER_CLAIR, "TRAINER_LEADER_CLAIR", "TRAINER_LEADER_CLAIR lost")
+    trainerbattle_single(TRAINER_LEADER_CLAIR, "TRAINER_LEADER_CLAIR", "TRAINER_LEADER_CLAIR lost", EventScript_PWTBattleClair_Money)
     end
+}
+
+script(local) EventScript_PWTBattleClair_Money {
+    if(var(VAR_GYM_LEADER_3) == TRAINER_LEADER_CLAIR) {
+        setflag(FLAG_JOHTO_LEADER_CLAIR)
+        addmoney(500)
+    } else {
+        addmoney(250)
+    }
 }

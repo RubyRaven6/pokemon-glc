@@ -1,42 +1,111 @@
 script EventScript_PWTBattleRoark{
-    if(var(VAR_GYM_LEADER_3) == TRAINER_LEADER_ROARK){setflag(FLAG_SINNOH_LEADER_ROARK)}
-    trainerbattle_single(TRAINER_LEADER_ROARK, "TRAINER_LEADER_ROARK", "TRAINER_LEADER_ROARK lost")
+    trainerbattle_single(TRAINER_LEADER_ROARK, "TRAINER_LEADER_ROARK", "TRAINER_LEADER_ROARK lost",EventScript_PWTBattleRoark_Money)
     end
+}
+
+script(local) EventScript_PWTBattleRoark_Money {
+    if(var(VAR_GYM_LEADER_3) == TRAINER_LEADER_ROARK) {
+        setflag(FLAG_SINNOH_LEADER_ROARK)
+        addmoney(500)
+    } else {
+        addmoney(250)
+    }
 }
 
 script EventScript_PWTBattleGardenia{
-    if(var(VAR_GYM_LEADER_3) == TRAINER_LEADER_GARDENIA){setflag(FLAG_SINNOH_LEADER_GARDENIA)}
-    trainerbattle_single(TRAINER_LEADER_GARDENIA, "TRAINER_LEADER_GARDENIA", "TRAINER_LEADER_GARDENIA lost")
+    trainerbattle_single(TRAINER_LEADER_GARDENIA, "TRAINER_LEADER_GARDENIA", "TRAINER_LEADER_GARDENIA lost",EventScript_PWTBattleGardenia_Money)
     end
 }
 
+script(local) EventScript_PWTBattleGardenia_Money {
+    if(var(VAR_GYM_LEADER_3) == TRAINER_LEADER_GARDENIA) {
+        setflag(FLAG_SINNOH_LEADER_GARDENIA)
+        addmoney(500)
+    } else {
+        addmoney(250)
+    }
+}
+
 script EventScript_PWTBattleMaylene{
-    if(var(VAR_GYM_LEADER_3) == TRAINER_LEADER_MAYLENE){setflag(FLAG_SINNOH_LEADER_MAYLENE)}
-    trainerbattle_single(TRAINER_LEADER_MAYLENE, "TRAINER_LEADER_MAYLENE", "TRAINER_LEADER_MAYLENE lost")
+    trainerbattle_single(TRAINER_LEADER_MAYLENE, "TRAINER_LEADER_MAYLENE", "TRAINER_LEADER_MAYLENE lost",EventScript_PWTBattleMaylene_Money)
     end
 }
+
+script(local) EventScript_PWTBattleMaylene_Money {
+    if(var(VAR_GYM_LEADER_3) == TRAINER_LEADER_MAYLENE) {
+        setflag(FLAG_SINNOH_LEADER_MAYLENE)
+        addmoney(500)
+    } else {
+        addmoney(250)
+    }
+}
+
 script EventScript_PWTBattleCrasherWake{
-    if(var(VAR_GYM_LEADER_3) == TRAINER_LEADER_CRASHER_WAKE){setflag(FLAG_SINNOH_LEADER_CRASHERWAKE)}
-    trainerbattle_single(TRAINER_LEADER_CRASHER_WAKE, "TRAINER_LEADER_CRASHER_WAKE", "TRAINER_LEADER_CRASHER_WAKE lost")
+    trainerbattle_single(TRAINER_LEADER_CRASHER_WAKE, "TRAINER_LEADER_CRASHER_WAKE", "TRAINER_LEADER_CRASHER_WAKE lost",EventScript_PWTBattleCrasherWake_Money)
     end
 }
+
+script(local) EventScript_PWTBattleCrasherWake_Money {
+    if(var(VAR_GYM_LEADER_3) == TRAINER_LEADER_CRASHER_WAKE) {
+        setflag(FLAG_SINNOH_LEADER_CRASHERWAKE)
+        addmoney(500)
+    } else {
+        addmoney(250)
+    }
+}
+
 script EventScript_PWTBattleFantina{
-    if(var(VAR_GYM_LEADER_3) == TRAINER_LEADER_FANTINA){setflag(FLAG_SINNOH_LEADER_FANTINA)}
-    trainerbattle_single(TRAINER_LEADER_FANTINA, "TRAINER_LEADER_FANTINA", "TRAINER_LEADER_FANTINA lost")
+    trainerbattle_single(TRAINER_LEADER_FANTINA, "TRAINER_LEADER_FANTINA", "TRAINER_LEADER_FANTINA lost",EventScript_PWTBattleFantina_Money)
     end
 }
+
+script(local) EventScript_PWTBattleFantina_Money {
+    if(var(VAR_GYM_LEADER_3) == TRAINER_LEADER_FANTINA) {
+        setflag(FLAG_SINNOH_LEADER_FANTINA)
+        addmoney(500)
+    } else {
+        addmoney(250)
+    }
+}
+
 script EventScript_PWTBattleByron{
-    if(var(VAR_GYM_LEADER_3) == TRAINER_LEADER_BYRON){setflag(FLAG_SINNOH_LEADER_BYRON)}
-    trainerbattle_single(TRAINER_LEADER_BYRON, "TRAINER_LEADER_BRYCE", "TRAINER_LEADER_BRYCE lost")
+    trainerbattle_single(TRAINER_LEADER_BYRON, "TRAINER_LEADER_BRYCE", "TRAINER_LEADER_BRYCE lost",EventScript_PWTBattleByron_Money)
     end
 }
+
+script(local) EventScript_PWTBattleByron_Money {
+    if(var(VAR_GYM_LEADER_3) == TRAINER_LEADER_BYRON) {
+        setflag(FLAG_SINNOH_LEADER_BYRON)
+        addmoney(500)
+    } else {
+        addmoney(250)
+    }
+}
+
 script EventScript_PWTBattleCandice{
-    if(var(VAR_GYM_LEADER_3) == TRAINER_LEADER_CANDICE_NUTS){setflag(FLAG_SINNOH_LEADER_CANDICE)}
-    trainerbattle_single(TRAINER_LEADER_CANDICE_NUTS, "TRAINER_LEADER_CANDICE_NUTS", "TRAINER_LEADER_CANDICE_NUTS lost")
+    trainerbattle_single(TRAINER_LEADER_CANDICE_NUTS, "TRAINER_LEADER_CANDICE_NUTS", "TRAINER_LEADER_CANDICE_NUTS lost",EventScript_PWTBattleCandice_Money)
     end
 }
+
+script(local) EventScript_PWTBattleCandice_Money {
+    if(var(VAR_GYM_LEADER_3) == TRAINER_LEADER_CANDICE_NUTS) {
+        setflag(FLAG_SINNOH_LEADER_CANDICE)
+        addmoney(500)
+    } else {
+        addmoney(250)
+    }
+}
+
 script EventScript_PWTBattleVolkner{
-    if(var(VAR_GYM_LEADER_3) == TRAINER_LEADER_VOLKNER){setflag(FLAG_SINNOH_LEADER_VOLKNER)}
-    trainerbattle_single(TRAINER_LEADER_VOLKNER, "TRAINER_LEADER_VOLKNER", "TRAINER_LEADER_VOLKNER lost")
+    trainerbattle_single(TRAINER_LEADER_VOLKNER, "TRAINER_LEADER_VOLKNER", "TRAINER_LEADER_VOLKNER lost",EventScript_PWTBattleVolkner_Money)
     end
+}
+
+script(local) EventScript_PWTBattleVolkner_Money {
+    if(var(VAR_GYM_LEADER_3) == TRAINER_LEADER_VOLKNER) {
+        setflag(FLAG_SINNOH_LEADER_VOLKNER)
+        addmoney(500)
+    } else {
+        addmoney(250)
+    }
 }
