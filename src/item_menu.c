@@ -133,7 +133,7 @@ static void AllocateBagItemListBuffers(void);
 static void LoadBagItemListBuffers(u8);
 static void PrintPocketNames(const u8 *, const u8 *);
 static void CopyPocketNameToWindow(u32);
-static void DrawPocketIndicatorSquare(u8, bool8);
+// static void DrawPocketIndicatorSquare(u8, bool8);
 static void CreatePocketScrollArrowPair(void);
 static void CreatePocketSwitchArrowPair(void);
 static void DestroyPocketSwitchArrowPair(void);
@@ -1487,7 +1487,7 @@ static void DrawItemListBgRow(u8 y)
     FillBgTilemapBufferRect_Palette0(2, 17, 14, y + 2, 15, 1);
     ScheduleBgCopyTilemapToVram(2);
 }
-
+/*
 static void DrawPocketIndicatorSquare(u8 x, bool8 isCurrentPocket)
 {
     DebugPrintf("gBagPosition.pocket %u", (gBagPosition.pocket + 4));
@@ -1497,7 +1497,7 @@ static void DrawPocketIndicatorSquare(u8 x, bool8 isCurrentPocket)
         FillBgTilemapBufferRect_Palette0(2, 0x102B, x + 4, 3, 1, 1);
     ScheduleBgCopyTilemapToVram(2);
 }
-
+*/
 static bool8 CanSwapItems(void)
 {
     // Swaps can only be done from the field or in battle (as opposed to while selling items, for example)
