@@ -1,5 +1,7 @@
 mapscripts TestingGrounds_MapScripts {
-
+    MAP_SCRIPT_ON_TRANSITION {
+        setrespawn(HEAL_LOCATION_TESTING_GROUNDS)
+    }
 }
 
 script GenerationSelector {
