@@ -55,3 +55,21 @@ script PWT_Battler2 {
 script PWT_Battler3 {
     goto_pwt_script(VAR_GYM_LEADER_3)
 }
+
+script ScriptWithPokemart {
+	lock
+	message("buymywares.com")
+	waitmessage
+	pokemart(MyMartItems)
+	msgbox("Come again soon.")
+	release
+}
+
+mart MyMartItems {
+	ITEM_LAVA_COOKIE
+	ITEM_MOOMOO_MILK
+	ITEM_RARE_CANDY
+	ITEM_LEMONADE
+	ITEM_BERRY_JUICE
+    ITEM_TM_HAIL
+}
