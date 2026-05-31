@@ -2917,8 +2917,8 @@ BattleScript_LocalBattleLostPrintWhiteOut::
 	waitmessage B_WAIT_TIME_LONG
 	end2
 BattleScript_LocalBattleLostEnd::
-	printstring STRINGID_PLAYERWHITEOUT2_TRAINER
-	waitmessage B_WAIT_TIME_LONG
+	@ printstring STRINGID_PLAYERWHITEOUT2_TRAINER
+	@ waitmessage B_WAIT_TIME_LONG
 	printstring STRINGID_PLAYERWHITEOUT3
 	waitmessage B_WAIT_TIME_LONG
 	end2
@@ -6223,11 +6223,11 @@ BattleScript_QuestionForfeitBattle::
 
 BattleScript_ForfeitBattleGaveMoney::
 	@ getmoneyreward
-.if B_WHITEOUT_MONEY >= GEN_4
-	printstring STRINGID_PLAYERWHITEOUT2_TRAINER
-.else
+@ .if B_WHITEOUT_MONEY >= GEN_4
+	@ printstring STRINGID_PLAYERWHITEOUT2_TRAINER
+@ .else
 	printstring STRINGID_PLAYERWHITEOUT3
-.endif
+@ .endif
 	waitmessage B_WAIT_TIME_LONG
 	end2
 
