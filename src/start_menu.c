@@ -52,6 +52,7 @@
 #include "constants/songs.h"
 #include "sample_ui.h"
 #include "mon_editor.h"
+#include "ui_stat_editor.h"
 
 // Menu actions
 enum
@@ -72,6 +73,7 @@ enum
     MENU_ACTION_DEBUG,
     MENU_ACTION_DEXNAV,
     MENU_ACTION_SAMPLE_UI,
+    MENU_ACTION_STAT_EDITOR,
 };
 
 // Save status
@@ -114,6 +116,7 @@ static bool8 StartMenuBattlePyramidRetireCallback(void);
 static bool8 StartMenuBattlePyramidBagCallback(void);
 static bool8 StartMenuDebugCallback(void);
 static bool8 StartMenuDexNavCallback(void);
+static bool8 StartMenuStatEditorCallback(void);
 
 // Menu callbacks
 static bool8 SaveStartCallback(void);
@@ -211,6 +214,7 @@ static const struct MenuAction sStartMenuItems[] =
     [MENU_ACTION_DEXNAV]          = {gText_MenuDexNav,  {.u8_void = StartMenuDexNavCallback}},
     [MENU_ACTION_DEBUG]           = {sText_MenuDebug,   {.u8_void = StartMenuDebugCallback}},
     // [MENU_ACTION_SAMPLE_UI]       = {sText_SampleUi,    {.u8_void = StartMenuSampleUiCallback}}
+    [MENU_ACTION_STAT_EDITOR]     = {gText_StatEditor,  {.u8_void = StartMenuStatEditorCallback}}
 };
 
 static const struct BgTemplate sBgTemplates_LinkBattleSave[] =
@@ -351,6 +355,8 @@ static void BuildNormalStartMenu(void)
         AddStartMenuAction(MENU_ACTION_POKENAV);
 
     // AddStartMenuAction(MENU_ACTION_SAMPLE_UI);
+    
+    //AddStartMenuAction(MENU_ACTION_STAT_EDITOR);
 
     AddStartMenuAction(MENU_ACTION_PLAYER);
     AddStartMenuAction(MENU_ACTION_SAVE);
@@ -1534,3 +1540,9 @@ static bool8 StartMenuSampleUiCallback(void)
     return TRUE;
 }
 */
+
+static bool8 StartMenuStatEditorCallback(void)
+{
+    CreateTask(Task_OpenStatEditorFromStartMenu, 0);
+    return TRUE;
+}
