@@ -64,19 +64,19 @@ PickerEventObject::
 
 PWT_Battler1::
 # 37 "data/maps/TestingGrounds/scripts.pory"
-	goto_pwt_script VAR_GYM_LEADER_1
+	call_pwt_script VAR_GYM_LEADER_1
 	return
 
 
 PWT_Battler2::
 # 41 "data/maps/TestingGrounds/scripts.pory"
-	goto_pwt_script VAR_GYM_LEADER_2
+	call_pwt_script VAR_GYM_LEADER_2
 	return
 
 
 PWT_Battler3::
 # 45 "data/maps/TestingGrounds/scripts.pory"
-	goto_pwt_script VAR_GYM_LEADER_3
+	call_pwt_script VAR_GYM_LEADER_3
 	return
 
 

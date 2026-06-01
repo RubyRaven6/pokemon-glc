@@ -1,3 +1,68 @@
 mapscripts TestingGrounds_HouseFoyer_MapScripts {
-    
+    MAP_SCRIPT_ON_TRANSITION {
+        setrespawn(HEAL_LOCATION_TESTING_GROUNDS_HOUSE_FOYER)
+        special(HealPlayerParty)
+    }
+    MAP_SCRIPT_ON_FRAME_TABLE [
+        VAR_GENERATION_CTL, 0 {
+            msgbox(format(
+                "Hello, and welcome to the PWT romhack!\p"
+                "To get started, we've given you three starters in your team, and even more in the box!\p"
+                "Once you beat all the gym leaders at the finals (the third round), you unlock the next generation's leaders and Pokemon.\p"
+                "You can then enter the room through the stairs again.\p"
+                "Whenever you've unlocked more generations, you can check the books in the corner to select a generation too!\p"
+                "Doing so also randomizes the gym leaders you may face.\p"
+                "Have fun!"
+                ))
+            closemessage
+            setvar(VAR_GENERATION_CTL, 1)
+            callnative(ChooseRandomGymLeader)
+            call(GivePlayerInitialMons)
+        }
+    ]
+}
+
+script EventScript_TestingGrounds_HouseFoyer_GenerationSelector {
+    lock
+    dynmultipush("Generation 1", 1)
+    if(flag(FLAG_COMPLETED_ROSTER_KANTO)){dynmultipush("Generation 2", 2)}
+    if(flag(FLAG_COMPLETED_ROSTER_JOHTO)){dynmultipush("Generation 3", 3)}
+    if(flag(FLAG_COMPLETED_ROSTER_HOENN)){dynmultipush("Generation 4", 4)}
+    if(flag(FLAG_COMPLETED_ROSTER_SINNOH)){dynmultipush("Generation 5", 5)}
+    dynmultistack(0, 0, FALSE, 3, FALSE, 0, DYN_MULTICHOICE_CB_NONE)
+
+    switch(var(VAR_RESULT)){
+        case 1:
+            choosegeneration(1)
+            bufferstring(STR_VAR_1, "1")
+        case 2:
+            choosegeneration(2)
+            bufferstring(STR_VAR_1, "2")
+        case 3:
+            choosegeneration(3)
+            bufferstring(STR_VAR_1, "3")
+        case 4:
+            choosegeneration(4)
+            bufferstring(STR_VAR_1, "4")
+        case 5:
+            choosegeneration(5)
+            bufferstring(STR_VAR_1, "5")
+        default:
+            bufferstring(STR_VAR_1, "0")
+    }
+
+    setspeaker("Books")
+    msgbox("You've chosen Generation {STR_VAR_1}.")
+    callnative(ChooseRandomGymLeader)
+    msgbox(format("Random gym leaders chosen."))
+    closemessage
+    release
+}
+
+script(local) GivePlayerInitialMons {
+    if(!flag(FLAG_SYS_POKEMON_GET)){setflag(FLAG_SYS_POKEMON_GET)}
+    givemon(SPECIES_VENUSAUR, 100, hpIv=31, atkIv=31, defIv=31, speedIv=31,spDefIv=31)
+    givemon(SPECIES_BLASTOISE, 100, hpIv=31, atkIv=31, defIv=31, speedIv=31,spDefIv=31)
+    givemon(SPECIES_CHARIZARD, 100, hpIv=31, atkIv=31, defIv=31, speedIv=31,spDefIv=31)
+    callnative(GivePlayerUnlockedPokemon)
 }

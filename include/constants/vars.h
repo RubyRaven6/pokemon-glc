@@ -101,16 +101,18 @@
 #define VAR_LOTAD_SIZE_RECORD                            0x404F
 #define VAR_LITTLEROOT_TOWN_STATE                        0x4050
 #define VAR_OLDALE_TOWN_STATE                            0x4051
-#define VAR_DEWFORD_TOWN_STATE                           0x4052 // Unused Var
+#define VAR_GYM_LEADER_BATTLE_COUNT                      0x4052 // Controls whether you're fighting the 1st, 2nd, or 3rd gym leader
 #define VAR_LAVARIDGE_TOWN_STATE                         0x4053
 #define VAR_CURRENT_SECRET_BASE                          0x4054 // was probably allocated for VAR_FALLARBOR_TOWN_STATE at one point
-#define VAR_VERDANTURF_TOWN_STATE                        0x4055 // Unused Var
+//ChooseRandomGymLeader vars
+#define VAR_GYM_LEADER_1                                 0x4055
+#define VAR_GYM_LEADER_2                                 0x4059
+#define VAR_GYM_LEADER_3                                 0x405B
+//ChooseRandomGymLeader vars end
 #define VAR_PACIFIDLOG_TOWN_STATE                        0x4056 // Unused Var
 #define VAR_PETALBURG_CITY_STATE                         0x4057
 #define VAR_SLATEPORT_CITY_STATE                         0x4058
-#define VAR_MAUVILLE_CITY_STATE                          0x4059 // Unused Var
 #define VAR_RUSTBORO_CITY_STATE                          0x405A
-#define VAR_FORTREE_CITY_STATE                           0x405B // Unused Var
 #define VAR_LILYCOVE_CITY_STATE                          0x405C // Unused Var
 #define VAR_MOSSDEEP_CITY_STATE                          0x405D
 #define VAR_SOOTOPOLIS_CITY_STATE                        0x405E
@@ -298,13 +300,11 @@
 #define VAR_RESULT                    0x800D
 #define VAR_ITEM_ID                   0x800E
 #define VAR_LAST_TALKED               0x800F
-#define VAR_MON_BOX_ID                0x8010
-#define VAR_MON_BOX_POS               0x8011
-//ChooseRandomGym Leader Vars
-#define VAR_GYM_LEADER_1              0x8012
-#define VAR_GYM_LEADER_2              0x8013
-#define VAR_GYM_LEADER_3              0x8014
-//End of ChooseRandomGym
+#define VAR_CONTEST_RANK              0x8010
+#define VAR_CONTEST_CATEGORY          0x8011
+#define VAR_MON_BOX_ID                0x8012
+#define VAR_MON_BOX_POS               0x8013
+#define VAR_UNUSED_0x8014             0x8014
 #define VAR_TRAINER_BATTLE_OPPONENT_A 0x8015 // Alias of TRAINER_BATTLE_PARAM.opponentA
 
 #define SPECIAL_VARS_END              0x8015

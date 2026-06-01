@@ -4,58 +4,16 @@ mapscripts TestingGrounds_MapScripts {
     }
 }
 
-script GenerationSelector {
-    lock
-    dynmultipush("Generation 1", 1)
-    if(flag(FLAG_COMPLETED_ROSTER_KANTO)){dynmultipush("Generation 2", 2)}
-    if(flag(FLAG_COMPLETED_ROSTER_JOHTO)){dynmultipush("Generation 3", 3)}
-    if(flag(FLAG_COMPLETED_ROSTER_HOENN)){dynmultipush("Generation 4", 4)}
-    if(flag(FLAG_COMPLETED_ROSTER_SINNOH)){dynmultipush("Generation 5", 5)}
-    dynmultistack(0, 0, FALSE, 3, FALSE, 0, DYN_MULTICHOICE_CB_NONE)
-
-    switch(var(VAR_RESULT)){
-        case 1:
-            choosegeneration(1)
-            bufferstring(STR_VAR_1, "1")
-        case 2:
-            choosegeneration(2)
-            bufferstring(STR_VAR_1, "2")
-        case 3:
-            choosegeneration(3)
-            bufferstring(STR_VAR_1, "3")
-        case 4:
-            choosegeneration(4)
-            bufferstring(STR_VAR_1, "4")
-        case 5:
-            choosegeneration(5)
-            bufferstring(STR_VAR_1, "5")
-        default:
-            bufferstring(STR_VAR_1, "0")
-    }
-
-    msgbox("You've chosen Generation {STR_VAR_1}.")
-    closemessage
-    release
-}
-
-script PickerEventObject {
-    lock
-    callnative(ChooseRandomGymLeader)
-    msgbox(format("Random gym leaders chosen."))
-    closemessage
-    release
-}
-
 script PWT_Battler1 {
-    goto_pwt_script(VAR_GYM_LEADER_1)
+    call_pwt_script(VAR_GYM_LEADER_1)
 }
 
 script PWT_Battler2 {
-    goto_pwt_script(VAR_GYM_LEADER_2)
+    call_pwt_script(VAR_GYM_LEADER_2)
 }
 
 script PWT_Battler3 {
-    goto_pwt_script(VAR_GYM_LEADER_3)
+    call_pwt_script(VAR_GYM_LEADER_3)
 }
 
 script ScriptWithPokemart {

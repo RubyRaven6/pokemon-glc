@@ -1924,7 +1924,8 @@ void CB2_NewGame(void)
     SetFieldVBlankCallback();
     SetMainCallback1(CB1_Overworld);
     SetMainCallback2(CB2_Overworld);
-    VarSet(VAR_GENERATION_CTL, 1);
+    FlagSet(FLAG_SYS_B_DASH);
+    VarSet(VAR_GYM_LEADER_BATTLE_COUNT, 1);
 #if OW_USE_FAKE_RTC
     // Wall clock now track local time so we set it to 10AM to match initial wall clock time
     RtcCalcLocalTimeOffset(0, 10, 0, 0);

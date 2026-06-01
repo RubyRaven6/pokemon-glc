@@ -355,6 +355,12 @@
       "map": "MAP_TESTING_GROUNDS",
       "x": 4,
       "y": 5
+    },
+    {
+      "id": "HEAL_LOCATION_TESTING_GROUNDS_HOUSE_FOYER",
+      "map": "MAP_TESTING_GROUNDS_HOUSE_FOYER",
+      "x": 8,
+      "y": 5
     }
   ]
 }
