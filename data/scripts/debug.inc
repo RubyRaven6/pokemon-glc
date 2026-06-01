@@ -474,7 +474,25 @@ Debug_EventScript_SetHiddenNature::
 
 Debug_EventScript_SetTeraType::
 	special ChoosePartyMon
-	dynmultichoice 0, 0, FALSE, 6, 0, DYN_MULTICHOICE_CB_NONE, Debug_EventScript_SetTeraType_Text_0, Debug_EventScript_SetTeraType_Text_1, Debug_EventScript_SetTeraType_Text_2, Debug_EventScript_SetTeraType_Text_3, Debug_EventScript_SetTeraType_Text_4, Debug_EventScript_SetTeraType_Text_5, Debug_EventScript_SetTeraType_Text_6, Debug_EventScript_SetTeraType_Text_7, Debug_EventScript_SetTeraType_Text_8, Debug_EventScript_SetTeraType_Text_9, Debug_EventScript_SetTeraType_Text_10, Debug_EventScript_SetTeraType_Text_11, Debug_EventScript_SetTeraType_Text_12, Debug_EventScript_SetTeraType_Text_13, Debug_EventScript_SetTeraType_Text_14, Debug_EventScript_SetTeraType_Text_15, Debug_EventScript_SetTeraType_Text_16, Debug_EventScript_SetTeraType_Text_17, Debug_EventScript_SetTeraType_Text_18
+	dynmultipush Debug_EventScript_SetTeraType_Text_0, TYPE_NORMAL
+	dynmultipush Debug_EventScript_SetTeraType_Text_1, TYPE_FIGHTING
+	dynmultipush Debug_EventScript_SetTeraType_Text_2, TYPE_FLYING
+	dynmultipush Debug_EventScript_SetTeraType_Text_3, TYPE_POISON
+	dynmultipush Debug_EventScript_SetTeraType_Text_4, TYPE_GROUND
+	dynmultipush Debug_EventScript_SetTeraType_Text_5, TYPE_ROCK
+	dynmultipush Debug_EventScript_SetTeraType_Text_6, TYPE_BUG
+	dynmultipush Debug_EventScript_SetTeraType_Text_7, TYPE_GHOST
+	dynmultipush Debug_EventScript_SetTeraType_Text_8, TYPE_STEEL
+	dynmultipush Debug_EventScript_SetTeraType_Text_9, TYPE_FIRE
+	dynmultipush Debug_EventScript_SetTeraType_Text_10, TYPE_WATER
+	dynmultipush Debug_EventScript_SetTeraType_Text_11, TYPE_GRASS
+	dynmultipush Debug_EventScript_SetTeraType_Text_12, TYPE_ELECTRIC
+	dynmultipush Debug_EventScript_SetTeraType_Text_13, TYPE_PSYCHIC
+	dynmultipush Debug_EventScript_SetTeraType_Text_14, TYPE_ICE
+	dynmultipush Debug_EventScript_SetTeraType_Text_15, TYPE_DRAGON
+	dynmultipush Debug_EventScript_SetTeraType_Text_16, TYPE_DARK
+	dynmultipush Debug_EventScript_SetTeraType_Text_17, TYPE_FAIRY
+	dynmultistack 0, 0, FALSE, 6, FALSE, 0, DYN_MULTICHOICE_CB_NONE
 	switch VAR_RESULT
 	case MULTI_B_PRESSED, Debug_EventScript_SetTeraTypeClose
 	special SetTeraType_Special
@@ -871,31 +889,28 @@ Debug_EventScript_SetTeraType_Text_8:
 	.string "Steel$"
 
 Debug_EventScript_SetTeraType_Text_9:
-	.string "Mystery$"
-
-Debug_EventScript_SetTeraType_Text_10:
 	.string "Fire$"
 
-Debug_EventScript_SetTeraType_Text_11:
+Debug_EventScript_SetTeraType_Text_10:
 	.string "Water$"
 
-Debug_EventScript_SetTeraType_Text_12:
+Debug_EventScript_SetTeraType_Text_11:
 	.string "Grass$"
 
-Debug_EventScript_SetTeraType_Text_13:
+Debug_EventScript_SetTeraType_Text_12:
 	.string "Electric$"
 
-Debug_EventScript_SetTeraType_Text_14:
+Debug_EventScript_SetTeraType_Text_13:
 	.string "Psychic$"
 
-Debug_EventScript_SetTeraType_Text_15:
+Debug_EventScript_SetTeraType_Text_14:
 	.string "Ice$"
 
-Debug_EventScript_SetTeraType_Text_16:
+Debug_EventScript_SetTeraType_Text_15:
 	.string "Dragon$"
 
-Debug_EventScript_SetTeraType_Text_17:
+Debug_EventScript_SetTeraType_Text_16:
 	.string "Dark$"
 
-Debug_EventScript_SetTeraType_Text_18:
+Debug_EventScript_SetTeraType_Text_17:
 	.string "Fairy$"
