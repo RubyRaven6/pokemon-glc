@@ -143,7 +143,7 @@ static u8 SaveReturnErrorCallback(void);
 static u8 BattlePyramidConfirmRetireCallback(void);
 static u8 BattlePyramidRetireYesNoCallback(void);
 static u8 BattlePyramidRetireInputCallback(void);
-static bool8 StartMenuSampleUiCallback(void);
+// static bool8 StartMenuSampleUiCallback(void);
 
 // Task callbacks
 static void StartMenuTask(u8 taskId);
