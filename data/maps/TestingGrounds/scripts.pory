@@ -75,3 +75,14 @@ mart MyMartItems {
 	ITEM_BERRY_JUICE
     ITEM_TM_HAIL
 }
+
+script ChooseWhatToDoWithPokemon {
+    dynmultichoice(0,0,FALSE, 2, 0, DYN_MULTICHOICE_CB_NONE, "Natures", "Ability")
+    switch(var(VAR_RESULT))
+    {
+        case 0:
+            call(Debug_EventScript_SetHiddenNature)
+        case 1:
+            call(Debug_EventScript_SetAbility)
+    }
+}
