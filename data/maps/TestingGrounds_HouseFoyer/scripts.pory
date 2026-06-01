@@ -70,6 +70,7 @@ script EventScript_TestingGrounds_HouseFoyer_ChooseWhatToDoWithPokemon {
         case 1:
             call(Debug_EventScript_SetAbility)
     }
+    closemessage
 }
 
 script EventScript_TestingGrounds_HouseFoyer_HeldItemMarket{
@@ -133,12 +134,10 @@ mart HeldItemMarket {
     ITEM_TWISTED_SPOON
     ITEM_TWISTEDSPOON
     ITEM_SILVER_POWDER
-    ITEM_SILVERPOWDER
     ITEM_HARD_STONE
     ITEM_SPELL_TAG
     ITEM_DRAGON_FANG
     ITEM_BLACK_GLASSES
-    ITEM_BLACKGLASSES
     ITEM_METAL_COAT
     ITEM_FAIRY_FEATHER
     // Choice Items
