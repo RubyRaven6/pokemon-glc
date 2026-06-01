@@ -231,9 +231,6 @@ void ChooseRandomGymLeader(void) {
     VarSet(VAR_GYM_LEADER_1, sGymLeaderRosters[gen].roster[leader1]);
     VarSet(VAR_GYM_LEADER_2, sGymLeaderRosters[gen].roster[leader2]);
     VarSet(VAR_GYM_LEADER_3, sGymLeaderRosters[gen].roster[leader3]);
-    DebugPrintf("VAR_GYM_LEADER_1 %u", sGymLeaderRosters[gen].roster[leader1]);
-    DebugPrintf("VAR_GYM_LEADER_2 %u", sGymLeaderRosters[gen].roster[leader2]);
-    DebugPrintf("VAR_GYM_LEADER_3 %u", sGymLeaderRosters[gen].roster[leader3]);
 };
 
 void Script_goto_pwt_battle_script(struct ScriptContext *ctx)
@@ -242,7 +239,6 @@ void Script_goto_pwt_battle_script(struct ScriptContext *ctx)
 
     Script_RequestEffects(SCREFF_V1);
 
-    DebugPrintf("trainerId: %d, script: %07x", trainerId, sPWTBattleScripts[trainerId]);
     ScriptCall(ctx, sPWTBattleScripts[trainerId]);
 }
 
