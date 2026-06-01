@@ -343,7 +343,7 @@ static const u32 sSampleUiTilemap[] = INCBIN_U32("graphics/sample_ui/tilemap.bin
  * CRLF. To remedy this, run your JASC palette file through a tool like unix2dos and you shouldn't have any more
  * problems.
  */
-static const u16 sSampleUiPalette[] = INCBIN_U16("graphics/sample_ui/00.gbapal");
+static const u16 sSampleUiPalette[] = INCBIN_U16("graphics/sample_ui/tiles.gbapal");
 
 // Define some font color values that will index into our font color table below.
 enum FontColor

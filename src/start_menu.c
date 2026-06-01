@@ -51,6 +51,7 @@
 #include "constants/rgb.h"
 #include "constants/songs.h"
 #include "sample_ui.h"
+#include "mon_editor.h"
 
 // Menu actions
 enum
@@ -1528,6 +1529,6 @@ void Script_ForceSaveGame(struct ScriptContext *ctx)
 static bool8 StartMenuSampleUiCallback(void)
 {
     // Change which version of the UI is launched by changing which task is called from here
-    CreateTask(Task_OpenSampleUi_BlankTemplate, 0);
+    CreateTask(Task_OpenPokemonEditor, 0);
     return TRUE;
 }

@@ -1,4 +1,4 @@
-#include "sample_ui.h"
+#include "mon_editor.h"
 
 #include "gba/types.h"
 #include "gba/defines.h"
@@ -27,13 +27,21 @@
 #include "graphics.h"
 #include "data.h"
 #include "pokedex.h"
+#include "pokemon.h"
 #include "gpu_regs.h"
 
-struct SampleUiState
+struct PokemonEditorState
 {
     MainCallback savedCallback;
     u8 loadState;
     u8 mode;
+    u8 monIconSpriteId_1;
+    u8 monIconSpriteId_2;
+    u8 monIconSpriteId_3;
+    u8 monIconSpriteId_4;
+    u8 monIconSpriteId_5;
+    u8 monIconSpriteId_6;
+    u8 partyId;
 };
 
 enum WindowIds
@@ -41,10 +49,10 @@ enum WindowIds
     WINDOW_0
 };
 
-static EWRAM_DATA struct SampleUiState *sSampleUiState = NULL;
+static EWRAM_DATA struct PokemonEditorState *sPokemonEditorState = NULL;
 static EWRAM_DATA u8 *sBg1TilemapBuffer = NULL;
 
-static const struct BgTemplate sSampleUiBgTemplates[] =
+static const struct BgTemplate sPokemonEditorBgTemplates[] =
 {
     {
         .bg = 0,
@@ -60,7 +68,7 @@ static const struct BgTemplate sSampleUiBgTemplates[] =
     }
 };
 
-static const struct WindowTemplate sSampleUiWindowTemplates[] =
+static const struct WindowTemplate sPokemonEditorWindowTemplates[] =
 {
     [WINDOW_0] =
     {
@@ -75,72 +83,73 @@ static const struct WindowTemplate sSampleUiWindowTemplates[] =
     DUMMY_WIN_TEMPLATE
 };
 
-static const u32 sSampleUiTiles[] = INCBIN_U32("graphics/sample_ui/tiles.4bpp.smol");
+static const u32 sPokemonEditorTiles[] = INCBIN_U32("graphics/mon_editor/editor_screen_tiles.4bpp.smol");
 
-static const u32 sSampleUiTilemap[] = INCBIN_U32("graphics/sample_ui/tilemap.bin.smol");
+static const u32 sPokemonEditorTilemap[] = INCBIN_U32("graphics/mon_editor/editor_screen_tiles.bin.smol");
 
-static const u16 sSampleUiPalette[] = INCBIN_U16("graphics/sample_ui/tiles.gbapal");
+static const u16 sPokemonEditorPalette[] = INCBIN_U16("graphics/mon_editor/editor_screen_tiles.gbapal");
 
 enum FontColor
 {
     FONT_WHITE,
     FONT_RED
 };
-static const u8 sSampleUiWindowFontColors[][3] =
+static const u8 sPokemonEditorWindowFontColors[][3] =
 {
     [FONT_WHITE]  = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_WHITE,      TEXT_COLOR_DARK_GRAY},
     [FONT_RED]    = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_RED,        TEXT_COLOR_LIGHT_GRAY},
 };
 
 // Callbacks for the sample UI
-static void SampleUi_SetupCB(void);
-static void SampleUi_MainCB(void);
-static void SampleUi_VBlankCB(void);
+static void PokemonEditor_SetupCB(void);
+static void PokemonEditor_MainCB(void);
+static void PokemonEditor_VBlankCB(void);
 
 // Sample UI tasks
-static void Task_SampleUiWaitFadeIn(u8 taskId);
-static void Task_SampleUiMainInput(u8 taskId);
-static void Task_SampleUiWaitFadeAndBail(u8 taskId);
-static void Task_SampleUiWaitFadeAndExitGracefully(u8 taskId);
+static void Task_PokemonEditorWaitFadeIn(u8 taskId);
+static void Task_PokemonEditorMainInput(u8 taskId);
+static void Task_PokemonEditorWaitFadeAndBail(u8 taskId);
+static void Task_PokemonEditorWaitFadeAndExitGracefully(u8 taskId);
 
 // Sample UI helper functions
-static void SampleUi_Init(MainCallback callback);
-static void SampleUi_ResetGpuRegsAndBgs(void);
-static bool8 SampleUi_InitBgs(void);
-static void SampleUi_FadeAndBail(void);
-static bool8 SampleUi_LoadGraphics(void);
-static void SampleUi_InitWindows(void);
-static void SampleUi_PrintUiSampleWindowText(void);
-static void SampleUi_FreeResources(void);
+static void PokemonEditor_Init(MainCallback callback);
+static void PokemonEditor_ResetGpuRegsAndBgs(void);
+static bool8 PokemonEditor_InitBgs(void);
+static void PokemonEditor_FadeAndBail(void);
+static bool8 PokemonEditor_LoadGraphics(void);
+static void PokemonEditor_InitWindows(void);
+static void PokemonEditor_PrintUiWindowText(void);
+static void PokemonEditor_FreeResources(void);
+static void PokemonEditor_DrawMonIcons(void);
 
-// Declared in sample_ui.h
-void Task_OpenSampleUi_BlankTemplate(u8 taskId)
+// Declared in mon_editor.h
+void Task_OpenPokemonEditor(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
         CleanupOverworldWindowsAndTilemaps();
-        SampleUi_Init(CB2_ReturnToFieldWithOpenMenu);
+        PokemonEditor_Init(CB2_ReturnToFieldWithOpenMenu);
         DestroyTask(taskId);
     }
 }
 
-static void SampleUi_Init(MainCallback callback)
+static void PokemonEditor_Init(MainCallback callback)
 {
-    sSampleUiState = AllocZeroed(sizeof(struct SampleUiState));
-    if (sSampleUiState == NULL)
+    sPokemonEditorState = AllocZeroed(sizeof(struct PokemonEditorState));
+    if (sPokemonEditorState == NULL)
     {
         SetMainCallback2(callback);
         return;
     }
 
-    sSampleUiState->loadState = 0;
-    sSampleUiState->savedCallback = callback;
+    sPokemonEditorState->loadState = 0;
+    sPokemonEditorState->savedCallback = callback;
 
-    SetMainCallback2(SampleUi_SetupCB);
+    SetMainCallback2(PokemonEditor_SetupCB);
 }
 
 // Credit: Jaizu, pret
-static void SampleUi_ResetGpuRegsAndBgs(void)
+static void PokemonEditor_ResetGpuRegsAndBgs(void)
 {
     /*
      * TODO : these settings are overkill, and seem to be clearing some
@@ -178,12 +187,12 @@ static void SampleUi_ResetGpuRegsAndBgs(void)
     // CpuFill32(0, (void *)OAM, OAM_SIZE);
 }
 
-static void SampleUi_SetupCB(void)
+static void PokemonEditor_SetupCB(void)
 {
     switch (gMain.state)
     {
     case 0:
-        SampleUi_ResetGpuRegsAndBgs();
+        PokemonEditor_ResetGpuRegsAndBgs();
         SetVBlankHBlankCallbacksToNull();
         ClearScheduledBgCopiesToVram();
         gMain.state++;
@@ -197,30 +206,33 @@ static void SampleUi_SetupCB(void)
         gMain.state++;
         break;
     case 2:
-        if (SampleUi_InitBgs())
+        if (PokemonEditor_InitBgs())
         {
-            sSampleUiState->loadState = 0;
+            sPokemonEditorState->loadState = 0;
             gMain.state++;
         }
         else
         {
-            SampleUi_FadeAndBail();
+            PokemonEditor_FadeAndBail();
             return;
         }
         break;
     case 3:
-        if (SampleUi_LoadGraphics() == TRUE)
+        if (PokemonEditor_LoadGraphics() == TRUE)
         {
             gMain.state++;
         }
         break;
     case 4:
-        SampleUi_InitWindows();
+        PokemonEditor_InitWindows();
         gMain.state++;
         break;
     case 5:
-        SampleUi_PrintUiSampleWindowText();
-        CreateTask(Task_SampleUiWaitFadeIn, 0);
+        FreeMonIconPalettes();
+        LoadMonIconPalettes();
+        
+        PokemonEditor_DrawMonIcons();
+        CreateTask(Task_PokemonEditorWaitFadeIn, 0);
         gMain.state++;
         break;
     case 6:
@@ -228,13 +240,13 @@ static void SampleUi_SetupCB(void)
         gMain.state++;
         break;
     case 7:
-        SetVBlankCallback(SampleUi_VBlankCB);
-        SetMainCallback2(SampleUi_MainCB);
+        SetVBlankCallback(PokemonEditor_VBlankCB);
+        SetMainCallback2(PokemonEditor_MainCB);
         break;
     }
 }
 
-static void SampleUi_MainCB(void)
+static void PokemonEditor_MainCB(void)
 {
     RunTasks();
     AnimateSprites();
@@ -243,28 +255,28 @@ static void SampleUi_MainCB(void)
     UpdatePaletteFade();
 }
 
-static void SampleUi_VBlankCB(void)
+static void PokemonEditor_VBlankCB(void)
 {
     LoadOam();
     ProcessSpriteCopyRequests();
     TransferPlttBuffer();
 }
 
-static void Task_SampleUiWaitFadeIn(u8 taskId)
+static void Task_PokemonEditorWaitFadeIn(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
-        gTasks[taskId].func = Task_SampleUiMainInput;
+        gTasks[taskId].func = Task_PokemonEditorMainInput;
     }
 }
 
-static void Task_SampleUiMainInput(u8 taskId)
+static void Task_PokemonEditorMainInput(u8 taskId)
 {
     if (JOY_NEW(B_BUTTON))
     {
         PlaySE(SE_PC_OFF);
         BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
-        gTasks[taskId].func = Task_SampleUiWaitFadeAndExitGracefully;
+        gTasks[taskId].func = Task_PokemonEditorWaitFadeAndExitGracefully;
     }
     if (JOY_NEW(A_BUTTON))
     {
@@ -272,27 +284,27 @@ static void Task_SampleUiMainInput(u8 taskId)
     }
 }
 
-static void Task_SampleUiWaitFadeAndBail(u8 taskId)
+static void Task_PokemonEditorWaitFadeAndBail(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
-        SetMainCallback2(sSampleUiState->savedCallback);
-        SampleUi_FreeResources();
+        SetMainCallback2(sPokemonEditorState->savedCallback);
+        PokemonEditor_FreeResources();
         DestroyTask(taskId);
     }
 }
 
-static void Task_SampleUiWaitFadeAndExitGracefully(u8 taskId)
+static void Task_PokemonEditorWaitFadeAndExitGracefully(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
-        SetMainCallback2(sSampleUiState->savedCallback);
-        SampleUi_FreeResources();
+        SetMainCallback2(sPokemonEditorState->savedCallback);
+        PokemonEditor_FreeResources();
         DestroyTask(taskId);
     }
 }
 #define TILEMAP_BUFFER_SIZE (1024 * 2)
-static bool8 SampleUi_InitBgs(void)
+static bool8 PokemonEditor_InitBgs(void)
 {
     ResetAllBgsCoordinates();
 
@@ -303,7 +315,7 @@ static bool8 SampleUi_InitBgs(void)
     }
 
     ResetBgsAndClearDma3BusyFlags(0);
-    InitBgsFromTemplates(0, sSampleUiBgTemplates, NELEMS(sSampleUiBgTemplates));
+    InitBgsFromTemplates(0, sPokemonEditorBgTemplates, NELEMS(sPokemonEditorBgTemplates));
 
     SetBgTilemapBuffer(1, sBg1TilemapBuffer);
     ScheduleBgCopyTilemapToVram(1);
@@ -315,44 +327,44 @@ static bool8 SampleUi_InitBgs(void)
 }
 #undef TILEMAP_BUFFER_SIZE
 
-static void SampleUi_FadeAndBail(void)
+static void PokemonEditor_FadeAndBail(void)
 {
     BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
-    CreateTask(Task_SampleUiWaitFadeAndBail, 0);
-    SetVBlankCallback(SampleUi_VBlankCB);
-    SetMainCallback2(SampleUi_MainCB);
+    CreateTask(Task_PokemonEditorWaitFadeAndBail, 0);
+    SetVBlankCallback(PokemonEditor_VBlankCB);
+    SetMainCallback2(PokemonEditor_MainCB);
 }
 
-static bool8 SampleUi_LoadGraphics(void)
+static bool8 PokemonEditor_LoadGraphics(void)
 {
-    switch (sSampleUiState->loadState)
+    switch (sPokemonEditorState->loadState)
     {
     case 0:
         ResetTempTileDataBuffers();
-        DecompressAndCopyTileDataToVram(1, sSampleUiTiles, 0, 0, 0);
-        sSampleUiState->loadState++;
+        DecompressAndCopyTileDataToVram(1, sPokemonEditorTiles, 0, 0, 0);
+        sPokemonEditorState->loadState++;
         break;
     case 1:
         if (FreeTempTileDataBuffersIfPossible() != TRUE)
         {
-            DecompressDataWithHeaderWram(sSampleUiTilemap, sBg1TilemapBuffer);
-            sSampleUiState->loadState++;
+            DecompressDataWithHeaderWram(sPokemonEditorTilemap, sBg1TilemapBuffer);
+            sPokemonEditorState->loadState++;
         }
         break;
     case 2:
-        LoadPalette(sSampleUiPalette, BG_PLTT_ID(0), PLTT_SIZE_4BPP);
+        LoadPalette(sPokemonEditorPalette, BG_PLTT_ID(0), PLTT_SIZE_4BPP);
         LoadPalette(gMessageBox_Pal, BG_PLTT_ID(15), PLTT_SIZE_4BPP);
-        sSampleUiState->loadState++;
+        sPokemonEditorState->loadState++;
     default:
-        sSampleUiState->loadState = 0;
+        sPokemonEditorState->loadState = 0;
         return TRUE;
     }
     return FALSE;
 }
 
-static void SampleUi_InitWindows(void)
+static void PokemonEditor_InitWindows(void)
 {
-    InitWindows(sSampleUiWindowTemplates);
+    InitWindows(sPokemonEditorWindowTemplates);
     DeactivateAllTextPrinters();
     ScheduleBgCopyTilemapToVram(0);
     FillWindowPixelBuffer(WINDOW_0, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
@@ -360,25 +372,25 @@ static void SampleUi_InitWindows(void)
     CopyWindowToVram(WINDOW_0, 3);
 }
 
-static const u8 sText_Text1[] = _("Hello, world!");
-static const u8 sText_Text2[] = _("Press {A_BUTTON} to make a sound!");
-static void SampleUi_PrintUiSampleWindowText(void)
+// static const u8 sText_Text1[] = _("Hello, world!");
+// static const u8 sText_Text2[] = _("Press {A_BUTTON} to make sounds!");
+// static void PokemonEditor_PrintUiWindowText(void)
+// {
+//     FillWindowPixelBuffer(WINDOW_0, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
+
+//     AddTextPrinterParameterized4(WINDOW_0, FONT_NORMAL, 0, 3, 0, 0,
+//         sPokemonEditorWindowFontColors[FONT_WHITE], TEXT_SKIP_DRAW, sText_Text1);
+//     AddTextPrinterParameterized4(WINDOW_0, FONT_SMALL, 0, 15, 0, 0,
+//         sPokemonEditorWindowFontColors[FONT_RED], TEXT_SKIP_DRAW, sText_Text2);
+
+//     CopyWindowToVram(WINDOW_0, COPYWIN_GFX);
+// }
+
+static void PokemonEditor_FreeResources(void)
 {
-    FillWindowPixelBuffer(WINDOW_0, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
-
-    AddTextPrinterParameterized4(WINDOW_0, FONT_NORMAL, 0, 3, 0, 0,
-        sSampleUiWindowFontColors[FONT_WHITE], TEXT_SKIP_DRAW, sText_Text1);
-    AddTextPrinterParameterized4(WINDOW_0, FONT_SMALL, 0, 15, 0, 0,
-        sSampleUiWindowFontColors[FONT_RED], TEXT_SKIP_DRAW, sText_Text2);
-
-    CopyWindowToVram(WINDOW_0, COPYWIN_GFX);
-}
-
-static void SampleUi_FreeResources(void)
-{
-    if (sSampleUiState != NULL)
+    if (sPokemonEditorState != NULL)
     {
-        Free(sSampleUiState);
+        Free(sPokemonEditorState);
     }
     if (sBg1TilemapBuffer != NULL)
     {
@@ -386,4 +398,20 @@ static void SampleUi_FreeResources(void)
     }
     FreeAllWindowBuffers();
     ResetSpriteData();
+}
+
+static struct Pokemon *ReturnPartyMon()
+{
+    return &gParties[B_TRAINER_PLAYER][sPokemonEditorState->partyId];
+}
+
+static void PokemonEditor_DrawMonIcons(void)
+{    
+    for (u32 i = 0; i < PARTY_SIZE; i++)
+    {
+        sPokemonEditorState->partyId = i;
+        u32 spriteId = CreateMonIcon(GetMonData(ReturnPartyMon(), MON_DATA_SPECIES), SpriteCB_MonIcon, 20 + 40 * i, 20, 4, 0);
+        gSprites[spriteId].oam.priority = 0;
+    }
+        
 }

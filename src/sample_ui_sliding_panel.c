@@ -253,7 +253,7 @@ static const u32 sSampleUiKalosButton[] = INCBIN_U32("graphics/sample_ui/kalos.4
 static const u32 sSampleUiTilemap[] = INCBIN_U32("graphics/sample_ui/tilemap.bin.smol");
 static const u32 sSampleUiPanelTilemap[] = INCBIN_U32("graphics/sample_ui/panel_tilemap.bin.smol");
 
-static const u16 sSampleUiPalette[] = INCBIN_U16("graphics/sample_ui/00.gbapal");
+static const u16 sSampleUiPalette[] = INCBIN_U16("graphics/sample_ui/tiles.gbapal");
 static const u16 sSampleUi_KantoJohtoHoennPalette[] = INCBIN_U16("graphics/sample_ui/kanto_johto_hoenn.gbapal");
 static const u16 sSampleUi_SinnohUnovaKalosPalette[] = INCBIN_U16("graphics/sample_ui/sinnoh_unova_kalos.gbapal");
 

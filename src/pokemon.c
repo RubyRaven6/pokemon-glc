@@ -6573,7 +6573,6 @@ void GivePlayerUnlockedPokemon(void)
             break;
     }
 
-    DebugPrintf("gen: %u", gen);
     for (i = 0; i < gFullyEvolvedArrays[gen].monArrayCount; i++)
     {
         u32 personality = Random32();
@@ -6581,6 +6580,7 @@ void GivePlayerUnlockedPokemon(void)
         SetBoxMonIVs(&mon.box, MAX_IV_MASK);
         CalculateMonStats(&mon);
         GiveMonInitialMoveset(&mon);
+        // CopyMon(&gParties[B_TRAINER_PLAYER][i], mon, sizeof(*mon)); give three kanto starters; will have to be iterated on more soon
         CopyMonToPC(&mon);
     }
 }
