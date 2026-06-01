@@ -353,8 +353,8 @@
     {
       "id": "HEAL_LOCATION_TESTING_GROUNDS",
       "map": "MAP_TESTING_GROUNDS",
-      "x": 10,
-      "y": 10
+      "x": 4,
+      "y": 5
     }
   ]
 }

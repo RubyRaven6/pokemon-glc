@@ -529,7 +529,7 @@
     "Route110_TrickHousePuzzle5",
     "Route110_TrickHousePuzzle6"
   ],
-  "gMapGroup_VanillaMaps5":[
+  "gMapGroup_VanillaMaps5": [
     "Route110_TrickHousePuzzle7",
     "Route110_TrickHousePuzzle8",
     "Route110_SeasideCyclingRoadSouthEntrance",
@@ -658,7 +658,7 @@
     "FourIsland_IcefallCave_Entrance_Frlg",
     "FourIsland_IcefallCave_1F_Frlg"
   ],
-  "gMapGroup_VanillaMaps6":[
+  "gMapGroup_VanillaMaps6": [
     "FourIsland_IcefallCave_B1F_Frlg",
     "FourIsland_IcefallCave_Back_Frlg",
     "FiveIsland_RocketWarehouse_Frlg",
@@ -916,7 +916,7 @@
     "SevenIsland_House_Room1_Frlg",
     "SevenIsland_House_Room2_Frlg"
   ],
-  "gMapGroup_VanillaMaps8" :[
+  "gMapGroup_VanillaMaps8": [
     "SevenIsland_Mart_Frlg",
     "SevenIsland_PokemonCenter_1F_Frlg",
     "SevenIsland_PokemonCenter_2F_Frlg",

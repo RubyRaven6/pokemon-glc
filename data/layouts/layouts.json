@@ -9327,8 +9327,8 @@
     {
       "id": "LAYOUT_TESTING_GROUNDS",
       "name": "TestingGrounds_Layout",
-      "width": 20,
-      "height": 20,
+      "width": 10,
+      "height": 10,
       "primary_tileset": "gTileset_General",
       "secondary_tileset": "gTileset_Petalburg",
       "border_filepath": "data/layouts/TestingGrounds/border.bin",
