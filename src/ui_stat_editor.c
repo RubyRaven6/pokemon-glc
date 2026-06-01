@@ -1019,9 +1019,9 @@ static void Task_MenuEditingStat(u8 taskId) // This function should be refactore
         PrintTitleToWindowMainState();
         return;
     }
-    if (JOY_NEW(DPAD_LEFT))
+    if (JOY_NEW(DPAD_LEFT) || JOY_HELD(DPAD_LEFT))
         HandleEditingStatInput(EDIT_INPUT_DECREASE_STATE);
-    else if (JOY_NEW(DPAD_RIGHT))
+    else if (JOY_NEW(DPAD_RIGHT) || JOY_HELD(DPAD_RIGHT))
         HandleEditingStatInput(EDIT_INPUT_INCREASE_STATE);
     else if (JOY_NEW(DPAD_UP) || JOY_NEW(R_BUTTON))
         HandleEditingStatInput(EDIT_INPUT_MAX_INCREASE_STATE);
