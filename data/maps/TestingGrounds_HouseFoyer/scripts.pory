@@ -20,6 +20,7 @@ mapscripts TestingGrounds_HouseFoyer_MapScripts {
             if(!flag(FLAG_SYS_POKEMON_GET)){setflag(FLAG_SYS_POKEMON_GET)}
             callnative(GivePlayerUnlockedPokemon)
             callnative(GiveStartingKeyItems)
+            special(HealPlayerParty)
         }
     ]
 }
