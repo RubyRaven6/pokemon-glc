@@ -165,6 +165,14 @@ void SetBagItemsPointers(void)
     gBagPockets[POCKET_BERRIES].itemSlots = gSaveBlock1Ptr->bag.berries;
     gBagPockets[POCKET_BERRIES].capacity = BAG_BERRIES_COUNT;
     gBagPockets[POCKET_BERRIES].id = POCKET_BERRIES;
+
+    gBagPockets[POCKET_MEGA_STONES].itemSlots = gSaveBlock1Ptr->bag.megaStones;
+    gBagPockets[POCKET_MEGA_STONES].capacity = BAG_MEGA_STONES_COUNT;
+    gBagPockets[POCKET_MEGA_STONES].id = POCKET_MEGA_STONES;
+
+    gBagPockets[POCKET_Z_CRYSTALS].itemSlots = gSaveBlock1Ptr->bag.zCrystals;
+    gBagPockets[POCKET_Z_CRYSTALS].capacity = BAG_Z_CRYSTALS_COUNT;
+    gBagPockets[POCKET_Z_CRYSTALS].id = POCKET_Z_CRYSTALS;
 }
 
 u8 *CopyItemName(enum Item itemId, u8 *dst)
@@ -970,4 +978,30 @@ bool32 IsItemShopCriteriaFulfilled(u32 itemId)
         return TRUE;
 
     return func(SanitizeItemId(itemId));
+}
+
+static const u32 sStarterKeyItems[] =
+{
+    //Form changing key items
+    ITEM_ROTOM_CATALOG,
+    ITEM_GRACIDEA,
+    ITEM_REVEAL_GLASS,
+    ITEM_DNA_SPLICERS,
+    ITEM_ZYGARDE_CUBE,
+    ITEM_PRISON_BOTTLE,
+    ITEM_N_SOLARIZER,
+    ITEM_N_LUNARIZER,
+    ITEM_REINS_OF_UNITY,
+    // Battle Mechanic Key Items
+    ITEM_MEGA_RING,
+    ITEM_Z_POWER_RING,
+    ITEM_TERA_ORB,
+};
+
+void GiveStartingKeyItems(void)
+{
+    for(u32 i = 0; i < ARRAY_COUNT(sStarterKeyItems); i++)
+    {
+        AddBagItem(sStarterKeyItems[i], 1);
+    }
 }

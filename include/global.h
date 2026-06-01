@@ -1086,9 +1086,11 @@ struct Bag
 {
     struct ItemSlot items[BAG_ITEMS_COUNT];
     struct ItemSlot keyItems[BAG_KEYITEMS_COUNT];
-    struct ItemSlot pokeBalls[BAG_POKEBALLS_COUNT];
+    struct ItemSlot pokeBalls[BAG_POKEBALLS_COUNT]; //consumables lol
     struct ItemSlot TMsHMs[BAG_TMHM_COUNT];
     struct ItemSlot berries[BAG_BERRIES_COUNT];
+    struct ItemSlot megaStones[BAG_MEGA_STONES_COUNT];
+    struct ItemSlot zCrystals[BAG_Z_CRYSTALS_COUNT];
 };
 
 struct SaveBlock1

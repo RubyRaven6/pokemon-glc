@@ -472,6 +472,16 @@ Debug_EventScript_SetHiddenNature::
 	releaseall
 	end
 
+Debug_EventScript_SetTeraType::
+	special ChoosePartyMon
+	dynmultichoice 0, 0, FALSE, 6, 0, DYN_MULTICHOICE_CB_NONE, Debug_EventScript_SetTeraType_Text_0, Debug_EventScript_SetTeraType_Text_1, Debug_EventScript_SetTeraType_Text_2, Debug_EventScript_SetTeraType_Text_3, Debug_EventScript_SetTeraType_Text_4, Debug_EventScript_SetTeraType_Text_5, Debug_EventScript_SetTeraType_Text_6, Debug_EventScript_SetTeraType_Text_7, Debug_EventScript_SetTeraType_Text_8, Debug_EventScript_SetTeraType_Text_9, Debug_EventScript_SetTeraType_Text_10, Debug_EventScript_SetTeraType_Text_11, Debug_EventScript_SetTeraType_Text_12, Debug_EventScript_SetTeraType_Text_13, Debug_EventScript_SetTeraType_Text_14, Debug_EventScript_SetTeraType_Text_15, Debug_EventScript_SetTeraType_Text_16, Debug_EventScript_SetTeraType_Text_17, Debug_EventScript_SetTeraType_Text_18
+	switch VAR_RESULT
+	case MULTI_B_PRESSED, Debug_EventScript_SetTeraTypeClose
+	special SetTeraType_Special
+Debug_EventScript_SetTeraTypeClose:
+	releaseall
+	end
+
 Debug_EventScript_SetAbility::
 	special ChoosePartyMon
 	callnative DebugNative_GetAbilityNames
@@ -832,3 +842,60 @@ Debug_EventScript_TellTheTime_Text_0:
 
 DebugEventScript_PrintWeekday_Text_0:
 	.string "Time of day: {STR_VAR_1}$"
+
+Debug_EventScript_SetTeraType_Text_0:
+	.string "Normal$"
+
+Debug_EventScript_SetTeraType_Text_1:
+	.string "Fighting$"
+
+Debug_EventScript_SetTeraType_Text_2:
+	.string "Flying$"
+
+Debug_EventScript_SetTeraType_Text_3:
+	.string "Poison$"
+
+Debug_EventScript_SetTeraType_Text_4:
+	.string "Ground$"
+
+Debug_EventScript_SetTeraType_Text_5:
+	.string "Rock$"
+
+Debug_EventScript_SetTeraType_Text_6:
+	.string "Bug$"
+
+Debug_EventScript_SetTeraType_Text_7:
+	.string "Ghost$"
+
+Debug_EventScript_SetTeraType_Text_8:
+	.string "Steel$"
+
+Debug_EventScript_SetTeraType_Text_9:
+	.string "Mystery$"
+
+Debug_EventScript_SetTeraType_Text_10:
+	.string "Fire$"
+
+Debug_EventScript_SetTeraType_Text_11:
+	.string "Water$"
+
+Debug_EventScript_SetTeraType_Text_12:
+	.string "Grass$"
+
+Debug_EventScript_SetTeraType_Text_13:
+	.string "Electric$"
+
+Debug_EventScript_SetTeraType_Text_14:
+	.string "Psychic$"
+
+Debug_EventScript_SetTeraType_Text_15:
+	.string "Ice$"
+
+Debug_EventScript_SetTeraType_Text_16:
+	.string "Dragon$"
+
+Debug_EventScript_SetTeraType_Text_17:
+	.string "Dark$"
+
+Debug_EventScript_SetTeraType_Text_18:
+	.string "Fairy$"

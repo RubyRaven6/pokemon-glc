@@ -4600,6 +4600,14 @@ void SetAbility(void)
     SetMonData(&gParties[B_TRAINER_PLAYER][gSpecialVar_0x8004], MON_DATA_ABILITY_NUM, &ability);
 }
 
+void SetTeraType_Special(void)
+{
+    u32 type = gSpecialVar_Result;
+    if (type < NUMBER_OF_MON_TYPES && gSpecialVar_0x8004 < PARTY_SIZE)
+        SetMonData(&gParties[B_TRAINER_PLAYER][gSpecialVar_0x8004], MON_DATA_TERA_TYPE, &type);
+    DebugPrintf("teratype %u",GetMonData(&gParties[B_TRAINER_PLAYER][gSpecialVar_0x8004], MON_DATA_TERA_TYPE));
+}
+
 void DaisyMassageServices(void)
 {
     AdjustFriendship(&gParties[B_TRAINER_PLAYER][gSpecialVar_0x8004], FRIENDSHIP_EVENT_MASSAGE);
