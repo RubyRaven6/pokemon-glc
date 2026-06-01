@@ -210,7 +210,7 @@ static const struct MenuAction sStartMenuItems[] =
     [MENU_ACTION_PYRAMID_BAG]     = {gText_MenuBag,     {.u8_void = StartMenuBattlePyramidBagCallback}},
     [MENU_ACTION_DEXNAV]          = {gText_MenuDexNav,  {.u8_void = StartMenuDexNavCallback}},
     [MENU_ACTION_DEBUG]           = {sText_MenuDebug,   {.u8_void = StartMenuDebugCallback}},
-    [MENU_ACTION_SAMPLE_UI]       = {sText_SampleUi,    {.u8_void = StartMenuSampleUiCallback}}
+    // [MENU_ACTION_SAMPLE_UI]       = {sText_SampleUi,    {.u8_void = StartMenuSampleUiCallback}}
 };
 
 static const struct BgTemplate sBgTemplates_LinkBattleSave[] =
@@ -350,7 +350,7 @@ static void BuildNormalStartMenu(void)
     if (FlagGet(FLAG_SYS_POKENAV_GET) == TRUE)
         AddStartMenuAction(MENU_ACTION_POKENAV);
 
-    AddStartMenuAction(MENU_ACTION_SAMPLE_UI);
+    // AddStartMenuAction(MENU_ACTION_SAMPLE_UI);
 
     AddStartMenuAction(MENU_ACTION_PLAYER);
     AddStartMenuAction(MENU_ACTION_SAVE);
@@ -1526,9 +1526,11 @@ void Script_ForceSaveGame(struct ScriptContext *ctx)
     sSaveDialogCallback = SaveSavingMessageCallback;
 }
 
+/*
 static bool8 StartMenuSampleUiCallback(void)
 {
     // Change which version of the UI is launched by changing which task is called from here
     CreateTask(Task_OpenPokemonEditor, 0);
     return TRUE;
 }
+*/

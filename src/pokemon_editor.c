@@ -118,7 +118,7 @@ static bool8 PokemonEditor_InitBgs(void);
 static void PokemonEditor_FadeAndBail(void);
 static bool8 PokemonEditor_LoadGraphics(void);
 static void PokemonEditor_InitWindows(void);
-static void PokemonEditor_PrintUiWindowText(void);
+// static void PokemonEditor_PrintUiWindowText(void);
 static void PokemonEditor_FreeResources(void);
 static void PokemonEditor_DrawMonIcons(void);
 
