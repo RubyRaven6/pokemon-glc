@@ -1,0 +1,42 @@
+{
+  "id": "MAP_TESTING_GROUNDS_BATTLE_ARENA",
+  "name": "TestingGrounds_BattleArena",
+  "layout": "LAYOUT_TESTING_GROUNDS_BATTLE_ARENA",
+  "music": "MUS_DUMMY",
+  "region_map_section": "MAPSEC_ABANDONED_SHIP",
+  "requires_flash": false,
+  "weather": "WEATHER_NONE",
+  "map_type": "MAP_TYPE_NONE",
+  "allow_cycling": false,
+  "allow_escaping": false,
+  "allow_running": false,
+  "show_map_name": true,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "connections": null,
+  "object_events": [],
+  "warp_events": [
+    {
+      "x": 6,
+      "y": 12,
+      "elevation": 0,
+      "dest_map": "MAP_TESTING_GROUNDS_HOUSE_FOYER",
+      "dest_warp_id": "WARP_ID_FOYER_STAIRS"
+    },
+    {
+      "x": 5,
+      "y": 12,
+      "elevation": 0,
+      "dest_map": "MAP_TESTING_GROUNDS_HOUSE_FOYER",
+      "dest_warp_id": "WARP_ID_FOYER_STAIRS"
+    },
+    {
+      "x": 7,
+      "y": 12,
+      "elevation": 0,
+      "dest_map": "MAP_TESTING_GROUNDS_HOUSE_FOYER",
+      "dest_warp_id": "WARP_ID_FOYER_STAIRS"
+    }
+  ],
+  "coord_events": [],
+  "bg_events": []
+}

@@ -11,7 +11,9 @@
     "gMapGroup_VanillaMaps8"
   ],
   "gMapGroup_PokemonWorldTournament_Demo": [
-    "TestingGrounds"
+    "TestingGrounds",
+    "TestingGrounds_HouseFoyer",
+    "TestingGrounds_BattleArena"
   ],
   "gMapGroup_VanillaMaps1": [
     "PetalburgCity",

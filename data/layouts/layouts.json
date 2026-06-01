@@ -9333,6 +9333,26 @@
       "secondary_tileset": "gTileset_Petalburg",
       "border_filepath": "data/layouts/TestingGrounds/border.bin",
       "blockdata_filepath": "data/layouts/TestingGrounds/map.bin"
+    },
+    {
+      "id": "LAYOUT_TESTING_GROUNDS_HOUSE_FOYER",
+      "name": "TestingGrounds_HouseFoyer_Layout",
+      "width": 10,
+      "height": 10,
+      "primary_tileset": "gTileset_Building",
+      "secondary_tileset": "gTileset_Lab",
+      "border_filepath": "data/layouts/TestingGrounds_HouseFoyer/border.bin",
+      "blockdata_filepath": "data/layouts/TestingGrounds_HouseFoyer/map.bin"
+    },
+    {
+      "id": "LAYOUT_TESTING_GROUNDS_BATTLE_ARENA",
+      "name": "TestingGrounds_BattleArena_Layout",
+      "width": 13,
+      "height": 13,
+      "primary_tileset": "gTileset_Building",
+      "secondary_tileset": "gTileset_EliteFour",
+      "border_filepath": "data/layouts/TestingGrounds_BattleArena/border.bin",
+      "blockdata_filepath": "data/layouts/TestingGrounds_BattleArena/map.bin"
     }
   ]
 }
