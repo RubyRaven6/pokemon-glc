@@ -328,13 +328,13 @@ static const struct WindowTemplate sSampleUiWindowTemplates[] =
  * (you can technically get away with 8bpp indexing as long as each individual index is between 0-15). The easiest way
  * to make indexed PNGs is using a program like GraphicsGale or Aseprite (in Index mode).
  */
-static const u32 sSampleUiTiles[] = INCBIN_U32("graphics/sample_ui/tiles.4bpp.lz");
+static const u32 sSampleUiTiles[] = INCBIN_U32("graphics/sample_ui/tiles.4bpp.smol");
 
 /*
  * I created this tilemap in TilemapStudio using the above tile PNG. I highly recommend TilemapStudio for exporting maps
  * like this.
  */
-static const u32 sSampleUiTilemap[] = INCBIN_U32("graphics/sample_ui/tilemap.bin.lz");
+static const u32 sSampleUiTilemap[] = INCBIN_U32("graphics/sample_ui/tilemap.bin.smol");
 
 /*
  * This palette was built from a JASC palette file that you can export using GraphicsGale or Aseprite. Please note: the
@@ -878,7 +878,7 @@ static bool8 SampleUi_LoadGraphics(void)
         if (FreeTempTileDataBuffersIfPossible() != TRUE)
         {
             /*
-             * This basically just wraps the LZ77UnCompWram system call. It reads and decompresses whatever data is
+             * This basically just wraps the smol77UnCompWram system call. It reads and decompresses whatever data is
              * provided in the `src' (argument 1), and writes the decompressed data to a WRAM location given in `dest'
              * (argument 2). In our case `dest' is just the tilemap buffer we heap-allocated earlier.
              */
