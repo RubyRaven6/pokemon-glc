@@ -66,3 +66,15 @@ script(local) GivePlayerInitialMons {
     givemon(SPECIES_CHARIZARD, 100, hpIv=31, atkIv=31, defIv=31, speedIv=31,spDefIv=31)
     callnative(GivePlayerUnlockedPokemon)
 }
+
+script EventScript_TestingGrounds_HouseFoyer_ChooseWhatToDoWithPokemon {
+    msgbox(format("Hello! And welcome to the Pokémon Editor.\pYou may choose to change your Pokemon's ability and nature."))
+    dynmultichoice(0,0,FALSE, 2, 0, DYN_MULTICHOICE_CB_NONE, "Natures", "Ability")
+    switch(var(VAR_RESULT))
+    {
+        case 0:
+            call(Debug_EventScript_SetHiddenNature)
+        case 1:
+            call(Debug_EventScript_SetAbility)
+    }
+}
