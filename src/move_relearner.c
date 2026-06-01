@@ -593,8 +593,6 @@ static void Task_MoveRelearner_Giveup_Prompt(u8 taskId)
     gTasks[taskId].func = Task_MoveRelearner_Giveup_Answer;
 }
 
-
-
 static void Task_MoveRelearner_LearnMove(u8 taskId)
 {
     if (IsTextPrinterActiveOnWindow(RELEARNERWIN_MSG))
@@ -607,28 +605,32 @@ static void Task_MoveRelearner_HandleInput(u8 taskId)
     s32 itemId = ListMenu_ProcessInput(sMoveRelearnerStruct->moveListMenuTask);
     ListMenuGetScrollAndRow(sMoveRelearnerStruct->moveListMenuTask, &sMoveRelearnerScrollState.listOffset, &sMoveRelearnerScrollState.listRow);
 
-    switch (itemId)
-    {
-    case LIST_NOTHING_CHOSEN:
-        if (!(JOY_NEW(DPAD_LEFT | DPAD_RIGHT)) && !GetLRKeysPressed())
-            break;
-
-        PlaySE(SE_SELECT);
-
-        if (gTasks[taskId].tCategory == BATTLE_INFO)
+         switch (itemId)
+     {
+     case LIST_NOTHING_CHOSEN:
+        if (!P_HIDE_CONTEST_DATA)
         {
-            PutWindowTilemap(RELEARNERWIN_DESC_CONTEST);
-            gTasks[taskId].tCategory = CONTEST_INFO;
-        }
-        else
-        {
-            PutWindowTilemap(RELEARNERWIN_DESC_BATTLE);
-            gTasks[taskId].tCategory = BATTLE_INFO;
-        }
+            if (!(JOY_NEW(DPAD_LEFT | DPAD_RIGHT)) && !GetLRKeysPressed())
+                break;
+ 
+            PlaySE(SE_SELECT);
+ 
+            if (gTasks[taskId].tCategory == BATTLE_INFO)
+            {
+                PutWindowTilemap(RELEARNERWIN_DESC_CONTEST);
+                gTasks[taskId].tCategory = CONTEST_INFO;
+            }
+            else
+            {
+                PutWindowTilemap(RELEARNERWIN_DESC_BATTLE);
+                gTasks[taskId].tCategory = BATTLE_INFO;
+            }
+ 
+            MoveRelearnerShowHideHearts(GetCurrentSelectedMove());
 
-        MoveRelearnerShowHideHearts(GetCurrentSelectedMove());
-
-        ScheduleBgCopyTilemapToVram(1);
+            ScheduleBgCopyTilemapToVram(1);
+        }
+ 
         if (B_SHOW_CATEGORY_ICON == TRUE)
             MoveRelearnerShowHideCategoryIcon(GetCurrentSelectedMove());
         AddScrollArrows();
@@ -686,27 +688,30 @@ static void CreateUISprites(void)
     LoadCompressedSpriteSheet(&gSpriteSheet_CategoryIcons);
     LoadSpritePalette(&gSpritePal_CategoryIcons);
 
-    // These are the appeal hearts.
-    for (i = 0; i < 8; i++)
-        sMoveRelearnerStruct->heartSpriteIds[i] = CreateSprite(&sConstestMoveHeartSprite, (i - (i / 4) * 4) * 8 + 104, (i / 4) * 8 + 36, 0);
-
-    // These are the jam harts.
-    // The animation is used to toggle between full/empty heart sprites.
-    for (i = 0; i < 8; i++)
+    if (!P_HIDE_CONTEST_DATA)
     {
-        sMoveRelearnerStruct->heartSpriteIds[i + 8] = CreateSprite(&sConstestMoveHeartSprite, (i - (i / 4) * 4) * 8 + 104, (i / 4) * 8 + 52, 0);
-        StartSpriteAnim(&gSprites[sMoveRelearnerStruct->heartSpriteIds[i + 8]], 2);
-    }
+      // These are the appeal hearts.
+      for (i = 0; i < 8; i++)
 
-    for (i = 0; i < 16; i++)
-        gSprites[sMoveRelearnerStruct->heartSpriteIds[i]].invisible = TRUE;
+      // These are the jam harts.
+      // The animation is used to toggle between full/empty heart sprites.
+      for (i = 0; i < 8; i++)
+      {
+          StartSpriteAnim(&gSprites[sMoveRelearnerStruct->heartSpriteIds[i + 8]], 2);
+      }
+ 
+      for (i = 0; i < 16; i++)
+          gSprites[sMoveRelearnerStruct->heartSpriteIds[i]].invisible = TRUE;
+    }
 }
 
 static void AddScrollArrows(void)
 {
-    if (sMoveRelearnerStruct->moveDisplayArrowTask == TASK_NONE)
-        sMoveRelearnerStruct->moveDisplayArrowTask = AddScrollIndicatorArrowPair(&sDisplayModeArrowsTemplate, &sMoveRelearnerStruct->scrollOffset);
-
+    if (!P_HIDE_CONTEST_DATA)
+    {
+        if (sMoveRelearnerStruct->moveDisplayArrowTask == TASK_NONE)
+            sMoveRelearnerStruct->moveDisplayArrowTask = AddScrollIndicatorArrowPair(&sDisplayModeArrowsTemplate, &sMoveRelearnerStruct->scrollOffset);
+    }
     if (sMoveRelearnerStruct->moveListScrollArrowTask == TASK_NONE)
     {
         gTempScrollArrowTemplate = sMoveListScrollArrowsTemplate;
@@ -717,16 +722,19 @@ static void AddScrollArrows(void)
 
 static void RemoveScrollArrows(void)
 {
-    if (sMoveRelearnerStruct->moveDisplayArrowTask != TASK_NONE)
+    if (!P_HIDE_CONTEST_DATA)
     {
-        RemoveScrollIndicatorArrowPair(sMoveRelearnerStruct->moveDisplayArrowTask);
-        sMoveRelearnerStruct->moveDisplayArrowTask = TASK_NONE;
-    }
+        if (sMoveRelearnerStruct->moveDisplayArrowTask != TASK_NONE)
+        {
+            RemoveScrollIndicatorArrowPair(sMoveRelearnerStruct->moveDisplayArrowTask);
+            sMoveRelearnerStruct->moveDisplayArrowTask = TASK_NONE;
+        }
 
-    if (sMoveRelearnerStruct->moveListScrollArrowTask != TASK_NONE)
-    {
-        RemoveScrollIndicatorArrowPair(sMoveRelearnerStruct->moveListScrollArrowTask);
-        sMoveRelearnerStruct->moveListScrollArrowTask = TASK_NONE;
+        if (sMoveRelearnerStruct->moveListScrollArrowTask != TASK_NONE)
+        {
+            RemoveScrollIndicatorArrowPair(sMoveRelearnerStruct->moveListScrollArrowTask);
+            sMoveRelearnerStruct->moveListScrollArrowTask = TASK_NONE;
+        }
     }
 }
 
