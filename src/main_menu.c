@@ -2143,6 +2143,7 @@ static void Task_NewGameNoBirchSpeech(u8 taskId)
 {
     StringCopy(gSaveBlock2Ptr->playerName, gText_DefaultPlayerName);
     gSaveBlock2Ptr->playerGender = FEMALE;
+    SeedRngAndSetTrainerId();
 
     FreeAllWindowBuffers();
     ResetAllPicSprites();
