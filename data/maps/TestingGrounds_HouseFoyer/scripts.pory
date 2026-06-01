@@ -17,7 +17,8 @@ mapscripts TestingGrounds_HouseFoyer_MapScripts {
             closemessage
             setvar(VAR_GENERATION_CTL, 1)
             callnative(ChooseRandomGymLeader)
-            call(GivePlayerInitialMons)
+            if(!flag(FLAG_SYS_POKEMON_GET)){setflag(FLAG_SYS_POKEMON_GET)}
+            callnative(GivePlayerUnlockedPokemon)
         }
     ]
 }
@@ -57,14 +58,6 @@ script EventScript_TestingGrounds_HouseFoyer_GenerationSelector {
     msgbox(format("Random gym leaders chosen."))
     closemessage
     release
-}
-
-script(local) GivePlayerInitialMons {
-    if(!flag(FLAG_SYS_POKEMON_GET)){setflag(FLAG_SYS_POKEMON_GET)}
-    givemon(SPECIES_VENUSAUR, 100, hpIv=31, atkIv=31, defIv=31, speedIv=31,spDefIv=31)
-    givemon(SPECIES_BLASTOISE, 100, hpIv=31, atkIv=31, defIv=31, speedIv=31,spDefIv=31)
-    givemon(SPECIES_CHARIZARD, 100, hpIv=31, atkIv=31, defIv=31, speedIv=31,spDefIv=31)
-    callnative(GivePlayerUnlockedPokemon)
 }
 
 script EventScript_TestingGrounds_HouseFoyer_ChooseWhatToDoWithPokemon {

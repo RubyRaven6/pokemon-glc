@@ -6580,7 +6580,9 @@ void GivePlayerUnlockedPokemon(void)
         SetBoxMonIVs(&mon.box, MAX_IV_MASK);
         CalculateMonStats(&mon);
         GiveMonInitialMoveset(&mon);
-        // CopyMon(&gParties[B_TRAINER_PLAYER][i], mon, sizeof(*mon)); give three kanto starters; will have to be iterated on more soon
-        CopyMonToPC(&mon);
+        if(i < 3)
+            CopyMon(&gParties[B_TRAINER_PLAYER][i], &mon, sizeof(struct Pokemon));
+        else
+            CopyMonToPC(&mon);
     }
 }

@@ -6,14 +6,14 @@
 /*KANTO FULLY EVOLVED MONS*/
 const u32 gKantoFullyEvolved[] = {
     /*
-    The first three starters are given to the player first through givemon macro, 
+    The first three starters are given to the player first
     and then the rest are put into the box. This prevents small graphical glitch 
     where player has no pokemon and a question mark icon appears in the pc
+    */
 
     SPECIES_VENUSAUR,
     SPECIES_CHARIZARD,
     SPECIES_BLASTOISE,
-    */
     SPECIES_BUTTERFREE,
     SPECIES_BEEDRILL,
     SPECIES_PIDGEOT,
