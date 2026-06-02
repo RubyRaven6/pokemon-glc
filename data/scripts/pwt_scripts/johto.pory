@@ -1,6 +1,6 @@
 script EventScript_PWTBattleFalkner{
     trainerbattle_single(TRAINER_LEADER_FALKNER, "TRAINER_LEADER_FALKNER", "TRAINER_LEADER_FALKNER lost", EventScript_PWTBattleFalkner_Money)
-    end
+    return
 }
 
 script(local) EventScript_PWTBattleFalkner_Money {
@@ -14,7 +14,7 @@ script(local) EventScript_PWTBattleFalkner_Money {
 
 script EventScript_PWTBattleBugsy{
     trainerbattle_single(TRAINER_LEADER_BUGSY, "TRAINER_LEADER_BUGSY", "TRAINER_LEADER_BUGSY lost", EventScript_PWTBattleBugsy_Money)
-    end
+    return
 }
 
 script(local) EventScript_PWTBattleBugsy_Money {
@@ -28,7 +28,7 @@ script(local) EventScript_PWTBattleBugsy_Money {
 
 script EventScript_PWTBattleWhitney{
     trainerbattle_single(TRAINER_LEADER_WHITNEY, "TRAINER_LEADER_WHITNEY", "TRAINER_LEADER_WHITNEY lost", EventScript_PWTBattleWhitney_Money)
-    end
+    return
 }
 
 script(local) EventScript_PWTBattleWhitney_Money {
@@ -42,7 +42,7 @@ script(local) EventScript_PWTBattleWhitney_Money {
 
 script EventScript_PWTBattleMorty{
     trainerbattle_single(TRAINER_LEADER_MORTY, "TRAINER_LEADER_MORTY", "TRAINER_LEADER_MORTY lost", EventScript_PWTBattleMorty_Money)
-    end
+    return
 }
 
 script(local) EventScript_PWTBattleMorty_Money {
@@ -56,7 +56,7 @@ script(local) EventScript_PWTBattleMorty_Money {
 
 script EventScript_PWTBattleChuck{
     trainerbattle_single(TRAINER_LEADER_CHUCK, "TRAINER_LEADER_CHUCK", "TRAINER_LEADER_CHUCK lost", EventScript_PWTBattleChuck_Money)
-    end
+    return
 }
 
 script(local) EventScript_PWTBattleChuck_Money {
@@ -70,7 +70,7 @@ script(local) EventScript_PWTBattleChuck_Money {
 
 script EventScript_PWTBattleJasmine{
     trainerbattle_single(TRAINER_LEADER_JASMINE, "TRAINER_LEADER_JASMINE", "TRAINER_LEADER_JASMINE lost", EventScript_PWTBattleJasmine_Money)
-    end
+    return
 }
 
 script(local) EventScript_PWTBattleJasmine_Money {
@@ -84,7 +84,7 @@ script(local) EventScript_PWTBattleJasmine_Money {
 
 script EventScript_PWTBattlePryce{
     trainerbattle_single(TRAINER_LEADER_PRYCE, "TRAINER_LEADER_PRYCE", "TRAINER_LEADER_PRYCE lost", EventScript_PWTBattlePryce_Money)
-    end
+    return
 }
 
 script(local) EventScript_PWTBattlePryce_Money {
@@ -98,7 +98,7 @@ script(local) EventScript_PWTBattlePryce_Money {
 
 script EventScript_PWTBattleClair{
     trainerbattle_single(TRAINER_LEADER_CLAIR, "TRAINER_LEADER_CLAIR", "TRAINER_LEADER_CLAIR lost", EventScript_PWTBattleClair_Money)
-    end
+    return
 }
 
 script(local) EventScript_PWTBattleClair_Money {
