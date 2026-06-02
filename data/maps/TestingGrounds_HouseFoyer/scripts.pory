@@ -5,16 +5,16 @@ mapscripts TestingGrounds_HouseFoyer_MapScripts {
     }
     MAP_SCRIPT_ON_FRAME_TABLE [
         VAR_GENERATION_CTL, 0 {
-            msgbox(format(
-                "Hello, and welcome to the PWT romhack!\p"
-                "To get started, we've given you three starters in your team, and even more in the box!\p"
-                "Once you beat all the gym leaders at the finals (the third round), you unlock the next generation's leaders and Pokemon.\p"
-                "You can then enter the room through the stairs again.\p"
-                "Whenever you've unlocked more generations, you can check the books in the corner to select a generation too!\p"
-                "Doing so also randomizes the gym leaders you may face.\p"
-                "Lastly, speak to the NPCs to buy items, and check the computer on the left to change your Pokémon's ability, nature, and tera type.\p"
-                "Have fun!"
-                ))
+            // msgbox(format(
+            //     "Hello, and welcome to the PWT romhack!\p"
+            //     "To get started, we've given you three starters in your team, and even more in the box!\p"
+            //     "Once you beat all the gym leaders at the finals (the third round), you unlock the next generation's leaders and Pokemon.\p"
+            //     "You can then enter the room through the stairs again.\p"
+            //     "Whenever you've unlocked more generations, you can check the books in the corner to select a generation too!\p"
+            //     "Doing so also randomizes the gym leaders you may face.\p"
+            //     "Lastly, speak to the NPCs to buy items, and check the computer on the left to change your Pokémon's ability, nature, and tera type.\p"
+            //     "Have fun!"
+            //     ))
             closemessage
             setvar(VAR_GENERATION_CTL, 1)
             callnative(ChooseRandomGymLeader)
