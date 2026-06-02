@@ -420,7 +420,7 @@ Gender: Female
 Music: Elite Four
 Double Battle: Yes
 Pool Rules: Doubles
-Pool Picker Index: Default
+Pool Pick Index: Default
 Party Size: 6
 AI: Smart Trainer / Prediction / Assumptions
 
@@ -528,7 +528,7 @@ Gender: Female
 Music: Elite Four
 Double Battle: Yes
 Pool Rules: Doubles
-Pool Picker Index: Default
+Pool Pick Index: Default
 Party Size: 6
 AI: Smart Trainer / Prediction / Assumptions
 
@@ -637,7 +637,7 @@ Gender: Male
 Music: Elite Four
 Double Battle: Yes
 Pool Rules: Doubles
-Pool Picker Index: Default
+Pool Pick Index: Default
 Party Size: 6
 AI: Smart Trainer / Prediction / Assumptions
 
