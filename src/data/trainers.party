@@ -854,7 +854,7 @@ Adamant Nature
 /*- Magmatic Rage*/
 
 === TRAINER_LEADER_GIOVANNI ===
-Name: Blaine
+Name: Giovanni
 Class: Leader
 Pic: Aqua Grunt M
 Gender: Male
@@ -962,137 +962,862 @@ Adamant Nature
 /* JOHTO GYM LEADERS */
 
 === TRAINER_LEADER_FALKNER ===
-Name: SAWYER
-Class: Hiker
-Pic: Hiker
+Name: Falkner
+Class: Leader
+Pic: Aqua Grunt M
 Gender: Male
-Music: Hiker
+Music: Elite Four
 Double Battle: No
-AI: Basic Trainer
+AI: Smart Trainer / Prediction / Assumptions
+Party Size: 6
+Pool Rules: Basic
+Pool Pick Functions: Default
 
-Geodude
-Level: 21
-IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+Skarmory @ Rocky Helmet
+Ability: Sturdy
+Level: 100
+EVs: 63 HP / 52 Def / 13 Spe
+Tags: Lead
+Impish Nature
+- Spikes
+- Iron Defense
+- Body Press
+- Roost
+
+Gliscor @ Toxic Orb
+Ability: Poison Heal
+Level: 100
+EVs: 62 HP / 9 Def / 57 SpD
+Careful Nature
+- Swords Dance
+- Knock Off
+- Earthquake
+- Protect
+
+Espathra @ Leftovers
+Ability: Speed Boost
+Level: 100
+EVs: 38 HP / 60 Def / 30 Spe
+Modest Nature
+- Calm Mind
+- Stored Power
+- Protect
+- Dazzling Gleam
+
+Talonflame @ Heavy-Duty Boots
+Ability: Flame Body
+Level: 100
+EVs: 63 HP / 2 Atk / 63 Spe  
+Tags: Weather Abuser
+Impish Nature
+- Flare Blitz
+- Will-o-wisp
+- Roost
+- U-turn
+
+Kilowattrel @ Heavy-Duty Boots
+Ability: Volt Absorb
+Level: 100
+EVs: 63 SpA / 2 SpD / 63 Spe  
+Tags: Weather Abuser
+Timid Nature
+- Thunderbolt
+- Volt Switch
+- Air Slash
+- Defog
+
+Murkrow @ Eviolite
+Ability: Prankster
+Level: 100
+EVs: 63 HP / 63 SpD / 2 Def
+Tags: Weather Setter
+Jolly Nature
+- U-Turn
+- Whirlwind
+- Taunt
+/*- Windstorm*/
+
+Mandibuzz @ Heavy-Duty Boots
+Ability: Overcoat
+Level: 100
+EVs: 62 HP / 62 SpD / 2 Spe  
+Tags: Weather Abuser
+Careful Nature
+- Foul Play
+- Toxic
+- Roost
+- U-turn
+
+Togekiss @ Leftovers
+Ability: Serene Grace
+Level: 100
+EVs: 2 Def / 63 SpA / 63 Spe 
+Tags: Weather Abuser
+Timid Nature
+- Nasty Plot
+- Air Slash
+- Flamethrower
+- Roost
+
+Pidgeot @ Pidgeotite
+Ability: Big Pecks
+Level: 100
+EVs: 4 HP / 63 SpA / 63 Spe
+Tags: Ace
+Timid Nature
+- Hurricane
+- Heat Wave
+- U-Turn
+- Roost
 
 === TRAINER_LEADER_BUGSY ===
-Name: GRUNT
-Class: Team Aqua
+Name: Bugsy
+Class: Leader
 Pic: Aqua Grunt M
 Gender: Male
-Music: Aqua
+Music: Elite Four
 Double Battle: No
-AI: Check Bad Move
+AI: Smart Trainer / Prediction / Assumptions
+Party Size: 6
+Pool Rules: Weather Singles
+Pool Pick Functions: Default
 
-Poochyena
-Level: 36
-IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+Butterfree @ Focus Sash
+Ability: Compound Eyes
+Level: 100
+EVs: 63 Spe / 63 HP / 2 Def
+Tags: Lead
+Jolly Nature
+- Tailwind
+- Sleep Powder
+- Teleport
+- Whirlwind
+
+Heracross @ Choice Band
+Ability: Moxie
+Level: 100
+EVs: 63 Atk / 63 HP / 2 Spe
+Tags: Weather Abuser
+Adamant Nature
+- Stone Edge
+- Close Combat
+- Megahorn
+- Trailblaze
+
+Drapion @ Zoom Lens
+Ability: Super Luck
+Level: 100
+EVs: 63 Spe / 63 Atk / 2 Spe
+Tags: Weather Abuser
+Jolly Nature
+- Cross Poison
+- Knock Off
+- Night Slash
+- Toxic Spikes
+
+Golisopod @ Heavy-Duty Boots
+Ability: Emergency Exit
+Level: 100
+EVs: 45 HP / 63 Atk / 20 Spe
+Tags: Weather Abuser
+Adamant Nature
+- First Impression
+- Liquidation
+- Leech Life
+- Knock Off
+
+Galvantula @ Heavy-Duty Boots
+Ability: Compound Eyes
+Level: 100
+EVs: 63 Spe / 63 Def / 2 SpD
+Tags: Weather Setter
+Timid Nature
+- Sticky Web
+- U-Turn
+- Rain Dance
+- Protect
+
+Slither Wing @ Booster Energy
+Ability: Protosynthesis
+Level: 100
+EVs: 63 Atk / 2 SpD / 63 Spe
+Tags: Ace
+Adamant Nature
+- Close Combat
+- Iron Head
+/*- Vinsectication */
+
+Escavalier @ Focus Sash
+Ability: Shell Armor
+Level: 100
+EVs: 63 Atk / 63 HP / 2 Def
+Tags: Weather Abuser
+Adamant Nature
+- Megahorn
+- Smart Strike
+- Drill Run
+- Giga Impact
+
+Genesect @ Choice Scarf
+Ability: Download
+Level: 100
+EVs: 63 Atk / 2 SpA / 63 Spe
+Tags: Weather Abuser
+Tera Type: Water
+Adamant Nature
+- Tera Blast
+- U-Turn
+- Ice Beam
+- Flamethrower
+
+Scizor @ Scizorite
+Ability: Light Metal
+Level: 100
+EVs: 33 HP / 63 Atk / 32 SpD
+Tags: Ace
+Tera Type: Water
+Adamant Nature
+- Swords Dance
+- Bullet Punch
+- Tera Blast
+/*- Vinsectication*/
 
 === TRAINER_LEADER_WHITNEY ===
-Name: GRUNT
-Class: Team Aqua
-Pic: Aqua Grunt M
-Gender: Male
-Music: Aqua
+Name: Whitney
+Class: Leader
+Pic: Aqua Grunt F
+Gender: Female
+Music: Elite Four
 Double Battle: No
-AI: Check Bad Move
+AI: Smart Trainer / Prediction / Assumptions
+Party Size: 6
+Pool Rules: Basic
+Pool Pick Functions: Default
 
-Carvanha
-Level: 36
-IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+Wigglytuff @ Assault Vest
+Ability: Battle Armor
+Level: 100
+EVs: 63 HP / 63 Atk / 2 Def
+Tags: Lead
+Impish Nature
+- Explosion
+- Disable
+- Disarming Voice
+- Knock Off
+
+Bewear @ Chople Berry
+Ability: Fluffy
+Level: 100
+EVs: 63 Atk / 2 SpD / 63 Spe
+Tags: Lead
+Jolly Nature
+- Swords Dance
+- Drain Punch
+- Darkest Lariat
+/*- Fussy Fuss*/
+
+Blissey @ Heavy-Duty Boots
+Ability: Natural Cure
+Level: 100
+EVs: 63 HP / 63 Def / 2 SpD
+Bold Nature
+- Soft-boiled
+- Stealth Rock
+- Toxic
+- Teleport
+
+Oinkologne-M @ Ganlon Berry
+Ability: Thick Fat
+Level: 100
+EVs: 2 HP / 63 SpD / 63 Atk
+Bold Nature
+- Yawn
+- Body Press
+- Stuff Cheeks
+- Protect
+
+Purugly @ Silk Scarf
+Ability: Defiant
+Level: 100
+EVs: 63 Atk / 63 HP / 2 Spe
+Tera Type: Normal
+Adamant Nature
+- Fake Out
+- Return
+- Knock Off
+- U-turn
+
+Lopunny @ Lopunnite
+Ability: Klutz
+Level: 100
+EVs: 63 Atk / 2 SpD / 63 Spe
+Jolly Nature
+- Hi-Jump Kick
+- Fake Out
+- Ice Punch
+/*- Fussy Fuss*/
+
+Meloetta-Aria @ Choice Scarf
+Ability: Serene Grace
+Level: 100
+EVs: 63 SpA / 2 SpD / 63 Spe
+Modest Nature
+- Hyper Voice
+- Psychic
+- Shadow Ball
+- Trick
+
+Maushold-Four @ Wide Lens
+Ability: Technician
+Level: 100
+EVs: 63 Atk / 2 Def / 63 Spe
+Adamant Nature
+- Population Bomb
+- Bite
+- Low Kick
+/*- Fussy Fuss*/
+
+Miltank @ Lum Berry
+Ability: Cud Chew
+Level: 100
+EVs: 63 HP / 30 Def / 35 Atk
+Tags: Ace
+Impish Nature
+- Milk Drink
+- Body Slam
+- Toxic
+/*- Fussy Fuss*/
 
 === TRAINER_LEADER_MORTY ===
-Name: GRUNT
-Class: Team Aqua
+Name: Morty
+Class: Leader
 Pic: Aqua Grunt M
 Gender: Male
-Music: Aqua
+Music: Elite Four
 Double Battle: No
-AI: Check Bad Move
+AI: Smart Trainer / Prediction / Assumptions
+Party Size: 6
+Pool Rules: Basic
+Pool Pick Functions: Default
 
-Zubat
-Level: 36
-IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+Brambleghast @ Focus Sash
+Ability: Wind Rider
+Level: 100
+EVs: 63 Atk / 2 SpD / 63 Spe
+Tags: Lead
+Jolly Nature
+- Spikes
+- Poltergeist
+- Rapid Spin
+- Power Whip
+
+Aegislash @ Spell Tag
+Ability: Stance Change
+Level: 100
+EVs: 2 HP / 63 Atk / 63 Spe
+Impish Nature
+- Swords Dance
+- Shadow Claw
+- Shadow Sneak
+- King's Shield
+
+Sigilyph @ Flame Orb
+Ability: Magic Guard
+Level: 100
+EVs: 63 HP / 63 SpA / 2 SpD
+Bold Nature
+- Future Sight
+- Psycho Shift
+- Protect
+/*- Jinx*/
+
+Zoroark-Hisui @ Choice Specs
+Ability: Illusion
+Level: 100
+EVs: 63 SpA / 63 Spe / 2 HP
+Modest Nature
+- Shadow Ball
+- Hyper Voice
+- Flamethrower
+- Trick
+
+Basculegion-M @ Choice Scarf
+Ability: Adaptability
+Level: 100
+EVs: 63 Atk / 63 Spe / 2 Def
+Adamant Nature
+- Wave Crash
+- Poltergeist
+- Psychic Fangs
+- Flip Turn
+
+Sinistcha @ Leftovers
+Ability: Heatproof
+Level: 100
+EVs: 63 HP / 50 SpD / 15 SpA
+Bold Nature
+- Matcha Gotcha
+- Calm Mind
+- Strength Sap
+/*- Jinx*/
+
+Golurk @ Expert Belt
+Ability: Iron Fist
+Level: 100
+EVs: 63 HP / 63 Atk / 2 Def
+Adamant Nature
+- Poltergeist
+- Drain Punch
+- Ice Punch
+- Earthquake
+
+Cursola @ Choice Specs
+Ability: Perish Body
+Level: 100
+EVs: 63 SpA / 63 SpD / 2 Def
+Modest Nature
+- Ice Beam
+- Power Gem
+- Earth Power
+/*- Jinx*/
+
+Gengar @ Gengarite
+Ability: Levitate
+Level: 100
+EVs: 4 HP / 63 SpA / 63 Spe
+Tags: Ace
+Timid Nature
+- Shadow Ball
+- Dazzling Gleam
+- Encore
+- Nasty Plot
 
 === TRAINER_LEADER_CHUCK ===
-Name: GABRIELLE
-Class: Pkmn Breeder
-Pic: Pokemon Breeder F
-Gender: Female
-Music: Female
-Double Battle: No
-AI: Check Bad Move
-
-Skitty
-Level: 26
-IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
-
-Poochyena
-Level: 26
-IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
-
-Zigzagoon
-Level: 26
-IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
-
-Lotad
-Level: 26
-IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
-
-Seedot
-Level: 26
-IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
-
-Taillow
-Level: 26
-IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
-
-=== TRAINER_LEADER_JASMINE ===
-Name: GRUNT
-Class: Team Aqua
+Name: Chuck
+Class: Leader
 Pic: Aqua Grunt M
 Gender: Male
-Music: Aqua
+Music: Elite Four
 Double Battle: No
-AI: Check Bad Move
+AI: Smart Trainer / Prediction / Assumptions
+Party Size: 6
+Pool Rules: Basic
+Pool Pick Functions: Default
 
-Poochyena
-Level: 9
-IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+Flamigo @ Choice Band
+Ability: Scrappy
+Level: 100
+EVs: 63 Atk / 63 Spe
+Tera Type: Flying
+Jolly Nature
+- Close Combat
+- Brave Bird
+- U-turn
+- Roost
+
+Pawmot @ Focus Sash
+Ability: Iron Fist
+Level: 100
+EVs: 63 Atk / 63 Spe
+Tera Type: Electric
+Jolly Nature
+- Double Shock
+- Healing Wish
+- Close Combat
+- Volt Switch
+
+Annihilape @ Leftovers
+Ability: Defiant
+Level: 100
+EVs: 63 HP / 63 Atk
+Adamant Nature
+- Rage Fist
+- Bulk Up
+- Taunt
+/*- Crashing Fists*/
+
+Conkeldurr @ Assault Vest
+Ability: Iron Fist
+Level: 100
+EVs: 63 Atk / 63 HP
+Adamant Nature
+- Thunder Punch
+- Fire Punch
+- Ice Punch
+- Power-up Punch
+
+Hariyama @ Flame Orb
+Ability: Guts
+Level: 100
+EVs: 63 Atk / 63 HP
+Adamant Nature
+- Close Combat
+- Knock Off
+- Facade
+- Bullet Punch
+
+Emboar @ Choice Scarf
+Ability: Intimidate
+Level: 100
+EVs: 63 Atk / 63 HP
+Adamant Nature
+- Flame Charge
+- Knock Off
+- Earthquake
+/*- Crashing Fists*/
+
+Hitmonlee @ Flying Gem
+Ability: Unburden
+Level: 100
+EVs: 63 Atk / 63 Spe
+Jolly Nature
+- Rolling Kick
+- Acrobatics
+- Knock Off
+- Swords Dance
+
+Sneasler @ Choice Band
+Ability: Poison Touch
+Level: 100
+EVs: 63 Atk / 63 Spe
+Adamant Nature
+- Close Combat
+- Dire Claw
+- Throat Chop
+- U-turn
+
+Poliwrath @ Expert Belt
+Ability: Water Absorb
+Level: 100
+EVs: 63 HP / 63 Atk
+Tags: Ace
+Adamant Nature
+- Surging Strikes
+- Bulk Up
+- Liquidation
+/*- Crashing Fists*/
+
+=== TRAINER_LEADER_JASMINE ===
+Name: Jasmine
+Class: Leader
+Pic: Aqua Grunt F
+Gender: Female
+Music: Elite Four
+Double Battle: No
+AI: Smart Trainer / Prediction / Assumptions
+Party Size: 6
+Pool Rules: Weather Singles
+Pool Pick Functions: Default
+
+Forretress @ Custap Berry
+Ability: Sturdy
+Level: 100
+EVs: 63 HP / 2 Atk / 63 SpD
+Tags: Lead
+Careful Nature
+- Stealth Rock
+- Rapid Spin
+- Spikes
+- Explosion
+
+Bronzong @ Iron Ball
+Ability: Levitate
+Level: 100
+EVs: 63 HP / 2 Atk / 63 SpD
+Tags: Lead
+Sassy Nature
+- Stealth Rock
+- Gyro Ball
+- Explosion
+- Trick
+
+Hippowdon @ Leftovers
+Ability: Sand Stream
+Level: 100
+EVs: 63 HP / 8 Atk / 62 SpD
+Tags: Weather Setter
+Careful Nature
+- Slack Off
+- Whirlwind
+- Earthquake
+- Toxic
+
+Excadrill @ Choice Band
+Ability: Sand Rush
+Level: 100
+EVs: 63 Atk / 2 Def / 63 Spe
+Tags: Weather Abuser
+Jolly Nature
+- Earthquake
+- Iron Head
+- Knock Off
+- Rock Slide
+
+Ferrothorn @ Rocky Helmet
+Ability: Iron Barbs
+Level: 100
+EVs: 63 HP / 2 Atk / 63 Def
+Impish Nature
+- Leech Seed
+- Power Whip
+- Thunder Wave
+/*- Hydraulic Press*/
+
+Empoleon @ Assault Vest
+Ability: Competitive
+Level: 100
+EVs: 53 HP / 12 SpA / 63 SpD
+Tera Type: Rock
+Calm Nature
+- Scald
+- Flash Cannon
+- Ice Beam
+- Power Gem
+
+Skarmory @ Leftovers
+Ability: Sturdy
+Level: 100
+EVs: 62 HP / 4 Atk / 62 Def
+Careful Nature
+- Roost
+- Spikes
+- Defog
+/*- Hydraulic Press*/
+
+Lucario @ Life Orb
+Ability: Steadfast
+Level: 100
+EVs: 63 SpA / 2 SpD / 63 Spe
+Timid Nature
+- Nasty Plot
+- Vacuum Wave
+- Flash Cannon
+- Psychic
+
+Steelix @ Steelixite
+Ability: Sand Force
+Level: 100
+EVs: 55 HP / 10 Atk / 63 Def
+Tags: Ace / Weather Abuser
+Impish Nature
+- Body Press
+- Earthquake
+- Stone Edge
+/*- Hydraulic Press*/
 
 === TRAINER_LEADER_PRYCE ===
-Name: MARCEL
-Class: Cooltrainer
-Pic: Cooltrainer M
+Name: Pryce
+Class: Leader
+Pic: Aqua Grunt M
 Gender: Male
-Music: Cool
-Items: Hyper Potion
+Music: Elite Four
 Double Battle: No
-AI: Basic Trainer
+AI: Smart Trainer / Prediction / Assumptions
+Party Size: 6
+Pool Rules: Weather Singles
+Pool Pick Functions: Default
 
-Manectric
-Level: 29
-IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
+Mamoswine @ Focus Sash
+Ability: Thick Fat
+Level: 100
+EVs: 63 Atk / 63 Spe
+Tags: Lead
+Jolly Nature
+- Stealth Rock
+- Earthquake
+- Ice Shard
+/*- Ice Rink*/
 
-Shiftry
-Level: 29
-IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
+Abomasnow @ Icy Rock
+Ability: Snow Warning
+Level: 100
+EVs: 63 HP / 63 Atk / 2 Def
+Tags: Weather Setter
+Naughty Nature
+- Blizzard
+- Wood Hammer
+- Swords Dance
+- Earthquake
+
+Cloyster @ White Herb
+Ability: Skill Link
+Level: 100
+EVs: 63 Atk / 2 SpA / 63 Spe
+Tera Type: Electric
+Naive Nature
+- Shell Smash
+- Icicle Spear
+- Rock Blast
+- Tera Blast
+
+Avalugg-Hisui @ Weakness Policy
+Ability: Sturdy
+Level: 100
+EVs: 63 HP / 63 Atk / 2 Def
+Adamant Nature
+- Rock Slide
+- Avalanche
+- Body Press
+- Rapid Spin
+
+Darmanitan-Galar @ Figy Berry
+Ability: Zen Mode
+Level: 100
+EVs: 20 Atk / 63 HP / 156 Spe
+Adamant Nature
+- Icicle Crash
+- Brick Break
+- Flare Blitz
+- Substitute
+
+Gyarados @ Covert Cloak
+Ability: Intimidate
+Level: 100
+EVs: 63 Atk / 63 Spe / 2 HP
+Tags: Support
+Adamant Nature
+- Waterfall
+- Dragon Dance
+- Ice Fang
+- Stone Edge
+
+Heracross @ Flame Orb
+Ability: Guts
+Level: 100
+EVs: 63 Atk / 63 Spe / 2 HP
+Tags: Support
+Adamant Nature
+- Close Combat
+- Megahorn
+- Stone Edge
+- Protect
+
+Crobat @ Flying Gem
+Ability: Infiltrator
+Level: 100
+EVs: 63 Atk / 63 Spe / 2 Def
+Tags: Support
+Jolly Nature
+- U-Turn
+- Acrobatics
+- Defog
+- Roost
+
+Iron Bundle @ Choice Specs
+Ability: Quark Drive
+Level: 100
+EVs: 63 SpA / 63 Spe / 2 Def
+Tags: Weather Abuser
+Modest Nature
+- Blizzard
+- Hydro Pump
+- Flip Turn
+- Air Cutter
 
 === TRAINER_LEADER_CLAIR ===
-Name: ALBERTO
-Class: Bird Keeper
-Pic: Bird Keeper
+Name: Clair
+Class: Leader
+Pic: Aqua Grunt M
 Gender: Male
-Music: Cool
+Music: Elite Four
 Double Battle: No
-AI: Check Bad Move
+AI: Smart Trainer / Prediction / Assumptions
+Party Size: 6
+Pool Rules: Basic
+Pool Pick Functions: Default
 
-Pelipper
-Level: 30
-IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+Druddigon @ Rocky Helmet
+Ability: Rough Skin
+Level: 100
+EVs: 63 HP / 21 Atk / 44 SpD
+Tags: Lead
+Impish Nature
+- Rain Dance
+- Stealth Rock
+- Dragon Tail
+- Glare
 
-Xatu
-Level: 30
-IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+Ampharos @ Ampharosite
+Ability: Static
+Level: 100
+EVs: 63 SpA / 63 HP / 2 Def
+Modest Nature
+- Thunder
+- Cotton Spore
+- Meteor Beam
+- Dragon Pulse
+
+Goodra @ Chesto Berry
+Ability: Hydration
+Level: 100
+EVs: 63 HP / 63 Def / 2 HP
+Calm Nature
+- Knock Off
+- Acid Armor
+- Rest
+/*- Storm Sacrifice*/
+
+Dragalge @ Life Orb
+Ability: Adaptability
+Level: 100
+EVs: 63 SpA / 63 Spe / 2 HP
+Modest Nature
+- Sludge Bomb
+- Hydro Pump
+- Flip Turn
+/*- Storm Sacrifice*/
+
+Gyarados @ Leftovers
+Ability: Moxie
+Level: 100
+EVs: 63 Atk / 63 Spe / 2 HP
+Tera Type: Flying
+Adamant Nature
+- Tera Blast
+- Waterfall
+- Dragon Dance
+- Earthquake
+
+Noivern @ Choice Specs
+Ability: 
+Level: 100
+EVs: 63 SpA / 63 Spe / 2 HP
+Modest Nature
+- Weather Ball
+- Boomburst
+- U-Turn
+/*- Storm Sacrifice*/
+
+Kingdra @ Choice Specs
+Ability: Swift Swim
+Level: 100
+EVs: 63 SpA / 63 Spe / 2 HP
+Tags: Ace
+Modest Nature
+- Hydro Pump
+- Draco Meteor
+- Flip Turn
+/*- Storm Sacrifice*/
+
+Archaludon @ Assault Vest
+Ability: Stamina
+Level: 100
+EVs: 63 SpA / 63 Spe / 2 HP
+Modest Nature
+- Electro Shot
+- Draco Meteor
+- Flash Cannon
+/*- Storm Sacrifice*/
+
+Dragonite @ Heavy-Duty Boots
+Ability: Multiscale
+Level: 100
+EVs: 63 Atk / 2 SpD / 63 Spe  
+Adamant Nature
+- Earthquake
+- Dual Wingbeat
+- Dragon Dance
+- Roost
 
 /* HOENN GYM LEADERS */
 
