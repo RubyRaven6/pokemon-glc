@@ -78,6 +78,16 @@ script EventScript_TestingGrounds_HouseFoyer_ChooseWhatToDoWithPokemon {
     closemessage
 }
 
+script EventScript_TestingGrounds_HouseFoyer_HaterComputer {
+    lock
+    msgbox(format("Your ass died lmao"))
+    closemessage
+    delay(30)
+    applymovement(LOCALID_PLAYER, moves(emote_question_mark))
+    waitmovement(0)
+    release
+}
+
 script EventScript_TestingGrounds_HouseFoyer_HeldItemMarket{
     lock
     faceplayer
