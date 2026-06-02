@@ -81,7 +81,7 @@ script EventScript_TestingGrounds_HouseFoyer_ChooseWhatToDoWithPokemon {
 script EventScript_TestingGrounds_HouseFoyer_HeldItemMarket{
     lock
     faceplayer
-	message("buymywares.com")
+	message("helditems.com")
 	waitmessage
 	pokemart(HeldItemMarket)
 	msgbox("Come again soon.")
@@ -93,7 +93,7 @@ script EventScript_TestingGrounds_HouseFoyer_HeldItemMarket{
 script EventScript_TestingGrounds_HouseFoyer_ConsumableMarket{
     lock
     faceplayer
-	message("buymywares.com")
+	message("consumables.com")
 	waitmessage
 	pokemart(ConsumableItemMarket)
 	msgbox("Come again soon.")
@@ -105,7 +105,7 @@ script EventScript_TestingGrounds_HouseFoyer_ConsumableMarket{
 script EventScript_TestingGrounds_HouseFoyer_MegaStoneMarket{
     lock
     faceplayer
-	message("buymywares.com")
+	message("megastones.com")
 	waitmessage
 	pokemart(MegaStoneMarket)
 	msgbox("Come again soon.")
@@ -117,7 +117,7 @@ script EventScript_TestingGrounds_HouseFoyer_MegaStoneMarket{
 script EventScript_TestingGrounds_HouseFoyer_ZCrystalMarket{
     lock
     faceplayer
-	message("buymywares.com")
+	message("zcrystals.com")
 	waitmessage
 	pokemart(ZCrystalMarket)
 	msgbox("Come again soon.")
@@ -129,7 +129,7 @@ script EventScript_TestingGrounds_HouseFoyer_ZCrystalMarket{
 script EventScript_TestingGrounds_HouseFoyer_BerryMarket{
     lock
     faceplayer
-	message("buymywares.com")
+	message("berries.com")
 	waitmessage
 	pokemart(BerryMarket)
 	msgbox("Come again soon.")
