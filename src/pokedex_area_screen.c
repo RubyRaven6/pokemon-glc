@@ -120,7 +120,7 @@ static void FindMapsWithMon(enum Species);
 static void BuildAreaGlowTilemap(void);
 // static void SetAreaHasMon(u16, u16);
 // static void SetSpecialMapHasMon(u16, u16);
-static mapsec_u16_t GetRegionMapSectionId(u8, u8);
+// static mapsec_u16_t GetRegionMapSectionId(u8, u8);
 static bool8 MapHasSpecies(const struct WildEncounterTypes *, u32, enum Species);
 static bool8 MonListHasSpecies(const struct WildPokemonInfo *, enum Species, u16);
 static void DoAreaGlow(void);
@@ -420,11 +420,11 @@ static void SetSpecialMapHasMon(u16 mapGroup, u16 mapNum)
         }
     }
 }
-*/
 static mapsec_u16_t GetRegionMapSectionId(u8 mapGroup, u8 mapNum)
 {
     return Overworld_GetMapHeaderByGroupAndId(mapGroup, mapNum)->regionMapSectionId;
 }
+*/
 
 static bool8 MapHasSpecies(const struct WildEncounterTypes *info, u32 headerSectionId, enum Species species)
 {
