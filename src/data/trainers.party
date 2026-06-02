@@ -92,10 +92,10 @@ Pic: Aqua Grunt M
 Gender: Male
 Music: Elite Four
 Double Battle: No
+AI: Smart Trainer / Prediction / Assumptions
 Party Size: 6
 Pool Rules: Basic
-Pool Pick Index: Default
-AI: Smart Trainer / Prediction / Assumptions
+Pool Pick Functions: Default
 
 Kleavor @ Salac Berry
 Ability: Sharpness
@@ -197,10 +197,10 @@ Pic: Aqua Grunt F
 Gender: Female
 Music: Elite Four
 Double Battle: No
+AI: Smart Trainer / Prediction / Assumptions
 Party Size: 6
 Pool Rules: Basic
-Pool Pick Index: Default
-AI: Smart Trainer / Prediction / Assumptions
+Pool Pick Functions: Default
 
 Pelipper @ Damp Rock
 Ability: Drizzle
@@ -310,10 +310,10 @@ Pic: Aqua Grunt M
 Gender: Male
 Music: Elite Four
 Double Battle: No
+AI: Smart Trainer / Prediction / Assumptions
 Party Size: 6
 Pool Rules: Basic
-Pool Pick Index: Default
-AI: Smart Trainer / Prediction / Assumptions
+Pool Pick Functions: Default
 
 Electrode @ Terrain Extender
 Ability: Aftermath
@@ -419,10 +419,10 @@ Pic: Aqua Grunt F
 Gender: Female
 Music: Elite Four
 Double Battle: Yes
-Pool Rules: Doubles
-Pool Pick Index: Default
-Party Size: 6
 AI: Smart Trainer / Prediction / Assumptions
+Party Size: 6
+Pool Rules: Doubles
+Pool Pick Functions: Default
 
 Tsareena @ Expert Belt
 Ability: Queenly Majesty
@@ -527,10 +527,10 @@ Pic: Aqua Grunt F
 Gender: Female
 Music: Elite Four
 Double Battle: Yes
-Pool Rules: Doubles
-Pool Pick Index: Default
-Party Size: 6
 AI: Smart Trainer / Prediction / Assumptions
+Party Size: 6
+Pool Rules: Doubles
+Pool Pick Functions: Default
 
 Gothitelle @ Covert Cloak
 Ability: Shadow Tag
@@ -636,10 +636,10 @@ Pic: Leader Tate And Liza
 Gender: Male
 Music: Elite Four
 Double Battle: Yes
-Pool Rules: Doubles
-Pool Pick Index: Default
-Party Size: 6
 AI: Smart Trainer / Prediction / Assumptions
+Party Size: 6
+Pool Rules: Doubles
+Pool Pick Functions: Default
 
 Glimmora @ Red Card
 Ability: Toxic Debris
@@ -748,10 +748,10 @@ Pic: Aqua Grunt M
 Gender: Male
 Music: Elite Four
 Double Battle: No
+AI: Smart Trainer / Prediction / Assumptions
 Party Size: 6
 Pool Rules: Basic
-Pool Pick Index: Default
-AI: Smart Trainer / Prediction / Assumptions
+Pool Pick Functions: Default
 
 Ninetales @ Heat Rock
 Ability: Drought
@@ -860,10 +860,10 @@ Pic: Aqua Grunt M
 Gender: Male
 Music: Elite Four
 Double Battle: No
+AI: Smart Trainer / Prediction / Assumptions
 Party Size: 6
 Pool Rules: Basic
-Pool Pick Index: Default
-AI: Smart Trainer / Prediction / Assumptions
+Pool Pick Functions: Default
 
 Persian @ Covert Cloak
 Ability: Technician
