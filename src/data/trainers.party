@@ -630,8 +630,8 @@ Modest Nature
 /*- Psyche Lock*/
 
 === TRAINER_LEADER_KOGA_AND_JANINE ===
-Name: Erika
-Class: Leader
+Name: KoJanine
+Class: Leaders
 Pic: Leader Tate And Liza
 Gender: Male
 Music: Elite Four
@@ -2066,7 +2066,7 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 
 === TRAINER_LEADER_TATE_AND_LIZA ===
 Name: TATE&LIZA
-Class: Leader
+Class: Leaders
 Pic: Leader Tate And Liza
 Gender: Male
 Music: Female
