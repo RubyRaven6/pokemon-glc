@@ -915,7 +915,8 @@ enum __attribute__((packed)) Move
     MOVE_MAGMATIC_RAGE,
     MOVE_SHALLOW_GRAVE,
 
-    MOVES_COUNT,
+    MOVES_PGLC,
+    MOVES_COUNT = MOVES_PGLC,
 
     // Z Moves
     FIRST_Z_MOVE = MOVES_COUNT,

@@ -22132,7 +22132,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .name = COMPOUND_STRING("Shallow Grave"),
         .description = COMPOUND_STRING(
             "Traps the target and\n"
-            "harshly lowers Speed."),
+            "greatly lowers Speed."),
         .effect = EFFECT_HIT,
         .power = 120,
         .type = TYPE_GROUND,
