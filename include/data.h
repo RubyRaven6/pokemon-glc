@@ -139,7 +139,7 @@ struct Trainer
     u16 partySize:3;
     u16 padding:2;
     enum TrainerPicID trainerPic;
-    u8 trainerName[TRAINER_NAME_LENGTH + 1];
+    const u8 *trainerName;
     u8 poolSize;
     u8 poolRuleIndex;
     u8 poolPickIndex;

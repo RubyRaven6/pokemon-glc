@@ -1828,7 +1828,7 @@ static void fprint_trainers(const char *output_path, FILE *f, struct Parsed *par
         if (!is_empty_string(trainer->name))
         {
             fprintf(f, "#line %d\n", trainer->name_line);
-            fprintf(f, "        .trainerName = _(\"");
+            fprintf(f, "        .trainerName = COMPOUND_STRING(\"");
             fprint_string(f, trainer->name);
             fprintf(f, "\"),\n");
         }
