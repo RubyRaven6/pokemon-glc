@@ -2386,6 +2386,21 @@ void SetMoveEffect(enum BattlerId battlerAtk, enum BattlerId effectBattler, enum
             gBattlescriptCurrInstr = BattleScript_MoveEffectConfusion;
         }
         break;
+    case MOVE_EFFECT_INFATUATION:
+        if (gBattleMons[effectBattler].volatiles.infatuation
+         || abilities[effectBattler] == ABILITY_OBLIVIOUS
+         || IsAbilityOnSide(effectBattler, ABILITY_AROMA_VEIL)
+         || !AreBattlersOfOppositeGender(battlerAtk, effectBattler))
+        {
+            gBattlescriptCurrInstr = battleScript;
+        }
+        else
+        {
+            gBattleMons[effectBattler].volatiles.infatuation = INFATUATED_WITH(battlerAtk);
+            BattleScriptPush(battleScript);
+            gBattlescriptCurrInstr = BattleScript_MoveEffectInfatuation;
+        }
+        break;
     case MOVE_EFFECT_FLINCH:
         if (abilities[effectBattler] == ABILITY_INNER_FOCUS)
         {
@@ -2541,6 +2556,8 @@ void SetMoveEffect(enum BattlerId battlerAtk, enum BattlerId effectBattler, enum
             gBattleMons[effectBattler].volatiles.escapePrevention = TRUE;
             gBattleMons[effectBattler].volatiles.battlerPreventingEscape = battlerAtk;
         }
+        if (MoveSetsStrictEscapePrevention(gCurrentMove))
+            gBattleMons[effectBattler].volatiles.strictEscapePrevention = TRUE;
         gBattlescriptCurrInstr = battleScript;
         break;
     case MOVE_EFFECT_NIGHTMARE:
@@ -2723,6 +2740,13 @@ void SetMoveEffect(enum BattlerId battlerAtk, enum BattlerId effectBattler, enum
         {
             static const u8 sDireClawEffects[] = { MOVE_EFFECT_POISON, MOVE_EFFECT_PARALYSIS, MOVE_EFFECT_SLEEP };
             SetMoveEffect(battlerAtk, effectBattler, RandomElement(RNG_DIRE_CLAW, sDireClawEffects), battleScript, effectFlags);
+        }
+        break;
+    case MOVE_EFFECT_GRASSPIERCER:
+        if (!gBattleMons[effectBattler].status1)
+        {
+            static const u8 sGrasspiercerEffects[] = { MOVE_EFFECT_TOXIC, MOVE_EFFECT_PARALYSIS, MOVE_EFFECT_SLEEP };
+            SetMoveEffect(battlerAtk, effectBattler, RandomElement(RNG_DIRE_CLAW, sGrasspiercerEffects), battleScript, effectFlags);
         }
         break;
     case MOVE_EFFECT_STEALTH_ROCK:
@@ -5167,7 +5191,8 @@ static void Cmd_jumpifcantswitch(void)
     CMD_ARGS(u8 battler:7, u8 ignoreEscapePrevention:1, const u8 *jumpInstr);
 
     enum BattlerId battler = GetBattlerForBattleScript(cmd->battler);
-    if (!cmd->ignoreEscapePrevention && !CanBattlerEscape(battler) && GetBattlerHoldEffect(battler) != HOLD_EFFECT_SHED_SHELL)
+    if (gBattleMons[battler].volatiles.strictEscapePrevention
+     || (!cmd->ignoreEscapePrevention && !CanBattlerEscape(battler) && GetBattlerHoldEffect(battler) != HOLD_EFFECT_SHED_SHELL))
     {
         gBattlescriptCurrInstr = cmd->jumpInstr;
     }
@@ -13979,4 +14004,3 @@ void BS_RestoreStatChangeQueue(void)
     ClearOtherStatChangeValues(gBattlerAttacker);
     gBattlescriptCurrInstr = cmd->nextInstr;
 }
-

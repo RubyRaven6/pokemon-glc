@@ -906,8 +906,16 @@ enum __attribute__((packed)) Move
     MOVES_COUNT_GEN9,
 
     // Add any custom moves here, not further down!
+    MOVE_ROCK_HEART = MOVES_COUNT_GEN9,
+    MOVE_RIPTIDE,
+    MOVE_ARC_FAULT,
+    MOVE_GRASSPIERCER,
+    MOVE_PSYCHE_LOCK,
+    MOVE_POISONED_STARS,
+    MOVE_MAGMATIC_RAGE,
+    MOVE_SHALLOW_GRAVE,
 
-    MOVES_COUNT = MOVES_COUNT_GEN9,
+    MOVES_COUNT,
 
     // Z Moves
     FIRST_Z_MOVE = MOVES_COUNT,

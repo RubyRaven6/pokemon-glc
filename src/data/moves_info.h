@@ -21982,6 +21982,177 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .battleAnimScript = gBattleAnimMove_MalignantChain,
     },
 
+    [MOVE_ROCK_HEART] =
+    {
+        .name = COMPOUND_STRING("Rock Heart"),
+        .description = COMPOUND_STRING(
+            "Professes love with a\n"
+            "heart-shaped rock."),
+        .effect = EFFECT_HIT,
+        .power = 80,
+        .type = TYPE_ROCK,
+        .accuracy = 100,
+        .pp = 10,
+        .target = TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_PHYSICAL,
+        .additionalEffects = ADDITIONAL_EFFECTS({
+            .moveEffect = MOVE_EFFECT_INFATUATION,
+            .chance = 30,
+        }),
+        .battleAnimScript = gBattleAnimMove_RockThrow,
+    },
+
+    [MOVE_RIPTIDE] =
+    {
+        .name = COMPOUND_STRING("Riptide"),
+        .description = COMPOUND_STRING(
+            "Ripping water cuts half\n"
+            "the target's HP."),
+        .effect = EFFECT_FIXED_PERCENT_DAMAGE,
+        .power = 1,
+        .type = TYPE_WATER,
+        .accuracy = 100,
+        .pp = 10,
+        .target = TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_STATUS,
+        .argument = { .damagePercentage = 50 },
+        .battleAnimScript = gBattleAnimMove_Whirlpool,
+    },
+
+    [MOVE_ARC_FAULT] =
+    {
+        .name = COMPOUND_STRING("Arc Fault"),
+        .description = COMPOUND_STRING(
+            "The user explodes and\n"
+            "sets Electric Terrain."),
+        .effect = EFFECT_HIT,
+        .power = 200,
+        .type = TYPE_ELECTRIC,
+        .accuracy = 100,
+        .pp = 5,
+        .target = TARGET_FOES_AND_ALLY,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_PHYSICAL,
+        .explosion = TRUE,
+        .parentalBondBanned = TRUE,
+        .dampBanned = TRUE,
+        .additionalEffects = ADDITIONAL_EFFECTS({
+            .moveEffect = MOVE_EFFECT_ELECTRIC_TERRAIN,
+        }),
+        .battleAnimScript = gBattleAnimMove_Explosion,
+    },
+
+    [MOVE_GRASSPIERCER] =
+    {
+        .name = COMPOUND_STRING("Grasspiercer"),
+        .description = COMPOUND_STRING(
+            "May badly poison, paralyze,\n"
+            "or put the target to sleep."),
+        .effect = EFFECT_HIT,
+        .power = 80,
+        .type = TYPE_GRASS,
+        .accuracy = 100,
+        .pp = 10,
+        .target = TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_PHYSICAL,
+        .additionalEffects = ADDITIONAL_EFFECTS({
+            .moveEffect = MOVE_EFFECT_GRASSPIERCER,
+            .chance = 50,
+        }),
+        .battleAnimScript = gBattleAnimMove_NeedleArm,
+    },
+
+    [MOVE_PSYCHE_LOCK] =
+    {
+        .name = COMPOUND_STRING("Psyche Lock"),
+        .description = COMPOUND_STRING(
+            "Chains the target mentally\n"
+            "and prevents switching."),
+        .effect = EFFECT_PSYCHE_LOCK,
+        .power = 0,
+        .type = TYPE_PSYCHIC,
+        .accuracy = 100,
+        .pp = 10,
+        .target = TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_STATUS,
+        .setsStrictEscapePrevention = TRUE,
+        .battleAnimScript = gBattleAnimMove_MeanLook,
+    },
+
+    [MOVE_POISONED_STARS] =
+    {
+        .name = COMPOUND_STRING("Poisoned Stars"),
+        .description = COMPOUND_STRING(
+            "Hits 3 times. Poison users\n"
+            "ignore resistances."),
+        .effect = EFFECT_HIT,
+        .power = 20,
+        .type = TYPE_POISON,
+        .accuracy = 100,
+        .pp = 10,
+        .target = TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_PHYSICAL,
+        .strikeCount = 3,
+        .ignoresResistancesIfUserPoison = TRUE,
+        .additionalEffects = ADDITIONAL_EFFECTS({
+            .moveEffect = MOVE_EFFECT_POISON,
+            .chance = 30,
+        }),
+        .battleAnimScript = gBattleAnimMove_PoisonSting,
+    },
+
+    [MOVE_MAGMATIC_RAGE] =
+    {
+        .name = COMPOUND_STRING("Magmatic Rage"),
+        .description = COMPOUND_STRING(
+            "May burn. Also sears Rock\n"
+            "and Ground types."),
+        .effect = EFFECT_HIT,
+        .power = 70,
+        .type = TYPE_FIRE,
+        .accuracy = 100,
+        .pp = 15,
+        .target = TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_PHYSICAL,
+        .additionalEffects = ADDITIONAL_EFFECTS({
+            .moveEffect = MOVE_EFFECT_BURN,
+            .chance = 10,
+        }),
+        .battleAnimScript = gBattleAnimMove_MagmaStorm,
+    },
+
+    [MOVE_SHALLOW_GRAVE] =
+    {
+        .name = COMPOUND_STRING("Shallow Grave"),
+        .description = COMPOUND_STRING(
+            "Traps the target and\n"
+            "harshly lowers Speed."),
+        .effect = EFFECT_HIT,
+        .power = 120,
+        .type = TYPE_GROUND,
+        .accuracy = 80,
+        .pp = 5,
+        .target = TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_PHYSICAL,
+        .additionalEffects = ADDITIONAL_EFFECTS({
+            .moveEffect = MOVE_EFFECT_WRAP,
+            .multistring.wrapped = B_MSG_WRAPPED_SAND_TOMB,
+        },
+        {
+            .moveEffect = MOVE_EFFECT_STAT_MINUS,
+            .speed = 3,
+            .chance = 100,
+        }),
+        .battleAnimScript = gBattleAnimMove_SandTomb,
+    },
+
     // Z-Moves
     [MOVE_BREAKNECK_BLITZ] =
     {

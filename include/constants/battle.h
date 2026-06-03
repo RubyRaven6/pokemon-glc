@@ -228,6 +228,7 @@ enum VolatileFlags
     F(VOLATILE_SUBSTITUTE,                  substitute,                    (u32, 1), V_BATON_PASSABLE) \
     F(VOLATILE_DESTINY_BOND,                destinyBond,                   (u32, 2)) \
     F(VOLATILE_ESCAPE_PREVENTION,           escapePrevention,              (u32, 1), V_BATON_PASSABLE) \
+    F(VOLATILE_STRICT_ESCAPE_PREVENTION,    strictEscapePrevention,        (u32, 1)) \
     F(VOLATILE_NIGHTMARE,                   nightmare,                     (u32, 1)) \
     F(VOLATILE_CURSED,                      cursed,                        (u32, 1), V_BATON_PASSABLE) \
     F(VOLATILE_FORESIGHT,                   foresight,                     (u32, 1)) \
@@ -517,6 +518,7 @@ enum __attribute__((packed)) MoveEffect
     MOVE_EFFECT_TOXIC = 6,
     MOVE_EFFECT_FROSTBITE = 7,
     MOVE_EFFECT_CONFUSION,
+    MOVE_EFFECT_INFATUATION,
     MOVE_EFFECT_FLINCH,
     MOVE_EFFECT_TRI_ATTACK,
     MOVE_EFFECT_UPROAR,
@@ -545,6 +547,7 @@ enum __attribute__((packed)) MoveEffect
     MOVE_EFFECT_TRAP_BOTH,
     MOVE_EFFECT_ROUND,
     MOVE_EFFECT_DIRE_CLAW,
+    MOVE_EFFECT_GRASSPIERCER,
     MOVE_EFFECT_SYRUP_BOMB,
     MOVE_EFFECT_FLORAL_HEALING,
     MOVE_EFFECT_SECRET_POWER,

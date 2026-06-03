@@ -3127,7 +3127,10 @@ void SwitchInClearSetData(enum BattlerId battler, struct Volatiles *volatilesCop
         for (enum BattlerId i = 0; i < gBattlersCount; i++)
         {
             if (gBattleMons[i].volatiles.escapePrevention && gBattleMons[i].volatiles.battlerPreventingEscape == battler)
+            {
                 gBattleMons[i].volatiles.escapePrevention = FALSE;
+                gBattleMons[i].volatiles.strictEscapePrevention = FALSE;
+            }
 
             if (gBattleMons[i].volatiles.battlerWithSureHit == battler + 1)
                 gBattleMons[i].volatiles.battlerWithSureHit = 0;
@@ -3138,7 +3141,10 @@ void SwitchInClearSetData(enum BattlerId battler, struct Volatiles *volatilesCop
         for (enum BattlerId i = 0; i < gBattlersCount; i++)
         {
             if (gBattleMons[i].volatiles.escapePrevention && gBattleMons[i].volatiles.battlerPreventingEscape == battler)
+            {
                 gBattleMons[i].volatiles.escapePrevention = FALSE;
+                gBattleMons[i].volatiles.strictEscapePrevention = FALSE;
+            }
         }
     }
 
@@ -3277,7 +3283,10 @@ void FaintClearSetData(enum BattlerId battler)
         if (gBattleMons[i].volatiles.battlerWithSureHit == battler + 1)
             gBattleMons[i].volatiles.battlerWithSureHit = 0;
         if (gBattleMons[i].volatiles.escapePrevention && gBattleMons[i].volatiles.battlerPreventingEscape == battler)
+        {
             gBattleMons[i].volatiles.escapePrevention = FALSE;
+            gBattleMons[i].volatiles.strictEscapePrevention = FALSE;
+        }
         if (gBattleMons[i].volatiles.infatuation == INFATUATED_WITH(battler))
             gBattleMons[i].volatiles.infatuation = 0;
         if (gBattleMons[i].volatiles.wrapped && gBattleMons[i].volatiles.wrappedBy == battler)
@@ -4228,7 +4237,8 @@ static void HandleTurnActionSelectionState(void)
                     break;
                 case B_ACTION_SWITCH:
                     gBattleStruct->battlerPartyIndexes[battler] = gBattlerPartyIndexes[battler];
-                    if (gBattleTypeFlags & BATTLE_TYPE_ARENA
+                    if (gBattleMons[battler].volatiles.strictEscapePrevention
+                        || (gBattleTypeFlags & BATTLE_TYPE_ARENA)
                         || (!CanBattlerEscape(battler) && GetBattlerHoldEffect(battler) != HOLD_EFFECT_SHED_SHELL))
                     {
                         BtlController_EmitChoosePokemon(battler, B_COMM_TO_CONTROLLER, PARTY_ACTION_CANT_SWITCH, PARTY_SIZE, ABILITY_NONE, 0, gBattleStruct->battlerPartyOrders[battler]);

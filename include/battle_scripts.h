@@ -157,6 +157,7 @@ extern const u8 BattleScript_MoveEffectToxic[];
 extern const u8 BattleScript_MoveEffectPayDay[];
 extern const u8 BattleScript_MoveEffectWrap[];
 extern const u8 BattleScript_MoveEffectConfusion[];
+extern const u8 BattleScript_MoveEffectInfatuation[];
 extern const u8 BattleScript_MoveEffectRecoilHP25[];
 extern const u8 BattleScript_MoveEffectRecoil[];
 extern const u8 BattleScript_FaintAttackerForExplosion[];
@@ -725,5 +726,6 @@ extern const u8 BattleScript_TarShotMessage[];
 extern const u8 BattleScript_Stockpile[];
 extern const u8 BattleScript_Memento[];
 extern const u8 BattleScript_TakeHeart[];
+extern const u8 BattleScript_EffectPsycheLock[];
 
 #endif // GUARD_BATTLE_SCRIPTS_H

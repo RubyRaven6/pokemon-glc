@@ -440,6 +440,8 @@ bool32 AI_CanBattlerEscape(enum BattlerId battler)
 {
     enum HoldEffect holdEffect = gAiLogicData->holdEffects[battler];
 
+    if (gBattleMons[battler].volatiles.strictEscapePrevention)
+        return FALSE;
     if (GetConfig(B_GHOSTS_ESCAPE) >= GEN_6 && IS_BATTLER_OF_TYPE(battler, TYPE_GHOST))
         return TRUE;
     if (holdEffect == HOLD_EFFECT_SHED_SHELL)
@@ -2919,6 +2921,7 @@ bool32 IsTrappingMove(enum Move move)
     switch (GetMoveEffect(move))
     {
     case EFFECT_MEAN_LOOK:
+    case EFFECT_PSYCHE_LOCK:
     case EFFECT_FAIRY_LOCK:
     //case EFFECT_NO_RETREAT:   // TODO
         return TRUE;
