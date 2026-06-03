@@ -6,6 +6,7 @@ script EventScript_PWTBattleRoxanne{
 script(local) EventScript_PWTBattleRoxanne_Money {
     if(var(VAR_GYM_LEADER_3) == TRAINER_LEADER_ROXANNE) {
         setflag(FLAG_HOENN_LEADER_ROXANNE)
+        if(!flag(FLAG_COMPLETED_HOENN_TOURNAMENT)){setflag(FLAG_COMPLETED_HOENN_TOURNAMENT)}
         addmoney(500)
     } else {
         addmoney(250)
@@ -20,6 +21,7 @@ script EventScript_PWTBattleBrawly{
 script(local) EventScript_PWTBattleBrawly_Money {
     if(var(VAR_GYM_LEADER_3) == TRAINER_LEADER_BRAWLY) {
         setflag(FLAG_HOENN_LEADER_BRAWLY)
+        if(!flag(FLAG_COMPLETED_HOENN_TOURNAMENT)){setflag(FLAG_COMPLETED_HOENN_TOURNAMENT)}
         addmoney(500)
     } else {
         addmoney(250)
@@ -34,6 +36,7 @@ script EventScript_PWTBattleWattson{
 script(local) EventScript_PWTBattleWattson_Money {
     if(var(VAR_GYM_LEADER_3) == TRAINER_LEADER_WATTSON) {
         setflag(FLAG_HOENN_LEADER_WATTSON)
+        if(!flag(FLAG_COMPLETED_HOENN_TOURNAMENT)){setflag(FLAG_COMPLETED_HOENN_TOURNAMENT)}
         addmoney(500)
     } else {
         addmoney(250)
@@ -48,6 +51,7 @@ script EventScript_PWTBattleFlannery{
 script(local) EventScript_PWTBattleFlannery_Money {
     if(var(VAR_GYM_LEADER_3) == TRAINER_LEADER_FLANNERY) {
         setflag(FLAG_HOENN_LEADER_FLANNERY)
+        if(!flag(FLAG_COMPLETED_HOENN_TOURNAMENT)){setflag(FLAG_COMPLETED_HOENN_TOURNAMENT)}
         addmoney(500)
     } else {
         addmoney(250)
@@ -62,6 +66,7 @@ script EventScript_PWTBattleNorman{
 script(local) EventScript_PWTBattleNorman_Money {
     if(var(VAR_GYM_LEADER_3) == TRAINER_LEADER_NORMAN) {
         setflag(FLAG_HOENN_LEADER_NORMAN)
+        if(!flag(FLAG_COMPLETED_HOENN_TOURNAMENT)){setflag(FLAG_COMPLETED_HOENN_TOURNAMENT)}
         addmoney(500)
     } else {
         addmoney(250)
@@ -76,6 +81,7 @@ script EventScript_PWTBattleWinona{
 script(local) EventScript_PWTBattleWinona_Money {
     if(var(VAR_GYM_LEADER_3) == TRAINER_LEADER_WINONA) {
         setflag(FLAG_HOENN_LEADER_WINONA)
+        if(!flag(FLAG_COMPLETED_HOENN_TOURNAMENT)){setflag(FLAG_COMPLETED_HOENN_TOURNAMENT)}
         addmoney(500)
     } else {
         addmoney(250)
@@ -90,6 +96,7 @@ script EventScript_PWTBattleTateAndLiza{
 script(local) EventScript_PWTBattleTateAndLiza_Money {
     if(var(VAR_GYM_LEADER_3) == TRAINER_LEADER_TATE_AND_LIZA) {
         setflag(FLAG_HOENN_LEADER_TATE_AND_LIZA)
+        if(!flag(FLAG_COMPLETED_HOENN_TOURNAMENT)){setflag(FLAG_COMPLETED_HOENN_TOURNAMENT)}
         addmoney(500)
     } else {
         addmoney(250)
@@ -104,6 +111,7 @@ script EventScript_PWTBattleJuan{
 script(local) EventScript_PWTBattleJuan_Money {
     if(var(VAR_GYM_LEADER_3) == TRAINER_LEADER_JUAN) {
         setflag(FLAG_HOENN_LEADER_JUAN)
+        if(!flag(FLAG_COMPLETED_HOENN_TOURNAMENT)){setflag(FLAG_COMPLETED_HOENN_TOURNAMENT)}
         addmoney(500)
     } else {
         addmoney(250)

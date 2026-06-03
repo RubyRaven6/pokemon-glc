@@ -6,6 +6,7 @@ script EventScript_PWTBattleRoark{
 script(local) EventScript_PWTBattleRoark_Money {
     if(var(VAR_GYM_LEADER_3) == TRAINER_LEADER_ROARK) {
         setflag(FLAG_SINNOH_LEADER_ROARK)
+        if(!flag(FLAG_COMPLETED_SINNOH_TOURNAMENT)){setflag(FLAG_COMPLETED_SINNOH_TOURNAMENT)}
         addmoney(500)
     } else {
         addmoney(250)
@@ -20,6 +21,7 @@ script EventScript_PWTBattleGardenia{
 script(local) EventScript_PWTBattleGardenia_Money {
     if(var(VAR_GYM_LEADER_3) == TRAINER_LEADER_GARDENIA) {
         setflag(FLAG_SINNOH_LEADER_GARDENIA)
+        if(!flag(FLAG_COMPLETED_SINNOH_TOURNAMENT)){setflag(FLAG_COMPLETED_SINNOH_TOURNAMENT)}
         addmoney(500)
     } else {
         addmoney(250)
@@ -34,6 +36,7 @@ script EventScript_PWTBattleMaylene{
 script(local) EventScript_PWTBattleMaylene_Money {
     if(var(VAR_GYM_LEADER_3) == TRAINER_LEADER_MAYLENE) {
         setflag(FLAG_SINNOH_LEADER_MAYLENE)
+        if(!flag(FLAG_COMPLETED_SINNOH_TOURNAMENT)){setflag(FLAG_COMPLETED_SINNOH_TOURNAMENT)}
         addmoney(500)
     } else {
         addmoney(250)
@@ -48,6 +51,7 @@ script EventScript_PWTBattleCrasherWake{
 script(local) EventScript_PWTBattleCrasherWake_Money {
     if(var(VAR_GYM_LEADER_3) == TRAINER_LEADER_CRASHER_WAKE) {
         setflag(FLAG_SINNOH_LEADER_CRASHERWAKE)
+        if(!flag(FLAG_COMPLETED_SINNOH_TOURNAMENT)){setflag(FLAG_COMPLETED_SINNOH_TOURNAMENT)}
         addmoney(500)
     } else {
         addmoney(250)
@@ -62,6 +66,7 @@ script EventScript_PWTBattleFantina{
 script(local) EventScript_PWTBattleFantina_Money {
     if(var(VAR_GYM_LEADER_3) == TRAINER_LEADER_FANTINA) {
         setflag(FLAG_SINNOH_LEADER_FANTINA)
+        if(!flag(FLAG_COMPLETED_SINNOH_TOURNAMENT)){setflag(FLAG_COMPLETED_SINNOH_TOURNAMENT)}
         addmoney(500)
     } else {
         addmoney(250)
@@ -76,6 +81,7 @@ script EventScript_PWTBattleByron{
 script(local) EventScript_PWTBattleByron_Money {
     if(var(VAR_GYM_LEADER_3) == TRAINER_LEADER_BYRON) {
         setflag(FLAG_SINNOH_LEADER_BYRON)
+        if(!flag(FLAG_COMPLETED_SINNOH_TOURNAMENT)){setflag(FLAG_COMPLETED_SINNOH_TOURNAMENT)}
         addmoney(500)
     } else {
         addmoney(250)
@@ -90,6 +96,7 @@ script EventScript_PWTBattleCandice{
 script(local) EventScript_PWTBattleCandice_Money {
     if(var(VAR_GYM_LEADER_3) == TRAINER_LEADER_CANDICE_NUTS) {
         setflag(FLAG_SINNOH_LEADER_CANDICE)
+        if(!flag(FLAG_COMPLETED_SINNOH_TOURNAMENT)){setflag(FLAG_COMPLETED_SINNOH_TOURNAMENT)}
         addmoney(500)
     } else {
         addmoney(250)
@@ -104,6 +111,7 @@ script EventScript_PWTBattleVolkner{
 script(local) EventScript_PWTBattleVolkner_Money {
     if(var(VAR_GYM_LEADER_3) == TRAINER_LEADER_VOLKNER) {
         setflag(FLAG_SINNOH_LEADER_VOLKNER)
+        if(!flag(FLAG_COMPLETED_SINNOH_TOURNAMENT)){setflag(FLAG_COMPLETED_SINNOH_TOURNAMENT)}
         addmoney(500)
     } else {
         addmoney(250)

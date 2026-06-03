@@ -7,7 +7,7 @@ script(local) EventScript_PWTBattleBrock_Money {
     if(var(VAR_GYM_LEADER_3) == TRAINER_LEADER_BROCK){
         setflag(FLAG_KANTO_LEADER_BROCK)
         addmoney(500)
-        if(!flag(FLAG_COMPLETED_KANTO_TOURNAMENT)){setflag(FLAG_COMPLETED_KANTO_TOURNAMENT)}        
+        if(!flag(FLAG_COMPLETED_KANTO_TOURNAMENT)){setflag(FLAG_COMPLETED_KANTO_TOURNAMENT)}
     } else {
         addmoney(250)
     }

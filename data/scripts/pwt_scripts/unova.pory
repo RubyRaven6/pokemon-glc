@@ -6,6 +6,7 @@ script EventScript_PWTBattleLenora{
 script(local) EventScript_PWTBattleLenora_Money {
     if(var(VAR_GYM_LEADER_3) == TRAINER_LEADER_LENORA) {
         setflag(FLAG_UNOVA_LEADER_LENORA)
+        if(!flag(FLAG_COMPLETED_UNOVA_TOURNAMENT)){setflag(FLAG_COMPLETED_UNOVA_TOURNAMENT)}
         addmoney(500)
     } else {
         addmoney(250)
@@ -20,6 +21,7 @@ script EventScript_PWTBattleBurgh{
 script(local) EventScript_PWTBattleBurgh_Money {
     if(var(VAR_GYM_LEADER_3) == TRAINER_LEADER_BURGH) {
         setflag(FLAG_UNOVA_LEADER_BURGH)
+        if(!flag(FLAG_COMPLETED_UNOVA_TOURNAMENT)){setflag(FLAG_COMPLETED_UNOVA_TOURNAMENT)}
         addmoney(500)
     } else {
         addmoney(250)
@@ -34,6 +36,7 @@ script EventScript_PWTBattleElesa{
 script(local) EventScript_PWTBattleElesa_Money {
     if(var(VAR_GYM_LEADER_3) == TRAINER_LEADER_ELESA) {
         setflag(FLAG_UNOVA_LEADER_ELESA)
+        if(!flag(FLAG_COMPLETED_UNOVA_TOURNAMENT)){setflag(FLAG_COMPLETED_UNOVA_TOURNAMENT)}
         addmoney(500)
     } else {
         addmoney(250)
@@ -48,6 +51,7 @@ script EventScript_PWTBattleClay{
 script(local) EventScript_PWTBattleClay_Money {
     if(var(VAR_GYM_LEADER_3) == TRAINER_LEADER_CLAY) {
         setflag(FLAG_UNOVA_LEADER_CLAY)
+        if(!flag(FLAG_COMPLETED_UNOVA_TOURNAMENT)){setflag(FLAG_COMPLETED_UNOVA_TOURNAMENT)}
         addmoney(500)
     } else {
         addmoney(250)
@@ -62,6 +66,7 @@ script EventScript_PWTBattleSkyla{
 script(local) EventScript_PWTBattleSkyla_Money {
     if(var(VAR_GYM_LEADER_3) == TRAINER_LEADER_SKYLA) {
         setflag(FLAG_UNOVA_LEADER_SKYLA)
+        if(!flag(FLAG_COMPLETED_UNOVA_TOURNAMENT)){setflag(FLAG_COMPLETED_UNOVA_TOURNAMENT)}
         addmoney(500)
     } else {
         addmoney(250)
@@ -76,6 +81,7 @@ script EventScript_PWTBattleBrycen{
 script(local) EventScript_PWTBattleBrycen_Money {
     if(var(VAR_GYM_LEADER_3) == TRAINER_LEADER_BRYCEN) {
         setflag(FLAG_UNOVA_LEADER_BRYCEN)
+        if(!flag(FLAG_COMPLETED_UNOVA_TOURNAMENT)){setflag(FLAG_COMPLETED_UNOVA_TOURNAMENT)}
         addmoney(500)
     } else {
         addmoney(250)
@@ -90,6 +96,7 @@ script EventScript_PWTBattleDrayden{
 script(local) EventScript_PWTBattleDrayden_Money {
     if(var(VAR_GYM_LEADER_3) == TRAINER_LEADER_DRAYDEN) {
         setflag(FLAG_UNOVA_LEADER_DRAYDEN)
+        if(!flag(FLAG_COMPLETED_UNOVA_TOURNAMENT)){setflag(FLAG_COMPLETED_UNOVA_TOURNAMENT)}
         addmoney(500)
     } else {
         addmoney(250)
@@ -104,6 +111,7 @@ script EventScript_PWTBattleCheren{
 script(local) EventScript_PWTBattleCheren_Money {
     if(var(VAR_GYM_LEADER_3) == TRAINER_LEADER_CHEREN) {
         setflag(FLAG_UNOVA_LEADER_CHEREN)
+        if(!flag(FLAG_COMPLETED_UNOVA_TOURNAMENT)){setflag(FLAG_COMPLETED_UNOVA_TOURNAMENT)}
         addmoney(500)
     } else {
         addmoney(250)
@@ -118,6 +126,7 @@ script EventScript_PWTBattleRoxie{
 script(local) EventScript_PWTBattleRoxie_Money {
     if(var(VAR_GYM_LEADER_3) == TRAINER_LEADER_ROXIE) {
         setflag(FLAG_UNOVA_LEADER_ROXIE)
+        if(!flag(FLAG_COMPLETED_UNOVA_TOURNAMENT)){setflag(FLAG_COMPLETED_UNOVA_TOURNAMENT)}
         addmoney(500)
     } else {
         addmoney(250)
@@ -132,6 +141,7 @@ script EventScript_PWTBattleMarlon{
 script(local) EventScript_PWTBattleMarlon_Money {
     if(var(VAR_GYM_LEADER_3) == TRAINER_LEADER_MARLON) {
         setflag(FLAG_UNOVA_LEADER_MARLON)
+        if(!flag(FLAG_COMPLETED_UNOVA_TOURNAMENT)){setflag(FLAG_COMPLETED_UNOVA_TOURNAMENT)}
         addmoney(500)
     } else {
         addmoney(250)
