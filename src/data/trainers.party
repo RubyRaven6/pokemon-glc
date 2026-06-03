@@ -199,7 +199,7 @@ Music: Elite Four
 Double Battle: No
 AI: Smart Trainer / Prediction / Assumptions
 Party Size: 6
-Pool Rules: Basic
+Pool Rules: Weather Singles
 Pool Pick Functions: Default
 
 Pelipper @ Damp Rock
@@ -1091,7 +1091,7 @@ Jolly Nature
 - Tailwind
 - Sleep Powder
 - Teleport
-- Whirlwind
+- Rain Dance
 
 Heracross @ Choice Band
 Ability: Moxie
@@ -1456,7 +1456,7 @@ Adamant Nature
 - Facade
 - Bullet Punch
 
-Emboar @ Choice Scarf
+Emboar @ Emboarite
 Ability: Intimidate
 Level: 100
 EVs: 63 Atk / 63 HP
