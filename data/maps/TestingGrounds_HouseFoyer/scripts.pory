@@ -29,10 +29,10 @@ mapscripts TestingGrounds_HouseFoyer_MapScripts {
 script EventScript_TestingGrounds_HouseFoyer_GenerationSelector {
     lock
     dynmultipush("Generation 1", 1)
-    if(flag(FLAG_COMPLETED_ROSTER_KANTO)){dynmultipush("Generation 2", 2)}
-    if(flag(FLAG_COMPLETED_ROSTER_JOHTO)){dynmultipush("Generation 3", 3)}
-    if(flag(FLAG_COMPLETED_ROSTER_HOENN)){dynmultipush("Generation 4", 4)}
-    if(flag(FLAG_COMPLETED_ROSTER_SINNOH)){dynmultipush("Generation 5", 5)}
+    if(flag(FLAG_COMPLETED_KANTO_TOURNAMENT)){dynmultipush("Generation 2", 2)}
+    if(flag(FLAG_COMPLETED_JOHTO_TOURNAMENT)){dynmultipush("Generation 3", 3)}
+    if(flag(FLAG_COMPLETED_HOENN_TOURNAMENT)){dynmultipush("Generation 4", 4)}
+    if(flag(FLAG_COMPLETED_SINNOH_TOURNAMENT)){dynmultipush("Generation 5", 5)}
     dynmultistack(0, 0, FALSE, 3, FALSE, 0, DYN_MULTICHOICE_CB_NONE)
 
     switch(var(VAR_RESULT)){

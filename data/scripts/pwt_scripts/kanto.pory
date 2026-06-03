@@ -5,8 +5,9 @@ script EventScript_PWTBattleBrock{
 
 script(local) EventScript_PWTBattleBrock_Money {
     if(var(VAR_GYM_LEADER_3) == TRAINER_LEADER_BROCK){
-    setflag(FLAG_KANTO_LEADER_BROCK)
-    addmoney(500)
+        setflag(FLAG_KANTO_LEADER_BROCK)
+        addmoney(500)
+        if(!flag(FLAG_COMPLETED_KANTO_TOURNAMENT)){setflag(FLAG_COMPLETED_KANTO_TOURNAMENT)}        
     } else {
         addmoney(250)
     }
@@ -19,8 +20,9 @@ script EventScript_PWTBattleMisty{
 
 script(local) EventScript_PWTBattleMisty_Money {
     if(var(VAR_GYM_LEADER_3) == TRAINER_LEADER_MISTY){
-    setflag(FLAG_KANTO_LEADER_MISTY)
-    addmoney(500)
+        setflag(FLAG_KANTO_LEADER_MISTY)
+        addmoney(500)
+        if(!flag(FLAG_COMPLETED_KANTO_TOURNAMENT)){setflag(FLAG_COMPLETED_KANTO_TOURNAMENT)}
     } else {
         addmoney(250)
     }
@@ -33,8 +35,9 @@ script EventScript_PWTBattleLtSurge{
 
 script(local) EventScript_PWTBattleLtSurge_Money {
     if(var(VAR_GYM_LEADER_3) == TRAINER_LEADER_LT_SURGE){
-    setflag(FLAG_KANTO_LEADER_LT_SURGE)
-    addmoney(500)
+        setflag(FLAG_KANTO_LEADER_LT_SURGE)
+        addmoney(500)
+        if(!flag(FLAG_COMPLETED_KANTO_TOURNAMENT)){setflag(FLAG_COMPLETED_KANTO_TOURNAMENT)}
     } else {
         addmoney(250)
     }
@@ -47,8 +50,9 @@ script EventScript_PWTBattleErika{
 
 script(local) EventScript_PWTBattleErika_Money {
     if(var(VAR_GYM_LEADER_3) == TRAINER_LEADER_ERIKA){
-    setflag(FLAG_KANTO_LEADER_ERIKA)
-    addmoney(500)
+        setflag(FLAG_KANTO_LEADER_ERIKA)
+        addmoney(500)
+        if(!flag(FLAG_COMPLETED_KANTO_TOURNAMENT)){setflag(FLAG_COMPLETED_KANTO_TOURNAMENT)}
     } else {
         addmoney(250)
     }
@@ -61,8 +65,9 @@ script EventScript_PWTBattleKogaJanine{
 
 script(local) EventScript_PWTBattleKogaJanine_Money {
     if(var(VAR_GYM_LEADER_3) == TRAINER_LEADER_KOGA_AND_JANINE){
-    setflag(FLAG_KANTO_LEADER_KOGA_JANINE)
-    addmoney(500)
+        setflag(FLAG_KANTO_LEADER_KOGA_JANINE)
+        addmoney(500)
+        if(!flag(FLAG_COMPLETED_KANTO_TOURNAMENT)){setflag(FLAG_COMPLETED_KANTO_TOURNAMENT)}
     } else {
         addmoney(250)
     }
@@ -75,8 +80,9 @@ script EventScript_PWTBattleSabrina{
 
 script(local) EventScript_PWTBattleSabrina_Money {
     if(var(VAR_GYM_LEADER_3) == TRAINER_LEADER_SABRINA){
-    setflag(FLAG_KANTO_LEADER_SABRINA)
-    addmoney(500)
+        setflag(FLAG_KANTO_LEADER_SABRINA)
+        addmoney(500)
+        if(!flag(FLAG_COMPLETED_KANTO_TOURNAMENT)){setflag(FLAG_COMPLETED_KANTO_TOURNAMENT)}
     } else {
         addmoney(250)
     }
@@ -89,8 +95,9 @@ script EventScript_PWTBattleBlaine{
 
 script(local) EventScript_PWTBattleBlaine_Money {
     if(var(VAR_GYM_LEADER_3) == TRAINER_LEADER_BLAINE){
-    setflag(FLAG_KANTO_LEADER_BLAINE)
-    addmoney(500)
+        setflag(FLAG_KANTO_LEADER_BLAINE)
+        addmoney(500)
+        if(!flag(FLAG_COMPLETED_KANTO_TOURNAMENT)){setflag(FLAG_COMPLETED_KANTO_TOURNAMENT)}
     } else {
         addmoney(250)
     }
@@ -103,8 +110,9 @@ script EventScript_PWTBattleGiovanni{
 
 script(local) EventScript_PWTBattleGiovanni_Money {
     if(var(VAR_GYM_LEADER_3) == TRAINER_LEADER_GIOVANNI){
-    setflag(FLAG_KANTO_LEADER_GIOVANNI)
-    addmoney(500)
+        setflag(FLAG_KANTO_LEADER_GIOVANNI)
+        addmoney(500)
+        if(!flag(FLAG_COMPLETED_KANTO_TOURNAMENT)){setflag(FLAG_COMPLETED_KANTO_TOURNAMENT)}
     } else {
         addmoney(250)
     }
