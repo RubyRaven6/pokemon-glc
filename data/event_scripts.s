@@ -70,6 +70,7 @@
 #include "constants/trainers.h"
 #include "constants/trainer_card.h"
 #include "constants/tv.h"
+#include "constants/tournament_constants.h"
 #include "constants/union_room.h"
 #include "constants/vars.h"
 #include "constants/weather.h"

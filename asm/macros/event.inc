@@ -2965,6 +2965,11 @@
 	.2byte \var
 	.endm
 
+	@ Checks if the given generation has a defeated Gym Leader Flag
+	.macro checkdefeatedleaders
+	callnative ScrCmd_checkdefeatedleaders
+	.endm
+
 	.if RELEASE == FALSE
 	.macro debugprint str:req, numOrVar=65535
 	callnative ScrCmd_debugprint

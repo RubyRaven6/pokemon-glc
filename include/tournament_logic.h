@@ -4,4 +4,6 @@
 void ChooseRandomGymLeader(void);
 void SetCompleteRosterFlag(void);
 
+extern const u16 gTechniqueFlagUnlocks[];
+
 #endif //GUARD_TOURNAMENT_LOGIC_H
