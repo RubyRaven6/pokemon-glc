@@ -148,6 +148,41 @@ script EventScript_TestingGrounds_HouseFoyer_BerryMarket{
 	release
 }
 
+script EventScript_TestingGrounds_HouseFoyer_TechniquesMarket{
+    lock
+    faceplayer
+	msgbox("techniques.com")
+    checkdefeatedleaders
+    if(var(VAR_RESULT) == FALSE){
+        msgbox(format("This shop unlocks once you defeat a gym leader."))
+        closemessage
+    } else {
+        msgbox(format("Kindly choose which techniques you'd like to claim."))
+        pokemart(TechniquesMarket)
+        msgbox("Good luck.")
+    }
+    applymovement(VAR_LAST_TALKED, moves(face_original_direction))
+    waitmovement(0)
+    closemessage
+	release
+}
+
+script EventScript_TestingGround_HouseFoyer_EnterTournament {
+    lock
+    faceplayer
+    msgbox(format("Hi! Will you be entering our Tournament?"), MSGBOX_YESNO)
+    if(var(VAR_RESULT) == NO){}
+    else
+    {
+        callnative(ChooseRandomGymLeader)
+        msgbox(format("Come on in into our green room, then!"))
+        closemessage
+        warp(MAP_TESTING_GROUNDS_GREEN_ROOM, 6, 6)
+    }
+    closemessage
+    release
+}
+
 mart HeldItemMarket {
     ITEM_SILK_SCARF
     ITEM_CHARCOAL
@@ -448,4 +483,47 @@ mart BerryMarket{
     ITEM_ROWAP_BERRY
     ITEM_KEE_BERRY
     ITEM_MARANGA_BERRY
+}
+
+mart TechniquesMarket{
+    ITEM_TM01
+    ITEM_TM02
+    ITEM_TM03
+    ITEM_TM04
+    ITEM_TM05
+    ITEM_TM06
+    ITEM_TM07
+    ITEM_TM08
+    ITEM_TM09
+    ITEM_TM10
+    ITEM_TM11
+    ITEM_TM12
+    ITEM_TM13
+    ITEM_TM14
+    ITEM_TM15
+    ITEM_TM16
+    ITEM_TM17
+    ITEM_TM18
+    ITEM_TM19
+    ITEM_TM20
+    ITEM_TM21
+    ITEM_TM22
+    ITEM_TM23
+    ITEM_TM24
+    ITEM_TM25
+    ITEM_TM26
+    ITEM_TM27
+    ITEM_TM28
+    ITEM_TM29
+    ITEM_TM30
+    ITEM_TM31
+    ITEM_TM32
+    ITEM_TM33
+    ITEM_TM34
+    ITEM_TM35
+    ITEM_TM36
+    ITEM_TM37
+    ITEM_TM38
+    ITEM_TM39
+    ITEM_TM40
 }

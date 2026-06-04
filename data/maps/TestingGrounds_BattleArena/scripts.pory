@@ -53,7 +53,7 @@ script GymLeaderBattleSetup {
     closemessage
     applymovement(LOCALID_PLAYER, moves(walk_down * 6, delay_16 *2))
     waitmovement(0)
-    warp(MAP_TESTING_GROUNDS_HOUSE_FOYER, 2, 2)
+    warp(MAP_TESTING_GROUNDS_GREEN_ROOM, 2, 3)
     waitstate
     release
     end

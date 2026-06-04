@@ -9337,7 +9337,7 @@
     {
       "id": "LAYOUT_TESTING_GROUNDS_HOUSE_FOYER",
       "name": "TestingGrounds_HouseFoyer_Layout",
-      "width": 10,
+      "width": 11,
       "height": 10,
       "primary_tileset": "gTileset_Building",
       "secondary_tileset": "gTileset_Lab",
@@ -9353,6 +9353,16 @@
       "secondary_tileset": "gTileset_EliteFour",
       "border_filepath": "data/layouts/TestingGrounds_BattleArena/border.bin",
       "blockdata_filepath": "data/layouts/TestingGrounds_BattleArena/map.bin"
+    },
+    {
+      "id": "LAYOUT_TESTING_GROUNDS_GREEN_ROOM",
+      "name": "TestingGrounds_GreenRoom_Layout",
+      "width": 10,
+      "height": 8,
+      "primary_tileset": "gTileset_Building",
+      "secondary_tileset": "gTileset_Lab",
+      "border_filepath": "data/layouts/TestingGrounds_GreenRoom/border.bin",
+      "blockdata_filepath": "data/layouts/TestingGrounds_GreenRoom/map.bin"
     }
   ]
 }

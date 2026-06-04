@@ -126,7 +126,7 @@ Impish Nature
 - Temper Flare
 - Substitute
 - Protect
-/*- Rock Heart*/
+- Rock Heart
 
 Garganacl @ Leftovers
 Ability: Purifying Salt
@@ -146,7 +146,7 @@ Adamant Nature
 - Acrobatics
 - Crunch
 - U-Turn
-/*- Rock Heart*/
+- Rock Heart
 
 Cradily @ Leftovers
 Ability: Storm Drain
@@ -177,7 +177,7 @@ Adamant Nature
 - Iron Tail
 - Earthquake
 - Explosion
-/*- Rock Heart*/
+- Rock Heart
 
 Arcanine Hisui @ Life Orb
 Ability: Rock Head
@@ -188,7 +188,7 @@ Jolly Nature
 - Wild Charge
 - Psychic Fangs
 - Flare Blitz
-/*- Rock Heart*/
+- Rock Heart
 
 === TRAINER_LEADER_MISTY ===
 Name: Misty
@@ -267,7 +267,7 @@ Modest Nature
 - Ice Beam
 - Earth Power
 - Amnesia
-/*- Riptide*/
+- Riptide
 
 Omastar @ White Herb
 Ability: Shell Armor
@@ -279,7 +279,7 @@ Modest Nature
 - Shell Smash
 - Ice Beam
 - Tera Blast
-/*- Riptide*/
+- Riptide
 
 Octillery @ Wide Lens
 Ability: Sniper
@@ -301,7 +301,7 @@ Modest Nature
 - Psychic
 - Flash Cannon
 - Power Gem
-/*- Riptide*/
+- Riptide
 
 === TRAINER_LEADER_LT_SURGE ===
 Name: Lt. Surge
@@ -324,8 +324,7 @@ Timid Nature
 - Light Screen
 - Electro Ball
 - Volt Switch
-- Electric Terrain
-/*- Arc Fault*/
+- Arc Fault
 
 Pawmot @ Focus Sash
 Ability: Iron Fist
@@ -367,7 +366,7 @@ Bold Nature
 - Flash Cannon
 - Gravity
 - Volt Switch
-/*- Arc Fault*/
+- Arc Fault
 
 Jolteon @ Choice Specs
 Ability: Unnerve
@@ -506,7 +505,7 @@ Jolly Nature
 - Spirit Shackle
 - Shadow Sneak
 - Tailwind
-/*- Grasspiercer*/
+- Grasspiercer
 
 Vileplume @ Wise Glasses
 Ability: Effect Spore
@@ -553,7 +552,7 @@ Modest Nature
 - Perish Song
 - Hyper Voice
 - Wish
-/*- Psyche Lock*/
+- Psyche Lock
 
 Chimecho @ Light Clay
 Ability: Levitate
@@ -564,7 +563,7 @@ Bold Nature
 - Perish Song
 - Light Screen
 - Reflect
-/*- Psyche Lock*/
+- Psyche Lock
 
 Jynx @ Normalium Z
 Ability: Dry Skin
@@ -575,7 +574,7 @@ Modest Nature
 - Perish Song
 - Psychic
 - Ice Beam
-/*- Psyche Lock*/
+- Psyche Lock
 
 Wyrdeer @ Zoom Lens
 Ability: Intimidate
@@ -627,7 +626,7 @@ Modest Nature
 - Shadow Ball
 - Psyshock
 - Energy Ball
-/*- Psyche Lock*/
+- Psyche Lock
 
 === TRAINER_LEADER_KOGA_AND_JANINE ===
 Name: Koga & Janine
@@ -807,7 +806,7 @@ Jolly Nature
 - Earthquake
 - Rock Slide
 - U-Turn
-/*- Magmatic Rage*/
+- Magmatic Rage
 
 Delphox @ Choice Specs
 Ability: Blaze
@@ -851,7 +850,7 @@ Adamant Nature
 - Close Combat
 - Extreme Speed
 - Raging Fury
-/*- Magmatic Rage*/
+- Magmatic Rage
 
 === TRAINER_LEADER_GIOVANNI ===
 Name: Giovanni
@@ -957,7 +956,7 @@ Adamant Nature
 - Stone Edge
 - Megahorn
 - Tera Blast
-/*- Shallow Grave*/
+- Shallow Grave
 
 /* JOHTO GYM LEADERS */
 

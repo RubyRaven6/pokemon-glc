@@ -2,14 +2,14 @@
 #define GUARD_CONSTANTS_TMS_HMS_H
 
 #define FOREACH_TM(F) \
-    F(FOCUS_PUNCH) \
-    F(DRAGON_CLAW) \
-    F(WATER_PULSE) \
-    F(CALM_MIND) \
-    F(ROAR) \
-    F(TOXIC) \
-    F(HAIL) \
-    F(BULK_UP) \
+    F(ROCK_HEART) \
+    F(RIPTIDE) \
+    F(ARC_FAULT) \
+    F(GRASSPIERCER) \
+    F(PSYCHE_LOCK) \
+    F(POISONED_STARS) \
+    F(MAGMATIC_RAGE) \
+    F(SHALLOW_GRAVE) \
     F(BULLET_SEED) \
     F(HIDDEN_POWER) \
     F(SUNNY_DAY) \

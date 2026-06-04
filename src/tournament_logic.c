@@ -2,8 +2,11 @@
 #include "battle.h"
 #include "event_data.h"
 #include "event_scripts.h"
+#include "pokemon.h"
+#include "party_menu.h"
 #include "tournament_logic.h"
 #include "constants/flags.h"
+#include "constants/items.h"
 #include "constants/opponents.h"
 
 static const u32 sKantoGymLeaderRoster[] = {
@@ -196,6 +199,62 @@ static const u8 *sPWTBattleScripts[] =
     [TRAINER_LEADER_MARLON] = EventScript_PWTBattleMarlon,
 };
 
+const u16 gTechniqueFlagUnlocks[] = {
+    [ITEM_TM01] = FLAG_KANTO_LEADER_BROCK,
+    [ITEM_TM02] = FLAG_KANTO_LEADER_MISTY,
+    [ITEM_TM03] = FLAG_KANTO_LEADER_LT_SURGE,
+    [ITEM_TM04] = FLAG_KANTO_LEADER_ERIKA,
+    [ITEM_TM05] = FLAG_KANTO_LEADER_SABRINA,
+    [ITEM_TM06] = FLAG_KANTO_LEADER_KOGA_JANINE,
+    [ITEM_TM07] = FLAG_KANTO_LEADER_BLAINE,
+    [ITEM_TM08] = FLAG_KANTO_LEADER_GIOVANNI,
+    [ITEM_TM09] = FLAG_JOHTO_LEADER_FALKNER,
+    [ITEM_TM10] = FLAG_JOHTO_LEADER_BUGSY,
+    [ITEM_TM11] = FLAG_JOHTO_LEADER_WHITNEY,
+    [ITEM_TM12] = FLAG_JOHTO_LEADER_MORTY,
+    [ITEM_TM13] = FLAG_JOHTO_LEADER_CHUCK,
+    [ITEM_TM14] = FLAG_JOHTO_LEADER_JASMINE,
+    [ITEM_TM15] = FLAG_JOHTO_LEADER_PRYCE,
+    [ITEM_TM16] = FLAG_JOHTO_LEADER_CLAIR,
+    [ITEM_TM17] = FLAG_HOENN_LEADER_ROXANNE,
+    [ITEM_TM18] = FLAG_HOENN_LEADER_BRAWLY,
+    [ITEM_TM19] = FLAG_HOENN_LEADER_WATTSON,
+    [ITEM_TM20] = FLAG_HOENN_LEADER_FLANNERY,
+    [ITEM_TM21] = FLAG_HOENN_LEADER_NORMAN,
+    [ITEM_TM22] = FLAG_HOENN_LEADER_WINONA,
+    [ITEM_TM23] = FLAG_HOENN_LEADER_TATE_AND_LIZA,
+    [ITEM_TM24] = FLAG_HOENN_LEADER_JUAN,
+    [ITEM_TM25] = FLAG_SINNOH_LEADER_ROARK,
+    [ITEM_TM26] = FLAG_SINNOH_LEADER_GARDENIA,
+    [ITEM_TM27] = FLAG_SINNOH_LEADER_MAYLENE,
+    [ITEM_TM28] = FLAG_SINNOH_LEADER_CRASHERWAKE,
+    [ITEM_TM29] = FLAG_SINNOH_LEADER_FANTINA,
+    [ITEM_TM30] = FLAG_SINNOH_LEADER_BYRON,
+    [ITEM_TM31] = FLAG_SINNOH_LEADER_CANDICE,
+    [ITEM_TM32] = FLAG_SINNOH_LEADER_VOLKNER,
+    [ITEM_TM33] = FLAG_UNOVA_LEADER_LENORA,
+    [ITEM_TM34] = FLAG_UNOVA_LEADER_BURGH,
+    [ITEM_TM35] = FLAG_UNOVA_LEADER_ELESA,
+    [ITEM_TM36] = FLAG_UNOVA_LEADER_CLAY,
+    [ITEM_TM37] = FLAG_UNOVA_LEADER_SKYLA,
+    [ITEM_TM38] = FLAG_UNOVA_LEADER_BRYCEN,
+    [ITEM_TM39] = FLAG_UNOVA_LEADER_DRAYDEN,
+    [ITEM_TM40] = FLAG_UNOVA_LEADER_CHEREN,
+    [ITEM_TM41] = FLAG_UNOVA_LEADER_ROXIE,
+    [ITEM_TM42] = FLAG_UNOVA_LEADER_MARLON,
+};
+
+static const u32 sLeaderSignatureTechs[] = {
+    MOVE_ROCK_HEART,
+    MOVE_RIPTIDE,
+    MOVE_ARC_FAULT,
+    MOVE_GRASSPIERCER,
+    MOVE_PSYCHE_LOCK,
+    MOVE_POISONED_STARS,
+    MOVE_MAGMATIC_RAGE,
+    MOVE_SHALLOW_GRAVE,
+};
+
 void ChooseRandomGymLeader(void) {
     u32 countUndefeated = 0;
     u32 gen = VarGet(VAR_GENERATION_CTL);
@@ -254,4 +313,35 @@ void SetCompleteRosterFlag(void) {
 
     if(countDefeated == sGymLeaderRosters[gen].rosterCount)
         FlagSet(sRosterCompletionFlags[gen]);
+}
+
+bool8 ScrCmd_checkdefeatedleaders(struct ScriptContext *ctx) {
+    u32 countDefeated = 0;
+    u32 kanto = 1;
+
+    for (u32 i = 0; i < sGymLeaderRosters[kanto].rosterCount; i++)
+    {
+        if(FlagGet(sGymLeaderRosters[kanto].leaderFlags[i]))
+            countDefeated++;
+    }
+
+    if(countDefeated >=1)
+        gSpecialVar_Result = TRUE;
+    else
+        gSpecialVar_Result = FALSE;
+    
+    return FALSE;
+}
+
+u32 CheckPartyForTech(void)
+{
+    
+    u32 counter = 0;
+
+    for (u32 j = 0; j < gPartiesCount[B_TRAINER_PLAYER]; j++)
+        for (u32 i = 0; i < ARRAY_COUNT(sLeaderSignatureTechs); i++)
+            if(MonKnowsMove(&gParties[B_TRAINER_PLAYER][j], sLeaderSignatureTechs[i]))
+                counter++;
+    
+    return counter;
 }

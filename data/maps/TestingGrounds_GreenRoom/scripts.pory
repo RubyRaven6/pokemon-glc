@@ -1,0 +1,46 @@
+mapscripts TestingGrounds_GreenRoom_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+        special(HealPlayerParty)
+    }
+}
+
+script EventScript_TestingGround_GreenRoom_ForfeitGame {
+    lock
+    faceplayer
+    msgbox(format("Hi! Are you thinking of forfeiting?\pIf so, you'll have to start from the beginning."), MSGBOX_YESNO)
+    if(var(VAR_RESULT) == NO){}
+    else
+    {
+        setvar(VAR_GYM_LEADER_BATTLE_COUNT, 1)
+        callnative(ChooseRandomGymLeader)
+        msgbox(format("Understandable. Good luck on your next go!"))
+        warp(MAP_TESTING_GROUNDS_HOUSE_FOYER, 2, 3)
+    }
+    release
+    closemessage
+}
+
+script EventScript_TestingGrounds_GreenRoom_AreYouReady {
+    lock
+    faceplayer
+    msgbox(format("Are you ready to go to the next round?"), MSGBOX_YESNO)
+    if(var(VAR_RESULT) == NO){}
+    else
+    {
+        checkpartyfortech
+        if(var(VAR_RESULT) > 1)
+        {
+            msgbox(format("You have two or more Pokemon with a signature move.\pKindly ensure only one signature move is present in your party."))
+            closemessage
+            applymovement(LOCALID_PLAYER, moves(walk_down))
+            waitmovement(0)
+        }
+        else
+        {
+            callnative(ChooseRandomGymLeader)
+            msgbox(format("Good luck!"))
+            closemessage
+            warp(MAP_TESTING_GROUNDS_BATTLE_ARENA, 6, 12)
+        }
+    }
+}

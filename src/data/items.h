@@ -11837,129 +11837,122 @@ const struct ItemInfo gItemsInfo[] =
 
 // TMs/HMs. They don't have a set flingPower, as that's handled by GetFlingPowerFromItemId.
 
-    [ITEM_TM_FOCUS_PUNCH] =
+    [ITEM_TM_ROCK_HEART] =
     {
         .name = ITEM_NAME("TM01"),
-        .price = 3000,
+        .price = 0,
         .description = COMPOUND_STRING(
-            "Powerful, but makes\n"
-            "the user flinch if\n"
-            "hit by the foe."),
+            "Gym Leader Brock's\n"
+            "signature move."),
         .importance = I_REUSABLE_TMS,
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
+        .shopCriteriaFunc = ShopCriteriaByUnlockedFlag,
     },
 
-    [ITEM_TM_DRAGON_CLAW] =
+    [ITEM_TM_RIPTIDE] =
     {
         .name = ITEM_NAME("TM02"),
-        .price = 3000,
+        .price = 0,
         .description = COMPOUND_STRING(
-            "Hooks and slashes\n"
-            "the foe with long,\n"
-            "sharp claws."),
+            "Gym Leader Misty's\n"
+            "signature move."),
         .importance = I_REUSABLE_TMS,
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
+        .shopCriteriaFunc = ShopCriteriaByUnlockedFlag,
     },
 
-    [ITEM_TM_WATER_PULSE] =
+    [ITEM_TM_ARC_FAULT] =
     {
         .name = ITEM_NAME("TM03"),
-        .price = 3000,
+        .price = 0,
         .description = COMPOUND_STRING(
-            "Generates an\n"
-            "ultrasonic wave\n"
-            "that may confuse."),
+            "Gym Leader Lt.\n"
+            "Surge's signature\nmove."),
         .importance = I_REUSABLE_TMS,
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
+        .shopCriteriaFunc = ShopCriteriaByUnlockedFlag,
     },
 
-    [ITEM_TM_CALM_MIND] =
+    [ITEM_TM_GRASSPIERCER] =
     {
         .name = ITEM_NAME("TM04"),
-        .price = 3000,
+        .price = 0,
         .description = COMPOUND_STRING(
-            "Raises Sp. Atk and\n"
-            "Sp. Def by focusing\n"
-            "the mind."),
+            "Gym Leader Erika's\n"
+            "signature move."),
         .importance = I_REUSABLE_TMS,
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
+        .shopCriteriaFunc = ShopCriteriaByUnlockedFlag,
     },
 
-    [ITEM_TM_ROAR] =
+    [ITEM_TM_PSYCHE_LOCK] =
     {
         .name = ITEM_NAME("TM05"),
-        .price = 1000,
+        .price = 0,
         .description = COMPOUND_STRING(
-            "A savage roar that\n"
-            "makes the foe flee \n"
-            "to end the battle."),
+            "Gym Leader\n"
+            "Sabrina's signature\nmove."),
         .importance = I_REUSABLE_TMS,
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
+        .shopCriteriaFunc = ShopCriteriaByUnlockedFlag,
     },
 
-    [ITEM_TM_TOXIC] =
+    [ITEM_TM_POISONED_STARS] =
     {
         .name = ITEM_NAME("TM06"),
-        .price = 3000,
+        .price = 0,
         .description = COMPOUND_STRING(
-            "Poisons the foe\n"
-            "with a toxin that\n"
-            "gradually worsens."),
+            "Gym Leaders'\n"
+            "Koga and Janine's\nsignature move."),
         .importance = I_REUSABLE_TMS,
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
+        .shopCriteriaFunc = ShopCriteriaByUnlockedFlag,
     },
 
-    [ITEM_TM_HAIL] =
+    [ITEM_TM_MAGMATIC_RAGE] =
     {
         .name = ITEM_NAME("TM07"),
-        .price = 3000,
-    #if B_PREFERRED_ICE_WEATHER == B_ICE_WEATHER_SNOW
+        .price = 0,
         .description = COMPOUND_STRING(
-            "Raises the Defense\n"
-            "of Ice type {PKMN}\n"
-            "for 5 turns."),
-    #else
-        .description = COMPOUND_STRING(
-            "Creates a hailstorm\n"
-            "that damages all\n"
-            "types except Ice."),
-    #endif
+            "Gym Leader Blaine's\n"
+            "signature move."),
         .importance = I_REUSABLE_TMS,
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
+        .shopCriteriaFunc = ShopCriteriaByUnlockedFlag,
     },
 
-    [ITEM_TM_BULK_UP] =
+    [ITEM_TM_SHALLOW_GRAVE] =
     {
         .name = ITEM_NAME("TM08"),
-        .price = 3000,
+        .price = 0,
         .description = COMPOUND_STRING(
-            "Bulks up the body\n"
-            "to boost both\n"
-            "Attack & Defense."),
+            "Former Leader\n"
+            "Giovanni's\nsignature move."),
         .importance = I_REUSABLE_TMS,
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
+        .shopCriteriaFunc = ShopCriteriaByUnlockedFlag,
     },
 
     [ITEM_TM_BULLET_SEED] =
     {
         .name = ITEM_NAME("TM09"),
-        .price = 3000,
+        .price = 0,
         .description = COMPOUND_STRING(
             "Shoots 2 to 5 seeds\n"
             "in a row to strike\n"
@@ -11968,12 +11961,13 @@ const struct ItemInfo gItemsInfo[] =
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
+        .shopCriteriaFunc = ShopCriteriaByUnlockedFlag,
     },
 
     [ITEM_TM_HIDDEN_POWER] =
     {
         .name = ITEM_NAME("TM10"),
-        .price = 3000,
+        .price = 0,
         .description = COMPOUND_STRING(
             "The attack power\n"
             "varies among\n"
@@ -11982,12 +11976,13 @@ const struct ItemInfo gItemsInfo[] =
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
+        .shopCriteriaFunc = ShopCriteriaByUnlockedFlag,
     },
 
     [ITEM_TM_SUNNY_DAY] =
     {
         .name = ITEM_NAME("TM11"),
-        .price = 2000,
+        .price = 0,
         .description = COMPOUND_STRING(
             "Raises the power of\n"
             "Fire-type moves\n"
@@ -11996,12 +11991,13 @@ const struct ItemInfo gItemsInfo[] =
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
+        .shopCriteriaFunc = ShopCriteriaByUnlockedFlag,
     },
 
     [ITEM_TM_TAUNT] =
     {
         .name = ITEM_NAME("TM12"),
-        .price = 3000,
+        .price = 0,
         .description = COMPOUND_STRING(
             "Enrages the foe so\n"
             "it can only use\n"
@@ -12010,12 +12006,13 @@ const struct ItemInfo gItemsInfo[] =
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
+        .shopCriteriaFunc = ShopCriteriaByUnlockedFlag,
     },
 
     [ITEM_TM_ICE_BEAM] =
     {
         .name = ITEM_NAME("TM13"),
-        .price = 3000,
+        .price = 0,
         .description = COMPOUND_STRING(
             "Fires an icy cold\n"
             "beam that may\n"
@@ -12028,12 +12025,13 @@ const struct ItemInfo gItemsInfo[] =
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
+        .shopCriteriaFunc = ShopCriteriaByUnlockedFlag,
     },
 
     [ITEM_TM_BLIZZARD] =
     {
         .name = ITEM_NAME("TM14"),
-        .price = 5500,
+        .price = 0,
         .description = COMPOUND_STRING(
         #if B_USE_FROSTBITE == TRUE
             "A snow-and-wind\n"
@@ -12048,12 +12046,13 @@ const struct ItemInfo gItemsInfo[] =
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
+        .shopCriteriaFunc = ShopCriteriaByUnlockedFlag,
     },
 
     [ITEM_TM_HYPER_BEAM] =
     {
         .name = ITEM_NAME("TM15"),
-        .price = 7500,
+        .price = 0,
         .description = COMPOUND_STRING(
             "Powerful, but needs\n"
             "recharging the\n"
@@ -12062,12 +12061,13 @@ const struct ItemInfo gItemsInfo[] =
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
+        .shopCriteriaFunc = ShopCriteriaByUnlockedFlag,
     },
 
     [ITEM_TM_LIGHT_SCREEN] =
     {
         .name = ITEM_NAME("TM16"),
-        .price = 3000,
+        .price = 0,
         .description = COMPOUND_STRING(
             "Creates a wall of\n"
             "light that lowers\n"
@@ -12076,12 +12076,13 @@ const struct ItemInfo gItemsInfo[] =
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
+        .shopCriteriaFunc = ShopCriteriaByUnlockedFlag,
     },
 
     [ITEM_TM_PROTECT] =
     {
         .name = ITEM_NAME("TM17"),
-        .price = 3000,
+        .price = 0,
         .description = COMPOUND_STRING(
             "Negates all damage,\n"
             "but may fail if used\n"
@@ -12090,12 +12091,13 @@ const struct ItemInfo gItemsInfo[] =
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
+        .shopCriteriaFunc = ShopCriteriaByUnlockedFlag,
     },
 
     [ITEM_TM_RAIN_DANCE] =
     {
         .name = ITEM_NAME("TM18"),
-        .price = 2000,
+        .price = 0,
         .description = COMPOUND_STRING(
             "Raises the power of\n"
             "Water-type moves\n"
@@ -12104,12 +12106,13 @@ const struct ItemInfo gItemsInfo[] =
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
+        .shopCriteriaFunc = ShopCriteriaByUnlockedFlag,
     },
 
     [ITEM_TM_GIGA_DRAIN] =
     {
         .name = ITEM_NAME("TM19"),
-        .price = 3000,
+        .price = 0,
         .description = COMPOUND_STRING(
             "Recovers half the\n"
             "HP of the damage \n"
@@ -12118,12 +12121,13 @@ const struct ItemInfo gItemsInfo[] =
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
+        .shopCriteriaFunc = ShopCriteriaByUnlockedFlag,
     },
 
     [ITEM_TM_SAFEGUARD] =
     {
         .name = ITEM_NAME("TM20"),
-        .price = 3000,
+        .price = 0,
         .description = COMPOUND_STRING(
             "Prevents status\n"
             "abnormality with a\n"
@@ -12132,12 +12136,13 @@ const struct ItemInfo gItemsInfo[] =
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
+        .shopCriteriaFunc = ShopCriteriaByUnlockedFlag,
     },
 
     [ITEM_TM_FRUSTRATION] =
     {
         .name = ITEM_NAME("TM21"),
-        .price = 1000,
+        .price = 0,
         .description = COMPOUND_STRING(
             "The less the user\n"
             "likes you, the more\n"
@@ -12146,12 +12151,13 @@ const struct ItemInfo gItemsInfo[] =
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
+        .shopCriteriaFunc = ShopCriteriaByUnlockedFlag,
     },
 
     [ITEM_TM_SOLAR_BEAM] =
     {
         .name = ITEM_NAME("TM22"),
-        .price = 3000,
+        .price = 0,
         .description = COMPOUND_STRING(
             "Absorbs sunlight in\n"
             "the 1st turn, then\n"
@@ -12160,12 +12166,13 @@ const struct ItemInfo gItemsInfo[] =
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
+        .shopCriteriaFunc = ShopCriteriaByUnlockedFlag,
     },
 
     [ITEM_TM_IRON_TAIL] =
     {
         .name = ITEM_NAME("TM23"),
-        .price = 3000,
+        .price = 0,
         .description = COMPOUND_STRING(
             "Slams the foe with\n"
             "a hard tail. It may\n"
@@ -12174,12 +12181,13 @@ const struct ItemInfo gItemsInfo[] =
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
+        .shopCriteriaFunc = ShopCriteriaByUnlockedFlag,
     },
 
     [ITEM_TM_THUNDERBOLT] =
     {
         .name = ITEM_NAME("TM24"),
-        .price = 3000,
+        .price = 0,
         .description = COMPOUND_STRING(
             "A powerful electric\n"
             "attack that may\n"
@@ -12188,12 +12196,13 @@ const struct ItemInfo gItemsInfo[] =
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
+        .shopCriteriaFunc = ShopCriteriaByUnlockedFlag,
     },
 
     [ITEM_TM_THUNDER] =
     {
         .name = ITEM_NAME("TM25"),
-        .price = 5500,
+        .price = 0,
         .description = COMPOUND_STRING(
             "Strikes the foe\n"
             "with a thunderbolt.\n"
@@ -12202,12 +12211,13 @@ const struct ItemInfo gItemsInfo[] =
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
+        .shopCriteriaFunc = ShopCriteriaByUnlockedFlag,
     },
 
     [ITEM_TM_EARTHQUAKE] =
     {
         .name = ITEM_NAME("TM26"),
-        .price = 3000,
+        .price = 0,
         .description = COMPOUND_STRING(
             "Causes a quake\n"
             "that has no effect\n"
@@ -12216,12 +12226,13 @@ const struct ItemInfo gItemsInfo[] =
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
+        .shopCriteriaFunc = ShopCriteriaByUnlockedFlag,
     },
 
     [ITEM_TM_RETURN] =
     {
         .name = ITEM_NAME("TM27"),
-        .price = 1000,
+        .price = 0,
         .description = COMPOUND_STRING(
             "The more the user\n"
             "likes you, the more\n"
@@ -12230,12 +12241,13 @@ const struct ItemInfo gItemsInfo[] =
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
+        .shopCriteriaFunc = ShopCriteriaByUnlockedFlag,
     },
 
     [ITEM_TM_DIG] =
     {
         .name = ITEM_NAME("TM28"),
-        .price = 2000,
+        .price = 0,
         .description = COMPOUND_STRING(
             "Digs underground\n"
             "the 1st turn, then\n"
@@ -12244,12 +12256,13 @@ const struct ItemInfo gItemsInfo[] =
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
+        .shopCriteriaFunc = ShopCriteriaByUnlockedFlag,
     },
 
     [ITEM_TM_PSYCHIC] =
     {
         .name = ITEM_NAME("TM29"),
-        .price = 2000,
+        .price = 0,
         .description = COMPOUND_STRING(
             "A powerful psychic\n"
             "attack that may\n"
@@ -12258,12 +12271,13 @@ const struct ItemInfo gItemsInfo[] =
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
+        .shopCriteriaFunc = ShopCriteriaByUnlockedFlag,
     },
 
     [ITEM_TM_SHADOW_BALL] =
     {
         .name = ITEM_NAME("TM30"),
-        .price = 3000,
+        .price = 0,
         .description = COMPOUND_STRING(
             "Hurls a dark lump\n"
             "at the foe. It may\n"
@@ -12272,12 +12286,13 @@ const struct ItemInfo gItemsInfo[] =
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
+        .shopCriteriaFunc = ShopCriteriaByUnlockedFlag,
     },
 
     [ITEM_TM_BRICK_BREAK] =
     {
         .name = ITEM_NAME("TM31"),
-        .price = 3000,
+        .price = 0,
         .description = COMPOUND_STRING(
             "Destroys barriers\n"
             "like Light Screen\n"
@@ -12286,12 +12301,13 @@ const struct ItemInfo gItemsInfo[] =
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
+        .shopCriteriaFunc = ShopCriteriaByUnlockedFlag,
     },
 
     [ITEM_TM_DOUBLE_TEAM] =
     {
         .name = ITEM_NAME("TM32"),
-        .price = 2000,
+        .price = 0,
         .description = COMPOUND_STRING(
             "Creates illusory\n"
             "copies to enhance\n"
@@ -12300,12 +12316,13 @@ const struct ItemInfo gItemsInfo[] =
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
+        .shopCriteriaFunc = ShopCriteriaByUnlockedFlag,
     },
 
     [ITEM_TM_REFLECT] =
     {
         .name = ITEM_NAME("TM33"),
-        .price = 3000,
+        .price = 0,
         .description = COMPOUND_STRING(
             "Creates a wall of\n"
             "light that weakens\n"
@@ -12314,12 +12331,13 @@ const struct ItemInfo gItemsInfo[] =
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
+        .shopCriteriaFunc = ShopCriteriaByUnlockedFlag,
     },
 
     [ITEM_TM_SHOCK_WAVE] =
     {
         .name = ITEM_NAME("TM34"),
-        .price = 3000,
+        .price = 0,
         .description = COMPOUND_STRING(
             "Zaps the foe with a\n"
             "jolt of electricity\n"
@@ -12328,12 +12346,13 @@ const struct ItemInfo gItemsInfo[] =
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
+        .shopCriteriaFunc = ShopCriteriaByUnlockedFlag,
     },
 
     [ITEM_TM_FLAMETHROWER] =
     {
         .name = ITEM_NAME("TM35"),
-        .price = 3000,
+        .price = 0,
         .description = COMPOUND_STRING(
             "Looses a stream of\n"
             "fire that may burn\n"
@@ -12342,12 +12361,13 @@ const struct ItemInfo gItemsInfo[] =
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
+        .shopCriteriaFunc = ShopCriteriaByUnlockedFlag,
     },
 
     [ITEM_TM_SLUDGE_BOMB] =
     {
         .name = ITEM_NAME("TM36"),
-        .price = 1000,
+        .price = 0,
         .description = COMPOUND_STRING(
             "Hurls sludge at the\n"
             "foe. It may poison\n"
@@ -12356,12 +12376,13 @@ const struct ItemInfo gItemsInfo[] =
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
+        .shopCriteriaFunc = ShopCriteriaByUnlockedFlag,
     },
 
     [ITEM_TM_SANDSTORM] =
     {
         .name = ITEM_NAME("TM37"),
-        .price = 2000,
+        .price = 0,
         .description = COMPOUND_STRING(
             "Causes a sandstorm\n"
             "that hits the foe\n"
@@ -12370,12 +12391,13 @@ const struct ItemInfo gItemsInfo[] =
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
+        .shopCriteriaFunc = ShopCriteriaByUnlockedFlag,
     },
 
     [ITEM_TM_FIRE_BLAST] =
     {
         .name = ITEM_NAME("TM38"),
-        .price = 5500,
+        .price = 0,
         .description = COMPOUND_STRING(
             "A powerful fire\n"
             "attack that may\n"
@@ -12384,12 +12406,13 @@ const struct ItemInfo gItemsInfo[] =
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
+        .shopCriteriaFunc = ShopCriteriaByUnlockedFlag,
     },
 
     [ITEM_TM_ROCK_TOMB] =
     {
         .name = ITEM_NAME("TM39"),
-        .price = 3000,
+        .price = 0,
         .description = COMPOUND_STRING(
             "Stops the foe from\n"
             "moving with rocks.\n"
@@ -12398,12 +12421,13 @@ const struct ItemInfo gItemsInfo[] =
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
+        .shopCriteriaFunc = ShopCriteriaByUnlockedFlag,
     },
 
     [ITEM_TM_AERIAL_ACE] =
     {
         .name = ITEM_NAME("TM40"),
-        .price = 3000,
+        .price = 0,
         .description = COMPOUND_STRING(
             "An extremely fast\n"
             "attack that can't\n"
@@ -12412,12 +12436,13 @@ const struct ItemInfo gItemsInfo[] =
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
+        .shopCriteriaFunc = ShopCriteriaByUnlockedFlag,
     },
 
     [ITEM_TM_TORMENT] =
     {
         .name = ITEM_NAME("TM41"),
-        .price = 3000,
+        .price = 0,
         .description = COMPOUND_STRING(
             "Prevents the foe\n"
             "from using the same\n"
@@ -12426,12 +12451,13 @@ const struct ItemInfo gItemsInfo[] =
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
+        .shopCriteriaFunc = ShopCriteriaByUnlockedFlag,
     },
 
     [ITEM_TM_FACADE] =
     {
         .name = ITEM_NAME("TM42"),
-        .price = 3000,
+        .price = 0,
         .description = COMPOUND_STRING(
             "Raises Attack when\n"
             "poisoned, burned,\n"
@@ -12440,12 +12466,13 @@ const struct ItemInfo gItemsInfo[] =
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
+        .shopCriteriaFunc = ShopCriteriaByUnlockedFlag,
     },
 
     [ITEM_TM_SECRET_POWER] =
     {
         .name = ITEM_NAME("TM43"),
-        .price = 3000,
+        .price = 0,
         .description = COMPOUND_STRING(
             "Adds an effect to\n"
             "attack depending\n"
@@ -12454,12 +12481,13 @@ const struct ItemInfo gItemsInfo[] =
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
+        .shopCriteriaFunc = ShopCriteriaByUnlockedFlag,
     },
 
     [ITEM_TM_REST] =
     {
         .name = ITEM_NAME("TM44"),
-        .price = 3000,
+        .price = 0,
         .description = COMPOUND_STRING(
             "The user sleeps for\n"
             "2 turns to restore\n"
@@ -12468,12 +12496,13 @@ const struct ItemInfo gItemsInfo[] =
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
+        .shopCriteriaFunc = ShopCriteriaByUnlockedFlag,
     },
 
     [ITEM_TM_ATTRACT] =
     {
         .name = ITEM_NAME("TM45"),
-        .price = 3000,
+        .price = 0,
         .description = COMPOUND_STRING(
             "Makes it tough to\n"
             "attack a foe of the\n"
@@ -12482,12 +12511,13 @@ const struct ItemInfo gItemsInfo[] =
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
+        .shopCriteriaFunc = ShopCriteriaByUnlockedFlag,
     },
 
     [ITEM_TM_THIEF] =
     {
         .name = ITEM_NAME("TM46"),
-        .price = 3000,
+        .price = 0,
         .description = COMPOUND_STRING(
             "While attacking,\n"
             "it may steal the\n"
@@ -12496,12 +12526,13 @@ const struct ItemInfo gItemsInfo[] =
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
+        .shopCriteriaFunc = ShopCriteriaByUnlockedFlag,
     },
 
     [ITEM_TM_STEEL_WING] =
     {
         .name = ITEM_NAME("TM47"),
-        .price = 3000,
+        .price = 0,
         .description = COMPOUND_STRING(
             "Spreads hard-\n"
             "edged wings and\n"
@@ -12510,12 +12541,13 @@ const struct ItemInfo gItemsInfo[] =
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
+        .shopCriteriaFunc = ShopCriteriaByUnlockedFlag,
     },
 
     [ITEM_TM_SKILL_SWAP] =
     {
         .name = ITEM_NAME("TM48"),
-        .price = 3000,
+        .price = 0,
         .description = COMPOUND_STRING(
             "Switches abilities\n"
             "with the foe on the\n"
@@ -12524,12 +12556,13 @@ const struct ItemInfo gItemsInfo[] =
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
+        .shopCriteriaFunc = ShopCriteriaByUnlockedFlag,
     },
 
     [ITEM_TM_SNATCH] =
     {
         .name = ITEM_NAME("TM49"),
-        .price = 3000,
+        .price = 0,
         .description = COMPOUND_STRING(
             "Steals the effects\n"
             "of the move the foe\n"
@@ -12538,12 +12571,13 @@ const struct ItemInfo gItemsInfo[] =
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
+        .shopCriteriaFunc = ShopCriteriaByUnlockedFlag,
     },
 
     [ITEM_TM_OVERHEAT] =
     {
         .name = ITEM_NAME("TM50"),
-        .price = 3000,
+        .price = 0,
         .description = COMPOUND_STRING(
             "Enables full-power\n"
             "attack, but sharply\n"
@@ -12552,556 +12586,607 @@ const struct ItemInfo gItemsInfo[] =
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
+        .shopCriteriaFunc = ShopCriteriaByUnlockedFlag,
     },
 
     [ITEM_TM51] =
     {
         .name = ITEM_NAME("TM51"),
-        .price = 3000,
+        .price = 0,
         .description = sQuestionMarksDesc, // Todo
         .importance = I_REUSABLE_TMS,
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
+        .shopCriteriaFunc = ShopCriteriaByUnlockedFlag,
     },
 
     [ITEM_TM52] =
     {
         .name = ITEM_NAME("TM52"),
-        .price = 3000,
+        .price = 0,
         .description = sQuestionMarksDesc, // Todo
         .importance = I_REUSABLE_TMS,
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
+        .shopCriteriaFunc = ShopCriteriaByUnlockedFlag,
     },
 
     [ITEM_TM53] =
     {
         .name = ITEM_NAME("TM53"),
-        .price = 3000,
+        .price = 0,
         .description = sQuestionMarksDesc, // Todo
         .importance = I_REUSABLE_TMS,
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
+        .shopCriteriaFunc = ShopCriteriaByUnlockedFlag,
     },
 
     [ITEM_TM54] =
     {
         .name = ITEM_NAME("TM54"),
-        .price = 3000,
+        .price = 0,
         .description = sQuestionMarksDesc, // Todo
         .importance = I_REUSABLE_TMS,
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
+        .shopCriteriaFunc = ShopCriteriaByUnlockedFlag,
     },
 
     [ITEM_TM55] =
     {
         .name = ITEM_NAME("TM55"),
-        .price = 3000,
+        .price = 0,
         .description = sQuestionMarksDesc, // Todo
         .importance = I_REUSABLE_TMS,
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
+        .shopCriteriaFunc = ShopCriteriaByUnlockedFlag,
     },
 
     [ITEM_TM56] =
     {
         .name = ITEM_NAME("TM56"),
-        .price = 3000,
+        .price = 0,
         .description = sQuestionMarksDesc, // Todo
         .importance = I_REUSABLE_TMS,
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
+        .shopCriteriaFunc = ShopCriteriaByUnlockedFlag,
     },
 
     [ITEM_TM57] =
     {
         .name = ITEM_NAME("TM57"),
-        .price = 3000,
+        .price = 0,
         .description = sQuestionMarksDesc, // Todo
         .importance = I_REUSABLE_TMS,
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
+        .shopCriteriaFunc = ShopCriteriaByUnlockedFlag,
     },
 
     [ITEM_TM58] =
     {
         .name = ITEM_NAME("TM58"),
-        .price = 3000,
+        .price = 0,
         .description = sQuestionMarksDesc, // Todo
         .importance = I_REUSABLE_TMS,
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
+        .shopCriteriaFunc = ShopCriteriaByUnlockedFlag,
     },
 
     [ITEM_TM59] =
     {
         .name = ITEM_NAME("TM59"),
-        .price = 3000,
+        .price = 0,
         .description = sQuestionMarksDesc, // Todo
         .importance = I_REUSABLE_TMS,
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
+        .shopCriteriaFunc = ShopCriteriaByUnlockedFlag,
     },
 
     [ITEM_TM60] =
     {
         .name = ITEM_NAME("TM60"),
-        .price = 3000,
+        .price = 0,
         .description = sQuestionMarksDesc, // Todo
         .importance = I_REUSABLE_TMS,
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
+        .shopCriteriaFunc = ShopCriteriaByUnlockedFlag,
     },
 
     [ITEM_TM61] =
     {
         .name = ITEM_NAME("TM61"),
-        .price = 3000,
+        .price = 0,
         .description = sQuestionMarksDesc, // Todo
         .importance = I_REUSABLE_TMS,
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
+        .shopCriteriaFunc = ShopCriteriaByUnlockedFlag,
     },
 
     [ITEM_TM62] =
     {
         .name = ITEM_NAME("TM62"),
-        .price = 3000,
+        .price = 0,
         .description = sQuestionMarksDesc, // Todo
         .importance = I_REUSABLE_TMS,
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
+        .shopCriteriaFunc = ShopCriteriaByUnlockedFlag,
     },
 
     [ITEM_TM63] =
     {
         .name = ITEM_NAME("TM63"),
-        .price = 3000,
+        .price = 0,
         .description = sQuestionMarksDesc, // Todo
         .importance = I_REUSABLE_TMS,
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
+        .shopCriteriaFunc = ShopCriteriaByUnlockedFlag,
     },
 
     [ITEM_TM64] =
     {
         .name = ITEM_NAME("TM64"),
-        .price = 3000,
+        .price = 0,
         .description = sQuestionMarksDesc, // Todo
         .importance = I_REUSABLE_TMS,
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
+        .shopCriteriaFunc = ShopCriteriaByUnlockedFlag,
     },
 
     [ITEM_TM65] =
     {
         .name = ITEM_NAME("TM65"),
-        .price = 3000,
+        .price = 0,
         .description = sQuestionMarksDesc, // Todo
         .importance = I_REUSABLE_TMS,
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
+        .shopCriteriaFunc = ShopCriteriaByUnlockedFlag,
     },
 
     [ITEM_TM66] =
     {
         .name = ITEM_NAME("TM66"),
-        .price = 3000,
+        .price = 0,
         .description = sQuestionMarksDesc, // Todo
         .importance = I_REUSABLE_TMS,
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
+        .shopCriteriaFunc = ShopCriteriaByUnlockedFlag,
     },
 
     [ITEM_TM67] =
     {
         .name = ITEM_NAME("TM67"),
-        .price = 3000,
+        .price = 0,
         .description = sQuestionMarksDesc, // Todo
         .importance = I_REUSABLE_TMS,
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
+        .shopCriteriaFunc = ShopCriteriaByUnlockedFlag,
     },
 
     [ITEM_TM68] =
     {
         .name = ITEM_NAME("TM68"),
-        .price = 3000,
+        .price = 0,
         .description = sQuestionMarksDesc, // Todo
         .importance = I_REUSABLE_TMS,
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
+        .shopCriteriaFunc = ShopCriteriaByUnlockedFlag,
     },
 
     [ITEM_TM69] =
     {
         .name = ITEM_NAME("TM69"),
-        .price = 3000,
+        .price = 0,
         .description = sQuestionMarksDesc, // Todo
         .importance = I_REUSABLE_TMS,
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
+        .shopCriteriaFunc = ShopCriteriaByUnlockedFlag,
     },
 
     [ITEM_TM70] =
     {
         .name = ITEM_NAME("TM70"),
-        .price = 3000,
+        .price = 0,
         .description = sQuestionMarksDesc, // Todo
         .importance = I_REUSABLE_TMS,
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
+        .shopCriteriaFunc = ShopCriteriaByUnlockedFlag,
     },
 
     [ITEM_TM71] =
     {
         .name = ITEM_NAME("TM71"),
-        .price = 3000,
+        .price = 0,
         .description = sQuestionMarksDesc, // Todo
         .importance = I_REUSABLE_TMS,
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
+        .shopCriteriaFunc = ShopCriteriaByUnlockedFlag,
     },
 
     [ITEM_TM72] =
     {
         .name = ITEM_NAME("TM72"),
-        .price = 3000,
+        .price = 0,
         .description = sQuestionMarksDesc, // Todo
         .importance = I_REUSABLE_TMS,
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
+        .shopCriteriaFunc = ShopCriteriaByUnlockedFlag,
     },
 
     [ITEM_TM73] =
     {
         .name = ITEM_NAME("TM73"),
-        .price = 3000,
+        .price = 0,
         .description = sQuestionMarksDesc, // Todo
         .importance = I_REUSABLE_TMS,
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
+        .shopCriteriaFunc = ShopCriteriaByUnlockedFlag,
     },
 
     [ITEM_TM74] =
     {
         .name = ITEM_NAME("TM74"),
-        .price = 3000,
+        .price = 0,
         .description = sQuestionMarksDesc, // Todo
         .importance = I_REUSABLE_TMS,
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
+        .shopCriteriaFunc = ShopCriteriaByUnlockedFlag,
     },
 
     [ITEM_TM75] =
     {
         .name = ITEM_NAME("TM75"),
-        .price = 3000,
+        .price = 0,
         .description = sQuestionMarksDesc, // Todo
         .importance = I_REUSABLE_TMS,
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
+        .shopCriteriaFunc = ShopCriteriaByUnlockedFlag,
     },
 
     [ITEM_TM76] =
     {
         .name = ITEM_NAME("TM76"),
-        .price = 3000,
+        .price = 0,
         .description = sQuestionMarksDesc, // Todo
         .importance = I_REUSABLE_TMS,
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
+        .shopCriteriaFunc = ShopCriteriaByUnlockedFlag,
     },
 
     [ITEM_TM77] =
     {
         .name = ITEM_NAME("TM77"),
-        .price = 3000,
+        .price = 0,
         .description = sQuestionMarksDesc, // Todo
         .importance = I_REUSABLE_TMS,
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
+        .shopCriteriaFunc = ShopCriteriaByUnlockedFlag,
     },
 
     [ITEM_TM78] =
     {
         .name = ITEM_NAME("TM78"),
-        .price = 3000,
+        .price = 0,
         .description = sQuestionMarksDesc, // Todo
         .importance = I_REUSABLE_TMS,
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
+        .shopCriteriaFunc = ShopCriteriaByUnlockedFlag,
     },
 
     [ITEM_TM79] =
     {
         .name = ITEM_NAME("TM79"),
-        .price = 3000,
+        .price = 0,
         .description = sQuestionMarksDesc, // Todo
         .importance = I_REUSABLE_TMS,
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
+        .shopCriteriaFunc = ShopCriteriaByUnlockedFlag,
     },
 
     [ITEM_TM80] =
     {
         .name = ITEM_NAME("TM80"),
-        .price = 3000,
+        .price = 0,
         .description = sQuestionMarksDesc, // Todo
         .importance = I_REUSABLE_TMS,
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
+        .shopCriteriaFunc = ShopCriteriaByUnlockedFlag,
     },
 
     [ITEM_TM81] =
     {
         .name = ITEM_NAME("TM81"),
-        .price = 3000,
+        .price = 0,
         .description = sQuestionMarksDesc, // Todo
         .importance = I_REUSABLE_TMS,
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
+        .shopCriteriaFunc = ShopCriteriaByUnlockedFlag,
     },
 
     [ITEM_TM82] =
     {
         .name = ITEM_NAME("TM82"),
-        .price = 3000,
+        .price = 0,
         .description = sQuestionMarksDesc, // Todo
         .importance = I_REUSABLE_TMS,
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
+        .shopCriteriaFunc = ShopCriteriaByUnlockedFlag,
     },
 
     [ITEM_TM83] =
     {
         .name = ITEM_NAME("TM83"),
-        .price = 3000,
+        .price = 0,
         .description = sQuestionMarksDesc, // Todo
         .importance = I_REUSABLE_TMS,
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
+        .shopCriteriaFunc = ShopCriteriaByUnlockedFlag,
     },
 
     [ITEM_TM84] =
     {
         .name = ITEM_NAME("TM84"),
-        .price = 3000,
+        .price = 0,
         .description = sQuestionMarksDesc, // Todo
         .importance = I_REUSABLE_TMS,
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
+        .shopCriteriaFunc = ShopCriteriaByUnlockedFlag,
     },
 
     [ITEM_TM85] =
     {
         .name = ITEM_NAME("TM85"),
-        .price = 3000,
+        .price = 0,
         .description = sQuestionMarksDesc, // Todo
         .importance = I_REUSABLE_TMS,
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
+        .shopCriteriaFunc = ShopCriteriaByUnlockedFlag,
     },
 
     [ITEM_TM86] =
     {
         .name = ITEM_NAME("TM86"),
-        .price = 3000,
+        .price = 0,
         .description = sQuestionMarksDesc, // Todo
         .importance = I_REUSABLE_TMS,
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
+        .shopCriteriaFunc = ShopCriteriaByUnlockedFlag,
     },
 
     [ITEM_TM87] =
     {
         .name = ITEM_NAME("TM87"),
-        .price = 3000,
+        .price = 0,
         .description = sQuestionMarksDesc, // Todo
         .importance = I_REUSABLE_TMS,
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
+        .shopCriteriaFunc = ShopCriteriaByUnlockedFlag,
     },
 
     [ITEM_TM88] =
     {
         .name = ITEM_NAME("TM88"),
-        .price = 3000,
+        .price = 0,
         .description = sQuestionMarksDesc, // Todo
         .importance = I_REUSABLE_TMS,
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
+        .shopCriteriaFunc = ShopCriteriaByUnlockedFlag,
     },
 
     [ITEM_TM89] =
     {
         .name = ITEM_NAME("TM89"),
-        .price = 3000,
+        .price = 0,
         .description = sQuestionMarksDesc, // Todo
         .importance = I_REUSABLE_TMS,
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
+        .shopCriteriaFunc = ShopCriteriaByUnlockedFlag,
     },
 
     [ITEM_TM90] =
     {
         .name = ITEM_NAME("TM90"),
-        .price = 3000,
+        .price = 0,
         .description = sQuestionMarksDesc, // Todo
         .importance = I_REUSABLE_TMS,
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
+        .shopCriteriaFunc = ShopCriteriaByUnlockedFlag,
     },
 
     [ITEM_TM91] =
     {
         .name = ITEM_NAME("TM91"),
-        .price = 3000,
+        .price = 0,
         .description = sQuestionMarksDesc, // Todo
         .importance = I_REUSABLE_TMS,
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
+        .shopCriteriaFunc = ShopCriteriaByUnlockedFlag,
     },
 
     [ITEM_TM92] =
     {
         .name = ITEM_NAME("TM92"),
-        .price = 3000,
+        .price = 0,
         .description = sQuestionMarksDesc, // Todo
         .importance = I_REUSABLE_TMS,
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
+        .shopCriteriaFunc = ShopCriteriaByUnlockedFlag,
     },
 
     [ITEM_TM93] =
     {
         .name = ITEM_NAME("TM93"),
-        .price = 3000,
+        .price = 0,
         .description = sQuestionMarksDesc, // Todo
         .importance = I_REUSABLE_TMS,
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
+        .shopCriteriaFunc = ShopCriteriaByUnlockedFlag,
     },
 
     [ITEM_TM94] =
     {
         .name = ITEM_NAME("TM94"),
-        .price = 3000,
+        .price = 0,
         .description = sQuestionMarksDesc, // Todo
         .importance = I_REUSABLE_TMS,
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
+        .shopCriteriaFunc = ShopCriteriaByUnlockedFlag,
     },
 
     [ITEM_TM95] =
     {
         .name = ITEM_NAME("TM95"),
-        .price = 3000,
+        .price = 0,
         .description = sQuestionMarksDesc, // Todo
         .importance = I_REUSABLE_TMS,
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
+        .shopCriteriaFunc = ShopCriteriaByUnlockedFlag,
     },
 
     [ITEM_TM96] =
     {
         .name = ITEM_NAME("TM96"),
-        .price = 3000,
+        .price = 0,
         .description = sQuestionMarksDesc, // Todo
         .importance = I_REUSABLE_TMS,
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
+        .shopCriteriaFunc = ShopCriteriaByUnlockedFlag,
     },
 
     [ITEM_TM97] =
     {
         .name = ITEM_NAME("TM97"),
-        .price = 3000,
+        .price = 0,
         .description = sQuestionMarksDesc, // Todo
         .importance = I_REUSABLE_TMS,
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
+        .shopCriteriaFunc = ShopCriteriaByUnlockedFlag,
     },
 
     [ITEM_TM98] =
     {
         .name = ITEM_NAME("TM98"),
-        .price = 3000,
+        .price = 0,
         .description = sQuestionMarksDesc, // Todo
         .importance = I_REUSABLE_TMS,
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
+        .shopCriteriaFunc = ShopCriteriaByUnlockedFlag,
     },
 
     [ITEM_TM99] =
     {
         .name = ITEM_NAME("TM99"),
-        .price = 3000,
+        .price = 0,
         .description = sQuestionMarksDesc, // Todo
         .importance = I_REUSABLE_TMS,
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
+        .shopCriteriaFunc = ShopCriteriaByUnlockedFlag,
     },
 
     [ITEM_TM100] =
     {
         .name = ITEM_NAME("TM100"),
-        .price = 3000,
+        .price = 0,
         .description = sQuestionMarksDesc, // Todo
         .importance = I_REUSABLE_TMS,
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
+        .shopCriteriaFunc = ShopCriteriaByUnlockedFlag,
     },
 
     [ITEM_HM_CUT] =

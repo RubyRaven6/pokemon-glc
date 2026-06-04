@@ -6,4 +6,6 @@ void TryFreeDynamicShopItemList(const u16 **ogItemList);
 
 // Add new Criterias below!
 
+bool32 ShopCriteriaByUnlockedFlag(enum Item item);
+
 #endif // GUARD_SHOP_CRITERIA_H

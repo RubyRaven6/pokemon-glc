@@ -4,6 +4,7 @@
 #include "event_data.h"
 #include "malloc.h"
 #include "shop_criteria.h"
+#include "tournament_logic.h"
 
 static EWRAM_DATA const u16 *sDynamicShopItemListRef = NULL;
 
@@ -79,5 +80,13 @@ static UNUSED bool32 ShopCriteriaByVar(u32 varId, u32 varValue)
     if (VarGet(varId) >= varValue)
         return TRUE;
 
+    return FALSE;
+}
+
+bool32 ShopCriteriaByUnlockedFlag(enum Item item)
+{
+    if(FlagGet(gTechniqueFlagUnlocks[item]))
+        return TRUE;
+    
     return FALSE;
 }
