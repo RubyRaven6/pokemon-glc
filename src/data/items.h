@@ -11870,8 +11870,8 @@ const struct ItemInfo gItemsInfo[] =
         .name = ITEM_NAME("TM03"),
         .price = 0,
         .description = COMPOUND_STRING(
-            "Gym Leader Lt. Surge's\n"
-            "signature move."),
+            "Gym Leader Lt.\n"
+            "Surge's signature\nmove."),
         .importance = I_REUSABLE_TMS,
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
@@ -11898,8 +11898,8 @@ const struct ItemInfo gItemsInfo[] =
         .name = ITEM_NAME("TM05"),
         .price = 0,
         .description = COMPOUND_STRING(
-            "Gym Leader Sabrina's\n"
-            "signature move."),
+            "Gym Leader\n"
+            "Sabrina's signature\nmove."),
         .importance = I_REUSABLE_TMS,
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
@@ -11912,8 +11912,8 @@ const struct ItemInfo gItemsInfo[] =
         .name = ITEM_NAME("TM06"),
         .price = 0,
         .description = COMPOUND_STRING(
-            "Gym Leaders' Koga and\n"
-            "Janine's signature move."),
+            "Gym Leaders'\n"
+            "Koga and Janine's\nsignature move."),
         .importance = I_REUSABLE_TMS,
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
@@ -11940,8 +11940,8 @@ const struct ItemInfo gItemsInfo[] =
         .name = ITEM_NAME("TM08"),
         .price = 0,
         .description = COMPOUND_STRING(
-            "Former Leader Giovanni's\n"
-            "signature move."),
+            "Former Leader\n"
+            "Giovanni's\nsignature move."),
         .importance = I_REUSABLE_TMS,
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
