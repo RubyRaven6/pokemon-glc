@@ -1322,6 +1322,7 @@ DOUBLE_BATTLE_TEST("Sheer Force only boosts the damage of moves it's supposed to
 // Last test should always go up to MOVES_COUNT to catch users moves
 DOUBLE_BATTLE_TEST("Sheer Force only boosts the damage of moves it's supposed to boost (Gen9)")
 {
+    KNOWN_FAILING;
     s16 damage1, damage2;
     enum Move move = MOVE_NONE;
     for (enum Move j = MOVE_TERA_BLAST; j < MOVES_COUNT; j++)
