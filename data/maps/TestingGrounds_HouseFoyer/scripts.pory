@@ -170,7 +170,7 @@ script EventScript_TestingGrounds_HouseFoyer_TechniquesMarket{
 script EventScript_TestingGrounds_HouseFoyer_CheckForTech {
     lock
     checkpartyfortech
-    if(var(VAR_RESULT) == FALSE)
+    if(var(VAR_RESULT) > 1)
     {
         msgbox(format("You have two or more Pokemon with a signature move.\pKindly ensure only one signature move is present in your party."))
         closemessage

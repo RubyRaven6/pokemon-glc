@@ -57,6 +57,7 @@
 #include "string_util.h"
 #include "text.h"
 #include "text_window.h"
+#include "tournament_logic.h"
 #include "trainer_see.h"
 #include "tv.h"
 #include "window.h"
@@ -3424,6 +3425,12 @@ bool8 ScrCmd_getbraillestringwidth(struct ScriptContext * ctx)
         msg = (u8 *)ctx->data[0];
 
     gSpecialVar_0x8004 = GetStringWidth(FONT_BRAILLE, msg, -1);
+    return FALSE;
+}
+
+bool8 ScrCmd_checkpartytechs(struct ScriptContext * ctx)
+{
+    gSpecialVar_Result = CheckPartyForTech();
     return FALSE;
 }
 

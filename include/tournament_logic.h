@@ -3,6 +3,7 @@
 
 void ChooseRandomGymLeader(void);
 void SetCompleteRosterFlag(void);
+u32 CheckPartyForTech(void);
 
 extern const u16 gTechniqueFlagUnlocks[];
 

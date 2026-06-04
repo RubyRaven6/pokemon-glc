@@ -3,6 +3,7 @@
 #include "event_data.h"
 #include "event_scripts.h"
 #include "pokemon.h"
+#include "party_menu.h"
 #include "tournament_logic.h"
 #include "constants/flags.h"
 #include "constants/items.h"
@@ -332,23 +333,15 @@ bool8 ScrCmd_checkdefeatedleaders(struct ScriptContext *ctx) {
     return FALSE;
 }
 
-bool8 ScrCmd_checkpartyfortech(struct ScriptContext *ctx) {
+u32 CheckPartyForTech(void)
+{
     
     u32 counter = 0;
 
-    for (u32 k = 0; k < gPartiesCount[B_TRAINER_PLAYER]; k++)
-        for (u32 j = 0; j < ARRAY_COUNT(sLeaderSignatureTechs); j++)
-            for (u32 i = 0; i < MAX_MON_MOVES; i++)
-            {
-                struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][k];
-                if(GetMonData(mon, MON_DATA_MOVE1 + i) == sLeaderSignatureTechs[j])
-                    counter++;
-            }
-
-    if(counter == 1)
-        gSpecialVar_Result = TRUE;
-    else
-        gSpecialVar_Result = FALSE;
+    for (u32 j = 0; j < gPartiesCount[B_TRAINER_PLAYER]; j++)
+        for (u32 i = 0; i < ARRAY_COUNT(sLeaderSignatureTechs); i++)
+            if(MonKnowsMove(&gParties[B_TRAINER_PLAYER][j], sLeaderSignatureTechs[i]))
+                counter++;
     
-    return FALSE;
+    return counter;
 }

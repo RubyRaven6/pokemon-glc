@@ -2972,7 +2972,7 @@
 
 	@ Checks if the given generation has a defeated Gym Leader Flag
 	.macro checkpartyfortech
-	callnative ScrCmd_checkpartyfortech
+	callnative ScrCmd_checkpartytechs
 	.endm
 
 	.if RELEASE == FALSE
