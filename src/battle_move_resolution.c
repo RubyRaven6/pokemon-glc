@@ -4883,7 +4883,6 @@ static void SetSameMoveTurnValues(enum BattleMoveEffects moveEffect)
     switch (moveEffect)
     {
     case EFFECT_FURY_CUTTER:
-    case EFFECT_RAZZLE_DAZZLE:
         if (increment && gBattleMons[gBattlerAttacker].volatiles.furyCutterCounter < 5)
             gBattleMons[gBattlerAttacker].volatiles.furyCutterCounter++;
         else
