@@ -6053,6 +6053,36 @@ static inline u32 CalcFuryCutterBasePower(enum BattlerId battlerAtk, u32 basePow
     return min(basePower, 160); // The duration to reach 160 depends on a gen
 }
 
+static inline u32 CalcSinkholeBasePower(struct DamageContext *ctx)
+{
+    u32 i;
+    u32 weight = GetBattlerWeight(ctx->battlerDef);
+    u32 basePower = 120;
+
+    for (i = 0; sWeightToDamageTable[i] != 0xFFFF; i += 2)
+    {
+        if (sWeightToDamageTable[i] > weight)
+        {
+            basePower = sWeightToDamageTable[i + 1];
+            break;
+        }
+    }
+
+    if (!IsBattlerGrounded(ctx->battlerDef, ctx->abilities[ctx->battlerDef], ctx->holdEffects[ctx->battlerDef]))
+        basePower /= 2;
+    if (ctx->fieldStatuses & STATUS_FIELD_GRAVITY)
+        basePower *= 2;
+
+    return basePower;
+}
+
+static inline u32 CalcRazzleDazzleBasePower(enum BattlerId battlerAtk, u32 basePower)
+{
+    for (u32 i = 0; i < gBattleMons[battlerAtk].volatiles.furyCutterCounter; i++)
+        basePower *= 2;
+    return min(basePower, 300);
+}
+
 static inline u32 CalcTerrainBoostedPower(struct DamageContext *ctx, u32 basePower)
 {
     bool32 isTerrainAffected = FALSE;
@@ -6157,6 +6187,9 @@ static inline u32 CalcMoveBasePower(struct DamageContext *ctx)
     case EFFECT_FURY_CUTTER:
         basePower = CalcFuryCutterBasePower(battlerAtk, basePower);
         break;
+    case EFFECT_RAZZLE_DAZZLE:
+        basePower = CalcRazzleDazzleBasePower(battlerAtk, basePower);
+        break;
     case EFFECT_ROLLOUT:
         basePower = CalcRolloutBasePower(battlerAtk, basePower);
         break;
@@ -6227,6 +6260,13 @@ static inline u32 CalcMoveBasePower(struct DamageContext *ctx)
             basePower = sWeightToDamageTable[i + 1];
         else
             basePower = 120;
+        break;
+    case EFFECT_SINKHOLE:
+        basePower = CalcSinkholeBasePower(ctx);
+        break;
+    case EFFECT_AURA_FARMING:
+        basePower += 75 * gProtectStructs[battlerAtk].auraFarmingHits;
+        basePower = min(basePower, 300);
         break;
     case EFFECT_HEAT_CRASH:
         weight = GetBattlerWeight(battlerAtk) / GetBattlerWeight(battlerDef);
@@ -6457,6 +6497,8 @@ static inline u32 CalcMoveBasePowerAfterModifiers(struct DamageContext *ctx)
         modifier = uq4_12_multiply(modifier, UQ_4_12(GetConfig(B_SPORT_DMG_REDUCTION) >= GEN_5 ? 0.33 : 0.5));
     if (IsFieldWaterSportAffected(ctx->moveType))
         modifier = uq4_12_multiply(modifier, UQ_4_12(GetConfig(B_SPORT_DMG_REDUCTION) >= GEN_5 ? 0.33 : 0.5));
+    if (move == MOVE_SUNBLOOM && GetAttackerWeather(ctx->holdEffects[battlerAtk], ctx->abilities[battlerAtk], ctx->weather) & B_WEATHER_SUN)
+        modifier = uq4_12_multiply(modifier, UQ_4_12(1.3));
 
     // attacker's abilities
     switch (ctx->abilities[battlerAtk])
@@ -8168,6 +8210,8 @@ static inline uq4_12_t CalcTypeEffectivenessMultiplierInternal(struct DamageCont
     if (types[2] != TYPE_MYSTERY && types[2] != types[1] && types[2] != types[0])
         MulByTypeEffectiveness(ctx, &modifier, types[2]);
     if (ctx->moveType == TYPE_FIRE && gBattleMons[ctx->battlerDef].volatiles.tarShot)
+        modifier = uq4_12_multiply(modifier, UQ_4_12(2.0));
+    if (ctx->moveType == TYPE_ICE && GetBattlerPartyState(ctx->battlerDef)->overexposed)
         modifier = uq4_12_multiply(modifier, UQ_4_12(2.0));
 
     if (ctx->updateFlags && (illusionSpecies = GetIllusionMonSpecies(ctx->battlerDef)))
@@ -10248,6 +10292,8 @@ bool32 CanMoveSkipAccuracyCalc(enum BattlerId battlerAtk, enum BattlerId battler
         u32 attackerWeather = GetAttackerWeather(GetBattlerHoldEffect(battlerAtk), abilityAtk, GetWeather());
 
         if ((attackerWeather & B_WEATHER_RAIN) && MoveAlwaysHitsInRain(move))
+            effect = TRUE;
+        else if ((attackerWeather & B_WEATHER_SUN) && MoveAlwaysHitsInSun(move))
             effect = TRUE;
         else if ((attackerWeather & B_WEATHER_ICY_ANY) && MoveAlwaysHitsInHailSnow(move))
             effect = TRUE;

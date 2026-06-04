@@ -1867,6 +1867,11 @@ static s32 AI_CheckBadMove(enum BattlerId battlerAtk, enum BattlerId battlerDef,
           || PartnerMoveIsSameNoTarget(BATTLE_PARTNER(battlerAtk), move, aiData->partnerMove)) //Only one mon needs to set up Stealth Rocks
             ADJUST_SCORE(-10);
         break;
+    case EFFECT_STEELSURGE:
+        if (IsHazardOnSide(GetBattlerSide(battlerDef), HAZARDS_STEELSURGE)
+          || PartnerMoveIsSameNoTarget(BATTLE_PARTNER(battlerAtk), move, aiData->partnerMove)) //Only one mon needs to set up Steelsurge
+            ADJUST_SCORE(-10);
+        break;
     case EFFECT_TOXIC_SPIKES:
         if (gSideTimers[GetBattlerSide(battlerDef)].toxicSpikesAmount >= 2)
             ADJUST_SCORE(-10);
@@ -4692,6 +4697,7 @@ static s32 AI_CalcMoveEffectScore(enum BattlerId battlerAtk, enum BattlerId batt
     case EFFECT_CEASELESS_EDGE:
     case EFFECT_SPIKES:
     case EFFECT_STEALTH_ROCK:
+    case EFFECT_STEELSURGE:
     case EFFECT_STICKY_WEB:
     case EFFECT_STONE_AXE:
     case EFFECT_TOXIC_SPIKES:
@@ -5585,7 +5591,29 @@ static s32 AI_CalcAdditionalEffectScore(enum BattlerId battlerAtk, enum BattlerI
 
         // Only consider effects with a guaranteed chance to happen
         if (!MoveEffectIsGuaranteed(battlerAtk, aiData->abilities[battlerAtk], additionalEffect))
+        {
+            if (additionalEffect->self
+             || IsAdditionalEffectBlocked(battlerAtk, aiData->abilities[battlerAtk], battlerDef, aiData->abilities[battlerDef]))
+                continue;
+
+            switch (additionalEffect->moveEffect)
+            {
+            case MOVE_EFFECT_INFATUATION:
+                if (AI_CanBeInfatuated(battlerAtk, battlerDef, aiData->abilities[battlerDef]))
+                    ADJUST_SCORE(WEAK_EFFECT);
+                break;
+            case MOVE_EFFECT_GRASSPIERCER:
+                if (AI_CanPutToSleep(battlerAtk, battlerDef, aiData->abilities[battlerDef], move, aiData->partnerMove)
+                 || AI_CanParalyze(battlerAtk, battlerDef, aiData->abilities[battlerDef], move, aiData->partnerMove)
+                 || (AI_CanPoison(battlerAtk, battlerDef, aiData->abilities[battlerDef], move, aiData->partnerMove)
+                  && ShouldPoison(battlerAtk, battlerDef)))
+                    ADJUST_SCORE(WEAK_EFFECT);
+                break;
+            default:
+                break;
+            }
             continue;
+        }
 
         // Consider move effects that target self
         if (additionalEffect->self)
@@ -5726,6 +5754,7 @@ static s32 AI_CalcAdditionalEffectScore(enum BattlerId battlerAtk, enum BattlerI
                     ADJUST_SCORE(DECENT_EFFECT);
                 break;
             case MOVE_EFFECT_STEALTH_ROCK:
+            case MOVE_EFFECT_STEELSURGE:
                 if (AI_ShouldSetUpHazards(battlerAtk, battlerDef, move, aiData))
                 {
                     if (IsBattlersFirstTurn(battlerAtk))
@@ -5774,6 +5803,7 @@ static s32 AI_CalcAdditionalEffectScore(enum BattlerId battlerAtk, enum BattlerI
                     ADJUST_SCORE(DECENT_EFFECT);
                 break;
             case MOVE_EFFECT_SUN:
+            case MOVE_EFFECT_SUNBLOOM:
                 if (ShouldSetWeather(battlerAtk, B_WEATHER_SUN))
                     ADJUST_SCORE(DECENT_EFFECT);
                 if (ShouldClearWeather(battlerAtk, B_WEATHER_SUN))
@@ -5796,6 +5826,12 @@ static s32 AI_CalcAdditionalEffectScore(enum BattlerId battlerAtk, enum BattlerI
                     ADJUST_SCORE(DECENT_EFFECT);
                 if (ShouldClearWeather(battlerAtk, B_WEATHER_HAIL))
                     ADJUST_SCORE(BAD_EFFECT);
+                break;
+            case MOVE_EFFECT_OVEREXPOSURE:
+                if (!GetBattlerPartyState(battlerDef)->overexposed
+                 && (HasMoveWithType(battlerAtk, TYPE_ICE)
+                  || HasMoveWithType(BATTLE_PARTNER(battlerAtk), TYPE_ICE)))
+                    ADJUST_SCORE(DECENT_EFFECT);
                 break;
             case MOVE_EFFECT_MISTY_TERRAIN:
                 if (ShouldClearFieldStatus(battlerAtk, STATUS_FIELD_MISTY_TERRAIN))
@@ -5944,6 +5980,7 @@ static s32 AI_ForceSetupFirstTurn(enum BattlerId battlerAtk, enum BattlerId batt
     case EFFECT_ELECTRIC_TERRAIN:
     case EFFECT_MISTY_TERRAIN:
     case EFFECT_STEALTH_ROCK:
+    case EFFECT_STEELSURGE:
     case EFFECT_TOXIC_SPIKES:
     case EFFECT_TRICK_ROOM:
     case EFFECT_WONDER_ROOM:
@@ -6344,6 +6381,7 @@ static s32 AI_PowerfulStatus(enum BattlerId battlerAtk, enum BattlerId battlerDe
         break;
     case EFFECT_SPIKES:
     case EFFECT_STEALTH_ROCK:
+    case EFFECT_STEELSURGE:
     case EFFECT_STICKY_WEB:
     case EFFECT_TOXIC_SPIKES:
         if (AI_ShouldSetUpHazards(battlerAtk, battlerDef, move, gAiLogicData))
@@ -6462,6 +6500,7 @@ static s32 AI_PredictSwitch(enum BattlerId battlerAtk, enum BattlerId battlerDef
     case EFFECT_MAGNET_RISE:
     case EFFECT_TRICK_ROOM:
     case EFFECT_STEALTH_ROCK:
+    case EFFECT_STEELSURGE:
     case EFFECT_SPIKES:
     case EFFECT_TOXIC_SPIKES:
         ADJUST_SCORE(BEST_EFFECT);

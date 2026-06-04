@@ -310,6 +310,7 @@ bool32 ShouldRecordStatusMove(enum Move move)
         case EFFECT_REFLECT:
         case EFFECT_SPIKES:
         case EFFECT_STEALTH_ROCK:
+        case EFFECT_STEELSURGE:
         case EFFECT_STICKY_WEB:
         case EFFECT_TOXIC_SPIKES:
             return RandomPercentage(RNG_AI_ASSUME_STATUS_MEDIUM_ODDS, ASSUME_STATUS_MEDIUM_ODDS);
@@ -674,6 +675,7 @@ bool32 IsDamageMoveUnusable(struct DamageContext *ctx)
             return TRUE;
         break;
     case EFFECT_LOW_KICK:
+    case EFFECT_SINKHOLE:
     case EFFECT_HEAT_CRASH:
         if (GetActiveGimmick(ctx->battlerDef) == GIMMICK_DYNAMAX)
             return TRUE;
@@ -1998,6 +2000,7 @@ bool32 IsHazardMove(enum Move move)
     case EFFECT_CEASELESS_EDGE:
     case EFFECT_SPIKES:
     case EFFECT_STEALTH_ROCK:
+    case EFFECT_STEELSURGE:
     case EFFECT_STICKY_WEB:
     case EFFECT_STONE_AXE:
     case EFFECT_TOXIC_SPIKES:
@@ -4189,6 +4192,7 @@ static u32 GetAIEffectGroupFromMove(enum BattlerId battler, enum Move move)
         switch (GetMoveAdditionalEffectById(move, effectIndex)->moveEffect)
         {
         case MOVE_EFFECT_SUN:
+        case MOVE_EFFECT_SUNBLOOM:
         case MOVE_EFFECT_RAIN:
         case MOVE_EFFECT_SANDSTORM:
         case MOVE_EFFECT_HAIL:

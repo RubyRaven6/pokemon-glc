@@ -161,6 +161,11 @@ BattleScript_TarShotMessage::
 	trymovestatchanges
 	goto BattleScript_MoveEnd
 
+BattleScript_OverexposureMessage::
+	printstring STRINGID_PKMNBECAMEWEAKERTOICE
+	waitmessage B_WAIT_TIME_LONG
+	return
+
 BattleScript_AbilityStatChange::
 	call BattleScript_AbilityPopUp
 	trystatchanges BS_EFFECT_BATTLER, STAT_CHANGE_IGNORE_SELF
@@ -1240,6 +1245,15 @@ BattleScript_EffectStealthRock::
 	attackanimation
 	waitanimation
 	printstring STRINGID_POINTEDSTONESFLOAT
+	waitmessage B_WAIT_TIME_LONG
+	goto BattleScript_MoveEnd
+
+BattleScript_EffectSteelsurge::
+	attackcanceler
+	setsteelsurge BattleScript_ButItFailed
+	attackanimation
+	waitanimation
+	printfromtable gDmgHazardsStringIds
 	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_MoveEnd
 

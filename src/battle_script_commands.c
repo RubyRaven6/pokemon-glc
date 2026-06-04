@@ -1683,6 +1683,8 @@ static void MoveDamageDataHpUpdate(enum BattlerId battler, u32 scriptBattler, co
     }
 
     GetBattlerPartyState(battler)->timesGotHit++;
+    if (!IsBattlerAlly(battler, gBattlerAttacker) && gProtectStructs[battler].auraFarmingHits < 3)
+        gProtectStructs[battler].auraFarmingHits++;
     gSpecialStatuses[battler].damagedByAttack = TRUE;
 }
 
@@ -2283,6 +2285,7 @@ static inline bool32 IgnoreTargetingForMoveEffect(enum MoveEffect moveEffect) //
     case MOVE_EFFECT_RAINBOW:
     case MOVE_EFFECT_SEA_OF_FIRE:
     case MOVE_EFFECT_SWAMP:
+    case MOVE_EFFECT_SUNBLOOM:
         return TRUE;
     default:
         return FALSE;
@@ -3068,6 +3071,29 @@ void SetMoveEffect(enum BattlerId battlerAtk, enum BattlerId effectBattler, enum
         gSideTimers[i].swampTimer = 4;
         BattleScriptPush(battleScript);
         gBattlescriptCurrInstr = BattleScript_TheSwampActivates;
+        break;
+    case MOVE_EFFECT_SUNBLOOM:
+        if (TryChangeBattleWeather(battlerAtk, BATTLE_WEATHER_SUN, ABILITY_NONE))
+        {
+            if (gBattleMons[gBattlerTarget].hp == 0 && !(gBattleWeather & B_WEATHER_PRIMAL_ANY))
+                gBattleStruct->weatherDuration = 8;
+            gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_STARTED_SUNLIGHT;
+            BattleScriptPush(battleScript);
+            gBattlescriptCurrInstr = BattleScript_MoveEffectSetWeather;
+        }
+        break;
+    case MOVE_EFFECT_OVEREXPOSURE:
+        if (GetBattlerPartyState(effectBattler)->overexposed)
+        {
+            gBattlescriptCurrInstr = battleScript;
+        }
+        else
+        {
+            GetBattlerPartyState(effectBattler)->overexposed = TRUE;
+            gBattleMons[effectBattler].volatiles.overexposure = TRUE;
+            BattleScriptPush(battleScript);
+            gBattlescriptCurrInstr = BattleScript_OverexposureMessage;
+        }
         break;
     case MOVE_EFFECT_SUN:
     case MOVE_EFFECT_RAIN:

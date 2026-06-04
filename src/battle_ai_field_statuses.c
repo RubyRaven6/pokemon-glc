@@ -244,11 +244,15 @@ static enum FieldEffectOutcome BenefitsFromSun(enum BattlerId battler)
     if (DoesAbilityBenefitFromWeather(ability, B_WEATHER_SUN)
      || HasLightSensitiveMove(battler)
      || HasDamagingMoveOfType(battler, TYPE_FIRE)
+     || HasMoveWithFlag(battler, MoveAlwaysHitsInSun)
      || HasMoveWithEffect(battler, EFFECT_WEATHER_BALL)
      || HasMoveWithEffect(battler, EFFECT_HYDRO_STEAM))
         return FIELD_EFFECT_POSITIVE;
 
     if (HasMoveWithFlag(battler, MoveHas50AccuracyInSun) || HasDamagingMoveOfType(battler, TYPE_WATER) || gAiLogicData->abilities[battler] == ABILITY_DRY_SKIN)
+        return FIELD_EFFECT_NEGATIVE;
+
+    if (HasMoveWithFlag(LEFT_FOE(battler), MoveAlwaysHitsInSun))
         return FIELD_EFFECT_NEGATIVE;
 
     return FIELD_EFFECT_NEUTRAL;
@@ -549,6 +553,8 @@ s32 CalcWeatherScore(enum BattlerId battlerAtk, enum BattlerId battlerDef, enum 
             if (HasDamagingMoveOfType(battlerDef, TYPE_WATER) || HasDamagingMoveOfType(BATTLE_PARTNER(battlerDef), TYPE_WATER))
                 score += WEAK_EFFECT;
             if (HasMoveWithFlag(battlerDef, MoveHas50AccuracyInSun) || HasMoveWithFlag(BATTLE_PARTNER(battlerDef), MoveHas50AccuracyInSun))
+                score += WEAK_EFFECT;
+            if (HasMoveWithFlag(battlerAtk, MoveAlwaysHitsInSun) || HasMoveWithFlag(BATTLE_PARTNER(battlerAtk), MoveAlwaysHitsInSun))
                 score += WEAK_EFFECT;
         }
         break;

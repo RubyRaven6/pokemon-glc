@@ -420,6 +420,7 @@ static enum MaxPowerTier GetMaxPowerTier(enum Move move)
         return MAX_POWER_TIER_6;
     case EFFECT_FLAIL:
     case EFFECT_LOW_KICK:
+    case EFFECT_SINKHOLE:
         return MAX_POWER_TIER_7;
     default:
         break;
