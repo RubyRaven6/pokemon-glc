@@ -148,7 +148,7 @@ script EventScript_TestingGrounds_HouseFoyer_BerryMarket{
 	release
 }
 
-script EventScript_TestingGrounds_HouseFoyer_TecniquesMarket{
+script EventScript_TestingGrounds_HouseFoyer_TechniquesMarket{
     lock
     faceplayer
 	msgbox("techniques.com")
@@ -165,6 +165,19 @@ script EventScript_TestingGrounds_HouseFoyer_TecniquesMarket{
     waitmovement(0)
     closemessage
 	release
+}
+
+script EventScript_TestingGrounds_HouseFoyer_CheckForTech {
+    lock
+    checkpartyfortech
+    if(var(VAR_RESULT) == FALSE)
+    {
+        msgbox(format("You have two or more Pokemon with a signature move.\pKindly ensure only one signature move is present in your party."))
+        closemessage
+        applymovement(LOCALID_PLAYER, moves(walk_down))
+        waitmovement(0)
+    }
+    else{}
 }
 
 mart HeldItemMarket {

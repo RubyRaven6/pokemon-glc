@@ -2,6 +2,7 @@
 #include "battle.h"
 #include "event_data.h"
 #include "event_scripts.h"
+#include "pokemon.h"
 #include "tournament_logic.h"
 #include "constants/flags.h"
 #include "constants/items.h"
@@ -242,6 +243,17 @@ const u16 gTechniqueFlagUnlocks[] = {
     [ITEM_TM42] = FLAG_UNOVA_LEADER_MARLON,
 };
 
+static const u32 sLeaderSignatureTechs[] = {
+    MOVE_ROCK_HEART,
+    MOVE_RIPTIDE,
+    MOVE_ARC_FAULT,
+    MOVE_GRASSPIERCER,
+    MOVE_PSYCHE_LOCK,
+    MOVE_POISONED_STARS,
+    MOVE_MAGMATIC_RAGE,
+    MOVE_SHALLOW_GRAVE,
+};
+
 void ChooseRandomGymLeader(void) {
     u32 countUndefeated = 0;
     u32 gen = VarGet(VAR_GENERATION_CTL);
@@ -313,6 +325,27 @@ bool8 ScrCmd_checkdefeatedleaders(struct ScriptContext *ctx) {
     }
 
     if(countDefeated >=1)
+        gSpecialVar_Result = TRUE;
+    else
+        gSpecialVar_Result = FALSE;
+    
+    return FALSE;
+}
+
+bool8 ScrCmd_checkpartyfortech(struct ScriptContext *ctx) {
+    
+    u32 counter = 0;
+
+    for (u32 k = 0; k < gPartiesCount[B_TRAINER_PLAYER]; k++)
+        for (u32 j = 0; j < ARRAY_COUNT(sLeaderSignatureTechs); j++)
+            for (u32 i = 0; i < MAX_MON_MOVES; i++)
+            {
+                struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][k];
+                if(GetMonData(mon, MON_DATA_MOVE1 + i) == sLeaderSignatureTechs[j])
+                    counter++;
+            }
+
+    if(counter == 1)
         gSpecialVar_Result = TRUE;
     else
         gSpecialVar_Result = FALSE;

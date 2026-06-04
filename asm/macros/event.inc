@@ -2970,6 +2970,11 @@
 	callnative ScrCmd_checkdefeatedleaders
 	.endm
 
+	@ Checks if the given generation has a defeated Gym Leader Flag
+	.macro checkpartyfortech
+	callnative ScrCmd_checkpartyfortech
+	.endm
+
 	.if RELEASE == FALSE
 	.macro debugprint str:req, numOrVar=65535
 	callnative ScrCmd_debugprint
