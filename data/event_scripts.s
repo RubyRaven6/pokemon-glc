@@ -1756,3 +1756,5 @@ EventScript_PalletTown_PlayersHouse_2F_TurnOnPC::
 	
 	.include "data/maps/TestingGrounds_HouseFoyer/scripts.scr"
 	.include "data/maps/TestingGrounds_BattleArena/scripts.scr"
+	.include "data/maps/TestingGrounds_GreenRoom/scripts.scr"
+

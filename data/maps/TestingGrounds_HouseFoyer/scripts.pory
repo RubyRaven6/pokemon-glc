@@ -167,17 +167,20 @@ script EventScript_TestingGrounds_HouseFoyer_TechniquesMarket{
 	release
 }
 
-script EventScript_TestingGrounds_HouseFoyer_CheckForTech {
+script EventScript_TestingGround_HouseFoyer_EnterTournament {
     lock
-    checkpartyfortech
-    if(var(VAR_RESULT) > 1)
+    faceplayer
+    msgbox(format("Hi! Will you be entering our Tournament?"), MSGBOX_YESNO)
+    if(var(VAR_RESULT) == NO){}
+    else
     {
-        msgbox(format("You have two or more Pokemon with a signature move.\pKindly ensure only one signature move is present in your party."))
+        callnative(ChooseRandomGymLeader)
+        msgbox(format("Come on in into our green room, then!"))
         closemessage
-        applymovement(LOCALID_PLAYER, moves(walk_down))
-        waitmovement(0)
+        warp(MAP_TESTING_GROUNDS_GREEN_ROOM, 6, 6)
     }
-    else{}
+    closemessage
+    release
 }
 
 mart HeldItemMarket {

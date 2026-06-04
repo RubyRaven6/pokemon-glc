@@ -57,29 +57,7 @@
       "flag": "FLAG_TEMP_2"
     }
   ],
-  "warp_events": [
-    {
-      "x": 6,
-      "y": 12,
-      "elevation": 0,
-      "dest_map": "MAP_TESTING_GROUNDS_HOUSE_FOYER",
-      "dest_warp_id": "WARP_ID_FOYER_STAIRS"
-    },
-    {
-      "x": 5,
-      "y": 12,
-      "elevation": 0,
-      "dest_map": "MAP_TESTING_GROUNDS_HOUSE_FOYER",
-      "dest_warp_id": "WARP_ID_FOYER_STAIRS"
-    },
-    {
-      "x": 7,
-      "y": 12,
-      "elevation": 0,
-      "dest_map": "MAP_TESTING_GROUNDS_HOUSE_FOYER",
-      "dest_warp_id": "WARP_ID_FOYER_STAIRS"
-    }
-  ],
+  "warp_events": [],
   "coord_events": [],
   "bg_events": []
 }

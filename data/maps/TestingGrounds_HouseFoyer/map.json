@@ -91,6 +91,19 @@
       "trainer_sight_or_berry_tree_id": "0",
       "script": "EventScript_TestingGrounds_HouseFoyer_TechniquesMarket",
       "flag": "0"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_BEAUTY",
+      "x": 2,
+      "y": 2,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_NONE",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "EventScript_TestingGround_HouseFoyer_EnterTournament",
+      "flag": "0"
     }
   ],
   "warp_events": [
@@ -109,27 +122,9 @@
       "elevation": 0,
       "dest_map": "MAP_TESTING_GROUNDS",
       "dest_warp_id": "0"
-    },
-    {
-      "warp_id": "WARP_ID_FOYER_STAIRS",
-      "x": 2,
-      "y": 1,
-      "elevation": 0,
-      "dest_map": "MAP_TESTING_GROUNDS_BATTLE_ARENA",
-      "dest_warp_id": "0"
     }
   ],
-  "coord_events": [
-    {
-      "type": "trigger",
-      "x": 2,
-      "y": 2,
-      "elevation": 0,
-      "var": "VAR_TEMP_0",
-      "var_value": "0",
-      "script": "EventScript_TestingGrounds_HouseFoyer_CheckForTech"
-    }
-  ],
+  "coord_events": [],
   "bg_events": [
     {
       "type": "sign",
