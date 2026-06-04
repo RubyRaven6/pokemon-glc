@@ -65,6 +65,48 @@ ASSUMPTIONS
     ASSUME(GetMoveCategory(MOVE_DRY_FULMINATION) == DAMAGE_CATEGORY_SPECIAL);
     ASSUME(MoveAlwaysHitsInSun(MOVE_DRY_FULMINATION));
     ASSUME(MoveHasAdditionalEffectWithChance(MOVE_DRY_FULMINATION, MOVE_EFFECT_BURN, 30));
+
+    ASSUME(GetMoveEffect(MOVE_WINDSTORM) == EFFECT_WEATHER);
+    ASSUME(GetMoveType(MOVE_WINDSTORM) == TYPE_FLYING);
+    ASSUME(GetMoveWeatherType(MOVE_WINDSTORM) == BATTLE_WEATHER_WINDSTORM);
+
+    ASSUME(GetMoveEffect(MOVE_VINSECTICATION) == EFFECT_LAST_RESPECTS);
+    ASSUME(GetMoveType(MOVE_VINSECTICATION) == TYPE_BUG);
+    ASSUME(GetMovePower(MOVE_VINSECTICATION) == 50);
+    ASSUME(GetMoveCategory(MOVE_VINSECTICATION) == DAMAGE_CATEGORY_PHYSICAL);
+
+    ASSUME(GetMoveEffect(MOVE_FUSSY_FUSS) == EFFECT_FUSSY_FUSS);
+    ASSUME(GetMoveType(MOVE_FUSSY_FUSS) == TYPE_NORMAL);
+    ASSUME(GetMovePower(MOVE_FUSSY_FUSS) == 75);
+    ASSUME(GetMoveCategory(MOVE_FUSSY_FUSS) == DAMAGE_CATEGORY_PHYSICAL);
+    ASSUME_MOVE_EFFECT_STAT_CHANGE(MOVE_FUSSY_FUSS, attack: -1);
+
+    ASSUME(GetMoveEffect(MOVE_JINX) == EFFECT_FUTURE_SIGHT);
+    ASSUME(GetMoveType(MOVE_JINX) == TYPE_GHOST);
+    ASSUME(GetMovePower(MOVE_JINX) == 120);
+    ASSUME(GetMoveCategory(MOVE_JINX) == DAMAGE_CATEGORY_SPECIAL);
+    ASSUME(MoveIgnoresProtect(MOVE_JINX));
+
+    ASSUME(GetMoveEffect(MOVE_CRASHING_FIST) == EFFECT_CRASHING_FIST);
+    ASSUME(GetMoveType(MOVE_CRASHING_FIST) == TYPE_FIGHTING);
+    ASSUME(GetMovePower(MOVE_CRASHING_FIST) == 85);
+    ASSUME(GetMoveAccuracy(MOVE_CRASHING_FIST) == 80);
+    ASSUME(GetMoveCategory(MOVE_CRASHING_FIST) == DAMAGE_CATEGORY_PHYSICAL);
+    ASSUME(MoveIgnoresProtect(MOVE_CRASHING_FIST));
+
+    ASSUME(GetMoveEffect(MOVE_HYDRAULIC_PRESS) == EFFECT_BODY_PRESS);
+    ASSUME(GetMoveType(MOVE_HYDRAULIC_PRESS) == TYPE_STEEL);
+    ASSUME(GetMovePower(MOVE_HYDRAULIC_PRESS) == 80);
+    ASSUME(GetMoveCategory(MOVE_HYDRAULIC_PRESS) == DAMAGE_CATEGORY_PHYSICAL);
+
+    ASSUME(GetMoveEffect(MOVE_ICE_RINK) == EFFECT_ICE_RINK);
+    ASSUME(GetMoveType(MOVE_ICE_RINK) == TYPE_ICE);
+    ASSUME(GetMoveCategory(MOVE_ICE_RINK) == DAMAGE_CATEGORY_STATUS);
+
+    ASSUME(GetMoveEffect(MOVE_STORM_SACRIFICE) == EFFECT_STORM_SACRIFICE);
+    ASSUME(GetMoveType(MOVE_STORM_SACRIFICE) == TYPE_DRAGON);
+    ASSUME(GetMovePower(MOVE_STORM_SACRIFICE) == 95);
+    ASSUME(GetMoveCategory(MOVE_STORM_SACRIFICE) == DAMAGE_CATEGORY_SPECIAL);
 }
 
 SINGLE_BATTLE_TEST("Custom Moves - Rock Heart may infatuate the target")
@@ -446,6 +488,293 @@ SINGLE_BATTLE_TEST("Custom Moves - Dry Fulmination cannot miss in sun and may bu
     }
 }
 
+SINGLE_BATTLE_TEST("Custom Moves - Windstorm sets windstorm for 5 turns")
+{
+    enum Item item;
+
+    PARAMETRIZE { item = ITEM_NONE; }
+    PARAMETRIZE { item = ITEM_DAMP_ROCK; }
+    PARAMETRIZE { item = ITEM_HEAT_ROCK; }
+    PARAMETRIZE { item = ITEM_SMOOTH_ROCK; }
+    PARAMETRIZE { item = ITEM_ICY_ROCK; }
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET) { Item(item); }
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(player, MOVE_WINDSTORM); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_WINDSTORM, player);
+        MESSAGE("The windstorm is raging.");
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_TAILWIND);
+        NOT ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STRONG_WINDS);
+    } THEN {
+        EXPECT(gBattleWeather & B_WEATHER_WINDSTORM);
+        EXPECT(!(gBattleWeather & B_WEATHER_STRONG_WINDS));
+        EXPECT_EQ(gBattleStruct->weatherDuration, 4);
+    }
+}
+
+SINGLE_BATTLE_TEST("Custom Moves - Windstorm can be replaced by other weather")
+{
+    enum Move move;
+    u32 expectedWeather;
+
+    PARAMETRIZE { move = MOVE_RAIN_DANCE; expectedWeather = B_WEATHER_RAIN_NORMAL; }
+    PARAMETRIZE { move = MOVE_SUNNY_DAY; expectedWeather = B_WEATHER_SUN_NORMAL; }
+    PARAMETRIZE { move = MOVE_SANDSTORM; expectedWeather = B_WEATHER_SANDSTORM; }
+    PARAMETRIZE { move = MOVE_SNOWSCAPE; expectedWeather = B_WEATHER_SNOW; }
+    GIVEN {
+        ASSUME(GetMoveEffect(move) == EFFECT_WEATHER);
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(player, MOVE_WINDSTORM); }
+        TURN { MOVE(player, move); }
+    } THEN {
+        EXPECT(gBattleWeather & expectedWeather);
+        EXPECT_EQ(gBattleStruct->weatherDuration, 4);
+    }
+}
+
+SINGLE_BATTLE_TEST("Custom Moves - Windstorm boosts Flying-type attacks", s16 damage)
+{
+    u32 setupMove;
+    PARAMETRIZE { setupMove = MOVE_CELEBRATE; }
+    PARAMETRIZE { setupMove = MOVE_WINDSTORM; }
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(player, setupMove); }
+        TURN { MOVE(player, MOVE_GUST, WITH_RNG(RNG_DAMAGE_MODIFIER, 0)); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_GUST, player);
+        HP_BAR(opponent, captureDamage: &results[i].damage);
+    } FINALLY {
+        EXPECT_GT(results[1].damage, results[0].damage);
+    }
+}
+
+SINGLE_BATTLE_TEST("Custom Moves - Windstorm removes Flying-type weaknesses", s16 damage)
+{
+    u32 setupMove;
+    PARAMETRIZE { setupMove = MOVE_CELEBRATE; }
+    PARAMETRIZE { setupMove = MOVE_WINDSTORM; }
+    GIVEN {
+        ASSUME(GetMoveType(MOVE_THUNDER_SHOCK) == TYPE_ELECTRIC);
+        ASSUME(GetSpeciesType(SPECIES_PIDGEY, 1) == TYPE_FLYING);
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_PIDGEY);
+    } WHEN {
+        TURN { MOVE(player, setupMove); }
+        TURN { MOVE(player, MOVE_THUNDER_SHOCK); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_THUNDER_SHOCK, player);
+        HP_BAR(opponent, captureDamage: &results[i].damage);
+    } FINALLY {
+        EXPECT_GT(results[0].damage, results[1].damage);
+    }
+}
+
+SINGLE_BATTLE_TEST("Custom Moves - Vinsectication gains power for fainted party members", s16 damage)
+{
+    u32 j, faintCount;
+    PARAMETRIZE { faintCount = 0; }
+    PARAMETRIZE { faintCount = 1; }
+    GIVEN {
+        PLAYER(SPECIES_HITMONLEE);
+        PLAYER(SPECIES_GEODUDE);
+        OPPONENT(SPECIES_TAUROS) { Item(ITEM_LEPPA_BERRY); Moves(MOVE_RECYCLE, MOVE_NONE, MOVE_NONE, MOVE_NONE); }
+    } WHEN {
+        for (j = 0; j < faintCount; j++)
+        {
+            TURN { MOVE(opponent, MOVE_RECYCLE); SWITCH(player, 1); }
+            TURN { MOVE(opponent, MOVE_RECYCLE); MOVE(player, MOVE_MEMENTO); SEND_OUT(player, 0); }
+            TURN { MOVE(opponent, MOVE_RECYCLE); USE_ITEM(player, ITEM_REVIVE, partyIndex: 1); }
+        }
+        TURN { MOVE(opponent, MOVE_RECYCLE); MOVE(player, MOVE_VINSECTICATION, WITH_RNG(RNG_DAMAGE_MODIFIER, 0)); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_VINSECTICATION, player);
+        HP_BAR(opponent, captureDamage: &results[i].damage);
+    } FINALLY {
+        EXPECT_GT(results[1].damage, results[0].damage);
+    }
+}
+
+SINGLE_BATTLE_TEST("Custom Moves - Fussy Fuss doubles when the user is below half HP and lowers Attack", s16 damage)
+{
+    u32 hp;
+    PARAMETRIZE { hp = 200; }
+    PARAMETRIZE { hp = 100; }
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET) { HP(hp); MaxHP(200); }
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(player, MOVE_FUSSY_FUSS, WITH_RNG(RNG_DAMAGE_MODIFIER, 0)); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_FUSSY_FUSS, player);
+        HP_BAR(opponent, captureDamage: &results[i].damage);
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponent);
+    } THEN {
+        EXPECT_EQ(opponent->statStages[STAT_ATK], DEFAULT_STAT_STAGE - 1);
+    } FINALLY {
+        EXPECT_GT(results[1].damage, results[0].damage);
+    }
+}
+
+SINGLE_BATTLE_TEST("Custom Moves - Jinx hits the switched-in Pokemon two turns later")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WYNAUT);
+    } WHEN {
+        TURN { MOVE(player, MOVE_JINX); }
+        TURN { SWITCH(opponent, 1); }
+        TURN {}
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_JINX, player);
+        MESSAGE("The opposing Wynaut took the Jinx attack!");
+        HP_BAR(opponent);
+    }
+}
+
+SINGLE_BATTLE_TEST("Custom Moves - Jinx ignores Wonder Guard")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_SQUIRTLE) { Ability(ABILITY_WONDER_GUARD); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_JINX); }
+        TURN {}
+        TURN {}
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_JINX, player);
+        MESSAGE("The opposing Squirtle took the Jinx attack!");
+        HP_BAR(opponent);
+    }
+}
+
+SINGLE_BATTLE_TEST("Custom Moves - Jinx ignores Protect and Endure")
+{
+    enum Move defensiveMove;
+    PARAMETRIZE { defensiveMove = MOVE_PROTECT; }
+    PARAMETRIZE { defensiveMove = MOVE_ENDURE; }
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET) { HP(1); MaxHP(400); Moves(defensiveMove); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_JINX); }
+        TURN {}
+        TURN { MOVE(opponent, defensiveMove); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_JINX, player);
+        MESSAGE("The opposing Wobbuffet took the Jinx attack!");
+        HP_BAR(opponent);
+    } THEN {
+        EXPECT_EQ(opponent->hp, 0);
+    }
+}
+
+SINGLE_BATTLE_TEST("Custom Moves - Crashing Fist damages protected targets for one-third damage", s16 damage)
+{
+    u32 protectMove;
+    PARAMETRIZE { protectMove = MOVE_CELEBRATE; }
+    PARAMETRIZE { protectMove = MOVE_PROTECT; }
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET) { Attack(200); }
+        OPPONENT(SPECIES_WOBBUFFET) { Defense(100); }
+    } WHEN {
+        TURN { MOVE(opponent, protectMove); MOVE(player, MOVE_CRASHING_FIST, WITH_RNG(RNG_DAMAGE_MODIFIER, 0)); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_CRASHING_FIST, player);
+        HP_BAR(opponent, captureDamage: &results[i].damage);
+    } FINALLY {
+        EXPECT_GT(results[0].damage, results[1].damage);
+        EXPECT_MUL_EQ(results[1].damage, Q_4_12(3.0), results[0].damage);
+    }
+}
+
+SINGLE_BATTLE_TEST("Custom Moves - Hydraulic Press uses the user's Defense", s16 damage)
+{
+    u32 def, atk;
+    PARAMETRIZE { def = 100; atk = 200; }
+    PARAMETRIZE { def = 200; atk = 100; }
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET) { Attack(atk); Defense(def); }
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(player, MOVE_HYDRAULIC_PRESS, WITH_RNG(RNG_DAMAGE_MODIFIER, 0)); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_HYDRAULIC_PRESS, player);
+        HP_BAR(opponent, captureDamage: &results[i].damage);
+    } FINALLY {
+        EXPECT_GT(results[1].damage, results[0].damage);
+    }
+}
+
+SINGLE_BATTLE_TEST("Custom Moves - Ice Rink makes grounded non-Ice switch-ins move last for one turn")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET) { Speed(1); }
+        OPPONENT(SPECIES_WOBBUFFET) { Speed(50); }
+        OPPONENT(SPECIES_RATTATA) { Speed(100); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_ICE_RINK); }
+        TURN { MOVE(player, MOVE_CELEBRATE); SWITCH(opponent, 1); }
+        TURN { MOVE(player, MOVE_SCRATCH); MOVE(opponent, MOVE_SCRATCH); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_ICE_RINK, player);
+        MESSAGE("The opposing Rattata slid on the ice!");
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, player);
+        HP_BAR(opponent);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, opponent);
+        HP_BAR(player);
+    } THEN {
+        EXPECT(!opponent->volatiles.iceRink);
+    }
+}
+
+SINGLE_BATTLE_TEST("Custom Moves - Ice Rink is removed by grounded Fire-type switch-ins")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_CHARMANDER);
+    } WHEN {
+        TURN { MOVE(player, MOVE_ICE_RINK); }
+        TURN { MOVE(player, MOVE_CELEBRATE); SWITCH(opponent, 1); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_ICE_RINK, player);
+        MESSAGE("The ice around the opposing team melted away!");
+    } THEN {
+        EXPECT(!IsHazardOnSide(B_SIDE_OPPONENT, HAZARDS_ICE_RINK));
+    }
+}
+
+SINGLE_BATTLE_TEST("Custom Moves - Storm Sacrifice sets rain when it knocks out the target")
+{
+    u32 hp;
+    PARAMETRIZE { hp = 999; }
+    PARAMETRIZE { hp = 1; }
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET) { HP(hp); MaxHP(999); }
+        OPPONENT(SPECIES_WYNAUT);
+    } WHEN {
+        if (hp == 1) {
+            TURN { MOVE(player, MOVE_STORM_SACRIFICE); SEND_OUT(opponent, 1); }
+        } else {
+            TURN { MOVE(player, MOVE_STORM_SACRIFICE); }
+        }
+    } THEN {
+        if (hp == 1)
+            EXPECT(gBattleWeather & B_WEATHER_RAIN_NORMAL);
+        else
+            EXPECT(!(gBattleWeather & B_WEATHER_RAIN));
+    }
+}
+
 AI_SINGLE_BATTLE_TEST("Custom Moves - AI values Rock Heart's infatuation chance")
 {
     GIVEN {
@@ -501,5 +830,28 @@ AI_SINGLE_BATTLE_TEST("Custom Moves - AI scores Overexposure as Ice support")
         OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_OVEREXPOSURE, MOVE_AURORA_BEAM); }
     } WHEN {
         TURN { SCORE_GT(opponent, MOVE_OVEREXPOSURE, MOVE_AURORA_BEAM); }
+    }
+}
+
+AI_SINGLE_BATTLE_TEST("Custom Moves - AI scores Windstorm as Flying support")
+{
+    GIVEN {
+        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_POWERFUL_STATUS);
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_WINDSTORM, MOVE_GUST); }
+    } WHEN {
+        TURN { SCORE_GT(opponent, MOVE_WINDSTORM, MOVE_GUST); }
+    }
+}
+
+AI_SINGLE_BATTLE_TEST("Custom Moves - AI scores Ice Rink as a hazard")
+{
+    GIVEN {
+        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_POWERFUL_STATUS);
+        PLAYER(SPECIES_WOBBUFFET);
+        PLAYER(SPECIES_WYNAUT);
+        OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_ICE_RINK, MOVE_CELEBRATE); }
+    } WHEN {
+        TURN { EXPECT_MOVE(opponent, MOVE_ICE_RINK); }
     }
 }

@@ -220,7 +220,7 @@ enum VolatileFlags
     F(VOLATILE_WRAPPED_BY,                  wrappedBy,                     (enum BattlerId, MAX_BITS(MAX_BATTLERS_COUNT))) \
     F(VOLATILE_WRAPPED_MOVE,                wrappedMove,                   (u32, MOVES_COUNT_ALL - 1)) \
     F(VOLATILE_POWDER,                      powder,                        (u32, 1)) \
-    F(VOLATILE_UNUSED,                      padding,                       (u32, 1)) \
+    F(VOLATILE_ICE_RINK,                    iceRink,                       (u32, 1)) \
     F(VOLATILE_INFATUATION,                 infatuation,                   (enum BattlerId, MAX_BITS(MAX_BATTLERS_COUNT))) \
     F(VOLATILE_DEFENSE_CURL,                defenseCurl,                   (u32, 1)) \
     F(VOLATILE_TRANSFORMED,                 transformed,                   (u32, 1)) \
@@ -424,6 +424,7 @@ enum Hazards
     HAZARDS_TOXIC_SPIKES,
     HAZARDS_STEALTH_ROCK,
     HAZARDS_STEELSURGE,
+    HAZARDS_ICE_RINK,
     HAZARDS_MAX_COUNT,
 };
 
@@ -483,6 +484,7 @@ enum BattleWeather
     BATTLE_WEATHER_SNOW,
     BATTLE_WEATHER_FOG,
     BATTLE_WEATHER_STRONG_WINDS,
+    BATTLE_WEATHER_WINDSTORM,
     BATTLE_WEATHER_COUNT,
 };
 
@@ -500,12 +502,13 @@ enum BattleWeather
 #define B_WEATHER_SNOW          (1 << BATTLE_WEATHER_SNOW)
 #define B_WEATHER_FOG           (1 << BATTLE_WEATHER_FOG)
 #define B_WEATHER_STRONG_WINDS  (1 << BATTLE_WEATHER_STRONG_WINDS)
+#define B_WEATHER_WINDSTORM     (1 << BATTLE_WEATHER_WINDSTORM)
 
 #define B_WEATHER_DAMAGING_ANY  (B_WEATHER_HAIL | B_WEATHER_SANDSTORM)
 #define B_WEATHER_ICY_ANY       (B_WEATHER_HAIL | B_WEATHER_SNOW)
 #define B_WEATHER_LOW_LIGHT     (B_WEATHER_FOG | B_WEATHER_ICY_ANY | B_WEATHER_RAIN | B_WEATHER_SANDSTORM)
 #define B_WEATHER_PRIMAL_ANY    (B_WEATHER_RAIN_PRIMAL | B_WEATHER_SUN_PRIMAL | B_WEATHER_STRONG_WINDS)
-#define B_WEATHER_ANY           (B_WEATHER_RAIN | B_WEATHER_SANDSTORM | B_WEATHER_SUN | B_WEATHER_ICY_ANY | B_WEATHER_STRONG_WINDS | B_WEATHER_FOG)
+#define B_WEATHER_ANY           (B_WEATHER_RAIN | B_WEATHER_SANDSTORM | B_WEATHER_SUN | B_WEATHER_ICY_ANY | B_WEATHER_STRONG_WINDS | B_WEATHER_WINDSTORM | B_WEATHER_FOG)
 
 // Explicit numbers until frostbite because those shouldn't be shifted
 enum __attribute__((packed)) MoveEffect

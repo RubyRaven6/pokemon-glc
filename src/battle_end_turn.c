@@ -122,6 +122,7 @@ static bool32 HandleEndTurnWeatherDamage(enum BattlerId battler)
     {
     case BATTLE_WEATHER_FOG:
     case BATTLE_WEATHER_STRONG_WINDS:
+    case BATTLE_WEATHER_WINDSTORM:
         break;
     case BATTLE_WEATHER_RAIN:
     case BATTLE_WEATHER_RAIN_PRIMAL:
@@ -243,10 +244,10 @@ static bool32 HandleEndTurnFutureSight(enum BattlerId battler)
         if (!IsBattlerPresent(battler))
             return effect;
 
-        if (gBattleStruct->futureSight[battler].move == MOVE_FUTURE_SIGHT)
-            gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_FUTURE_SIGHT;
-        else
+        if (gBattleStruct->futureSight[battler].move == MOVE_DOOM_DESIRE)
             gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_DOOM_DESIRE;
+        else
+            gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_FUTURE_SIGHT;
 
         PREPARE_MOVE_BUFFER(gBattleTextBuff1, gBattleStruct->futureSight[battler].move);
 

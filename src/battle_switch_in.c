@@ -391,6 +391,25 @@ static bool32 TryHazardsOnSwitchIn(enum BattlerId battler, enum Ability ability,
             }
         }
         break;
+    case HAZARDS_ICE_RINK:
+        if (IsBattlerAffectedByHazards(battler, holdEffect, FALSE) && IsBattlerGrounded(battler, ability, holdEffect))
+        {
+            if (IS_BATTLER_OF_TYPE(battler, TYPE_FIRE))
+            {
+                RemoveHazardFromField(side, HAZARDS_ICE_RINK);
+                gBattlerAttacker = battler;
+                BattleScriptCall(BattleScript_IceRinkMelted);
+                effect = TRUE;
+            }
+            else if (!IS_BATTLER_OF_TYPE(battler, TYPE_ICE))
+            {
+                gEffectBattler = battler;
+                gBattleMons[battler].volatiles.iceRink = TRUE;
+                BattleScriptCall(BattleScript_IceRinkOnSwitchIn);
+                effect = TRUE;
+            }
+        }
+        break;
     case HAZARDS_MAX_COUNT:
         break;
     }

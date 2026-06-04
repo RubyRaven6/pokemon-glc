@@ -36,6 +36,7 @@ static enum FieldEffectOutcome BenefitsFromSun(enum BattlerId battler);
 static enum FieldEffectOutcome BenefitsFromSandstorm(enum BattlerId battler);
 static enum FieldEffectOutcome BenefitsFromHailOrSnow(enum BattlerId battler, u32 weather);
 static enum FieldEffectOutcome BenefitsFromRain(enum BattlerId battler);
+static enum FieldEffectOutcome BenefitsFromWindstorm(enum BattlerId battler);
 // The following functions all feed into FieldStatusChecker, which is then called by ShouldSetFieldStatus and ShouldClearFieldStatus.
 // They work approximately the same as the weather functions.
 static enum FieldEffectOutcome BenefitsFromElectricTerrain(enum BattlerId battler);
@@ -85,6 +86,8 @@ bool32 WeatherChecker(enum BattlerId battler, u32 weather, enum FieldEffectOutco
             result = BenefitsFromSandstorm(battler);
         else if (weather & B_WEATHER_ICY_ANY)
             result = BenefitsFromHailOrSnow(battler, weather);
+        else if (weather & B_WEATHER_WINDSTORM)
+            result = BenefitsFromWindstorm(battler);
 
         battler = BATTLE_PARTNER(battler);
 
@@ -318,6 +321,27 @@ static enum FieldEffectOutcome BenefitsFromRain(enum BattlerId battler)
         return FIELD_EFFECT_NEGATIVE;
 
     if (HasMoveWithFlag(LEFT_FOE(battler), MoveAlwaysHitsInRain))
+        return FIELD_EFFECT_NEGATIVE;
+
+    return FIELD_EFFECT_NEUTRAL;
+}
+
+// Windstorm
+static enum FieldEffectOutcome BenefitsFromWindstorm(enum BattlerId battler)
+{
+    bool32 benefitsSelf = HasDamagingMoveOfType(battler, TYPE_FLYING)
+                       || IS_BATTLER_OF_TYPE(battler, TYPE_FLYING);
+    bool32 benefitsPartner = HasPartner(battler)
+                          && (HasDamagingMoveOfType(BATTLE_PARTNER(battler), TYPE_FLYING)
+                           || IS_BATTLER_OF_TYPE(BATTLE_PARTNER(battler), TYPE_FLYING));
+    bool32 benefitsFoe = HasDamagingMoveOfType(LEFT_FOE(battler), TYPE_FLYING)
+                      || IS_BATTLER_OF_TYPE(LEFT_FOE(battler), TYPE_FLYING)
+                      || HasDamagingMoveOfType(RIGHT_FOE(battler), TYPE_FLYING)
+                      || IS_BATTLER_OF_TYPE(RIGHT_FOE(battler), TYPE_FLYING);
+
+    if (benefitsSelf || benefitsPartner)
+        return FIELD_EFFECT_POSITIVE;
+    if (benefitsFoe)
         return FIELD_EFFECT_NEGATIVE;
 
     return FIELD_EFFECT_NEUTRAL;
@@ -605,6 +629,19 @@ s32 CalcWeatherScore(enum BattlerId battlerAtk, enum BattlerId battlerDef, enum 
              || HasMoveWithEffect(battlerDef, EFFECT_SYNTHESIS)
              || HasMoveWithEffect(battlerDef, EFFECT_MOONLIGHT))
                 score += WEAK_EFFECT;
+        }
+        break;
+    case BATTLE_WEATHER_WINDSTORM:
+        if (ShouldSetWeather(battlerAtk, B_WEATHER_WINDSTORM))
+        {
+            score += DECENT_EFFECT;
+
+            if (HasDamagingMoveOfType(battlerAtk, TYPE_FLYING) || HasDamagingMoveOfType(BATTLE_PARTNER(battlerAtk), TYPE_FLYING))
+                score += WEAK_EFFECT;
+            if (IS_BATTLER_OF_TYPE(battlerAtk, TYPE_FLYING) || IS_BATTLER_OF_TYPE(BATTLE_PARTNER(battlerAtk), TYPE_FLYING))
+                score += WEAK_EFFECT;
+            if (HasDamagingMoveOfType(battlerDef, TYPE_FLYING) || HasDamagingMoveOfType(BATTLE_PARTNER(battlerDef), TYPE_FLYING))
+                score -= WEAK_EFFECT;
         }
         break;
     }

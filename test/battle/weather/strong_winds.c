@@ -51,6 +51,24 @@ DOUBLE_BATTLE_TEST("Strong winds remove Flying-type weaknesses of all battlers")
     }
 }
 
+SINGLE_BATTLE_TEST("Strong winds do not boost Flying-type attacks", s16 damage)
+{
+    bool32 strongWinds;
+    PARAMETRIZE { strongWinds = FALSE; }
+    PARAMETRIZE { strongWinds = TRUE; }
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET) { Ability(strongWinds ? ABILITY_DELTA_STREAM : ABILITY_NONE); }
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(player, MOVE_GUST, WITH_RNG(RNG_DAMAGE_MODIFIER, 0)); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_GUST, player);
+        HP_BAR(opponent, captureDamage: &results[i].damage);
+    } FINALLY {
+        EXPECT_EQ(results[0].damage, results[1].damage);
+    }
+}
+
 DOUBLE_BATTLE_TEST("Strong winds remove Flying-type weaknesses of all battlers - Inverse Battle", s16 damagePlayer, s16 damageOpponent) // Bug, Fighting, Grass
 {
     enum Move move;

@@ -1285,6 +1285,19 @@ static inline bool32 TryStrongWindsWeakenAttack(enum BattlerId battlerDef, enum 
         }
     }
 
+    if (GetWeather() & B_WEATHER_WINDSTORM)
+    {
+        if (GetMoveCategory(gCurrentMove) != DAMAGE_CATEGORY_STATUS
+         && IS_BATTLER_OF_TYPE(battlerDef, TYPE_FLYING)
+         && gTypeEffectivenessTable[moveType][TYPE_FLYING] >= UQ_4_12(2.0)
+         && !gBattleStruct->printedStrongWindsWeakenedAttack)
+        {
+            gBattleStruct->printedStrongWindsWeakenedAttack = TRUE;
+            BattleScriptCall(BattleScript_AttackWeakenedByWindstorm);
+            return TRUE;
+        }
+    }
+
     return FALSE;
 }
 
@@ -6762,6 +6775,8 @@ static void RemoveAllWeather(void)
         gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_WEATHER_END_HAIL;
     else if (gBattleWeather & B_WEATHER_STRONG_WINDS)
         gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_WEATHER_END_STRONG_WINDS;
+    else if (gBattleWeather & B_WEATHER_WINDSTORM)
+        gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_WEATHER_END_WINDSTORM;
     else if (gBattleWeather & B_WEATHER_SNOW)
         gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_WEATHER_END_SNOW;
     else if (gBattleWeather & B_WEATHER_FOG)
@@ -12406,6 +12421,22 @@ void BS_SetSteelsurge(void)
     else
     {
         PushHazardTypeToQueue(targetSide, HAZARDS_STEELSURGE);
+        gBattlescriptCurrInstr = cmd->nextInstr;
+    }
+}
+
+// Freezes the ground beneath the target's side.
+void BS_SetIceRink(void)
+{
+    NATIVE_ARGS(const u8 *failInstr);
+    u8 targetSide = GetBattlerSide(gBattlerTarget);
+    if (IsHazardOnSide(targetSide, HAZARDS_ICE_RINK))
+    {
+        gBattlescriptCurrInstr = cmd->failInstr;
+    }
+    else
+    {
+        PushHazardTypeToQueue(targetSide, HAZARDS_ICE_RINK);
         gBattlescriptCurrInstr = cmd->nextInstr;
     }
 }

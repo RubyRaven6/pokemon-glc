@@ -3629,6 +3629,18 @@ static enum MoveEndResult MoveEndMoveBlock(struct BattleCalcValues *cv)
             result = MOVEEND_RESULT_RUN_SCRIPT;
         }
         break;
+    case EFFECT_STORM_SACRIFICE:
+        if (IsBattlerAlive(cv->battlerAtk)
+         && !IsBattlerAlive(cv->battlerDef)
+         && IsAnyTargetTurnDamaged(cv->battlerAtk, EXCLUDING_SUBSTITUTES)
+         && !NoAliveMonsForEitherParty()
+         && TryChangeBattleWeather(cv->battlerAtk, BATTLE_WEATHER_RAIN, ABILITY_NONE))
+        {
+            gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_STARTED_RAIN;
+            BattleScriptCall(BattleScript_MoveEffectSetWeather);
+            result = MOVEEND_RESULT_RUN_SCRIPT;
+        }
+        break;
     default:
         result = MOVEEND_RESULT_CONTINUE;
         break;

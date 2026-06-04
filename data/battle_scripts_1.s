@@ -1257,6 +1257,25 @@ BattleScript_EffectSteelsurge::
 	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_MoveEnd
 
+BattleScript_EffectIceRink::
+	attackcanceler
+	seticerink BattleScript_ButItFailed
+	attackanimation
+	waitanimation
+	printstring STRINGID_ICERINKSET
+	waitmessage B_WAIT_TIME_LONG
+	goto BattleScript_MoveEnd
+
+BattleScript_IceRinkOnSwitchIn::
+	printstring STRINGID_PKMNSLIDONICE
+	waitmessage B_WAIT_TIME_LONG
+	return
+
+BattleScript_IceRinkMelted::
+	printstring STRINGID_ICERINKMELTED
+	waitmessage B_WAIT_TIME_LONG
+	return
+
 BattleScript_EffectStickyWeb::
 	attackcanceler
 	setstickyweb BattleScript_ButItFailed
@@ -4746,6 +4765,12 @@ BattleScript_HospitalityActivates::
 BattleScript_AttackWeakenedByStrongWinds::
 	pause B_WAIT_TIME_SHORT
 	printstring STRINGID_ATTACKWEAKENEDBSTRONGWINDS
+	waitmessage B_WAIT_TIME_LONG
+	return
+
+BattleScript_AttackWeakenedByWindstorm::
+	pause B_WAIT_TIME_SHORT
+	printstring STRINGID_ATTACKWEAKENEDBYWINDSTORM
 	waitmessage B_WAIT_TIME_LONG
 	return
 

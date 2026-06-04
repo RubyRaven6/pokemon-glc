@@ -2001,6 +2001,7 @@ bool32 IsHazardMove(enum Move move)
     case EFFECT_SPIKES:
     case EFFECT_STEALTH_ROCK:
     case EFFECT_STEELSURGE:
+    case EFFECT_ICE_RINK:
     case EFFECT_STICKY_WEB:
     case EFFECT_STONE_AXE:
     case EFFECT_TOXIC_SPIKES:

@@ -4753,7 +4753,7 @@ s32 GetBattleMovePriority(enum BattlerId battler, enum Ability ability, enum Mov
     if (GetActiveGimmick(battler) == GIMMICK_DYNAMAX && GetMoveCategory(move) == DAMAGE_CATEGORY_STATUS)
         return GetMovePriority(MOVE_MAX_GUARD);
 
-    if (gProtectStructs[battler].quash)
+    if (gProtectStructs[battler].quash || gBattleMons[battler].volatiles.iceRink)
     {
         priority = -8;
     }

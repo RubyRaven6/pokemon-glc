@@ -22307,6 +22307,155 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .battleAnimScript = gBattleAnimMove_Thunder,
     },
 
+    [MOVE_WINDSTORM] =
+    {
+        .name = COMPOUND_STRING("Windstorm"),
+        .description = COMPOUND_STRING(
+            "Summons strong winds\n"
+            "that favor Flying types."),
+        .effect = EFFECT_WEATHER,
+        .power = 0,
+        .type = TYPE_FLYING,
+        .accuracy = 0,
+        .pp = 10,
+        .target = TARGET_FIELD,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_STATUS,
+        .argument = { .weatherType = BATTLE_WEATHER_WINDSTORM },
+        .battleAnimScript = gBattleAnimMove_Tailwind,
+    },
+
+    [MOVE_VINSECTICATION] =
+    {
+        .name = COMPOUND_STRING("Vinsectication"),
+        .description = COMPOUND_STRING(
+            "Power rises for each\n"
+            "fallen party member."),
+        .effect = EFFECT_LAST_RESPECTS,
+        .power = 50,
+        .type = TYPE_BUG,
+        .accuracy = 100,
+        .pp = 10,
+        .target = TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_PHYSICAL,
+        .battleAnimScript = gBattleAnimMove_StruggleBug,
+    },
+
+    [MOVE_FUSSY_FUSS] =
+    {
+        .name = COMPOUND_STRING("Fussy Fuss"),
+        .description = COMPOUND_STRING(
+            "Lowers Attack. Stronger\n"
+            "when the user is hurt."),
+        .effect = EFFECT_FUSSY_FUSS,
+        .power = 75,
+        .type = TYPE_NORMAL,
+        .accuracy = 100,
+        .pp = 10,
+        .target = TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_PHYSICAL,
+        .additionalEffects = ADDITIONAL_EFFECTS({
+            .moveEffect = MOVE_EFFECT_STAT_MINUS,
+            .attack = 1,
+            .chance = 100,
+        }),
+        .battleAnimScript = gBattleAnimMove_Headbutt,
+    },
+
+    [MOVE_JINX] =
+    {
+        .name = COMPOUND_STRING("Jinx"),
+        .description = COMPOUND_STRING(
+            "A delayed curse strikes\n"
+            "two turns later."),
+        .effect = EFFECT_FUTURE_SIGHT,
+        .power = 120,
+        .type = TYPE_GHOST,
+        .accuracy = 100,
+        .pp = 10,
+        .target = TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_SPECIAL,
+        .ignoresProtect = TRUE,
+        .battleAnimScript = gBattleAnimMove_FutureSight,
+    },
+
+    [MOVE_CRASHING_FIST] =
+    {
+        .name = COMPOUND_STRING("Crashing Fist"),
+        .description = COMPOUND_STRING(
+            "Hits through protection\n"
+            "for reduced damage."),
+        .effect = EFFECT_CRASHING_FIST,
+        .power = 85,
+        .type = TYPE_FIGHTING,
+        .accuracy = 80,
+        .pp = 10,
+        .target = TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_PHYSICAL,
+        .makesContact = TRUE,
+        .ignoresProtect = TRUE,
+        .battleAnimScript = gBattleAnimMove_Feint,
+    },
+
+    [MOVE_HYDRAULIC_PRESS] =
+    {
+        .name = COMPOUND_STRING("Hydraulic Press"),
+        .description = COMPOUND_STRING(
+            "Uses the user's Defense\n"
+            "to deal damage."),
+        .effect = EFFECT_BODY_PRESS,
+        .power = 80,
+        .type = TYPE_STEEL,
+        .accuracy = 100,
+        .pp = 10,
+        .target = TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_PHYSICAL,
+        .battleAnimScript = gBattleAnimMove_BodyPress,
+    },
+
+    [MOVE_ICE_RINK] =
+    {
+        .name = COMPOUND_STRING("Ice Rink"),
+        .description = COMPOUND_STRING(
+            "Freezes the foe's ground\n"
+            "to make switch-ins slip."),
+        .effect = EFFECT_ICE_RINK,
+        .power = 0,
+        .type = TYPE_ICE,
+        .accuracy = 0,
+        .pp = 20,
+        .target = TARGET_OPPONENTS_FIELD,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_STATUS,
+        .magicCoatAffected = TRUE,
+        .ignoresProtect = TRUE,
+        .mirrorMoveBanned = TRUE,
+        .forcePressure = TRUE,
+        .battleAnimScript = gBattleAnimMove_IceSpinner,
+    },
+
+    [MOVE_STORM_SACRIFICE] =
+    {
+        .name = COMPOUND_STRING("Storm Sacrifice"),
+        .description = COMPOUND_STRING(
+            "If this move gets a KO,\n"
+            "rain begins to fall."),
+        .effect = EFFECT_STORM_SACRIFICE,
+        .power = 95,
+        .type = TYPE_DRAGON,
+        .accuracy = 100,
+        .pp = 10,
+        .target = TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_SPECIAL,
+        .battleAnimScript = gBattleAnimMove_DragonPulse,
+    },
+
     // Z-Moves
     [MOVE_BREAKNECK_BLITZ] =
     {

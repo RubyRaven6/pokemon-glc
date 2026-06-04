@@ -1290,6 +1290,11 @@
 	.4byte \failInstr
 	.endm
 
+	.macro seticerink, failInstr:req
+	callnative BS_SetIceRink
+	.4byte \failInstr
+	.endm
+
 	.macro trysetparalysis, ptr:req
 	callnative BS_TrySetParalysis
 	.4byte \ptr
