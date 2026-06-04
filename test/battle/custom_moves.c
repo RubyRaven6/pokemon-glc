@@ -33,7 +33,7 @@ ASSUMPTIONS
     ASSUME(GetMoveType(MOVE_SUNBLOOM) == TYPE_GRASS);
     ASSUME(GetMovePower(MOVE_SUNBLOOM) == 60);
     ASSUME(GetMoveCategory(MOVE_SUNBLOOM) == DAMAGE_CATEGORY_SPECIAL);
-    ASSUME(MoveHasAdditionalEffect(MOVE_SUNBLOOM, MOVE_EFFECT_SUNBLOOM));
+    ASSUME(MoveHasAdditionalEffectSelf(MOVE_SUNBLOOM, MOVE_EFFECT_SUNBLOOM));
 
     ASSUME(GetMoveEffect(MOVE_AURA_FARMING) == EFFECT_AURA_FARMING);
     ASSUME(GetMoveType(MOVE_AURA_FARMING) == TYPE_FIGHTING);
@@ -67,7 +67,7 @@ ASSUMPTIONS
     ASSUME(MoveHasAdditionalEffectWithChance(MOVE_DRY_FULMINATION, MOVE_EFFECT_BURN, 30));
 }
 
-SINGLE_BATTLE_TEST("Rock Heart may infatuate the target")
+SINGLE_BATTLE_TEST("Custom Moves - Rock Heart may infatuate the target")
 {
     PASSES_RANDOMLY(30, 100, RNG_SECONDARY_EFFECT);
     GIVEN {
@@ -84,7 +84,7 @@ SINGLE_BATTLE_TEST("Rock Heart may infatuate the target")
     }
 }
 
-SINGLE_BATTLE_TEST("Riptide halves the target's current HP")
+SINGLE_BATTLE_TEST("Custom Moves - Riptide halves the target's current HP")
 {
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET);
@@ -99,7 +99,7 @@ SINGLE_BATTLE_TEST("Riptide halves the target's current HP")
     }
 }
 
-SINGLE_BATTLE_TEST("Arc Fault makes the user faint and sets Electric Terrain")
+SINGLE_BATTLE_TEST("Custom Moves - Arc Fault makes the user faint and sets Electric Terrain")
 {
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET);
@@ -112,7 +112,7 @@ SINGLE_BATTLE_TEST("Arc Fault makes the user faint and sets Electric Terrain")
     }
 }
 
-SINGLE_BATTLE_TEST("Grasspiercer can badly poison, paralyze, or put the target to sleep")
+SINGLE_BATTLE_TEST("Custom Moves - Grasspiercer can badly poison, paralyze, or put the target to sleep")
 {
     u8 statusAnim;
     u32 rng;
@@ -133,7 +133,7 @@ SINGLE_BATTLE_TEST("Grasspiercer can badly poison, paralyze, or put the target t
     }
 }
 
-SINGLE_BATTLE_TEST("Psyche Lock prevents hit-and-switch moves from switching out")
+SINGLE_BATTLE_TEST("Custom Moves - Psyche Lock prevents hit-and-switch moves from switching out")
 {
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET);
@@ -155,7 +155,7 @@ SINGLE_BATTLE_TEST("Psyche Lock prevents hit-and-switch moves from switching out
     }
 }
 
-SINGLE_BATTLE_TEST("Psyche Lock prevents Shed Shell switching")
+SINGLE_BATTLE_TEST("Custom Moves - Psyche Lock prevents Shed Shell switching")
 {
     GIVEN {
         ASSUME(gItemsInfo[ITEM_SHED_SHELL].holdEffect == HOLD_EFFECT_SHED_SHELL);
@@ -164,19 +164,27 @@ SINGLE_BATTLE_TEST("Psyche Lock prevents Shed Shell switching")
         OPPONENT(SPECIES_WYNAUT);
     } WHEN {
         TURN { MOVE(player, MOVE_PSYCHE_LOCK); MOVE(opponent, MOVE_CELEBRATE); }
-        TURN { MOVE(player, MOVE_CELEBRATE); SWITCH(opponent, 1); }
+        TURN { MOVE(player, MOVE_CELEBRATE); MOVE(opponent, MOVE_CELEBRATE); }
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_PSYCHE_LOCK, player);
         NONE_OF {
-            SWITCH_OUT_MESSAGE("Wobbuffet");
-            SEND_IN_MESSAGE("Wynaut");
+            MESSAGE("Wobbuffet, that's enough! Come back!");
+            MESSAGE("Wobbuffet, come back!");
+            MESSAGE("Wobbuffet, OK! Come back!");
+            MESSAGE("Wobbuffet, good! Come back!");
+            MESSAGE("Go! Wynaut!");
+            MESSAGE("You're in charge, Wynaut!");
+            MESSAGE("Go for it, Wynaut!");
+            MESSAGE("Your opponent's weak! Get 'em, Wynaut!");
         }
     } THEN {
+        enum BattlerId battler = opponent - gBattleMons;
         EXPECT(opponent->volatiles.strictEscapePrevention);
+        EXPECT(!CanBattlerEscape(battler));
     }
 }
 
-SINGLE_BATTLE_TEST("Poisoned Stars hits 3 times and can poison on each hit")
+SINGLE_BATTLE_TEST("Custom Moves - Poisoned Stars hits 3 times and can poison on each hit")
 {
     PASSES_RANDOMLY(30, 100, RNG_SECONDARY_EFFECT);
     GIVEN {
@@ -195,7 +203,7 @@ SINGLE_BATTLE_TEST("Poisoned Stars hits 3 times and can poison on each hit")
     }
 }
 
-SINGLE_BATTLE_TEST("Poisoned Stars ignores Poison resistance when used by a Poison-type Pokemon", s16 damage)
+SINGLE_BATTLE_TEST("Custom Moves - Poisoned Stars ignores Poison resistance when used by a Poison-type Pokemon", s16 damage)
 {
     u32 species;
     PARAMETRIZE { species = SPECIES_WOBBUFFET; }
@@ -216,7 +224,7 @@ SINGLE_BATTLE_TEST("Poisoned Stars ignores Poison resistance when used by a Pois
     }
 }
 
-SINGLE_BATTLE_TEST("Magmatic Rage is super effective against Rock and Ground types")
+SINGLE_BATTLE_TEST("Custom Moves - Magmatic Rage is super effective against Rock and Ground types")
 {
     u32 species;
     PARAMETRIZE { species = SPECIES_NOSEPASS; }
@@ -234,7 +242,7 @@ SINGLE_BATTLE_TEST("Magmatic Rage is super effective against Rock and Ground typ
     }
 }
 
-SINGLE_BATTLE_TEST("Shallow Grave traps the target and lowers Speed by 3 stages")
+SINGLE_BATTLE_TEST("Custom Moves - Shallow Grave traps the target and lowers Speed by 3 stages")
 {
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET);
@@ -251,7 +259,7 @@ SINGLE_BATTLE_TEST("Shallow Grave traps the target and lowers Speed by 3 stages"
     }
 }
 
-SINGLE_BATTLE_TEST("Sinkhole deals less damage to airborne targets and more damage during Gravity", s16 damage)
+SINGLE_BATTLE_TEST("Custom Moves - Sinkhole deals less damage to airborne targets and more damage during Gravity", s16 damage)
 {
     u32 setupMove, item;
     PARAMETRIZE { setupMove = MOVE_CELEBRATE; item = ITEM_NONE; }
@@ -272,11 +280,11 @@ SINGLE_BATTLE_TEST("Sinkhole deals less damage to airborne targets and more dama
     }
 }
 
-SINGLE_BATTLE_TEST("Sunbloom sets sunlight for 5 turns or 8 turns if it KOs")
+SINGLE_BATTLE_TEST("Custom Moves - Sunbloom sets sunlight for 5 turns or 8 turns if it KOs")
 {
     u32 hp, remainingDuration;
     PARAMETRIZE { hp = 999; remainingDuration = 4; }
-    PARAMETRIZE { hp = 1; remainingDuration = 7; }
+    PARAMETRIZE { hp = 1; remainingDuration = 8; }
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET) { HP(hp); MaxHP(999); }
@@ -288,11 +296,11 @@ SINGLE_BATTLE_TEST("Sunbloom sets sunlight for 5 turns or 8 turns if it KOs")
     }
 }
 
-SINGLE_BATTLE_TEST("Sunbloom does not reset existing sunlight")
+SINGLE_BATTLE_TEST("Custom Moves - Sunbloom does not reset existing sunlight")
 {
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET);
-        OPPONENT(SPECIES_WOBBUFFET) { HP(1); MaxHP(999); }
+        OPPONENT(SPECIES_WOBBUFFET) { HP(999); MaxHP(999); }
     } WHEN {
         TURN { MOVE(player, MOVE_SUNNY_DAY); }
         TURN { MOVE(player, MOVE_SUNBLOOM); }
@@ -302,7 +310,7 @@ SINGLE_BATTLE_TEST("Sunbloom does not reset existing sunlight")
     }
 }
 
-SINGLE_BATTLE_TEST("Sunbloom is stronger in sunlight", s16 damage)
+SINGLE_BATTLE_TEST("Custom Moves - Sunbloom is stronger in sunlight", s16 damage)
 {
     u32 setupMove;
     PARAMETRIZE { setupMove = MOVE_CELEBRATE; }
@@ -321,7 +329,7 @@ SINGLE_BATTLE_TEST("Sunbloom is stronger in sunlight", s16 damage)
     }
 }
 
-SINGLE_BATTLE_TEST("Aura Farming gains power for attacks received before moving", s16 damage)
+SINGLE_BATTLE_TEST("Custom Moves - Aura Farming gains power for attacks received before moving", s16 damage)
 {
     u32 opponentMove;
     PARAMETRIZE { opponentMove = MOVE_CELEBRATE; }
@@ -339,7 +347,7 @@ SINGLE_BATTLE_TEST("Aura Farming gains power for attacks received before moving"
     }
 }
 
-SINGLE_BATTLE_TEST("Wake Crash applies 20 percent recoil")
+SINGLE_BATTLE_TEST("Custom Moves - Wake Crash applies 20 percent recoil")
 {
     s16 damage;
     GIVEN {
@@ -356,12 +364,12 @@ SINGLE_BATTLE_TEST("Wake Crash applies 20 percent recoil")
     }
 }
 
-SINGLE_BATTLE_TEST("Razzle Dazzle doubles on consecutive use up to 300 BP")
+SINGLE_BATTLE_TEST("Custom Moves - Razzle Dazzle doubles on consecutive use up to 300 BP")
 {
     s16 damage[4];
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET) { SpAttack(50); }
-        OPPONENT(SPECIES_WOBBUFFET) { HP(999); MaxHP(999); SpDefense(50); }
+        OPPONENT(SPECIES_WOBBUFFET) { HP(9999); MaxHP(9999); SpDefense(50); }
     } WHEN {
         TURN { MOVE(player, MOVE_RAZZLE_DAZZLE, WITH_RNG(RNG_DAMAGE_MODIFIER, 0)); }
         TURN { MOVE(player, MOVE_RAZZLE_DAZZLE, WITH_RNG(RNG_DAMAGE_MODIFIER, 0)); }
@@ -383,7 +391,7 @@ SINGLE_BATTLE_TEST("Razzle Dazzle doubles on consecutive use up to 300 BP")
     }
 }
 
-SINGLE_BATTLE_TEST("Steelsurge sets sharp steel on the opposing side")
+SINGLE_BATTLE_TEST("Custom Moves - Steelsurge sets sharp steel on the opposing side")
 {
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET);
@@ -395,7 +403,7 @@ SINGLE_BATTLE_TEST("Steelsurge sets sharp steel on the opposing side")
     }
 }
 
-SINGLE_BATTLE_TEST("Overexposure makes its target weak to Ice for the rest of battle")
+SINGLE_BATTLE_TEST("Custom Moves - Overexposure makes its target weak to Ice for the rest of battle")
 {
     s16 damage[2];
     GIVEN {
@@ -419,7 +427,7 @@ SINGLE_BATTLE_TEST("Overexposure makes its target weak to Ice for the rest of ba
     }
 }
 
-SINGLE_BATTLE_TEST("Dry Fulmination cannot miss in sun and may burn")
+SINGLE_BATTLE_TEST("Custom Moves - Dry Fulmination cannot miss in sun and may burn")
 {
     PASSES_RANDOMLY(100, 100, RNG_ACCURACY);
     PASSES_RANDOMLY(30, 100, RNG_SECONDARY_EFFECT);
@@ -438,7 +446,7 @@ SINGLE_BATTLE_TEST("Dry Fulmination cannot miss in sun and may burn")
     }
 }
 
-AI_SINGLE_BATTLE_TEST("AI values Rock Heart's infatuation chance")
+AI_SINGLE_BATTLE_TEST("Custom Moves - AI values Rock Heart's infatuation chance")
 {
     GIVEN {
         AI_FLAGS(AI_FLAG_CHECK_VIABILITY);
@@ -449,7 +457,7 @@ AI_SINGLE_BATTLE_TEST("AI values Rock Heart's infatuation chance")
     }
 }
 
-AI_SINGLE_BATTLE_TEST("AI values Grasspiercer's random status chance")
+AI_SINGLE_BATTLE_TEST("Custom Moves - AI values Grasspiercer's random status chance")
 {
     GIVEN {
         AI_FLAGS(AI_FLAG_CHECK_VIABILITY);
@@ -460,7 +468,7 @@ AI_SINGLE_BATTLE_TEST("AI values Grasspiercer's random status chance")
     }
 }
 
-AI_DOUBLE_BATTLE_TEST("AI scores Sunbloom as sun setup for its ally")
+AI_DOUBLE_BATTLE_TEST("Custom Moves - AI scores Sunbloom as sun setup for its ally")
 {
     GIVEN {
         AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT | AI_FLAG_DOUBLE_BATTLE);
@@ -473,7 +481,7 @@ AI_DOUBLE_BATTLE_TEST("AI scores Sunbloom as sun setup for its ally")
     }
 }
 
-AI_SINGLE_BATTLE_TEST("AI scores Steelsurge as a hazard")
+AI_SINGLE_BATTLE_TEST("Custom Moves - AI scores Steelsurge as a hazard")
 {
     GIVEN {
         AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_POWERFUL_STATUS);
@@ -485,7 +493,7 @@ AI_SINGLE_BATTLE_TEST("AI scores Steelsurge as a hazard")
     }
 }
 
-AI_SINGLE_BATTLE_TEST("AI scores Overexposure as Ice support")
+AI_SINGLE_BATTLE_TEST("Custom Moves - AI scores Overexposure as Ice support")
 {
     GIVEN {
         AI_FLAGS(AI_FLAG_CHECK_VIABILITY);

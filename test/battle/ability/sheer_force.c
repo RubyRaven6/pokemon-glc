@@ -378,6 +378,7 @@ static inline bool32 IgnoreMoveForSheerForceBoost(enum Move move)
         case MOVE_SYNCHRONOISE:
         case MOVE_ELECTRO_BALL:
         case MOVE_ROUND:
+        case MOVE_ARC_FAULT:
         case MOVE_BELCH:
         case MOVE_HYPERSPACE_FURY:
         case MOVE_BURN_UP:
@@ -386,6 +387,7 @@ static inline bool32 IgnoreMoveForSheerForceBoost(enum Move move)
         case MOVE_FISHIOUS_REND:
         case MOVE_AURA_WHEEL:
         case MOVE_STEEL_ROLLER:
+        case MOVE_SUNBLOOM:
         case MOVE_DRAGON_ENERGY:
         case MOVE_DOUBLE_SHOCK:
         case MOVE_COMEUPPANCE:
@@ -422,6 +424,7 @@ static inline bool32 IsMoveSheerForceBoosted(enum Move move)
         case MOVE_DARK_PULSE:
         case MOVE_DRAGON_RUSH:
         case MOVE_DRAGON_BREATH:
+        case MOVE_DRY_FULMINATION:
         case MOVE_DYNAMIC_PUNCH:
         case MOVE_EARTH_POWER:
         case MOVE_EMBER:
@@ -459,6 +462,7 @@ static inline bool32 IsMoveSheerForceBoosted(enum Move move)
         case MOVE_MUD_SLAP:
         case MOVE_MYSTICAL_FIRE:
         case MOVE_PLAY_ROUGH:
+        case MOVE_POISONED_STARS:
         case MOVE_POISON_FANG:
         case MOVE_POISON_JAB:
         case MOVE_POISON_STING:
@@ -469,6 +473,7 @@ static inline bool32 IsMoveSheerForceBoosted(enum Move move)
         case MOVE_PSYCHIC:
         case MOVE_RAZOR_SHELL:
         case MOVE_ROCK_CLIMB:
+        case MOVE_ROCK_HEART:
         case MOVE_ROCK_SLIDE:
         case MOVE_ROCK_SMASH:
         case MOVE_ROCK_TOMB:
@@ -478,6 +483,7 @@ static inline bool32 IsMoveSheerForceBoosted(enum Move move)
         case MOVE_SECRET_POWER:
         case MOVE_SHADOW_BALL:
         case MOVE_SIGNAL_BEAM:
+        case MOVE_SHALLOW_GRAVE:
         case MOVE_SKY_ATTACK:
         case MOVE_SLUDGE_BOMB:
         case MOVE_SLUDGE_WAVE:
@@ -539,6 +545,7 @@ static inline bool32 IsMoveSheerForceBoosted(enum Move move)
         case MOVE_FREEZE_SHOCK:
         case MOVE_GENESIS_SUPERNOVA:
         case MOVE_GLACIATE:
+        case MOVE_GRASSPIERCER:
         case MOVE_GRAV_APPLE:
         case MOVE_HEART_STAMP:
         case MOVE_HYPER_FANG:
@@ -550,6 +557,7 @@ static inline bool32 IsMoveSheerForceBoosted(enum Move move)
         case MOVE_LUMINA_CRASH:
         case MOVE_LUNGE:
         case MOVE_LUSTER_PURGE:
+        case MOVE_MAGMATIC_RAGE:
         case MOVE_MAGICAL_TORQUE:
         case MOVE_MALIGNANT_CHAIN:
         case MOVE_MATCHA_GOTCHA:
