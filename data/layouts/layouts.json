@@ -9337,7 +9337,7 @@
     {
       "id": "LAYOUT_TESTING_GROUNDS_HOUSE_FOYER",
       "name": "TestingGrounds_HouseFoyer_Layout",
-      "width": 10,
+      "width": 11,
       "height": 10,
       "primary_tileset": "gTileset_Building",
       "secondary_tileset": "gTileset_Lab",
