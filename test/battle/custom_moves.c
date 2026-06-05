@@ -504,6 +504,7 @@ SINGLE_BATTLE_TEST("Custom Moves - Windstorm sets windstorm for 5 turns")
         TURN { MOVE(player, MOVE_WINDSTORM); }
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_WINDSTORM, player);
+        MESSAGE("A windstorm kicked up!");
         MESSAGE("The windstorm is raging.");
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_TAILWIND);
         NOT ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STRONG_WINDS);

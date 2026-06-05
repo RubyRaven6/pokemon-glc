@@ -765,6 +765,7 @@ enum MoveWeatherChangeStringID
     B_MSG_STARTED_HAIL,
     B_MSG_STARTED_SNOW,
     B_MSG_STARTED_FOG,
+    B_MSG_STARTED_WINDSTORM,
 };
 
 // gAbilityWeatherChangeStringId
@@ -778,7 +779,7 @@ enum AbilityWeatherChangeStringID
     B_MSG_STARTED_DESOLATE_LAND,
     B_MSG_STARTED_PRIMORDIAL_SEA,
     B_MSG_STARTED_STRONG_WINDS,
-    B_MSG_STARTED_WINDSTORM,
+    B_MSG_STARTED_WINDSTORM_ABILITY,
 };
 
 // gWeatherEndsStringIds

@@ -229,7 +229,7 @@ static const struct BattleWeatherInfo sBattleWeatherInfo[BATTLE_WEATHER_COUNT] =
     {
         .flag = B_WEATHER_WINDSTORM,
         .rock = HOLD_EFFECT_NONE,
-        .abilityStartMessage = B_MSG_STARTED_WINDSTORM,
+        .abilityStartMessage = B_MSG_STARTED_WINDSTORM_ABILITY,
         .moveStartMessage = B_MSG_STARTED_WINDSTORM,
         .endMessage = B_MSG_WEATHER_END_WINDSTORM,
         .continuesMessage = B_MSG_WEATHER_TURN_WINDSTORM,
