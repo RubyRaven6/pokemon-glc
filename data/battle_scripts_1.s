@@ -1270,6 +1270,29 @@ BattleScript_EffectIceRink::
 	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_MoveEnd
 
+BattleScript_EffectInversion::
+	attackcanceler
+	attackanimation
+	waitanimation
+	callnative BS_ToggleInversion
+	printfromtable gInversionStringIds
+	waitmessage B_WAIT_TIME_LONG
+	goto BattleScript_MoveEnd
+
+BattleScript_EffectShowstopper::
+	attackcanceler
+	setforcedtarget
+	attackanimation
+	waitanimation
+	callnative BS_SetShowstopper
+	printstring STRINGID_PKMNCENTERATTENTION
+	waitmessage B_WAIT_TIME_LONG
+	goto BattleScript_MoveEnd
+
+BattleScript_ShowstopperStatDrop::
+	trybattlerstatchange BS_EFFECT_BATTLER, STAT_CHANGE_NO_FLAGS
+	return
+
 BattleScript_IceRinkOnSwitchIn::
 	printstring STRINGID_PKMNSLIDONICE
 	waitmessage B_WAIT_TIME_LONG

@@ -1596,6 +1596,14 @@ static s32 AI_CheckBadMove(enum BattlerId battlerAtk, enum BattlerId battlerDef,
         if (!AI_CanAnyStatChange(battlerAtk, battlerAtk, move))
             ADJUST_SCORE(-10);
         break;
+    case EFFECT_MINERAGRAPHY:
+        if (AreBattlersStatsMaxed(battlerAtk))
+            ADJUST_SCORE(-10);
+        break;
+    case EFFECT_INVERSION:
+        if (IsTypeChartInverted())
+            ADJUST_SCORE(-20);
+        break;
     case EFFECT_NO_RETREAT:
         if (gBattleMons[battlerAtk].volatiles.noRetreat)
             ADJUST_SCORE(-10);
@@ -4297,6 +4305,10 @@ static s32 AI_CalcMoveEffectScore(enum BattlerId battlerAtk, enum BattlerId batt
     case EFFECT_STAT_CHANGE:
         ADJUST_SCORE(GetStatChangeScore(battlerAtk, battlerDef, move));
         break;
+    case EFFECT_MINERAGRAPHY:
+        if (!AreBattlersStatsMaxed(battlerAtk))
+            ADJUST_SCORE(GOOD_EFFECT);
+        break;
     case EFFECT_STOCKPILE:
         if (HasMoveWithEffect(battlerAtk, EFFECT_SWALLOW) || HasMoveWithEffect(battlerAtk, EFFECT_SPIT_UP))
             ADJUST_SCORE(DECENT_EFFECT);
@@ -4740,6 +4752,11 @@ static s32 AI_CalcMoveEffectScore(enum BattlerId battlerAtk, enum BattlerId batt
     case EFFECT_WEATHER:
         ADJUST_SCORE(CalcWeatherScore(battlerAtk, battlerDef, move, aiData));
         break;
+    case EFFECT_INVERSION:
+        if (!IsTypeChartInverted()
+         && !(hasPartner && aiData->partnerMove != MOVE_NONE && IsBattleMoveStatus(aiData->partnerMove)))
+            ADJUST_SCORE(POWERFUL_STATUS_MOVE);
+        break;
     case EFFECT_FELL_STINGER:
         if (gBattleMons[battlerAtk].statStages[STAT_ATK] < MAX_STAT_STAGE
         && aiData->abilities[battlerAtk] != ABILITY_CONTRARY
@@ -4887,6 +4904,7 @@ static s32 AI_CalcMoveEffectScore(enum BattlerId battlerAtk, enum BattlerId batt
     case EFFECT_TORMENT:
         break;
     case EFFECT_FOLLOW_ME:
+    case EFFECT_SHOWSTOPPER:
         if (hasPartner
           && AI_GetBattlerMoveTargetType(battlerAtk, move) == TARGET_USER
           && !IsBattlerIncapacitated(battlerDef, aiData->abilities[battlerDef])

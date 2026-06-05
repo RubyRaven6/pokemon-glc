@@ -5,44 +5,78 @@ ASSUMPTIONS
 {
     ASSUME(GetMoveType(MOVE_ROCK_HEART) == TYPE_ROCK);
     ASSUME(GetMovePower(MOVE_ROCK_HEART) == 80);
+    ASSUME(GetMoveAccuracy(MOVE_ROCK_HEART) == 100);
+    ASSUME(GetMoveCategory(MOVE_ROCK_HEART) == DAMAGE_CATEGORY_PHYSICAL);
     ASSUME(MoveHasAdditionalEffectWithChance(MOVE_ROCK_HEART, MOVE_EFFECT_INFATUATION, 30));
 
     ASSUME(GetMoveEffect(MOVE_RIPTIDE) == EFFECT_FIXED_PERCENT_DAMAGE);
+    ASSUME(GetMoveType(MOVE_RIPTIDE) == TYPE_WATER);
+    ASSUME(GetMoveAccuracy(MOVE_RIPTIDE) == 100);
     ASSUME(GetMoveDamagePercentage(MOVE_RIPTIDE) == 50);
     ASSUME(GetMoveCategory(MOVE_RIPTIDE) == DAMAGE_CATEGORY_STATUS);
 
     ASSUME(IsExplosionMove(MOVE_ARC_FAULT));
+    ASSUME(GetMoveType(MOVE_ARC_FAULT) == TYPE_ELECTRIC);
+    ASSUME(GetMovePower(MOVE_ARC_FAULT) == 200);
+    ASSUME(GetMoveAccuracy(MOVE_ARC_FAULT) == 100);
+    ASSUME(GetMoveCategory(MOVE_ARC_FAULT) == DAMAGE_CATEGORY_PHYSICAL);
     ASSUME(MoveHasAdditionalEffect(MOVE_ARC_FAULT, MOVE_EFFECT_ELECTRIC_TERRAIN));
 
+    ASSUME(GetMoveType(MOVE_GRASSPIERCER) == TYPE_GRASS);
+    ASSUME(GetMovePower(MOVE_GRASSPIERCER) == 80);
+    ASSUME(GetMoveAccuracy(MOVE_GRASSPIERCER) == 100);
+    ASSUME(GetMoveCategory(MOVE_GRASSPIERCER) == DAMAGE_CATEGORY_PHYSICAL);
     ASSUME(MoveHasAdditionalEffectWithChance(MOVE_GRASSPIERCER, MOVE_EFFECT_GRASSPIERCER, 50));
+
     ASSUME(GetMoveEffect(MOVE_PSYCHE_LOCK) == EFFECT_PSYCHE_LOCK);
+    ASSUME(GetMoveType(MOVE_PSYCHE_LOCK) == TYPE_PSYCHIC);
+    ASSUME(GetMoveAccuracy(MOVE_PSYCHE_LOCK) == 100);
+    ASSUME(GetMoveCategory(MOVE_PSYCHE_LOCK) == DAMAGE_CATEGORY_STATUS);
     ASSUME(MoveSetsStrictEscapePrevention(MOVE_PSYCHE_LOCK));
 
+    ASSUME(GetMoveType(MOVE_POISONED_STARS) == TYPE_POISON);
+    ASSUME(GetMovePower(MOVE_POISONED_STARS) == 20);
+    ASSUME(GetMoveAccuracy(MOVE_POISONED_STARS) == 100);
+    ASSUME(GetMoveCategory(MOVE_POISONED_STARS) == DAMAGE_CATEGORY_PHYSICAL);
     ASSUME(GetMoveStrikeCount(MOVE_POISONED_STARS) == 3);
     ASSUME(MoveHasAdditionalEffectWithChance(MOVE_POISONED_STARS, MOVE_EFFECT_POISON, 30));
     ASSUME(MoveIgnoresResistancesIfUserPoison(MOVE_POISONED_STARS));
 
+    ASSUME(GetMoveType(MOVE_MAGMATIC_RAGE) == TYPE_FIRE);
+    ASSUME(GetMovePower(MOVE_MAGMATIC_RAGE) == 70);
+    ASSUME(GetMoveAccuracy(MOVE_MAGMATIC_RAGE) == 100);
+    ASSUME(GetMoveCategory(MOVE_MAGMATIC_RAGE) == DAMAGE_CATEGORY_PHYSICAL);
     ASSUME(MoveHasAdditionalEffectWithChance(MOVE_MAGMATIC_RAGE, MOVE_EFFECT_BURN, 10));
+
+    ASSUME(GetMoveType(MOVE_SHALLOW_GRAVE) == TYPE_GROUND);
+    ASSUME(GetMovePower(MOVE_SHALLOW_GRAVE) == 120);
+    ASSUME(GetMoveAccuracy(MOVE_SHALLOW_GRAVE) == 80);
+    ASSUME(GetMoveCategory(MOVE_SHALLOW_GRAVE) == DAMAGE_CATEGORY_PHYSICAL);
     ASSUME(MoveHasAdditionalEffect(MOVE_SHALLOW_GRAVE, MOVE_EFFECT_WRAP));
     ASSUME_MOVE_EFFECT_STAT_CHANGE(MOVE_SHALLOW_GRAVE, speed: -3);
 
     ASSUME(GetMoveEffect(MOVE_SINKHOLE) == EFFECT_SINKHOLE);
     ASSUME(GetMoveType(MOVE_SINKHOLE) == TYPE_ROCK);
+    ASSUME(GetMoveAccuracy(MOVE_SINKHOLE) == 100);
     ASSUME(GetMoveCategory(MOVE_SINKHOLE) == DAMAGE_CATEGORY_PHYSICAL);
 
     ASSUME(GetMoveType(MOVE_SUNBLOOM) == TYPE_GRASS);
     ASSUME(GetMovePower(MOVE_SUNBLOOM) == 60);
+    ASSUME(GetMoveAccuracy(MOVE_SUNBLOOM) == 100);
     ASSUME(GetMoveCategory(MOVE_SUNBLOOM) == DAMAGE_CATEGORY_SPECIAL);
     ASSUME(MoveHasAdditionalEffectSelf(MOVE_SUNBLOOM, MOVE_EFFECT_SUNBLOOM));
 
     ASSUME(GetMoveEffect(MOVE_AURA_FARMING) == EFFECT_AURA_FARMING);
     ASSUME(GetMoveType(MOVE_AURA_FARMING) == TYPE_FIGHTING);
     ASSUME(GetMovePower(MOVE_AURA_FARMING) == 75);
+    ASSUME(GetMoveAccuracy(MOVE_AURA_FARMING) == 100);
     ASSUME(GetMoveCategory(MOVE_AURA_FARMING) == DAMAGE_CATEGORY_SPECIAL);
     ASSUME(GetMovePriority(MOVE_AURA_FARMING) < 0);
 
     ASSUME(GetMoveType(MOVE_WAKE_CRASH) == TYPE_WATER);
     ASSUME(GetMovePower(MOVE_WAKE_CRASH) == 120);
+    ASSUME(GetMoveAccuracy(MOVE_WAKE_CRASH) == 100);
+    ASSUME(GetMoveCategory(MOVE_WAKE_CRASH) == DAMAGE_CATEGORY_PHYSICAL);
     ASSUME(GetMovePriority(MOVE_WAKE_CRASH) == 1);
     ASSUME(GetMoveRecoil(MOVE_WAKE_CRASH) == 20);
 
@@ -57,6 +91,8 @@ ASSUMPTIONS
 
     ASSUME(GetMoveType(MOVE_OVEREXPOSURE) == TYPE_ICE);
     ASSUME(GetMovePower(MOVE_OVEREXPOSURE) == 65);
+    ASSUME(GetMoveAccuracy(MOVE_OVEREXPOSURE) == 100);
+    ASSUME(GetMoveCategory(MOVE_OVEREXPOSURE) == DAMAGE_CATEGORY_SPECIAL);
     ASSUME(MoveHasAdditionalEffect(MOVE_OVEREXPOSURE, MOVE_EFFECT_OVEREXPOSURE));
 
     ASSUME(GetMoveType(MOVE_DRY_FULMINATION) == TYPE_ELECTRIC);
@@ -68,22 +104,26 @@ ASSUMPTIONS
 
     ASSUME(GetMoveEffect(MOVE_WINDSTORM) == EFFECT_WEATHER);
     ASSUME(GetMoveType(MOVE_WINDSTORM) == TYPE_FLYING);
+    ASSUME(GetMoveCategory(MOVE_WINDSTORM) == DAMAGE_CATEGORY_STATUS);
     ASSUME(GetMoveWeatherType(MOVE_WINDSTORM) == BATTLE_WEATHER_WINDSTORM);
 
     ASSUME(GetMoveEffect(MOVE_VINSECTICATION) == EFFECT_LAST_RESPECTS);
     ASSUME(GetMoveType(MOVE_VINSECTICATION) == TYPE_BUG);
     ASSUME(GetMovePower(MOVE_VINSECTICATION) == 50);
+    ASSUME(GetMoveAccuracy(MOVE_VINSECTICATION) == 100);
     ASSUME(GetMoveCategory(MOVE_VINSECTICATION) == DAMAGE_CATEGORY_PHYSICAL);
 
     ASSUME(GetMoveEffect(MOVE_FUSSY_FUSS) == EFFECT_FUSSY_FUSS);
     ASSUME(GetMoveType(MOVE_FUSSY_FUSS) == TYPE_NORMAL);
     ASSUME(GetMovePower(MOVE_FUSSY_FUSS) == 75);
+    ASSUME(GetMoveAccuracy(MOVE_FUSSY_FUSS) == 100);
     ASSUME(GetMoveCategory(MOVE_FUSSY_FUSS) == DAMAGE_CATEGORY_PHYSICAL);
     ASSUME_MOVE_EFFECT_STAT_CHANGE(MOVE_FUSSY_FUSS, attack: -1);
 
     ASSUME(GetMoveEffect(MOVE_JINX) == EFFECT_FUTURE_SIGHT);
     ASSUME(GetMoveType(MOVE_JINX) == TYPE_GHOST);
     ASSUME(GetMovePower(MOVE_JINX) == 120);
+    ASSUME(GetMoveAccuracy(MOVE_JINX) == 100);
     ASSUME(GetMoveCategory(MOVE_JINX) == DAMAGE_CATEGORY_SPECIAL);
     ASSUME(MoveIgnoresProtect(MOVE_JINX));
 
@@ -97,6 +137,7 @@ ASSUMPTIONS
     ASSUME(GetMoveEffect(MOVE_HYDRAULIC_PRESS) == EFFECT_BODY_PRESS);
     ASSUME(GetMoveType(MOVE_HYDRAULIC_PRESS) == TYPE_STEEL);
     ASSUME(GetMovePower(MOVE_HYDRAULIC_PRESS) == 80);
+    ASSUME(GetMoveAccuracy(MOVE_HYDRAULIC_PRESS) == 100);
     ASSUME(GetMoveCategory(MOVE_HYDRAULIC_PRESS) == DAMAGE_CATEGORY_PHYSICAL);
 
     ASSUME(GetMoveEffect(MOVE_ICE_RINK) == EFFECT_ICE_RINK);
@@ -106,7 +147,54 @@ ASSUMPTIONS
     ASSUME(GetMoveEffect(MOVE_STORM_SACRIFICE) == EFFECT_STORM_SACRIFICE);
     ASSUME(GetMoveType(MOVE_STORM_SACRIFICE) == TYPE_DRAGON);
     ASSUME(GetMovePower(MOVE_STORM_SACRIFICE) == 95);
+    ASSUME(GetMoveAccuracy(MOVE_STORM_SACRIFICE) == 100);
     ASSUME(GetMoveCategory(MOVE_STORM_SACRIFICE) == DAMAGE_CATEGORY_SPECIAL);
+
+    ASSUME(GetMoveEffect(MOVE_MINERAGRAPHY) == EFFECT_MINERAGRAPHY);
+    ASSUME(GetMoveType(MOVE_MINERAGRAPHY) == TYPE_ROCK);
+    ASSUME(GetMoveCategory(MOVE_MINERAGRAPHY) == DAMAGE_CATEGORY_STATUS);
+
+    ASSUME(GetMoveEffect(MOVE_SURFS_UP) == EFFECT_TWO_TYPED_MOVE);
+    ASSUME(GetMoveType(MOVE_SURFS_UP) == TYPE_FIGHTING);
+    ASSUME(GetMoveArgType(MOVE_SURFS_UP) == TYPE_WATER);
+    ASSUME(GetMovePower(MOVE_SURFS_UP) == 100);
+    ASSUME(GetMoveAccuracy(MOVE_SURFS_UP) == 95);
+    ASSUME(GetMoveCategory(MOVE_SURFS_UP) == DAMAGE_CATEGORY_PHYSICAL);
+
+    ASSUME(GetMoveType(MOVE_UNDERCURRENT) == TYPE_ELECTRIC);
+    ASSUME(GetMovePower(MOVE_UNDERCURRENT) == 70);
+    ASSUME(GetMoveAccuracy(MOVE_UNDERCURRENT) == 100);
+    ASSUME(GetMoveCategory(MOVE_UNDERCURRENT) == DAMAGE_CATEGORY_SPECIAL);
+
+    ASSUME(GetMoveEffect(MOVE_THIRD_DEGREE) == EFFECT_DOUBLE_POWER_ON_ARG_STATUS);
+    ASSUME(GetMoveType(MOVE_THIRD_DEGREE) == TYPE_FIRE);
+    ASSUME(GetMovePower(MOVE_THIRD_DEGREE) == 65);
+    ASSUME(GetMoveAccuracy(MOVE_THIRD_DEGREE) == 100);
+    ASSUME(GetMoveCategory(MOVE_THIRD_DEGREE) == DAMAGE_CATEGORY_SPECIAL);
+
+    ASSUME(GetMoveEffect(MOVE_INVERSION) == EFFECT_INVERSION);
+    ASSUME(GetMoveType(MOVE_INVERSION) == TYPE_NORMAL);
+    ASSUME(GetMovePP(MOVE_INVERSION) == 1);
+    ASSUME(GetMoveCategory(MOVE_INVERSION) == DAMAGE_CATEGORY_STATUS);
+
+    ASSUME(GetMoveEffect(MOVE_WING_SLICER) == EFFECT_WING_SLICER);
+    ASSUME(GetMoveType(MOVE_WING_SLICER) == TYPE_FLYING);
+    ASSUME(GetMovePower(MOVE_WING_SLICER) == 65);
+    ASSUME(GetMoveAccuracy(MOVE_WING_SLICER) == 100);
+    ASSUME(GetMoveCategory(MOVE_WING_SLICER) == DAMAGE_CATEGORY_PHYSICAL);
+    ASSUME(GetMoveStrikeCount(MOVE_WING_SLICER) == 2);
+
+    ASSUME(GetMoveType(MOVE_GEMINIC_BLAST) == TYPE_PSYCHIC);
+    ASSUME(GetMovePower(MOVE_GEMINIC_BLAST) == 60);
+    ASSUME(GetMoveAccuracy(MOVE_GEMINIC_BLAST) == 100);
+    ASSUME(GetMoveCategory(MOVE_GEMINIC_BLAST) == DAMAGE_CATEGORY_SPECIAL);
+    ASSUME(GetMoveStrikeCount(MOVE_GEMINIC_BLAST) == 2);
+    ASSUME(MoveHasAdditionalEffectWithChance(MOVE_GEMINIC_BLAST, MOVE_EFFECT_CONFUSION, 30));
+
+    ASSUME(GetMoveEffect(MOVE_SHOWSTOPPER) == EFFECT_SHOWSTOPPER);
+    ASSUME(GetMoveType(MOVE_SHOWSTOPPER) == TYPE_WATER);
+    ASSUME(GetMoveAccuracy(MOVE_SHOWSTOPPER) == 100);
+    ASSUME(GetMoveCategory(MOVE_SHOWSTOPPER) == DAMAGE_CATEGORY_STATUS);
 }
 
 SINGLE_BATTLE_TEST("Custom Moves - Rock Heart may infatuate the target")
@@ -776,6 +864,157 @@ SINGLE_BATTLE_TEST("Custom Moves - Storm Sacrifice sets rain when it knocks out 
     }
 }
 
+SINGLE_BATTLE_TEST("Custom Moves - Mineragraphy raises the user's two lowest stats by three stages")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_CELEBRATE); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_MINERAGRAPHY); }
+    } THEN {
+        EXPECT_EQ(player->statStages[STAT_ATK], DEFAULT_STAT_STAGE + 3);
+        EXPECT_EQ(player->statStages[STAT_DEF], DEFAULT_STAT_STAGE + 3);
+    }
+}
+
+SINGLE_BATTLE_TEST("Custom Moves - Surf's Up deals Fighting and Water type damage", s16 damage)
+{
+    enum Move move;
+    PARAMETRIZE { move = MOVE_BRICK_BREAK; }
+    PARAMETRIZE { move = MOVE_SURFS_UP; }
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET) { Attack(200); }
+        OPPONENT(SPECIES_NUMEL) { Defense(100); }
+    } WHEN {
+        TURN { MOVE(player, move, WITH_RNG(RNG_DAMAGE_MODIFIER, 0)); }
+    } SCENE {
+        HP_BAR(opponent, captureDamage: &results[i].damage);
+    } FINALLY {
+        EXPECT_GT(results[1].damage, results[0].damage);
+    }
+}
+
+SINGLE_BATTLE_TEST("Custom Moves - Undercurrent is super effective against Ground")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_DIGLETT);
+    } WHEN {
+        TURN { MOVE(player, MOVE_UNDERCURRENT); }
+    } SCENE {
+        HP_BAR(opponent);
+        MESSAGE("It's super effective!");
+    }
+}
+
+SINGLE_BATTLE_TEST("Custom Moves - Third Degree doubles in power against burned targets", s16 damage)
+{
+    bool32 burned;
+    PARAMETRIZE { burned = FALSE; }
+    PARAMETRIZE { burned = TRUE; }
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET) { SpAttack(200); }
+        OPPONENT(SPECIES_WOBBUFFET) { SpDefense(100); if (burned) Status1(STATUS1_BURN); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_THIRD_DEGREE, WITH_RNG(RNG_DAMAGE_MODIFIER, 0)); }
+    } SCENE {
+        HP_BAR(opponent, captureDamage: &results[i].damage);
+    } FINALLY {
+        EXPECT_MUL_EQ(results[0].damage, Q_4_12(2.0), results[1].damage);
+    }
+}
+
+SINGLE_BATTLE_TEST("Custom Moves - Inversion toggles inverse type matchups")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_VAPOREON) { Moves(MOVE_CELEBRATE); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_INVERSION); }
+        TURN { MOVE(player, MOVE_EMBER); }
+    } SCENE {
+        MESSAGE("Type matchups were inverted!");
+        HP_BAR(opponent);
+        MESSAGE("It's super effective!");
+    } THEN {
+        EXPECT(IsTypeChartInverted());
+    }
+}
+
+SINGLE_BATTLE_TEST("Custom Moves - Inversion restores the normal type chart when used again")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_INVERSION); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_INVERSION); MOVE(opponent, MOVE_INVERSION); }
+    } SCENE {
+        MESSAGE("Type matchups were inverted!");
+        MESSAGE("Type matchups returned to normal!");
+    } THEN {
+        EXPECT(!IsTypeChartInverted());
+    }
+}
+
+SINGLE_BATTLE_TEST("Custom Moves - Wing Slicer only hits twice if the user acts before opposing foes", s16 damage)
+{
+    u32 playerSpeed, opponentSpeed;
+    PARAMETRIZE { playerSpeed = 200; opponentSpeed = 100; }
+    PARAMETRIZE { playerSpeed = 100; opponentSpeed = 200; }
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET) { Speed(playerSpeed); Attack(200); }
+        OPPONENT(SPECIES_WOBBUFFET) { Speed(opponentSpeed); Defense(100); Moves(MOVE_CELEBRATE); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_WING_SLICER, WITH_RNG(RNG_DAMAGE_MODIFIER, 0)); MOVE(opponent, MOVE_CELEBRATE); }
+    } THEN {
+        results[i].damage = opponent->maxHP - opponent->hp;
+    } FINALLY {
+        EXPECT_GT(results[0].damage, results[1].damage);
+    }
+}
+
+SINGLE_BATTLE_TEST("Custom Moves - Geminic Blast may confuse on either hit")
+{
+    PASSES_RANDOMLY(30, 100, RNG_SECONDARY_EFFECT);
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(player, MOVE_GEMINIC_BLAST); }
+    } SCENE {
+        HP_BAR(opponent);
+        HP_BAR(opponent);
+    } THEN {
+        u32 confusionTurns = opponent->volatiles.confusionTurns;
+        EXPECT_GT(confusionTurns, 0);
+    }
+}
+
+DOUBLE_BATTLE_TEST("Custom Moves - Showstopper redirects attacks and lowers two random stats")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET);
+        PLAYER(SPECIES_WYNAUT);
+        OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_TACKLE); }
+        OPPONENT(SPECIES_WYNAUT) { Moves(MOVE_CELEBRATE); }
+    } WHEN {
+        TURN { MOVE(playerLeft, MOVE_SHOWSTOPPER); MOVE(opponentLeft, MOVE_TACKLE, target: playerRight); MOVE(playerRight, MOVE_CELEBRATE); MOVE(opponentRight, MOVE_CELEBRATE); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SHOWSTOPPER, playerLeft);
+        MESSAGE("Wobbuffet became the center of attention!");
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_TACKLE, opponentLeft);
+        HP_BAR(playerLeft);
+    } THEN {
+        u32 loweredStats = 0;
+        for (enum Stat stat = STAT_ATK; stat < NUM_BATTLE_STATS; stat++)
+        {
+            if (opponentLeft->statStages[stat] < DEFAULT_STAT_STAGE)
+                loweredStats++;
+        }
+        EXPECT_EQ(loweredStats, 2);
+    }
+}
+
 AI_SINGLE_BATTLE_TEST("Custom Moves - AI values Rock Heart's infatuation chance")
 {
     GIVEN {
@@ -854,5 +1093,52 @@ AI_SINGLE_BATTLE_TEST("Custom Moves - AI scores Ice Rink as a hazard")
         OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_ICE_RINK, MOVE_CELEBRATE); }
     } WHEN {
         TURN { EXPECT_MOVE(opponent, MOVE_ICE_RINK); }
+    }
+}
+
+AI_SINGLE_BATTLE_TEST("Custom Moves - AI scores Mineragraphy as setup")
+{
+    GIVEN {
+        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_POWERFUL_STATUS);
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_MINERAGRAPHY, MOVE_CELEBRATE); }
+    } WHEN {
+        TURN { SCORE_GT(opponent, MOVE_MINERAGRAPHY, MOVE_CELEBRATE); }
+    }
+}
+
+AI_SINGLE_BATTLE_TEST("Custom Moves - AI uses Inversion as soon as possible")
+{
+    GIVEN {
+        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT | AI_FLAG_POWERFUL_STATUS);
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_INVERSION, MOVE_PSYCHIC); }
+    } WHEN {
+        TURN { EXPECT_MOVE(opponent, MOVE_INVERSION); }
+    }
+}
+
+AI_SINGLE_BATTLE_TEST("Custom Moves - AI does not use Inversion while type matchups are already inverted")
+{
+    GIVEN {
+        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT | AI_FLAG_POWERFUL_STATUS);
+        FLAG_SET(B_FLAG_INVERSE_BATTLE);
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_INVERSION, MOVE_PSYCHIC); }
+    } WHEN {
+        TURN { SCORE_GT(opponent, MOVE_PSYCHIC, MOVE_INVERSION); }
+    }
+}
+
+AI_DOUBLE_BATTLE_TEST("Custom Moves - AI scores Showstopper as redirection support")
+{
+    GIVEN {
+        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_DOUBLE_BATTLE | AI_FLAG_POWERFUL_STATUS);
+        PLAYER(SPECIES_WOBBUFFET);
+        PLAYER(SPECIES_WYNAUT);
+        OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_SHOWSTOPPER, MOVE_CELEBRATE); }
+        OPPONENT(SPECIES_WYNAUT) { Moves(MOVE_TACKLE); }
+    } WHEN {
+        TURN { SCORE_GT(opponentLeft, MOVE_SHOWSTOPPER, MOVE_CELEBRATE, target: playerLeft); }
     }
 }

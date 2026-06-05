@@ -22146,7 +22146,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .name = COMPOUND_STRING("Shallow Grave"),
         .description = COMPOUND_STRING(
             "Traps the target and\n"
-            "greatly lowers Speed."),
+            "severely lowers Speed."),
         .effect = EFFECT_HIT,
         .power = 120,
         .type = TYPE_GROUND,
@@ -22319,6 +22319,154 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
             .chance = 30,
         }),
         .battleAnimScript = gBattleAnimMove_Thunder,
+    },
+
+    [MOVE_MINERAGRAPHY] =
+    {
+        .name = COMPOUND_STRING("Mineragraphy"),
+        .description = COMPOUND_STRING(
+            "Sharply raises the\n"
+            "user's lowest stats."),
+        .effect = EFFECT_MINERAGRAPHY,
+        .power = 0,
+        .type = TYPE_ROCK,
+        .accuracy = 0,
+        .pp = 10,
+        .target = TARGET_USER,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_STATUS,
+        .snatchAffected = TRUE,
+        .battleAnimScript = gBattleAnimMove_CosmicPower,
+    },
+
+    [MOVE_SURFS_UP] =
+    {
+        .name = COMPOUND_STRING("Surf's Up"),
+        .description = COMPOUND_STRING(
+            "A Fighting attack that\n"
+            "also deals Water damage."),
+        .effect = EFFECT_TWO_TYPED_MOVE,
+        .power = 100,
+        .type = TYPE_FIGHTING,
+        .accuracy = 95,
+        .pp = 5,
+        .target = TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_PHYSICAL,
+        .argument = { .type = TYPE_WATER },
+        .makesContact = TRUE,
+        .battleAnimScript = gBattleAnimMove_Surf,
+    },
+
+    [MOVE_UNDERCURRENT] =
+    {
+        .name = COMPOUND_STRING("Undercurrent"),
+        .description = COMPOUND_STRING(
+            "An Electric attack also\n"
+            "strong against Ground."),
+        .effect = EFFECT_HIT,
+        .power = 70,
+        .type = TYPE_ELECTRIC,
+        .accuracy = 100,
+        .pp = 10,
+        .target = TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_SPECIAL,
+        .battleAnimScript = gBattleAnimMove_Thunderbolt,
+    },
+
+    [MOVE_THIRD_DEGREE] =
+    {
+        .name = COMPOUND_STRING("Third Degree"),
+        .description = COMPOUND_STRING(
+            "This move's power doubles\n"
+            "against burned targets."),
+        .effect = EFFECT_DOUBLE_POWER_ON_ARG_STATUS,
+        .power = 65,
+        .type = TYPE_FIRE,
+        .accuracy = 100,
+        .pp = 10,
+        .target = TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_SPECIAL,
+        .argument = { .status = STATUS1_BURN },
+        .battleAnimScript = gBattleAnimMove_Flamethrower,
+    },
+
+    [MOVE_INVERSION] =
+    {
+        .name = COMPOUND_STRING("Inversion"),
+        .description = COMPOUND_STRING(
+            "Inverts type matchups\n"
+            "until used again."),
+        .effect = EFFECT_INVERSION,
+        .power = 0,
+        .type = TYPE_NORMAL,
+        .accuracy = 0,
+        .pp = 1,
+        .target = TARGET_FIELD,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_STATUS,
+        .mirrorMoveBanned = TRUE,
+        .battleAnimScript = gBattleAnimMove_TrickRoom,
+    },
+
+    [MOVE_WING_SLICER] =
+    {
+        .name = COMPOUND_STRING("Wing Slicer"),
+        .description = COMPOUND_STRING(
+            "Hits twice if the user\n"
+            "acts before opposing foes."),
+        .effect = EFFECT_WING_SLICER,
+        .power = 65,
+        .type = TYPE_FLYING,
+        .accuracy = 100,
+        .pp = 10,
+        .target = TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_PHYSICAL,
+        .strikeCount = 2,
+        .slicingMove = TRUE,
+        .battleAnimScript = gBattleAnimMove_AerialAce,
+    },
+
+    [MOVE_GEMINIC_BLAST] =
+    {
+        .name = COMPOUND_STRING("Geminic Blast"),
+        .description = COMPOUND_STRING(
+            "Hits twice. Each hit may\n"
+            "confuse the target."),
+        .effect = EFFECT_HIT,
+        .power = 60,
+        .type = TYPE_PSYCHIC,
+        .accuracy = 100,
+        .pp = 10,
+        .target = TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_SPECIAL,
+        .strikeCount = 2,
+        .additionalEffects = ADDITIONAL_EFFECTS({
+            .moveEffect = MOVE_EFFECT_CONFUSION,
+            .chance = 30,
+        }),
+        .battleAnimScript = gBattleAnimMove_Psybeam,
+    },
+
+    [MOVE_SHOWSTOPPER] =
+    {
+        .name = COMPOUND_STRING("Showstopper"),
+        .description = COMPOUND_STRING(
+            "Draws attacks. Foes that\n"
+            "hit have stats lowered."),
+        .effect = EFFECT_SHOWSTOPPER,
+        .power = 0,
+        .type = TYPE_WATER,
+        .accuracy = 100,
+        .pp = 10,
+        .target = TARGET_USER,
+        .priority = 2,
+        .category = DAMAGE_CATEGORY_STATUS,
+        .battleAnimScript = gBattleAnimMove_FollowMe,
     },
 
     [MOVE_WINDSTORM] =

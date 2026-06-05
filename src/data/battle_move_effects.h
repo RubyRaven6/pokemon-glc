@@ -1957,4 +1957,32 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
         .battleScript = BattleScript_EffectHit,
         .battleTvScore = 0, // TODO: Assign points
     },
+
+    [EFFECT_MINERAGRAPHY] =
+    {
+        .battleScript = BattleScript_EffectStatChange,
+        .battleTvScore = 0, // TODO: Assign points
+        .encourageEncore = TRUE,
+    },
+
+    [EFFECT_INVERSION] =
+    {
+        .battleScript = BattleScript_EffectInversion,
+        .battleTvScore = 0, // TODO: Assign points
+        .encourageEncore = TRUE,
+    },
+
+    [EFFECT_WING_SLICER] =
+    {
+        .battleScript = BattleScript_EffectHit,
+        .battleTvScore = 0, // TODO: Assign points
+    },
+
+    [EFFECT_SHOWSTOPPER] =
+    {
+        .battleScript = BattleScript_EffectShowstopper,
+        .battleTvScore = 5,
+        .usesProtectCounter = TRUE,
+        .encourageEncore = TRUE,
+    },
 };

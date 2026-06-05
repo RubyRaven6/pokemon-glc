@@ -897,6 +897,8 @@ const u8 *const gBattleStringsTable[STRINGID_COUNT] =
     [STRINGID_AURORAVEILWOREOFF]                    = COMPOUND_STRING("{B_DEF_TEAM1} team's Aurora Veil wore off!"),
     [STRINGID_STICKYWEBDISAPPEAREDFROMYOU]          = COMPOUND_STRING("The sticky web has disappeared from the ground around you!"),
     [STRINGID_VICTORYCATCH]                         = COMPOUND_STRING("{B_DEF_NAME} is weak!\nThrow a Poké Ball now!"),
+    [STRINGID_TYPECHARTINVERTED]                    = COMPOUND_STRING("Type matchups were inverted!"),
+    [STRINGID_TYPECHARTRESTORED]                    = COMPOUND_STRING("Type matchups returned to normal!"),
 };
 
 const u16 gTrainerUsedItemStringIds[] =
@@ -913,6 +915,12 @@ const u16 gZEffectStringIds[] =
     [B_MSG_Z_RECOVER_HP]  = STRINGID_ZMOVERESTOREHP,
     [B_MSG_Z_STAT_UP]     = STRINGID_ZMOVESTATUP,
     [B_MSG_Z_HP_TRAP]     = STRINGID_ZMOVEHPTRAP,
+};
+
+const u16 gInversionStringIds[] =
+{
+    [B_MSG_INVERSION_STARTED] = STRINGID_TYPECHARTINVERTED,
+    [B_MSG_INVERSION_ENDED]   = STRINGID_TYPECHARTRESTORED,
 };
 
 const u16 gMentalHerbCureStringIds[] =

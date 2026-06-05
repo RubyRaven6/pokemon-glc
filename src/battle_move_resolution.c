@@ -26,6 +26,7 @@ static bool32 TryMagicCoat(struct BattleCalcValues *cv);
 static bool32 TryActivatePowderStatus(enum Move move);
 static void CalculateMagnitudeDamage(void);
 static void UpdateStallMons(void);
+static bool32 IsBattlerFirstBeforeOpponents(enum BattlerId battler);
 
 // Submoves
 static enum Move GetMirrorMoveMove(void);
@@ -1231,6 +1232,16 @@ static enum CancelerResult CancelerMoveFailure(struct BattleCalcValues *cv)
         if (B_UPDATED_MOVE_DATA >= GEN_8 && !(gBattleTypeFlags & BATTLE_TYPE_DOUBLE))
             battleScript = BattleScript_ButItFailed;
         break;
+    case EFFECT_SHOWSTOPPER:
+        TryResetConsecutiveUseCounter(cv->battlerAtk);
+        if (!CanUseMoveConsecutively(cv->battlerAtk))
+            battleScript = BattleScript_ButItFailed;
+        if (battleScript != NULL)
+        {
+            gBattleMons[cv->battlerAtk].volatiles.consecutiveMoveUses = 0;
+            gBattleStruct->battlerState[cv->battlerAtk].stompingTantrumTimer = 2;
+        }
+        break;
     case EFFECT_LAST_RESORT:
         if (!CanUseLastResort(cv->battlerAtk))
             battleScript = BattleScript_ButItFailed;
@@ -2287,6 +2298,21 @@ static bool32 IsMoveParentalBondAffected(struct BattleCalcValues *cv)
     return TRUE;
 }
 
+static bool32 IsBattlerFirstBeforeOpponents(enum BattlerId battler)
+{
+    for (u32 i = 0; i < gCurrentTurnActionNumber; i++)
+    {
+        enum BattlerId previousBattler = gBattlerByTurnOrder[i];
+
+        if (IsBattlerAlive(previousBattler)
+         && !IsBattlerAlly(battler, previousBattler)
+         && gActionsByTurnOrder[i] == B_ACTION_USE_MOVE)
+            return FALSE;
+    }
+
+    return TRUE;
+}
+
 static void SetPossibleNewSmartTarget(u32 move)
 {
     if (!IsBattlerUnaffectedByMove(gBattlerTarget)
@@ -2340,7 +2366,12 @@ static enum CancelerResult CancelerMultihitMoves(struct BattleCalcValues *cv)
     }
     else if (GetMoveStrikeCount(cv->move) > 1)
     {
-        if (GetMoveEffect(cv->move) == EFFECT_POPULATION_BOMB
+        if (GetMoveEffect(cv->move) == EFFECT_WING_SLICER
+         && !IsBattlerFirstBeforeOpponents(cv->battlerAtk))
+        {
+            gMultiHitCounter = 1;
+        }
+        else if (GetMoveEffect(cv->move) == EFFECT_POPULATION_BOMB
          && cv->holdEffects[cv->battlerAtk] == HOLD_EFFECT_LOADED_DICE
          && cv->abilities[cv->battlerAtk] != ABILITY_SKILL_LINK)
         {
@@ -4510,7 +4541,7 @@ static enum MoveResult StatChangeSubstitute(struct BattleCalcValues *cv)
 
 static enum MoveResult StatChangeCanAnyChange(struct BattleCalcValues *cv)
 {
-    if (GetMoveEffect(cv->move) == EFFECT_ACUPRESSURE)
+    if (GetMoveEffect(cv->move) == EFFECT_ACUPRESSURE || GetMoveEffect(cv->move) == EFFECT_MINERAGRAPHY)
         return MOVE_RESULT_CONTINUE;
 
     struct StatChange st = {
@@ -4617,6 +4648,50 @@ static enum MoveResult StatChangeBeforeChange(struct BattleCalcValues *cv)
 
             gBattleStruct->moveResultFlags[cv->battlerDef] = MOVE_RESULT_ATTEMPT_STAT_CHANGE;
             SetStatChange(cv->battlerDef, statId, 2);
+            BattleScriptCall(BattleScript_PlayMoveAnim);
+            return MOVE_RESULT_RUN_SCRIPT_INCREMENT;
+        }
+        else
+        {
+            gBattlescriptCurrInstr = BattleScript_StatChangeFailed;
+            return MOVE_RESULT_FAILURE;
+        }
+        break;
+    }
+    case EFFECT_MINERAGRAPHY:
+    {
+        u32 queuedStats = 0;
+        u32 selectedStats = 0;
+
+        for (u32 statToRaise = 0; statToRaise < 2; statToRaise++)
+        {
+            enum Stat lowestStat = NUM_BATTLE_STATS;
+            u32 lowestStage = MAX_STAT_STAGE + 1;
+
+            for (enum Stat stat = STAT_ATK; stat < NUM_BATTLE_STATS; stat++)
+            {
+                if (selectedStats & (1u << stat))
+                    continue;
+                if (!CompareStat(cv->battlerAtk, stat, MAX_STAT_STAGE, CMP_LESS_THAN, cv->abilities[cv->battlerAtk]))
+                    continue;
+                if (gBattleMons[cv->battlerAtk].statStages[stat] < lowestStage)
+                {
+                    lowestStage = gBattleMons[cv->battlerAtk].statStages[stat];
+                    lowestStat = stat;
+                }
+            }
+
+            if (lowestStat == NUM_BATTLE_STATS)
+                break;
+
+            selectedStats |= 1u << lowestStat;
+            SetStatChange(cv->battlerAtk, lowestStat, 3);
+            queuedStats++;
+        }
+
+        if (queuedStats)
+        {
+            gBattleStruct->moveResultFlags[cv->battlerAtk] = MOVE_RESULT_ATTEMPT_STAT_CHANGE;
             BattleScriptCall(BattleScript_PlayMoveAnim);
             return MOVE_RESULT_RUN_SCRIPT_INCREMENT;
         }

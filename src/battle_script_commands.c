@@ -348,6 +348,7 @@ static void ResetValuesForCalledMove(void);
 static bool32 CanAbilityShieldActivateForBattler(enum BattlerId battler);
 static void PlayAnimation(enum BattlerId battler, u8 animId, const u16 *argPtr, const u8 *nextInstr);
 static u32 GetPossibleNextTarget(u32 currTarget);
+static bool32 TryQueueShowstopperStatDrops(enum BattlerId damagedBattler, const u8 *nextInstr);
 
 static void Cmd_attackcanceler(void);
 static void Cmd_accuracycheck(void);
@@ -1591,6 +1592,8 @@ static void PassiveDataHpUpdate(enum BattlerId battler, const u8 *nextInstr)
 
 static void MoveDamageDataHpUpdate(enum BattlerId battler, u32 scriptBattler, const u8 *nextInstr)
 {
+    bool32 tookDirectDamage = FALSE;
+
     if (IsBattlerUnaffectedByMove(gBattlerTarget))
     {
         gBattlescriptCurrInstr = nextInstr;
@@ -1666,7 +1669,10 @@ static void MoveDamageDataHpUpdate(enum BattlerId battler, u32 scriptBattler, co
 
             hpLost = hpBefore - gBattleMons[battler].hp;
             if (hpLost != 0)
+            {
                 gBattleStruct->innardsOutHpLost[battler] += hpLost;
+                tookDirectDamage = TRUE;
+            }
 
             gProtectStructs[battler].assuranceDoubled = TRUE;
             gProtectStructs[battler].revengeDoubled |= 1u << gBattlerAttacker;
@@ -1700,6 +1706,55 @@ static void MoveDamageDataHpUpdate(enum BattlerId battler, u32 scriptBattler, co
     if (!IsBattlerAlly(battler, gBattlerAttacker) && gProtectStructs[battler].auraFarmingHits < 3)
         gProtectStructs[battler].auraFarmingHits++;
     gSpecialStatuses[battler].damagedByAttack = TRUE;
+
+    if (tookDirectDamage && TryQueueShowstopperStatDrops(battler, nextInstr))
+        return;
+}
+
+static bool32 TryQueueShowstopperStatDrops(enum BattlerId damagedBattler, const u8 *nextInstr)
+{
+    u32 selectedStats = 0;
+    u32 queuedStats = 0;
+
+    if (!gProtectStructs[damagedBattler].showstopper)
+        return FALSE;
+    if (IsBattlerAlly(damagedBattler, gBattlerAttacker))
+        return FALSE;
+    if (!IsBattlerAlive(gBattlerAttacker))
+        return FALSE;
+
+    for (u32 i = 0; i < 2; i++)
+    {
+        u32 eligibleStats = 0;
+        enum Stat stat;
+
+        for (stat = STAT_ATK; stat < NUM_BATTLE_STATS; stat++)
+        {
+            if (!(selectedStats & (1u << stat))
+             && CompareStat(gBattlerAttacker, stat, MIN_STAT_STAGE, CMP_GREATER_THAN, GetBattlerAbility(gBattlerAttacker)))
+                eligibleStats |= 1u << stat;
+        }
+
+        if (eligibleStats == 0)
+            break;
+
+        do
+        {
+            stat = (Random() % (NUM_BATTLE_STATS - 1)) + 1;
+        } while (!(eligibleStats & (1u << stat)));
+
+        selectedStats |= 1u << stat;
+        SetStatChange(gBattlerAttacker, stat, -1);
+        queuedStats++;
+    }
+
+    if (queuedStats == 0)
+        return FALSE;
+
+    gEffectBattler = gBattlerAttacker;
+    BattleScriptPush(nextInstr);
+    gBattlescriptCurrInstr = BattleScript_ShowstopperStatDrop;
+    return TRUE;
 }
 
 static void Cmd_datahpupdate(void)
@@ -3501,19 +3556,20 @@ static void Cmd_setpreattackadditionaleffect(void)
         u32 numAdditionalEffects = GetMoveAdditionalEffectCount(gCurrentMove);
         if (numAdditionalEffects > gBattleStruct->additionalEffectsCounter)
         {
-            const struct AdditionalEffect *additionalEffect = GetMoveAdditionalEffectById(gCurrentMove, gBattleStruct->additionalEffectsCounter);
+            u32 additionalEffectIndex = gBattleStruct->additionalEffectsCounter;
+            const struct AdditionalEffect *additionalEffect = GetMoveAdditionalEffectById(gCurrentMove, additionalEffectIndex);
             gBattleStruct->additionalEffectsCounter++;
 
             if (!additionalEffect->preAttackEffect)
-                return;
+                continue;
 
             if ((gEffectBattler == gBattlerAttacker) != additionalEffect->self)
-                return;
+                continue;
 
             u32 percentChance = CalcSecondaryEffectChance(gBattlerAttacker, GetBattlerAbility(gBattlerAttacker), additionalEffect);
 
             // Activate effect if it's primary (chance == 0) or if RNGesus says so
-            if ((percentChance == 0) || RandomPercentage(RNG_SECONDARY_EFFECT + gBattleStruct->additionalEffectsCounter, percentChance))
+            if ((percentChance == 0) || RandomPercentage(RNG_SECONDARY_EFFECT + additionalEffectIndex, percentChance))
             {
                 gBattleCommunication[MULTISTRING_CHOOSER] = *((u8 *) &additionalEffect->multistring);
 
@@ -12775,6 +12831,25 @@ void BS_SetIceRink(void)
         PushHazardTypeToQueue(targetSide, HAZARDS_ICE_RINK);
         gBattlescriptCurrInstr = cmd->nextInstr;
     }
+}
+
+void BS_ToggleInversion(void)
+{
+    NATIVE_ARGS();
+    bool32 wasInverted = IsTypeChartInverted();
+
+    gFieldStatuses ^= STATUS_FIELD_INVERSION;
+    gBattleCommunication[MULTISTRING_CHOOSER] = wasInverted ? B_MSG_INVERSION_ENDED : B_MSG_INVERSION_STARTED;
+    gBattlescriptCurrInstr = cmd->nextInstr;
+}
+
+void BS_SetShowstopper(void)
+{
+    NATIVE_ARGS();
+
+    gProtectStructs[gBattlerAttacker].showstopper = TRUE;
+    gBattleMons[gBattlerAttacker].volatiles.consecutiveMoveUses++;
+    gBattlescriptCurrInstr = cmd->nextInstr;
 }
 
 void BS_JumpIfCanGigantamax(void)
