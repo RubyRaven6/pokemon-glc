@@ -386,8 +386,10 @@ static inline bool32 IgnoreMoveForSheerForceBoost(enum Move move)
         case MOVE_BOLT_BEAK:
         case MOVE_FISHIOUS_REND:
         case MOVE_AURA_WHEEL:
+        case MOVE_AURA_FARMING:
         case MOVE_STEEL_ROLLER:
         case MOVE_SUNBLOOM:
+        case MOVE_MOSH_PIT:
         case MOVE_DRAGON_ENERGY:
         case MOVE_DOUBLE_SHOCK:
         case MOVE_COMEUPPANCE:

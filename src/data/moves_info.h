@@ -22209,14 +22209,14 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
     {
         .name = COMPOUND_STRING("Aura Farming"),
         .description = COMPOUND_STRING(
-            "Moves last. Taking hits\n"
-            "raises its power."),
+            "Moves last, reflecting\n"
+            "damage taken twofold."),
         .effect = EFFECT_AURA_FARMING,
-        .power = 75,
+        .power = 1,
         .type = TYPE_FIGHTING,
         .accuracy = 100,
-        .pp = 10,
-        .target = TARGET_SELECTED,
+        .pp = 1,
+        .target = TARGET_BOTH,
         .priority = -3,
         .category = DAMAGE_CATEGORY_SPECIAL,
         .battleAnimScript = gBattleAnimMove_AuraSphere,
@@ -22467,6 +22467,185 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .priority = 2,
         .category = DAMAGE_CATEGORY_STATUS,
         .battleAnimScript = gBattleAnimMove_FollowMe,
+    },
+
+    [MOVE_RESEARCH] =
+    {
+        .name = COMPOUND_STRING("Research"),
+        .description = COMPOUND_STRING(
+            "Studies the foe and\n"
+            "boosts stats this turn."),
+        .effect = EFFECT_RESEARCH,
+        .power = 0,
+        .type = TYPE_NORMAL,
+        .accuracy = 0,
+        .pp = 10,
+        .target = TARGET_USER,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_STATUS,
+        .battleAnimScript = gBattleAnimMove_CalmMind,
+    },
+
+    [MOVE_CHRYSALIS] =
+    {
+        .name = COMPOUND_STRING("Chrysalis"),
+        .description = COMPOUND_STRING(
+            "Protects itself. Heals\n"
+            "if targeted by a move."),
+        .effect = EFFECT_CHRYSALIS,
+        .power = 0,
+        .type = TYPE_BUG,
+        .accuracy = 0,
+        .pp = 10,
+        .target = TARGET_USER,
+        .priority = 4,
+        .category = DAMAGE_CATEGORY_STATUS,
+        .argument = { .protectMethod = PROTECT_CHRYSALIS },
+        .battleAnimScript = gBattleAnimMove_Protect,
+    },
+
+    [MOVE_CASTING_CALL] =
+    {
+        .name = COMPOUND_STRING("Casting Call"),
+        .description = COMPOUND_STRING(
+            "Switches out and charges\n"
+            "the replacement."),
+        .effect = EFFECT_CASTING_CALL,
+        .power = 0,
+        .type = TYPE_ELECTRIC,
+        .accuracy = 0,
+        .pp = 10,
+        .target = TARGET_USER,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_STATUS,
+        .battleAnimScript = gBattleAnimMove_Teleport,
+    },
+
+    [MOVE_MOUNTING_PRESSURE] =
+    {
+        .name = COMPOUND_STRING("Orbital Pull"),
+        .description = COMPOUND_STRING(
+            "Charges, then boosts\n"
+            "offenses and gravity."),
+        .effect = EFFECT_MOUNTING_PRESSURE,
+        .power = 0,
+        .type = TYPE_GROUND,
+        .accuracy = 0,
+        .pp = 10,
+        .target = TARGET_FIELD,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_STATUS,
+        .argument.twoTurnAttack = { .stringId = STRINGID_PKNMABSORBINGPOWER },
+        .battleAnimScript = gBattleAnimMove_Gravity,
+    },
+
+    [MOVE_JET_STREAM] =
+    {
+        .name = COMPOUND_STRING("Jet Stream"),
+        .description = COMPOUND_STRING(
+            "The user gains Wind\n"
+            "Rider after attacking."),
+        .effect = EFFECT_JET_STREAM,
+        .power = 100,
+        .type = TYPE_FLYING,
+        .accuracy = 95,
+        .pp = 10,
+        .target = TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_PHYSICAL,
+        .battleAnimScript = gBattleAnimMove_AirSlash,
+    },
+
+    [MOVE_STUNT_DOUBLE] =
+    {
+        .name = COMPOUND_STRING("Stunt Double"),
+        .description = COMPOUND_STRING(
+            "Makes a substitute that\n"
+            "bursts when broken."),
+        .effect = EFFECT_STUNT_DOUBLE,
+        .power = 0,
+        .type = TYPE_ICE,
+        .accuracy = 0,
+        .pp = 10,
+        .target = TARGET_USER,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_STATUS,
+        .battleAnimScript = gBattleAnimMove_Substitute,
+    },
+
+    [MOVE_CALAMITY_CLEAVE] =
+    {
+        .name = COMPOUND_STRING("Calamity Cleave"),
+        .description = COMPOUND_STRING(
+            "A sharp strike that\n"
+            "can't be used twice."),
+        .effect = EFFECT_HIT,
+        .power = 130,
+        .type = TYPE_DRAGON,
+        .accuracy = 100,
+        .pp = 5,
+        .target = TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_PHYSICAL,
+        .cantUseTwice = TRUE,
+        .slicingMove = TRUE,
+        .battleAnimScript = gBattleAnimMove_Slash,
+    },
+
+    [MOVE_PSIDEKICK] =
+    {
+        .name = COMPOUND_STRING("Psidekick"),
+        .description = COMPOUND_STRING(
+            "Stronger if an ally uses\n"
+            "a Psychic move."),
+        .effect = EFFECT_PSIDEKICK,
+        .power = 60,
+        .type = TYPE_NORMAL,
+        .accuracy = 100,
+        .pp = 10,
+        .target = TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_PHYSICAL,
+        .battleAnimScript = gBattleAnimMove_DoubleHit,
+    },
+
+    [MOVE_MOSH_PIT] =
+    {
+        .name = COMPOUND_STRING("Mosh Pit"),
+        .description = COMPOUND_STRING(
+            "Party members attack.\n"
+            "Each hit may poison."),
+        .effect = EFFECT_MOSH_PIT,
+        .power = 0,
+        .type = TYPE_POISON,
+        .accuracy = 100,
+        .pp = 10,
+        .target = TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_PHYSICAL,
+        .additionalEffects = ADDITIONAL_EFFECTS({
+            .moveEffect = MOVE_EFFECT_POISON,
+            .chance = 10,
+        }),
+        .battleAnimScript = gBattleAnimMove_BeatUp,
+    },
+
+    [MOVE_SYNCHRONIZED_SWIM] =
+    {
+        .name = COMPOUND_STRING("Synchroswim"),
+        .description = COMPOUND_STRING(
+            "The user and ally each\n"
+            "strike twice."),
+        .effect = EFFECT_SYNCHRONIZED_SWIM,
+        .power = 70,
+        .type = TYPE_WATER,
+        .accuracy = 100,
+        .pp = 10,
+        .target = TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_PHYSICAL,
+        .strikeCount = 2,
+        .battleAnimScript = gBattleAnimMove_Dive,
     },
 
     [MOVE_WINDSTORM] =

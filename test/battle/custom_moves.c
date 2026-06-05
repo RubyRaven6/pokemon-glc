@@ -68,8 +68,10 @@ ASSUMPTIONS
 
     ASSUME(GetMoveEffect(MOVE_AURA_FARMING) == EFFECT_AURA_FARMING);
     ASSUME(GetMoveType(MOVE_AURA_FARMING) == TYPE_FIGHTING);
-    ASSUME(GetMovePower(MOVE_AURA_FARMING) == 75);
+    ASSUME(GetMovePower(MOVE_AURA_FARMING) == 1);
     ASSUME(GetMoveAccuracy(MOVE_AURA_FARMING) == 100);
+    ASSUME(GetMovePP(MOVE_AURA_FARMING) == 1);
+    ASSUME(GetMoveTarget(MOVE_AURA_FARMING) == TARGET_BOTH);
     ASSUME(GetMoveCategory(MOVE_AURA_FARMING) == DAMAGE_CATEGORY_SPECIAL);
     ASSUME(GetMovePriority(MOVE_AURA_FARMING) < 0);
 
@@ -195,6 +197,59 @@ ASSUMPTIONS
     ASSUME(GetMoveType(MOVE_SHOWSTOPPER) == TYPE_WATER);
     ASSUME(GetMoveAccuracy(MOVE_SHOWSTOPPER) == 100);
     ASSUME(GetMoveCategory(MOVE_SHOWSTOPPER) == DAMAGE_CATEGORY_STATUS);
+
+    ASSUME(GetMoveEffect(MOVE_RESEARCH) == EFFECT_RESEARCH);
+    ASSUME(GetMoveType(MOVE_RESEARCH) == TYPE_NORMAL);
+    ASSUME(GetMoveCategory(MOVE_RESEARCH) == DAMAGE_CATEGORY_STATUS);
+
+    ASSUME(GetMoveEffect(MOVE_CHRYSALIS) == EFFECT_CHRYSALIS);
+    ASSUME(GetMoveType(MOVE_CHRYSALIS) == TYPE_BUG);
+    ASSUME(GetMoveCategory(MOVE_CHRYSALIS) == DAMAGE_CATEGORY_STATUS);
+    ASSUME(GetMoveProtectMethod(MOVE_CHRYSALIS) == PROTECT_CHRYSALIS);
+
+    ASSUME(GetMoveEffect(MOVE_CASTING_CALL) == EFFECT_CASTING_CALL);
+    ASSUME(GetMoveType(MOVE_CASTING_CALL) == TYPE_ELECTRIC);
+    ASSUME(GetMoveCategory(MOVE_CASTING_CALL) == DAMAGE_CATEGORY_STATUS);
+
+    ASSUME(GetMoveEffect(MOVE_MOUNTING_PRESSURE) == EFFECT_MOUNTING_PRESSURE);
+    ASSUME(GetMoveType(MOVE_MOUNTING_PRESSURE) == TYPE_GROUND);
+    ASSUME(GetMoveCategory(MOVE_MOUNTING_PRESSURE) == DAMAGE_CATEGORY_STATUS);
+
+    ASSUME(GetMoveEffect(MOVE_JET_STREAM) == EFFECT_JET_STREAM);
+    ASSUME(GetMoveType(MOVE_JET_STREAM) == TYPE_FLYING);
+    ASSUME(GetMovePower(MOVE_JET_STREAM) == 100);
+    ASSUME(GetMoveAccuracy(MOVE_JET_STREAM) == 95);
+    ASSUME(GetMoveCategory(MOVE_JET_STREAM) == DAMAGE_CATEGORY_PHYSICAL);
+
+    ASSUME(GetMoveEffect(MOVE_STUNT_DOUBLE) == EFFECT_STUNT_DOUBLE);
+    ASSUME(GetMoveType(MOVE_STUNT_DOUBLE) == TYPE_ICE);
+    ASSUME(GetMoveCategory(MOVE_STUNT_DOUBLE) == DAMAGE_CATEGORY_STATUS);
+
+    ASSUME(GetMoveType(MOVE_CALAMITY_CLEAVE) == TYPE_DRAGON);
+    ASSUME(GetMovePower(MOVE_CALAMITY_CLEAVE) == 130);
+    ASSUME(GetMoveAccuracy(MOVE_CALAMITY_CLEAVE) == 100);
+    ASSUME(GetMoveCategory(MOVE_CALAMITY_CLEAVE) == DAMAGE_CATEGORY_PHYSICAL);
+    ASSUME(MoveCantBeUsedTwice(MOVE_CALAMITY_CLEAVE));
+    ASSUME(IsSlicingMove(MOVE_CALAMITY_CLEAVE));
+
+    ASSUME(GetMoveEffect(MOVE_PSIDEKICK) == EFFECT_PSIDEKICK);
+    ASSUME(GetMoveType(MOVE_PSIDEKICK) == TYPE_NORMAL);
+    ASSUME(GetMovePower(MOVE_PSIDEKICK) == 60);
+    ASSUME(GetMoveAccuracy(MOVE_PSIDEKICK) == 100);
+    ASSUME(GetMoveCategory(MOVE_PSIDEKICK) == DAMAGE_CATEGORY_PHYSICAL);
+
+    ASSUME(GetMoveEffect(MOVE_MOSH_PIT) == EFFECT_MOSH_PIT);
+    ASSUME(GetMoveType(MOVE_MOSH_PIT) == TYPE_POISON);
+    ASSUME(GetMoveAccuracy(MOVE_MOSH_PIT) == 100);
+    ASSUME(GetMoveCategory(MOVE_MOSH_PIT) == DAMAGE_CATEGORY_PHYSICAL);
+    ASSUME(MoveHasAdditionalEffectWithChance(MOVE_MOSH_PIT, MOVE_EFFECT_POISON, 10));
+
+    ASSUME(GetMoveEffect(MOVE_SYNCHRONIZED_SWIM) == EFFECT_SYNCHRONIZED_SWIM);
+    ASSUME(GetMoveType(MOVE_SYNCHRONIZED_SWIM) == TYPE_WATER);
+    ASSUME(GetMovePower(MOVE_SYNCHRONIZED_SWIM) == 70);
+    ASSUME(GetMoveAccuracy(MOVE_SYNCHRONIZED_SWIM) == 100);
+    ASSUME(GetMoveCategory(MOVE_SYNCHRONIZED_SWIM) == DAMAGE_CATEGORY_PHYSICAL);
+    ASSUME(GetMoveStrikeCount(MOVE_SYNCHRONIZED_SWIM) == 2);
 }
 
 SINGLE_BATTLE_TEST("Custom Moves - Rock Heart may infatuate the target")
@@ -459,21 +514,77 @@ SINGLE_BATTLE_TEST("Custom Moves - Sunbloom is stronger in sunlight", s16 damage
     }
 }
 
-SINGLE_BATTLE_TEST("Custom Moves - Aura Farming gains power for attacks received before moving", s16 damage)
+SINGLE_BATTLE_TEST("Custom Moves - Aura Farming reflects damage received before moving")
 {
-    u32 opponentMove;
-    PARAMETRIZE { opponentMove = MOVE_CELEBRATE; }
-    PARAMETRIZE { opponentMove = MOVE_SCRATCH; }
+    s16 receivedDamage;
+    s16 reflectedDamage;
+
     GIVEN {
-        PLAYER(SPECIES_WOBBUFFET);
-        OPPONENT(SPECIES_WOBBUFFET) { Moves(opponentMove); }
+        ASSUME(GetMoveCategory(MOVE_POUND) == DAMAGE_CATEGORY_PHYSICAL);
+        PLAYER(SPECIES_WOBBUFFET) { Speed(1); }
+        OPPONENT(SPECIES_WOBBUFFET) { Speed(100); }
     } WHEN {
-        TURN { MOVE(player, MOVE_AURA_FARMING, WITH_RNG(RNG_DAMAGE_MODIFIER, 0)); MOVE(opponent, opponentMove); }
+        TURN { MOVE(player, MOVE_AURA_FARMING); MOVE(opponent, MOVE_POUND); }
     } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_POUND, opponent);
+        HP_BAR(player, captureDamage: &receivedDamage);
         ANIMATION(ANIM_TYPE_MOVE, MOVE_AURA_FARMING, player);
-        HP_BAR(opponent, captureDamage: &results[i].damage);
-    } FINALLY {
-        EXPECT_GT(results[1].damage, results[0].damage);
+        HP_BAR(opponent, captureDamage: &reflectedDamage);
+    } THEN {
+        EXPECT_MUL_EQ(receivedDamage, Q_4_12(2.0), reflectedDamage);
+    }
+}
+
+DOUBLE_BATTLE_TEST("Custom Moves - Aura Farming hits both opponents for twice the total damage received")
+{
+    s16 receivedDamage[2];
+    s16 reflectedDamage[2];
+
+    GIVEN {
+        ASSUME(GetMoveCategory(MOVE_POUND) == DAMAGE_CATEGORY_PHYSICAL);
+        ASSUME(GetMoveCategory(MOVE_WATER_GUN) == DAMAGE_CATEGORY_SPECIAL);
+        PLAYER(SPECIES_WOBBUFFET) { Speed(1); HP(999); MaxHP(999); }
+        PLAYER(SPECIES_WYNAUT) { Speed(2); }
+        OPPONENT(SPECIES_WOBBUFFET) { Speed(100); }
+        OPPONENT(SPECIES_WYNAUT) { Speed(90); }
+    } WHEN {
+        TURN {
+            MOVE(playerLeft, MOVE_AURA_FARMING);
+            MOVE(playerRight, MOVE_CELEBRATE);
+            MOVE(opponentLeft, MOVE_POUND, target: playerLeft);
+            MOVE(opponentRight, MOVE_WATER_GUN, target: playerLeft);
+        }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_POUND, opponentLeft);
+        HP_BAR(playerLeft, captureDamage: &receivedDamage[0]);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_WATER_GUN, opponentRight);
+        HP_BAR(playerLeft, captureDamage: &receivedDamage[1]);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_AURA_FARMING, playerLeft);
+        HP_BAR(opponentLeft, captureDamage: &reflectedDamage[0]);
+        HP_BAR(opponentRight, captureDamage: &reflectedDamage[1]);
+    } THEN {
+        EXPECT_EQ(reflectedDamage[0], (receivedDamage[0] + receivedDamage[1]) * 2);
+        EXPECT_EQ(reflectedDamage[1], (receivedDamage[0] + receivedDamage[1]) * 2);
+    }
+}
+
+SINGLE_BATTLE_TEST("Custom Moves - Aura Farming survives lethal damage until it reflects")
+{
+    GIVEN {
+        ASSUME(GetMovePower(MOVE_HYPER_BEAM) > 100);
+        PLAYER(SPECIES_WOBBUFFET) { Speed(1); HP(10); MaxHP(10); Defense(1); }
+        OPPONENT(SPECIES_WOBBUFFET) { Speed(100); Attack(255); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_AURA_FARMING); MOVE(opponent, MOVE_HYPER_BEAM); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_HYPER_BEAM, opponent);
+        HP_BAR(player);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_AURA_FARMING, player);
+        HP_BAR(opponent);
+        HP_BAR(player);
+        MESSAGE("Wobbuffet fainted!");
+    } THEN {
+        EXPECT_EQ(player->hp, 0);
     }
 }
 
@@ -1140,5 +1251,176 @@ AI_DOUBLE_BATTLE_TEST("Custom Moves - AI scores Showstopper as redirection suppo
         OPPONENT(SPECIES_WYNAUT) { Moves(MOVE_TACKLE); }
     } WHEN {
         TURN { SCORE_GT(opponentLeft, MOVE_SHOWSTOPPER, MOVE_CELEBRATE, target: playerLeft); }
+    }
+}
+
+SINGLE_BATTLE_TEST("Custom Moves - Research raises offenses if the user is not attacked")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET) { Speed(10); }
+        OPPONENT(SPECIES_WOBBUFFET) { Speed(5); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_RESEARCH); MOVE(opponent, MOVE_CELEBRATE); }
+    } THEN {
+        EXPECT_EQ(player->statStages[STAT_ATK], DEFAULT_STAT_STAGE + 2);
+        EXPECT_EQ(player->statStages[STAT_SPATK], DEFAULT_STAT_STAGE + 2);
+        EXPECT_EQ(player->statStages[STAT_DEF], DEFAULT_STAT_STAGE);
+        EXPECT_EQ(player->statStages[STAT_SPDEF], DEFAULT_STAT_STAGE);
+    }
+}
+
+SINGLE_BATTLE_TEST("Custom Moves - Research raises defenses if the user is attacked")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET) { Speed(10); }
+        OPPONENT(SPECIES_WOBBUFFET) { Speed(5); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_RESEARCH); MOVE(opponent, MOVE_SCRATCH); }
+    } THEN {
+        EXPECT_EQ(player->statStages[STAT_DEF], DEFAULT_STAT_STAGE + 2);
+        EXPECT_EQ(player->statStages[STAT_SPDEF], DEFAULT_STAT_STAGE + 2);
+        EXPECT_EQ(player->statStages[STAT_ATK], DEFAULT_STAT_STAGE);
+        EXPECT_EQ(player->statStages[STAT_SPATK], DEFAULT_STAT_STAGE);
+    }
+}
+
+SINGLE_BATTLE_TEST("Custom Moves - Chrysalis protects and heals if hit")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET) { MaxHP(200); HP(100); }
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(player, MOVE_CHRYSALIS); MOVE(opponent, MOVE_SCRATCH); }
+    } THEN {
+        EXPECT_EQ(player->hp, 150);
+    }
+}
+
+SINGLE_BATTLE_TEST("Custom Moves - Casting Call switches out and charges the replacement")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET) { Moves(MOVE_CASTING_CALL); }
+        PLAYER(SPECIES_WYNAUT);
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(player, MOVE_CASTING_CALL); SEND_OUT(player, 1); MOVE(opponent, MOVE_CELEBRATE); }
+    } THEN {
+        EXPECT_EQ(player->species, SPECIES_WYNAUT);
+        EXPECT(player->volatiles.chargeTimer > 0);
+    }
+}
+
+SINGLE_BATTLE_TEST("Custom Moves - Orbital Pull charges then boosts offenses and sets gravity")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(player, MOVE_MOUNTING_PRESSURE); MOVE(opponent, MOVE_CELEBRATE); }
+        TURN { SKIP_TURN(player); MOVE(opponent, MOVE_CELEBRATE); }
+    } THEN {
+        EXPECT_EQ(player->statStages[STAT_ATK], DEFAULT_STAT_STAGE + 2);
+        EXPECT_EQ(player->statStages[STAT_SPATK], DEFAULT_STAT_STAGE + 2);
+        EXPECT(gFieldStatuses & STATUS_FIELD_GRAVITY);
+    }
+}
+
+SINGLE_BATTLE_TEST("Custom Moves - Jet Stream grants Wind Rider after attacking until end of turn")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET) { Speed(10); Ability(ABILITY_NONE); }
+        OPPONENT(SPECIES_WOBBUFFET) { Speed(5); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_JET_STREAM); MOVE(opponent, MOVE_GUST); }
+    } THEN {
+        EXPECT(!player->volatiles.jetStreamWindRider);
+        EXPECT_EQ(player->statStages[STAT_ATK], DEFAULT_STAT_STAGE + 1);
+    }
+}
+
+SINGLE_BATTLE_TEST("Custom Moves - Stunt Double bursts when its substitute is broken")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET) { MaxHP(200); HP(200); Speed(10); }
+        OPPONENT(SPECIES_WOBBUFFET) { MaxHP(200); HP(200); Speed(5); Attack(500); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_STUNT_DOUBLE); MOVE(opponent, MOVE_CELEBRATE); }
+        TURN { MOVE(player, MOVE_CELEBRATE); MOVE(opponent, MOVE_SCRATCH); }
+    } THEN {
+        EXPECT_EQ(opponent->hp, 163);
+        EXPECT(opponent->status1 & STATUS1_FROSTBITE);
+    }
+}
+
+SINGLE_BATTLE_TEST("Custom Moves - Calamity Cleave cannot be used twice in a row")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET) { Moves(MOVE_CALAMITY_CLEAVE); }
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(player, MOVE_CALAMITY_CLEAVE); }
+        TURN { FORCED_MOVE(player); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_CALAMITY_CLEAVE, player);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_STRUGGLE, player);
+    }
+}
+
+DOUBLE_BATTLE_TEST("Custom Moves - Psidekick doubles in power if an ally uses a Psychic move")
+{
+    u16 hpWithPsychic = 0;
+    u16 hpWithoutPsychic = 0;
+
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET) { Attack(100); Speed(10); }
+        PLAYER(SPECIES_WYNAUT) { Speed(5); }
+        OPPONENT(SPECIES_WOBBUFFET) { Defense(100); HP(400); MaxHP(400); Speed(4); }
+        OPPONENT(SPECIES_WYNAUT) { Speed(3); }
+    } WHEN {
+        TURN { MOVE(playerLeft, MOVE_PSIDEKICK, target: opponentLeft); MOVE(playerRight, MOVE_CONFUSION, target: opponentRight); }
+    } THEN {
+        hpWithPsychic = opponentLeft->hp;
+    } GIVEN {
+        PLAYER(SPECIES_WOBBUFFET) { Attack(100); Speed(10); }
+        PLAYER(SPECIES_WYNAUT) { Speed(5); }
+        OPPONENT(SPECIES_WOBBUFFET) { Defense(100); HP(400); MaxHP(400); Speed(4); }
+        OPPONENT(SPECIES_WYNAUT) { Speed(3); }
+    } WHEN {
+        TURN { MOVE(playerLeft, MOVE_PSIDEKICK, target: opponentLeft); MOVE(playerRight, MOVE_TACKLE, target: opponentRight); }
+    } THEN {
+        hpWithoutPsychic = opponentLeft->hp;
+        EXPECT_GT(hpWithoutPsychic, hpWithPsychic);
+    }
+}
+
+SINGLE_BATTLE_TEST("Custom Moves - Mosh Pit hits once for each healthy party member")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET) { Attack(100); }
+        PLAYER(SPECIES_WYNAUT);
+        PLAYER(SPECIES_ABRA);
+        OPPONENT(SPECIES_WOBBUFFET) { Defense(100); HP(400); MaxHP(400); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_MOSH_PIT); }
+    } SCENE {
+        MESSAGE("The Pokémon was hit 3 time(s)!");
+    }
+}
+
+DOUBLE_BATTLE_TEST("Custom Moves - Synchroswim is repeated by the user's ally with the ally's stats")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET) { Attack(50); Speed(20); }
+        PLAYER(SPECIES_WYNAUT) { Attack(300); Speed(10); }
+        OPPONENT(SPECIES_WOBBUFFET) { Defense(100); HP(400); MaxHP(400); Speed(4); }
+        OPPONENT(SPECIES_WYNAUT) { Speed(3); }
+    } WHEN {
+        TURN { MOVE(playerLeft, MOVE_SYNCHRONIZED_SWIM, target: opponentLeft); MOVE(playerRight, MOVE_CELEBRATE); MOVE(opponentLeft, MOVE_CELEBRATE); MOVE(opponentRight, MOVE_CELEBRATE); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SYNCHRONIZED_SWIM, playerLeft);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SYNCHRONIZED_SWIM, playerRight);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_CELEBRATE, playerRight);
+    } THEN {
+        EXPECT_LT(opponentLeft->hp, 300);
     }
 }

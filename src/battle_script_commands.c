@@ -349,6 +349,8 @@ static bool32 CanAbilityShieldActivateForBattler(enum BattlerId battler);
 static void PlayAnimation(enum BattlerId battler, u8 animId, const u16 *argPtr, const u8 *nextInstr);
 static u32 GetPossibleNextTarget(u32 currTarget);
 static bool32 TryQueueShowstopperStatDrops(enum BattlerId damagedBattler, const u8 *nextInstr);
+static bool32 TryQueueResearchDefenseBoost(enum BattlerId damagedBattler, const u8 *nextInstr);
+static bool32 TryQueueStuntDoubleExplosion(enum BattlerId damagedBattler, const u8 *nextInstr);
 
 static void Cmd_attackcanceler(void);
 static void Cmd_accuracycheck(void);
@@ -1493,6 +1495,40 @@ static void Cmd_waitanimation(void)
     }
 }
 
+static bool32 IsAuraFarmingWaitingToMove(enum BattlerId battler)
+{
+    if (gChosenMoveByBattler[battler] != MOVE_AURA_FARMING)
+        return FALSE;
+
+    for (u32 i = gCurrentTurnActionNumber + 1; i < gBattlersCount; i++)
+    {
+        if (gBattlerByTurnOrder[i] == battler && gActionsByTurnOrder[i] == B_ACTION_USE_MOVE)
+            return TRUE;
+    }
+
+    return FALSE;
+}
+
+static void PrepareAuraFarmingDamage(enum BattlerId battler)
+{
+    s32 damage = gBattleStruct->moveDamage[battler];
+
+    if (damage <= 0)
+        return;
+    if (IsBattlerAlly(battler, gBattlerAttacker))
+        return;
+    if (!IsAuraFarmingWaitingToMove(battler))
+        return;
+
+    gBattleStruct->auraFarmingDamage[battler] = min(UINT16_MAX, gBattleStruct->auraFarmingDamage[battler] + damage);
+
+    if (damage >= gBattleMons[battler].hp)
+    {
+        gProtectStructs[battler].auraFarmingEndured = TRUE;
+        gBattleStruct->moveDamage[battler] = gBattleMons[battler].hp > 0 ? gBattleMons[battler].hp - 1 : 0;
+    }
+}
+
 static void DoublesHPBarReduction(void)
 {
     if (gBattleStruct->doneDoublesSpreadHit)
@@ -1507,6 +1543,7 @@ static void DoublesHPBarReduction(void)
          || DoesIceFaceBlockMove(battlerDef, gCurrentMove))
             continue;
 
+        PrepareAuraFarmingDamage(battlerDef);
         s32 dmgUpdate = min(gBattleStruct->moveDamage[battlerDef], 10000);
         BtlController_EmitHealthBarUpdate(battlerDef, B_COMM_TO_CONTROLLER, dmgUpdate);
         MarkBattlerForControllerExec(battlerDef);
@@ -1546,6 +1583,7 @@ static void Cmd_healthbarupdate(void)
               && !DoesDisguiseBlockMove(battler, gCurrentMove)
               && !DoesIceFaceBlockMove(battler, gCurrentMove))
         {
+            PrepareAuraFarmingDamage(battler);
             s32 damage = min(gBattleStruct->moveDamage[battler], 10000);
             BtlController_EmitHealthBarUpdate(battler, B_COMM_TO_CONTROLLER, damage);
             MarkBattlerForControllerExec(battler);
@@ -1615,9 +1653,12 @@ static void MoveDamageDataHpUpdate(enum BattlerId battler, u32 scriptBattler, co
         // check substitute fading
         if (gBattleMons[battler].volatiles.substituteHP == 0)
         {
-            gBattlescriptCurrInstr = nextInstr;
             gBattleScripting.battler = battler;
-            BattleScriptCall(BattleScript_SubstituteFade);
+            if (!TryQueueStuntDoubleExplosion(battler, nextInstr))
+            {
+                gBattlescriptCurrInstr = nextInstr;
+                BattleScriptCall(BattleScript_SubstituteFade);
+            }
         }
         else
         {
@@ -1703,11 +1744,11 @@ static void MoveDamageDataHpUpdate(enum BattlerId battler, u32 scriptBattler, co
     }
 
     GetBattlerPartyState(battler)->timesGotHit++;
-    if (!IsBattlerAlly(battler, gBattlerAttacker) && gProtectStructs[battler].auraFarmingHits < 3)
-        gProtectStructs[battler].auraFarmingHits++;
     gSpecialStatuses[battler].damagedByAttack = TRUE;
 
     if (tookDirectDamage && TryQueueShowstopperStatDrops(battler, nextInstr))
+        return;
+    if (tookDirectDamage && TryQueueResearchDefenseBoost(battler, nextInstr))
         return;
 }
 
@@ -1754,6 +1795,41 @@ static bool32 TryQueueShowstopperStatDrops(enum BattlerId damagedBattler, const 
     gEffectBattler = gBattlerAttacker;
     BattleScriptPush(nextInstr);
     gBattlescriptCurrInstr = BattleScript_ShowstopperStatDrop;
+    return TRUE;
+}
+
+static bool32 TryQueueResearchDefenseBoost(enum BattlerId damagedBattler, const u8 *nextInstr)
+{
+    if (!gBattleMons[damagedBattler].volatiles.research)
+        return FALSE;
+    if (IsBattlerAlly(damagedBattler, gBattlerAttacker))
+        return FALSE;
+
+    gBattleMons[damagedBattler].volatiles.research = FALSE;
+    gProtectStructs[damagedBattler].researchAttacked = TRUE;
+    gEffectBattler = damagedBattler;
+    SetStatChange(damagedBattler, STAT_DEF, 2);
+    SetStatChange(damagedBattler, STAT_SPDEF, 2);
+    BattleScriptPush(nextInstr);
+    gBattlescriptCurrInstr = BattleScript_ResearchDefensesUp;
+    return TRUE;
+}
+
+static bool32 TryQueueStuntDoubleExplosion(enum BattlerId damagedBattler, const u8 *nextInstr)
+{
+    if (!gBattleMons[damagedBattler].volatiles.stuntDouble)
+        return FALSE;
+    if (IsBattlerAlly(damagedBattler, gBattlerAttacker))
+        return FALSE;
+    if (!IsBattlerAlive(gBattlerAttacker))
+        return FALSE;
+
+    gBattleMons[damagedBattler].volatiles.stuntDouble = FALSE;
+    gEffectBattler = damagedBattler;
+    gBattleScripting.battler = damagedBattler;
+    SetPassiveDamageAmount(gBattlerAttacker, max(1, GetNonDynamaxMaxHP(damagedBattler) / 8));
+    BattleScriptPush(nextInstr);
+    gBattlescriptCurrInstr = BattleScript_StuntDoubleExplosion;
     return TRUE;
 }
 
@@ -12849,6 +12925,37 @@ void BS_SetShowstopper(void)
 
     gProtectStructs[gBattlerAttacker].showstopper = TRUE;
     gBattleMons[gBattlerAttacker].volatiles.consecutiveMoveUses++;
+    gBattlescriptCurrInstr = cmd->nextInstr;
+}
+
+void BS_SetResearch(void)
+{
+    NATIVE_ARGS();
+
+    gBattleMons[gBattlerAttacker].volatiles.research = TRUE;
+    gProtectStructs[gBattlerAttacker].researchAttacked = FALSE;
+    gBattlescriptCurrInstr = cmd->nextInstr;
+}
+
+void BS_SetCastingCallCharge(void)
+{
+    NATIVE_ARGS();
+
+    gBattleMons[gBattlerAttacker].volatiles.chargeTimer = 2;
+    gBattlescriptCurrInstr = cmd->nextInstr;
+}
+
+void BS_SetMountingPressure(void)
+{
+    NATIVE_ARGS();
+
+    SetStatChange(gBattlerAttacker, STAT_ATK, 2);
+    SetStatChange(gBattlerAttacker, STAT_SPATK, 2);
+    if (!(gFieldStatuses & STATUS_FIELD_GRAVITY))
+    {
+        gFieldStatuses |= STATUS_FIELD_GRAVITY;
+        gFieldTimers.gravityTimer = 5;
+    }
     gBattlescriptCurrInstr = cmd->nextInstr;
 }
 

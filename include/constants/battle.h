@@ -308,6 +308,9 @@ enum VolatileFlags
     F(VOLATILE_TRUANT_SWITCH_IN_HACK,       truantSwitchInHack,            (u32, 1)) \
     F(VOLATILE_TAR_SHOT,                    tarShot,                       (u32, 1)) \
     F(VOLATILE_OVEREXPOSURE,                overexposure,                  (u32, 1)) \
+    F(VOLATILE_RESEARCH,                    research,                      (u32, 1)) \
+    F(VOLATILE_STUNT_DOUBLE,                stuntDouble,                   (u32, 1)) \
+    F(VOLATILE_JET_STREAM_WIND_RIDER,       jetStreamWindRider,            (u32, 1)) \
     F(VOLATILE_OCTOLOCK,                    octolock,                      (u32, 1)) \
     F(VOLATILE_CUD_CHEW,                    cudChew,                       (u32, 1)) \
     F(VOLATILE_WEATHER_ABILITY_DONE,        weatherAbilityDone,            (u32, 1)) \
@@ -328,6 +331,7 @@ enum VolatileFlags
     F(VOLATILE_PARADOX_BOOSTED_STAT,        paradoxBoostedStat,            (enum Stat, NUM_STATS - 1)) \
     F(VOLATILE_UNABLE_TO_USE_MOVE,          unableToUseMove,               (u32, 1)) \
     F(VOLATILE_ACTIVATE_DANCER,             activateDancer,                (u32, 1)) \
+    F(VOLATILE_ACTIVATE_SYNCHRONIZED_SWIM,  activateSynchronizedSwim,      (u32, 1)) \
     F(VOLATILE_TRACE_ACTIVATED,             traceActivated,                (u32, 1))
 
 

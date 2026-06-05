@@ -1293,6 +1293,89 @@ BattleScript_ShowstopperStatDrop::
 	trybattlerstatchange BS_EFFECT_BATTLER, STAT_CHANGE_NO_FLAGS
 	return
 
+BattleScript_EffectResearch::
+	attackcanceler
+	attackanimation
+	waitanimation
+	callnative BS_SetResearch
+	goto BattleScript_MoveEnd
+
+BattleScript_EffectCastingCall::
+	attackcanceler
+	jumpifbattletype BATTLE_TYPE_ARENA, BattleScript_ButItFailed
+	jumpifcantswitch SWITCH_IGNORE_ESCAPE_PREVENTION | BS_ATTACKER, BattleScript_ButItFailed
+	attackanimation
+	waitanimation
+	returntoball BS_ATTACKER, FALSE
+	switchoutabilities BS_ATTACKER
+	openpartyscreen BS_ATTACKER, BattleScript_ButItFailed
+	waitstate
+	switchhandleorder BS_ATTACKER, 2
+	getswitchedmondata BS_ATTACKER
+	switchindataupdate BS_ATTACKER
+	callnative BS_SetCastingCallCharge
+	hpthresholds BS_ATTACKER
+	trytoclearprimalweather
+	flushtextbox
+	printstring STRINGID_SWITCHINMON
+	switchinanim BS_ATTACKER, FALSE, TRUE
+	waitstate
+	switchineffects BS_ATTACKER
+	switchinevents
+	goto BattleScript_MoveEnd
+
+BattleScript_EffectMountingPressure::
+	attackcanceler
+	attackanimation
+	waitanimation
+	callnative BS_SetMountingPressure
+	trybattlerstatchange BS_ATTACKER, STAT_CHANGE_NO_FLAGS
+	printstring STRINGID_GRAVITYINTENSIFIED
+	waitmessage B_WAIT_TIME_LONG
+	goto BattleScript_MoveEnd
+
+BattleScript_EffectStuntDouble::
+	attackcanceler
+	waitstate
+	jumpifvolatile BS_ATTACKER, VOLATILE_SUBSTITUTE, BattleScript_AlreadyHasSubstitute
+	setsubstitute
+	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, B_MSG_SUBSTITUTE_FAILED, BattleScript_StuntDoubleString
+	setvolatile BS_ATTACKER, VOLATILE_STUNT_DOUBLE
+	attackanimation
+	waitanimation
+	healthbarupdate BS_ATTACKER, PASSIVE_HP_UPDATE
+	datahpupdate BS_ATTACKER, PASSIVE_HP_UPDATE
+BattleScript_StuntDoubleString:
+	pause B_WAIT_TIME_SHORT
+	printfromtable gSubstituteUsedStringIds
+	waitmessage B_WAIT_TIME_LONG
+	goto BattleScript_MoveEnd
+
+BattleScript_ResearchDefensesUp::
+	trybattlerstatchange BS_EFFECT_BATTLER, STAT_CHANGE_NO_FLAGS
+	return
+
+BattleScript_ResearchOffensesUp::
+	trybattlerstatchange BS_ATTACKER, STAT_CHANGE_NO_FLAGS
+	return
+
+BattleScript_ChrysalisHeal::
+	healthbarupdate BS_EFFECT_BATTLER, PASSIVE_HP_UPDATE
+	datahpupdate BS_EFFECT_BATTLER, PASSIVE_HP_UPDATE
+	printstring STRINGID_PKMNREGAINEDHEALTH
+	waitmessage B_WAIT_TIME_LONG
+	return
+
+BattleScript_StuntDoubleExplosion::
+	playanimation BS_SCRIPTING, B_ANIM_SUBSTITUTE_FADE
+	printstring STRINGID_PKMNSUBSTITUTEFADED
+	waitmessage B_WAIT_TIME_LONG
+	healthbarupdate BS_ATTACKER, PASSIVE_HP_UPDATE
+	datahpupdate BS_ATTACKER, PASSIVE_HP_UPDATE
+	tryfaintmon BS_ATTACKER
+	seteffectprimary BS_EFFECT_BATTLER, BS_ATTACKER, MOVE_EFFECT_FROSTBITE
+	return
+
 BattleScript_IceRinkOnSwitchIn::
 	printstring STRINGID_PKMNSLIDONICE
 	waitmessage B_WAIT_TIME_LONG
@@ -1523,6 +1606,12 @@ BattleScript_Hit_RetFromAtkAnimation::
 	resultmessage
 	waitmessage B_WAIT_TIME_LONG
 	setadditionaleffects
+	return
+
+BattleScript_AuraFarmingFaint::
+	healthbarupdate BS_ATTACKER, PASSIVE_HP_UPDATE
+	datahpupdate BS_ATTACKER, PASSIVE_HP_UPDATE
+	tryfaintmon BS_ATTACKER
 	return
 
 BattleScript_MakeMoveMissed::
@@ -5193,6 +5282,10 @@ BattleScript_BattleBondActivatesOnMoveEndAttacker::
 
 BattleScript_DancerActivates::
 	call BattleScript_AbilityPopUp
+	waitmessage B_WAIT_TIME_SHORT
+	jumptocalledmove TRUE
+
+BattleScript_SynchronizedSwimActivates::
 	waitmessage B_WAIT_TIME_SHORT
 	jumptocalledmove TRUE
 

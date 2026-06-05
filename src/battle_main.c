@@ -5273,6 +5273,8 @@ static void CheckChangingTurnOrderEffects(void)
     {
         gBattleStruct->battlerState[i].focusPunchBattlers = FALSE;
         gBattleStruct->battlerState[i].ateBoost = FALSE;
+        gBattleStruct->auraFarmingDamage[i] = 0;
+        gProtectStructs[i].auraFarmingEndured = FALSE;
         gSpecialStatuses[i].gemBoost = FALSE;
         if (!MoveHasAdditionalEffectSelf(gChosenMoveByBattler[i], MOVE_EFFECT_RAGE))
             gBattleMons[i].volatiles.rage = FALSE;

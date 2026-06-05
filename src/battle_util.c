@@ -293,6 +293,14 @@ static u32 CalcBeatUpPower(void)
     return (GetSpeciesBaseAttack(species) / 10) + 5;
 }
 
+static u32 CalcMoshPitPower(void)
+{
+    enum Species species = gBattleStruct->beatUpSpecies[gBattleStruct->beatUpSlot++];
+    if (species == 0xFFFF)
+        return 0;
+    return (GetSpeciesBaseAttack(species) / 5) + 5;
+}
+
 // Gen 3/4
 static s32 CalcBeatUpDamage(struct DamageContext *ctx)
 {
@@ -2938,6 +2946,51 @@ static bool32 TryDancer(void)
     return FALSE;
 }
 
+static bool32 TrySynchronizedSwim(void)
+{
+    enum BattlerId swimBattler = MAX_BATTLERS_COUNT;
+
+    if (gCurrentMove != MOVE_SYNCHRONIZED_SWIM)
+        return FALSE;
+
+    for (enum BattlerId battler = 0; battler < gBattlersCount; battler++)
+    {
+        if (gBattleMons[battler].volatiles.activateSynchronizedSwim && !gSpecialStatuses[battler].synchronizedSwimUsedMove)
+        {
+            swimBattler = battler;
+            break;
+        }
+    }
+
+    if (swimBattler >= gBattlersCount)
+        return FALSE;
+
+    if (!gSpecialStatuses[gBattlerAttacker].synchronizedSwimUsedMove)
+    {
+        gBattleStruct->synchronizedSwimSavedTarget = gBattlerTarget;
+        gBattleStruct->synchronizedSwimSavedAttacker = gBattlerAttacker;
+        gSpecialStatuses[gBattlerAttacker].synchronizedSwimUsedMove = TRUE;
+    }
+
+    if (IsBattlerAlive(swimBattler))
+    {
+        gSpecialStatuses[swimBattler].synchronizedSwimUsedMove = TRUE;
+        gSpecialStatuses[swimBattler].backUpTarget = gBattleStruct->moveTarget[swimBattler] + 1;
+        gBattleMons[swimBattler].volatiles.activateSynchronizedSwim = FALSE;
+        gBattlerAttacker = swimBattler;
+        gCalledMove = gCurrentMove;
+        gBattlerTarget = gBattleStruct->synchronizedSwimSavedTarget;
+
+        if (!IsBattlerAlive(gBattlerTarget) || IsBattlerAlly(gBattlerTarget, gBattlerAttacker))
+            gBattlerTarget = gBattleStruct->synchronizedSwimSavedAttacker;
+
+        BattleScriptExecute(BattleScript_SynchronizedSwimActivates);
+        return TRUE;
+    }
+
+    return FALSE;
+}
+
 u32 AbilityBattleEffects(enum AbilityEffect caseID, enum BattlerId battler, enum Ability ability, enum Move move, bool32 shouldAbilityTrigger)
 {
     u32 effect = 0;
@@ -4419,6 +4472,8 @@ u32 AbilityBattleEffects(enum AbilityEffect caseID, enum BattlerId battler, enum
         break;
     case ABILITYEFFECT_DANCER:
         return TryDancer();
+    case ABILITYEFFECT_SYNCHRONIZED_SWIM:
+        return TrySynchronizedSwim();
     case ABILITYEFFECT_MOVE_END_FOES_FAINTED:
         switch (ability)
         {
@@ -4898,6 +4953,9 @@ enum Ability GetBattlerAbilityInternal(enum BattlerId battler, bool32 ignoreMold
 
     if (CanBreakThroughAbility(gBattlerAttacker, battler, hasAbilityShield, ignoreMoldBreaker))
         return ABILITY_NONE;
+
+    if (gBattleMons[battler].volatiles.jetStreamWindRider)
+        return ABILITY_WIND_RIDER;
 
     return gBattleMons[battler].ability;
 }
@@ -5834,6 +5892,8 @@ bool32 IsBattlerProtected(struct BattleCalcValues *cv)
         isProtected = TRUE;
     else if (gProtectStructs[cv->battlerDef].protected == PROTECT_BURNING_BULWARK)
         isProtected = TRUE;
+    else if (gProtectStructs[cv->battlerDef].protected == PROTECT_CHRYSALIS)
+        isProtected = TRUE;
     else if (gProtectStructs[cv->battlerDef].protected == PROTECT_OBSTRUCT && !IsBattleMoveStatus(cv->move))
         isProtected = TRUE;
     else if (gProtectStructs[cv->battlerDef].protected == PROTECT_SILK_TRAP && !IsBattleMoveStatus(cv->move))
@@ -5863,6 +5923,7 @@ enum ProtectType GetProtectType(enum ProtectMethod method)
     case PROTECT_BURNING_BULWARK:
     case PROTECT_OBSTRUCT:
     case PROTECT_SILK_TRAP:
+    case PROTECT_CHRYSALIS:
     case PROTECT_MAX_GUARD:
         return PROTECT_TYPE_SINGLE;
     case PROTECT_WIDE_GUARD:
@@ -6285,10 +6346,6 @@ static inline u32 CalcMoveBasePower(struct DamageContext *ctx)
     case EFFECT_SINKHOLE:
         basePower = CalcSinkholeBasePower(ctx);
         break;
-    case EFFECT_AURA_FARMING:
-        basePower += 75 * gProtectStructs[battlerAtk].auraFarmingHits;
-        basePower = min(basePower, 300);
-        break;
     case EFFECT_FUSSY_FUSS:
         if (gBattleMons[battlerAtk].hp <= gBattleMons[battlerAtk].maxHP / 2)
             basePower *= 2;
@@ -6410,6 +6467,18 @@ static inline u32 CalcMoveBasePower(struct DamageContext *ctx)
     case EFFECT_BEAT_UP:
         if (GetConfig(B_BEAT_UP) >= GEN_5)
             basePower = CalcBeatUpPower();
+        break;
+    case EFFECT_MOSH_PIT:
+        basePower = CalcMoshPitPower();
+        break;
+    case EFFECT_PSIDEKICK:
+        if (IsDoubleBattle())
+        {
+            enum BattlerId partner = BATTLE_PARTNER(battlerAtk);
+            enum Move partnerMove = gChosenMoveByBattler[partner];
+            if (IsBattlerAlive(partner) && partnerMove != MOVE_NONE && GetMoveType(partnerMove) == TYPE_PSYCHIC)
+                basePower *= 2;
+        }
         break;
     case EFFECT_MAX_MOVE:
         basePower = GetMaxMovePower(GetBattlerChosenMove(battlerAtk));
@@ -7757,6 +7826,10 @@ s32 DoFixedDamageMoveCalc(struct DamageContext *ctx)
 
             dmg = (baseDamage - 1) * percentMultiplier / 100;
         }
+        break;
+    case EFFECT_AURA_FARMING:
+        if (!ctx->aiCalc)
+            dmg = gBattleStruct->auraFarmingDamage[ctx->battlerAtk] * 2;
         break;
     case EFFECT_ENDEAVOR:
         if (GetNonDynamaxHP(ctx->battlerDef) <= gBattleMons[ctx->battlerAtk].hp)

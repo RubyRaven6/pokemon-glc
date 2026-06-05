@@ -131,6 +131,7 @@ static bool32 TargetHasToMove(enum Move move) // Opponent needs to hit the playe
 {
     enum BattleMoveEffects effect = GetMoveEffect(move);
     if (effect == EFFECT_REFLECT_DAMAGE
+     || effect == EFFECT_AURA_FARMING
      || effect == EFFECT_MIRROR_MOVE
      || effect == EFFECT_CONVERSION_2
      || effect == EFFECT_COPYCAT
@@ -150,6 +151,7 @@ static bool32 AttackerHasToSwitch(enum Move move) // User needs to send out a di
     if (IsExplosionMove(move)
      || effect == EFFECT_TELEPORT
      || effect == EFFECT_BATON_PASS
+     || effect == EFFECT_CASTING_CALL
      || effect == EFFECT_MEMENTO
      || effect == EFFECT_HEALING_WISH
      || effect == EFFECT_LUNAR_DANCE
@@ -166,6 +168,7 @@ static bool32 UserHasToGoFirst(enum Move move) // Player needs to go first
 {
     enum BattleMoveEffects effect = GetMoveEffect(move);
     if (effect == EFFECT_PROTECT
+     || effect == EFFECT_CHRYSALIS
      || effect == EFFECT_ENDURE
      || effect == EFFECT_FOLLOW_ME
      || effect == EFFECT_MAGIC_COAT

@@ -74,6 +74,7 @@ enum ProtectMethod
     PROTECT_BURNING_BULWARK,
     PROTECT_OBSTRUCT,
     PROTECT_SILK_TRAP,
+    PROTECT_CHRYSALIS,
     PROTECT_MAX_GUARD,
     PROTECT_WIDE_GUARD,
     PROTECT_QUICK_GUARD,
@@ -623,7 +624,7 @@ static inline u32 GetMoveTwoTurnAttackWeather(enum Move moveId)
 {
     moveId = SanitizeMoveId(moveId);
     enum BattleMoveEffects effect = gMovesInfo[moveId].effect;
-    assertf(effect == EFFECT_TWO_TURNS_ATTACK || effect == EFFECT_SOLAR_BEAM, "not a two-turn move with weather: %S", gMovesInfo[moveId].name);
+    assertf(gBattleMoveEffects[effect].twoTurnEffect, "not a two-turn move: %S", gMovesInfo[moveId].name);
     return gMovesInfo[moveId].argument.twoTurnAttack.weather;
 }
 
@@ -708,7 +709,7 @@ static inline enum ProtectMethod GetMoveProtectMethod(enum Move moveId)
 {
     moveId = SanitizeMoveId(moveId);
     enum BattleMoveEffects effect = gMovesInfo[moveId].effect;
-    assertf(effect == EFFECT_PROTECT || effect == EFFECT_ENDURE || effect == EFFECT_MAT_BLOCK, "not a protect move: %S", GetMoveName(moveId));
+    assertf(effect == EFFECT_PROTECT || effect == EFFECT_ENDURE || effect == EFFECT_MAT_BLOCK || effect == EFFECT_CHRYSALIS, "not a protect move: %S", GetMoveName(moveId));
     return gMovesInfo[moveId].argument.protectMethod;
 }
 

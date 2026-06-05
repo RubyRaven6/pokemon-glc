@@ -1715,6 +1715,7 @@ static s32 AI_CheckBadMove(enum BattlerId battlerAtk, enum BattlerId battlerDef,
             ADJUST_SCORE(-10);
         break;
     case EFFECT_REFLECT_DAMAGE:
+    case EFFECT_AURA_FARMING:
         if (IsBattlerIncapacitated(battlerDef, aiData->abilities[battlerDef])
         || gBattleMons[battlerDef].volatiles.infatuation
         || gBattleMons[battlerDef].volatiles.confusionTurns > 0)
@@ -4655,6 +4656,7 @@ static s32 AI_CalcMoveEffectScore(enum BattlerId battlerAtk, enum BattlerId batt
         }
         break;
     case EFFECT_PROTECT:
+    case EFFECT_CHRYSALIS:
         if (incomingMove == MOVE_UNAVAILABLE)
             incomingMove = MOVE_NONE;
         enum ProtectMethod protectMethod = GetMoveProtectMethod(move);
@@ -6064,6 +6066,10 @@ static s32 AI_Risky(enum BattlerId battlerAtk, enum BattlerId battlerDef, enum M
               && GetSpeciesBaseSpAttack(gBattleMons[battlerDef].species) >= GetSpeciesBaseAttack(gBattleMons[battlerDef].species) + 10)
             ADJUST_SCORE(STRONG_RISKY_EFFECT);
         break;
+    case EFFECT_AURA_FARMING:
+        if (HasDamagingMove(battlerDef))
+            ADJUST_SCORE(STRONG_RISKY_EFFECT);
+        break;
 
     // +2 Score
     case EFFECT_MEMENTO:
@@ -6588,6 +6594,7 @@ static s32 AI_PredictSwitch(enum BattlerId battlerAtk, enum BattlerId battlerDef
     // Fails if opponent switches
     case EFFECT_PROTECT:
     case EFFECT_REFLECT_DAMAGE:
+    case EFFECT_AURA_FARMING:
     case EFFECT_SHELL_TRAP:
     case EFFECT_SUCKER_PUNCH:
     case EFFECT_UPPER_HAND:

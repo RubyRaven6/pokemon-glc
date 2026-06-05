@@ -41,6 +41,29 @@ static bool32 HandleEndTurnOrder(enum BattlerId battler)
     return effect;
 }
 
+static bool32 HandleEndTurnResearch(enum BattlerId battler)
+{
+    bool32 effect = FALSE;
+
+    gBattleStruct->eventState.endTurnBattler++;
+
+    if (!IsBattlerPresent(battler) || !gBattleMons[battler].volatiles.research)
+        return FALSE;
+
+    gBattleMons[battler].volatiles.research = FALSE;
+
+    if (!gProtectStructs[battler].researchAttacked)
+    {
+        gBattlerAttacker = battler;
+        SetStatChange(battler, STAT_ATK, 2);
+        SetStatChange(battler, STAT_SPATK, 2);
+        BattleScriptCall(BattleScript_ResearchOffensesUp);
+        effect = TRUE;
+    }
+
+    return effect;
+}
+
 static bool32 HandleEndTurnVarious(enum BattlerId battler)
 {
     bool32 effect = FALSE;
@@ -70,6 +93,8 @@ static bool32 HandleEndTurnVarious(enum BattlerId battler)
 
         if (B_CHARGE < GEN_9 && gBattleMons[i].volatiles.chargeTimer > 0)
             gBattleMons[i].volatiles.chargeTimer--;
+
+        gBattleMons[i].volatiles.jetStreamWindRider = FALSE;
 
         if (gBattleMons[i].volatiles.laserFocusTimer > 0 && --gBattleMons[i].volatiles.laserFocusTimer == 0)
             gBattleMons[i].volatiles.laserFocus = FALSE;
@@ -1527,6 +1552,7 @@ static bool32 HandleEndTurnDynamax(enum BattlerId battler)
 static bool32 (*const sEndTurnEffectHandlers[])(enum BattlerId battler) =
 {
     [ENDTURN_ORDER] = HandleEndTurnOrder,
+    [ENDTURN_RESEARCH] = HandleEndTurnResearch,
     [ENDTURN_VARIOUS] = HandleEndTurnVarious,
     [ENDTURN_WEATHER] = HandleEndTurnWeather,
     [ENDTURN_WEATHER_DAMAGE] = HandleEndTurnWeatherDamage,

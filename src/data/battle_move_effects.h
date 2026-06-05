@@ -1985,4 +1985,64 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
         .usesProtectCounter = TRUE,
         .encourageEncore = TRUE,
     },
+
+    [EFFECT_RESEARCH] =
+    {
+        .battleScript = BattleScript_EffectResearch,
+        .battleTvScore = 0, // TODO: Assign points
+        .encourageEncore = TRUE,
+    },
+
+    [EFFECT_CHRYSALIS] =
+    {
+        .battleScript = BattleScript_EffectProtect,
+        .battleTvScore = 5,
+        .usesProtectCounter = TRUE,
+        .encourageEncore = TRUE,
+    },
+
+    [EFFECT_CASTING_CALL] =
+    {
+        .battleScript = BattleScript_EffectCastingCall,
+        .battleTvScore = 0, // TODO: Assign points
+    },
+
+    [EFFECT_MOUNTING_PRESSURE] =
+    {
+        .battleScript = BattleScript_EffectMountingPressure,
+        .battleTvScore = 0, // TODO: Assign points
+        .twoTurnEffect = TRUE,
+        .encourageEncore = TRUE,
+    },
+
+    [EFFECT_JET_STREAM] =
+    {
+        .battleScript = BattleScript_EffectHit,
+        .battleTvScore = 0, // TODO: Assign points
+    },
+
+    [EFFECT_STUNT_DOUBLE] =
+    {
+        .battleScript = BattleScript_EffectStuntDouble,
+        .battleTvScore = 0, // TODO: Assign points
+        .encourageEncore = TRUE,
+    },
+
+    [EFFECT_PSIDEKICK] =
+    {
+        .battleScript = BattleScript_EffectHit,
+        .battleTvScore = 0, // TODO: Assign points
+    },
+
+    [EFFECT_MOSH_PIT] =
+    {
+        .battleScript = BattleScript_EffectHit,
+        .battleTvScore = 0, // TODO: Assign points
+    },
+
+    [EFFECT_SYNCHRONIZED_SWIM] =
+    {
+        .battleScript = BattleScript_EffectHit,
+        .battleTvScore = 0, // TODO: Assign points
+    },
 };
