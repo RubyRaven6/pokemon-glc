@@ -874,7 +874,7 @@ static bool8 ShowPartyMenu(void)
         {
             u8 promptType = GetButtonPromptType();
             if (promptType != BUTTON_PROMPT_NONE
-                && sPartyMenuInternal != NULL
+                && sPartyMenuInternal
                 && sPartyMenuInternal->promptWindowId != WINDOW_NONE)
             {
                 ShowButtonPrompt(promptType);
@@ -1028,7 +1028,7 @@ static bool8 ReloadPartyMenu(void)
         {
             u8 promptType = GetButtonPromptType();
             if (promptType != BUTTON_PROMPT_NONE
-                && sPartyMenuInternal != NULL
+                && sPartyMenuInternal
                 && sPartyMenuInternal->promptWindowId != WINDOW_NONE)
             {
                 ShowButtonPrompt(promptType);
@@ -1128,7 +1128,7 @@ static void SetUpSlideInTransition(void)
         u8 top = GetWindowAttribute(sPartyMenuBoxes[i].windowId, WINDOW_TILEMAP_TOP);
         u8 height = GetWindowAttribute(sPartyMenuBoxes[i].windowId, WINDOW_HEIGHT);
         sAllSlotsTilemapBuffers[i] = Alloc(width * height * sizeof(u16));
-        if (sAllSlotsTilemapBuffers[i] != NULL)
+        if (sAllSlotsTilemapBuffers[i])
             CopyToBufferFromBgTilemap(1, sAllSlotsTilemapBuffers[i], left, top, width, height);
         ClearWindowTilemap(sPartyMenuBoxes[i].windowId);
     }
@@ -1368,7 +1368,7 @@ static void FreePartyPointers(void)
     SetGpuReg(REG_OFFSET_WININ, 0);
     SetGpuReg(REG_OFFSET_WINOUT, 0);
 
-    if (sPartyMenuInternal != NULL)
+    if (sPartyMenuInternal)
     {
         if (sPartyMenuInternal->comfyAnimX != INVALID_COMFY_ANIM)
             ReleaseComfyAnim(sPartyMenuInternal->comfyAnimX);
@@ -1377,22 +1377,22 @@ static void FreePartyPointers(void)
         // DebugPrintf("%s %d", __func__, __LINE__);
         Free(sPartyMenuInternal);
     }
-    if (sPartyBgTilemapBuffer != NULL)
+    if (sPartyBgTilemapBuffer)
     {
         // DebugPrintf("%s %d", __func__, __LINE__);
         Free(sPartyBgTilemapBuffer);
     }
-    if (sPartyBg3TilemapBuffer != NULL)
+    if (sPartyBg3TilemapBuffer)
     {
         // DebugPrintf("%s %d", __func__, __LINE__);
         Free(sPartyBg3TilemapBuffer);
     }
-    if (sPartyBgGfxTilemap != NULL)
+    if (sPartyBgGfxTilemap)
     {
         // DebugPrintf("%s %d", __func__, __LINE__);
         Free(sPartyBgGfxTilemap);
     }
-    if (sPartyMenuBoxes != NULL)
+    if (sPartyMenuBoxes)
     {
         // DebugPrintf("%s %d", __func__, __LINE__);
         Free(sPartyMenuBoxes);
@@ -1917,7 +1917,7 @@ static void Task_ClosePartyMenuAndSetCB2(u8 taskId)
         if (gPartyMenu.menuType == PARTY_MENU_TYPE_IN_BATTLE)
             UpdatePartyToFieldOrder();
 
-        if (sPartyMenuInternal->exitCallback != NULL)
+        if (sPartyMenuInternal->exitCallback)
             SetMainCallback2(sPartyMenuInternal->exitCallback);
         else
             SetMainCallback2(gPartyMenu.exitCallback);
@@ -2602,7 +2602,7 @@ static void Task_ReturnToChooseMonAfterText(u8 taskId)
         {
             u8 promptType = GetButtonPromptType();
             if (promptType != BUTTON_PROMPT_NONE
-                && sPartyMenuInternal != NULL
+                && sPartyMenuInternal
                 && sPartyMenuInternal->promptWindowId != WINDOW_NONE)
             {
                 ShowButtonPrompt(promptType);
@@ -3016,7 +3016,7 @@ static void PrintTextOnWindowWithFont(u8 windowId, const u8 *string, u8 x, u8 y,
 
 static inline u8 GetButtonPromptType(void)
 {
-    if (sPartyMenuInternal != NULL && sPartyMenuInternal->chooseHalf == TRUE)
+    if (sPartyMenuInternal && sPartyMenuInternal->chooseHalf == TRUE)
         return BUTTON_PROMPT_CONFIRM;
 
     if (gPartyMenu.action == PARTY_ACTION_CHOOSE_MON
@@ -3163,7 +3163,7 @@ static void BlitBitmapToPartyWindow(u8 windowId, const u8 *b, u8 c, u8 x, u8 y, 
     u8 *pixels = AllocZeroed(height * width * 32);
     u8 i, j;
 
-    if (pixels != NULL)
+    if (pixels)
     {
         for (i = 0; i < height; i++)
         {
@@ -4190,7 +4190,7 @@ static void SnapshotMoveAbilityWindows(void)
 
     sMoveAbilityWindowBuffer = Alloc(totalTiles * sizeof(u16));
 
-    if (sMoveAbilityWindowBuffer != NULL)
+    if (sMoveAbilityWindowBuffer)
     {
         CopyToBufferFromBgTilemap(1, sMoveAbilityWindowBuffer, mLeft, mTop, mW, mH * MAX_MON_MOVES);
         CopyToBufferFromBgTilemap(1, &sMoveAbilityWindowBuffer[mTiles], aLeft, aTop, aW, aH);
@@ -4274,7 +4274,7 @@ static void Task_SlideMultiBattlePartyView(u8 taskId)
             {
                 u8 top = GetWindowAttribute(sPartyMenuBoxes[i].windowId, WINDOW_TILEMAP_TOP);
                 sAllSlotsTilemapBuffers[i] = Alloc(width * height * sizeof(u16));
-                if (sAllSlotsTilemapBuffers[i] != NULL)
+                if (sAllSlotsTilemapBuffers[i])
                     CopyToBufferFromBgTilemap(1, sAllSlotsTilemapBuffers[i], left, top, width, height);
             }
             if (gPartyMenu.menuType == PARTY_MENU_TYPE_IN_BATTLE)
@@ -4284,7 +4284,7 @@ static void Task_SlideMultiBattlePartyView(u8 taskId)
             frame = 0;
         }
 
-        if (gPartyMenu.menuType == PARTY_MENU_TYPE_IN_BATTLE && sMoveAbilityWindowBuffer != NULL)
+        if (gPartyMenu.menuType == PARTY_MENU_TYPE_IN_BATTLE && sMoveAbilityWindowBuffer)
             SlideMoveAbilityWindows(frame * PARTY_SLIDE_SPEED, PARTY_SLIDE_SPEED);
 
         if (CascadePartyBoxes(left, width, slideDistance, frame, -PARTY_SLIDE_SPEED, FALSE))
@@ -4303,7 +4303,7 @@ static void Task_SlideMultiBattlePartyView(u8 taskId)
     {
         bool8 allDone = CascadePartyBoxes(left, width, slideDistance, frame, PARTY_SLIDE_SPEED, TRUE);
 
-        if (gPartyMenu.menuType == PARTY_MENU_TYPE_IN_BATTLE && sMoveAbilityWindowBuffer != NULL)
+        if (gPartyMenu.menuType == PARTY_MENU_TYPE_IN_BATTLE && sMoveAbilityWindowBuffer)
         {
             const s16 moveSlideDistance = (s16)(32 - GetWindowAttribute(sAbilityWindowId, WINDOW_TILEMAP_LEFT) - 1);
             if (frame < moveSlideDistance)
@@ -6248,7 +6248,7 @@ static u8 LoadMonGfxAndSprite(struct Pokemon *mon, s16 *state, bool32 isShadow)
     default:
         return CreateMonSprite(mon, isShadow);
     case 0:
-        if (gMonSpritesGfxPtr != NULL)
+        if (gMonSpritesGfxPtr)
         {
             HandleLoadSpecialPokePic(TRUE,
                                      gMonSpritesGfxPtr->spritesGfx[B_POSITION_OPPONENT_LEFT],
@@ -9302,7 +9302,7 @@ static void Task_ValidateChosenHalfParty(u8 taskId)
 {
     const u8 *msg = CheckBattleEntriesAndGetMessage();
 
-    if (msg != NULL)
+    if (msg)
     {
         PlaySE(SE_FAILURE);
         DisplayPartyMenuMessage(msg, TRUE);
@@ -9922,7 +9922,7 @@ static void Task_InitMultiPartnerPartySlideIn(u8 taskId)
         u8 left = GetWindowAttribute(sPartyMenuBoxes[i].windowId, WINDOW_TILEMAP_LEFT);
         u8 top  = GetWindowAttribute(sPartyMenuBoxes[i].windowId, WINDOW_TILEMAP_TOP);
         sAllSlotsTilemapBuffers[i] = Alloc(width * height * sizeof(u16));
-        if (sAllSlotsTilemapBuffers[i] != NULL)
+        if (sAllSlotsTilemapBuffers[i])
         {
             CopyToBufferFromBgTilemap(1, sAllSlotsTilemapBuffers[i], left, top, width, height);
             ClearWindowTilemap(sPartyMenuBoxes[i].windowId);
@@ -10027,7 +10027,7 @@ static void SlideMultiPartyMenuBoxSpritesOneStep(u8 taskId)
             MoveMultiPartyMenuBoxSprite(sPartyMenuBoxes[i].itemSpriteId, tXPos - 8);
             MoveMultiPartyMenuBoxSprite(sPartyMenuBoxes[i].statusSpriteId, tXPos - 8);
         }
-        if (sAllSlotsTilemapBuffers[i] != NULL)
+        if (sAllSlotsTilemapBuffers[i])
         {
             u8 left   = GetWindowAttribute(sPartyMenuBoxes[i].windowId, WINDOW_TILEMAP_LEFT);
             u8 top    = GetWindowAttribute(sPartyMenuBoxes[i].windowId, WINDOW_TILEMAP_TOP);
