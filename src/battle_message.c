@@ -899,6 +899,7 @@ const u8 *const gBattleStringsTable[STRINGID_COUNT] =
     [STRINGID_VICTORYCATCH]                         = COMPOUND_STRING("{B_DEF_NAME} is weak!\nThrow a Poké Ball now!"),
     [STRINGID_TYPECHARTINVERTED]                    = COMPOUND_STRING("Type matchups were inverted!"),
     [STRINGID_TYPECHARTRESTORED]                    = COMPOUND_STRING("Type matchups returned to normal!"),
+    [STRINGID_PKMNWASCHARGEDWITHPOWER]              = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX} was charged with power!"),
 };
 
 const u16 gTrainerUsedItemStringIds[] =

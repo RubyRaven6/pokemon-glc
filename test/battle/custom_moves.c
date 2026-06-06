@@ -1304,6 +1304,8 @@ SINGLE_BATTLE_TEST("Custom Moves - Casting Call switches out and charges the rep
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
         TURN { MOVE(player, MOVE_CASTING_CALL); SEND_OUT(player, 1); MOVE(opponent, MOVE_CELEBRATE); }
+    } SCENE {
+        MESSAGE("Wynaut was charged with power!");
     } THEN {
         EXPECT_EQ(player->species, SPECIES_WYNAUT);
         EXPECT(player->volatiles.chargeTimer > 0);

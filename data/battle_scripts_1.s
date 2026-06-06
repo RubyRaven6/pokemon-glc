@@ -1320,6 +1320,8 @@ BattleScript_EffectCastingCall::
 	printstring STRINGID_SWITCHINMON
 	switchinanim BS_ATTACKER, FALSE, TRUE
 	waitstate
+	printstring STRINGID_PKMNWASCHARGEDWITHPOWER
+	waitmessage B_WAIT_TIME_LONG
 	switchineffects BS_ATTACKER
 	switchinevents
 	goto BattleScript_MoveEnd
