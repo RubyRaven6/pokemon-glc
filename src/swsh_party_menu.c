@@ -1355,22 +1355,35 @@ static void FreePartyPointers(void)
     SetGpuReg(REG_OFFSET_BLDCNT, 0);
     SetGpuReg(REG_OFFSET_BLDALPHA, 0);
 
-    if (sPartyMenuInternal)
+    if (sPartyMenuInternal != NULL)
     {
         if (sPartyMenuInternal->comfyAnimX != INVALID_COMFY_ANIM)
             ReleaseComfyAnim(sPartyMenuInternal->comfyAnimX);
         if (sPartyMenuInternal->comfyAnimY != INVALID_COMFY_ANIM)
             ReleaseComfyAnim(sPartyMenuInternal->comfyAnimY);
+        DebugPrintf("%s %d", __func__, __LINE__);
         Free(sPartyMenuInternal);
     }
-    if (sPartyBgTilemapBuffer)
+    if (sPartyBgTilemapBuffer != NULL)
+    {
+        DebugPrintf("%s %d", __func__, __LINE__);
         Free(sPartyBgTilemapBuffer);
-    if (sPartyBg3TilemapBuffer)
+    }
+    if (sPartyBg3TilemapBuffer != NULL)
+    {
+        DebugPrintf("%s %d", __func__, __LINE__);
         Free(sPartyBg3TilemapBuffer);
-    if (sPartyBgGfxTilemap)
+    }
+    if (sPartyBgGfxTilemap != NULL)
+    {
+        DebugPrintf("%s %d", __func__, __LINE__);
         Free(sPartyBgGfxTilemap);
-    if (sPartyMenuBoxes)
+    }
+    if (sPartyMenuBoxes != NULL)
+    {
+        DebugPrintf("%s %d", __func__, __LINE__);
         Free(sPartyMenuBoxes);
+    }
     FreeAllWindowBuffers();
 }
 
@@ -2646,7 +2659,7 @@ static void GiveItemToMon(struct Pokemon *mon, enum Item item)
     TryItemHoldFormChange(&gParties[B_TRAINER_PLAYER][gPartyMenu.slotId], gPartyMenu.slotId, B_TRAINER_PLAYER);
 }
 
-static u8 TryTakeMonItem(struct Pokemon *mon)
+u8 TryTakeMonItem(struct Pokemon *mon)
 {
     enum Item item = GetMonData(mon, MON_DATA_HELD_ITEM);
 
