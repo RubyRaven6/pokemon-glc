@@ -6615,7 +6615,7 @@ void GivePlayerUnlockedPokemon(void)
         CalculateMonStats(&mon);
         GiveMonInitialMoveset(&mon);
         if(i < 3)
-            CopyMon(&gParties[B_TRAINER_PLAYER][i], &mon, sizeof(struct Pokemon));
+            GiveScriptedMonToPlayer(&mon, PARTY_SIZE);
         else
             CopyMonToPC(&mon);
     }
