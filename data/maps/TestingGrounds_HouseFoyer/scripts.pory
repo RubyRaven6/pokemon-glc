@@ -526,4 +526,6 @@ mart TechniquesMarket{
     ITEM_TM38
     ITEM_TM39
     ITEM_TM40
+    ITEM_TM41
+    ITEM_TM42
 }

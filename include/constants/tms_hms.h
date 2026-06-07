@@ -10,40 +10,40 @@
     F(POISONED_STARS) \
     F(MAGMATIC_RAGE) \
     F(SHALLOW_GRAVE) \
-    F(BULLET_SEED) \
-    F(HIDDEN_POWER) \
-    F(SUNNY_DAY) \
-    F(TAUNT) \
-    F(ICE_BEAM) \
-    F(BLIZZARD) \
-    F(HYPER_BEAM) \
-    F(LIGHT_SCREEN) \
-    F(PROTECT) \
-    F(RAIN_DANCE) \
-    F(GIGA_DRAIN) \
-    F(SAFEGUARD) \
-    F(FRUSTRATION) \
-    F(SOLAR_BEAM) \
-    F(IRON_TAIL) \
-    F(THUNDERBOLT) \
-    F(THUNDER) \
-    F(EARTHQUAKE) \
-    F(RETURN) \
-    F(DIG) \
-    F(PSYCHIC) \
-    F(SHADOW_BALL) \
-    F(BRICK_BREAK) \
-    F(DOUBLE_TEAM) \
-    F(REFLECT) \
-    F(SHOCK_WAVE) \
-    F(FLAMETHROWER) \
-    F(SLUDGE_BOMB) \
-    F(SANDSTORM) \
-    F(FIRE_BLAST) \
-    F(ROCK_TOMB) \
-    F(AERIAL_ACE) \
-    F(TORMENT) \
-    F(FACADE) \
+    F(WINDSTORM) \
+    F(VINSECTICATION) \
+    F(FUSSY_FUSS) \
+    F(JINX) \
+    F(CRASHING_FIST) \
+    F(HYDRAULIC_PRESS) \
+    F(ICE_RINK) \
+    F(STORM_SACRIFICE) \
+    F(MINERAGRAPHY) \
+    F(SURFS_UP) \
+    F(UNDERCURRENT) \
+    F(THIRD_DEGREE) \
+    F(INVERSION) \
+    F(WING_SLICER) \
+    F(GEMINIC_BLAST) \
+    F(SHOWSTOPPER) \
+    F(SINKHOLE) \
+    F(SUNBLOOM) \
+    F(AURA_FARMING) \
+    F(WAKE_CRASH) \
+    F(RAZZLE_DAZZLE) \
+    F(STEELSURGE) \
+    F(OVEREXPOSURE) \
+    F(DRY_FULMINATION) \
+    F(RESEARCH) \
+    F(CHRYSALIS) \
+    F(CASTING_CALL) \
+    F(MOUNTING_PRESSURE) \
+    F(JET_STREAM) \
+    F(STUNT_DOUBLE) \
+    F(CALAMITY_CLEAVE) \
+    F(PSIDEKICK) \
+    F(MOSH_PIT) \
+    F(SYNCHRONIZED_SWIM) \
     F(SECRET_POWER) \
     F(REST) \
     F(ATTRACT) \

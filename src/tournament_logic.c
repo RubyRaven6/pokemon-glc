@@ -253,6 +253,40 @@ static const u32 sLeaderSignatureTechs[] = {
     MOVE_POISONED_STARS,
     MOVE_MAGMATIC_RAGE,
     MOVE_SHALLOW_GRAVE,
+    MOVE_WINDSTORM,
+    MOVE_VINSECTICATION,
+    MOVE_FUSSY_FUSS,
+    MOVE_JINX,
+    MOVE_CRASHING_FIST,
+    MOVE_HYDRAULIC_PRESS,
+    MOVE_ICE_RINK,
+    MOVE_STORM_SACRIFICE,
+    MOVE_MINERAGRAPHY,
+    MOVE_SURFS_UP,
+    MOVE_UNDERCURRENT,
+    MOVE_THIRD_DEGREE,
+    MOVE_INVERSION,
+    MOVE_WING_SLICER,
+    MOVE_GEMINIC_BLAST,
+    MOVE_SHOWSTOPPER,
+    MOVE_SINKHOLE,
+    MOVE_SUNBLOOM,
+    MOVE_AURA_FARMING,
+    MOVE_WAKE_CRASH,
+    MOVE_RAZZLE_DAZZLE,
+    MOVE_STEELSURGE,
+    MOVE_OVEREXPOSURE,
+    MOVE_DRY_FULMINATION,
+    MOVE_RESEARCH,
+    MOVE_CHRYSALIS,
+    MOVE_CASTING_CALL,
+    MOVE_MOUNTING_PRESSURE,
+    MOVE_JET_STREAM,
+    MOVE_STUNT_DOUBLE,
+    MOVE_CALAMITY_CLEAVE,
+    MOVE_PSIDEKICK,
+    MOVE_MOSH_PIT,
+    MOVE_SYNCHRONIZED_SWIM,
 };
 
 void ChooseRandomGymLeader(void) {
@@ -335,7 +369,6 @@ bool8 ScrCmd_checkdefeatedleaders(struct ScriptContext *ctx) {
 
 u32 CheckPartyForTech(void)
 {
-    
     u32 counter = 0;
 
     for (u32 j = 0; j < gPartiesCount[B_TRAINER_PLAYER]; j++)
@@ -344,4 +377,13 @@ u32 CheckPartyForTech(void)
                 counter++;
     
     return counter;
+}
+
+void Debug_SetAllFlagsForGymLeaders(void)
+{
+    for (u32 i = ITEM_TM01; i < ARRAY_COUNT(gTechniqueFlagUnlocks); i++)
+    {
+        if(!FlagGet(gTechniqueFlagUnlocks[i]))
+            FlagSet(gTechniqueFlagUnlocks[i]);
+    }
 }
