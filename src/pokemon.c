@@ -6623,3 +6623,27 @@ void GivePlayerUnlockedPokemon(void)
             CopyMonToPC(&mon);
     }
 }
+
+void Debug_GivePlayerAllPokemon(void)
+{
+    struct Pokemon mon;
+    u32 gen;
+    u32 i;
+
+    for (gen = 0; gen <= 5; gen++)
+    {
+
+        for (i = 0; i < gFullyEvolvedArrays[gen].monArrayCount; i++)
+        {
+            u32 personality = Random32();
+            CreateMon(&mon, gFullyEvolvedArrays[gen].monArray[i], 100, personality, OTID_STRUCT_PLAYER_ID);
+            SetBoxMonIVs(&mon.box, MAX_IV_MASK);
+            CalculateMonStats(&mon);
+            GiveMonInitialMoveset(&mon);
+            if(i < 3)
+            GiveScriptedMonToPlayer(&mon, PARTY_SIZE);
+        else
+        CopyMonToPC(&mon);
+        }
+    }
+}
