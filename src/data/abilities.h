@@ -2485,7 +2485,7 @@ const struct AbilityInfo gAbilitiesInfo[ABILITIES_COUNT] =
     [ABILITY_METTLE] =
     {
         .name = _("Mettle"),
-        .description = COMPOUND_STRING("KOs boost Sp. Atk stat."),
+        .description = COMPOUND_STRING("KOs boost SpA stat."),
         .aiRating = 7,
     },
 };
