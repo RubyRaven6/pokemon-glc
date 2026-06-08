@@ -42,7 +42,7 @@ Looks pretty :)
 - **Ariados**: Gained Skill Link. Rebalanced with the following stats:
 
 | Stat            | Value |
-| :---------------:| :-----:|
+| :----------------| :-----:|
 | HP              | 70    |
 | Attack          | 90    |
 | Defense         | 60    |
@@ -54,7 +54,7 @@ Looks pretty :)
 - **Wormadam**: Each form has been given a new ability:
 
 | Stat         | Value     |
-| :------------:| :---------:|
+| :-------------| :----------|
 | Plant Cloak  | Harvest   |
 | Sandy Cloak  | Stamina   |
 | Trashy Cloak | Heatproof |
@@ -67,7 +67,7 @@ Looks pretty :)
 
 # Team Credits
 | Position                          | Name                                                    |
-| :---------------------------------:| :-------------------------------------------------------:|
+| :----------------------------------| :-------------------------------------------------------:|
 | Developer                         | Ruby                                                    |
 | Gym Leader<br>Team Designers      | Ruby, Turtleye, Jordan,<br>Kithri, Hedara, Noodle, Iriv |
 | Gym Leader<br>Technique Designers | Ruby, Turtleye, Jordan,<br>Kithri, Hedara               |
@@ -76,7 +76,7 @@ Looks pretty :)
 
 # Credits
 | Credit                | Feature                                |
-| :---------------------:| :--------------------------------------:|
-| pokeemerald-expansion | RHH and all the Expansion Contributors |
+| :----------------------| :--------------------------------------:|
+| pokeemerald-expansion | RHH and all<br>the Expansion Contributors |
 | Mudskip               | Pokemon GLC Logo                       |
 
