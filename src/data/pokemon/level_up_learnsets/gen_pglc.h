@@ -22059,6 +22059,7 @@ static const struct LevelUpMove sWormadamSandyLevelUpLearnset[] = {
     LEVEL_UP_MOVE(1, MOVE_SLEEP_TALK),
     LEVEL_UP_MOVE(1, MOVE_SUBSTITUTE),
     LEVEL_UP_MOVE(1, MOVE_CONFIDE),
+    LEVEL_UP_MOVE(1, MOVE_SHORE_UP),
     LEVEL_UP_END
 };
 
