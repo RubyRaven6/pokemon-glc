@@ -2841,7 +2841,7 @@ static enum MoveEndResult MoveEndQueueSynchronizedSwim(struct BattleCalcValues *
 {
     enum BattlerId partner = BATTLE_PARTNER(cv->battlerAtk);
 
-    if (cv->move != MOVE_SYNCHRONIZED_SWIM
+    if (cv->move != MOVE_SYNCHROSWIM
      || IsBattlerUnaffectedByMove(cv->battlerDef)
      || gBattleStruct->unableToUseMove
      || gSpecialStatuses[cv->battlerAtk].synchronizedSwimUsedMove

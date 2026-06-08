@@ -2986,7 +2986,7 @@ static bool32 TrySynchronizedSwim(void)
 {
     enum BattlerId swimBattler = MAX_BATTLERS_COUNT;
 
-    if (gCurrentMove != MOVE_SYNCHRONIZED_SWIM)
+    if (gCurrentMove != MOVE_SYNCHROSWIM)
         return FALSE;
 
     for (enum BattlerId battler = 0; battler < gBattlersCount; battler++)

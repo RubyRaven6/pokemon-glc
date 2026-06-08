@@ -22675,7 +22675,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .battleAnimScript = gBattleAnimMove_BeatUp,
     },
 
-    [MOVE_SYNCHRONIZED_SWIM] =
+    [MOVE_SYNCHROSWIM] =
     {
         .name = COMPOUND_STRING("Synchroswim"),
         .description = COMPOUND_STRING(

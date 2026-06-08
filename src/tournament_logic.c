@@ -188,7 +188,7 @@ static const u32 sLeaderSignatureTechs[] =
     MOVE_CALAMITY_CLEAVE,
     MOVE_PSIDEKICK,
     MOVE_MOSH_PIT,
-    MOVE_SYNCHRONIZED_SWIM,
+    MOVE_SYNCHROSWIM,
 };
 
 void ChooseRandomGymLeader(void)

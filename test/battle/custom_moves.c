@@ -244,12 +244,12 @@ ASSUMPTIONS
     ASSUME(GetMoveCategory(MOVE_MOSH_PIT) == DAMAGE_CATEGORY_PHYSICAL);
     ASSUME(MoveHasAdditionalEffectWithChance(MOVE_MOSH_PIT, MOVE_EFFECT_POISON, 10));
 
-    ASSUME(GetMoveEffect(MOVE_SYNCHRONIZED_SWIM) == EFFECT_SYNCHRONIZED_SWIM);
-    ASSUME(GetMoveType(MOVE_SYNCHRONIZED_SWIM) == TYPE_WATER);
-    ASSUME(GetMovePower(MOVE_SYNCHRONIZED_SWIM) == 70);
-    ASSUME(GetMoveAccuracy(MOVE_SYNCHRONIZED_SWIM) == 100);
-    ASSUME(GetMoveCategory(MOVE_SYNCHRONIZED_SWIM) == DAMAGE_CATEGORY_PHYSICAL);
-    ASSUME(GetMoveStrikeCount(MOVE_SYNCHRONIZED_SWIM) == 2);
+    ASSUME(GetMoveEffect(MOVE_SYNCHROSWIM) == EFFECT_SYNCHRONIZED_SWIM);
+    ASSUME(GetMoveType(MOVE_SYNCHROSWIM) == TYPE_WATER);
+    ASSUME(GetMovePower(MOVE_SYNCHROSWIM) == 70);
+    ASSUME(GetMoveAccuracy(MOVE_SYNCHROSWIM) == 100);
+    ASSUME(GetMoveCategory(MOVE_SYNCHROSWIM) == DAMAGE_CATEGORY_PHYSICAL);
+    ASSUME(GetMoveStrikeCount(MOVE_SYNCHROSWIM) == 2);
 }
 
 SINGLE_BATTLE_TEST("Custom Moves - Rock Heart may infatuate the target")
@@ -1417,10 +1417,10 @@ DOUBLE_BATTLE_TEST("Custom Moves - Synchroswim is repeated by the user's ally wi
         OPPONENT(SPECIES_WOBBUFFET) { Defense(100); HP(400); MaxHP(400); Speed(4); }
         OPPONENT(SPECIES_WYNAUT) { Speed(3); }
     } WHEN {
-        TURN { MOVE(playerLeft, MOVE_SYNCHRONIZED_SWIM, target: opponentLeft); MOVE(playerRight, MOVE_CELEBRATE); MOVE(opponentLeft, MOVE_CELEBRATE); MOVE(opponentRight, MOVE_CELEBRATE); }
+        TURN { MOVE(playerLeft, MOVE_SYNCHROSWIM, target: opponentLeft); MOVE(playerRight, MOVE_CELEBRATE); MOVE(opponentLeft, MOVE_CELEBRATE); MOVE(opponentRight, MOVE_CELEBRATE); }
     } SCENE {
-        ANIMATION(ANIM_TYPE_MOVE, MOVE_SYNCHRONIZED_SWIM, playerLeft);
-        ANIMATION(ANIM_TYPE_MOVE, MOVE_SYNCHRONIZED_SWIM, playerRight);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SYNCHROSWIM, playerLeft);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SYNCHROSWIM, playerRight);
         ANIMATION(ANIM_TYPE_MOVE, MOVE_CELEBRATE, playerRight);
     } THEN {
         EXPECT_LT(opponentLeft->hp, 300);
