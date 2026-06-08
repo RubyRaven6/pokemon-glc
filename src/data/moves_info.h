@@ -22566,13 +22566,13 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .battleAnimScript = gBattleAnimMove_Teleport,
     },
 
-    [MOVE_MOUNTING_PRESSURE] =
+    [MOVE_ORBITAL_PULL] =
     {
         .name = COMPOUND_STRING("Orbital Pull"),
         .description = COMPOUND_STRING(
             "Charges, then boosts\n"
             "offenses and gravity."),
-        .effect = EFFECT_MOUNTING_PRESSURE,
+        .effect = EFFECT_ORBITAL_PULL,
         .power = 0,
         .type = TYPE_GROUND,
         .accuracy = 0,

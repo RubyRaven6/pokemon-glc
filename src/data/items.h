@@ -12329,7 +12329,7 @@ const struct ItemInfo gItemsInfo[] =
         .shopCriteriaFunc = ShopCriteriaByUnlockedFlag,
     },
 
-    [ITEM_TM_MOUNTING_PRESSURE] =
+    [ITEM_TM_ORBITAL_PULL] =
     {
         .name = ITEM_NAME("TM36"),
         .price = 0,
