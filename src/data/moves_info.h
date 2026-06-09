@@ -22076,7 +22076,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
             .moveEffect = MOVE_EFFECT_GRASSPIERCER,
             .chance = 50,
         }),
-        .battleAnimScript = gBattleAnimMove_NeedleArm,
+        .battleAnimScript = gBattleAnimMove_Grasspiercer,
     },
 
     [MOVE_PSYCHE_LOCK] =

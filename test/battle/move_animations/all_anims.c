@@ -2501,4 +2501,57 @@ SINGLE_BATTLE_TEST("Tera Blast animations work")
     }
 }
 
+SINGLE_BATTLE_TEST("Custom Move animations work")
+{
+    u32 j = MOVE_ROCK_HEART, move = 0, species = 0;
+    u32 k = 0, variation = 0, variationsNumber;
+    u32 friendship = 0, tempFriendship;
+    u32 tempMove, tempSpecies;
+    FORCE_MOVE_ANIM(TRUE);
+    for (; j <= ANIM_TEST_END_MOVE; j++) {
+        variationsNumber = GetVariationsNumber(j, FALSE);
+        for (k = 0; k < variationsNumber; k++) {
+            ParametrizeMovesAndSpecies(j, &tempMove, &tempSpecies, k);
+            tempFriendship = ParametrizeFriendship(j, k);
+            PARAMETRIZE { move = tempMove; species = tempSpecies; variation = k; friendship = tempFriendship;}
+        }
+    }
+
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET) {};
+        OPPONENT(SPECIES_WOBBUFFET) { Item(ITEM_FOCUS_SASH); }
+    } WHEN {
+        TURN { MOVE(player, move); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, move, player);
+    } THEN {
+        FORCE_MOVE_ANIM(FALSE);
+        if (gLoadFail || gSpriteAllocs != 0)
+            DebugPrintf("Move failed: %S (%u)", GetMoveName(move), move);
+        EXPECT_EQ(gLoadFail, FALSE);
+        EXPECT_EQ(gSpriteAllocs, 0);
+    }
+}
+
+SINGLE_BATTLE_TEST("Individual Custom Move test")
+{
+    u32 move;
+    PARAMETRIZE { move = MOVE_GRASSPIERCER; }
+
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET) {};
+        OPPONENT(SPECIES_WOBBUFFET) { Item(ITEM_FOCUS_SASH); }
+    } WHEN {
+        TURN { MOVE(player, move); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, move, player);
+    } THEN {
+        FORCE_MOVE_ANIM(FALSE);
+        if (gLoadFail || gSpriteAllocs != 0)
+            DebugPrintf("Move failed: %S (%u)", GetMoveName(move), move);
+        EXPECT_EQ(gLoadFail, FALSE);
+        EXPECT_EQ(gSpriteAllocs, 0);
+    }
+}
+
 #endif // !T_SHOULD_RUN_MOVE_ANIM
