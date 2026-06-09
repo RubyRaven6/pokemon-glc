@@ -1691,6 +1691,7 @@ enum __attribute__((packed)) Species
     SPECIES_GLIMMORA_MEGA = 1572,
 
     SPECIES_CUSTOM_START = SPECIES_GLIMMORA_MEGA,
+    SPECIES_NANI,
     // Add any custom species between here and SPECIES_CUSTOM_END
     SPECIES_CUSTOM_END,
 
