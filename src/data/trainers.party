@@ -92,7 +92,7 @@ Pic: Aqua Grunt M
 Gender: Male
 Music: Elite Four
 Double Battle: No
-AI: Smart Trainer / Prediction / Assumptions
+AI: Good Trainer / Prediction / Assumptions / Ace / Force Setup First Turn / Risky
 Party Size: 6
 Pool Rules: Basic
 Pool Pick Functions: Default
@@ -197,7 +197,7 @@ Pic: Aqua Grunt F
 Gender: Female
 Music: Elite Four
 Double Battle: No
-AI: Smart Trainer / Prediction / Assumptions
+AI: Good Trainer / Prediction / Assumptions / Ace / HP Aware
 Party Size: 6
 Pool Rules: Weather Singles
 Pool Pick Functions: Default
@@ -310,7 +310,7 @@ Pic: Aqua Grunt M
 Gender: Male
 Music: Elite Four
 Double Battle: No
-AI: Smart Trainer / Prediction / Assumptions
+AI: Good Trainer / Prediction / Assumptions / Ace / Suicide
 Party Size: 6
 Pool Rules: Basic
 Pool Pick Functions: Default
@@ -418,7 +418,7 @@ Pic: Aqua Grunt F
 Gender: Female
 Music: Elite Four
 Double Battle: Yes
-AI: Smart Trainer / Prediction / Assumptions
+AI: Good Trainer / Prediction / Assumptions / Ace / Prefer Status Moves
 Party Size: 6
 Pool Rules: Doubles
 Pool Pick Functions: Default
@@ -526,7 +526,7 @@ Pic: Aqua Grunt F
 Gender: Female
 Music: Elite Four
 Double Battle: Yes
-AI: Smart Trainer / Prediction / Assumptions
+AI: Good Trainer / Prediction / Assumptions / Ace / Prefer Status Moves
 Party Size: 6
 Pool Rules: Doubles
 Pool Pick Functions: Default
@@ -635,7 +635,7 @@ Pic: Leader Tate And Liza
 Gender: Male
 Music: Elite Four
 Double Battle: Yes
-AI: Smart Trainer / Prediction / Assumptions
+AI: Good Trainer / Prediction / Assumptions / Ace
 Party Size: 6
 Pool Rules: Doubles
 Pool Pick Functions: Default
@@ -747,7 +747,7 @@ Pic: Aqua Grunt M
 Gender: Male
 Music: Elite Four
 Double Battle: No
-AI: Smart Trainer / Prediction / Assumptions
+AI: Good Trainer / Prediction / Assumptions / Ace / Risky
 Party Size: 6
 Pool Rules: Basic
 Pool Pick Functions: Default
@@ -859,7 +859,7 @@ Pic: Aqua Grunt M
 Gender: Male
 Music: Elite Four
 Double Battle: No
-AI: Smart Trainer / Prediction / Assumptions
+AI: Good Trainer / Prediction / Assumptions / Ace / Conservative
 Party Size: 6
 Pool Rules: Basic
 Pool Pick Functions: Default
@@ -967,7 +967,7 @@ Pic: Aqua Grunt M
 Gender: Male
 Music: Elite Four
 Double Battle: No
-AI: Smart Trainer / Prediction / Assumptions
+AI: Good Trainer / Prediction / Assumptions / Ace
 Party Size: 6
 Pool Rules: Basic
 Pool Pick Functions: Default
@@ -1076,7 +1076,7 @@ Pic: Aqua Grunt M
 Gender: Male
 Music: Elite Four
 Double Battle: No
-AI: Smart Trainer / Prediction / Assumptions
+AI: Good Trainer / Prediction / Assumptions / Ace / Conservative
 Party Size: 6
 Pool Rules: Weather Singles
 Pool Pick Functions: Default
@@ -1188,7 +1188,7 @@ Pic: Aqua Grunt F
 Gender: Female
 Music: Elite Four
 Double Battle: No
-AI: Smart Trainer / Prediction / Assumptions
+AI: Good Trainer / Prediction / Assumptions / Ace
 Party Size: 6
 Pool Rules: Basic
 Pool Pick Functions: Default
@@ -1294,7 +1294,7 @@ Pic: Aqua Grunt M
 Gender: Male
 Music: Elite Four
 Double Battle: No
-AI: Smart Trainer / Prediction / Assumptions
+AI: Good Trainer / Prediction / Assumptions / Ace
 Party Size: 6
 Pool Rules: Basic
 Pool Pick Functions: Default
@@ -1398,7 +1398,7 @@ Pic: Aqua Grunt M
 Gender: Male
 Music: Elite Four
 Double Battle: No
-AI: Smart Trainer / Prediction / Assumptions
+AI: Good Trainer / Prediction / Assumptions / Ace
 Party Size: 6
 Pool Rules: Basic
 Pool Pick Functions: Default
@@ -1503,7 +1503,7 @@ Pic: Aqua Grunt F
 Gender: Female
 Music: Elite Four
 Double Battle: No
-AI: Smart Trainer / Prediction / Assumptions
+AI: Good Trainer / Prediction / Assumptions / Ace
 Party Size: 6
 Pool Rules: Weather Singles
 Pool Pick Functions: Default
@@ -1611,7 +1611,7 @@ Pic: Aqua Grunt M
 Gender: Male
 Music: Elite Four
 Double Battle: No
-AI: Smart Trainer / Prediction / Assumptions
+AI: Good Trainer / Prediction / Assumptions / Ace
 Party Size: 6
 Pool Rules: Weather Singles
 Pool Pick Functions: Default
@@ -1720,7 +1720,7 @@ Pic: Aqua Grunt M
 Gender: Male
 Music: Elite Four
 Double Battle: No
-AI: Smart Trainer / Prediction / Assumptions
+AI: Good Trainer / Prediction / Assumptions / Ace
 Party Size: 6
 Pool Rules: Basic
 Pool Pick Functions: Default
@@ -1827,7 +1827,7 @@ Pic: Leader Roxanne
 Gender: Female
 Music: Elite Four
 Double Battle: No
-AI: Smart Trainer / Prediction / Assumptions
+AI: Good Trainer / Prediction / Assumptions / Ace
 Party Size: 6
 Pool Rules: Basic
 Pool Pick Functions: Default
@@ -1931,7 +1931,7 @@ Pic: Leader Brawly
 Gender: Male
 Music: Elite Four
 Double Battle: No
-AI: Smart Trainer / Prediction / Assumptions
+AI: Good Trainer / Prediction / Assumptions / Ace
 Party Size: 6
 Pool Rules: Basic
 Pool Pick Functions: Default
@@ -2040,7 +2040,7 @@ Pic: Leader Wattson
 Gender: Male
 Music: Elite Four
 Double Battle: Yes
-AI: Smart Trainer / Prediction / Assumptions
+AI: Good Trainer / Prediction / Assumptions / Ace
 Party Size: 6
 Pool Rules: Doubles
 Pool Pick Functions: Default
@@ -2145,7 +2145,7 @@ Pic: Leader Flannery
 Gender: Female
 Music: Elite Four
 Double Battle: No
-AI: Smart Trainer / Prediction / Assumptions
+AI: Good Trainer / Prediction / Assumptions / Ace
 Party Size: 6
 Pool Rules: Doubles
 Pool Pick Functions: Default
@@ -2253,7 +2253,7 @@ Pic: Leader Norman
 Gender: Male
 Music: Elite Four
 Double Battle: Yes
-AI: Smart Trainer / Prediction / Assumptions
+AI: Good Trainer / Prediction / Assumptions / Ace
 Party Size: 6
 Pool Rules: Doubles
 Pool Pick Functions: Default
@@ -2360,7 +2360,7 @@ Pic: Leader Winona
 Gender: Female
 Music: Elite Four
 Double Battle: No
-AI: Smart Trainer / Prediction / Assumptions
+AI: Good Trainer / Prediction / Assumptions / Ace
 Party Size: 6
 Pool Rules: Basic
 Pool Pick Functions: Default
@@ -2464,7 +2464,7 @@ Pic: Leader Tate And Liza
 Gender: Male
 Music: Elite Four
 Double Battle: Yes
-AI: Smart Trainer / Prediction / Assumptions
+AI: Good Trainer / Prediction / Assumptions / Ace
 Party Size: 6
 Pool Rules: Doubles
 Pool Pick Functions: Default
@@ -2568,7 +2568,7 @@ Pic: Leader Juan
 Gender: Male
 Music: Elite Four
 Double Battle: No
-AI: Smart Trainer / Prediction / Assumptions
+AI: Good Trainer / Prediction / Assumptions / Ace
 Party Size: 6
 Pool Rules: Doubles
 Pool Pick Functions: Default
@@ -2677,7 +2677,7 @@ Pic: Aqua Grunt M
 Gender: Male
 Music: Elite Four
 Double Battle: No
-AI: Smart Trainer / Prediction / Assumptions
+AI: Good Trainer / Prediction / Assumptions / Ace
 Party Size: 6
 Pool Rules: Doubles
 Pool Pick Functions: Default
@@ -2785,7 +2785,7 @@ Pic: Aqua Grunt F
 Gender: Female
 Music: Elite Four
 Double Battle: No
-AI: Smart Trainer / Prediction / Assumptions
+AI: Good Trainer / Prediction / Assumptions / Ace
 Party Size: 6
 Pool Rules: Doubles
 Pool Pick Functions: Default
@@ -2890,7 +2890,7 @@ Pic: Aqua Grunt F
 Gender: Female
 Music: Elite Four
 Double Battle: No
-AI: Smart Trainer / Prediction / Assumptions
+AI: Good Trainer / Prediction / Assumptions / Ace
 Party Size: 6
 Pool Rules: Doubles
 Pool Pick Functions: Default
@@ -2996,7 +2996,7 @@ Pic: Aqua Grunt F
 Gender: Female
 Music: Elite Four
 Double Battle: No
-AI: Smart Trainer / Prediction / Assumptions
+AI: Good Trainer / Prediction / Assumptions / Ace
 Party Size: 6
 Pool Rules: Basic
 Pool Pick Functions: Default
@@ -3104,7 +3104,7 @@ Pic: Aqua Admin M
 Gender: Male
 Music: Elite Four
 Double Battle: No
-AI: Smart Trainer / Prediction / Assumptions
+AI: Good Trainer / Prediction / Assumptions / Ace
 Party Size: 6
 Pool Rules: Basic
 Pool Pick Functions: Default
@@ -3232,7 +3232,7 @@ Pic: Aqua Grunt M
 Gender: Male
 Music: Elite Four
 Double Battle: No
-AI: Smart Trainer / Prediction / Assumptions
+AI: Good Trainer / Prediction / Assumptions / Ace
 Party Size: 6
 Pool Rules: Doubles
 Pool Pick Functions: Default
@@ -3337,7 +3337,7 @@ Pic: Aqua Grunt F
 Gender: Female
 Music: Elite Four
 Double Battle: No
-AI: Smart Trainer / Prediction / Assumptions
+AI: Good Trainer / Prediction / Assumptions / Ace
 Party Size: 6
 Pool Rules: Basic
 Pool Pick Functions: Default
@@ -3443,7 +3443,7 @@ Pic: Aqua Grunt M
 Gender: Male
 Music: Elite Four
 Double Battle: No
-AI: Smart Trainer / Prediction / Assumptions
+AI: Good Trainer / Prediction / Assumptions / Ace
 Party Size: 6
 Pool Rules: Basic
 Pool Pick Functions: Default
@@ -3543,147 +3543,976 @@ Modest Nature
 - Dry Fulmination
 
 === TRAINER_LEADER_LENORA ===
-Name: GRUNT
-Class: Team Aqua
-Pic: Aqua Grunt M
-Gender: Male
-Music: Aqua
-Double Battle: No
-AI: Check Bad Move
-
-Zubat
-Level: 14
-IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
-
-Carvanha
-Level: 14
-IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
-
-=== TRAINER_LEADER_BURGH ===
-Name: GRUNT
-Class: Team Magma
-Pic: Magma Grunt M
-Gender: Male
-Music: Magma
-Double Battle: No
-AI: Check Bad Move
-
-Numel
-Level: 32
-IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
-
-=== TRAINER_LEADER_ELESA ===
-Name: GRUNT
-Class: Team Aqua
-Pic: Aqua Grunt M
-Gender: Male
-Music: Aqua
-Double Battle: No
-AI: Check Bad Move
-
-Zubat
-Level: 32
-IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
-
-=== TRAINER_LEADER_CLAY ===
-Name: GRUNT
-Class: Team Aqua
-Pic: Aqua Grunt M
-Gender: Male
-Music: Aqua
-Double Battle: No
-AI: Check Bad Move
-
-Carvanha
-Level: 32
-IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
-
-=== TRAINER_LEADER_SKYLA ===
-Name: GRUNT
-Class: Team Aqua
-Pic: Aqua Grunt M
-Gender: Male
-Music: Aqua
-Double Battle: No
-AI: Check Bad Move
-
-Poochyena
-Level: 30
-IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
-
-Carvanha
-Level: 30
-IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
-
-=== TRAINER_LEADER_BRYCEN ===
-Name: GRUNT
-Class: Team Aqua
+Name: Lenora
+Class: Leader
 Pic: Aqua Grunt F
 Gender: Female
-Music: Aqua
+Music: Elite Four
 Double Battle: No
-AI: Check Bad Move
+AI: Good Trainer / Prediction / Assumptions / Ace
+Party Size: 6
+Pool Rules: Basic
+Pool Pick Functions: Default
 
-Carvanha
-Level: 28
-IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+Delcatty @ Silk Scarf
+Ability: Normalize
+Level: 100
+EVs: 63 Spe / 63 Atk / 2 HP
+Tags: Lead
+Adamant Nature
+- Assist
+- Research
+- Play Rough
+- Attract
+
+Chansey @ Eviolite
+Ability: Natural Cure
+Level: 100
+EVs: 63 HP / 63 Def / 2 SpD
+Modest Nature
+- Softboiled
+- Seismic Toss
+- Copycat
+- Healing Wish
+
+Stoutland @ Silk Scarf
+Ability: Intimidate
+Level: 100
+EVs: 63 Atk / 63 Spe / 2 HP
+Adamant Nature
+- Retaliation
+- Intimidate
+- Psychic Fangs
+- Work Up
+
+Cinccino @ Assault Vest
+Ability: Skill Link
+Level: 100
+EVs: 63 Atk / 63 Spe / 2 HP
+Adamant Nature
+- Rock Blast
+- Bullet Seed
+- Triple Axel
+- Tail Slap
+
+Porygon2 @ Eviolite
+Ability: Download
+Level: 100
+EVs: 63 SpA / 63 HP / 2 SpD
+Modest Nature
+- Research
+- Tri-Attack
+- Recycle
+- Rest
+
+Obstagoon @ Flying
+Ability: Defiant
+Level: 100
+EVs: 63 Atk / 63 HP / 2 Def
+Adamant Nature
+- Knock Off
+- Tera Blast
+- Ice Punch
+- Switcheroo
+
+Pyroar @ Pyroarite
+Ability: Mettle
+Level: 100
+EVs: 63 SpA / 63 Spe / 2 HP
+Modest Nature
+- Hyper Voice
+- Research
+- Flamethrower
+- Yawn
+
+Silvally @ Psychic Memory
+Ability: RKS System
+Level: 100
+EVs: 63 Atk / 63 Spe / 2 HP
+Adamant Nature
+- Research
+- Retaliation
+- Parting Shot
+- Thunder Wave
+
+Watchog @ Life Orb
+Ability: Analytic
+Level: 100
+EVs: 63 Atk / 63 Spe / 2 HP
+Tags: Ace
+Adamant Nature
+- Research
+- Seed Bomb
+- Retaliation
+- Knock Off
+
+=== TRAINER_LEADER_BURGH ===
+Name: Burgh
+Class: Leader
+Pic: Aqua Grunt M
+Gender: Male
+Music: Elite Four
+Double Battle: Yes
+AI: Good Trainer / Prediction / Assumptions / Ace
+Party Size: 6
+Pool Rules: Basic
+Pool Pick Functions: Default
+
+Grafaiai @ Covert Cloak
+Ability: Prankster
+Level: 100
+EVs: 63 Spe / 63 Atk / 2 HP
+Tags: Lead
+Jolly Nature
+- Gunk Shot
+- Knock Off
+- U-Turn
+- Doodle
+
+Ribombee @ Focus Sash
+Ability: Shield Dust
+Level: 100
+EVs: 63 SpA / 63 Spe / 2 HP
+Tags: Lead
+Timid Nature
+- Sticky Web
+- Moonblast
+- Stun Spore
+- Tailwind
+
+Vivillon @ Focus Sash
+Ability: Compound Eyes
+Level: 100
+EVs: 63 SpA / 63 Def / 2 HP
+Tera Type: Ground
+Modest Nature
+- Chrysalis
+- Bug Buzz
+- Tailwind
+- Hurricane
+
+Vespiquen @ Leftovers
+Ability: Unnerve
+Level: 100
+EVs: 63 SpA / 63 Def / 2 HP
+Tera Type: Ground
+Modest Nature
+- Struggle Bug
+- Confuse Ray
+- Defend Order
+- Toxic Spikes
+
+Frosmoth @ Heavy-Duty Boots
+Ability: Ice Scales
+Level: 100
+EVs: 63 SpA / 63 Def / 2 HP
+Tera Type: Ground
+Modest Nature
+- Chrysalis
+- Ice Beam
+- Giga Drain
+- Defog
+
+Wormadam-Ground @ Leftovers
+Ability: Stamina
+Level: 100
+EVs: 63 Ark / 63 Def / 2 HP
+Adamant Nature
+- Shore Up
+- Bug Bite
+- Substitute
+- Rest
+
+Slither Wing @ Booster Energy
+Ability: Protosynthesis
+Level: 100
+EVs: 63 Atk / 63 Spe / 2 SpD
+Tera Type: Fire
+Adamant Nature
+- Leech Life
+- Earthquake
+- Flame Charge
+- Bulk Up
+
+Beedrill @ Beedrillite
+Ability: Swarm
+Level: 100
+EVs: 63 Atk / 63 Spe / 2 SpD
+Tags: Ace
+Adamant Nature
+- Drill Run
+- Poison Jab
+- Fell Stinger
+- U-Turn
+
+Levanny @ Life Orb
+Ability: Sharpness
+Level: 100
+EVs: 63 Atk / 63 Spe / 2 SpD
+Tags: Ace
+Adamant Nature
+- X-Scissor
+- Swords Dance
+- Aerial Ace
+- Leaf Blade
+
+=== TRAINER_LEADER_ELESA ===
+Name: Elesa
+Class: Leader
+Pic: Aqua Grunt F
+Gender: Female
+Music: Elite Four
+Double Battle: Yes
+AI: Good Trainer / Prediction / Assumptions / Ace
+Party Size: 6
+Pool Rules: Basic
+Pool Pick Functions: Default
+
+Sandy Shocks @ Booste Energy
+Ability: Quark Drive
+Level: 100
+EVs: 63 SpA / 63 Spe / 2 HP
+Tags: Lead
+Modest Nature
+- Volt Switch
+- Earth Power
+- Thunderbolt
+- Stealth Rock
+
+Eelektross @ Assault Vest
+Ability: Levitate
+Level: 100
+EVs: 63 SpA / 63 HP / 2 Def
+Modest Nature
+- Thunderbolt
+- Casting Call
+- Giga Drain
+- Dragon Tail
+
+Rotom-Mow @ Grass Gem
+Ability: Levitate
+Level: 100
+EVs: 63 SpA / 63 Spe / 2 HP
+Modest Nature
+- Leaf Storm
+- Thunderbolt
+- Casting Call
+- Will-o-Wisp
+
+Lanturn @ Leftovers
+Ability: Water Absorb
+Level: 100
+EVs: 63 SpA / 63 HP / 2 Def
+Modest Nature
+- Wish
+- Casting Call
+- Scald
+- Thunder Wave
+
+Jolteon @ Salac Berry
+Ability: Volt Absorb
+Level: 100
+EVs: 63 SpA / 63 Spe / 2 HP
+Modest Nature
+- Substitute
+- Baton Pass
+- Work Up
+- Thunderbolt
+
+Manectric @ Manectite
+Ability: Static
+Level: 100
+EVs: 63 SpA / 63 Spe / 2 HP
+Tags: Support
+Modest Nature
+- Thunderbolt
+- Volt Switch
+- Flamethrower
+- Parabolic Charge
+
+Luxray @ Life Orb
+Ability: Strong Jaw
+Level: 100
+EVs: 63 Atk / 63 Spe / 2 HP
+Adamant Nature
+- Thunder Fang
+- Ice Fang
+- Crunch
+- Psychic Fangs
+
+Oricorio-Pom-Pom @ Leftovers
+Ability: Dancer
+Level: 100
+EVs: 63 SpA / 63 Spe / 2 HP
+Tags: Ace
+Tera Type: Water
+Modest Nature
+- Quiver Dance
+- Revelation Dance
+- Air Slash
+- Thunderbolt
+
+Iron Thorns @ Booster Energy
+Ability: Quark Drive
+Level: 100
+EVs: 63 Atk / 63 Spe / 2 HP
+Tags: Ace
+Tera Type: Flying
+Adamant Nature
+- Dragon Dance
+- Rock Slide
+- Supercell Slam
+- Tera Blast
+
+=== TRAINER_LEADER_CLAY ===
+Name: Clay
+Class: Leader
+Pic: Aqua Grunt M
+Gender: Male
+Music: Elite Four
+Double Battle: No
+AI: Good Trainer / Prediction / Assumptions / Ace
+Party Size: 6
+Pool Rules: Basic
+Pool Pick Functions: Default
+
+Hippodown @ Smooth Rock
+Ability: Sand Stream
+Level: 100
+EVs: 63 HP / 63 Atk / 2 Def
+Tags: Lead
+Adamant Nature
+- Stealth Rock
+- Whirlwind
+- Earthquake
+- Slack Off
+
+Gastrodon @ Red Card
+Ability: Storm Drain
+Level: 100
+EVs: 63 HP / 63 SpA / 2 HP
+Modest Nature
+- Spikes
+- Scald
+- Earth Power
+- Memento
+
+Krookodile @ Power Herb
+Ability: Moxie
+Level: 100
+EVs: 63 Atk / 63 Spe / 2 HP
+Adamant Nature
+- Orbital Pull
+- Power Trip
+- Earthquake
+- Gunk Shot
+
+Mamoswine @ Assault Vest
+Ability: Thick Fat
+Level: 100
+EVs: 63 Spe / 63 Atk / 2 Def
+Adamant Nature
+- Earthquake
+- Ice Shard
+- Icicle Crash
+- Knock Off
+
+Flapple @ Power Herb
+Ability: Hustle
+Level: 100
+EVs: 63 Atk / 63 Spe / 2 HP
+Adamant Nature
+- Orbital Pull
+- Grav Apple
+- Acrobatics
+- Dragon Rush
+
+Sandaconda @ Smooth Rock
+Ability: Sand Spit
+Level: 100
+EVs: 63 Atk / 63 Def / 2 HP
+Tags: Support
+Adamant Nature
+- Glare
+- Body Press
+- Bulldoze
+- Coil
+
+Flygon @ Leftovers
+Ability: Levitate
+Level: 100
+EVs: 63 Atk / 63 Spe / 2 HP
+Tera Type: Water
+Adamant Nature
+- Orbital Pull
+- Earth Power
+- Fire Blast
+- Dragon Pulse
+
+Sandy Shocks @ Power Herb
+Ability: Quark Drive
+Level: 100
+EVs: 63 Spe / 63 SpA / 2 HP
+Tera Type: Ice
+Modest Nature
+- Orbital Pull
+- Zap Cannon
+- Earth Power
+- Tera Blast
+
+Excadrill @ Life Orb
+Ability: Sand Rush
+Level: 100
+EVs: 63 Atk / 63 Spe / 2 HP
+Tags: Ace
+Adamant Nature
+- Swords Dance
+- Earthquake
+- Rock Slide
+- Iron Head
+
+=== TRAINER_LEADER_SKYLA ===
+Name: Skyla
+Class: Leader
+Pic: Aqua Grunt F
+Gender: Female
+Music: Elite Four
+Double Battle: Yes
+AI: Good Trainer / Prediction / Assumptions / Ace
+Party Size: 6
+Pool Rules: Basic
+Pool Pick Functions: Default
+
+Xatu @ Light Clay
+Ability: Magic Bounce
+Level: 100
+EVs: 63 SpD / 63 HP / 2 Def
+Tags: Lead
+Sassy Nature
+- Tailwind
+- Future Sight
+- Light Screen
+- U-Turn
+
+Corviknight @ Light Clay
+Ability: Mirror Armor
+Level: 100
+EVs: 63 HP / 63 Atk / 2 Def
+Tags: Lead
+Adamant Nature
+- Roost
+- Reflect
+- Brave Bird
+- U-Turn
+
+Braviary-H @ Life Orb
+Ability: Sheer Force
+Level: 100
+EVs: 63 Atk / 63 Spe / 2 HP
+Adamant Nature
+- Air Slash
+- Esper Wing
+- Dazzling Gleam
+- Heat Wave
+
+Garchomp @ Life Orb
+Ability: Rough Skin
+Level: 100
+EVs: 63 Atk / 63 Spe / 2 SpD
+Adamant Nature
+- Jet Stream
+- Earthquake
+- Scale Shot
+- Iron Head
+
+Yanmega @ Choice Specs
+Ability: Tinted Lens
+Level: 100
+EVs: 63 Spe / 63 SpA / 2 Def
+Timid Nature
+- Bug Buzz
+- Air Slash
+- Giga Drain
+- U-Turn
+
+Decidueye-H @ Fighting Gem
+Ability: Scrappy
+Level: 100
+EVs: 63 Atk / 63 Spe / 2 SpD
+Tera Type: Flying
+Adamant Nature
+- Jet Stream
+- Triple Arrows
+- Acrobatics
+- Leaf Blade
+
+Swanna @ Leftovers
+Ability: Big Pecks
+Level: 100
+EVs: 63 HP / 63 SpA / 2 Def
+Tags: Support
+Modest Nature
+- Tailwind
+- Helping Hand
+- Feather Dance
+- Muddy Water
+
+Staraptor @ Choice Band
+Ability: Intimidate
+Level: 100
+EVs: 63 Atk / 63 Spe / 2 SpD
+Adamant Nature
+- Jet Stream
+- Double Edge
+- Close Combat
+- U-Turn
+
+Aerodactyl @ Aerodactilite
+Ability: Pressure
+Level: 100
+EVs: 63 Atk / 63 Spe / 2 SpD
+Tags: Ace
+Adamant Nature
+- Jet Stream
+- Rock Slide
+- Earthquake
+- Iron Head
+
+=== TRAINER_LEADER_BRYCEN ===
+Name: Brycen
+Class: Leader
+Pic: Aqua Grunt M
+Gender: Male
+Music: Elite Four
+Double Battle: Yes
+AI: Good Trainer / Prediction / Assumptions / Ace
+Party Size: 6
+Pool Rules: Basic
+Pool Pick Functions: Default
+
+Cryogonal @ Icy Rock
+Ability: Snow Warning
+Level: 100
+EVs: 63 HP / 63 Spe / 2 SpA
+Tags: Lead / Weather Setter
+Timid Nature
+- Stunt Double
+- Recover
+- Blizzard
+- Snowscape
+
+Rotom-Frost @ Spell Tag
+Ability: Levitate
+Level: 100
+EVs: 63 Spe / 63 SpA / 2 HP
+Tags: Lead
+Tera Type: Water
+Timid Nature
+- Hex
+- Blizzard
+- Thunder Wave
+- Tera Blast
+
+Vanilluxe @ Choice Specs
+Ability: Snow Warning
+Level: 100
+EVs: 63 HP / 63 SpA / 2 Spe
+Modest Nature
+- Blizzard
+- Freeze-Dry
+- Sleep Talk
+- Stunt Double
+
+Jynx @ Leftovers
+Ability: Oblivious
+Level: 100
+EVs: 63 HP / 63 SpD / 2 Def
+Timid Nature
+- Stunt Double
+- Sweet Kiss
+- Chilly Reception
+- Ice Beam
+
+Beartic @ Life Orb
+Ability: Snow Cloak
+Level: 100
+EVs: 63 Atk / 63 Spe / 2 HP
+Jolly Nature
+- Play Rough
+- Brick Break
+- Liquidation
+- Ice Punch
+
+Darmanitan-Galar @ Weakness Policy
+Ability: Zen Mode
+Level: 100
+EVs: 63 Atk / 63 Spe / 2 HP
+Jolly Nature
+- Icicle Crash
+- Flare Blitz
+- Superpower
+- U-Turn
+
+Glalie @ Wide Lens
+Ability: Ice Body
+Level: 100
+EVs: 63 Atk / 63 Spe / 2 HP
+Adamant Nature
+- Hex
+- Explosion
+- Sheer Cold
+- Icicle Crash
+
+Dewgong @ Heavy-Duty Boots
+Ability: Ice Body
+Level: 100
+EVs: 63 Spe / 63 SpA / 2 HP
+Modest Nature
+- Freeze-Dry
+- Hydro Pump
+- Alluring Voice
+- Ice Beam
+
+Lapras @ Heavy-Duty Boots
+Ability: Shell Armor
+Level: 100
+EVs: 63 Spe / 63 SpA / 2 HP
+Tera Type: Fairy
+Modest Nature
+- Freeze-Dry
+- Hydro Pump
+- Alluring Voice
+- Ice Beam
 
 === TRAINER_LEADER_DRAYDEN ===
-Name: FREDRICK
-Class: Expert
-Pic: Expert M
+Name: Drayden
+Class: Leader
+Pic: Aqua Grunt M
 Gender: Male
-Music: Intense
-Double Battle: No
-AI: Basic Trainer
+Music: Elite Four
+Double Battle: Yes
+AI: Good Trainer / Prediction / Assumptions / Ace
+Party Size: 6
+Pool Rules: Basic
+Pool Pick Functions: Default
 
-Makuhita
-Level: 30
-IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
+Salamence @ Salamencite
+Ability: Intimidate
+Level: 100
+EVs: 63 Atk / 63 Spe / 2 HP
+Tags: Lead
+Adamant Nature
+- Double Edge
+- Calamity Cleave
+- Steel Wing
+- Earthquake
 
-Machoke
-Level: 30
-IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
+Roaring Moon @ Booster Energy
+Ability: Protosynthesis
+Level: 100
+EVs: 63 Atk / 63 Spe / 2 HP
+Adamant Nature
+- Calamity Cleave
+- Acrobatics
+- Knock Off
+- Earthquake
+
+Aegislash @ Expert Belt
+Ability: Stance Change
+Level: 100
+EVs: 63 Atk / 63 HP / 2 SpD
+Adamant Nature
+- Calamity Cleave
+- Shadow Ball
+- King's Shield
+- Tachyon Cutter
+
+Iron Valiant @ Booster Energy
+Ability: Quark Drive
+Level: 100
+EVs: 63 HP / 63 Def / 2 SpD
+Brave Nature
+- Calamity Cleave
+- Moonblast
+- Close Combat
+- Destiny Bond
+
+Hydreigon @ White Herb
+Ability: Levitate
+Level: 100
+EVs: 63 Atk / 63 Spe / 2 HP
+Adamant Nature
+- Draco Meteor
+- Dark Pulse
+- Sludge Bomb
+- Earth Power
+
+Archaludon @ Power Herb
+Ability: Stalwart
+Level: 100
+EVs: 63 Atk / 63 Spe / 2 HP
+Adamant Nature
+- Electro Shot
+- Flash Cannon
+- Dragon Pulse
+- Thunderbolt
+
+Baxcalibur @ Loaded Dice
+Ability: Thermal Exchange
+Level: 100
+EVs: 63 Atk / 63 Spe / 2 HP
+Adamant Nature
+- Calamity Cleave
+- Scale Shot
+- Icicle Spear
+- Earthquake
+
+Tyrantrum @ Choice Band
+Ability: Rock Head
+Level: 100
+EVs: 63 Atk / 63 Spe / 2 HP
+Adamant Nature
+- Head Smash
+- Outrage
+- Earthquake
+- Iron Head
+
+Haxorus @ Dragon Gem
+Ability: Sharpness
+Level: 100
+EVs: 63 Atk / 63 Spe / 2 HP
+Tags: Ace
+Tera Type: Steel
+Adamant Nature
+- Dragon Dance
+- Calamity Cleave
+- Iron Head
+- Sacred Sword
 
 === TRAINER_LEADER_CHEREN ===
-Name: MATT
-Class: Aqua Admin
-Pic: Aqua Admin M
+Name: Cheren
+Class: Leader
+Pic: Aqua Grunt M
 Gender: Male
-Music: Aqua
-Items: Super Potion
-Double Battle: No
-AI: Basic Trainer
+Music: Elite Four
+Double Battle: Yes
+AI: Good Trainer / Prediction / Assumptions / Ace
+Party Size: 6
+Pool Rules: Basic
+Pool Pick Functions: Default
 
-Mightyena
-Level: 34
-IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
+Bouffalant @ Assault Vest
+Ability: Reckless
+Level: 100
+EVs: 63 HP / 63 Atk / 2 Def
+Tags: Lead
+Brave Nature
+- Psidekick
+- Head Smash
+- Zen Headbutt
+- High Horsepower
 
-Golbat
-Level: 34
-IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
+Farigiraf @ Mental Herb
+Ability: Armor Tail
+Level: 100
+EVs: 63 HP / 32 Def / 33 SpD
+Tags: Lead
+Relaxed Nature
+- Trick Room
+- Ally Switch
+- Psychic
+- Protect
+
+Stoutland @ Room Service
+Ability: Intimidate
+Level: 100
+EVs: 63 HP / 63 Atk / 2 Def
+Brave Nature
+- Psidekick
+- Psychic Fangs
+- Howl
+- Play Rough
+
+Dudunsparce @ Leftovers
+Ability: Serene Grace
+Level: 100
+EVs: 63 HP / 63 Atk / 2 Def
+Brave Nature
+- Coil
+- Headbutt
+- Hyper Drill
+- Zen Headbutt
+
+Porygon2 @ Eviolite
+Ability: Download
+Level: 100
+EVs: 63 HP / 33 Def / 32 SpD
+Tera Type: Ghost
+Relaxed Nature
+- Trick Room
+- Recover
+- Tera Blast
+- Protect
+
+Oranguru @ Colbur Berry
+Ability: Inner Focus
+Level: 100
+EVs: 63 HP / 33 Def / 32 SpD
+Tags: Support
+Relaxed Nature
+- Instruct
+- Psyshock
+- Trick Room
+- Hyper Voice
+
+Gumshoos @ Silk Scarf
+Ability: Adaptability
+Level: 100
+EVs: 63 HP / 63 Atk / 2 Def
+Brave Nature
+- Psidekick
+- Psychic Fangs
+- Protect
+- Knock Off
+
+Wyrdeer @ Sitrus Berry
+Ability: Intimidate
+Level: 100
+EVs: 63 HP / 63 Atk / 2 Def
+Brave Nature
+- Trick Room
+- Psyshield Bash
+- Psidekick
+- Protect
+
+Drampa @ Drampanite
+Ability: Sap Sipper
+Level: 100
+EVs: 63 HP / 63 SpA / 2 SpD
+Tags: Ace
+Quiet Nature
+- Calm Mind
+- Hyper Voice
+- Draco Meteor
+- Protect
 
 === TRAINER_LEADER_ROXIE ===
-Name: ZANDER
-Class: Black Belt
-Pic: Black Belt
-Gender: Male
-Music: Intense
+Name: Roxie
+Class: Leader
+Pic: Aqua Grunt F
+Gender: Female
+Music: Elite Four
 Double Battle: No
-AI: Check Bad Move
+AI: Good Trainer / Prediction / Assumptions / Ace
+Party Size: 6
+Pool Rules: Basic
+Pool Pick Functions: Default
 
-Hariyama
-Level: 31
-IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+Garbodor @ Poison Barb
+Ability: Stench
+Level: 100
+EVs: 63 Atk / 63 HP / 2 SpD
+Tags: Lead
+Adamant Nature
+- Payback
+- Mosh Pit
+- Seed Bomb
+- Drain Punch
+
+Drapion @ Black Sludge
+Ability: Battle Armor
+Level: 100
+EVs: 63 HP / 60 Def / 5 Atk
+Adamant Nature
+- Swords Dance
+- Knock Off
+- Mosh Pit
+- Aqua Tail
+
+Muk-Alola @ Black Sludge
+Ability: Poison Touch
+Level: 100
+EVs: 63 Atk / 63 HP / 2 Def
+Adamant Nature
+- Knock Off
+- Pursuit
+- Drain Punch
+- Protect
+
+Toxicroak @ Choice Scarf
+Ability: Poison Touch
+Level: 100
+EVs: 63 SpD / 63 Atk / 2 HP
+Tera Type: Dark
+Adamant Nature
+- Mosh Pit
+- Drain Punch
+- Sucker Punch
+- Stone Edge
+
+Toxtricity @ Kings' Rock
+Ability: Technician
+Level: 100
+EVs: 63 Def / 63 Atk / 2 HP
+Tera Type: Flying
+Adamant Nature
+- Mosh Pit
+- Brick Break
+- Throat Chop
+- Wild Charge
+
+Seviper @ Poison Barb
+Ability: Corrosion
+Level: 100
+EVs: 63 Atk / 63 Spe / 2 HP
+Adamant Nature
+- Poison Tail
+- Coil
+- Ice Fang
+- Crunch
+
+Nidoqueen @ Black Sludge
+Ability: Queenly Majesty
+Level: 100
+EVs: 63 HP / 63 Def / 2 SpD
+Hardy Nature
+- Iron Defense
+- Body Press
+- Toxic
+- Protect
+
+Gengar @ Choice Specs
+Ability: Levitate
+Level: 100
+EVs: 63 SpA / 63 Spe / 2 HP
+Impish Nature
+- Shadow Ball
+- Giga Drain
+- Dazzling Gleam
+- Disable
+
+Scolipede @ Scolipite
+Ability: Speed Boost
+Level: 100
+EVs: 63 Atk / 63 Spe / 2 HP
+Tags: Ace
+Adamant Nature
+- Iron Defense
+- Mosh Pit
+- First Impression
+- Smart Strike
 
 === TRAINER_LEADER_MARLON ===
-Name: SHELLY
-Class: Aqua Admin
-Pic: Aqua Admin F
-Gender: Female
-Music: Aqua
+Name: Marlon
+Class: Leader
+Pic: Aqua Grunt M
+Gender: Male
+Music: Elite Four
 Double Battle: No
-AI: Basic Trainer
+AI: Good Trainer / Prediction / Assumptions / Ace
+Party Size: 6
+Pool Rules: Basic
+Pool Pick Functions: Default
 
 Carvanha
 Level: 28
