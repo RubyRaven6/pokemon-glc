@@ -167,7 +167,7 @@ const struct TournamentOpponent gTournamentOpponents[OPPONENT_COUNT] =
         .graphicsId = OPPONENT_GFX(OBJ_EVENT_GFX_BRENDAN_NORMAL),
         .script = EventScript_PWTBattleByron,
     },
-    [OPPONENT_CANDICE] =
+    [OPPONENT_CANDICE_NUTS] =
     {
         .graphicsId = OPPONENT_GFX(OBJ_EVENT_GFX_BRENDAN_NORMAL),
         .script = EventScript_PWTBattleCandice,
