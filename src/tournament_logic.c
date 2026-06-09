@@ -10,13 +10,13 @@
 #include "constants/items.h"
 #include "constants/opponents.h"
 
-struct Roaster
+struct Roster
 {
     enum OpponentID opponentId;
     u16 flag;
 };
 
-static const struct Roaster sKantoGymLeaderRoster[] =
+static const struct Roster sKantoGymLeaderRoster[] =
 {
     { OPPONENT_BROCK,           FLAG_KANTO_LEADER_BROCK },
     { OPPONENT_MISTY,           FLAG_KANTO_LEADER_MISTY },
@@ -28,7 +28,7 @@ static const struct Roaster sKantoGymLeaderRoster[] =
     { OPPONENT_GIOVANNI,        FLAG_KANTO_LEADER_GIOVANNI },
 };
 
-static const struct Roaster sJohtoGymLeaderRoster[] =
+static const struct Roster sJohtoGymLeaderRoster[] =
 {
     { OPPONENT_FALKNER, FLAG_JOHTO_LEADER_FALKNER },
     { OPPONENT_BUGSY,   FLAG_JOHTO_LEADER_BUGSY },
@@ -40,7 +40,7 @@ static const struct Roaster sJohtoGymLeaderRoster[] =
     { OPPONENT_CLAIR,   FLAG_JOHTO_LEADER_CLAIR },
 };
 
-static const struct Roaster sHoennGymLeaderRoster[] =
+static const struct Roster sHoennGymLeaderRoster[] =
 {
     { OPPONENT_ROXANNE,       FLAG_HOENN_LEADER_ROXANNE },
     { OPPONENT_BRAWLY,        FLAG_HOENN_LEADER_BRAWLY },
@@ -52,7 +52,7 @@ static const struct Roaster sHoennGymLeaderRoster[] =
     { OPPONENT_JUAN,          FLAG_HOENN_LEADER_JUAN },
 };
 
-static const struct Roaster sSinnohGymLeaderRoster[] =
+static const struct Roster sSinnohGymLeaderRoster[] =
 {
     { OPPONENT_ROARK,        FLAG_SINNOH_LEADER_ROARK },
     { OPPONENT_GARDENIA,     FLAG_SINNOH_LEADER_GARDENIA },
@@ -64,7 +64,7 @@ static const struct Roaster sSinnohGymLeaderRoster[] =
     { OPPONENT_VOLKNER,      FLAG_SINNOH_LEADER_VOLKNER },
 };
 
-static const struct Roaster sUnovaGymLeaderRoster[] =
+static const struct Roster sUnovaGymLeaderRoster[] =
 {
     { OPPONENT_LENORA,  FLAG_UNOVA_LEADER_LENORA },
     { OPPONENT_BURGH,   FLAG_UNOVA_LEADER_BURGH },
@@ -78,25 +78,25 @@ static const struct Roaster sUnovaGymLeaderRoster[] =
     { OPPONENT_MARLON,  FLAG_UNOVA_LEADER_MARLON },
 };
 
-#define ROASTER(_roaster, _flag)    \
+#define ROSTER(_roster, _flag)    \
 {                                   \
-    .roaster = _roaster,            \
-    .count = ARRAY_COUNT(_roaster), \
+    .roster = _roster,            \
+    .count = ARRAY_COUNT(_roster), \
     .flag = _flag,                  \
 }
-static const struct RoasterData
+static const struct RosterData
 {
-    const struct Roaster *roaster;
+    const struct Roster *roster;
     u32 count;
     u16 flag;
 }
 sGymLeaderRosters[] =
 {
-    [ROASTER_GEN1_GYM_LEADERS] = ROASTER(sKantoGymLeaderRoster,  FLAG_COMPLETED_ROSTER_KANTO),
-    [ROASTER_GEN2_GYM_LEADERS] = ROASTER(sJohtoGymLeaderRoster,  FLAG_COMPLETED_ROSTER_JOHTO),
-    [ROASTER_GEN3_GYM_LEADERS] = ROASTER(sHoennGymLeaderRoster,  FLAG_COMPLETED_ROSTER_HOENN),
-    [ROASTER_GEN4_GYM_LEADERS] = ROASTER(sSinnohGymLeaderRoster, FLAG_COMPLETED_ROSTER_SINNOH),
-    [ROASTER_GEN5_GYM_LEADERS] = ROASTER(sUnovaGymLeaderRoster,  FLAG_COMPLETED_ROSTER_UNOVA),
+    [ROSTER_GEN1_GYM_LEADERS] = ROSTER(sKantoGymLeaderRoster,  FLAG_COMPLETED_ROSTER_KANTO),
+    [ROSTER_GEN2_GYM_LEADERS] = ROSTER(sJohtoGymLeaderRoster,  FLAG_COMPLETED_ROSTER_JOHTO),
+    [ROSTER_GEN3_GYM_LEADERS] = ROSTER(sHoennGymLeaderRoster,  FLAG_COMPLETED_ROSTER_HOENN),
+    [ROSTER_GEN4_GYM_LEADERS] = ROSTER(sSinnohGymLeaderRoster, FLAG_COMPLETED_ROSTER_SINNOH),
+    [ROSTER_GEN5_GYM_LEADERS] = ROSTER(sUnovaGymLeaderRoster,  FLAG_COMPLETED_ROSTER_UNOVA),
 };
 
 const u16 gTechniqueFlagUnlocks[] =
@@ -193,7 +193,7 @@ static const u32 sLeaderSignatureTechs[] =
 
 void ChooseRandomGymLeader(void)
 {
-    enum TrainerRoaster gen = VarGet(VAR_GENERATION_CTL);
+    enum TrainerRoster gen = VarGet(VAR_GENERATION_CTL);
 
     u32 countUndefeated = 0;
     u32 leader1 = 0;
@@ -202,7 +202,7 @@ void ChooseRandomGymLeader(void)
 
     for (u32 i = 0; i < sGymLeaderRosters[gen].count; i++)
     {
-        if(!FlagGet(sGymLeaderRosters[gen].roaster[i].flag))
+        if(!FlagGet(sGymLeaderRosters[gen].roster[i].flag))
             countUndefeated++;
     }
     
@@ -210,7 +210,7 @@ void ChooseRandomGymLeader(void)
 
     for (u32 i = 0; i < sGymLeaderRosters[gen].count; i++)
     {
-        if (!FlagGet(sGymLeaderRosters[gen].roaster[i].flag))
+        if (!FlagGet(sGymLeaderRosters[gen].roster[i].flag))
         {
             if (n == 0)
             {
@@ -225,9 +225,9 @@ void ChooseRandomGymLeader(void)
 
     do { leader2 = RandomUniform(RNG_NONE, 0, sGymLeaderRosters[gen].count - 1); } while (leader2 == leader3 || leader2 == leader1);
 
-    VarSet(VAR_GYM_LEADER_1, sGymLeaderRosters[gen].roaster[leader1].opponentId);
-    VarSet(VAR_GYM_LEADER_2, sGymLeaderRosters[gen].roaster[leader2].opponentId);
-    VarSet(VAR_GYM_LEADER_3, sGymLeaderRosters[gen].roaster[leader3].opponentId);
+    VarSet(VAR_GYM_LEADER_1, sGymLeaderRosters[gen].roster[leader1].opponentId);
+    VarSet(VAR_GYM_LEADER_2, sGymLeaderRosters[gen].roster[leader2].opponentId);
+    VarSet(VAR_GYM_LEADER_3, sGymLeaderRosters[gen].roster[leader3].opponentId);
 };
 
 void Script_goto_pwt_battle_script(struct ScriptContext *ctx)
@@ -242,11 +242,11 @@ void Script_goto_pwt_battle_script(struct ScriptContext *ctx)
 void SetCompleteRosterFlag(void)
 {
     u32 countDefeated = 0;
-    enum TrainerRoaster gen = VarGet(VAR_GENERATION_CTL);
+    enum TrainerRoster gen = VarGet(VAR_GENERATION_CTL);
 
     for (u32 i = 0; i < sGymLeaderRosters[gen].count; i++)
     {
-        if (FlagGet(sGymLeaderRosters[gen].roaster[i].flag))
+        if (FlagGet(sGymLeaderRosters[gen].roster[i].flag))
             countDefeated++;
     }
 
@@ -257,11 +257,11 @@ void SetCompleteRosterFlag(void)
 bool8 ScrCmd_checkdefeatedleaders(struct ScriptContext *ctx)
 {
     u32 countDefeated = 0;
-    enum TrainerRoaster kanto = ROASTER_GEN1_GYM_LEADERS;
+    enum TrainerRoster kanto = ROSTER_GEN1_GYM_LEADERS;
 
     for (u32 i = 0; i < sGymLeaderRosters[kanto].count; i++)
     {
-        if(FlagGet(sGymLeaderRosters[kanto].roaster[i].flag))
+        if(FlagGet(sGymLeaderRosters[kanto].roster[i].flag))
             countDefeated++;
     }
 
