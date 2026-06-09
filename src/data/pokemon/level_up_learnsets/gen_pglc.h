@@ -3761,6 +3761,7 @@ static const struct LevelUpMove sJynxLevelUpLearnset[] = {
     LEVEL_UP_MOVE(1, MOVE_BRICK_BREAK),
     LEVEL_UP_MOVE(1, MOVE_CALM_MIND),
     LEVEL_UP_MOVE(1, MOVE_CAPTIVATE),
+    LEVEL_UP_MOVE(1, MOVE_CHILLY_RECEPTION),
     LEVEL_UP_MOVE(1, MOVE_CONFIDE),
     LEVEL_UP_MOVE(1, MOVE_CONFUSION),
     LEVEL_UP_MOVE(1, MOVE_COPYCAT),
@@ -20505,6 +20506,7 @@ static const struct LevelUpMove sBearticLevelUpLearnset[] = {
     LEVEL_UP_MOVE(1, MOVE_NIGHT_SLASH),
     LEVEL_UP_MOVE(1, MOVE_PLAY_ROUGH),
     LEVEL_UP_MOVE(1, MOVE_YAWN),
+    LEVEL_UP_MOVE(1, MOVE_LIQUIDATION),
     LEVEL_UP_END
 };
 
@@ -20553,6 +20555,7 @@ static const struct LevelUpMove sCryogonalLevelUpLearnset[] = {
     LEVEL_UP_MOVE(1, MOVE_SUBSTITUTE),
     LEVEL_UP_MOVE(1, MOVE_FLASH_CANNON),
     LEVEL_UP_MOVE(1, MOVE_CONFIDE),
+    LEVEL_UP_MOVE(1, MOVE_SNOWSCAPE),
     LEVEL_UP_END
 };
 
@@ -20992,6 +20995,7 @@ static const struct LevelUpMove sBouffalantLevelUpLearnset[] = {
     LEVEL_UP_MOVE(1, MOVE_ROCK_CLIMB),
     LEVEL_UP_MOVE(1, MOVE_SKULL_BASH),
     LEVEL_UP_MOVE(1, MOVE_STOMP),
+    LEVEL_UP_MOVE(1, MOVE_HEAD_SMASH),
     LEVEL_UP_END
 };
 

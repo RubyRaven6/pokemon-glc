@@ -37,6 +37,17 @@ Looks pretty :)
 - **Wigglytuff**: Abilities changed from Cute Charm and Competitive to Fluffy and Battle Armor
 - **Slowbro**: Ability changed from Own Tempo to Unaware
 - **Jolteon**: Gained Ability Unnerve
+- **Dewgong**: Thick Fat Ability replaced with Swift Swim
+- **Nidoqueen**: Replaced Sheer Force with Queenly Majesty. Rebalanced with the following stats:
+
+| Stat            | Value |
+| :----------------| :-----:|
+| HP              | 102   |
+| Attack          | 77    |
+| Defense         | 90    |
+| Special Attack  | 75    |
+| Special Defense | 94    |
+| Speed           | 67    |
 
 ## Generation 2
 - **Ariados**: Gained Skill Link. Rebalanced with the following stats:
@@ -49,6 +60,9 @@ Looks pretty :)
 | Special Attack  | 40    |
 | Special Defense | 70    |
 | Speed           | 70    |
+
+## Generation 3
+- **Seviper**: Gained Corrosion.
 
 ## Generation 4
 - **Wormadam**: Each form has been given a new ability:
@@ -64,6 +78,8 @@ Looks pretty :)
 ## Generation 5
 - **Leavanny**: Replaced Overcoat with Sharpness
 - **Archeops**: Gained Klutz
+- **Cryogonal**: Gained Snow Warning
+- **Scolipede**: Mega Scolipede given Battle Armor for now. Will be changed once official Ability is confirmed.
 
 # Team Credits
 | Position                          | Name                                                    |
