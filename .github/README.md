@@ -63,6 +63,16 @@ Looks pretty :)
 
 ## Generation 3
 - **Seviper**: Gained Corrosion.
+- **Delcatty**: Rebalanced to the following stats:
+
+| Stat            | Value |
+| :----------------| :-----:|
+| HP              | 70    |
+| Attack          | 99    |
+| Defense         | 65    |
+| Special Attack  | 88    |
+| Special Defense | 55    |
+| Speed           | 90    |
 
 ## Generation 4
 - **Wormadam**: Each form has been given a new ability:
