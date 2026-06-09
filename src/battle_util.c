@@ -4494,7 +4494,7 @@ u32 AbilityBattleEffects(enum AbilityEffect caseID, enum BattlerId battler, enum
         break;
     case ABILITYEFFECT_DANCER:
         return TryDancer();
-    case ABILITYEFFECT_SYNCHRONIZED_SWIM:
+    case ABILITYEFFECT_SYNCHROSWIM:
         return TrySynchronizedSwim();
     case ABILITYEFFECT_MOVE_END_FOES_FAINTED:
         switch (ability)

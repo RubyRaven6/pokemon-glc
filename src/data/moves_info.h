@@ -22681,7 +22681,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .description = COMPOUND_STRING(
             "The user and ally each\n"
             "strike twice."),
-        .effect = EFFECT_SYNCHRONIZED_SWIM,
+        .effect = EFFECT_SYNCHROSWIM,
         .power = 70,
         .type = TYPE_WATER,
         .accuracy = 100,

@@ -12413,7 +12413,7 @@ const struct ItemInfo gItemsInfo[] =
         .shopCriteriaFunc = ShopCriteriaByUnlockedFlag,
     },
 
-    [ITEM_TM_SYNCHRONIZED_SWIM] =
+    [ITEM_TM_SYNCHROSWIM] =
     {
         .name = ITEM_NAME("TM42"),
         .price = 0,

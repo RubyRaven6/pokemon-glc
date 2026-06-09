@@ -92,7 +92,7 @@ Pic: Aqua Grunt M
 Gender: Male
 Music: Elite Four
 Double Battle: No
-AI: Good Trainer / Prediction / Assumptions / Ace / Force Setup First Turn / Risky
+AI: Good Trainer / Prediction / Assumptions / Ace Pokemon / Force Setup First Turn / Risky
 Party Size: 6
 Pool Rules: Basic
 Pool Pick Functions: Default
@@ -197,7 +197,7 @@ Pic: Aqua Grunt F
 Gender: Female
 Music: Elite Four
 Double Battle: No
-AI: Good Trainer / Prediction / Assumptions / Ace / HP Aware
+AI: Good Trainer / Prediction / Assumptions / Ace Pokemon / HP Aware
 Party Size: 6
 Pool Rules: Weather Singles
 Pool Pick Functions: Default
@@ -310,7 +310,7 @@ Pic: Aqua Grunt M
 Gender: Male
 Music: Elite Four
 Double Battle: No
-AI: Good Trainer / Prediction / Assumptions / Ace / Suicide
+AI: Good Trainer / Prediction / Assumptions / Ace Pokemon / Will Suicide
 Party Size: 6
 Pool Rules: Basic
 Pool Pick Functions: Default
@@ -418,7 +418,7 @@ Pic: Aqua Grunt F
 Gender: Female
 Music: Elite Four
 Double Battle: Yes
-AI: Good Trainer / Prediction / Assumptions / Ace / Prefer Status Moves
+AI: Good Trainer / Prediction / Assumptions / Ace Pokemon / Prefer Status Moves
 Party Size: 6
 Pool Rules: Doubles
 Pool Pick Functions: Default
@@ -526,7 +526,7 @@ Pic: Aqua Grunt F
 Gender: Female
 Music: Elite Four
 Double Battle: Yes
-AI: Good Trainer / Prediction / Assumptions / Ace / Prefer Status Moves
+AI: Good Trainer / Prediction / Assumptions / Ace Pokemon / Prefer Status Moves
 Party Size: 6
 Pool Rules: Doubles
 Pool Pick Functions: Default
@@ -635,7 +635,7 @@ Pic: Leader Tate And Liza
 Gender: Male
 Music: Elite Four
 Double Battle: Yes
-AI: Good Trainer / Prediction / Assumptions / Ace
+AI: Good Trainer / Prediction / Assumptions / Ace Pokemon
 Party Size: 6
 Pool Rules: Doubles
 Pool Pick Functions: Default
@@ -747,7 +747,7 @@ Pic: Aqua Grunt M
 Gender: Male
 Music: Elite Four
 Double Battle: No
-AI: Good Trainer / Prediction / Assumptions / Ace / Risky
+AI: Good Trainer / Prediction / Assumptions / Ace Pokemon / Risky
 Party Size: 6
 Pool Rules: Basic
 Pool Pick Functions: Default
@@ -859,7 +859,7 @@ Pic: Aqua Grunt M
 Gender: Male
 Music: Elite Four
 Double Battle: No
-AI: Good Trainer / Prediction / Assumptions / Ace / Conservative
+AI: Good Trainer / Prediction / Assumptions / Ace Pokemon / Conservative
 Party Size: 6
 Pool Rules: Basic
 Pool Pick Functions: Default
@@ -967,7 +967,7 @@ Pic: Aqua Grunt M
 Gender: Male
 Music: Elite Four
 Double Battle: No
-AI: Good Trainer / Prediction / Assumptions / Ace
+AI: Good Trainer / Prediction / Assumptions / Ace Pokemon
 Party Size: 6
 Pool Rules: Basic
 Pool Pick Functions: Default
@@ -1076,7 +1076,7 @@ Pic: Aqua Grunt M
 Gender: Male
 Music: Elite Four
 Double Battle: No
-AI: Good Trainer / Prediction / Assumptions / Ace / Conservative
+AI: Good Trainer / Prediction / Assumptions / Ace Pokemon / Conservative
 Party Size: 6
 Pool Rules: Weather Singles
 Pool Pick Functions: Default
@@ -1188,7 +1188,7 @@ Pic: Aqua Grunt F
 Gender: Female
 Music: Elite Four
 Double Battle: No
-AI: Good Trainer / Prediction / Assumptions / Ace
+AI: Good Trainer / Prediction / Assumptions / Ace Pokemon
 Party Size: 6
 Pool Rules: Basic
 Pool Pick Functions: Default
@@ -1294,7 +1294,7 @@ Pic: Aqua Grunt M
 Gender: Male
 Music: Elite Four
 Double Battle: No
-AI: Good Trainer / Prediction / Assumptions / Ace
+AI: Good Trainer / Prediction / Assumptions / Ace Pokemon
 Party Size: 6
 Pool Rules: Basic
 Pool Pick Functions: Default
@@ -1398,7 +1398,7 @@ Pic: Aqua Grunt M
 Gender: Male
 Music: Elite Four
 Double Battle: No
-AI: Good Trainer / Prediction / Assumptions / Ace
+AI: Good Trainer / Prediction / Assumptions / Ace Pokemon
 Party Size: 6
 Pool Rules: Basic
 Pool Pick Functions: Default
@@ -1503,7 +1503,7 @@ Pic: Aqua Grunt F
 Gender: Female
 Music: Elite Four
 Double Battle: No
-AI: Good Trainer / Prediction / Assumptions / Ace
+AI: Good Trainer / Prediction / Assumptions / Ace Pokemon
 Party Size: 6
 Pool Rules: Weather Singles
 Pool Pick Functions: Default
@@ -1611,7 +1611,7 @@ Pic: Aqua Grunt M
 Gender: Male
 Music: Elite Four
 Double Battle: No
-AI: Good Trainer / Prediction / Assumptions / Ace
+AI: Good Trainer / Prediction / Assumptions / Ace Pokemon
 Party Size: 6
 Pool Rules: Weather Singles
 Pool Pick Functions: Default
@@ -1720,7 +1720,7 @@ Pic: Aqua Grunt M
 Gender: Male
 Music: Elite Four
 Double Battle: No
-AI: Good Trainer / Prediction / Assumptions / Ace
+AI: Good Trainer / Prediction / Assumptions / Ace Pokemon
 Party Size: 6
 Pool Rules: Basic
 Pool Pick Functions: Default
@@ -1827,7 +1827,7 @@ Pic: Leader Roxanne
 Gender: Female
 Music: Elite Four
 Double Battle: No
-AI: Good Trainer / Prediction / Assumptions / Ace
+AI: Good Trainer / Prediction / Assumptions / Ace Pokemon
 Party Size: 6
 Pool Rules: Basic
 Pool Pick Functions: Default
@@ -1931,7 +1931,7 @@ Pic: Leader Brawly
 Gender: Male
 Music: Elite Four
 Double Battle: No
-AI: Good Trainer / Prediction / Assumptions / Ace
+AI: Good Trainer / Prediction / Assumptions / Ace Pokemon
 Party Size: 6
 Pool Rules: Basic
 Pool Pick Functions: Default
@@ -2040,7 +2040,7 @@ Pic: Leader Wattson
 Gender: Male
 Music: Elite Four
 Double Battle: Yes
-AI: Good Trainer / Prediction / Assumptions / Ace
+AI: Good Trainer / Prediction / Assumptions / Ace Pokemon
 Party Size: 6
 Pool Rules: Doubles
 Pool Pick Functions: Default
@@ -2145,7 +2145,7 @@ Pic: Leader Flannery
 Gender: Female
 Music: Elite Four
 Double Battle: No
-AI: Good Trainer / Prediction / Assumptions / Ace
+AI: Good Trainer / Prediction / Assumptions / Ace Pokemon
 Party Size: 6
 Pool Rules: Doubles
 Pool Pick Functions: Default
@@ -2253,7 +2253,7 @@ Pic: Leader Norman
 Gender: Male
 Music: Elite Four
 Double Battle: Yes
-AI: Good Trainer / Prediction / Assumptions / Ace
+AI: Good Trainer / Prediction / Assumptions / Ace Pokemon
 Party Size: 6
 Pool Rules: Doubles
 Pool Pick Functions: Default
@@ -2360,7 +2360,7 @@ Pic: Leader Winona
 Gender: Female
 Music: Elite Four
 Double Battle: No
-AI: Good Trainer / Prediction / Assumptions / Ace
+AI: Good Trainer / Prediction / Assumptions / Ace Pokemon
 Party Size: 6
 Pool Rules: Basic
 Pool Pick Functions: Default
@@ -2464,7 +2464,7 @@ Pic: Leader Tate And Liza
 Gender: Male
 Music: Elite Four
 Double Battle: Yes
-AI: Good Trainer / Prediction / Assumptions / Ace
+AI: Good Trainer / Prediction / Assumptions / Ace Pokemon
 Party Size: 6
 Pool Rules: Doubles
 Pool Pick Functions: Default
@@ -2568,7 +2568,7 @@ Pic: Leader Juan
 Gender: Male
 Music: Elite Four
 Double Battle: No
-AI: Good Trainer / Prediction / Assumptions / Ace
+AI: Good Trainer / Prediction / Assumptions / Ace Pokemon
 Party Size: 6
 Pool Rules: Doubles
 Pool Pick Functions: Default
@@ -2677,7 +2677,7 @@ Pic: Aqua Grunt M
 Gender: Male
 Music: Elite Four
 Double Battle: No
-AI: Good Trainer / Prediction / Assumptions / Ace
+AI: Good Trainer / Prediction / Assumptions / Ace Pokemon
 Party Size: 6
 Pool Rules: Doubles
 Pool Pick Functions: Default
@@ -2785,7 +2785,7 @@ Pic: Aqua Grunt F
 Gender: Female
 Music: Elite Four
 Double Battle: No
-AI: Good Trainer / Prediction / Assumptions / Ace
+AI: Good Trainer / Prediction / Assumptions / Ace Pokemon
 Party Size: 6
 Pool Rules: Doubles
 Pool Pick Functions: Default
@@ -2890,7 +2890,7 @@ Pic: Aqua Grunt F
 Gender: Female
 Music: Elite Four
 Double Battle: No
-AI: Good Trainer / Prediction / Assumptions / Ace
+AI: Good Trainer / Prediction / Assumptions / Ace Pokemon
 Party Size: 6
 Pool Rules: Doubles
 Pool Pick Functions: Default
@@ -2996,7 +2996,7 @@ Pic: Aqua Grunt F
 Gender: Female
 Music: Elite Four
 Double Battle: No
-AI: Good Trainer / Prediction / Assumptions / Ace
+AI: Good Trainer / Prediction / Assumptions / Ace Pokemon
 Party Size: 6
 Pool Rules: Basic
 Pool Pick Functions: Default
@@ -3104,7 +3104,7 @@ Pic: Aqua Admin M
 Gender: Male
 Music: Elite Four
 Double Battle: No
-AI: Good Trainer / Prediction / Assumptions / Ace
+AI: Good Trainer / Prediction / Assumptions / Ace Pokemon
 Party Size: 6
 Pool Rules: Basic
 Pool Pick Functions: Default
@@ -3232,7 +3232,7 @@ Pic: Aqua Grunt M
 Gender: Male
 Music: Elite Four
 Double Battle: No
-AI: Good Trainer / Prediction / Assumptions / Ace
+AI: Good Trainer / Prediction / Assumptions / Ace Pokemon
 Party Size: 6
 Pool Rules: Doubles
 Pool Pick Functions: Default
@@ -3337,7 +3337,7 @@ Pic: Aqua Grunt F
 Gender: Female
 Music: Elite Four
 Double Battle: No
-AI: Good Trainer / Prediction / Assumptions / Ace
+AI: Good Trainer / Prediction / Assumptions / Ace Pokemon
 Party Size: 6
 Pool Rules: Basic
 Pool Pick Functions: Default
@@ -3443,7 +3443,7 @@ Pic: Aqua Grunt M
 Gender: Male
 Music: Elite Four
 Double Battle: No
-AI: Good Trainer / Prediction / Assumptions / Ace
+AI: Good Trainer / Prediction / Assumptions / Ace Pokemon
 Party Size: 6
 Pool Rules: Basic
 Pool Pick Functions: Default
@@ -3549,7 +3549,7 @@ Pic: Aqua Grunt F
 Gender: Female
 Music: Elite Four
 Double Battle: No
-AI: Good Trainer / Prediction / Assumptions / Ace
+AI: Good Trainer / Prediction / Assumptions / Ace Pokemon
 Party Size: 6
 Pool Rules: Basic
 Pool Pick Functions: Default
@@ -3580,8 +3580,8 @@ Ability: Intimidate
 Level: 100
 EVs: 63 Atk / 63 Spe / 2 HP
 Adamant Nature
-- Retaliation
-- Intimidate
+- Retaliate
+- Crunch
 - Psychic Fangs
 - Work Up
 
@@ -3605,10 +3605,11 @@ Modest Nature
 - Recycle
 - Rest
 
-Obstagoon @ Flying
+Obstagoon @ Leftovers
 Ability: Defiant
 Level: 100
 EVs: 63 Atk / 63 HP / 2 Def
+Tera Type: Flying
 Adamant Nature
 - Knock Off
 - Tera Blast
@@ -3631,7 +3632,7 @@ Level: 100
 EVs: 63 Atk / 63 Spe / 2 HP
 Adamant Nature
 - Research
-- Retaliation
+- Retaliate
 - Parting Shot
 - Thunder Wave
 
@@ -3643,7 +3644,7 @@ Tags: Ace
 Adamant Nature
 - Research
 - Seed Bomb
-- Retaliation
+- Retaliate
 - Knock Off
 
 === TRAINER_LEADER_BURGH ===
@@ -3653,7 +3654,7 @@ Pic: Aqua Grunt M
 Gender: Male
 Music: Elite Four
 Double Battle: Yes
-AI: Good Trainer / Prediction / Assumptions / Ace
+AI: Good Trainer / Prediction / Assumptions / Ace Pokemon
 Party Size: 6
 Pool Rules: Basic
 Pool Pick Functions: Default
@@ -3713,10 +3714,10 @@ Modest Nature
 - Giga Drain
 - Defog
 
-Wormadam-Ground @ Leftovers
+Wormadam-Sandy @ Leftovers
 Ability: Stamina
 Level: 100
-EVs: 63 Ark / 63 Def / 2 HP
+EVs: 63 Atk / 63 Def / 2 HP
 Adamant Nature
 - Shore Up
 - Bug Bite
@@ -3745,7 +3746,7 @@ Adamant Nature
 - Fell Stinger
 - U-Turn
 
-Levanny @ Life Orb
+Leavanny @ Life Orb
 Ability: Sharpness
 Level: 100
 EVs: 63 Atk / 63 Spe / 2 SpD
@@ -3763,12 +3764,12 @@ Pic: Aqua Grunt F
 Gender: Female
 Music: Elite Four
 Double Battle: Yes
-AI: Good Trainer / Prediction / Assumptions / Ace
+AI: Good Trainer / Prediction / Assumptions / Ace Pokemon
 Party Size: 6
 Pool Rules: Basic
 Pool Pick Functions: Default
 
-Sandy Shocks @ Booste Energy
+Sandy Shocks @ Booster Energy
 Ability: Quark Drive
 Level: 100
 EVs: 63 SpA / 63 Spe / 2 HP
@@ -3871,12 +3872,12 @@ Pic: Aqua Grunt M
 Gender: Male
 Music: Elite Four
 Double Battle: No
-AI: Good Trainer / Prediction / Assumptions / Ace
+AI: Good Trainer / Prediction / Assumptions / Ace Pokemon
 Party Size: 6
 Pool Rules: Basic
 Pool Pick Functions: Default
 
-Hippodown @ Smooth Rock
+Hippowdon @ Smooth Rock
 Ability: Sand Stream
 Level: 100
 EVs: 63 HP / 63 Atk / 2 Def
@@ -3978,7 +3979,7 @@ Pic: Aqua Grunt F
 Gender: Female
 Music: Elite Four
 Double Battle: Yes
-AI: Good Trainer / Prediction / Assumptions / Ace
+AI: Good Trainer / Prediction / Assumptions / Ace Pokemon
 Party Size: 6
 Pool Rules: Basic
 Pool Pick Functions: Default
@@ -4005,7 +4006,7 @@ Adamant Nature
 - Brave Bird
 - U-Turn
 
-Braviary-H @ Life Orb
+Braviary-Hisui @ Life Orb
 Ability: Sheer Force
 Level: 100
 EVs: 63 Atk / 63 Spe / 2 HP
@@ -4035,7 +4036,7 @@ Timid Nature
 - Giga Drain
 - U-Turn
 
-Decidueye-H @ Fighting Gem
+Decidueye-Hisui @ Fighting Gem
 Ability: Scrappy
 Level: 100
 EVs: 63 Atk / 63 Spe / 2 SpD
@@ -4067,7 +4068,7 @@ Adamant Nature
 - Close Combat
 - U-Turn
 
-Aerodactyl @ Aerodactilite
+Aerodactyl @ ITEM_AERODACTYLITE
 Ability: Pressure
 Level: 100
 EVs: 63 Atk / 63 Spe / 2 SpD
@@ -4085,7 +4086,7 @@ Pic: Aqua Grunt M
 Gender: Male
 Music: Elite Four
 Double Battle: Yes
-AI: Good Trainer / Prediction / Assumptions / Ace
+AI: Good Trainer / Prediction / Assumptions / Ace Pokemon
 Party Size: 6
 Pool Rules: Basic
 Pool Pick Functions: Default
@@ -4191,7 +4192,7 @@ Pic: Aqua Grunt M
 Gender: Male
 Music: Elite Four
 Double Battle: Yes
-AI: Good Trainer / Prediction / Assumptions / Ace
+AI: Good Trainer / Prediction / Assumptions / Ace Pokemon
 Party Size: 6
 Pool Rules: Basic
 Pool Pick Functions: Default
@@ -4296,7 +4297,7 @@ Pic: Aqua Grunt M
 Gender: Male
 Music: Elite Four
 Double Battle: Yes
-AI: Good Trainer / Prediction / Assumptions / Ace
+AI: Good Trainer / Prediction / Assumptions / Ace Pokemon
 Party Size: 6
 Pool Rules: Basic
 Pool Pick Functions: Default
@@ -4403,7 +4404,7 @@ Pic: Aqua Grunt F
 Gender: Female
 Music: Elite Four
 Double Battle: No
-AI: Good Trainer / Prediction / Assumptions / Ace
+AI: Good Trainer / Prediction / Assumptions / Ace Pokemon
 Party Size: 6
 Pool Rules: Basic
 Pool Pick Functions: Default
@@ -4509,10 +4510,10 @@ Pic: Aqua Grunt M
 Gender: Male
 Music: Elite Four
 Double Battle: No
-AI: Good Trainer / Prediction / Assumptions / Ace
-Party Size: 6
+AI: Good Trainer / Prediction / Assumptions / Ace Pokemon
 Pool Rules: Basic
 Pool Pick Functions: Default
+/*Party Size: 6*/
 
 Carvanha
 Level: 28

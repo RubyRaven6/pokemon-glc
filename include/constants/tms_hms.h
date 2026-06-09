@@ -43,7 +43,7 @@
     F(CALAMITY_CLEAVE) \
     F(PSIDEKICK) \
     F(MOSH_PIT) \
-    F(SYNCHRONIZED_SWIM) \
+    F(SYNCHROSWIM) \
     F(SECRET_POWER) \
     F(REST) \
     F(ATTRACT) \
