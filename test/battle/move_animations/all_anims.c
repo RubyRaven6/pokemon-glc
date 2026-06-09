@@ -2533,18 +2533,20 @@ SINGLE_BATTLE_TEST("Custom Move animations work")
     }
 }
 
-SINGLE_BATTLE_TEST("Individual Custom Move test")
+DOUBLE_BATTLE_TEST("Individual Custom Move test")
 {
     u32 move;
-    PARAMETRIZE { move = MOVE_GRASSPIERCER; }
+    PARAMETRIZE { move = MOVE_RESEARCH; }
 
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET) {};
+        PLAYER(SPECIES_WYNAUT) { Item(ITEM_FOCUS_SASH); }
         OPPONENT(SPECIES_WOBBUFFET) { Item(ITEM_FOCUS_SASH); }
+        OPPONENT(SPECIES_WYNAUT) { Item(ITEM_FOCUS_SASH); }
     } WHEN {
-        TURN { MOVE(player, move); }
+        TURN { MOVE(playerLeft, move, target: opponentLeft); }
     } SCENE {
-        ANIMATION(ANIM_TYPE_MOVE, move, player);
+        ANIMATION(ANIM_TYPE_MOVE, move, playerLeft);
     } THEN {
         FORCE_MOVE_ANIM(FALSE);
         if (gLoadFail || gSpriteAllocs != 0)
