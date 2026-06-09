@@ -3,7 +3,7 @@
 
 #include "tournament_opponent.h"
 
-enum TrainerRoaster
+enum TrainerRoster
 {
     ROSTER_GEN1_GYM_LEADERS = 1,
     ROSTER_GEN2_GYM_LEADERS,

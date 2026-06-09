@@ -60,7 +60,7 @@ static const struct Roster sSinnohGymLeaderRoster[] =
     { OPPONENT_CRASHER_WAKE, FLAG_SINNOH_LEADER_CRASHERWAKE },
     { OPPONENT_FANTINA,      FLAG_SINNOH_LEADER_FANTINA },
     { OPPONENT_BYRON,        FLAG_SINNOH_LEADER_BYRON },
-    { OPPONENT_CANDICE_NUTS,      FLAG_SINNOH_LEADER_CANDICE },
+    { OPPONENT_CANDICE_NUTS, FLAG_SINNOH_LEADER_CANDICE },
     { OPPONENT_VOLKNER,      FLAG_SINNOH_LEADER_VOLKNER },
 };
 
@@ -78,11 +78,11 @@ static const struct Roster sUnovaGymLeaderRoster[] =
     { OPPONENT_MARLON,  FLAG_UNOVA_LEADER_MARLON },
 };
 
-#define ROSTER(_roster, _flag)    \
-{                                   \
-    .roster = _roster,            \
+#define ROSTER(_roster, _flag)     \
+{                                  \
+    .roster = _roster,             \
     .count = ARRAY_COUNT(_roster), \
-    .flag = _flag,                  \
+    .flag = _flag,                 \
 }
 static const struct RosterData
 {
