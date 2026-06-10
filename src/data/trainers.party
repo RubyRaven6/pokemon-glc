@@ -4513,15 +4513,99 @@ Double Battle: No
 AI: Good Trainer / Prediction / Assumptions / Ace Pokemon
 Pool Rules: Basic
 Pool Pick Functions: Default
-/*Party Size: 6*/
+Party Size: 6
 
-Carvanha
-Level: 28
-IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
+Jellicent @ Colbur Berry
+Ability: Cursed Body
+Level: 100
+EVs: 63 HP / 63 Def / 2 SpD
+Tags: Lead
+Relaxed Nature
+- Trick Room
+- Muddy Water
+- Shadow Ball
+- Strength Sap
 
-Mightyena
-Level: 28
-IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
+Carracosta @ Rindo Berry
+Ability: Solid Rock
+Level: 100
+EVs: 63 HP / 63 Atk / 2 SpD
+Brave Nature
+- Protect
+- Rock Slide
+- Synchroswim
+- Knock Off
+
+Wailord @ Assault Vest
+Ability: Oblivious
+Level: 100
+EVs: 63 HP / 63 Atk / 2 Def
+Brave Nature
+- Synchroswim
+- Heavy Slam
+- Zen Headbutt
+- Rock Tomb
+
+Kingler @ Room Service
+Ability: Sheer Force
+Level: 100
+EVs: 63 HP / 63 Atk / 2 Def
+Brave Nature
+- Synchroswim
+- Rock Slide
+- Razor Shell
+- Protect
+
+Octillery @ Leftovers
+Ability: Moody
+Level: 100
+EVs: 63 HP / 63 Atk / 2 Def
+Brave Nature
+- Protect
+- Seed Bomb
+- Synchroswim
+- Gunk Shot
+
+Slowking @ Colbur Berry
+Ability: Oblivious
+Level: 100
+EVs: 63 HP / 2 Def / 63 SpA
+Quiet Nature
+- Trick Room
+- Ice Beam
+- Muddy Water
+- Psychic
+
+Gastrodon @ Focus Sash
+Ability: Sticky Hold
+Level: 100
+EVs: 2 HP / 63 Atk / 63 SpA
+Brave Nature
+- Counter
+- Mirror Coat
+- Earth Power
+- Synchroswim
+
+Crawdaunt @ Mystic Water
+Ability: Adaptability
+Level: 100
+EVs: 63 HP / 63 Atk / 2 Def
+Brave Nature
+- Synchroswim
+- Knock Off
+- Protect
+- Aqua Jet
+
+Blastoise @ Blastoisinite
+Ability: Rain Dish
+Level: 100
+EVs: 63 HP / 63 SpA / 2 SpD
+Tags: Ace
+Quiet Nature
+- Muddy Water
+- Flash Cannon
+- Aura Sphere
+- Protect
 
 === TRAINER_SHELLY_SEAFLOOR_CAVERN ===
 Name: SHELLY
