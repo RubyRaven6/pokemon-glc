@@ -54,16 +54,27 @@ Looks pretty :)
 
 | Stat            | Value |
 | :----------------| :-----:|
-| HP              | 70    |
-| Attack          | 90    |
-| Defense         | 60    |
+| HP              | 88    |
+| Attack          | 30    |
+| Defense         | 55    |
 | Special Attack  | 40    |
-| Special Defense | 70    |
-| Speed           | 70    |
+| Special Defense | 100   |
+| Speed           | 97    |
 
 ## Generation 3
 - **Seviper**: Gained Corrosion.
 - **Delcatty**: Rebalanced to the following stats:
+
+| Stat            | Value |
+| :----------------| :-----:|
+| HP              | 70    |
+| Attack          | 99    |
+| Defense         | 65    |
+| Special Attack  | 88    |
+| Special Defense | 55    |
+| Speed           | 90    |
+
+- **Luvdisc**: Rebalanced to the following stats:
 
 | Stat            | Value |
 | :----------------| :-----:|
@@ -90,6 +101,7 @@ Looks pretty :)
 - **Archeops**: Gained Klutz
 - **Cryogonal**: Gained Snow Warning
 - **Scolipede**: Mega Scolipede given Battle Armor for now. Will be changed once official Ability is confirmed.
+- **Haxorus**: Replaced Rivarly Ability with Sharpness
 
 # Team Credits
 | Position                          | Name                                                    |
