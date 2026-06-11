@@ -2288,6 +2288,39 @@ static enum CancelerResult CancelerAccuracyCheck(struct BattleCalcValues *cv)
     return CANCELER_RESULT_SUCCESS;
 }
 
+static enum CancelerResult CancelerColorChange(struct BattleCalcValues *cv)
+{
+    enum Type moveType = GetBattleMoveType(cv->move);
+
+    while (gBattleStruct->eventState.atkCancelerBattler < gBattlersCount)
+    {
+        enum BattlerId battlerDef = GetTargetBySlot(cv->battlerAtk, gBattleStruct->eventState.atkCancelerBattler++);
+
+        if (battlerDef == cv->battlerAtk
+         || ShouldSkipFailureCheckOnBattler(cv->battlerAtk, battlerDef, TRUE)
+         || GetMoveCategory(cv->move) == DAMAGE_CATEGORY_STATUS
+         || (cv->moveEffect == EFFECT_PRESENT && gBattleStruct->presentBasePower == 0)
+         || DoesSubstituteBlockMove(cv->battlerAtk, battlerDef, cv->move)
+         || IsSheerForceAffected(cv->move, cv->abilities[cv->battlerAtk])
+         || cv->abilities[battlerDef] != ABILITY_COLOR_CHANGE
+         || IS_BATTLER_OF_TYPE(battlerDef, moveType)
+         || cv->move == MOVE_STRUGGLE
+         || moveType == TYPE_STELLAR
+         || moveType == TYPE_MYSTERY)
+            continue;
+
+        gEffectBattler = gBattlerAbility = battlerDef;
+        SET_BATTLER_TYPE(battlerDef, moveType);
+        PREPARE_TYPE_BUFFER(gBattleTextBuff1, moveType);
+        RecordAbilityBattle(battlerDef, cv->abilities[battlerDef]);
+        BattleScriptCall(BattleScript_ColorChangeActivates);
+        return CANCELER_RESULT_RUN_SCRIPT;
+    }
+
+    gBattleStruct->eventState.atkCancelerBattler = 0;
+    return CANCELER_RESULT_SUCCESS;
+}
+
 static bool32 IsMoveParentalBondAffected(struct BattleCalcValues *cv)
 {
     if (cv->abilities[cv->battlerAtk] != ABILITY_PARENTAL_BOND
@@ -2480,6 +2513,7 @@ static enum CancelerResult (*const sMoveSuccessOrderCancelers[])(struct BattleCa
     [CANCELER_NOT_FULLY_PROTECTED] = CancelerNotFullyProtected,
     [CANCELER_MULTIHIT_MOVES] = CancelerMultihitMoves,
     [CANCELER_ACCURACY_CHECK] = CancelerAccuracyCheck,
+    [CANCELER_COLOR_CHANGE] = CancelerColorChange,
 };
 
 enum CancelerResult DoAttackCanceler(void)
@@ -3807,7 +3841,7 @@ static enum MoveEndResult MoveEndShellTrap(struct BattleCalcValues *cv)
     return MOVEEND_RESULT_CONTINUE;
 }
 
-static enum MoveEndResult MoveEndColorChange(struct BattleCalcValues *cv)
+static enum MoveEndResult MoveEndHpThresholdAbilities(struct BattleCalcValues *cv)
 {
     while (gBattleStruct->eventState.moveEndBattler < gBattlersCount)
     {
@@ -3815,7 +3849,7 @@ static enum MoveEndResult MoveEndColorChange(struct BattleCalcValues *cv)
 
         if (battler == cv->battlerAtk)
             continue;
-        if (AbilityBattleEffects(ABILITYEFFECT_COLOR_CHANGE, battler, cv->abilities[battler], 0, TRUE))
+        if (AbilityBattleEffects(ABILITYEFFECT_HP_THRESHOLD, battler, cv->abilities[battler], 0, TRUE))
             return MOVEEND_RESULT_RUN_SCRIPT;
     }
 
@@ -4516,7 +4550,7 @@ static enum MoveEndResult (*const sMoveEndHandlers[])(struct BattleCalcValues *c
     [MOVEEND_ITEM_EFFECTS_ATTACKER_2] = MoveEndItemEffectsAttacker2,
     [MOVEEND_ABILITY_EFFECT_FOES_FAINTED] = MoveEndAbilityEffectFoesFainted,
     [MOVEEND_SHELL_TRAP] = MoveEndShellTrap,
-    [MOVEEND_COLOR_CHANGE] = MoveEndColorChange,
+    [MOVEEND_HP_THRESHOLD_ABILITIES] = MoveEndHpThresholdAbilities,
     [MOVEEND_KEE_MARANGA_HP_THRESHOLD_ITEM_TARGET] = MoveEndKeeMarangaHpThresholdItemTarget,
     [MOVEEND_CARD_BUTTON] = MoveEndCardButton,
     [MOVEEND_FORM_CHANGE] = MoveEndFormChange,

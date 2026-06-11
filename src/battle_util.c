@@ -3787,23 +3787,9 @@ u32 AbilityBattleEffects(enum AbilityEffect caseID, enum BattlerId battler, enum
             }
         }
         break;
-    case ABILITYEFFECT_COLOR_CHANGE:
+    case ABILITYEFFECT_HP_THRESHOLD:
         switch (gLastUsedAbility)
         {
-        case ABILITY_COLOR_CHANGE:
-            if (IsBattlerTurnDamaged(battler, EXCLUDING_SUBSTITUTES)
-             && !IS_BATTLER_OF_TYPE(battler, moveType)
-             && move != MOVE_STRUGGLE
-             && moveType != TYPE_STELLAR
-             && moveType != TYPE_MYSTERY)
-            {
-                gEffectBattler = gBattlerAbility = battler;
-                SET_BATTLER_TYPE(battler, moveType);
-                PREPARE_TYPE_BUFFER(gBattleTextBuff1, moveType);
-                BattleScriptCall(BattleScript_ColorChangeActivates);
-                effect++;
-            }
-            break;
         case ABILITY_BERSERK:
             if (IsBattlerTurnDamaged(battler, EXCLUDING_SUBSTITUTES)
              && HadMoreThanHalfHpNowDoesnt(battler)

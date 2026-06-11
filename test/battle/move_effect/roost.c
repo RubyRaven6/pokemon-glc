@@ -243,11 +243,11 @@ DOUBLE_BATTLE_TEST("Roost suppresses the user's not-yet-aquired Flying-type this
         ANIMATION(ANIM_TYPE_MOVE, MOVE_ROOST, playerLeft);
         MESSAGE("Kecleon's HP was restored.");
         MESSAGE("The opposing Pidgey used Gust!");
-        ANIMATION(ANIM_TYPE_MOVE, MOVE_GUST, opponentLeft);
         MESSAGE("Kecleon's type changed to Flying!");
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_GUST, opponentLeft);
         MESSAGE("The opposing Sandshrew used Earthquake!");
-        ANIMATION(ANIM_TYPE_MOVE, MOVE_EARTHQUAKE, opponentRight);
         MESSAGE("Kecleon's type changed to Ground!");
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_EARTHQUAKE, opponentRight);
     }
 }
 
