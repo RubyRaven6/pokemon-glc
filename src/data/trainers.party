@@ -1034,7 +1034,7 @@ Jolly Nature
 - U-Turn
 - Whirlwind
 - Taunt
-/*- Windstorm*/
+- Windstorm
 
 Mandibuzz @ Heavy-Duty Boots
 Ability: Overcoat
@@ -1144,7 +1144,7 @@ Tags: Ace
 Adamant Nature
 - Close Combat
 - Iron Head
-/*- Vinsectication */
+- Vinsectication
 
 Escavalier @ Focus Sash
 Ability: Shell Armor
@@ -1179,7 +1179,7 @@ Adamant Nature
 - Swords Dance
 - Bullet Punch
 - Tera Blast
-/*- Vinsectication*/
+- Vinsectication
 
 === TRAINER_LEADER_WHITNEY ===
 Name: Whitney
@@ -1193,7 +1193,7 @@ Party Size: 6
 Pool Rules: Basic
 Pool Pick Functions: Default
 
-Wigglytuff @ Assault Vest
+Wigglytuff (F) @ Assault Vest
 Ability: Battle Armor
 Level: 100
 EVs: 63 HP / 63 Atk / 2 Def
@@ -1204,7 +1204,7 @@ Impish Nature
 - Disarming Voice
 - Knock Off
 
-Bewear @ Chople Berry
+Bewear (F) @ Chople Berry
 Ability: Fluffy
 Level: 100
 EVs: 63 Atk / 2 SpD / 63 Spe
@@ -1213,9 +1213,9 @@ Jolly Nature
 - Swords Dance
 - Drain Punch
 - Darkest Lariat
-/*- Fussy Fuss*/
+- Fussy Fuss
 
-Blissey @ Heavy-Duty Boots
+Blissey (F) @ Heavy-Duty Boots
 Ability: Natural Cure
 Level: 100
 EVs: 63 HP / 63 Def / 2 SpD
@@ -1225,7 +1225,7 @@ Bold Nature
 - Toxic
 - Teleport
 
-Oinkologne-M @ Ganlon Berry
+Oinkologne-M (F) @ Ganlon Berry
 Ability: Thick Fat
 Level: 100
 EVs: 2 HP / 63 SpD / 63 Atk
@@ -1235,7 +1235,7 @@ Bold Nature
 - Stuff Cheeks
 - Protect
 
-Purugly @ Silk Scarf
+Purugly (F) @ Silk Scarf
 Ability: Defiant
 Level: 100
 EVs: 63 Atk / 63 HP / 2 Spe
@@ -1246,7 +1246,7 @@ Adamant Nature
 - Knock Off
 - U-turn
 
-Lopunny @ Lopunnite
+Lopunny (F) @ Lopunnite
 Ability: Klutz
 Level: 100
 EVs: 63 Atk / 2 SpD / 63 Spe
@@ -1254,9 +1254,9 @@ Jolly Nature
 - Hi-Jump Kick
 - Fake Out
 - Ice Punch
-/*- Fussy Fuss*/
+- Fussy Fuss
 
-Meloetta-Aria @ Choice Scarf
+Meloetta-Aria (F) @ Choice Scarf
 Ability: Serene Grace
 Level: 100
 EVs: 63 SpA / 2 SpD / 63 Spe
@@ -1266,7 +1266,7 @@ Modest Nature
 - Shadow Ball
 - Trick
 
-Maushold-Four @ Wide Lens
+Maushold-Four (F) @ Wide Lens
 Ability: Technician
 Level: 100
 EVs: 63 Atk / 2 Def / 63 Spe
@@ -1274,9 +1274,9 @@ Adamant Nature
 - Population Bomb
 - Bite
 - Low Kick
-/*- Fussy Fuss*/
+- Fussy Fuss
 
-Miltank @ Lum Berry
+Miltank (F) @ Lum Berry
 Ability: Cud Chew
 Level: 100
 EVs: 63 HP / 30 Def / 35 Atk
@@ -1285,7 +1285,7 @@ Impish Nature
 - Milk Drink
 - Body Slam
 - Toxic
-/*- Fussy Fuss*/
+- Fussy Fuss
 
 === TRAINER_LEADER_MORTY ===
 Name: Morty
@@ -1297,8 +1297,7 @@ Double Battle: No
 AI: Good Trainer / Prediction / Assumptions / Ace Pokemon
 Party Size: 6
 Pool Rules: Basic
-Pool Pick Functions: Default
-
+ol Pick Functions: Defaul
 Brambleghast @ Focus Sash
 Ability: Wind Rider
 Level: 100
@@ -1328,7 +1327,7 @@ Bold Nature
 - Future Sight
 - Psycho Shift
 - Protect
-/*- Jinx*/
+- Jinx
 
 Zoroark-Hisui @ Choice Specs
 Ability: Illusion
@@ -1348,7 +1347,7 @@ Adamant Nature
 - Wave Crash
 - Poltergeist
 - Psychic Fangs
-- Flip Turn
+Flip Tu
 
 Sinistcha @ Leftovers
 Ability: Heatproof
@@ -1433,7 +1432,7 @@ Adamant Nature
 - Rage Fist
 - Bulk Up
 - Taunt
-/*- Crashing Fists*/
+- Crashing Fist
 
 Conkeldurr @ Assault Vest
 Ability: Iron Fist
@@ -1463,7 +1462,7 @@ Adamant Nature
 - Flame Charge
 - Knock Off
 - Earthquake
-/*- Crashing Fists*/
+- Crashing Fist
 
 Hitmonlee @ Flying Gem
 Ability: Unburden
@@ -1494,7 +1493,7 @@ Adamant Nature
 - Surging Strikes
 - Bulk Up
 - Liquidation
-/*- Crashing Fists*/
+- Crashing Fist
 
 === TRAINER_LEADER_JASMINE ===
 Name: Jasmine
@@ -1560,7 +1559,7 @@ Impish Nature
 - Leech Seed
 - Power Whip
 - Thunder Wave
-/*- Hydraulic Press*/
+- Hydraulic Press
 
 Empoleon @ Assault Vest
 Ability: Competitive
@@ -1581,7 +1580,7 @@ Careful Nature
 - Roost
 - Spikes
 - Defog
-/*- Hydraulic Press*/
+- Hydraulic Press
 
 Lucario @ Life Orb
 Ability: Steadfast
@@ -1602,7 +1601,7 @@ Impish Nature
 - Body Press
 - Earthquake
 - Stone Edge
-/*- Hydraulic Press*/
+- Hydraulic Press
 
 === TRAINER_LEADER_PRYCE ===
 Name: Pryce
@@ -1625,7 +1624,7 @@ Jolly Nature
 - Stealth Rock
 - Earthquake
 - Ice Shard
-/*- Ice Rink*/
+- Ice Rink
 
 Abomasnow @ Icy Rock
 Ability: Snow Warning
@@ -1754,7 +1753,7 @@ Calm Nature
 - Knock Off
 - Acid Armor
 - Rest
-/*- Storm Sacrifice*/
+- Storm Sacrifice
 
 Dragalge @ Life Orb
 Ability: Adaptability
@@ -1764,7 +1763,7 @@ Modest Nature
 - Sludge Bomb
 - Hydro Pump
 - Flip Turn
-/*- Storm Sacrifice*/
+- Storm Sacrifice
 
 Gyarados @ Leftovers
 Ability: Moxie
@@ -1785,7 +1784,7 @@ Modest Nature
 - Weather Ball
 - Boomburst
 - U-Turn
-/*- Storm Sacrifice*/
+- Storm Sacrifice
 
 Kingdra @ Choice Specs
 Ability: Swift Swim
@@ -1796,7 +1795,7 @@ Modest Nature
 - Hydro Pump
 - Draco Meteor
 - Flip Turn
-/*- Storm Sacrifice*/
+- Storm Sacrifice
 
 Archaludon @ Assault Vest
 Ability: Stamina
@@ -1806,7 +1805,7 @@ Modest Nature
 - Electro Shot
 - Draco Meteor
 - Flash Cannon
-/*- Storm Sacrifice*/
+- Storm Sacrifice
 
 Dragonite @ Heavy-Duty Boots
 Ability: Multiscale
@@ -3361,7 +3360,7 @@ Tags: Lead / Weather Setter
 Modest Nature
 - Blizzard
 - Moonblast
-- Freeze Dry
+- Overexposure
 - Aurora Veil
 
 Cloyster @ White Herb
@@ -3402,7 +3401,7 @@ Modest Nature
 - Substitute
 - Calm Mind
 - Psychic
-- Freeze Dry
+- Overexposure
 
 Aurorus @ Nevermeltice
 Ability: Refrigerate
