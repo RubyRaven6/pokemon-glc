@@ -32,6 +32,7 @@ Looks pretty :)
 ## General Changes
 - Movesets for all the Pokémon available in the game (and more) can be found in [gen_pglc.h](../../src/data/pokemon/level_up_learnsets/gen_pglc.h).
 - New ability *Mettle*, which raises the user's Special Attack after fainting an opponent.
+- Color Change buffed to proc *before* attack rather than after.
 
 ## Generation 1
 - **Wigglytuff**: Abilities changed from Cute Charm and Competitive to Fluffy and Battle Armor
@@ -102,6 +103,20 @@ Looks pretty :)
 - **Cryogonal**: Gained Snow Warning
 - **Scolipede**: Mega Scolipede given Battle Armor for now. Will be changed once official Ability is confirmed.
 - **Haxorus**: Replaced Rivarly Ability with Sharpness
+
+<!---
+## Generation 6
+- **Pyroar**: Gave Pyroar Mettle.
+
+## Generation 7
+
+## Generation 8
+
+## Generation 9
+- **Rabsca**: Gave Rabsca Magic Bounce
+- **Spidops**: Gained Color Change.
+
+--->
 
 # Team Credits
 | Position                          | Name                                                    |
