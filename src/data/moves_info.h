@@ -22293,7 +22293,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
             "Consecutive uses double\n"
             "power up to 300."),
         .effect = EFFECT_RAZZLE_DAZZLE,
-        .power = 75,
+        .power = 50,
         .type = TYPE_GHOST,
         .accuracy = 100,
         .pp = 10,
