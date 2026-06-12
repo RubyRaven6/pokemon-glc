@@ -30,9 +30,9 @@ Looks pretty :)
 
 # Pokémon Changes
 ## General Changes
-- Movesets for all the Pokémon available in the game (and more) can be found in [gen_pglc.h](../../src/data/pokemon/level_up_learnsets/gen_pglc.h).
+- Movesets for all the Pokémon available in the game (and more) can be found in [gen_pglc.h](../src/data/pokemon/level_up_learnsets/gen_pglc.h).
 - New ability *Mettle*, which raises the user's Special Attack after fainting an opponent.
-- Color Change buffed to proc *before* attack rather than after.
+- Color Change buffed to proc *before* being hit with an attack rather than after.
 
 ## Generation 1
 - **Wigglytuff**: Abilities changed from Cute Charm and Competitive to Fluffy and Battle Armor
@@ -51,8 +51,8 @@ Looks pretty :)
 | Speed           | 67    |
 
 ## Generation 2
-- **Magcargo**: Ability Magma Armor replaced with Evaporate 
-- **Ledian**: Replaced Ability Iron Fist with Huge Power.
+- **Magcargo**: Ability Magma Armor replaced with Steam Engine 
+- **Ledian**: Replaced Abilities with Zero to Hero.
 
 | Stat            | Value |
 | :----------------| :-----:|
@@ -67,11 +67,11 @@ Looks pretty :)
 
 | Stat            | Value |
 | :----------------| :-----:|
-| HP              | 88    |
-| Attack          | 30    |
-| Defense         | 55    |
-| Special Attack  | 40    |
-| Special Defense | 100   |
+| HP              | 76    |
+| Attack          | 92    |
+| Defense         | 60    |
+| Special Attack  | 41    |
+| Special Defense | 70    |
 | Speed           | 97    |
 
 ## Generation 3
@@ -91,12 +91,12 @@ Looks pretty :)
 
 | Stat            | Value |
 | :----------------| :-----:|
-| HP              | 70    |
-| Attack          | 99    |
-| Defense         | 65    |
-| Special Attack  | 88    |
-| Special Defense | 55    |
-| Speed           | 90    |
+| HP              | 88    |
+| Attack          | 30    |
+| Defense         | 55    |
+| Special Attack  | 40    |
+| Special Defense | 100   |
+| Speed           | 97    |
 
 ## Generation 4
 - **Wormadam**: Each form has been given a new ability:
@@ -114,7 +114,7 @@ Looks pretty :)
 - **Archeops**: Gained Klutz
 - **Cryogonal**: Gained Snow Warning
 - **Scolipede**: Mega Scolipede given Battle Armor for now. Will be changed once official Ability is confirmed.
-- **Haxorus**: Replaced Rivarly Ability with Sharpness
+- **Haxorus**: Replaced Ability Rivarly with Sharpness
 
 <!---
 ## Generation 6
@@ -125,8 +125,8 @@ Looks pretty :)
 ## Generation 8
 
 ## Generation 9
-- **Rabsca**: Gave Rabsca Magic Bounce
-- **Spidops**: Gained Color Change.
+- **Rabsca**: Gave Rabsca Ability Magic Bounce
+- **Spidops**: Gained Ability Color Change.
 
 --->
 
