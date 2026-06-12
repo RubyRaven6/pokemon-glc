@@ -3574,8 +3574,9 @@ u32 AbilityBattleEffects(enum AbilityEffect caseID, enum BattlerId battler, enum
             }
             break;
         case ABILITY_ZERO_TO_HERO:
-            if (GetMonData(GetBattlerMon(battler), MON_DATA_SPECIES) == SPECIES_PALAFIN_HERO
-             && !GetBattlerPartyState(battler)->transformZeroToHero)
+            if ((GetMonData(GetBattlerMon(battler), MON_DATA_SPECIES) == SPECIES_PALAFIN_HERO ||
+                 GetMonData(GetBattlerMon(battler), MON_DATA_SPECIES) == SPECIES_LEDIAN_HERO) && 
+                !GetBattlerPartyState(battler)->transformZeroToHero)
             {
                 GetBattlerPartyState(battler)->transformZeroToHero = TRUE;
                 BattleScriptCall(BattleScript_ZeroToHeroActivates);

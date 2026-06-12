@@ -51,6 +51,7 @@ Looks pretty :)
 | Speed           | 67    |
 
 ## Generation 2
+- **Ledian**: Replaced Ability Iron Fist with Huge Power. 
 - **Ariados**: Gained Skill Link. Rebalanced with the following stats:
 
 | Stat            | Value |

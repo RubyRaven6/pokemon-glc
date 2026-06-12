@@ -675,6 +675,14 @@ static const u16 sWooperFormSpeciesIdTable[] = {
 };
 #endif //P_FAMILY_WOOPER
 
+#if P_FAMILY_FINIZEN
+static const u16 sLedianFormSpeciesIdTable[] = {
+    SPECIES_LEDIAN,
+    SPECIES_LEDIAN_HERO,
+    FORM_SPECIES_END,
+};
+#endif //P_FAMILY_FINIZEN
+
 #if P_FAMILY_UNOWN
 static const u16 sUnownFormSpeciesIdTable[] = {
     SPECIES_UNOWN,

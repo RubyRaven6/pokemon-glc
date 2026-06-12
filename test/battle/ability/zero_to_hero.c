@@ -20,6 +20,26 @@ SINGLE_BATTLE_TEST("Zero to Hero transforms Palafin when it switches out")
     } THEN { EXPECT_EQ(player->species, SPECIES_PALAFIN_HERO); }
 }
 
+SINGLE_BATTLE_TEST("Zero to Hero transforms Ledian when it switches out")
+{
+    GIVEN {
+        PLAYER(SPECIES_LEDIAN) { Ability(ABILITY_ZERO_TO_HERO); }
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { SWITCH(player, 1); }
+        TURN { SWITCH(player, 0); }
+    } SCENE {
+        SWITCH_OUT_MESSAGE("Ledian");
+        SEND_IN_MESSAGE("Wobbuffet");
+        SWITCH_OUT_MESSAGE("Wobbuffet");
+        SEND_IN_MESSAGE("Ledian");
+        ABILITY_POPUP(player, ABILITY_ZERO_TO_HERO);
+        MESSAGE("Ledian underwent a heroic transformation!");
+    } THEN { EXPECT_EQ(player->species, SPECIES_LEDIAN_HERO); }
+}
+
+
 SINGLE_BATTLE_TEST("Zero to Hero can't be suppressed by Neutralizing Gas")
 {
     GIVEN {
