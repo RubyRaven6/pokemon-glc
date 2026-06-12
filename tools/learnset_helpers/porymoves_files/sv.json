@@ -295,7 +295,7 @@
       "MOVE_BULLDOZE",
       "MOVE_BULLET_SEED",
       "MOVE_CHARM",
-      "MOVE_CURSE"
+      "MOVE_CURSE",
       "MOVE_DOUBLE_EDGE",
       "MOVE_EARTH_POWER",
       "MOVE_EARTHQUAKE",
@@ -334,7 +334,7 @@
       "MOVE_TOXIC",
       "MOVE_TRAILBLAZE",
       "MOVE_VENOSHOCK",
-      "MOVE_WEATHER_BALL",
+      "MOVE_WEATHER_BALL"
     ],
     "EggMoves": [
       "MOVE_CURSE",
