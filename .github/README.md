@@ -51,7 +51,18 @@ Looks pretty :)
 | Speed           | 67    |
 
 ## Generation 2
-- **Ledian**: Replaced Ability Iron Fist with Huge Power. 
+- **Magcargo**: Ability Magma Armor replaced with Evaporate 
+- **Ledian**: Replaced Ability Iron Fist with Huge Power.
+
+| Stat            | Value |
+| :----------------| :-----:|
+| HP              | 85    |
+| Attack          | 125   |
+| Defense         | 63    |
+| Special Attack  | 85    |
+| Special Defense | 110   |
+| Speed           | 125   |
+
 - **Ariados**: Gained Skill Link. Rebalanced with the following stats:
 
 | Stat            | Value |
