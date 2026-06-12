@@ -11,9 +11,10 @@ SINGLE_BATTLE_TEST("Color Change changes the type of a Pokemon being hit by a mo
     } WHEN {
         TURN { MOVE(player, MOVE_PSYWAVE); }
     } SCENE {
-        ANIMATION(ANIM_TYPE_MOVE, MOVE_PSYWAVE, player);
         ABILITY_POPUP(opponent, ABILITY_COLOR_CHANGE);
         MESSAGE("The opposing Kecleon's type changed to Psychic!");
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_PSYWAVE, player);
+        HP_BAR(opponent);
     }
 }
 
@@ -77,13 +78,13 @@ SINGLE_BATTLE_TEST("Color Change changes the user to Electric type if hit by a m
     } WHEN {
         TURN { MOVE(opponent, MOVE_ELECTRIFY); MOVE(player, MOVE_PSYCHO_CUT); }
     } SCENE {
-        ANIMATION(ANIM_TYPE_MOVE, MOVE_PSYCHO_CUT, player);
         ABILITY_POPUP(opponent, ABILITY_COLOR_CHANGE);
         MESSAGE("The opposing Kecleon's type changed to Electric!");
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_PSYCHO_CUT, player);
     }
 }
 
-SINGLE_BATTLE_TEST("Color Change changes the type when a Pokemon is hit by Future Sight")
+SINGLE_BATTLE_TEST("Color Change activates before damage from Future Sight")
 {
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET);
@@ -97,10 +98,11 @@ SINGLE_BATTLE_TEST("Color Change changes the type when a Pokemon is hit by Futur
         MESSAGE("The opposing Kecleon took the Future Sight attack!");
         ABILITY_POPUP(opponent, ABILITY_COLOR_CHANGE);
         MESSAGE("The opposing Kecleon's type changed to Psychic!");
+        HP_BAR(opponent);
     }
 }
 
-SINGLE_BATTLE_TEST("Color Change changes the type when a Pokemon is hit by Doom Desire")
+SINGLE_BATTLE_TEST("Color Change activates before damage from Doom Desire")
 {
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET);
@@ -114,10 +116,11 @@ SINGLE_BATTLE_TEST("Color Change changes the type when a Pokemon is hit by Doom 
         MESSAGE("The opposing Kecleon took the Doom Desire attack!");
         ABILITY_POPUP(opponent, ABILITY_COLOR_CHANGE);
         MESSAGE("The opposing Kecleon's type changed to Steel!");
+        HP_BAR(opponent);
     }
 }
 
-SINGLE_BATTLE_TEST("Color Change changes the type to Electric when a Pokemon is hit by a forseen attack under the effect of Electrify")
+SINGLE_BATTLE_TEST("Color Change activates before damage from an Electrified delayed attack")
 {
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET);
@@ -131,10 +134,11 @@ SINGLE_BATTLE_TEST("Color Change changes the type to Electric when a Pokemon is 
         MESSAGE("The opposing Kecleon took the Future Sight attack!");
         ABILITY_POPUP(opponent, ABILITY_COLOR_CHANGE);
         MESSAGE("The opposing Kecleon's type changed to Electric!");
+        HP_BAR(opponent);
     }
 }
 
-SINGLE_BATTLE_TEST("Color Change changes the type to Normal when a Pokemon is hit by a forseen attack under the effect of Normalize")
+SINGLE_BATTLE_TEST("Color Change activates before damage from a Normalize-affected delayed attack")
 {
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET) { Ability(ABILITY_NORMALIZE); }
@@ -151,6 +155,7 @@ SINGLE_BATTLE_TEST("Color Change changes the type to Normal when a Pokemon is hi
         MESSAGE("The opposing Kecleon took the Future Sight attack!");
         ABILITY_POPUP(opponent, ABILITY_COLOR_CHANGE);
         MESSAGE("The opposing Kecleon's type changed to Normal!");
+        HP_BAR(opponent);
     }
 }
 
