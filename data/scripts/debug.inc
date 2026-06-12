@@ -213,6 +213,7 @@ Debug_EventScript_Script_2::
 
 
 Debug_EventScript_Script_3::
+	call Common_EventScript_MoveRelearner
 	release
 	end
 

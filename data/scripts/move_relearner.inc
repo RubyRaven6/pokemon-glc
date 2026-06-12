@@ -8,8 +8,8 @@ Common_EventScript_MoveRelearner::
 
 Common_EventScript_MoveRelearnerDynMultiChoice::
 	dynmultipush MoveRelearner_Text_LevelUpMoves, 0
-	dynmultipush MoveRelearner_Text_EggMoves, 1
-	dynmultipush MoveRelearner_Text_TMMoves, 2
+	@dynmultipush MoveRelearner_Text_EggMoves, 1
+	@dynmultipush MoveRelearner_Text_TMMoves, 2
 	dynmultipush MoveRelearner_Text_TutormoveMoves, 3
 	dynmultipush MoveRelearner_Text_SeeYa, 4
 	dynmultistack 0, 0, FALSE, 5, 0, 0, DYN_MULTICHOICE_CB_NONE
