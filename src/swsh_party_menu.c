@@ -35,6 +35,7 @@
 #include "item.h"
 #include "item_menu.h"
 #include "item_use.h"
+#include "party_menu.h"
 #include "pokemon_storage_system.h"
 #include "caps.h"
 #include "link.h"
@@ -48,7 +49,6 @@
 #include "move_relearner.h"
 #include "overworld.h"
 #include "palette.h"
-#include "party_menu.h"
 #include "comfy_anim.h"
 #include "player_pc.h"
 #include "pokemon.h"
@@ -2672,7 +2672,7 @@ static void GiveItemToMon(struct Pokemon *mon, enum Item item)
     TryItemHoldFormChange(&gParties[B_TRAINER_PLAYER][gPartyMenu.slotId], gPartyMenu.slotId, B_TRAINER_PLAYER);
 }
 
-u8 TryTakeMonItem(struct Pokemon *mon)
+enum TryTakeMonItemResult TryTakeMonItem(struct Pokemon *mon)
 {
     enum Item item = GetMonData(mon, MON_DATA_HELD_ITEM);
 

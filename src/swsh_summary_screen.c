@@ -7,6 +7,7 @@
 #include "battle_tent.h"
 #include "battle_factory.h"
 #include "bg.h"
+#include "party_menu.h"
 #include "swsh_summary_screen.h"
 #include "contest.h"
 #include "contest_effect.h"
@@ -31,7 +32,6 @@
 #include "mon_markings.h"
 #include "move_relearner.h"
 #include "naming_screen.h"
-#include "party_menu.h"
 #include "palette.h"
 #include "pokeball.h"
 #include "pokemon.h"
@@ -6395,7 +6395,7 @@ static void SetPokerusCuredSprite(void)
 {
     struct Pokemon *mon = &sMonSummaryScreen->currentMon;
     if (sMonSummaryScreen->spriteIds[SPRITE_ARR_ID_POKERUS_CURED] == SPRITE_NONE)
-    sMonSummaryScreen->spriteIds[SPRITE_ARR_ID_POKERUS_CURED] = CreateSprite(&sSpriteTemplate_PokerusCuredIcon, 117, 85, 0);
+        sMonSummaryScreen->spriteIds[SPRITE_ARR_ID_POKERUS_CURED] = CreateSprite(&sSpriteTemplate_PokerusCuredIcon, 117, 85, 0);
 
     gSprites[sMonSummaryScreen->spriteIds[SPRITE_ARR_ID_POKERUS_CURED]].invisible = !ShouldPokemonShowCuredPokerus(mon);
 }
