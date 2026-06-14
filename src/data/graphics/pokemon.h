@@ -6991,6 +6991,18 @@ const u32 gObjectEventPic_Substitute[] = INCGFX_COMP("graphics/pokemon/question_
     const u32 gObjectEventPic_LedianF[] = INCGFX_COMP("graphics/pokemon/ledian/overworldf.png", ".4bpp", "-mwidth 4 -mheight 4");
 #endif //OW_POKEMON_OBJECT_EVENTS
 #endif //P_GENDER_DIFFERENCES
+
+const u32 gMonFrontPic_LedianHero[] = INCGFX_U32("graphics/pokemon/ledian/hero/anim_front.png", ".4bpp.smol");
+const u16 gMonPalette_LedianHero[] = INCGFX_U16("graphics/pokemon/ledian/hero/anim_front.png", ".gbapal");
+const u32 gMonBackPic_LedianHero[] = INCGFX_U32("graphics/pokemon/ledian/hero/back.png", ".4bpp.smol");
+const u16 gMonShinyPalette_LedianHero[] = INCGFX_U16("graphics/pokemon/ledian/back.png", ".gbapal");
+
+const u8 gMonIcon_LedianHero[] = INCGFX_U8("graphics/pokemon/ledian/hero/icon.png", ".4bpp");
+
+#if P_GENDER_DIFFERENCES
+    const u32 gMonFrontPic_LedianHeroF[] = INCGFX_U32("graphics/pokemon/ledian/hero/anim_frontf.png", ".4bpp.smol");
+    const u32 gMonBackPic_LedianHeroF[] = INCGFX_U32("graphics/pokemon/ledian/hero/backf.png", ".4bpp.smol");
+#endif //P_GENDER_DIFFERENCES
 #endif //P_FAMILY_LEDYBA
 
 #if P_FAMILY_SPINARAK
