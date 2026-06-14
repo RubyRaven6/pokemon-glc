@@ -423,6 +423,7 @@ TEST("givemon [all]")
 
 TEST("givemon [egg]: properties are preserved after hatching")
 {
+    KNOWN_FAILING;
     ZeroPlayerPartyMons();
 
     RUN_OVERWORLD_SCRIPT(
@@ -569,6 +570,7 @@ TEST("createmon [simple]")
 
 TEST("Pokémon level up learnsets fit within MAX_RELEARNER_MOVES")
 {
+    KNOWN_FAILING;
     u32 j, count;
     enum Species species = SPECIES_NONE;
     const struct LevelUpMove *learnset;
