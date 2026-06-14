@@ -643,6 +643,7 @@ s32 CalcWeatherScore(enum BattlerId battlerAtk, enum BattlerId battlerDef, enum 
             if (HasDamagingMoveOfType(battlerDef, TYPE_FLYING) || HasDamagingMoveOfType(BATTLE_PARTNER(battlerDef), TYPE_FLYING))
                 score -= WEAK_EFFECT;
         }
+    default:
         break;
     }
 

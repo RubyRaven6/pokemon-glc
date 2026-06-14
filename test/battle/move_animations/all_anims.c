@@ -8,7 +8,7 @@
 #define ANIM_TEST_END_MOVE   MOVES_COUNT-1  //  Last move to test
 
 
-static void ParametrizeMovesAndSpecies(u32 j, u32 *pMove, u32 *pSpecies, u32 variation)
+static void ParametrizeMovesAndSpecies(u32 j, enum Move *pMove, enum Species *pSpecies, u32 variation)
 {
     enum BattleMoveEffects effect = GetMoveEffect(j);
     if (effect == EFFECT_DARK_VOID) // User needs to be Darkrai
@@ -90,7 +90,7 @@ static u32 GetParametrizedHP(enum Move move, u32 variation)
     return 9997;
 }
 
-static u32 GetParametrizedItem(enum Move move, u32 variation)
+static enum Item GetParametrizedItem(enum Move move, u32 variation)
 {
     if ((move == MOVE_TECHNO_BLAST) && variation > 0)
     {
@@ -656,10 +656,13 @@ static void DoublesScene(enum Move move, struct BattlePokemon *attacker)
 
 SINGLE_BATTLE_TEST("Move Animations don't leak when used - Singles (player to opponent)")
 {
-    u32 j = ANIM_TEST_START_MOVE, move = 0, species = 0;
+    u32 j = ANIM_TEST_START_MOVE;
+    enum move = MOVE_NONE;
+    enum Species species = SPECIES_NONE;
     u32 k = 0, variation = 0, variationsNumber;
     u32 friendship = 0, tempFriendship;
-    u32 tempMove, tempSpecies;
+    enum Move tempMove;
+    enum Species tempSpecies;
     FORCE_MOVE_ANIM(TRUE);
     for (; j <= ANIM_TEST_END_MOVE; j++) {
         variationsNumber = GetVariationsNumber(j, FALSE);
@@ -704,10 +707,13 @@ SINGLE_BATTLE_TEST("Move Animations don't leak when used - Singles (player to op
 
 SINGLE_BATTLE_TEST("Move Animations don't leak when used - Singles (opponent to player)")
 {
-    u32 j = ANIM_TEST_START_MOVE, move = 0, species = 0;
+    u32 j = ANIM_TEST_START_MOVE;
+    enum Move move = MOVE_NONE;
+    enum Species species = SPECIES_NONE;
     u32 k = 0, variation = 0, variationsNumber;
     u32 friendship = 0, tempFriendship;
-    u32 tempMove, tempSpecies;
+    enum Move tempMove;
+    enum Species tempSpecies;
     FORCE_MOVE_ANIM(TRUE);
     for (; j <= ANIM_TEST_END_MOVE; j++) {
         variationsNumber = GetVariationsNumber(j, FALSE);
@@ -752,10 +758,13 @@ SINGLE_BATTLE_TEST("Move Animations don't leak when used - Singles (opponent to 
 
 DOUBLE_BATTLE_TEST("Move Animations don't leak when used - Doubles (playerLeft to opponentLeft)")
 {
-    u32 j = ANIM_TEST_START_MOVE, move = 0, species = 0;
+    u32 j = ANIM_TEST_START_MOVE;
+    enum Move move = MOVE_NONE;
+    enum Species species = SPECIES_NONE;
     u32 k = 0, variation = 0, variationsNumber;
     u32 friendship = 0, tempFriendship;
-    u32 tempMove, tempSpecies;
+    enum Move tempMove;
+    enum Species tempSpecies;
     FORCE_MOVE_ANIM(TRUE);
     struct BattlePokemon *attacker = playerLeft;
     struct BattlePokemon *target = opponentLeft;
@@ -823,10 +832,13 @@ DOUBLE_BATTLE_TEST("Move Animations don't leak when used - Doubles (playerLeft t
 
 DOUBLE_BATTLE_TEST("Move Animations don't leak when used - Doubles (opponentLeft to playerLeft)")
 {
-    u32 j = ANIM_TEST_START_MOVE, move = 0, species = 0;
+    u32 j = ANIM_TEST_START_MOVE;
+    enum Move move = MOVE_NONE;
+    enum Species species = SPECIES_NONE;
     u32 k = 0, variation = 0, variationsNumber;
     u32 friendship = 0, tempFriendship;
-    u32 tempMove, tempSpecies;
+    enum Move tempMove;
+    enum Species tempSpecies;
     FORCE_MOVE_ANIM(TRUE);
     struct BattlePokemon *attacker = opponentLeft;
     struct BattlePokemon *target = playerLeft;
@@ -895,10 +907,13 @@ DOUBLE_BATTLE_TEST("Move Animations don't leak when used - Doubles (opponentLeft
 
 DOUBLE_BATTLE_TEST("Move Animations don't leak when used - Doubles (playerLeft to opponentRight)")
 {
-    u32 j = ANIM_TEST_START_MOVE, move = 0, species = 0;
+    u32 j = ANIM_TEST_START_MOVE;
+    enum Move move = MOVE_NONE;
+    enum Species species = SPECIES_NONE;
     u32 k = 0, variation = 0, variationsNumber;
     u32 friendship = 0, tempFriendship;
-    u32 tempMove, tempSpecies;
+    enum Move tempMove;
+    enum Species tempSpecies;
     FORCE_MOVE_ANIM(TRUE);
     struct BattlePokemon *attacker = playerLeft;
     struct BattlePokemon *target = opponentRight;
@@ -967,10 +982,13 @@ DOUBLE_BATTLE_TEST("Move Animations don't leak when used - Doubles (playerLeft t
 
 DOUBLE_BATTLE_TEST("Move Animations don't leak when used - Doubles (opponentRight to playerLeft)")
 {
-    u32 j = ANIM_TEST_START_MOVE, move = 0, species = 0;
+    u32 j = ANIM_TEST_START_MOVE;
+    enum Move move = MOVE_NONE;
+    enum Species species = SPECIES_NONE;
     u32 k = 0, variation = 0, variationsNumber;
     u32 friendship = 0, tempFriendship;
-    u32 tempMove, tempSpecies;
+    enum Move tempMove;
+    enum Species tempSpecies;
     FORCE_MOVE_ANIM(TRUE);
     struct BattlePokemon *attacker = opponentRight;
     struct BattlePokemon *target = playerLeft;
@@ -1039,10 +1057,13 @@ DOUBLE_BATTLE_TEST("Move Animations don't leak when used - Doubles (opponentRigh
 
 DOUBLE_BATTLE_TEST("Move Animations don't leak when used - Doubles (playerRight to opponentLeft)")
 {
-    u32 j = ANIM_TEST_START_MOVE, move = 0, species = 0;
+    u32 j = ANIM_TEST_START_MOVE;
+    enum Move move = MOVE_NONE;
+    enum Species species = SPECIES_NONE;
     u32 k = 0, variation = 0, variationsNumber;
     u32 friendship = 0, tempFriendship;
-    u32 tempMove, tempSpecies;
+    enum Move tempMove;
+    enum Species tempSpecies;
     FORCE_MOVE_ANIM(TRUE);
     struct BattlePokemon *attacker = playerRight;
     struct BattlePokemon *target = opponentLeft;
@@ -1111,10 +1132,13 @@ DOUBLE_BATTLE_TEST("Move Animations don't leak when used - Doubles (playerRight 
 
 DOUBLE_BATTLE_TEST("Move Animations don't leak when used - Doubles (opponentLeft to playerRight)")
 {
-    u32 j = ANIM_TEST_START_MOVE, move = 0, species = 0;
+    u32 j = ANIM_TEST_START_MOVE;
+    enum Move move = MOVE_NONE;
+    enum Species species = SPECIES_NONE;
     u32 k = 0, variation = 0, variationsNumber;
     u32 friendship = 0, tempFriendship;
-    u32 tempMove, tempSpecies;
+    enum Move tempMove;
+    enum Species tempSpecies;
     FORCE_MOVE_ANIM(TRUE);
     struct BattlePokemon *attacker = opponentLeft;
     struct BattlePokemon *target = playerRight;
@@ -1183,10 +1207,13 @@ DOUBLE_BATTLE_TEST("Move Animations don't leak when used - Doubles (opponentLeft
 
 DOUBLE_BATTLE_TEST("Move Animations don't leak when used - Doubles (playerRight to opponentRight)")
 {
-    u32 j = ANIM_TEST_START_MOVE, move = 0, species = 0;
+    u32 j = ANIM_TEST_START_MOVE;
+    enum Move move = MOVE_NONE;
+    enum Species species = SPECIES_NONE;
     u32 k = 0, variation = 0, variationsNumber;
     u32 friendship = 0, tempFriendship;
-    u32 tempMove, tempSpecies;
+    enum Move tempMove;
+    enum Species tempSpecies;
     FORCE_MOVE_ANIM(TRUE);
     struct BattlePokemon *attacker = playerRight;
     struct BattlePokemon *target = opponentRight;
@@ -1255,10 +1282,13 @@ DOUBLE_BATTLE_TEST("Move Animations don't leak when used - Doubles (playerRight 
 
 DOUBLE_BATTLE_TEST("Move Animations don't leak when used - Doubles (opponentRight to playerRight)")
 {
-    u32 j = ANIM_TEST_START_MOVE, move = 0, species = 0;
+    u32 j = ANIM_TEST_START_MOVE;
+    enum Move move = MOVE_NONE;
+    enum Species species = SPECIES_NONE;
     u32 k = 0, variation = 0, variationsNumber;
     u32 friendship = 0, tempFriendship;
-    u32 tempMove, tempSpecies;
+    enum Move tempMove;
+    enum Species tempSpecies;
     FORCE_MOVE_ANIM(TRUE);
     struct BattlePokemon *attacker = opponentRight;
     struct BattlePokemon *target = playerRight;
@@ -1328,8 +1358,11 @@ DOUBLE_BATTLE_TEST("Move Animations don't leak when used - Doubles (opponentRigh
 /*
 DOUBLE_BATTLE_TEST("Move Animations don't leak when used - Doubles (playerLeft to playerRight)")
 {
-    u32 j = ANIM_TEST_START_MOVE, move = 0, species = 0;
-    u32 tempMove, tempSpecies;
+    u32 j = ANIM_TEST_START_MOVE;
+    enum Move move = MOVE_NONE;
+    enum Species species = SPECIES_NONE;
+    enum Move tempMove;
+    enum Species tempSpecies;
     FORCE_MOVE_ANIM(TRUE);
     struct BattlePokemon *attacker = playerLeft;
     struct BattlePokemon *target = playerRight;
@@ -1387,8 +1420,11 @@ DOUBLE_BATTLE_TEST("Move Animations don't leak when used - Doubles (playerLeft t
 
 DOUBLE_BATTLE_TEST("Move Animations don't leak when used - Doubles (playerRight to playerLeft)")
 {
-    u32 j = ANIM_TEST_START_MOVE, move = 0, species = 0;
-    u32 tempMove, tempSpecies;
+    u32 j = ANIM_TEST_START_MOVE;
+    enum Move move = MOVE_NONE;
+    enum Species species = SPECIES_NONE;
+    enum Move tempMove;
+    enum Species tempSpecies;
     FORCE_MOVE_ANIM(TRUE);
     struct BattlePokemon *attacker = playerRight;
     struct BattlePokemon *target = playerLeft;
@@ -1446,8 +1482,11 @@ DOUBLE_BATTLE_TEST("Move Animations don't leak when used - Doubles (playerRight 
 
 DOUBLE_BATTLE_TEST("Move Animations don't leak when used - Doubles (opponentleft to opponentRight)")
 {
-    u32 j = ANIM_TEST_START_MOVE, move = 0, species = 0;
-    u32 tempMove, tempSpecies;
+    u32 j = ANIM_TEST_START_MOVE;
+    enum Move move = MOVE_NONE;
+    enum Species species = SPECIES_NONE;
+    enum Move tempMove;
+    enum Species tempSpecies;
     FORCE_MOVE_ANIM(TRUE);
     struct BattlePokemon *attacker = opponentLeft;
     struct BattlePokemon *target = opponentRight;
@@ -1505,8 +1544,11 @@ DOUBLE_BATTLE_TEST("Move Animations don't leak when used - Doubles (opponentleft
 
 DOUBLE_BATTLE_TEST("Move Animations don't leak when used - Doubles (opponentRight to opponentLeft)")
 {
-    u32 j = ANIM_TEST_START_MOVE, move = 0, species = 0;
-    u32 tempMove, tempSpecies;
+    u32 j = ANIM_TEST_START_MOVE;
+    enum Move move = MOVE_NONE;
+    enum Species species = SPECIES_NONE;
+    enum Move tempMove;
+    enum Species tempSpecies;
     FORCE_MOVE_ANIM(TRUE);
     struct BattlePokemon *attacker = opponentRight;
     struct BattlePokemon *target = opponentLeft;
@@ -1565,10 +1607,13 @@ DOUBLE_BATTLE_TEST("Move Animations don't leak when used - Doubles (opponentRigh
 
 SINGLE_BATTLE_TEST("Move Animations occur before their stat change animations - Singles (player to opponent)")
 {
-    u32 j = ANIM_TEST_START_MOVE, move = 0, species = 0;
+    u32 j = ANIM_TEST_START_MOVE;
+    enum Move move = MOVE_NONE;
+    enum Species species = SPECIES_NONE;
     u32 k = 0, variation = 0, variationsNumber;
     u32 friendship = 0, tempFriendship;
-    u32 tempMove, tempSpecies;
+    enum Move tempMove;
+    enum Species tempSpecies;
     FORCE_MOVE_ANIM(TRUE);
     for (; j <= ANIM_TEST_END_MOVE; j++) {
         variationsNumber = GetVariationsNumber(j, FALSE);
@@ -1668,7 +1713,9 @@ SINGLE_BATTLE_TEST("Move Animations occur before their stat change animations - 
 SINGLE_BATTLE_TEST("Z-Moves don't leak when used - Singles (player to opponent)")
 {
     FORCE_MOVE_ANIM(TRUE);
-    u32 species, move, item, zmove;
+    enum Species species;
+    enum Move move, zmove;
+    enum Item item;
     Z_MOVE_PARAMETERS;
     GIVEN {
         PLAYER(species) { Item(item); }
@@ -1698,7 +1745,9 @@ SINGLE_BATTLE_TEST("Z-Moves don't leak when used - Singles (player to opponent)"
 SINGLE_BATTLE_TEST("Z-Moves don't leak when used - Singles (opponent to player)")
 {
     FORCE_MOVE_ANIM(TRUE);
-    u32 species, move, item, zmove;
+    enum Species species;
+    enum Move move, zmove;
+    enum Item item;
     Z_MOVE_PARAMETERS;
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET) { Item(ITEM_FOCUS_SASH); }
@@ -1728,7 +1777,9 @@ SINGLE_BATTLE_TEST("Z-Moves don't leak when used - Singles (opponent to player)"
 DOUBLE_BATTLE_TEST("Z-Moves don't leak when used - Doubles (playerLeft to opponentLeft)")
 {
     FORCE_MOVE_ANIM(TRUE);
-    u32 species, move, item, zmove;
+    enum Species species;
+    enum Move move, zmove;
+    enum Item item;
     Z_MOVE_PARAMETERS;
     GIVEN {
         PLAYER(species) { Item(item); }
@@ -1760,7 +1811,9 @@ DOUBLE_BATTLE_TEST("Z-Moves don't leak when used - Doubles (playerLeft to oppone
 DOUBLE_BATTLE_TEST("Z-Moves don't leak when used - Doubles (playerLeft to opponentRight)")
 {
     FORCE_MOVE_ANIM(TRUE);
-    u32 species, move, item, zmove;
+    enum Species species;
+    enum Move move, zmove;
+    enum Item item;
     Z_MOVE_PARAMETERS;
     GIVEN {
         PLAYER(species) { Item(item); }
@@ -1792,7 +1845,9 @@ DOUBLE_BATTLE_TEST("Z-Moves don't leak when used - Doubles (playerLeft to oppone
 DOUBLE_BATTLE_TEST("Z-Moves don't leak when used - Doubles (playerRight to opponentLeft)")
 {
     FORCE_MOVE_ANIM(TRUE);
-    u32 species, move, item, zmove;
+    enum Species species;
+    enum Move move, zmove;
+    enum Item item;
     Z_MOVE_PARAMETERS;
     GIVEN {
         PLAYER(SPECIES_WYNAUT);
@@ -1824,7 +1879,9 @@ DOUBLE_BATTLE_TEST("Z-Moves don't leak when used - Doubles (playerRight to oppon
 DOUBLE_BATTLE_TEST("Z-Moves don't leak when used - Doubles (playerRight to opponentRight)")
 {
     FORCE_MOVE_ANIM(TRUE);
-    u32 species, move, item, zmove;
+    enum Species species;
+    enum Move move, zmove;
+    enum Item item;
     Z_MOVE_PARAMETERS;
     GIVEN {
         PLAYER(SPECIES_WYNAUT);
@@ -1856,7 +1913,9 @@ DOUBLE_BATTLE_TEST("Z-Moves don't leak when used - Doubles (playerRight to oppon
 DOUBLE_BATTLE_TEST("Z-Moves don't leak when used - Doubles (opponentLeft to playerLeft)")
 {
     FORCE_MOVE_ANIM(TRUE);
-    u32 species, move, item, zmove;
+    enum Species species;
+    enum Move move, zmove;
+    enum Item item;
     Z_MOVE_PARAMETERS;
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET) { Item(ITEM_FOCUS_SASH); }
@@ -1888,7 +1947,9 @@ DOUBLE_BATTLE_TEST("Z-Moves don't leak when used - Doubles (opponentLeft to play
 DOUBLE_BATTLE_TEST("Z-Moves don't leak when used - Doubles (opponentLeft to playerRight)")
 {
     FORCE_MOVE_ANIM(TRUE);
-    u32 species, move, item, zmove;
+    enum Species species;
+    enum Move move, zmove;
+    enum Item item;
     Z_MOVE_PARAMETERS;
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET) { Item(ITEM_FOCUS_SASH); }
@@ -1920,7 +1981,9 @@ DOUBLE_BATTLE_TEST("Z-Moves don't leak when used - Doubles (opponentLeft to play
 DOUBLE_BATTLE_TEST("Z-Moves don't leak when used - Doubles (opponentRight to playerLeft)")
 {
     FORCE_MOVE_ANIM(TRUE);
-    u32 species, move, item, zmove;
+    enum Species species;
+    enum Move move, zmove;
+    enum Item item;
     Z_MOVE_PARAMETERS;
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET) { Item(ITEM_FOCUS_SASH); }
@@ -1952,7 +2015,9 @@ DOUBLE_BATTLE_TEST("Z-Moves don't leak when used - Doubles (opponentRight to pla
 DOUBLE_BATTLE_TEST("Z-Moves don't leak when used - Doubles (opponentRight to playerRight)")
 {
     FORCE_MOVE_ANIM(TRUE);
-    u32 species, move, item, zmove;
+    enum Species species;
+    enum Move move, zmove;
+    enum Item item;
     Z_MOVE_PARAMETERS;
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET) { Item(ITEM_FOCUS_SASH); }
@@ -2011,7 +2076,9 @@ DOUBLE_BATTLE_TEST("Z-Moves don't leak when used - Doubles (opponentRight to pla
 SINGLE_BATTLE_TEST("Tera Blast doesn't leak when used - Singles (player to opponent)")
 {
     FORCE_MOVE_ANIM(TRUE);
-    u32 species, move, type;
+    enum Species species;
+    enum Move move;
+    enum Type type;
     TERA_BLAST_PARAMETERS;
     GIVEN {
         PLAYER(species) { TeraType(type); }
@@ -2034,7 +2101,9 @@ SINGLE_BATTLE_TEST("Tera Blast doesn't leak when used - Singles (player to oppon
 SINGLE_BATTLE_TEST("Tera Blast doesn't leak when used - Singles (opponent to player)")
 {
     FORCE_MOVE_ANIM(TRUE);
-    u32 species, move, type;
+    enum Species species;
+    enum Move move;
+    enum Type type;
     TERA_BLAST_PARAMETERS;
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET) { Item(ITEM_FOCUS_SASH); }
@@ -2057,7 +2126,9 @@ SINGLE_BATTLE_TEST("Tera Blast doesn't leak when used - Singles (opponent to pla
 DOUBLE_BATTLE_TEST("Tera Blast doesn't leak when used - Doubles (playerLeft to opponentLeft)")
 {
     FORCE_MOVE_ANIM(TRUE);
-    u32 species, move, type;
+    enum Species species;
+    enum Move move;
+    enum Type type;
     TERA_BLAST_PARAMETERS;
     GIVEN {
         PLAYER(species) { TeraType(type); }
@@ -2082,7 +2153,9 @@ DOUBLE_BATTLE_TEST("Tera Blast doesn't leak when used - Doubles (playerLeft to o
 DOUBLE_BATTLE_TEST("Tera Blast doesn't leak when used - Doubles (playerLeft to opponentRight)")
 {
     FORCE_MOVE_ANIM(TRUE);
-    u32 species, move, type;
+    enum Species species;
+    enum Move move;
+    enum Type type;
     TERA_BLAST_PARAMETERS;
     GIVEN {
         PLAYER(species) { TeraType(type); }
@@ -2107,7 +2180,9 @@ DOUBLE_BATTLE_TEST("Tera Blast doesn't leak when used - Doubles (playerLeft to o
 DOUBLE_BATTLE_TEST("Tera Blast doesn't leak when used - Doubles (playerRight to opponentLeft)")
 {
     FORCE_MOVE_ANIM(TRUE);
-    u32 species, move, type;
+    enum Species species;
+    enum Move move;
+    enum Type type;
     TERA_BLAST_PARAMETERS;
     GIVEN {
         PLAYER(SPECIES_WYNAUT);
@@ -2132,7 +2207,9 @@ DOUBLE_BATTLE_TEST("Tera Blast doesn't leak when used - Doubles (playerRight to 
 DOUBLE_BATTLE_TEST("Tera Blast doesn't leak when used - Doubles (playerRight to opponentRight)")
 {
     FORCE_MOVE_ANIM(TRUE);
-    u32 species, move, type;
+    enum Species species;
+    enum Move move;
+    enum Type type;
     TERA_BLAST_PARAMETERS;
     GIVEN {
         PLAYER(SPECIES_WYNAUT);
@@ -2157,7 +2234,9 @@ DOUBLE_BATTLE_TEST("Tera Blast doesn't leak when used - Doubles (playerRight to 
 DOUBLE_BATTLE_TEST("Tera Blast doesn't leak when used - Doubles (opponentLeft to playerLeft)")
 {
     FORCE_MOVE_ANIM(TRUE);
-    u32 species, move, type;
+    enum Species species;
+    enum Move move;
+    enum Type type;
     TERA_BLAST_PARAMETERS;
     GIVEN {
         PLAYER(species) { Item(ITEM_FOCUS_SASH); }
@@ -2182,7 +2261,9 @@ DOUBLE_BATTLE_TEST("Tera Blast doesn't leak when used - Doubles (opponentLeft to
 DOUBLE_BATTLE_TEST("Tera Blast doesn't leak when used - Doubles (opponentLeft to playerRight)")
 {
     FORCE_MOVE_ANIM(TRUE);
-    u32 species, move, type;
+    enum Species species;
+    enum Move move;
+    enum Type type;
     TERA_BLAST_PARAMETERS;
     GIVEN {
         PLAYER(species) { Item(ITEM_FOCUS_SASH); }
@@ -2207,7 +2288,9 @@ DOUBLE_BATTLE_TEST("Tera Blast doesn't leak when used - Doubles (opponentLeft to
 DOUBLE_BATTLE_TEST("Tera Blast doesn't leak when used - Doubles (opponentRight to playerLeft)")
 {
     FORCE_MOVE_ANIM(TRUE);
-    u32 species, move, type;
+    enum Species species;
+    enum Move move;
+    enum Type type;
     TERA_BLAST_PARAMETERS;
     GIVEN {
         PLAYER(species) { Item(ITEM_FOCUS_SASH); }
@@ -2232,7 +2315,9 @@ DOUBLE_BATTLE_TEST("Tera Blast doesn't leak when used - Doubles (opponentRight t
 DOUBLE_BATTLE_TEST("Tera Blast doesn't leak when used - Doubles (opponentRight to playerRight)")
 {
     FORCE_MOVE_ANIM(TRUE);
-    u32 species, move, type;
+    enum Species species;
+    enum Move move;
+    enum Type type;
     TERA_BLAST_PARAMETERS;
     GIVEN {
         PLAYER(species) { Item(ITEM_FOCUS_SASH); }
@@ -2258,10 +2343,13 @@ DOUBLE_BATTLE_TEST("Tera Blast doesn't leak when used - Doubles (opponentRight t
 
 SINGLE_BATTLE_TEST("Move Animations work 1")
 {
-    u32 j = ANIM_TEST_START_MOVE + 0, move = 0, species = 0;
+    u32 j = ANIM_TEST_START_MOVE;
+    enum Move move = MOVE_NONE;
+    enum Species species = SPECIES_NONE;
     u32 k = 0, variation = 0, variationsNumber;
     u32 friendship = 0, tempFriendship;
-    u32 tempMove, tempSpecies;
+    enum Move tempMove;
+    enum Species tempSpecies;
     FORCE_MOVE_ANIM(TRUE);
     for (; j <= ANIM_TEST_END_MOVE; j += 4) {
         variationsNumber = GetVariationsNumber(j, FALSE);
@@ -2306,10 +2394,13 @@ SINGLE_BATTLE_TEST("Move Animations work 1")
 
 SINGLE_BATTLE_TEST("Move Animations work 2")
 {
-    u32 j = ANIM_TEST_START_MOVE + 1, move = 0, species = 0;
+    u32 j = ANIM_TEST_START_MOVE;
+    enum Move move = MOVE_NONE;
+    enum Species species = SPECIES_NONE;
     u32 k = 0, variation = 0, variationsNumber;
     u32 friendship = 0, tempFriendship;
-    u32 tempMove, tempSpecies;
+    enum Move tempMove;
+    enum Species tempSpecies;
     FORCE_MOVE_ANIM(TRUE);
     for (; j <= ANIM_TEST_END_MOVE; j += 4) {
         variationsNumber = GetVariationsNumber(j, FALSE);
@@ -2354,10 +2445,13 @@ SINGLE_BATTLE_TEST("Move Animations work 2")
 
 SINGLE_BATTLE_TEST("Move Animations work 3")
 {
-    u32 j = ANIM_TEST_START_MOVE + 2, move = 0, species = 0;
+    u32 j = ANIM_TEST_START_MOVE;
+    enum Move move = MOVE_NONE;
+    enum Species species = SPECIES_NONE;
     u32 k = 0, variation = 0, variationsNumber;
     u32 friendship = 0, tempFriendship;
-    u32 tempMove, tempSpecies;
+    enum Move tempMove;
+    enum Species tempSpecies;
     FORCE_MOVE_ANIM(TRUE);
     for (; j <= ANIM_TEST_END_MOVE; j += 4) {
         variationsNumber = GetVariationsNumber(j, FALSE);
@@ -2402,10 +2496,13 @@ SINGLE_BATTLE_TEST("Move Animations work 3")
 
 SINGLE_BATTLE_TEST("Move Animations work 4")
 {
-    u32 j = ANIM_TEST_START_MOVE + 3, move = 0, species = 0;
+    u32 j = ANIM_TEST_START_MOVE;
+    enum Move move = MOVE_NONE;
+    enum Species species = SPECIES_NONE;
     u32 k = 0, variation = 0, variationsNumber;
     u32 friendship = 0, tempFriendship;
-    u32 tempMove, tempSpecies;
+    enum Move tempMove;
+    enum Species tempSpecies;
     FORCE_MOVE_ANIM(TRUE);
     for (; j <= ANIM_TEST_END_MOVE; j += 4) {
         variationsNumber = GetVariationsNumber(j, FALSE);
@@ -2451,7 +2548,9 @@ SINGLE_BATTLE_TEST("Move Animations work 4")
 SINGLE_BATTLE_TEST("Z-Moves animations work")
 {
     FORCE_MOVE_ANIM(TRUE);
-    u32 species, move, item, zmove;
+    enum Species species;
+    enum Move move, zmove;
+    enum Item item;
     Z_MOVE_PARAMETERS;
     GIVEN {
         PLAYER(species) { Item(item); }
@@ -2481,7 +2580,9 @@ SINGLE_BATTLE_TEST("Z-Moves animations work")
 SINGLE_BATTLE_TEST("Tera Blast animations work")
 {
     FORCE_MOVE_ANIM(TRUE);
-    u32 species, move, type;
+    enum Species species;
+    enum Move move;
+    enum Type type;
     TERA_BLAST_PARAMETERS;
     GIVEN {
         PLAYER(species) { TeraType(type); }

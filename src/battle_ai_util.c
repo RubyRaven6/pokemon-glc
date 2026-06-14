@@ -703,7 +703,7 @@ bool32 IsDamageMoveUnusable(struct DamageContext *ctx)
     return FALSE;
 }
 
-bool32 IsAdditionalEffectBlocked(enum BattlerId battlerAtk, u32 abilityAtk, enum BattlerId battlerDef, enum Ability abilityDef)
+bool32 IsAdditionalEffectBlocked(enum BattlerId battlerAtk, enum Ability abilityAtk, enum BattlerId battlerDef, enum Ability abilityDef)
 {
     if (gAiLogicData->holdEffects[battlerDef] == HOLD_EFFECT_COVERT_CLOAK)
         return TRUE;
@@ -740,13 +740,14 @@ static inline void AI_RestoreBattlerTypes(enum BattlerId battlerAtk, enum Type *
     gBattleMons[battlerAtk].types[2] = types[2];
 }
 
-static inline void CalcDynamicMoveDamage(struct DamageContext *ctx, u16 *medianDamage, u16 *minimumDamage, u16 *maximumDamage, u16 *randomDamage)
+static inline void CalcDynamicMoveDamage(struct DamageContext *ctx, struct SimulatedDamage *simDamage)
 {
     enum BattleMoveEffects effect = GetMoveEffect(ctx->move);
-    u16 median = *medianDamage;
-    u16 minimum = *minimumDamage;
-    u16 maximum = *maximumDamage;
-    u16 random = *randomDamage;
+
+    u32 median = simDamage->median;
+    u32 minimum = simDamage->minimum;
+    u32 maximum = simDamage->maximum;
+    u32 random = simDamage->random;
 
     u32 strikeCount = GetMoveStrikeCount(ctx->move);
 
@@ -774,10 +775,11 @@ static inline void CalcDynamicMoveDamage(struct DamageContext *ctx, u16 *medianD
     {
         if (GetMoveEffect(ctx->move) == EFFECT_SPECIES_POWER_OVERRIDE && gBattleMons[ctx->battlerAtk].species == GetMoveSpeciesPowerOverride_Species(ctx->move))
         {
-            median *= GetMoveSpeciesPowerOverride_NumOfHits(ctx->move);
-            minimum *= GetMoveSpeciesPowerOverride_NumOfHits(ctx->move);
-            maximum *= GetMoveSpeciesPowerOverride_NumOfHits(ctx->move);
-            random *= GetMoveSpeciesPowerOverride_NumOfHits(ctx->move);
+            u32 basePowerOverride = GetMoveSpeciesPowerOverride_NumOfHits(ctx->move);
+            median *= basePowerOverride;
+            minimum *= basePowerOverride;
+            maximum *= basePowerOverride;
+            random *= basePowerOverride;
         }
         else if (ctx->abilities[ctx->battlerAtk] == ABILITY_SKILL_LINK)
         {
@@ -821,10 +823,10 @@ static inline void CalcDynamicMoveDamage(struct DamageContext *ctx, u16 *medianD
     if (random == 0)
         random = 1;
 
-    *medianDamage = median;
-    *minimumDamage = minimum;
-    *maximumDamage = maximum;
-    *randomDamage = random;
+    simDamage->median = median;
+    simDamage->minimum = minimum;
+    simDamage->maximum = maximum;
+    simDamage->random = random;
 }
 
 static inline bool32 ShouldCalcCritDamage(struct DamageContext *ctx)
@@ -922,9 +924,6 @@ struct SimulatedDamage AI_CalcDamage(enum Move move, enum BattlerId battlerAtk, 
     gBattleStruct->magnitudeBasePower = 70;
     gBattleStruct->presentBasePower = 80;
 
-    enum BattlerId battlerAtkPartner = BATTLE_PARTNER(battlerAtk);
-    enum BattlerId battlerDefPartner = BATTLE_PARTNER(battlerDef);
-
     struct DamageContext ctx = {0};
     ctx.aiCalc = TRUE;
     ctx.aiCheckBerryModifier = FALSE;
@@ -937,14 +936,17 @@ struct SimulatedDamage AI_CalcDamage(enum Move move, enum BattlerId battlerAtk, 
     ctx.updateFlags = FALSE;
     ctx.weather = weather;
     ctx.fixedBasePower = 0;
-    ctx.holdEffects[ctx.battlerAtk] = aiData->holdEffects[battlerAtk];
-    ctx.holdEffects[battlerAtkPartner] = aiData->holdEffects[battlerAtkPartner];
-    ctx.holdEffects[ctx.battlerDef] = aiData->holdEffects[battlerDef];
-    ctx.holdEffects[battlerDefPartner] = aiData->holdEffects[battlerDefPartner];
-    ctx.abilities[ctx.battlerAtk] = aiData->abilities[battlerAtk];
-    ctx.abilities[battlerAtkPartner] = aiData->abilities[battlerAtkPartner];
-    ctx.abilities[ctx.battlerDef] = AI_GetMoldBreakerSanitizedAbility(battlerAtk, ctx.abilities[ctx.battlerAtk], aiData->abilities[battlerDef], ctx.holdEffects[ctx.battlerDef], move);
-    ctx.abilities[battlerDefPartner] = AI_GetMoldBreakerSanitizedAbility(battlerAtk, ctx.abilities[ctx.battlerAtk], aiData->abilities[battlerDefPartner], ctx.holdEffects[battlerDefPartner], move);
+
+    for (enum BattlerId battler = 0; battler < gBattlersCount; battler++)
+    {
+        if (battler == battlerAtk)
+            ctx.abilities[battler] = aiData->abilities[battler];
+        else
+            ctx.abilities[battler] = AI_GetMoldBreakerSanitizedAbility(battlerAtk, aiData->abilities[ctx.battlerAtk], aiData->abilities[battler], aiData->holdEffects[battler], move);
+
+        ctx.holdEffects[battler] = aiData->holdEffects[battler];
+    }
+
     ctx.isCrit = ShouldCalcCritDamage(&ctx);
     ctx.typeEffectivenessModifier = CalcTypeEffectivenessMultiplier(&ctx);
 
@@ -1001,7 +1003,7 @@ struct SimulatedDamage AI_CalcDamage(enum Move move, enum BattlerId battlerAtk, 
         }
 
         if (GetActiveGimmick(battlerAtk) != GIMMICK_Z_MOVE)
-            CalcDynamicMoveDamage(&ctx, &simDamage.median, &simDamage.minimum, &simDamage.maximum, &simDamage.random);
+            CalcDynamicMoveDamage(&ctx, &simDamage);
 
         AI_RestoreBattlerTypes(battlerAtk, types);
     }
@@ -1023,6 +1025,7 @@ struct SimulatedDamage AI_CalcDamage(enum Move move, enum BattlerId battlerAtk, 
         SetActiveGimmick(battlerAtk, GIMMICK_NONE);
     if (toggledGimmickDef)
         SetActiveGimmick(battlerDef, GIMMICK_NONE);
+
     gAiLogicData->aiCalcInProgress = FALSE;
     return simDamage;
 }
@@ -1876,7 +1879,8 @@ u32 AI_GetWeather(void)
 
 u32 AI_GetSwitchinWeather(enum BattlerId battler)
 {
-    enum Ability ability = gBattleMons[battler].ability;
+    enum Ability ability = gAiLogicData->abilities[battler];
+
     // Forced weather behaviour
     if (!AI_WeatherHasEffect())
         return B_WEATHER_NONE;
@@ -1919,10 +1923,9 @@ u32 SwitchinChangeBattleTerrain(u32 newTerrain, u32 fieldStatus)
 
 u32 AI_GetSwitchinFieldStatus(enum BattlerId battler)
 {
-    enum Ability ability = gBattleMons[battler].ability;
     u32 startingFieldStatus = gFieldStatuses;
     // Switchin will introduce new terrain
-    switch (ability)
+    switch (gAiLogicData->abilities[battler])
     {
     case ABILITY_ELECTRIC_SURGE:
     case ABILITY_HADRON_ENGINE:
@@ -4518,7 +4521,7 @@ bool32 IsAbilityOfRating(enum Ability ability, s32 rating)
     return FALSE;
 }
 
-static const u16 sRecycleEncouragedItems[] =
+static const enum Item sRecycleEncouragedItems[] =
 {
     ITEM_CHESTO_BERRY,
     ITEM_LUM_BERRY,
@@ -5636,7 +5639,7 @@ bool32 IsBattlerItemEnabled(enum BattlerId battler)
         return FALSE;
     if (gBattleMons[battler].volatiles.embargo)
         return FALSE;
-    if (gBattleMons[battler].ability == ABILITY_KLUTZ && !gBattleMons[battler].volatiles.gastroAcid)
+    if (gAiLogicData->abilities[battler] == ABILITY_KLUTZ && !gBattleMons[battler].volatiles.gastroAcid)
         return FALSE;
     return TRUE;
 }
@@ -6377,7 +6380,7 @@ s32 GetFoeStatChangeScore(enum BattlerId battlerAtk, enum BattlerId battlerDef, 
     return (score > BEST_EFFECT) ? BEST_EFFECT : score;
 }
 
-s32 GetAllyStatChangeScore(u32 battlerAtk, u32 partner, u32 move)
+s32 GetAllyStatChangeScore(enum BattlerId battlerAtk, enum BattlerId partner, enum Move move)
 {
     s32 tempScore = 0;
     enum BattlerId foe = LEFT_FOE(battlerAtk);
