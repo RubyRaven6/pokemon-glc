@@ -4686,9 +4686,13 @@ static void TryAcupressureStatChange(struct BattleCalcValues *cv)
 
 static enum MoveResult StatChangeCanAnyChange(struct BattleCalcValues *cv)
 {
-    if (GetMoveEffect(cv->move) == EFFECT_ACUPRESSURE || GetMoveEffect(cv->move) == EFFECT_MINERAGRAPHY)
+    if (GetMoveEffect(cv->move) == EFFECT_ACUPRESSURE)
     {
         TryAcupressureStatChange(cv);
+        return MOVE_RESULT_CONTINUE;
+    }
+    else if (GetMoveEffect(cv->move) == EFFECT_MINERAGRAPHY)
+    {
         return MOVE_RESULT_CONTINUE;
     }
 
