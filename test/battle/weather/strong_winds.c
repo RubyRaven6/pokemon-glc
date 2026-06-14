@@ -250,23 +250,29 @@ SINGLE_BATTLE_TEST("Strong winds can be replaced by Primordial Sea")
     }
 }
 
-SINGLE_BATTLE_TEST("Strong winds don't reduce Synthesis, Morning Sun or Moonlight recovery")
+SINGLE_BATTLE_TEST("Strong winds don't reduce Synthesis, Morning Sun or Moonlight recovery", s16 healing)
 {
     enum Move move;
     enum BattleMoveEffects effect;
-    PARAMETRIZE { move = MOVE_SYNTHESIS;   effect = EFFECT_SYNTHESIS; }
-    PARAMETRIZE { move = MOVE_MORNING_SUN; effect = EFFECT_MORNING_SUN; }
-    PARAMETRIZE { move = MOVE_MOONLIGHT;   effect = EFFECT_MOONLIGHT; }
+    bool32 strongWinds;
+    PARAMETRIZE { move = MOVE_SYNTHESIS;   effect = EFFECT_SYNTHESIS;   strongWinds = FALSE; }
+    PARAMETRIZE { move = MOVE_SYNTHESIS;   effect = EFFECT_SYNTHESIS;   strongWinds = TRUE; }
+    PARAMETRIZE { move = MOVE_MORNING_SUN; effect = EFFECT_MORNING_SUN; strongWinds = FALSE; }
+    PARAMETRIZE { move = MOVE_MORNING_SUN; effect = EFFECT_MORNING_SUN; strongWinds = TRUE; }
+    PARAMETRIZE { move = MOVE_MOONLIGHT;   effect = EFFECT_MOONLIGHT;   strongWinds = FALSE; }
+    PARAMETRIZE { move = MOVE_MOONLIGHT;   effect = EFFECT_MOONLIGHT;   strongWinds = TRUE; }
 
     GIVEN {
         ASSUME(GetMoveEffect(move) == effect);
-        PLAYER(SPECIES_RAYQUAZA) { HP(1); MaxHP(200); Moves(MOVE_DRAGON_ASCENT, MOVE_CELEBRATE, move); }
+        PLAYER(SPECIES_RAYQUAZA) { Ability(strongWinds ? ABILITY_DELTA_STREAM : ABILITY_NONE); HP(1); MaxHP(200); Moves(move); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
-        TURN { MOVE(player, MOVE_CELEBRATE, gimmick: GIMMICK_MEGA); }
         TURN { MOVE(player, move); }
     } SCENE {
-        ABILITY_POPUP(player, ABILITY_DELTA_STREAM);
-        HP_BAR(player, damage: -100);
+        HP_BAR(player, captureDamage: &results[i].healing);
+    } FINALLY {
+        EXPECT_EQ(results[0].healing, results[1].healing);
+        EXPECT_EQ(results[2].healing, results[3].healing);
+        EXPECT_EQ(results[4].healing, results[5].healing);
     }
 }
