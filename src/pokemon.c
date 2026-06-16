@@ -6550,6 +6550,8 @@ void GivePlayerUnlockedPokemon(void)
             GiveScriptedMonToPlayer(&mon, PARTY_SIZE);
         else
             CopyMonToPC(&mon);
+        GetSetPokedexFlag(GetMonData(&mon, MON_DATA_SPECIES), FLAG_SET_CAUGHT);
+        GetSetPokedexFlag(GetMonData(&mon, MON_DATA_SPECIES), FLAG_SET_SEEN);
     }
 }
 
@@ -6573,6 +6575,8 @@ void Debug_GivePlayerAllPokemon(void)
             GiveScriptedMonToPlayer(&mon, PARTY_SIZE);
         else
         CopyMonToPC(&mon);
+        GetSetPokedexFlag(GetMonData(&mon, MON_DATA_SPECIES), FLAG_SET_CAUGHT);
+        GetSetPokedexFlag(GetMonData(&mon, MON_DATA_SPECIES), FLAG_SET_SEEN);
         }
     }
 }
