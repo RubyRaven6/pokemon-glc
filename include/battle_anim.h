@@ -537,6 +537,7 @@ void AnimFallingRock(struct Sprite *sprite);
 void AnimRaiseSprite(struct Sprite *sprite);
 void AnimFallingRock_Step(struct Sprite *sprite);
 void AnimFlyingSandCrescent(struct Sprite *sprite);
+void AnimWindstormCrescent(struct Sprite *sprite);
 void AnimRockFragment(struct Sprite *);
 void AnimRockBlastRock(struct Sprite *sprite);
 

@@ -140,7 +140,8 @@ static bool32 TargetHasToMove(enum Move move) // Opponent needs to hit the playe
      || effect == EFFECT_DISABLE
      || effect == EFFECT_MIMIC
      || effect == EFFECT_SPITE
-     || effect == EFFECT_ENCORE)
+     || effect == EFFECT_ENCORE
+     || effect == EFFECT_AURA_FARMING)
         return TRUE;
     return FALSE;
 }
@@ -296,7 +297,7 @@ static void WhenSingles(enum Move move, struct BattlePokemon *attacker, struct B
     }
     // Effective turn
     TURN {
-        if (effect == EFFECT_REFLECT_DAMAGE)
+        if (effect == EFFECT_REFLECT_DAMAGE || effect == EFFECT_AURA_FARMING)
         {
             bool32 useSpecialMove = GetMoveReflectDamage_DamageCategories(move) == 1u << DAMAGE_CATEGORY_SPECIAL;
             MOVE(defender, useSpecialMove ? MOVE_SWIFT : MOVE_POUND);
@@ -2536,7 +2537,7 @@ SINGLE_BATTLE_TEST("Custom Move animations work")
 DOUBLE_BATTLE_TEST("Individual Custom Move test")
 {
     u32 move;
-    PARAMETRIZE { move = MOVE_RESEARCH; }
+    PARAMETRIZE { move = MOVE_THIRD_DEGREE; }
 
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET) {};
@@ -2544,7 +2545,13 @@ DOUBLE_BATTLE_TEST("Individual Custom Move test")
         OPPONENT(SPECIES_WOBBUFFET) { Item(ITEM_FOCUS_SASH); }
         OPPONENT(SPECIES_WYNAUT) { Item(ITEM_FOCUS_SASH); }
     } WHEN {
-        TURN { MOVE(playerLeft, move, target: opponentLeft); }
+        TURN {
+            if (gMovesInfo[move].effect == EFFECT_AURA_FARMING)
+            {
+                MOVE(opponentLeft, MOVE_POUND, target: playerLeft);
+            }
+            MOVE(playerLeft, move, target: opponentLeft);
+        }
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, move, playerLeft);
     } THEN {
