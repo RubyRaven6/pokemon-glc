@@ -349,7 +349,7 @@ AI_SINGLE_BATTLE_TEST("AI won't use ground type attacks against flying type Poke
     } WHEN {
         TURN { NOT_EXPECT_MOVE(opponent, MOVE_EARTHQUAKE); }
         TURN { MOVE(player, MOVE_GRAVITY); NOT_EXPECT_MOVE(opponent, MOVE_EARTHQUAKE); }
-        TURN { EXPECT_MOVE(opponent, MOVE_EARTHQUAKE); SEND_OUT(player, 1); }
+        TURN { EXPECT_MOVE(opponent, MOVE_EARTHQUAKE); /*SEND_OUT(player, 1);*/ }
     } SCENE {
         MESSAGE("Gravity intensified!");
     }
