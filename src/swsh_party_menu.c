@@ -2678,8 +2678,11 @@ enum TryTakeMonItemResult TryTakeMonItem(struct Pokemon *mon)
 
     if (item == ITEM_NONE)
         return 0;
-    if (AddBagItem(item, 1) == FALSE)
+    /*
+        if (AddBagItem(item, 1) == FALSE)
         return 1;
+    */
+    //ensures no items are added to the bag. badabing bada bag
 
     item = ITEM_NONE;
     SetMonData(mon, MON_DATA_HELD_ITEM, &item);
@@ -4506,7 +4509,7 @@ static void CB2_GiveHoldItem(void)
         // Give mail
         else if (ItemIsMail(gSpecialVar_ItemId))
         {
-            RemoveBagItem(gSpecialVar_ItemId, 1);
+            // RemoveBagItem(gSpecialVar_ItemId, 1); NOW it wont give mons anything!
             GiveItemToMon(&gParties[B_TRAINER_PLAYER][gPartyMenu.slotId], gSpecialVar_ItemId);
             CB2_WriteMailToGiveMon();
         }
@@ -4532,7 +4535,7 @@ static void Task_GiveHoldItem(u8 taskId)
     {
         item = gSpecialVar_ItemId;
         GiveItemToMon(&gParties[B_TRAINER_PLAYER][gPartyMenu.slotId], item);
-        RemoveBagItem(item, 1);
+        // RemoveBagItem(item, 1); and now this also wont remove bag items!!! good job ruby
 
         // Visually update cursor and held item sprites
         UpdatePartyMonHeldItemSprite(&gParties[B_TRAINER_PLAYER][gPartyMenu.slotId], &sPartyMenuBoxes[gPartyMenu.slotId]);
@@ -4568,12 +4571,12 @@ static void Task_HandleSwitchItemsYesNoInput(u8 taskId)
     switch (Menu_ProcessInputNoWrapClearOnChoose())
     {
     case 0: // Yes, switch items
-        RemoveBagItem(gSpecialVar_ItemId, 1);
+        // RemoveBagItem(gSpecialVar_ItemId, 1);
 
         // No room to return held item to bag
         if (AddBagItem(sPartyMenuItemId, 1) == FALSE)
         {
-            AddBagItem(gSpecialVar_ItemId, 1);
+            // AddBagItem(gSpecialVar_ItemId, 1);
             BufferBagFullCantTakeItemMessage(sPartyMenuItemId);
             DisplayPartyMenuMessage(gStringVar4, FALSE);
             gTasks[taskId].func = Task_ReturnToChooseMonAfterText;
@@ -4604,7 +4607,7 @@ static void Task_HandleSwitchItemsYesNoInput(u8 taskId)
         PlaySE(SE_SELECT);
         // fallthrough
     case 1: // No
-        AddBagItem(gSpecialVar_ItemId, 1);
+        // AddBagItem(gSpecialVar_ItemId, 1);
 
         // Reset to choose mon mode via Task_UpdateHeldItemSprite
         gPartyMenu.action = PARTY_ACTION_GIVE_ITEM; // Keep as GIVE_ITEM so cleanup happens
@@ -9013,7 +9016,7 @@ static void GiveItemOrMailToSelectedMon(u8 taskId)
 {
     if (ItemIsMail(gPartyMenu.bagItem))
     {
-        RemoveBagItem(gPartyMenu.bagItem, 1);
+        // RemoveBagItem(gPartyMenu.bagItem, 1);
         sPartyMenuInternal->exitCallback = CB2_WriteMailToGiveMonFromBag;
         Task_ClosePartyMenu(taskId);
     }
@@ -9031,7 +9034,7 @@ static void GiveItemToSelectedMon(u8 taskId)
     {
         item = gPartyMenu.bagItem;
         GiveItemToMon(&gParties[B_TRAINER_PLAYER][gPartyMenu.slotId], item);
-        RemoveBagItem(item, 1);
+        // RemoveBagItem(item, 1);
 
         // Visually update cursor and held item sprites
         UpdatePartyMonHeldItemSprite(&gParties[B_TRAINER_PLAYER][gPartyMenu.slotId], &sPartyMenuBoxes[gPartyMenu.slotId]);
