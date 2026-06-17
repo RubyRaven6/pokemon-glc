@@ -22133,8 +22133,8 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .effect = EFFECT_PSYCHE_LOCK,
         .power = 0,
         .type = TYPE_PSYCHIC,
-        .accuracy = 100,
-        .pp = 10,
+        .accuracy = 75,
+        .pp = 5,
         .target = TARGET_SELECTED,
         .priority = 0,
         .category = DAMAGE_CATEGORY_STATUS,
@@ -22191,7 +22191,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .name = COMPOUND_STRING("Shallow Grave"),
         .description = COMPOUND_STRING(
             "Traps the target and\n"
-            "severely lowers Speed."),
+            "gravely lowers Speed."),
         .effect = EFFECT_HIT,
         .power = 120,
         .type = TYPE_GROUND,
@@ -22293,7 +22293,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
             "Consecutive uses double\n"
             "power up to 300."),
         .effect = EFFECT_RAZZLE_DAZZLE,
-        .power = 75,
+        .power = 50,
         .type = TYPE_GHOST,
         .accuracy = 100,
         .pp = 10,
@@ -22566,13 +22566,13 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .battleAnimScript = gBattleAnimMove_Teleport,
     },
 
-    [MOVE_MOUNTING_PRESSURE] =
+    [MOVE_ORBITAL_PULL] =
     {
         .name = COMPOUND_STRING("Orbital Pull"),
         .description = COMPOUND_STRING(
             "Charges, then boosts\n"
             "offenses and gravity."),
-        .effect = EFFECT_MOUNTING_PRESSURE,
+        .effect = EFFECT_ORBITAL_PULL,
         .power = 0,
         .type = TYPE_GROUND,
         .accuracy = 0,
@@ -22675,13 +22675,13 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .battleAnimScript = gBattleAnimMove_BeatUp,
     },
 
-    [MOVE_SYNCHRONIZED_SWIM] =
+    [MOVE_SYNCHROSWIM] =
     {
         .name = COMPOUND_STRING("Synchroswim"),
         .description = COMPOUND_STRING(
             "The user and ally each\n"
             "strike twice."),
-        .effect = EFFECT_SYNCHRONIZED_SWIM,
+        .effect = EFFECT_SYNCHROSWIM,
         .power = 70,
         .type = TYPE_WATER,
         .accuracy = 100,

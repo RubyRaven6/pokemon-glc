@@ -2841,7 +2841,7 @@ static enum MoveEndResult MoveEndQueueSynchronizedSwim(struct BattleCalcValues *
 {
     enum BattlerId partner = BATTLE_PARTNER(cv->battlerAtk);
 
-    if (cv->move != MOVE_SYNCHRONIZED_SWIM
+    if (cv->move != MOVE_SYNCHROSWIM
      || IsBattlerUnaffectedByMove(cv->battlerDef)
      || gBattleStruct->unableToUseMove
      || gSpecialStatuses[cv->battlerAtk].synchronizedSwimUsedMove
@@ -4476,7 +4476,7 @@ static enum MoveEndResult MoveEndSynchronizedSwim(struct BattleCalcValues *cv)
 {
     enum MoveEndResult result = MOVEEND_RESULT_CONTINUE;
 
-    if (AbilityBattleEffects(ABILITYEFFECT_SYNCHRONIZED_SWIM, cv->battlerAtk, ABILITY_NONE, cv->move, TRUE))
+    if (AbilityBattleEffects(ABILITYEFFECT_SYNCHROSWIM, cv->battlerAtk, ABILITY_NONE, cv->move, TRUE))
         result = MOVEEND_RESULT_RUN_SCRIPT;
 
     gBattleScripting.moveendState++;
@@ -4523,7 +4523,7 @@ static enum MoveEndResult (*const sMoveEndHandlers[])(struct BattleCalcValues *c
     [MOVEEND_FORM_CHANGE_ON_HIT] = MoveEndFormChangeOnHit,
     [MOVEEND_ABILITIES_ATTACKER] = MoveEndAbilitiesAttacker,
     [MOVEEND_QUEUE_DANCER] = MoveEndQueueDancer,
-    [MOVEEND_QUEUE_SYNCHRONIZED_SWIM] = MoveEndQueueSynchronizedSwim,
+    [MOVEEND_QUEUE_SYNCHROSWIM] = MoveEndQueueSynchronizedSwim,
     [MOVEEND_STATUS_IMMUNITY_ABILITIES] = MoveEndStatusImmunityAbilities,
     [MOVEEND_ATTACKER_INVISIBLE] = MoveEndAttackerInvisible,
     [MOVEEND_ATTACKER_VISIBLE] = MoveEndAttackerVisible,
@@ -4565,7 +4565,7 @@ static enum MoveEndResult (*const sMoveEndHandlers[])(struct BattleCalcValues *c
     [MOVEEND_SEND_OUT_REPLACEMENTS] = MoveEndSendOutReplacements,
     [MOVEEND_CLEAR_BITS] = MoveEndClearBits,
     [MOVEEND_DANCER] = MoveEndDancer,
-    [MOVEEND_SYNCHRONIZED_SWIM] = MoveEndSynchronizedSwim,
+    [MOVEEND_SYNCHROSWIM] = MoveEndSynchronizedSwim,
     [MOVEEND_PURSUIT_NEXT_ACTION] = MoveEndPursuitNextAction,
 };
 

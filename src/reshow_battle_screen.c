@@ -38,6 +38,7 @@ void ReshowBattleScreenAfterMenu(void)
     SetHBlankCallback(NULL);
     SetVBlankCallback(NULL);
     SetGpuReg(REG_OFFSET_MOSAIC, 0);
+    SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_ON | DISPCNT_OBJ_1D_MAP);
     gBattleScripting.reshowMainState = 0;
     gBattleScripting.reshowHelperState = 0;
     SetMainCallback2(CB2_ReshowBattleScreenAfterMenu);

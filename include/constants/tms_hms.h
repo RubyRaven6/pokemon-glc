@@ -37,13 +37,13 @@
     F(RESEARCH) \
     F(CHRYSALIS) \
     F(CASTING_CALL) \
-    F(MOUNTING_PRESSURE) \
+    F(ORBITAL_PULL) \
     F(JET_STREAM) \
     F(STUNT_DOUBLE) \
     F(CALAMITY_CLEAVE) \
     F(PSIDEKICK) \
     F(MOSH_PIT) \
-    F(SYNCHRONIZED_SWIM) \
+    F(SYNCHROSWIM) \
     F(SECRET_POWER) \
     F(REST) \
     F(ATTRACT) \
@@ -54,14 +54,7 @@
     F(OVERHEAT)
 
 #define FOREACH_HM(F) \
-    F(CUT) \
-    F(FLY) \
-    F(SURF) \
-    F(STRENGTH) \
-    F(FLASH) \
-    F(ROCK_SMASH) \
-    F(WATERFALL) \
-    F(DIVE)
+    F(NONE) \
 
 #define FOREACH_TMHM(F) \
     FOREACH_TM(F) \

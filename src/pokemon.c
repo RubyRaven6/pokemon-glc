@@ -456,7 +456,7 @@ const struct NatureInfo gNaturesInfo[NUM_NATURES] =
 #include "data/pokemon/trainer_class_lookups.h"
 #include "data/pokemon/experience_tables.h"
 
-#include "data/pokemon/level_up_learnsets/gen_pglc.h"
+// #include "data/pokemon/level_up_learnsets/gen_pglc.h"
 #include "data/pokemon/level_up_learnsets/gen_9.h"
 
 // #if P_LVL_UP_LEARNSETS >= GEN_9
@@ -6550,6 +6550,8 @@ void GivePlayerUnlockedPokemon(void)
             GiveScriptedMonToPlayer(&mon, PARTY_SIZE);
         else
             CopyMonToPC(&mon);
+        GetSetPokedexFlag(GetMonData(&mon, MON_DATA_SPECIES), FLAG_SET_CAUGHT);
+        GetSetPokedexFlag(GetMonData(&mon, MON_DATA_SPECIES), FLAG_SET_SEEN);
     }
 }
 
@@ -6573,6 +6575,8 @@ void Debug_GivePlayerAllPokemon(void)
             GiveScriptedMonToPlayer(&mon, PARTY_SIZE);
         else
         CopyMonToPC(&mon);
+        GetSetPokedexFlag(GetMonData(&mon, MON_DATA_SPECIES), FLAG_SET_CAUGHT);
+        GetSetPokedexFlag(GetMonData(&mon, MON_DATA_SPECIES), FLAG_SET_SEEN);
         }
     }
 }

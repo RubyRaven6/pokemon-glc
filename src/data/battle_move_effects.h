@@ -2007,7 +2007,7 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
         .battleTvScore = 0, // TODO: Assign points
     },
 
-    [EFFECT_MOUNTING_PRESSURE] =
+    [EFFECT_ORBITAL_PULL] =
     {
         .battleScript = BattleScript_EffectMountingPressure,
         .battleTvScore = 0, // TODO: Assign points
@@ -2040,7 +2040,7 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
         .battleTvScore = 0, // TODO: Assign points
     },
 
-    [EFFECT_SYNCHRONIZED_SWIM] =
+    [EFFECT_SYNCHROSWIM] =
     {
         .battleScript = BattleScript_EffectHit,
         .battleTvScore = 0, // TODO: Assign points
