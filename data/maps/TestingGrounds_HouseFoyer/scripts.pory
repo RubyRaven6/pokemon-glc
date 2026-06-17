@@ -168,7 +168,7 @@ script EventScript_TestingGrounds_HouseFoyer_TechniquesMarket{
 }
 
 script EventScript_TestingGround_HouseFoyer_EnterTournament {
-    lock
+    lockall
     faceplayer
     msgbox(format("Hi! Will you be entering our Tournament?"), MSGBOX_YESNO)
     if(var(VAR_RESULT) == NO){}
@@ -178,9 +178,10 @@ script EventScript_TestingGround_HouseFoyer_EnterTournament {
         msgbox(format("Come on in into our green room, then!"))
         closemessage
         warp(MAP_TESTING_GROUNDS_GREEN_ROOM, 6, 6)
+        waitstate
     }
     closemessage
-    release
+    releaseall
 }
 
 mart HeldItemMarket {

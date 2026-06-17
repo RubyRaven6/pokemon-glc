@@ -5,7 +5,7 @@ mapscripts TestingGrounds_GreenRoom_MapScripts {
 }
 
 script EventScript_TestingGround_GreenRoom_ForfeitGame {
-    lock
+    lockall
     faceplayer
     msgbox(format("Hi! Are you thinking of forfeiting?\pIf so, you'll have to start from the beginning."), MSGBOX_YESNO)
     if(var(VAR_RESULT) == NO){}
@@ -15,13 +15,14 @@ script EventScript_TestingGround_GreenRoom_ForfeitGame {
         callnative(ChooseRandomGymLeader)
         msgbox(format("Understandable. Good luck on your next go!"))
         warp(MAP_TESTING_GROUNDS_HOUSE_FOYER, 2, 3)
+        waitstate
     }
-    release
+    releaseall
     closemessage
 }
 
 script EventScript_TestingGrounds_GreenRoom_AreYouReady {
-    lock
+    lockall
     faceplayer
     msgbox(format("Are you ready to go to the next round?"), MSGBOX_YESNO)
     if(var(VAR_RESULT) == NO){}
@@ -41,6 +42,9 @@ script EventScript_TestingGrounds_GreenRoom_AreYouReady {
             msgbox(format("Good luck!"))
             closemessage
             warp(MAP_TESTING_GROUNDS_BATTLE_ARENA, 6, 12)
+            waitstate
         }
     }
+    releaseall
+    end
 }
