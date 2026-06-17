@@ -13147,7 +13147,7 @@ const struct ItemInfo gItemsInfo[] =
         .shopCriteriaFunc = ShopCriteriaByUnlockedFlag,
     },
 
-    [ITEM_HM_CUT] =
+    [ITEM_HM01] =
     {
         .name = ITEM_NAME("HM01"),
         .price = 0,
@@ -13161,7 +13161,7 @@ const struct ItemInfo gItemsInfo[] =
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
 
-    [ITEM_HM_FLY] =
+    [ITEM_HM02] =
     {
         .name = ITEM_NAME("HM02"),
         .price = 0,
@@ -13175,7 +13175,7 @@ const struct ItemInfo gItemsInfo[] =
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
 
-    [ITEM_HM_SURF] =
+    [ITEM_HM03] =
     {
         .name = ITEM_NAME("HM03"),
         .price = 0,
@@ -13189,7 +13189,7 @@ const struct ItemInfo gItemsInfo[] =
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
 
-    [ITEM_HM_STRENGTH] =
+    [ITEM_HM04] =
     {
         .name = ITEM_NAME("HM04"),
         .price = 0,
@@ -13203,7 +13203,7 @@ const struct ItemInfo gItemsInfo[] =
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
 
-    [ITEM_HM_FLASH] =
+    [ITEM_HM05] =
     {
         .name = ITEM_NAME("HM05"),
         .price = 0,
@@ -13217,7 +13217,7 @@ const struct ItemInfo gItemsInfo[] =
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
 
-    [ITEM_HM_ROCK_SMASH] =
+    [ITEM_HM06] =
     {
         .name = ITEM_NAME("HM06"),
         .price = 0,
@@ -13231,7 +13231,7 @@ const struct ItemInfo gItemsInfo[] =
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
 
-    [ITEM_HM_WATERFALL] =
+    [ITEM_HM07] =
     {
         .name = ITEM_NAME("HM07"),
         .price = 0,
@@ -13245,7 +13245,7 @@ const struct ItemInfo gItemsInfo[] =
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
 
-    [ITEM_HM_DIVE] =
+    [ITEM_HM08] =
     {
         .name = ITEM_NAME("HM08"),
         .price = 0,

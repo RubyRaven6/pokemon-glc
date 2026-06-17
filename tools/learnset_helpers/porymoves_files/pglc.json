@@ -5694,7 +5694,7 @@
       "MOVE_SINKHOLE",
       "MOVE_SUNBLOOM",
       "MOVE_AURA_FARMING",
-      "MOVE_ORBITAL_PULL",
+      "MOVE_ORBITAL_PULL"
     ],
     "EggMoves": [],
     "TutorMoves": []
