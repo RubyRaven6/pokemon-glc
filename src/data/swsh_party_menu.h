@@ -1122,6 +1122,7 @@ struct
 } static const sCursorOptions[MENU_FIELD_MOVES] =
 {
     [MENU_SUMMARY]         = {COMPOUND_STRING("Summary"),         CursorCb_Summary},
+    [MENU_STAT_EDIT]       = {gText_StatEditor,                   CursorCb_StatEdit},
     [MENU_SWITCH]          = {COMPOUND_STRING("Switch"),          CursorCb_Switch},
     [MENU_CANCEL1]         = {COMPOUND_STRING("Cancel"),          CursorCb_Cancel1},
     [MENU_ITEM]            = {COMPOUND_STRING("Item"),            CursorCb_Item},
