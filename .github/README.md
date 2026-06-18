@@ -113,7 +113,7 @@ Looks pretty :)
 - **Leavanny**: Replaced Overcoat with Sharpness
 - **Archeops**: Gained Klutz
 - **Cryogonal**: Gained Snow Warning
-- **Scolipede**: Mega Scolipede given Battle Armor for now. Will be changed once official Ability is confirmed.
+- **Scolipede**: Mega Scolipede's Ability Battle Armor replaced with Weak Armor.
 - **Haxorus**: Replaced Ability Rivarly with Sharpness
 
 <!---
