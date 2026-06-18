@@ -4087,7 +4087,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_BUG),
-        .abilities = { ABILITY_BATTLE_ARMOR, ABILITY_BATTLE_ARMOR, ABILITY_BATTLE_ARMOR },
+        .abilities = { ABILITY_WEAK_ARMOR, ABILITY_WEAK_ARMOR, ABILITY_WEAK_ARMOR },
         .bodyColor = BODY_COLOR_RED,
         .speciesName = _("Scolipede"),
     #if P_MODIFIED_MEGA_CRIES
