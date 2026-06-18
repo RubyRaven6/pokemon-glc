@@ -28,6 +28,10 @@ Allows the player to easily edit a Pokémon's EVs and IVs.
 ## SWSH User Interfaces by Montblanc
 Looks pretty :)
 
+# Trainer Teams
+Trainer Teams can be found in the following docs:
+- [Kanto Leader Teams](../docs/gameplay/kanto_parties.md)
+
 # Pokémon Changes
 ## General Changes
 - Movesets for all the Pokémon available in the game (and more) can be found in [gen_pglc.h](../src/data/pokemon/level_up_learnsets/gen_pglc.h).
