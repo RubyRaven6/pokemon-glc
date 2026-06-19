@@ -140,13 +140,13 @@ Trainer Teams can be found in the following docs:
 | Developer                         | Ruby                                                    |
 | Gym Leader<br>Team Designers      | Ruby, Turtleye, Jordan,<br>Kithri, Hedara, Noodle, Iriv |
 | Gym Leader<br>Technique Designers | Ruby, Turtleye, Jordan,<br>Kithri, Hedara               |
-| Pokémon Movesets<br>and Balancing | Ruby, Emma                                              |
+| Pokémon Movesets<br>and Balancing | Ruby, Lemmanade                                         |
 | Scripting and Mapping             | Ruby                                                    |
 | Tournament Logic                  | Ruby, Estellar                                          |
 
 # Credits
-| Credit                | Feature                                |
-| :----------------------| :--------------------------------------:|
+| Credit                | Feature                                   |
+| :----------------------| :-----------------------------------------:|
 | pokeemerald-expansion | RHH and all<br>the Expansion Contributors |
-| Mudskip               | Pokemon GLC Logo                       |
+| Mudskip               | Pokemon GLC Logo                          |
 
