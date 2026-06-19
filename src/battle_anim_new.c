@@ -6077,6 +6077,14 @@ const struct SpriteTemplate gIceShardSpriteTemplate =
     .affineAnims = sSpriteAffineAnimTable_Flutterby,
     .callback = SpriteCB_MaxFlutterby
 };
+const struct SpriteTemplate gIceShardSpiralSpriteTemplate =
+{
+    .tileTag = ANIM_TAG_ICE_CRYSTALS,
+    .paletteTag = ANIM_TAG_ICE_CRYSTALS,
+    .oam = &gOamData_AffineDouble_ObjBlend_8x8,
+    .anims = gAnims_IceCrystalSmall,
+    .callback = AnimFireSpiralOutward,
+};
 
 const struct SpriteTemplate gSpinningVineSpriteTemplate =
 {

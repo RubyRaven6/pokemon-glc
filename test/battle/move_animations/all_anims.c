@@ -2537,7 +2537,7 @@ SINGLE_BATTLE_TEST("Custom Move animations work")
 DOUBLE_BATTLE_TEST("Individual Custom Move test")
 {
     u32 move;
-    PARAMETRIZE { move = MOVE_THIRD_DEGREE; }
+    PARAMETRIZE { move = MOVE_STUNT_DOUBLE; }
 
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET) {};
