@@ -145,8 +145,8 @@ Trainer Teams can be found in the following docs:
 | Tournament Logic                  | Ruby, Estellar                                          |
 
 # Credits
-| Credit                | Feature                                |
-| :----------------------| :--------------------------------------:|
+| Credit                | Feature                                   |
+| :----------------------| :-----------------------------------------:|
 | pokeemerald-expansion | RHH and all<br>the Expansion Contributors |
-| Mudskip               | Pokemon GLC Logo                       |
+| Mudskip               | Pokemon GLC Logo                          |
 
