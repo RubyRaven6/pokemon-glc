@@ -78,7 +78,7 @@ script EventScript_TestingGrounds_HouseFoyer_ChooseWhatToDoWithPokemon {
         case 2:
             call(Debug_EventScript_SetTeraType)
         case 3:
-            call(MoveRelearner_EventScript_TeachTutorMoves)
+            call(Common_EventScript_MoveRelearner)
     }
     closemessage
 }
