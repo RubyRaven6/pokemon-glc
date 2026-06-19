@@ -473,7 +473,7 @@ Debug_EventScript_SetHiddenNature::
 	case MULTI_B_PRESSED, Debug_EventScript_InflictStatus1_Close
 	special SetHiddenNature
 	releaseall
-	end
+	return
 
 Debug_EventScript_SetTeraType::
 	special ChoosePartyMon
@@ -501,7 +501,7 @@ Debug_EventScript_SetTeraType::
 	special SetTeraType_Special
 Debug_EventScript_SetTeraTypeClose:
 	releaseall
-	end
+	return
 
 Debug_EventScript_SetAbility::
 	special ChoosePartyMon
@@ -515,7 +515,7 @@ Debug_EventScript_SetAbility::
 	special SetAbility
 Debug_EventScript_SetAbilityClose:
 	releaseall
-	end
+	return
 
 Debug_EventScript_SetFriendship::
 	special ChoosePartyMon

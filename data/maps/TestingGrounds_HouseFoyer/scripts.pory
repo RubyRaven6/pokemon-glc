@@ -68,7 +68,7 @@ script EventScript_TestingGrounds_HouseFoyer_GenerationSelector {
 
 script EventScript_TestingGrounds_HouseFoyer_ChooseWhatToDoWithPokemon {
     msgbox(format("Hello! And welcome to the Pokémon Editor.\pYou may choose to change your Pokemon's ability, nature, and tera type.\pYou may also teach move tutor moves."))
-    dynmultichoice(0,0,FALSE, 3, 0, DYN_MULTICHOICE_CB_NONE, "Natures", "Ability", "Tera Type", "Move Tutor")
+    dynmultichoice(0, 0, FALSE, 4, 0, DYN_MULTICHOICE_CB_NONE, "Natures", "Ability", "Tera Type", "Move Tutor")
     switch(var(VAR_RESULT))
     {
         case 0:
