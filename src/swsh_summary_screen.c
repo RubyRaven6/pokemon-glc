@@ -507,6 +507,7 @@ static const u8 sText_MemoFateful[]             = _("Met in a fateful encounter\
 static const u8 sText_MemoProbablyMet[]         = _("Seems to have met at {LV_2}. {DYNAMIC 1}{DYNAMIC 3}{DYNAMIC 1}\nLocation: {DYNAMIC 0}{DYNAMIC 4}{DYNAMIC 1}");
 static const u8 sText_MemoMetSomewhere[]        = _("Met somewhere at {LV_2}. {DYNAMIC 1}{DYNAMIC 3}{DYNAMIC 1}");
 static const u8 sText_MemoHatchedSomewhere[]    = _("Hatched from an egg\nsomewhere.");
+static const u8 sText_GiftedByTheFacility[]     = _("A Pokémon given by the\ntournament organizers.");
 
 // Characteristics
 static const u8 sCharacteristic_HP_0[]          = _("Loves to eat");
@@ -4560,10 +4561,11 @@ static void BufferMonEncounter(void)
 
     if (DoesMonOTMatchOwner() == TRUE)
     {
-        if (sum->metLevel == 0)
-            text = (!locationFound) ? sText_MemoHatchedSomewhere : sText_MemoHatched;
-        else
-            text = (!locationFound) ? sText_MemoMetSomewhere : sText_MemoMet;
+        text = sText_GiftedByTheFacility;
+        // if (sum->metLevel == 0)
+        //     text = (!locationFound) ? sText_MemoHatchedSomewhere : sText_MemoHatched;
+        // else
+        //     text = (!locationFound) ? sText_MemoMetSomewhere : sText_MemoMet;
     }
     else if (sum->metLocation == METLOC_FATEFUL_ENCOUNTER)
     {
