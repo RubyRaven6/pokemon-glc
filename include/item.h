@@ -121,7 +121,7 @@ static inline enum TMHMIndex GetItemTMHMIndex(enum Item item)
     /* Expands to:
         * case ITEM_TM_FOCUS_PUNCH:
         *     return 1;
-        * case ITEM_TM_DRAGON_CLAW:
+        * case ITEM_TM_RIPTIDE:
         *      return 2;
         * etc */
     FOREACH_TM(UNPACK_ITEM_TO_TM_INDEX)
@@ -138,7 +138,7 @@ static inline enum Move GetItemTMHMMoveId(enum Item item)
     /* Expands to:
         * case ITEM_TM_FOCUS_PUNCH:
         *     return MOVE_FOCUS_PUNCH;
-        * case ITEM_TM_DRAGON_CLAW:
+        * case ITEM_TM_RIPTIDE:
         *      return MOVE_DRAGON_CLAW;
         * etc */
     FOREACH_TM(UNPACK_ITEM_TO_TM_MOVE_ID)
@@ -156,7 +156,7 @@ static inline enum Item GetTMHMItemIdFromMoveId(enum Move move)
         * case MOVE_FOCUS_PUNCH:
         *     return ITEM_TM_FOCUS_PUNCH;
         * case MOVE_DRAGON_CLAW:
-        *      return ITEM_TM_DRAGON_CLAW;
+        *      return ITEM_TM_RIPTIDE;
         * etc */
     FOREACH_TM(UNPACK_TM_MOVE_TO_ITEM_ID)
     FOREACH_HM(UNPACK_HM_MOVE_TO_ITEM_ID)
@@ -279,8 +279,8 @@ u32 GetItemStatus1Mask(enum Item itemId);
 bool32 ItemHasVolatileFlag(enum Item itemId, enum Volatile volatile);
 u32 GetItemSellPrice(enum Item itemId);
 bool32 IsHoldEffectChoice(enum HoldEffect holdEffect);
-ShopCriteriaFunc GetItemShopCriteriaFunc(u32 itemId);
-bool32 IsItemShopCriteriaFulfilled(u32 itemId);
+ShopCriteriaFunc GetItemShopCriteriaFunc(enum Item itemId);
+bool32 IsItemShopCriteriaFulfilled(enum Item itemId);
 void GiveStartingKeyItems(void);
 
 #endif // GUARD_ITEM_H

@@ -1248,7 +1248,91 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_FAST,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_BUG),
-        .abilities = { ABILITY_SWARM, ABILITY_EARLY_BIRD, ABILITY_IRON_FIST },
+        .abilities = { ABILITY_ZERO_TO_HERO, ABILITY_ZERO_TO_HERO, ABILITY_ZERO_TO_HERO },
+        .bodyColor = BODY_COLOR_RED,
+        .speciesName = _("Ledian"),
+        .cryId = CRY_LEDIAN,
+        .natDexNum = NATIONAL_DEX_LEDIAN,
+        .categoryName = _("Five Star"),
+        .height = 14,
+        .weight = 356,
+        .description = COMPOUND_STRING(
+            "It is said that in lands with clean air,\n"
+            "where the stars fill the sky, there live\n"
+            "many Ledian. For good reason, they use\n"
+            "the light of the stars as energy."),
+        .pokemonScale = 256,
+        .pokemonOffset = 2,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+        .frontPic = gMonFrontPic_Ledian,
+        .frontPicSize = MON_COORDS_SIZE(48, 56),
+        .frontPicYOffset = P_GBA_STYLE_SPECIES_GFX ? 4 : 6,
+        .frontAnimFrames = ANIM_FRAMES(
+            ANIMCMD_FRAME(1, 25),
+            ANIMCMD_FRAME(0, 25),
+            ANIMCMD_FRAME(1, 25),
+            ANIMCMD_FRAME(0, 25),
+        ),
+        .frontAnimId = P_GBA_STYLE_SPECIES_GFX ? ANIM_V_SLIDE_SLOW : ANIM_H_JUMPS,
+        .enemyMonElevation = P_GBA_STYLE_SPECIES_GFX ? 8 : 0,
+        .backPic = gMonBackPic_Ledian,
+        .backPicSize = P_GBA_STYLE_SPECIES_GFX ? MON_COORDS_SIZE(56, 56) : MON_COORDS_SIZE(64, 64),
+        .backPicYOffset = P_GBA_STYLE_SPECIES_GFX ? 7 : 3,
+        .backAnimId = BACK_ANIM_CONVEX_DOUBLE_ARC,
+        .palette = gMonPalette_Ledian,
+        .shinyPalette = gMonShinyPalette_Ledian,
+        .iconSprite = gMonIcon_Ledian,
+        .iconPalIndex = 0,
+#if P_GENDER_DIFFERENCES && !P_GBA_STYLE_SPECIES_GFX
+        .frontPicFemale = gMonFrontPic_LedianF,
+        .frontPicSizeFemale = MON_COORDS_SIZE(48, 56),
+        .backPicFemale = gMonBackPic_LedianF,
+        .backPicSizeFemale = MON_COORDS_SIZE(64, 64),
+#endif //P_GENDER_DIFFERENCES && !P_GBA_STYLE_SPECIES_GFX
+        .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
+        SHADOW(2, 4, SHADOW_SIZE_S)
+        FOOTPRINT(Ledian)
+        OVERWORLD(
+            sPicTable_Ledian,
+            SIZE_32x32,
+            SHADOW_SIZE_M,
+            TRACKS_FOOT,
+            sAnimTable_Following,
+            gOverworldPalette_Ledian,
+            gShinyOverworldPalette_Ledian
+        )
+        OVERWORLD_FEMALE(
+            sPicTable_LedianF,
+            SIZE_32x32,
+            SHADOW_SIZE_M,
+            TRACKS_FOOT,
+            sAnimTable_Following
+        )
+        .levelUpLearnset = sLedianLevelUpLearnset,
+        .teachableLearnset = sLedianTeachableLearnset,
+        .formSpeciesIdTable = sLedianFormSpeciesIdTable,
+        .formChangeTable = sLedianFormChangeTable,
+    },
+
+    [SPECIES_LEDIAN_HERO] =
+    {
+        .baseHP        = 85,
+        .baseAttack    = 125,
+        .baseDefense   = 63,
+        .baseSpeed     = 125,
+        .baseSpAttack  = 85,
+        .baseSpDefense = 110,
+        .types = MON_TYPES(TYPE_BUG, TYPE_FLYING),
+        .catchRate = 90,
+        .expYield = (P_UPDATED_EXP_YIELDS >= GEN_5) ? 137 : 134,
+        .evYield_SpDefense = 2,
+        .genderRatio = PERCENT_FEMALE(50),
+        .eggCycles = 15,
+        .friendship = STANDARD_FRIENDSHIP,
+        .growthRate = GROWTH_FAST,
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_BUG),
+        .abilities = { ABILITY_ZERO_TO_HERO, ABILITY_ZERO_TO_HERO, ABILITY_ZERO_TO_HERO },
         .bodyColor = BODY_COLOR_RED,
         .speciesName = _("Ledian"),
         .cryId = CRY_LEDIAN,
@@ -1311,6 +1395,8 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         )
         .levelUpLearnset = sLedianLevelUpLearnset,
         .teachableLearnset = sLedianTeachableLearnset,
+        .formSpeciesIdTable = sLedianFormSpeciesIdTable,
+        .formChangeTable = sLedianFormChangeTable,
     },
 #endif //P_FAMILY_LEDYBA
 
@@ -6285,7 +6371,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_AMORPHOUS),
-        .abilities = { ABILITY_MAGMA_ARMOR, ABILITY_FLAME_BODY, ABILITY_WEAK_ARMOR },
+        .abilities = { ABILITY_STEAM_ENGINE, ABILITY_FLAME_BODY, ABILITY_WEAK_ARMOR },
         .bodyColor = BODY_COLOR_RED,
         .noFlip = TRUE,
         .speciesName = _("Magcargo"),

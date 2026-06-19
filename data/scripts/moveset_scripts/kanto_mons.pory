@@ -1,0 +1,146 @@
+script VenusaurAlternateMoveset{
+    dynmultipush("Take Down", MOVE_TAKE_DOWN)
+    dynmultipush("Charm", MOVE_CHARM)
+    dynmultipush("Scary Face", MOVE_SCARY_FACE)
+    dynmultipush("Protect", MOVE_PROTECT)
+    dynmultipush("Acid Spray", MOVE_ACID_SPRAY)
+    dynmultipush("Trailblaze", MOVE_TRAILBLAZE)
+    dynmultipush("Facade", MOVE_FACADE)
+    dynmultipush("Bulldoze", MOVE_BULLDOZE)
+    dynmultipush("Magical Leaf", MOVE_MAGICAL_LEAF)
+    dynmultipush("Venoshock", MOVE_VENOSHOCK)
+    dynmultipush("Endure", MOVE_ENDURE)
+    dynmultipush("Sunny Day", MOVE_SUNNY_DAY)
+    dynmultipush("Bullet Seed", MOVE_BULLET_SEED)
+    dynmultipush("False Swipe", MOVE_FALSE_SWIPE)
+    dynmultipush("Body Slam", MOVE_BODY_SLAM)
+    dynmultipush("Sleep Talk", MOVE_SLEEP_TALK)
+    dynmultipush("Seed Bomb", MOVE_SEED_BOMB)
+    dynmultipush("Grass Knot", MOVE_GRASS_KNOT)
+    dynmultipush("Poison Jab", MOVE_POISON_JAB)
+    dynmultipush("Stomping Tantrum", MOVE_STOMPING_TANTRUM)
+    dynmultipush("Rest", MOVE_REST)
+    dynmultipush("Swords Dance", MOVE_SWORDS_DANCE)
+    dynmultipush("Substitute", MOVE_SUBSTITUTE)
+    dynmultipush("Giga Drain", MOVE_GIGA_DRAIN)
+    dynmultipush("Energy Ball", MOVE_ENERGY_BALL)
+    dynmultipush("Amnesia", MOVE_AMNESIA)
+    dynmultipush("Helping Hand", MOVE_HELPING_HAND)
+    dynmultipush("Earth Power", MOVE_EARTH_POWER)
+    dynmultipush("Grassy Terrain", MOVE_GRASSY_TERRAIN)
+    dynmultipush("Grass Pledge", MOVE_GRASS_PLEDGE)
+    dynmultipush("Sludge Bomb", MOVE_SLUDGE_BOMB)
+    dynmultipush("Earthquake", MOVE_EARTHQUAKE)
+    dynmultipush("Giga Impact", MOVE_GIGA_IMPACT)
+    dynmultipush("Frenzy Plant", MOVE_FRENZY_PLANT)
+    dynmultipush("Leaf Storm", MOVE_LEAF_STORM)
+    dynmultipush("Hyper Beam", MOVE_HYPER_BEAM)
+    dynmultipush("Solar Beam", MOVE_SOLAR_BEAM)
+    dynmultipush("Tera Blast", MOVE_TERA_BLAST)
+    dynmultipush("Roar", MOVE_ROAR)
+    dynmultipush("Toxic", MOVE_TOXIC)
+    dynmultipush("Knock Off", MOVE_KNOCK_OFF)
+    dynmultipush("Weather Ball", MOVE_WEATHER_BALL)
+    dynmultipush("Grassy Glide", MOVE_GRASSY_GLIDE)
+    dynmultipush("Double Edge", MOVE_DOUBLE_EDGE)
+    dynmultipush("Petal Blizzard", MOVE_PETAL_BLIZZARD)
+    dynmultipush("Curse", MOVE_CURSE)
+    dynmultistack(0, 0, FALSE, 7, FALSE, 0, DYN_MULTICHOICE_CB_NONE)
+    switch(var(VAR_RESULT))
+    {
+        case MOVE_TAKE_DOWN:
+            setvar(VAR_0x8005, MOVE_TAKE_DOWN)
+        case MOVE_CHARM:
+            setvar(VAR_0x8005, MOVE_CHARM)
+        case MOVE_SCARY_FACE:
+            setvar(VAR_0x8005, MOVE_SCARY_FACE)
+        case MOVE_PROTECT:
+            setvar(VAR_0x8005, MOVE_PROTECT)
+        case MOVE_ACID_SPRAY:
+            setvar(VAR_0x8005, MOVE_ACID_SPRAY)
+        case MOVE_TRAILBLAZE:
+            setvar(VAR_0x8005, MOVE_TRAILBLAZE)
+        case MOVE_FACADE:
+            setvar(VAR_0x8005, MOVE_FACADE)
+        case MOVE_BULLDOZE:
+            setvar(VAR_0x8005, MOVE_BULLDOZE)
+        case MOVE_MAGICAL_LEAF:
+            setvar(VAR_0x8005, MOVE_MAGICAL_LEAF)
+        case MOVE_VENOSHOCK:
+            setvar(VAR_0x8005, MOVE_VENOSHOCK)
+        case MOVE_ENDURE:
+            setvar(VAR_0x8005, MOVE_ENDURE)
+        case MOVE_SUNNY_DAY:
+            setvar(VAR_0x8005, MOVE_SUNNY_DAY)
+        case MOVE_BULLET_SEED:
+            setvar(VAR_0x8005, MOVE_BULLET_SEED)
+        case MOVE_FALSE_SWIPE:
+            setvar(VAR_0x8005, MOVE_FALSE_SWIPE)
+        case MOVE_BODY_SLAM:
+            setvar(VAR_0x8005, MOVE_BODY_SLAM)
+        case MOVE_SLEEP_TALK:
+            setvar(VAR_0x8005, MOVE_SLEEP_TALK)
+        case MOVE_SEED_BOMB:
+            setvar(VAR_0x8005, MOVE_SEED_BOMB)
+        case MOVE_GRASS_KNOT:
+            setvar(VAR_0x8005, MOVE_GRASS_KNOT)
+        case MOVE_POISON_JAB:
+            setvar(VAR_0x8005, MOVE_POISON_JAB)
+        case MOVE_STOMPING_TANTRUM:
+            setvar(VAR_0x8005, MOVE_STOMPING_TANTRUM)
+        case MOVE_REST:
+            setvar(VAR_0x8005, MOVE_REST)
+        case MOVE_SWORDS_DANCE:
+            setvar(VAR_0x8005, MOVE_SWORDS_DANCE)
+        case MOVE_SUBSTITUTE:
+            setvar(VAR_0x8005, MOVE_SUBSTITUTE)
+        case MOVE_GIGA_DRAIN:
+            setvar(VAR_0x8005, MOVE_GIGA_DRAIN)
+        case MOVE_ENERGY_BALL:
+            setvar(VAR_0x8005, MOVE_ENERGY_BALL)
+        case MOVE_AMNESIA:
+            setvar(VAR_0x8005, MOVE_AMNESIA)
+        case MOVE_HELPING_HAND:
+            setvar(VAR_0x8005, MOVE_HELPING_HAND)
+        case MOVE_EARTH_POWER:
+            setvar(VAR_0x8005, MOVE_EARTH_POWER)
+        case MOVE_GRASSY_TERRAIN:
+            setvar(VAR_0x8005, MOVE_GRASSY_TERRAIN)
+        case MOVE_GRASS_PLEDGE:
+            setvar(VAR_0x8005, MOVE_GRASS_PLEDGE)
+        case MOVE_SLUDGE_BOMB:
+            setvar(VAR_0x8005, MOVE_SLUDGE_BOMB)
+        case MOVE_EARTHQUAKE:
+            setvar(VAR_0x8005, MOVE_EARTHQUAKE)
+        case MOVE_GIGA_IMPACT:
+            setvar(VAR_0x8005, MOVE_GIGA_IMPACT)
+        case MOVE_FRENZY_PLANT:
+            setvar(VAR_0x8005, MOVE_FRENZY_PLANT)
+        case MOVE_LEAF_STORM:
+            setvar(VAR_0x8005, MOVE_LEAF_STORM)
+        case MOVE_HYPER_BEAM:
+            setvar(VAR_0x8005, MOVE_HYPER_BEAM)
+        case MOVE_SOLAR_BEAM:
+            setvar(VAR_0x8005, MOVE_SOLAR_BEAM)
+        case MOVE_TERA_BLAST:
+            setvar(VAR_0x8005, MOVE_TERA_BLAST)
+        case MOVE_ROAR:
+            setvar(VAR_0x8005, MOVE_ROAR)
+        case MOVE_TOXIC:
+            setvar(VAR_0x8005, MOVE_TOXIC)
+        case MOVE_KNOCK_OFF:
+            setvar(VAR_0x8005, MOVE_KNOCK_OFF)
+        case MOVE_WEATHER_BALL:
+            setvar(VAR_0x8005, MOVE_WEATHER_BALL)
+        case MOVE_GRASSY_GLIDE:
+            setvar(VAR_0x8005, MOVE_GRASSY_GLIDE)
+        case MOVE_DOUBLE_EDGE:
+            setvar(VAR_0x8005, MOVE_DOUBLE_EDGE)
+        case MOVE_PETAL_BLIZZARD:
+            setvar(VAR_0x8005, MOVE_PETAL_BLIZZARD)
+        case MOVE_CURSE:
+            setvar(VAR_0x8005, MOVE_CURSE)
+    }
+    closemessage
+    end
+}

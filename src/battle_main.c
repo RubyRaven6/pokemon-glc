@@ -69,7 +69,6 @@
 #include "constants/battle_move_effects.h"
 #include "constants/battle_string_ids.h"
 #include "constants/battle_partner.h"
-#include "constants/battle_setup.h"
 #include "constants/items.h"
 #include "constants/moves.h"
 #include "constants/party_menu.h"
@@ -169,7 +168,7 @@ EWRAM_DATA u16 gCurrentMove = 0;
 EWRAM_DATA u16 gChosenMove = 0;
 EWRAM_DATA u16 gCalledMove = 0;
 EWRAM_DATA s32 gBideDmg[MAX_BATTLERS_COUNT] = {0};
-EWRAM_DATA u16 gLastUsedItem = 0;
+EWRAM_DATA enum Item gLastUsedItem = ITEM_NONE;
 EWRAM_DATA enum Ability gLastUsedAbility = ABILITY_NONE;
 EWRAM_DATA enum BattlerId gBattlerAttacker = 0;
 EWRAM_DATA enum BattlerId gBattlerTarget = 0;
@@ -1988,7 +1987,7 @@ u8 CreateNPCTrainerPartyFromTrainer(struct Pokemon *party, const struct Trainer 
 
             if (B_TRAINER_CLASS_POKE_BALLS >= GEN_7 && ball == -1)
             {
-                ball = gTrainerClasses[trainer->trainerClass].ball ?: ITEM_POKE_BALL;
+                ball = gTrainerClasses[trainer->trainerClass].ball ?: BALL_POKE;
                 SetMonData(&party[i], MON_DATA_POKEBALL, &ball);
             }
         }
@@ -3127,7 +3126,10 @@ void SwitchInClearSetData(enum BattlerId battler, struct Volatiles *volatilesCop
         for (enum BattlerId i = 0; i < gBattlersCount; i++)
         {
             if (gBattleMons[i].volatiles.escapePrevention && gBattleMons[i].volatiles.battlerPreventingEscape == battler)
+            {
                 gBattleMons[i].volatiles.escapePrevention = FALSE;
+                gBattleMons[i].volatiles.strictEscapePrevention = FALSE;
+            }
 
             if (gBattleMons[i].volatiles.battlerWithSureHit == battler + 1)
                 gBattleMons[i].volatiles.battlerWithSureHit = 0;
@@ -3138,7 +3140,10 @@ void SwitchInClearSetData(enum BattlerId battler, struct Volatiles *volatilesCop
         for (enum BattlerId i = 0; i < gBattlersCount; i++)
         {
             if (gBattleMons[i].volatiles.escapePrevention && gBattleMons[i].volatiles.battlerPreventingEscape == battler)
+            {
                 gBattleMons[i].volatiles.escapePrevention = FALSE;
+                gBattleMons[i].volatiles.strictEscapePrevention = FALSE;
+            }
         }
     }
 
@@ -3277,7 +3282,10 @@ void FaintClearSetData(enum BattlerId battler)
         if (gBattleMons[i].volatiles.battlerWithSureHit == battler + 1)
             gBattleMons[i].volatiles.battlerWithSureHit = 0;
         if (gBattleMons[i].volatiles.escapePrevention && gBattleMons[i].volatiles.battlerPreventingEscape == battler)
+        {
             gBattleMons[i].volatiles.escapePrevention = FALSE;
+            gBattleMons[i].volatiles.strictEscapePrevention = FALSE;
+        }
         if (gBattleMons[i].volatiles.infatuation == INFATUATED_WITH(battler))
             gBattleMons[i].volatiles.infatuation = 0;
         if (gBattleMons[i].volatiles.wrapped && gBattleMons[i].volatiles.wrappedBy == battler)
@@ -3795,12 +3803,12 @@ static void TryDoEventsBeforeFirstTurn(void)
         gBattleStruct->eventState.beforeFirstTurn++;
         break;
     case FIRST_TURN_EVENTS_TRAINER_SLIDE_A:
-        if (ShouldDoTrainerSlide(GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT), TRAINER_SLIDE_BEFORE_FIRST_TURN))
+        if (ShouldDoTrainerSlide(B_BATTLER_1, TRAINER_SLIDE_BEFORE_FIRST_TURN))
             BattleScriptExecute(BattleScript_TrainerASlideMsgEnd2);
         gBattleStruct->eventState.beforeFirstTurn++;
         break;
     case FIRST_TURN_EVENTS_TRAINER_SLIDE_B:
-        if (ShouldDoTrainerSlide(GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT), TRAINER_SLIDE_BEFORE_FIRST_TURN))
+        if (ShouldDoTrainerSlide(B_BATTLER_3, TRAINER_SLIDE_BEFORE_FIRST_TURN))
         {
             // Ensures only trainer A slide is played in single-trainer doubles (B == A / B == TRAINER_NONE) and 2v1 multibattles (B == 0xFFFF)
             if (!((TRAINER_BATTLE_PARAM.opponentB == TRAINER_BATTLE_PARAM.opponentA)
@@ -3813,7 +3821,7 @@ static void TryDoEventsBeforeFirstTurn(void)
         gBattleStruct->eventState.beforeFirstTurn++;
         break;
     case FIRST_TURN_EVENTS_TRAINER_SLIDE_PARTNER:
-        if (ShouldDoTrainerSlide(GetBattlerAtPosition(B_POSITION_PLAYER_RIGHT), TRAINER_SLIDE_BEFORE_FIRST_TURN))
+        if (ShouldDoTrainerSlide(B_BATTLER_2, TRAINER_SLIDE_BEFORE_FIRST_TURN))
             BattleScriptExecute(BattleScript_TrainerPartnerSlideMsgEnd2);
         gBattleStruct->eventState.beforeFirstTurn++;
         break;
@@ -4228,7 +4236,8 @@ static void HandleTurnActionSelectionState(void)
                     break;
                 case B_ACTION_SWITCH:
                     gBattleStruct->battlerPartyIndexes[battler] = gBattlerPartyIndexes[battler];
-                    if (gBattleTypeFlags & BATTLE_TYPE_ARENA
+                    if (gBattleMons[battler].volatiles.strictEscapePrevention
+                        || (gBattleTypeFlags & BATTLE_TYPE_ARENA)
                         || (!CanBattlerEscape(battler) && GetBattlerHoldEffect(battler) != HOLD_EFFECT_SHED_SHELL))
                     {
                         BtlController_EmitChoosePokemon(battler, B_COMM_TO_CONTROLLER, PARTY_ACTION_CANT_SWITCH, PARTY_SIZE, ABILITY_NONE, 0, gBattleStruct->battlerPartyOrders[battler]);
@@ -4743,7 +4752,7 @@ s32 GetBattleMovePriority(enum BattlerId battler, enum Ability ability, enum Mov
     if (GetActiveGimmick(battler) == GIMMICK_DYNAMAX && GetMoveCategory(move) == DAMAGE_CATEGORY_STATUS)
         return GetMovePriority(MOVE_MAX_GUARD);
 
-    if (gProtectStructs[battler].quash)
+    if (gProtectStructs[battler].quash || gBattleMons[battler].volatiles.iceRink)
     {
         priority = -8;
     }
@@ -5263,6 +5272,8 @@ static void CheckChangingTurnOrderEffects(void)
     {
         gBattleStruct->battlerState[i].focusPunchBattlers = FALSE;
         gBattleStruct->battlerState[i].ateBoost = FALSE;
+        gBattleStruct->auraFarmingDamage[i] = 0;
+        gProtectStructs[i].auraFarmingEndured = FALSE;
         gSpecialStatuses[i].gemBoost = FALSE;
         if (!MoveHasAdditionalEffectSelf(gChosenMoveByBattler[i], MOVE_EFFECT_RAGE))
             gBattleMons[i].volatiles.rage = FALSE;
@@ -5392,9 +5403,9 @@ static void HandleEndTurn_BattleLost(void)
     }
     else
     {
-        if (gBattleTypeFlags & BATTLE_TYPE_TRAINER && GetTrainerBattleMode() == TRAINER_BATTLE_EARLY_RIVAL)
+        if (gBattleTypeFlags & BATTLE_TYPE_TRAINER && TRAINER_BATTLE_PARAM.earlyRival)
         {
-            if (GetRivalBattleFlags() & RIVAL_BATTLE_HEAL_AFTER)
+            if (TRAINER_BATTLE_PARAM.earlyRival)
                 gBattleCommunication[MULTISTRING_CHOOSER] = 1; // Dont do white out text
             else
                 gBattleCommunication[MULTISTRING_CHOOSER] = 2; // Do white out text
@@ -5563,8 +5574,7 @@ static void HandleEndTurn_FinishBattle(void)
     }
     else
     {
-        if (gBattleControllerExecFlags == 0)
-            gBattleScriptingCommandsTable[gBattlescriptCurrInstr[0]]();
+        RunBattleScriptCommands();
     }
 }
 
@@ -5711,8 +5721,7 @@ void RunBattleScriptCommands_PopCallbacksStack(void)
     }
     else
     {
-        if (gBattleControllerExecFlags == 0)
-            gBattleScriptingCommandsTable[gBattlescriptCurrInstr[0]]();
+        RunBattleScriptCommands();
     }
 }
 
@@ -6006,7 +6015,7 @@ enum Type GetDynamicMoveType(struct Pokemon *mon, enum Move move, enum BattlerId
           && gimmick != GIMMICK_DYNAMAX
           && gimmick != GIMMICK_Z_MOVE)
     {
-        u32 ateType = TrySetAteType(move, battler, ability);
+        enum Type ateType = TrySetAteType(move, battler, ability);
         if (ateType != TYPE_NONE && state == MON_IN_BATTLE)
             gBattleStruct->battlerState[battler].ateBoost = TRUE;
         return ateType;
@@ -6030,7 +6039,7 @@ enum Type GetDynamicMoveType(struct Pokemon *mon, enum Move move, enum BattlerId
 void SetTypeBeforeUsingMove(enum Move move, enum BattlerId battler)
 {
     enum Type moveType;
-    u32 heldItem = gBattleMons[battler].item;
+    enum Item heldItem = gBattleMons[battler].item;
     enum HoldEffect holdEffect = GetBattlerHoldEffect(battler);
 
     gBattleStruct->dynamicMoveType = 0;

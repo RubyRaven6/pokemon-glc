@@ -1290,6 +1290,11 @@
 	.4byte \failInstr
 	.endm
 
+	.macro seticerink, failInstr:req
+	callnative BS_SetIceRink
+	.4byte \failInstr
+	.endm
+
 	.macro trysetparalysis, ptr:req
 	callnative BS_TrySetParalysis
 	.4byte \ptr
@@ -1364,6 +1369,10 @@
 
 	.macro trytrainerslidedynamaxmsg
 	callnative BS_TryTrainerSlideDynamaxMsg
+	.endm
+
+	.macro trytrainerslideteramsg
+	callnative BS_TryTrainerSlideTeraMsg
 	.endm
 
 	.macro tryhealpulse failInstr:req
@@ -1818,6 +1827,10 @@
 	.byte \battler
 	.endm
 
+	.macro effectsafterformchange
+	callnative BS_EffectsAfterFormChange
+	.endm
+
 	.macro abilityonformchange battler:req
 	callnative BS_AbilityOnFormChange
 	.byte \battler
@@ -2108,4 +2121,21 @@
 
 	.macro trywakebattlersuproar
 	callnative BS_TryWakeBattlersUproar
+	.endm
+
+	.macro catchaftervictory
+	callnative BS_CatchAfterVictory
+	.endm
+
+	.macro jumpifnoballs jumpInstr:req
+	callnative BS_JumpIfNoBalls
+	.4byte \jumpInstr
+	.endm
+
+	.macro handlefailedvictorycatch
+	callnative BS_HandleFailedVictoryCatch
+	.endm
+
+	.macro catchornot
+	callnative BS_CatchOrNot
 	.endm

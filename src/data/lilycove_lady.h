@@ -22,7 +22,7 @@ struct LilycoveQuizLadyQuestions
 struct LilycoveFavorLady
 {
     const u8 *request;
-    const u16 *acceptedItems;
+    const enum Item *acceptedItems;
     u16 prize;
 };
 
@@ -294,7 +294,7 @@ static const struct LilycoveQuizLadyQuestions sQuizLadyQuestions[] =
     {.question = sQuizLadyQuestion8,  .answer = EC_WORD_SHADOW_TAG, .prize = ITEM_BELUE_BERRY},
     {.question = sQuizLadyQuestion9,  .answer = EC_WORD_IMMUNITY,   .prize = ITEM_DURIN_BERRY},
     {.question = sQuizLadyQuestion10, .answer = EC_WORD_POKEMON,    .prize = ITEM_LUXURY_BALL},
-    {.question = sQuizLadyQuestion11, .answer = EC_WORD_PC,         .prize = ITEM_TM_HYPER_BEAM},
+    {.question = sQuizLadyQuestion11, .answer = EC_WORD_PC,         .prize = ITEM_TM_ROCK_HEART},
     {.question = sQuizLadyQuestion12, .answer = EC_WORD_TELEVISION, .prize = ITEM_BIG_PEARL},
     {.question = sQuizLadyQuestion13, .answer = EC_WORD_PLUSH_DOLL, .prize = ITEM_STAR_PIECE},
     {.question = sQuizLadyQuestion14, .answer = EC_WORD_ICE,        .prize = ITEM_RARE_CANDY},
@@ -303,7 +303,7 @@ static const struct LilycoveQuizLadyQuestions sQuizLadyQuestions[] =
 };
 
 // Favor Lady data
-static const u16 sFavorLadyAcceptedItems_Slippery[] =
+static const enum Item sFavorLadyAcceptedItems_Slippery[] =
 {
     ITEM_REPEL,
     ITEM_SUPER_REPEL,
@@ -320,7 +320,7 @@ static const u16 sFavorLadyAcceptedItems_Slippery[] =
     ITEM_NONE
 };
 
-static const u16 sFavorLadyAcceptedItems_Roundish[] =
+static const enum Item sFavorLadyAcceptedItems_Roundish[] =
 {
     ITEM_FLUFFY_TAIL,
     ITEM_PEARL,
@@ -341,7 +341,7 @@ static const u16 sFavorLadyAcceptedItems_Roundish[] =
     ITEM_NONE
 };
 
-static const u16 sFavorLadyAcceptedItems_Whamish[] =
+static const enum Item sFavorLadyAcceptedItems_Whamish[] =
 {
     ITEM_REVIVAL_HERB,
     ITEM_POTION,
@@ -360,7 +360,7 @@ static const u16 sFavorLadyAcceptedItems_Whamish[] =
     ITEM_NONE
 };
 
-static const u16 sFavorLadyAcceptedItems_Shiny[] =
+static const enum Item sFavorLadyAcceptedItems_Shiny[] =
 {
     ITEM_HEAL_POWDER,
     ITEM_X_SPEED,
@@ -385,7 +385,7 @@ static const u16 sFavorLadyAcceptedItems_Shiny[] =
     ITEM_NONE
 };
 
-static const u16 sFavorLadyAcceptedItems_Sticky[] =
+static const enum Item sFavorLadyAcceptedItems_Sticky[] =
 {
     ITEM_ENERGY_ROOT,
     ITEM_FULL_RESTORE,
@@ -400,7 +400,7 @@ static const u16 sFavorLadyAcceptedItems_Sticky[] =
     ITEM_NONE
 };
 
-static const u16 sFavorLadyAcceptedItems_Pointy[] =
+static const enum Item sFavorLadyAcceptedItems_Pointy[] =
 {
     ITEM_QUICK_CLAW,
     ITEM_POISON_BARB,

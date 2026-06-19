@@ -3,6 +3,7 @@
 
 #include "main.h"
 #include "task.h"
+#include "constants/party_menu.h"
 
 enum PartyMenuLayout
 {
@@ -34,6 +35,14 @@ enum PartyMenuType
     PARTY_MENU_TYPE_MINIGAME,
     PARTY_MENU_TYPE_STORE_PYRAMID_HELD_ITEMS,
     PARTY_MENU_TYPE_MULTI_FULL_SHOWCASE
+};
+
+
+enum TryTakeMonItemResult
+{
+    TAKE_NO_ITEM,
+    TAKE_NO_BAG_SPACE,
+    TAKE_OK,
 };
 
 // seems like the last two fields may have been left as all-purpose vars
@@ -75,7 +84,7 @@ void Task_HandleChooseMonInput(u8 taskId);
 u8 *GetMonNickname(struct Pokemon *mon, u8 *dest);
 u8 DisplayPartyMenuMessage(const u8 *str, bool8 keepOpen);
 bool8 IsPartyMenuTextPrinterActive(void);
-u8 TryTakeMonItem(struct Pokemon *mon);
+enum TryTakeMonItemResult TryTakeMonItem(struct Pokemon *mon);
 void PartyMenuModifyHP(u8 taskId, u8 slot, s8 hpIncrement, s16 hpDifference, TaskFunc task);
 u8 GetAilmentFromStatus(u32 status);
 u8 GetMonAilment(struct Pokemon *mon);
@@ -83,6 +92,9 @@ void DisplayPartyMenuStdMessage(u32 stringId);
 bool8 FieldCallback_PrepareFadeInFromMenu(void);
 bool8 FieldCallback_PrepareFadeInForTeleport(void);
 void CB2_ReturnToPartyMenuFromFlyMap(void);
+#if SWSH_PARTY_MENU_PC_ACCESS
+void CB2_ReopenPartyMenuFromPC(void);
+#endif
 void LoadHeldItemIcons(void);
 void DrawHeldItemIconsForTrade(u8 *partyCounts, u8 *partySpriteIds, u8 whichParty);
 void LoadPartyMenuAilmentGfx(void);

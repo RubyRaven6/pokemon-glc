@@ -12,7 +12,6 @@
 #include "constants/battle_palace.h"
 #include "constants/battle_pike.h"
 #include "constants/battle_pyramid.h"
-#include "constants/battle_setup.h"
 #include "constants/battle_special.h"
 #include "constants/battle_tent.h"
 #include "constants/battle_tower.h"
@@ -44,6 +43,7 @@
 #include "constants/lilycove_lady.h"
 #include "constants/map_scripts.h"
 #include "constants/maps.h"
+#include "constants/mass_outbreak.h"
 #include "constants/mauville_old_man.h"
 #include "constants/metatile_labels.h"
 #include "constants/move_relearner.h"
@@ -70,6 +70,7 @@
 #include "constants/trainers.h"
 #include "constants/trainer_card.h"
 #include "constants/tv.h"
+#include "constants/tournament_constants.h"
 #include "constants/union_room.h"
 #include "constants/vars.h"
 #include "constants/weather.h"
@@ -1747,11 +1748,10 @@ EventScript_PalletTown_PlayersHouse_2F_TurnOnPC::
 	.include "data/scripts/pwt_scripts/hoenn.scr"
 	.include "data/scripts/pwt_scripts/sinnoh.scr"
 	.include "data/scripts/pwt_scripts/unova.scr"
-	
-	@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-	@@ Maps
-	@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+	.include "data/scripts/moveset_scripts/kanto_mons.scr"
 	.include "data/maps/TestingGrounds/scripts.scr"
 	
 	.include "data/maps/TestingGrounds_HouseFoyer/scripts.scr"
 	.include "data/maps/TestingGrounds_BattleArena/scripts.scr"
+	.include "data/maps/TestingGrounds_GreenRoom/scripts.scr"
+

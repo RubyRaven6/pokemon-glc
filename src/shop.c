@@ -341,7 +341,7 @@ static const u8 sShopBuyMenuTextColors[][3] =
     [COLORID_GRAY_CURSOR] = {0, 3, 2},
 };
 
-static const u16 sShopItemsListDummy[] = { ITEM_NONE };
+static const enum Item sShopItemsListDummy[] = { ITEM_NONE };
 
 static u8 CreateShopMenu(u8 martType)
 {
@@ -1021,7 +1021,7 @@ static void Task_BuyMenu(u8 taskId)
             else
                 sShopData->totalCost = gDecorations[itemId].price;
 
-            if (GetItemImportance(itemId) && (CheckBagHasItem(itemId, 1) || CheckPCHasItem(itemId, 1)))
+            if (/*GetItemImportance(itemId) &&*/ (CheckBagHasItem(itemId, 1) || CheckPCHasItem(itemId, 1)))
                 BuyMenuDisplayMessage(taskId, gText_ThatItemIsSoldOut, BuyMenuReturnToItemList);
             else if (!IsEnoughMoney(&gSaveBlock1Ptr->money, sShopData->totalCost))
             {

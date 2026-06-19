@@ -70,6 +70,7 @@ enum CancelerState
     CANCELER_NOT_FULLY_PROTECTED,
     CANCELER_MULTIHIT_MOVES,
     CANCELER_ACCURACY_CHECK,
+    CANCELER_COLOR_CHANGE,
     CANCELER_END,
 };
 
@@ -77,6 +78,7 @@ enum FaintBlockStates
 {
     FAINT_BLOCK_FINAL_GAMBIT,
     FAINT_BLOCK_CHECK_TARGET_FAINTED, // Exits if target is not fainted
+    FAINT_BLOCK_VICTORY_CATCH,
     FAINT_BLOCK_END_NEUTRALIZING_GAS,
     FAINT_BLOCK_DO_GRUDGE,
     // Destiny Bond is tested and called first, but Faint Target's script plays first
@@ -103,6 +105,7 @@ enum MoveEndState
     MOVEEND_FORM_CHANGE_ON_HIT, // Disguise / Gulp Missile
     MOVEEND_ABILITIES_ATTACKER,
     MOVEEND_QUEUE_DANCER,
+    MOVEEND_QUEUE_SYNCHROSWIM,
     MOVEEND_STATUS_IMMUNITY_ABILITIES, // TODO: Do berries come before????
     MOVEEND_ATTACKER_INVISIBLE,
     MOVEEND_ATTACKER_VISIBLE,
@@ -115,6 +118,7 @@ enum MoveEndState
     MOVEEND_UPDATE_LAST_MOVES,
     MOVEEND_MIRROR_MOVE,
     MOVEEND_NEXT_TARGET, // Everything up until here is handled for each strike of a spread move
+    MOVEEND_AURA_FARMING_FAINT,
     MOVEEND_BOUNCED_MOVE,
     MOVEEND_HP_THRESHOLD_ITEMS_TARGET, // Activation only during a multi hit move / ability (Parental Bond)
     MOVEEND_MULTIHIT_MOVE,
@@ -125,7 +129,7 @@ enum MoveEndState
     MOVEEND_ITEM_EFFECTS_ATTACKER_2,
     MOVEEND_ABILITY_EFFECT_FOES_FAINTED, // Moxie-like abilities / Battle Bond / Magician
     MOVEEND_SHELL_TRAP,
-    MOVEEND_COLOR_CHANGE, // Color Change / Berserk / Anger Shell
+    MOVEEND_HP_THRESHOLD_ABILITIES, // Berserk / Anger Shell
     MOVEEND_KEE_MARANGA_HP_THRESHOLD_ITEM_TARGET,
     MOVEEND_CARD_BUTTON, // Red Card / Eject Button
     MOVEEND_FORM_CHANGE,
@@ -143,6 +147,7 @@ enum MoveEndState
     MOVEEND_SEND_OUT_REPLACEMENTS, // For all non-forced switching effects
     MOVEEND_CLEAR_BITS,
     MOVEEND_DANCER,
+    MOVEEND_SYNCHROSWIM,
     MOVEEND_PURSUIT_NEXT_ACTION,
     MOVEEND_COUNT,
 

@@ -37,6 +37,8 @@
 #include "trig.h"
 #include "walda_phrase.h"
 #include "window.h"
+#include "chooseboxmon.h"
+#include "party_menu.h"
 #include "constants/form_change_types.h"
 #include "constants/items.h"
 #include "constants/party_menu.h"
@@ -44,8 +46,7 @@
 #include "constants/rgb.h"
 #include "constants/songs.h"
 #include "constants/pokemon_icon.h"
-#include "chooseboxmon.h"
-#include "party_menu.h"
+#include "swsh_storage_system.h"
 
 /*
     NOTE: This file is large. Some general groups of functions have
@@ -481,7 +482,7 @@ struct PokemonStorageSystemData
     const u16 *displayMonPalette;
     u32 displayMonPersonality;
     enum Species displayMonSpecies;
-    u16 displayMonItemId;
+    enum Item displayMonItemId;
     u16 displayUnusedVar;
     bool8 setMosaic;
     u8 displayMonMarkings;
@@ -526,7 +527,7 @@ struct PokemonStorageSystemData
     u8 inBoxMovingMode;
     u16 multiMoveWindowId;
     struct ItemIcon itemIcons[MAX_ITEM_ICONS];
-    u16 movingItemId;
+    enum Item movingItemId;
     u16 itemInfoWindowOffset;
     u16 displayMonPalOffset;
     u16 *displayMonTilePtr;
@@ -547,7 +548,7 @@ EWRAM_DATA static u8 sCurrentBoxOption = 0;
 EWRAM_DATA static u8 sDepositBoxId = 0;
 EWRAM_DATA static u8 sWhichToReshow = 0;
 EWRAM_DATA static u8 sLastUsedBox = 0;
-EWRAM_DATA static u16 sMovingItemId = 0;
+EWRAM_DATA static enum Item sMovingItemId = ITEM_NONE;
 EWRAM_DATA static struct Pokemon sSavedMovingMon = {0};
 EWRAM_DATA static s8 sCursorArea = 0;
 EWRAM_DATA static s8 sCursorPosition = 0;
@@ -557,6 +558,7 @@ EWRAM_DATA static u8 sMovingMonOrigBoxPos = 0;
 EWRAM_DATA static bool8 sAutoActionOn = 0;
 EWRAM_DATA static bool8 sJustOpenedBag = 0;
 EWRAM_DATA static bool8 sRefreshDisplayMonGfx = FALSE;
+EWRAM_DATA static MainCallback sReturnToPartyCallback = NULL;
 
 // Main tasks
 static void Task_InitPokeStorage(u8);
@@ -715,7 +717,7 @@ static void MoveHeldItemWithPartyMenu(void);
 static bool8 IsItemIconAnimActive(void);
 static bool8 IsMovingItem(void);
 static const u8 *GetMovingItemName(void);
-static u16 GetMovingItemId(void);
+static enum Item GetMovingItemId(void);
 static void PrintItemDescription(void);
 static void InitItemInfoWindow(void);
 static bool8 UpdateItemInfoWindowSlideIn(void);
@@ -1620,6 +1622,12 @@ static void Task_PCMainMenu(u8 taskId)
 
 void ShowPokemonStorageSystemPC(void)
 {
+    if (SWSH_STORAGE_SYSTEM)
+    {
+        ShowPokemonStorageSystemPC_SwSh();
+        return;
+    }
+
     u8 taskId = CreateTask(Task_PCMainMenu, 80);
     gTasks[taskId].tState = 0;
     gTasks[taskId].tSelectedOption = 0;
@@ -1638,6 +1646,44 @@ static void FieldTask_ReturnToPcMenu(void)
     Task_PCMainMenu(taskId);
     SetVBlankCallback(vblankCb);
     FadeInFromBlack();
+}
+
+static void FieldTask_ReturnToPartyMenu(void)
+{
+    MainCallback vblankCb = gMain.vblankCallback;
+    ResetSpriteData();
+    FreeAllWindowBuffers();
+
+    SetVBlankCallback(NULL);
+    SetMainCallback2(sReturnToPartyCallback != NULL ? sReturnToPartyCallback : CB2_ReturnToFieldWithOpenMenu);
+    sReturnToPartyCallback = NULL;
+    SetVBlankCallback(vblankCb);
+    FadeInFromBlack();
+}
+
+void PokemonPC_SetReturnToPartyCallback(MainCallback cb)
+{
+    sReturnToPartyCallback = cb;
+}
+
+bool8 PokemonPC_HasReturnToPartyCallback(void)
+{
+    return sReturnToPartyCallback != NULL;
+}
+
+void ShowPokemonPCFromParty(void)
+{
+    if (SWSH_STORAGE_SYSTEM)
+    {
+        ShowPokemonPCFromParty_SwSh();
+        return;
+    }
+     EnterPokeStorage(OPTION_MOVE_MONS);
+ }
+
+void CB2_ShowPokemonPCFromParty(void)
+{
+    ShowPokemonPCFromParty();
 }
 
 #undef tState
@@ -1662,7 +1708,14 @@ static void CreateMainMenu(u8 whichMenu, s16 *windowIdPtr)
 static void CB2_ExitPokeStorage(void)
 {
     sPreviousBoxOption = GetCurrentBoxOption();
-    gFieldCallback = FieldTask_ReturnToPcMenu;
+    if (sReturnToPartyCallback != NULL)
+    {
+        gFieldCallback = FieldTask_ReturnToPartyMenu;
+    }
+    else
+    {
+        gFieldCallback = FieldTask_ReturnToPcMenu;
+    }
     SetMainCallback2(CB2_ReturnToField);
 }
 
@@ -6939,12 +6992,24 @@ static void ReshowDisplayMon(void)
 
 void SetMonFormPSS(struct BoxPokemon *boxMon, enum FormChanges method)
 {
+    if (SWSH_STORAGE_SYSTEM)
+    {
+        SetMonFormPSS_SwSh(boxMon, method);
+        return;
+    }
+
     if (TryBoxMonFormChange(boxMon, method))
         sRefreshDisplayMonGfx = TRUE;
 }
 
 void SetMonFormPSS_ItemHold(struct BoxPokemon *boxMon)
 {
+    if (SWSH_STORAGE_SYSTEM)
+    {
+        SetMonFormPSS_ItemHold_SwSh(boxMon);
+        return;
+    }
+
     if (TryBoxMonFormChange(boxMon, FORM_CHANGE_ITEM_HOLD))
         sRefreshDisplayMonGfx = TRUE;
     UpdateSpeciesSpritePSS(boxMon);
@@ -7997,11 +8062,6 @@ static void StartCursorAnim(u8 animNum)
     StartSpriteAnim(sStorage->cursorSprite, animNum);
 }
 
-static u8 UNUSED GetMovingMonOriginalBoxId(void)
-{
-    return sMovingMonOrigBoxId;
-}
-
 static void SetCursorPriorityTo1(void)
 {
     sStorage->cursorSprite->oam.priority = 1;
@@ -8865,7 +8925,7 @@ static void CreateItemIconSprites(void)
 
 static void TryLoadItemIconAtPos(u8 cursorArea, u8 cursorPos)
 {
-    u16 heldItem;
+    enum Item heldItem;
 
     if (sStorage->boxOption != OPTION_MOVE_ITEMS)
         return;
@@ -9110,7 +9170,7 @@ static const u8 *GetMovingItemName(void)
     return GetItemName(sStorage->movingItemId);
 }
 
-static u16 GetMovingItemId(void)
+static enum Item GetMovingItemId(void)
 {
     return sStorage->movingItemId;
 }
@@ -9496,19 +9556,6 @@ static void SpriteCB_ItemIcon_HideParty(struct Sprite *sprite)
 //------------------------------------------------------------------------------
 //  SECTION: General utility
 //------------------------------------------------------------------------------
-
-
-// Leftover from FRLG
-static void UNUSED BackupPokemonStorage(void/*struct PokemonStorage * dest*/)
-{
-    //*dest = *gPokemonStoragePtr;
-}
-
-// Leftover from FRLG
-static void UNUSED RestorePokemonStorage(void/*struct PokemonStorage * src*/)
-{
-    //*gPokemonStoragePtr = *src;
-}
 
 // Functions here are general utility functions.
 u8 StorageGetCurrentBox(void)
@@ -10057,6 +10104,12 @@ static void TilemapUtil_Draw(u8 id)
 
 void UpdateSpeciesSpritePSS(struct BoxPokemon *boxMon)
 {
+    if (SWSH_STORAGE_SYSTEM)
+    {
+        UpdateSpeciesSpritePSS_SwSh(boxMon);
+        return;
+    }
+
     enum Species species = GetBoxMonData(boxMon, MON_DATA_SPECIES);
     bool32 isShiny = GetBoxMonData(boxMon, MON_DATA_IS_SHINY);
     u32 pid = GetBoxMonData(boxMon, MON_DATA_PERSONALITY);
@@ -10092,6 +10145,12 @@ void UpdateSpeciesSpritePSS(struct BoxPokemon *boxMon)
 
 void ChooseMonFromStorage(void)
 {
+    if (SWSH_STORAGE_SYSTEM)
+    {
+        ChooseMonFromStorage_SwSh();
+        return;
+    }
+
     EnterPokeStorage(OPTION_SELECT_MON);
 }
 

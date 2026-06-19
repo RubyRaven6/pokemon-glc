@@ -176,6 +176,78 @@ const struct SpeciesInfo gSpeciesInfo[] =
 
     /* You may add any custom species below this point based on the following structure: */
 
+    [SPECIES_NANI] =
+    {
+        .baseHP        = 255,
+        .baseAttack    = 255,
+        .baseDefense   = 255,
+        .baseSpeed     = 255,
+        .baseSpAttack  = 255,
+        .baseSpDefense = 255,
+        .types = MON_TYPES(TYPE_WATER),
+        .catchRate = 45,
+        .expYield = 62,
+        .evYield_SpAttack = 1,
+        .genderRatio = PERCENT_FEMALE(12.5),
+        .eggCycles = 20,
+        .friendship = STANDARD_FRIENDSHIP,
+        .growthRate = GROWTH_MEDIUM_SLOW,
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FIELD),
+        .abilities = { ABILITY_MOXIE, ABILITY_MOXIE, ABILITY_MOXIE },
+        .bodyColor = BODY_COLOR_BLUE,
+        .speciesName = _("Nani?!"),
+        .cryId = CRY_OSHAWOTT,
+        .natDexNum = NATIONAL_DEX_OSHAWOTT,
+        .categoryName = _("Sea Otter"),
+        .height = 5,
+        .weight = 59,
+        .description = COMPOUND_STRING(
+            "The scalchop on its stomach isn't just\n"
+            "used for battle, it can be used to break\n"
+            "open hard berries as well. It is made\n"
+            "from the same element as its claws."),
+        .pokemonScale = 432,
+        .pokemonOffset = 15,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+        .frontPic = gMonFrontPic_Oshawott,
+        .frontPicSize = MON_COORDS_SIZE(32, 40),
+        .frontPicYOffset = 14,
+        .frontAnimFrames = ANIM_FRAMES(
+            ANIMCMD_FRAME(0, 13),
+            ANIMCMD_FRAME(1, 7),
+            ANIMCMD_FRAME(0, 13),
+            ANIMCMD_FRAME(1, 7),
+            ANIMCMD_FRAME(0, 13),
+            ANIMCMD_FRAME(1, 7),
+            ANIMCMD_FRAME(0, 11),
+        ),
+        .frontAnimId = ANIM_H_JUMPS,
+        .backPic = gMonBackPic_Oshawott,
+        .backPicSize = MON_COORDS_SIZE(40, 48),
+        .backPicYOffset = 14,
+        .backAnimId = BACK_ANIM_CONCAVE_ARC_SMALL,
+        .palette = gMonPalette_Oshawott,
+        .shinyPalette = gMonShinyPalette_Oshawott,
+        .iconSprite = gMonIcon_Oshawott,
+        .iconPalIndex = 0,
+        .pokemonJumpType = PKMN_JUMP_TYPE_NORMAL,
+        SHADOW(-3, 0, SHADOW_SIZE_S)
+        FOOTPRINT(Oshawott)
+        OVERWORLD(
+            sPicTable_Oshawott,
+            SIZE_32x32,
+            SHADOW_SIZE_M,
+            TRACKS_FOOT,
+            sAnimTable_Following,
+            gOverworldPalette_Oshawott,
+            gShinyOverworldPalette_Oshawott
+        )
+        .levelUpLearnset = sSamurottLevelUpLearnset,
+        .teachableLearnset = sOshawottTeachableLearnset,
+        .eggMoveLearnset = sOshawottEggMoveLearnset,
+    },
+
     /*
     [SPECIES_NONE] =
     {
