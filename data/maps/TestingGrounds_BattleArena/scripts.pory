@@ -21,7 +21,7 @@ script GymLeaderBattleSetup {
     applymovement(LOCALID_PLAYER, moves(walk_up * 6, delay_16 *2))
     waitmovement(0)
     closemessage
-    setvar(VAR_LAST_TALKED, 1)
+    setvar(VAR_LAST_TALKED, LOCALID_BATTLE_ARENA_GYM_LEADER)
     switch(var(VAR_GYM_LEADER_BATTLE_COUNT))
     {
         case 1:

@@ -2,6 +2,7 @@ mapscripts TestingGrounds_HouseFoyer_MapScripts {
     MAP_SCRIPT_ON_TRANSITION {
         setrespawn(HEAL_LOCATION_TESTING_GROUNDS_HOUSE_FOYER)
         special(HealPlayerParty)
+        clearflag(FLAG_DISABLE_SAVING)
     }
     MAP_SCRIPT_ON_FRAME_TABLE [
         VAR_GENERATION_CTL, 0 {
@@ -19,6 +20,7 @@ mapscripts TestingGrounds_HouseFoyer_MapScripts {
             setvar(VAR_GENERATION_CTL, 1)
             callnative(ChooseRandomGymLeader)
             if(!flag(FLAG_SYS_POKEMON_GET)){setflag(FLAG_SYS_POKEMON_GET)}
+            if(!flag(FLAG_SYS_POKEDEX_GET)){setflag(FLAG_SYS_POKEDEX_GET)}
             callnative(GivePlayerUnlockedPokemon)
             callnative(GiveStartingKeyItems)
             special(HealPlayerParty)

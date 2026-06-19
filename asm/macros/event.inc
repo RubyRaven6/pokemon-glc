@@ -3049,10 +3049,10 @@
 	callnative ScrCmd_checkpartytechs
 	.endm
 
-	.if RELEASE == FALSE
 	.macro debugprint str:req, numOrVar=65535
+	.if RELEASE != TRUE
 	callnative ScrCmd_debugprint
 	.4byte \str
 	.2byte \numOrVar
-	.endm
 	.endif
+	.endm
