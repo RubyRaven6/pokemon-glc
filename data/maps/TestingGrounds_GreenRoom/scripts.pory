@@ -3,6 +3,21 @@ mapscripts TestingGrounds_GreenRoom_MapScripts {
         special(HealPlayerParty)
         setflag(FLAG_DISABLE_SAVING)
     }
+    MAP_SCRIPT_ON_FRAME_TABLE [
+        VAR_TEMP_0, 0 {
+            getobjectxy(LOCALID_PLAYER, CURRENT_POSITION, VAR_TEMP_1, VAR_TEMP_2)
+            if(var(VAR_TEMP_1) == 6 && var(VAR_TEMP_2) == 6){
+                applymovement(LOCALID_PLAYER, moves(walk_up, walk_left * 2, face_down))
+                waitmovement(0)
+            }
+            else
+            {
+                applymovement(LOCALID_PLAYER, moves(walk_down, walk_right * 2, face_down))
+                waitmovement(0)
+            }
+            setvar(VAR_TEMP_0, 1)
+        }
+    ]
 }
 
 script EventScript_TestingGround_GreenRoom_ForfeitGame {
