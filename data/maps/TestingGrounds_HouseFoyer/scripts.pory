@@ -14,6 +14,7 @@ mapscripts TestingGrounds_HouseFoyer_MapScripts {
                 "Whenever you've unlocked more generations, you can check the books in the corner to select a generation too!\p"
                 "Doing so also randomizes the gym leaders you may face.\p"
                 "Lastly, speak to the NPCs to buy items, and check the computer on the left to change your Pokémon's ability, nature, and tera type.\p"
+                "You can also teach them a bunch of other moves!\p"
                 "Have fun!"
                 ))
             closemessage
