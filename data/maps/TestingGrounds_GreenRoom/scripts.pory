@@ -1,7 +1,7 @@
 mapscripts TestingGrounds_GreenRoom_MapScripts {
     MAP_SCRIPT_ON_TRANSITION {
         special(HealPlayerParty)
-        setflag(FLAG_UNUSED_0x068)
+        setflag(FLAG_DISABLE_SAVING)
     }
 }
 

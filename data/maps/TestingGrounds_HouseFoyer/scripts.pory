@@ -2,7 +2,7 @@ mapscripts TestingGrounds_HouseFoyer_MapScripts {
     MAP_SCRIPT_ON_TRANSITION {
         setrespawn(HEAL_LOCATION_TESTING_GROUNDS_HOUSE_FOYER)
         special(HealPlayerParty)
-        clearflag(FLAG_UNUSED_0x068)
+        clearflag(FLAG_DISABLE_SAVING)
     }
     MAP_SCRIPT_ON_FRAME_TABLE [
         VAR_GENERATION_CTL, 0 {
