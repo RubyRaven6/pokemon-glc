@@ -120,10 +120,10 @@ Trainer Teams can be found in the following docs:
 - **Scolipede**: Mega Scolipede's Ability Battle Armor replaced with Weak Armor.
 - **Haxorus**: Replaced Ability Rivarly with Sharpness
 
-<!---
 ## Generation 6
 - **Pyroar**: Gave Pyroar Mettle.
 
+<!---
 ## Generation 7
 
 ## Generation 8
