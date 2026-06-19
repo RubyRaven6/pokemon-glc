@@ -268,7 +268,6 @@ static u32 GetRelearnerLevelUpMoves(struct BoxPokemon *mon, u16 *moves);
 static u32 GetRelearnerEggMoves(struct BoxPokemon *mon, u16 *moves);
 static u32 GetRelearnerTMMoves(struct BoxPokemon *mon, u16 *moves);
 static u32 GetRelearnerTutorMoves(struct BoxPokemon *mon, u16 *moves);
-static u32 RemoveRedundantMoves(struct BoxPokemon *mon, u16 *moves, u8 count);
 static u32 TryAddEverySingleMoves(struct BoxPokemon *boxMon);
 
 static void Task_MoveRelearner_HandleInput(u8 taskId);
@@ -992,40 +991,40 @@ static u32 GetRelearnerTutorMoves(struct BoxPokemon *mon, u16 *moves)
     return numMoves;
 }
 
-static u32 RemoveRedundantMoves(struct BoxPokemon *mon, u16 *moves, u8 count)
-{
-    /*this block removes moves if it is in the mon's learnset*/
-    u32 level = GetLevelFromBoxMonExp(mon);
-    enum Species species = GetBoxMonData(mon, MON_DATA_SPECIES);
+// static u32 RemoveRedundantMoves(struct BoxPokemon *mon, u16 *moves, u8 count)
+// {
+//     /*this block removes moves if it is in the mon's learnset*/
+//     u32 level = GetLevelFromBoxMonExp(mon);
+//     enum Species species = GetBoxMonData(mon, MON_DATA_SPECIES);
 
-    const struct LevelUpMove *learnset = GetSpeciesLevelUpLearnset(species);
-    const u16 *eggMoves = GetSpeciesEggMoves(species);
+//     const struct LevelUpMove *learnset = GetSpeciesLevelUpLearnset(species);
+//     const u16 *eggMoves = GetSpeciesEggMoves(species);
 
-    for (u32 i = 0; learnset[i].move != LEVEL_UP_MOVE_END; i++)
-    {
-        if (learnset[i].level > level)
-            break;
+//     for (u32 i = 0; learnset[i].move != LEVEL_UP_MOVE_END; i++)
+//     {
+//         if (learnset[i].level > level)
+//             break;
 
-        if (BoxMonKnowsMove(mon, learnset[i].move))
-            continue;
+//         if (BoxMonKnowsMove(mon, learnset[i].move))
+//             continue;
 
-        for(u32 index = 0; index < count; index++)
-        {
-            if (moves[index] == learnset[i].move)
-            {
-                moves[index] = moves[count - 1];
-                count--;
-            }
-            if (moves[index] == eggMoves[i])
-            {
-                moves[index] = moves[count - 1];
-                count--;
-            }
-        }
-    }
+//         for(u32 index = 0; index < count; index++)
+//         {
+//             if (moves[index] == learnset[i].move)
+//             {
+//                 moves[index] = moves[count - 1];
+//                 count--;
+//             }
+//             if (moves[index] == eggMoves[i])
+//             {
+//                 moves[index] = moves[count - 1];
+//                 count--;
+//             }
+//         }
+//     }
 
-    return count;
-}
+//     return count;
+// }
 
 void Special_HasMoveToRelearn(void)
 {
