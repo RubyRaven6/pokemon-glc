@@ -10198,13 +10198,7 @@ const struct ItemInfo gItemsInfo[] =
     [ITEM_EVIOLITE] =
     {
         .name = ITEM_NAME("Eviolite"),
-    #if I_PRICE >= GEN_9
-        .price = 50000,
-    #elif I_PRICE >= GEN_7
-        .price = 4000,
-    #else
         .price = 200,
-    #endif
         .holdEffect = HOLD_EFFECT_EVIOLITE,
         .holdEffectParam = 50,
         .description = COMPOUND_STRING(

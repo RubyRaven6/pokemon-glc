@@ -7,7 +7,7 @@ Common_EventScript_MoveRelearner::
 	end
 
 Common_EventScript_MoveRelearnerDynMultiChoice::
-	dynmultipush MoveRelearner_Text_LevelUpMoves, 0
+	@dynmultipush MoveRelearner_Text_LevelUpMoves, 0
 	@dynmultipush MoveRelearner_Text_EggMoves, 1
 	@dynmultipush MoveRelearner_Text_TMMoves, 2
 	dynmultipush MoveRelearner_Text_TutormoveMoves, 3
@@ -93,7 +93,7 @@ MoveRelearner_EventScript_CantTeachMoveToPkmn:
 	end
 
 MoveRelearner_EventScript_AnythingElse::
-	message MoveRelearner_Text_AnythingElse
-	waitmessage
+	@message MoveRelearner_Text_AnythingElse
+	@waitmessage
 	goto Common_EventScript_MoveRelearnerDynMultiChoice
 	end
