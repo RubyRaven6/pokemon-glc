@@ -9373,6 +9373,16 @@
       "secondary_tileset": "gTileset_BattleFrontierOutsideWest",
       "border_filepath": "data/layouts/TournamentGrounds_Outside/border.bin",
       "blockdata_filepath": "data/layouts/TournamentGrounds_Outside/map.bin"
+    },
+    {
+      "id": "LAYOUT_TOURNAMENT_GROUNDS_RECEPTION",
+      "name": "TournamentGrounds_Reception_Layout",
+      "width": 9,
+      "height": 9,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_BattleFrontier",
+      "border_filepath": "data/layouts/TournamentGrounds_Reception/border.bin",
+      "blockdata_filepath": "data/layouts/TournamentGrounds_Reception/map.bin"
     }
   ]
 }
