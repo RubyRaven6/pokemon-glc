@@ -6572,11 +6572,11 @@ void Debug_GivePlayerAllPokemon(void)
             CalculateMonStats(&mon);
             GiveMonInitialMoveset(&mon);
             if(i < 3)
-            GiveScriptedMonToPlayer(&mon, PARTY_SIZE);
-        else
-        CopyMonToPC(&mon);
-        GetSetPokedexFlag(GetMonData(&mon, MON_DATA_SPECIES), FLAG_SET_CAUGHT);
-        GetSetPokedexFlag(GetMonData(&mon, MON_DATA_SPECIES), FLAG_SET_SEEN);
+                GiveScriptedMonToPlayer(&mon, PARTY_SIZE);
+            else
+                CopyMonToPC(&mon);
+            GetSetPokedexFlag(GetMonData(&mon, MON_DATA_SPECIES), FLAG_SET_CAUGHT);
+            GetSetPokedexFlag(GetMonData(&mon, MON_DATA_SPECIES), FLAG_SET_SEEN);
         }
     }
 }
