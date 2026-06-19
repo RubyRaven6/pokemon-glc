@@ -68,7 +68,7 @@ script EventScript_TestingGrounds_HouseFoyer_GenerationSelector {
 
 script EventScript_TestingGrounds_HouseFoyer_ChooseWhatToDoWithPokemon {
     msgbox(format("Hello! And welcome to the Pokémon Editor.\pYou may choose to change your Pokemon's ability, nature, and tera type.\pYou may also teach move tutor moves."))
-    dynmultichoice(0,0,FALSE, 3, 0, DYN_MULTICHOICE_CB_NONE, "Natures", "Ability", "Tera Type", "Move Tutor")
+    dynmultichoice(0, 0, FALSE, 4, 0, DYN_MULTICHOICE_CB_NONE, "Natures", "Ability", "Tera Type", "Move Tutor")
     switch(var(VAR_RESULT))
     {
         case 0:
@@ -78,7 +78,7 @@ script EventScript_TestingGrounds_HouseFoyer_ChooseWhatToDoWithPokemon {
         case 2:
             call(Debug_EventScript_SetTeraType)
         case 3:
-            call(MoveRelearner_EventScript_TeachTutorMoves)
+            call(Common_EventScript_MoveRelearner)
     }
     closemessage
 }
@@ -263,6 +263,7 @@ mart HeldItemMarket {
     ITEM_PUNCHING_GLOVE
     ITEM_COVERT_CLOAK
     ITEM_LOADED_DICE
+    ITEM_EVIOLITE
 }
 
 mart ConsumableItemMarket {
