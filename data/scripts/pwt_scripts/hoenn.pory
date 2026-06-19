@@ -1,5 +1,7 @@
 script EventScript_PWTBattleRoxanne{
-    trainerbattle_single(TRAINER_LEADER_ROXANNE, "TRAINER_LEADER_ROXANNE", "TRAINER_LEADER_ROXANNE lost",EventScript_PWTBattleRoxanne_Money)
+    msgbox("TRAINER_LEADER_ROXANNE")
+    trainerbattle_no_intro(TRAINER_LEADER_ROXANNE,"TRAINER_LEADER_ROXANNE lost")
+    call(EventScript_PWTBattleRoxanne_Money)
     return
 }
 
@@ -14,7 +16,9 @@ script(local) EventScript_PWTBattleRoxanne_Money {
 }
 
 script EventScript_PWTBattleBrawly{
-    trainerbattle_single(TRAINER_LEADER_BRAWLY, "TRAINER_LEADER_BRAWLY", "TRAINER_LEADER_BRAWLY lost",EventScript_PWTBattleBrawly_Money)
+    msgbox("TRAINER_LEADER_BRAWLY")
+    trainerbattle_no_intro(TRAINER_LEADER_BRAWLY,"TRAINER_LEADER_BRAWLY lost")
+    call(EventScript_PWTBattleBrawly_Money)
     return
 }
 
@@ -29,7 +33,9 @@ script(local) EventScript_PWTBattleBrawly_Money {
 }
 
 script EventScript_PWTBattleWattson{
-    trainerbattle_single(TRAINER_LEADER_WATTSON, "TRAINER_LEADER_WATTSON", "TRAINER_LEADER_WATTSON lost",EventScript_PWTBattleWattson_Money)
+    msgbox("TRAINER_LEADER_WATTSON")
+    trainerbattle_no_intro(TRAINER_LEADER_WATTSON,"TRAINER_LEADER_WATTSON lost")
+    call(EventScript_PWTBattleWattson_Money)
     return
 }
 
@@ -44,7 +50,9 @@ script(local) EventScript_PWTBattleWattson_Money {
 }
 
 script EventScript_PWTBattleFlannery{
-    trainerbattle_single(TRAINER_LEADER_FLANNERY, "TRAINER_LEADER_FLANNERY", "TRAINER_LEADER_FLANNERY lost",EventScript_PWTBattleFlannery_Money)
+    msgbox("TRAINER_LEADER_FLANNERY")
+    trainerbattle_no_intro(TRAINER_LEADER_FLANNERY,"TRAINER_LEADER_FLANNERY lost")
+    call(EventScript_PWTBattleFlannery_Money)
     return
 }
 
@@ -59,7 +67,9 @@ script(local) EventScript_PWTBattleFlannery_Money {
 }
 
 script EventScript_PWTBattleNorman{
-    trainerbattle_single(TRAINER_LEADER_NORMAN, "TRAINER_LEADER_NORMAN", "TRAINER_LEADER_NORMAN lost",EventScript_PWTBattleNorman_Money)
+    msgbox("TRAINER_LEADER_NORMAN")
+    trainerbattle_no_intro(TRAINER_LEADER_NORMAN,"TRAINER_LEADER_NORMAN lost")
+    call(EventScript_PWTBattleNorman_Money)
     return
 }
 
@@ -74,7 +84,9 @@ script(local) EventScript_PWTBattleNorman_Money {
 }
 
 script EventScript_PWTBattleWinona{
-    trainerbattle_single(TRAINER_LEADER_WINONA, "TRAINER_LEADER_WINONA", "TRAINER_LEADER_WINONA lost",EventScript_PWTBattleWinona_Money)
+    msgbox("TRAINER_LEADER_WINONA")
+    trainerbattle_no_intro(TRAINER_LEADER_WINONA,"TRAINER_LEADER_WINONA lost")
+    call(EventScript_PWTBattleWinona_Money)
     return
 }
 
@@ -89,7 +101,9 @@ script(local) EventScript_PWTBattleWinona_Money {
 }
 
 script EventScript_PWTBattleTateAndLiza{
-    trainerbattle_single(TRAINER_LEADER_TATE_AND_LIZA, "TRAINER_LEADER_TATE_AND_LIZA", "TRAINER_LEADER_TATE_AND_LIZA lost",EventScript_PWTBattleTateAndLiza_Money)
+    msgbox("TRAINER_LEADER_TATE_AND_LIZA")
+    trainerbattle_no_intro(TRAINER_LEADER_TATE_AND_LIZA,"TRAINER_LEADER_TATE_AND_LIZA lost")
+    call(EventScript_PWTBattleTateAndLiza_Money)
     return
 }
 
@@ -104,7 +118,9 @@ script(local) EventScript_PWTBattleTateAndLiza_Money {
 }
 
 script EventScript_PWTBattleJuan{
-    trainerbattle_single(TRAINER_LEADER_JUAN, "TRAINER_LEADER_JUAN", "TRAINER_LEADER_JUAN lost",EventScript_PWTBattleJuan_Money)
+    msgbox("TRAINER_LEADER_JUAN")
+    trainerbattle_no_intro(TRAINER_LEADER_JUAN,"TRAINER_LEADER_JUAN lost")
+    call(EventScript_PWTBattleJuan_Money)
     return
 }
 
