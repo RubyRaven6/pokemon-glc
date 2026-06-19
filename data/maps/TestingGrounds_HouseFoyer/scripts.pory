@@ -263,6 +263,7 @@ mart HeldItemMarket {
     ITEM_PUNCHING_GLOVE
     ITEM_COVERT_CLOAK
     ITEM_LOADED_DICE
+    ITEM_EVIOLITE
 }
 
 mart ConsumableItemMarket {
