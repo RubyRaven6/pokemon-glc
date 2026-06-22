@@ -758,8 +758,8 @@ static u32 TryAddEverySingleMoves(struct BoxPokemon *boxMon)
     return num;
 }
 
- static void CreateLearnableMovesList(void)
- {
+static void CreateLearnableMovesList(void)
+{
      s32 i;
  
      struct BoxPokemon *boxmon = GetSelectedBoxMonFromPcOrParty();
