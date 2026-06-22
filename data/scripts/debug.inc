@@ -468,7 +468,7 @@ Debug_EventScript_SetHiddenNature::
 	dynmultipush Debug_EventScript_ChangeNature_Text_Sassy, 22
 	dynmultipush Debug_EventScript_ChangeNature_Text_Careful, 23
 	dynmultipush Debug_EventScript_ChangeNature_Text_Quirky, 24
-	dynmultistack 0, 0, TRUE, 7, FALSE, 0, NULL
+	dynmultistack 0, 0, FALSE, 7, FALSE, 0, NULL
 	switch VAR_RESULT
 	case MULTI_B_PRESSED, Debug_EventScript_InflictStatus1_Close
 	special SetHiddenNature
@@ -477,6 +477,9 @@ Debug_EventScript_SetHiddenNature::
 
 Debug_EventScript_SetTeraType::
 	special ChoosePartyMon
+	goto_if_ge VAR_0x8004, PARTY_SIZE, Debug_EventScript_InflictStatus1_Close
+	specialvar VAR_RESULT, ScriptGetPartyMonSpecies
+	goto_if_eq VAR_RESULT, SPECIES_EGG, Debug_EventScript_InflictStatus1_Close
 	dynmultipush Debug_EventScript_SetTeraType_Text_0, TYPE_NORMAL
 	dynmultipush Debug_EventScript_SetTeraType_Text_1, TYPE_FIGHTING
 	dynmultipush Debug_EventScript_SetTeraType_Text_2, TYPE_FLYING
@@ -505,6 +508,9 @@ Debug_EventScript_SetTeraTypeClose:
 
 Debug_EventScript_SetAbility::
 	special ChoosePartyMon
+	goto_if_ge VAR_0x8004, PARTY_SIZE, Debug_EventScript_InflictStatus1_Close
+	specialvar VAR_RESULT, ScriptGetPartyMonSpecies
+	goto_if_eq VAR_RESULT, SPECIES_EGG, Debug_EventScript_InflictStatus1_Close
 	callnative DebugNative_GetAbilityNames
 	dynmultipush gStringVar1, 0
 	dynmultipush gStringVar2, 1
