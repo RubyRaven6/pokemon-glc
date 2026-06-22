@@ -641,55 +641,55 @@ Debug_EventScript_InflictStatus1_Text_KO:
 	.string "KO$"
 
 Debug_EventScript_ChangeNature_Text_Hardy:
-	.string "Hardy$"
+    .string "Hardy ({COLOR BLUE}Defense+, {COLOR RED}Sp. Def-)$"
 Debug_EventScript_ChangeNature_Text_Lonely:
-	.string "Lonely$"
-Debug_EventScript_ChangeNature_Text_Brave:
-	.string "Brave$"
+    .string "Lonely ({COLOR BLUE}Sp. Atk+, {COLOR RED}Sp. Def-)$"
 Debug_EventScript_ChangeNature_Text_Adamant:
-	.string "Adamant$"
+    .string "Adamant ({COLOR BLUE}Attack+, {COLOR RED}Attack-)$"
 Debug_EventScript_ChangeNature_Text_Naughty:
-	.string "Naughty$"
+    .string "Naughty ({COLOR BLUE}Sp. Def+, {COLOR RED}Sp. Atk-)$"
+Debug_EventScript_ChangeNature_Text_Brave:
+    .string "Brave ({COLOR BLUE}Attack+, {COLOR RED}Sp. Def-)$"
 Debug_EventScript_ChangeNature_Text_Bold:
-	.string "Bold$"
+    .string "Bold ({COLOR BLUE}Attack+, {COLOR RED}Sp. Atk-)$"
 Debug_EventScript_ChangeNature_Text_Docile:
-	.string "Docile$"
-Debug_EventScript_ChangeNature_Text_Relaxed:
-	.string "Relaxed$"
+    .string "Docile ({COLOR BLUE}Defense+, {COLOR RED}Defense-)$"
 Debug_EventScript_ChangeNature_Text_Impish:
-	.string "Impish$"
+    .string "Impish ({COLOR BLUE}Sp. Atk+, {COLOR RED}Attack-)$"
 Debug_EventScript_ChangeNature_Text_Lax:
-	.string "Lax$"
-Debug_EventScript_ChangeNature_Text_Timid:
-	.string "Timid$"
-Debug_EventScript_ChangeNature_Text_Hasty:
-	.string "Hasty$"
-Debug_EventScript_ChangeNature_Text_Serious:
-	.string "Serious$"
-Debug_EventScript_ChangeNature_Text_Jolly:
-	.string "Jolly$"
-Debug_EventScript_ChangeNature_Text_Naive:
-	.string "Naive$"
+    .string "Lax ({COLOR BLUE}Sp. Atk+, {COLOR RED}Sp. Atk-)$"
+Debug_EventScript_ChangeNature_Text_Relaxed:
+    .string "Relaxed ({COLOR BLUE}Speed+, {COLOR RED}Defense-)$"
 Debug_EventScript_ChangeNature_Text_Modest:
-	.string "Modest$"
+    .string "Modest ({COLOR BLUE}Sp. Def+, {COLOR RED}Attack-)$"
 Debug_EventScript_ChangeNature_Text_Mild:
-	.string "Mild$"
-Debug_EventScript_ChangeNature_Text_Quiet:
-	.string "Quiet$"
+    .string "Mild ({COLOR BLUE}Sp. Atk+, {COLOR RED}Speed-)$"
 Debug_EventScript_ChangeNature_Text_Bashful:
-	.string "Bashful$"
+    .string "Bashful ({COLOR BLUE}Attack+, {COLOR RED}Defense-)$"
 Debug_EventScript_ChangeNature_Text_Rash:
-	.string "Rash$"
+    .string "Rash ({COLOR BLUE}Speed+, {COLOR RED}Attack-)$"
+Debug_EventScript_ChangeNature_Text_Quiet:
+    .string "Quiet ({COLOR BLUE}Sp. Def+, {COLOR RED}Sp. Def-)$"
 Debug_EventScript_ChangeNature_Text_Calm:
-	.string "Calm$"
+    .string "Calm ({COLOR BLUE}Attack+, {COLOR RED}Speed-)$"
 Debug_EventScript_ChangeNature_Text_Gentle:
-	.string "Gentle$"
-Debug_EventScript_ChangeNature_Text_Sassy:
-	.string "Sassy$"
+    .string "Gentle ({COLOR BLUE}Defense+, {COLOR RED}Sp. Atk-)$"
 Debug_EventScript_ChangeNature_Text_Careful:
-	.string "Careful$"
+    .string "Careful ({COLOR BLUE}Defense+, {COLOR RED}Attack-)$"
 Debug_EventScript_ChangeNature_Text_Quirky:
-	.string "Quirky$"
+    .string "Quirky ({COLOR BLUE}Sp. Def+, {COLOR RED}Speed-)$"
+Debug_EventScript_ChangeNature_Text_Sassy:
+    .string "Sassy ({COLOR BLUE}Speed+, {COLOR RED}Sp. Atk-)$"
+Debug_EventScript_ChangeNature_Text_Timid:
+    .string "Timid ({COLOR BLUE}Speed+, {COLOR RED}Speed-)$"
+Debug_EventScript_ChangeNature_Text_Hasty:
+    .string "Hasty ({COLOR BLUE}Defense+, {COLOR RED}Speed-)$"
+Debug_EventScript_ChangeNature_Text_Jolly:
+    .string "Jolly ({COLOR BLUE}Sp. Atk+, {COLOR RED}Defense-)$"
+Debug_EventScript_ChangeNature_Text_Naive:
+    .string "Naive ({COLOR BLUE}Sp. Def+, {COLOR RED}Defense-)$"
+Debug_EventScript_ChangeNature_Text_Serious:
+    .string "Serious ({COLOR BLUE}Speed+, {COLOR RED}Sp. Def-)$"
 
 Debug_EventScript_EWRAMCounters::
 	callnative CheckEWRAMCounters
