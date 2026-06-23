@@ -336,7 +336,7 @@ static void PrintButtonIcon(u8, u8, u32, u32);
 static u8 GetButtonTextOffset(u8 buttonType);
 static void PrintTextOnWindowWithFont(u8, const u8 *, u8, u8, u8, u8, u32);
 static void PrintMovesPagePrompt(void);
-static void RefreshRelearnModePrompt(void);
+// static void RefreshRelearnModePrompt(void);
 static void ClearMovesPagePrompt(void);
 static void PrintPagePrompts(void);
 static void PutPageWindowTilemaps(u8);
@@ -605,7 +605,7 @@ static const u8 sButtons_Gfx[][4 * TILE_SIZE_4BPP] = {
     INCBIN_U8("graphics/summary_screen/swsh/button_a.4bpp"),
     INCBIN_U8("graphics/summary_screen/swsh/button_b.4bpp"),
     INCBIN_U8("graphics/summary_screen/swsh/button_start.4bpp"),
-    // INCBIN_U8("graphics/summary_screen/swsh/button_lr.4bpp"),
+    INCBIN_U8("graphics/summary_screen/swsh/button_lr.4bpp"),
 };
 
 static const u16 sCategoryIcons_Pal[]               = INCBIN_U16("graphics/summary_screen/swsh/category_icons.gbapal");
@@ -2807,7 +2807,7 @@ enum {
     BUTTON_A,
     BUTTON_B,
     BUTTON_START,
-    // BUTTON_LR,
+    BUTTON_LR,
 };
 
 static void PrintRightAlignedPrompt(u8 windowId, u8 button, const u8 *text, int maxPx, u8 colorId)
@@ -2939,14 +2939,13 @@ static void Task_HandleInput(u8 taskId)
             PlaySE(SE_SELECT);
             CloseSummaryScreen(taskId);
         }
-        /*
         else if (JOY_NEW(R_BUTTON)) // R means increase. Level -> Egg -> TM -> Tutor
         {
             if (P_SUMMARY_SCREEN_MOVE_RELEARNER && IS_MOVE_PAGE(sMonSummaryScreen->currPageIndex) && !gMain.inBattle)
             {
                 gMoveRelearnerState++;
                 UpdateMoveRelearnerState(FALSE);
-                RefreshRelearnModePrompt();
+                // RefreshRelearnModePrompt();
                 PlaySE(SE_SELECT);
             }
         }
@@ -2956,11 +2955,10 @@ static void Task_HandleInput(u8 taskId)
             {
                 gMoveRelearnerState--;
                 UpdateMoveRelearnerState(TRUE);
-                RefreshRelearnModePrompt();
+                // RefreshRelearnModePrompt();
                 PlaySE(SE_SELECT);
             }
         }
-        */
     }
 }
 
@@ -4127,7 +4125,7 @@ static u8 GetButtonTextOffset(u8 buttonType)
         [BUTTON_A]     = 11,   // 8px + 3px
         [BUTTON_B]     = 11,   // 8px + 3px
         [BUTTON_START] = 26,   // (32 - 9)px + 3px
-        // [BUTTON_LR]    = 19,   // 16px + 3px
+        [BUTTON_LR]    = 19,   // 16px + 3px
     };
     return sButtonTextOffset[buttonType];
 }
@@ -4141,7 +4139,7 @@ static void PrintButtonIcon(u8 windowId, u8 buttonType, u32 x, u32 y)
         [BUTTON_A]      = {8, 8},
         [BUTTON_B]      = {8, 8},
         [BUTTON_START]  = {32, 8},
-        // [BUTTON_LR]     = {16, 8},
+        [BUTTON_LR]     = {16, 8},
     };
 
     const u8 *button = sButtons_Gfx[buttonType];
@@ -6084,13 +6082,11 @@ static void CreateMoveTypeIcons(void)
             }
             else
             {
-                DebugPrintf("I'm ballin!");
                 sMonSummaryScreen->spriteIds[i] = CreateSprite(&sSpriteTemplate_MoveTypes, 0, 0, 2);
             }
         }
 
         SetSpriteInvisibility(i, TRUE);
-        DebugPrintf("%u", i);
     }
 }
 
@@ -7018,8 +7014,6 @@ static inline bool32 ShouldShowMoveRelearner(void)
          && !InSlateportBattleTent());
 }
 
-/*
-- removed bc unnecessary. such as edgeworth's feelings for wright
 static void RefreshRelearnModePrompt(void)
 {
     FillWindowPixelRect(PSS_LABEL_WINDOW_PROMPT_MOVES, PIXEL_FILL(0), 0, 0, 120, 16);
@@ -7033,14 +7027,13 @@ static void RefreshRelearnModePrompt(void)
     }
     ScheduleBgCopyTilemapToVram(0);
 }
-*/
 
 static void PrintMovesPagePrompt(void)
 {
     FillWindowPixelBuffer(PSS_LABEL_WINDOW_PROMPT_MOVES, PIXEL_FILL(0));
     if (ShouldShowMoveRelearner())
     {
-        // PrintButtonIcon(PSS_LABEL_WINDOW_PROMPT_MOVES, BUTTON_LR, 8, 4);
+        PrintButtonIcon(PSS_LABEL_WINDOW_PROMPT_MOVES, BUTTON_LR, 8, 4);
         PrintButtonIcon(PSS_LABEL_WINDOW_PROMPT_MOVES, BUTTON_START, 27, 4);
         PrintTextOnWindowWithFont(PSS_LABEL_WINDOW_PROMPT_MOVES, sText_Relearn, 53, 0, 0, 1, FONT_SMALL);
         PrintTextOnWindowWithFont(PSS_LABEL_WINDOW_PROMPT_MOVES, sRelearnModeNames[gMoveRelearnerState],
