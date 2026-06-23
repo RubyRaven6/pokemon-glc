@@ -1,21 +1,21 @@
 #include "global.h"
 #include "constants/trainers.h"
 
-static enum TrainerPicID GetEmeraldTrainerPic(enum Gender gender)
+static enum TrainerPicID GetEmeraldTrainerPic(enum PlayerGender gender)
 {
-    return gender == MALE ? TRAINER_PIC_BRENDAN : TRAINER_PIC_MAY;
+    return gender == GENDER_MASCULINE ? TRAINER_PIC_BRENDAN : TRAINER_PIC_MAY;
 }
-static enum TrainerPicID GetRSTrainerPic(enum Gender gender)
+static enum TrainerPicID GetRSTrainerPic(enum PlayerGender gender)
 {
-    return gender == MALE ? TRAINER_PIC_RS_BRENDAN : TRAINER_PIC_RS_MAY;
-}
-
-static enum TrainerPicID GetKantoTrainerPic(enum Gender gender)
-{
-    return gender == MALE ? TRAINER_PIC_RED : TRAINER_PIC_LEAF;
+    return gender == GENDER_MASCULINE ? TRAINER_PIC_RS_BRENDAN : TRAINER_PIC_RS_MAY;
 }
 
-enum TrainerPicID GetPlayerTrainerPic(enum Gender gender, enum GameVersion version)
+static enum TrainerPicID GetKantoTrainerPic(enum PlayerGender gender)
+{
+    return gender == GENDER_MASCULINE ? TRAINER_PIC_RED : TRAINER_PIC_LEAF;
+}
+
+enum TrainerPicID GetPlayerTrainerPic(enum PlayerGender gender, enum GameVersion version)
 {
     switch (version)
     {

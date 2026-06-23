@@ -1533,8 +1533,8 @@ static void Task_NewGameBirchSpeech_WaitToShowGenderMenu(u8 taskId)
 
 static void Task_NewGameBirchSpeech_ChooseGender(u8 taskId)
 {
-    enum Gender gender = NewGameBirchSpeech_ProcessGenderMenuInput();
-    enum Gender gender2;
+    enum PlayerGender gender = NewGameBirchSpeech_ProcessGenderMenuInput();
+    enum PlayerGender gender2;
 
     switch (gender)
     {
@@ -2142,7 +2142,7 @@ const u8 gText_DefaultPlayerName[] = _("Ruby");
 void Task_NewGameNoBirchSpeech(u8 taskId)
 {
     StringCopy(gSaveBlock2Ptr->playerName, gText_DefaultPlayerName);
-    gSaveBlock2Ptr->playerGender = FEMALE;
+    gSaveBlock2Ptr->playerGender = GENDER_FEMININE;
     SeedRngAndSetTrainerId();
 
     FreeAllWindowBuffers();

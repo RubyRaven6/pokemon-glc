@@ -1415,7 +1415,7 @@ static void Task_SaveAfterLinkBattle(u8 taskId)
 static void ShowSaveInfoWindow(void)
 {
     struct WindowTemplate saveInfoWindow = sSaveInfoWindowTemplate;
-    enum Gender gender;
+    enum PlayerGender gender;
     u8 color;
     u32 xOffset;
     u32 yOffset;
@@ -1431,7 +1431,7 @@ static void ShowSaveInfoWindow(void)
     gender = gSaveBlock2Ptr->playerGender;
     color = TEXT_COLOR_RED;  // Red when female, blue when male.
 
-    if (gender == MALE)
+    if (gender == GENDER_MASCULINE)
         color = TEXT_COLOR_BLUE;
 
     // Print region name

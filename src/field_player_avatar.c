@@ -1564,7 +1564,7 @@ void StopPlayerAvatar(void)
     }
 }
 
-u16 GetRivalAvatarGraphicsIdByStateIdAndGender(u8 state, enum Gender gender)
+u16 GetRivalAvatarGraphicsIdByStateIdAndGender(u8 state, enum PlayerGender gender)
 {
     if (IS_FRLG)
         return GetPlayerAvatarGraphicsIdByStateIdAndGender(state, gender);
@@ -1572,17 +1572,17 @@ u16 GetRivalAvatarGraphicsIdByStateIdAndGender(u8 state, enum Gender gender)
         return sRivalAvatarGfxIds[state][gender];
 }
 
-u16 GetPlayerAvatarGraphicsIdByStateIdAndGender(u8 state, enum Gender gender)
+u16 GetPlayerAvatarGraphicsIdByStateIdAndGender(u8 state, enum PlayerGender gender)
 {
     return sPlayerAvatarGfxIds[state][gender];
 }
 
-u16 GetFRLGAvatarGraphicsIdByGender(enum Gender gender)
+u16 GetFRLGAvatarGraphicsIdByGender(enum PlayerGender gender)
 {
     return sFRLGAvatarGfxIds[gender];
 }
 
-u16 GetRSAvatarGraphicsIdByGender(enum Gender gender)
+u16 GetRSAvatarGraphicsIdByGender(enum PlayerGender gender)
 {
     return sRSAvatarGfxIds[gender];
 }
@@ -1592,7 +1592,7 @@ u16 GetPlayerAvatarGraphicsIdByStateId(u8 state)
     return GetPlayerAvatarGraphicsIdByStateIdAndGender(state, gPlayerAvatar.gender);
 }
 
-enum Gender GetPlayerAvatarGenderByGraphicsId(u16 gfxId)
+enum PlayerGender GetPlayerAvatarGenderByGraphicsId(u16 gfxId)
 {
     switch (gfxId)
     {
@@ -1611,9 +1611,9 @@ enum Gender GetPlayerAvatarGenderByGraphicsId(u16 gfxId)
     case OBJ_EVENT_GFX_GREEN_FISH:
     case OBJ_EVENT_GFX_GREEN_VS_SEEKER:
     case OBJ_EVENT_GFX_GREEN_VS_SEEKER_BIKE:
-        return FEMALE;
+        return GENDER_FEMININE;
     default:
-        return MALE;
+        return GENDER_MASCULINE;
     }
 }
 
@@ -1701,7 +1701,7 @@ void SetPlayerAvatarExtraStateTransition(u16 graphicsId, u8 transitionFlag)
     DoPlayerAvatarTransition();
 }
 
-void InitPlayerAvatar(s16 x, s16 y, enum Direction direction, enum Gender gender)
+void InitPlayerAvatar(s16 x, s16 y, enum Direction direction, enum PlayerGender gender)
 {
     struct ObjectEventTemplate playerObjEventTemplate;
     u8 objectEventId;

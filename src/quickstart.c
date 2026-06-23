@@ -58,17 +58,17 @@ static const struct SpritePalette sSpritePalette_QuickstartHud = {
     .tag = TAG_SKIP_INTRO
 };
 
-static inline enum Gender SetQuickstartPlayerGender()
+static inline enum PlayerGender SetQuickstartPlayerGender()
 {
     switch (QUICKSTART_GENDER)
     {
         case GENDER_MALE:
-            return MALE;
+            return GENDER_MASCULINE;
         case GENDER_FEMALE:
-            return FEMALE;
+            return GENDER_FEMININE;
         case GENDER_RANDOM:
         default:
-            return RandomPercentage(RNG_NONE, 50) ? FEMALE : MALE;
+            return RandomPercentage(RNG_NONE, 50) ? GENDER_FEMININE : GENDER_MASCULINE;
     }
 }
 
