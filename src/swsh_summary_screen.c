@@ -7013,7 +7013,7 @@ static inline bool32 ShouldShowMoveRelearner(void)
          && !InBattleFactory()
          && !InSlateportBattleTent());
 }
-
+/*
 static void RefreshRelearnModePrompt(void)
 {
     FillWindowPixelRect(PSS_LABEL_WINDOW_PROMPT_MOVES, PIXEL_FILL(0), 0, 0, 120, 16);
@@ -7027,7 +7027,7 @@ static void RefreshRelearnModePrompt(void)
     }
     ScheduleBgCopyTilemapToVram(0);
 }
-
+*/
 static void PrintMovesPagePrompt(void)
 {
     FillWindowPixelBuffer(PSS_LABEL_WINDOW_PROMPT_MOVES, PIXEL_FILL(0));
