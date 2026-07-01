@@ -723,19 +723,16 @@ static void AddScrollArrows(void)
 
 static void RemoveScrollArrows(void)
 {
-    if (!P_HIDE_CONTEST_DATA)
+    if (sMoveRelearnerStruct->moveDisplayArrowTask != TASK_NONE)
     {
-        if (sMoveRelearnerStruct->moveDisplayArrowTask != TASK_NONE)
-        {
-            RemoveScrollIndicatorArrowPair(sMoveRelearnerStruct->moveDisplayArrowTask);
-            sMoveRelearnerStruct->moveDisplayArrowTask = TASK_NONE;
-        }
+        RemoveScrollIndicatorArrowPair(sMoveRelearnerStruct->moveDisplayArrowTask);
+        sMoveRelearnerStruct->moveDisplayArrowTask = TASK_NONE;
+    }
 
-        if (sMoveRelearnerStruct->moveListScrollArrowTask != TASK_NONE)
-        {
-            RemoveScrollIndicatorArrowPair(sMoveRelearnerStruct->moveListScrollArrowTask);
-            sMoveRelearnerStruct->moveListScrollArrowTask = TASK_NONE;
-        }
+    if (sMoveRelearnerStruct->moveListScrollArrowTask != TASK_NONE)
+    {
+        RemoveScrollIndicatorArrowPair(sMoveRelearnerStruct->moveListScrollArrowTask);
+        sMoveRelearnerStruct->moveListScrollArrowTask = TASK_NONE;
     }
 }
 
