@@ -723,19 +723,16 @@ static void AddScrollArrows(void)
 
 static void RemoveScrollArrows(void)
 {
-    if (!P_HIDE_CONTEST_DATA)
+    if (sMoveRelearnerStruct->moveDisplayArrowTask != TASK_NONE)
     {
-        if (sMoveRelearnerStruct->moveDisplayArrowTask != TASK_NONE)
-        {
-            RemoveScrollIndicatorArrowPair(sMoveRelearnerStruct->moveDisplayArrowTask);
-            sMoveRelearnerStruct->moveDisplayArrowTask = TASK_NONE;
-        }
+        RemoveScrollIndicatorArrowPair(sMoveRelearnerStruct->moveDisplayArrowTask);
+        sMoveRelearnerStruct->moveDisplayArrowTask = TASK_NONE;
+    }
 
-        if (sMoveRelearnerStruct->moveListScrollArrowTask != TASK_NONE)
-        {
-            RemoveScrollIndicatorArrowPair(sMoveRelearnerStruct->moveListScrollArrowTask);
-            sMoveRelearnerStruct->moveListScrollArrowTask = TASK_NONE;
-        }
+    if (sMoveRelearnerStruct->moveListScrollArrowTask != TASK_NONE)
+    {
+        RemoveScrollIndicatorArrowPair(sMoveRelearnerStruct->moveListScrollArrowTask);
+        sMoveRelearnerStruct->moveListScrollArrowTask = TASK_NONE;
     }
 }
 
@@ -758,16 +755,20 @@ static u32 TryAddEverySingleMoves(struct BoxPokemon *boxMon)
     return num;
 }
 
- static void CreateLearnableMovesList(void)
- {
-     s32 i;
+static void CreateLearnableMovesList(void)
+{
+    s32 i;
  
-     struct BoxPokemon *boxmon = GetSelectedBoxMonFromPcOrParty();
+    struct BoxPokemon *boxmon = GetSelectedBoxMonFromPcOrParty();
     /*
      if (gRelearnMode == RELEARN_MODE_SCRIPT || sRelearnTypes[gMoveRelearnerState].isActive())
          sMoveRelearnerStruct->numMenuChoices = sRelearnTypes[gMoveRelearnerState].getMoves(boxmon, sMoveRelearnerStruct->movesToLearn);
     */
-    sMoveRelearnerStruct->numMenuChoices = TryAddEverySingleMoves(boxmon);
+    
+    if (gRelearnMode == RELEARN_MODE_PSS_PAGE_BATTLE_MOVES)
+        sMoveRelearnerStruct->numMenuChoices = GetRelearnerLevelUpMoves(boxmon, sMoveRelearnerStruct->movesToLearn);
+    if (gRelearnMode == RELEARN_MODE_SCRIPT)
+        sMoveRelearnerStruct->numMenuChoices = TryAddEverySingleMoves(boxmon);
  
     //  if (P_SORT_MOVES)
     SortMovesAlphabetically(sMoveRelearnerStruct->movesToLearn, sMoveRelearnerStruct->numMenuChoices);
