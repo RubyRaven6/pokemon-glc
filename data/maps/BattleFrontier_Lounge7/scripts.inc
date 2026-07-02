@@ -66,61 +66,61 @@ BattleFrontier_Lounge7_EventScript_ChooseNewLeftTutorMove::
 
 BattleFrontier_Lounge7_EventScript_Softboiled::
 	setvar VAR_0x8008, 16
-	@setvar VAR_0x8005, MOVE_UNAVAILABLE
+	@setvar VAR_0x8005, MOVE_SPLASH
 	goto BattleFrontier_Lounge7_EventScript_ConfirmMoveSelection
 	end
 
 BattleFrontier_Lounge7_EventScript_SeismicToss::
 	setvar VAR_0x8008, 24
-	@setvar VAR_0x8005, MOVE_UNAVAILABLE
+	@setvar VAR_0x8005, MOVE_SPLASH
 	goto BattleFrontier_Lounge7_EventScript_ConfirmMoveSelection
 	end
 
 BattleFrontier_Lounge7_EventScript_DreamEater::
 	setvar VAR_0x8008, 24
-	@setvar VAR_0x8005, MOVE_UNAVAILABLE
+	@setvar VAR_0x8005, MOVE_SPLASH
 	goto BattleFrontier_Lounge7_EventScript_ConfirmMoveSelection
 	end
 
 BattleFrontier_Lounge7_EventScript_MegaPunch::
 	setvar VAR_0x8008, 24
-	@setvar VAR_0x8005, MOVE_UNAVAILABLE
+	@setvar VAR_0x8005, MOVE_SPLASH
 	goto BattleFrontier_Lounge7_EventScript_ConfirmMoveSelection
 	end
 
 BattleFrontier_Lounge7_EventScript_MegaKick::
 	setvar VAR_0x8008, 48
-	@setvar VAR_0x8005, MOVE_UNAVAILABLE
+	@setvar VAR_0x8005, MOVE_SPLASH
 	goto BattleFrontier_Lounge7_EventScript_ConfirmMoveSelection
 	end
 
 BattleFrontier_Lounge7_EventScript_BodySlam::
 	setvar VAR_0x8008, 48
-	@setvar VAR_0x8005, MOVE_UNAVAILABLE
+	@setvar VAR_0x8005, MOVE_SPLASH
 	goto BattleFrontier_Lounge7_EventScript_ConfirmMoveSelection
 	end
 
 BattleFrontier_Lounge7_EventScript_RockSlide::
 	setvar VAR_0x8008, 48
-	@setvar VAR_0x8005, MOVE_UNAVAILABLE
+	@setvar VAR_0x8005, MOVE_SPLASH
 	goto BattleFrontier_Lounge7_EventScript_ConfirmMoveSelection
 	end
 
 BattleFrontier_Lounge7_EventScript_Counter::
 	setvar VAR_0x8008, 48
-	@setvar VAR_0x8005, MOVE_UNAVAILABLE
+	@setvar VAR_0x8005, MOVE_SPLASH
 	goto BattleFrontier_Lounge7_EventScript_ConfirmMoveSelection
 	end
 
 BattleFrontier_Lounge7_EventScript_ThunderWave::
 	setvar VAR_0x8008, 48
-	@setvar VAR_0x8005, MOVE_UNAVAILABLE
+	@setvar VAR_0x8005, MOVE_SPLASH
 	goto BattleFrontier_Lounge7_EventScript_ConfirmMoveSelection
 	end
 
 BattleFrontier_Lounge7_EventScript_SwordsDance::
 	setvar VAR_0x8008, 48
-	@setvar VAR_0x8005, MOVE_UNAVAILABLE
+	@setvar VAR_0x8005, MOVE_SPLASH
 	goto BattleFrontier_Lounge7_EventScript_ConfirmMoveSelection
 	end
 
@@ -188,61 +188,61 @@ BattleFrontier_Lounge7_EventScript_ChooseNewRightTutorMove::
 
 BattleFrontier_Lounge7_EventScript_DefenseCurl::
 	setvar VAR_0x8008, 16
-	@setvar VAR_0x8005, MOVE_UNAVAILABLE
+	@setvar VAR_0x8005, MOVE_SPLASH
 	goto BattleFrontier_Lounge7_EventScript_ConfirmMoveSelection
 	end
 
 BattleFrontier_Lounge7_EventScript_Snore::
 	setvar VAR_0x8008, 24
-	@setvar VAR_0x8005, MOVE_UNAVAILABLE
+	@setvar VAR_0x8005, MOVE_SPLASH
 	goto BattleFrontier_Lounge7_EventScript_ConfirmMoveSelection
 	end
 
 BattleFrontier_Lounge7_EventScript_MudSlap::
 	setvar VAR_0x8008, 24
-	@setvar VAR_0x8005, MOVE_UNAVAILABLE
+	@setvar VAR_0x8005, MOVE_SPLASH
 	goto BattleFrontier_Lounge7_EventScript_ConfirmMoveSelection
 	end
 
 BattleFrontier_Lounge7_EventScript_Swift::
 	setvar VAR_0x8008, 24
-	@setvar VAR_0x8005, MOVE_UNAVAILABLE
+	@setvar VAR_0x8005, MOVE_SPLASH
 	goto BattleFrontier_Lounge7_EventScript_ConfirmMoveSelection
 	end
 
 BattleFrontier_Lounge7_EventScript_IcyWind::
 	setvar VAR_0x8008, 24
-	@setvar VAR_0x8005, MOVE_UNAVAILABLE
+	@setvar VAR_0x8005, MOVE_SPLASH
 	goto BattleFrontier_Lounge7_EventScript_ConfirmMoveSelection
 	end
 
 BattleFrontier_Lounge7_EventScript_Endure::
 	setvar VAR_0x8008, 48
-	@setvar VAR_0x8005, MOVE_UNAVAILABLE
+	@setvar VAR_0x8005, MOVE_SPLASH
 	goto BattleFrontier_Lounge7_EventScript_ConfirmMoveSelection
 	end
 
 BattleFrontier_Lounge7_EventScript_PsychUp::
 	setvar VAR_0x8008, 48
-	@setvar VAR_0x8005, MOVE_UNAVAILABLE
+	@setvar VAR_0x8005, MOVE_SPLASH
 	goto BattleFrontier_Lounge7_EventScript_ConfirmMoveSelection
 	end
 
 BattleFrontier_Lounge7_EventScript_IcePunch::
 	setvar VAR_0x8008, 48
-	@setvar VAR_0x8005, MOVE_UNAVAILABLE
+	@setvar VAR_0x8005, MOVE_SPLASH
 	goto BattleFrontier_Lounge7_EventScript_ConfirmMoveSelection
 	end
 
 BattleFrontier_Lounge7_EventScript_ThunderPunch::
 	setvar VAR_0x8008, 48
-	@setvar VAR_0x8005, MOVE_UNAVAILABLE
+	@setvar VAR_0x8005, MOVE_SPLASH
 	goto BattleFrontier_Lounge7_EventScript_ConfirmMoveSelection
 	end
 
 BattleFrontier_Lounge7_EventScript_FirePunch::
 	setvar VAR_0x8008, 48
-	@setvar VAR_0x8005, MOVE_UNAVAILABLE
+	@setvar VAR_0x8005, MOVE_SPLASH
 	setvar VAR_0x8005, MOVE_POUND
 	setvar VAR_0x8005, MOVE_KARATE_CHOP
 	setvar VAR_0x8005, MOVE_DOUBLE_SLAP
