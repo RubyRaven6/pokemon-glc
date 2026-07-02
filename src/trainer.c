@@ -2,18 +2,16 @@
 #include "constants/trainers.h"
 
 static enum TrainerPicID GetEmeraldTrainerPic(enum PlayerGender gender)
-{
-    u32 trainerPicGender = 0;
-    
+{    
     switch(gender)
     {
-        default: //happy women's month
-        case GENDER_FEMININE:
-            return TRAINER_PIC_MAY;
         case GENDER_MASCULINE:
             return TRAINER_PIC_BRENDAN;
         case GENDER_ANDROGYNOUS:
             return TRAINER_PIC_KRIS;
+        default: //happy women's month
+        case GENDER_FEMININE:
+            return TRAINER_PIC_MAY;
     }
 }
 static enum TrainerPicID GetRSTrainerPic(enum PlayerGender gender)

@@ -2142,7 +2142,7 @@ const u8 gText_DefaultPlayerName[] = _("Ruby");
 void Task_NewGameNoBirchSpeech(u8 taskId)
 {
     StringCopy(gSaveBlock2Ptr->playerName, gText_DefaultPlayerName);
-    gSaveBlock2Ptr->playerGender = GENDER_FEMININE;
+    gSaveBlock2Ptr->playerGender = GENDER_ANDROGYNOUS;
     SeedRngAndSetTrainerId();
 
     FreeAllWindowBuffers();

@@ -1621,6 +1621,15 @@ enum PlayerGender GetPlayerAvatarGenderByGraphicsId(u16 gfxId)
     case OBJ_EVENT_GFX_GREEN_VS_SEEKER:
     case OBJ_EVENT_GFX_GREEN_VS_SEEKER_BIKE:
         return GENDER_FEMININE;
+    case OBJ_EVENT_GFX_KRIS_NORMAL:
+    case OBJ_EVENT_GFX_KRIS_MACH_BIKE:
+    case OBJ_EVENT_GFX_KRIS_ACRO_BIKE:
+    case OBJ_EVENT_GFX_KRIS_SURFING:
+    case OBJ_EVENT_GFX_KRIS_FIELD_MOVE:
+    case OBJ_EVENT_GFX_KRIS_UNDERWATER:
+    case OBJ_EVENT_GFX_KRIS_FISHING:
+    case OBJ_EVENT_GFX_KRIS_WATERING:    
+        return GENDER_ANDROGYNOUS;
     default:
         return GENDER_MASCULINE;
     }
