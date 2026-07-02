@@ -3346,6 +3346,9 @@ u8 LoadPlayerObjectEventPalette(enum PlayerGender gender)
     case GENDER_FEMININE:
         paletteTag = OBJ_EVENT_PAL_TAG_MAY;
         break;
+    case GENDER_ANDROGYNOUS:
+        paletteTag = OBJ_EVENT_PAL_TAG_KRIS;
+        break;
     }
     return LoadObjectEventPalette(paletteTag);
 }
