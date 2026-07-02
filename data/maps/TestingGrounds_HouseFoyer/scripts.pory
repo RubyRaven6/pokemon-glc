@@ -236,7 +236,6 @@ mart HeldItemMarket {
     ITEM_EXPERT_BELT
     ITEM_LIGHT_CLAY
     ITEM_LIFE_ORB
-    ITEM_FOCUS_SASH
     ITEM_ZOOM_LENS
     ITEM_METRONOME
     ITEM_IRON_BALL
@@ -277,6 +276,7 @@ mart ConsumableItemMarket {
     ITEM_CELL_BATTERY
     ITEM_LUMINOUS_MOSS
     ITEM_SNOWBALL
+    // Situational Consumables
     ITEM_WHITE_HERB
     ITEM_MENTAL_HERB
     ITEM_POWER_HERB
@@ -292,6 +292,8 @@ mart ConsumableItemMarket {
     ITEM_MIRROR_HERB
     ITEM_EJECT_PACK
     ITEM_THROAT_SPRAY
+    ITEM_FOCUS_SASH
+    // Type Gems
     ITEM_NORMAL_GEM
     ITEM_FIRE_GEM
     ITEM_WATER_GEM
