@@ -9383,6 +9383,16 @@
       "secondary_tileset": "gTileset_BattleFrontier",
       "border_filepath": "data/layouts/TournamentGrounds_Reception/border.bin",
       "blockdata_filepath": "data/layouts/TournamentGrounds_Reception/map.bin"
+    },
+    {
+      "id": "LAYOUT_TOURNAMENT_GROUNDS_ARENA_LOBBY",
+      "name": "TournamentGrounds_ArenaLobby_Layout",
+      "width": 23,
+      "height": 17,
+      "primary_tileset": "gTileset_Building",
+      "secondary_tileset": "gTileset_BattleDome",
+      "border_filepath": "data/layouts/TournamentGrounds_ArenaLobby/border.bin",
+      "blockdata_filepath": "data/layouts/TournamentGrounds_ArenaLobby/map.bin"
     }
   ]
 }

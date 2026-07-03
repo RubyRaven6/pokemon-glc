@@ -16,7 +16,8 @@
     "TestingGrounds_GreenRoom",
     "TestingGrounds_BattleArena",
     "TournamentGrounds_Outside",
-    "TournamentGrounds_Reception"
+    "TournamentGrounds_Reception",
+    "TournamentGrounds_ArenaLobby"
   ],
   "gMapGroup_VanillaMaps1": [
     "PetalburgCity",
