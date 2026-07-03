@@ -37,9 +37,17 @@ struct PlayerGenState
     u8 mode;
 };
 
+enum BgIds
+{
+    BG_TEXT = 0,
+    BG_ONE,
+    BG_COUNT,
+};
+
 enum WindowIds
 {
-    WINDOW_0
+    WINDOW_TEXT = 0,
+    WINDOW_COUNT,
 };
 
 static EWRAM_DATA struct PlayerGenState *sPlayerGenState = NULL;
@@ -48,13 +56,13 @@ static EWRAM_DATA u8 *sBg1TilemapBuffer = NULL;
 static const struct BgTemplate sPlayerGenBgTemplates[] =
 {
     {
-        .bg = 0,
+        .bg = BG_TEXT,
         .charBaseIndex = 0,
         .mapBaseIndex = 31,
         .priority = 1
     },
     {
-        .bg = 1,
+        .bg = BG_ONE,
         .charBaseIndex = 3,
         .mapBaseIndex = 30,
         .priority = 2
@@ -63,7 +71,7 @@ static const struct BgTemplate sPlayerGenBgTemplates[] =
 
 static const struct WindowTemplate sPlayerGenWindowTemplates[] =
 {
-    [WINDOW_0] =
+    [WINDOW_TEXT] =
     {
         .bg = 0,
         .tilemapLeft = 14,
@@ -76,11 +84,11 @@ static const struct WindowTemplate sPlayerGenWindowTemplates[] =
     DUMMY_WIN_TEMPLATE
 };
 
-static const u32 sPlayerGenTiles[] = INCBIN_U32("graphics/sample_ui/tiles.4bpp.smol");
+static const u32 sPlayerGenTiles[] = INCBIN_U32("graphics/player_gen/tiles.4bpp.smol");
 
-static const u32 sPlayerGenTilemap[] = INCBIN_U32("graphics/sample_ui/tilemap.bin.smol");
+static const u32 sPlayerGenTilemap[] = INCBIN_U32("graphics/player_gen/tilemap.bin.smol");
 
-static const u16 sPlayerGenPalette[] = INCBIN_U16("graphics/sample_ui/tiles.gbapal");
+static const u16 sPlayerGenPalette[] = INCBIN_U16("graphics/player_gen/tiles.gbapal");
 
 enum FontColor
 {
@@ -100,6 +108,7 @@ static void PlayerGen_VBlankCB(void);
 
 // Sample UI tasks
 static void Task_PlayerGenWaitFadeIn(u8 taskId);
+static void Task_NewGameBirchSpeech_AndYouAre(u8 taskId);
 static void Task_PlayerGenMainInput(u8 taskId);
 static void Task_PlayerGenWaitFadeAndBail(u8 taskId);
 static void Task_PlayerGenWaitFadeAndExitGracefully(u8 taskId);
@@ -113,6 +122,7 @@ static bool8 PlayerGen_LoadGraphics(void);
 static void PlayerGen_InitWindows(void);
 static void PlayerGen_PrintUiSampleWindowText(void);
 static void PlayerGen_FreeResources(void);
+static inline void PlayerGen_PrintMessageBox(const u8 *str);
 
 void Task_OpenPlayerGen(u8 taskId)
 {
@@ -203,7 +213,7 @@ static void PlayerGen_SetupCB(void)
         gMain.state++;
         break;
     case 5:
-        PlayerGen_PrintUiSampleWindowText();
+        // PlayerGen_PrintUiSampleWindowText();
         CreateTask(Task_PlayerGenWaitFadeIn, 0);
         gMain.state++;
         break;
@@ -238,7 +248,7 @@ static void Task_PlayerGenWaitFadeIn(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
-        gTasks[taskId].func = Task_PlayerGenMainInput;
+        gTasks[taskId].func = Task_NewGameBirchSpeech_AndYouAre;
     }
 }
 
@@ -341,23 +351,39 @@ static void PlayerGen_InitWindows(void)
     InitWindows(sPlayerGenWindowTemplates);
     DeactivateAllTextPrinters();
     ScheduleBgCopyTilemapToVram(0);
-    FillWindowPixelBuffer(WINDOW_0, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
-    PutWindowTilemap(WINDOW_0);
-    CopyWindowToVram(WINDOW_0, 3);
+    FillWindowPixelBuffer(WINDOW_TEXT, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
+    PutWindowTilemap(WINDOW_TEXT);
+    CopyWindowToVram(WINDOW_TEXT, 3);
 }
 
 static const u8 sText_Text1[] = _("Hello, world!");
 static const u8 sText_Text2[] = _("Press {A_BUTTON} to make a sound!");
+
 static void PlayerGen_PrintUiSampleWindowText(void)
 {
-    FillWindowPixelBuffer(WINDOW_0, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
+    FillWindowPixelBuffer(WINDOW_TEXT, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
 
-    AddTextPrinterParameterized4(WINDOW_0, FONT_NORMAL, 0, 3, 0, 0,
+    AddTextPrinterParameterized4(WINDOW_TEXT, FONT_NORMAL, 0, 3, 0, 0,
         sPlayerGenWindowFontColors[FONT_WHITE], TEXT_SKIP_DRAW, sText_Text1);
-    AddTextPrinterParameterized4(WINDOW_0, FONT_SMALL, 0, 15, 0, 0,
+    AddTextPrinterParameterized4(WINDOW_TEXT, FONT_SMALL, 0, 15, 0, 0,
         sPlayerGenWindowFontColors[FONT_RED], TEXT_SKIP_DRAW, sText_Text2);
 
-    CopyWindowToVram(WINDOW_0, COPYWIN_GFX);
+    CopyWindowToVram(WINDOW_TEXT, COPYWIN_GFX);
+}
+
+static inline void PlayerGen_PrintMessageBox(const u8 *str)
+{
+    DrawDialogueFrame(WINDOW_TEXT, FALSE);
+    if (str != gStringVar4)
+    {
+        StringExpandPlaceholders(gStringVar4, str);
+        AddTextPrinterParameterized2(WINDOW_TEXT, FONT_NORMAL, gStringVar4, GetPlayerTextSpeedDelay(), NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
+    }
+    else
+    {
+        AddTextPrinterParameterized2(WINDOW_TEXT, FONT_NORMAL, str, GetPlayerTextSpeedDelay(), NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
+    }
+    CopyWindowToVram(WINDOW_TEXT, COPYWIN_FULL);
 }
 
 static void PlayerGen_FreeResources(void)
