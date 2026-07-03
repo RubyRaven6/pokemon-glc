@@ -1759,3 +1759,5 @@ EventScript_PalletTown_PlayersHouse_2F_TurnOnPC::
 	.include "data/maps/TournamentGrounds_Outside/scripts.scr"
 	.include "data/maps/TournamentGrounds_Reception/scripts.scr"
 	.include "data/maps/TournamentGrounds_ArenaLobby/scripts.scr"
+	.include "data/maps/TournamentGrounds_Mart/scripts.scr"
+	.include "data/maps/TournamentGrounds_Lounge1/scripts.scr"

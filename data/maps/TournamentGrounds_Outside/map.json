@@ -87,8 +87,8 @@
       "x": 8,
       "y": 38,
       "elevation": 0,
-      "dest_map": "MAP_TOURNAMENT_GROUNDS_RECEPTION",
-      "dest_warp_id": "1"
+      "dest_map": "MAP_TOURNAMENT_GROUNDS_LOUNGE1",
+      "dest_warp_id": "0"
     },
     {
       "x": 20,
@@ -101,8 +101,8 @@
       "x": 41,
       "y": 36,
       "elevation": 0,
-      "dest_map": "MAP_TOURNAMENT_GROUNDS_RECEPTION",
-      "dest_warp_id": "1"
+      "dest_map": "MAP_TOURNAMENT_GROUNDS_MART",
+      "dest_warp_id": "0"
     },
     {
       "x": 26,
