@@ -114,6 +114,7 @@ Trainer Teams can be found in the following docs:
 - **Tangrowth**: Replaces Ability Leaf Guard with Grass Pelt
 
 ## Generation 5
+- **Simisage**: Gained Moxie
 - **Leavanny**: Replaced Overcoat with Sharpness
 - **Archeops**: Gained Klutz
 - **Cryogonal**: Gained Snow Warning
