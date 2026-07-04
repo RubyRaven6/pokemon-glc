@@ -2605,10 +2605,13 @@ SINGLE_BATTLE_TEST("Tera Blast animations work")
 
 SINGLE_BATTLE_TEST("Custom Move animations work")
 {
-    u32 j = MOVE_ROCK_HEART, move = 0, species = 0;
+    u32 j = MOVE_ROCK_HEART;
+    enum Move move = MOVE_NONE;
+    enum Species species = SPECIES_NONE;
     u32 k = 0, variation = 0, variationsNumber;
     u32 friendship = 0, tempFriendship;
-    u32 tempMove, tempSpecies;
+    enum Move tempMove;
+    enum Species tempSpecies;
     FORCE_MOVE_ANIM(TRUE);
     for (; j <= ANIM_TEST_END_MOVE; j++) {
         variationsNumber = GetVariationsNumber(j, FALSE);
@@ -2638,11 +2641,12 @@ SINGLE_BATTLE_TEST("Custom Move animations work")
 DOUBLE_BATTLE_TEST("Individual Custom Move test")
 {
     u32 move;
-    PARAMETRIZE { move = MOVE_STUNT_DOUBLE; }
+    PARAMETRIZE { move = MOVE_SURFS_UP; }
 
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET) {};
         PLAYER(SPECIES_WYNAUT) { Item(ITEM_FOCUS_SASH); }
+        PLAYER(SPECIES_WOBBUFFET) {};
         OPPONENT(SPECIES_WOBBUFFET) { Item(ITEM_FOCUS_SASH); }
         OPPONENT(SPECIES_WYNAUT) { Item(ITEM_FOCUS_SASH); }
     } WHEN {
@@ -2652,6 +2656,10 @@ DOUBLE_BATTLE_TEST("Individual Custom Move test")
                 MOVE(opponentLeft, MOVE_POUND, target: playerLeft);
             }
             MOVE(playerLeft, move, target: opponentLeft);
+            if (gMovesInfo[move].effect == EFFECT_CASTING_CALL)
+            {
+                SEND_OUT(playerLeft, 2);
+            }
         }
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, move, playerLeft);
