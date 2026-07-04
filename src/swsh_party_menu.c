@@ -35,6 +35,7 @@
 #include "item.h"
 #include "item_menu.h"
 #include "item_use.h"
+#include "party_menu.h"
 #include "pokemon_storage_system.h"
 #include "caps.h"
 #include "link.h"
@@ -48,7 +49,6 @@
 #include "move_relearner.h"
 #include "overworld.h"
 #include "palette.h"
-#include "party_menu.h"
 #include "comfy_anim.h"
 #include "player_pc.h"
 #include "pokemon.h"
@@ -84,13 +84,14 @@
 #include "constants/pokemon_icon.h"
 #include "constants/rgb.h"
 #include "constants/songs.h"
-
+#include "ui_stat_editor.h"
 
 
 #if SWSH_PARTY_MENU
 
 enum {
     MENU_SUMMARY,
+    MENU_STAT_EDIT,
     MENU_SWITCH,
     MENU_CANCEL1,
     MENU_ITEM,
@@ -556,6 +557,7 @@ static void ShiftMoveSlot(struct BoxPokemon *, u8, u8);
 static void BlitBitmapToPartyWindow(u8, const u8 *, u8, u8, u8, u8, u8);
 static void BlitBitmapToPartyWindow_SwSh(u8, u8, u8, u8, u8, bool8);
 static void CursorCb_Summary(u8);
+static void CursorCb_StatEdit(u8);
 static void CursorCb_Switch(u8);
 static void CursorCb_Cancel1(u8);
 static void CursorCb_Item(u8);
@@ -1352,21 +1354,7 @@ static void FreePartyPointers(void)
     DestroyMonSpritesGfxManager(MON_SPR_GFX_MANAGER_A);
     DestroyMoveTypeSprites();
     // Clear alpha blending from party mon shadows
-    SetGpuReg(REG_OFFSET_BLDCNT, 0);
-    SetGpuReg(REG_OFFSET_BLDALPHA, 0);
-    SetGpuReg(REG_OFFSET_DISPCNT, 0);
-    SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_ON);
-    SetGpuReg(REG_OFFSET_BG3CNT, 0);
-    SetGpuReg(REG_OFFSET_BG2CNT, 0);
-    SetGpuReg(REG_OFFSET_BG1CNT, 0);
-    SetGpuReg(REG_OFFSET_BG0CNT, 0);
-    SetGpuReg(REG_OFFSET_BLDY, 0);
-    SetGpuReg(REG_OFFSET_WIN0H, 0);
-    SetGpuReg(REG_OFFSET_WIN0V, 0);
-    SetGpuReg(REG_OFFSET_WIN1H, 0);
-    SetGpuReg(REG_OFFSET_WIN1V, 0);
-    SetGpuReg(REG_OFFSET_WININ, 0);
-    SetGpuReg(REG_OFFSET_WINOUT, 0);
+    SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_ON | DISPCNT_OBJ_1D_MAP);
 
     if (sPartyMenuInternal)
     {
@@ -2672,14 +2660,17 @@ static void GiveItemToMon(struct Pokemon *mon, enum Item item)
     TryItemHoldFormChange(&gParties[B_TRAINER_PLAYER][gPartyMenu.slotId], gPartyMenu.slotId, B_TRAINER_PLAYER);
 }
 
-u8 TryTakeMonItem(struct Pokemon *mon)
+enum TryTakeMonItemResult TryTakeMonItem(struct Pokemon *mon)
 {
     enum Item item = GetMonData(mon, MON_DATA_HELD_ITEM);
 
     if (item == ITEM_NONE)
         return 0;
-    if (AddBagItem(item, 1) == FALSE)
+    /*
+        if (AddBagItem(item, 1) == FALSE)
         return 1;
+    */
+    //ensures no items are added to the bag. badabing bada bag
 
     item = ITEM_NONE;
     SetMonData(mon, MON_DATA_HELD_ITEM, &item);
@@ -3746,6 +3737,7 @@ static void SetPartyMonFieldSelectionActions(struct Pokemon *mons, u8 slotId)
 
     sPartyMenuInternal->numActions = 0;
     AppendToList(sPartyMenuInternal->actions, &sPartyMenuInternal->numActions, MENU_SUMMARY);
+    AppendToList(sPartyMenuInternal->actions, &sPartyMenuInternal->numActions, MENU_STAT_EDIT);
 
     // Add field moves to action list
     for (i = 0; i < MAX_MON_MOVES; i++)
@@ -4506,7 +4498,7 @@ static void CB2_GiveHoldItem(void)
         // Give mail
         else if (ItemIsMail(gSpecialVar_ItemId))
         {
-            RemoveBagItem(gSpecialVar_ItemId, 1);
+            // RemoveBagItem(gSpecialVar_ItemId, 1); NOW it wont give mons anything!
             GiveItemToMon(&gParties[B_TRAINER_PLAYER][gPartyMenu.slotId], gSpecialVar_ItemId);
             CB2_WriteMailToGiveMon();
         }
@@ -4532,7 +4524,7 @@ static void Task_GiveHoldItem(u8 taskId)
     {
         item = gSpecialVar_ItemId;
         GiveItemToMon(&gParties[B_TRAINER_PLAYER][gPartyMenu.slotId], item);
-        RemoveBagItem(item, 1);
+        // RemoveBagItem(item, 1); and now this also wont remove bag items!!! good job ruby
 
         // Visually update cursor and held item sprites
         UpdatePartyMonHeldItemSprite(&gParties[B_TRAINER_PLAYER][gPartyMenu.slotId], &sPartyMenuBoxes[gPartyMenu.slotId]);
@@ -4568,12 +4560,12 @@ static void Task_HandleSwitchItemsYesNoInput(u8 taskId)
     switch (Menu_ProcessInputNoWrapClearOnChoose())
     {
     case 0: // Yes, switch items
-        RemoveBagItem(gSpecialVar_ItemId, 1);
+        // RemoveBagItem(gSpecialVar_ItemId, 1);
 
         // No room to return held item to bag
         if (AddBagItem(sPartyMenuItemId, 1) == FALSE)
         {
-            AddBagItem(gSpecialVar_ItemId, 1);
+            // AddBagItem(gSpecialVar_ItemId, 1);
             BufferBagFullCantTakeItemMessage(sPartyMenuItemId);
             DisplayPartyMenuMessage(gStringVar4, FALSE);
             gTasks[taskId].func = Task_ReturnToChooseMonAfterText;
@@ -4604,7 +4596,7 @@ static void Task_HandleSwitchItemsYesNoInput(u8 taskId)
         PlaySE(SE_SELECT);
         // fallthrough
     case 1: // No
-        AddBagItem(gSpecialVar_ItemId, 1);
+        // AddBagItem(gSpecialVar_ItemId, 1);
 
         // Reset to choose mon mode via Task_UpdateHeldItemSprite
         gPartyMenu.action = PARTY_ACTION_GIVE_ITEM; // Keep as GIVE_ITEM so cleanup happens
@@ -6412,6 +6404,23 @@ void LoadPartyMenuAilmentGfx(void)
 {
     LoadCompressedSpriteSheet(&sSpriteSheet_StatusIcons);
     LoadSpritePalette(&sSpritePalette_StatusIcons);
+}
+
+static void ChangePokemonStatsPartyScreen_CB(void)
+{
+    CB2_ReturnToPartyMenuFromSummaryScreen();
+}
+
+static void ChangePokemonStatsPartyScreen(void)
+{
+    StatEditor_Init(ChangePokemonStatsPartyScreen_CB);
+}
+static void CursorCb_StatEdit(u8 taskId)
+{
+    PlaySE(SE_SELECT);
+    gSpecialVar_0x8004 = gPartyMenu.slotId;
+    sPartyMenuInternal->exitCallback = ChangePokemonStatsPartyScreen;
+    Task_ClosePartyMenu(taskId);
 }
 
 void CB2_ShowPartyMenuForItemUse(void)
@@ -9013,7 +9022,7 @@ static void GiveItemOrMailToSelectedMon(u8 taskId)
 {
     if (ItemIsMail(gPartyMenu.bagItem))
     {
-        RemoveBagItem(gPartyMenu.bagItem, 1);
+        // RemoveBagItem(gPartyMenu.bagItem, 1);
         sPartyMenuInternal->exitCallback = CB2_WriteMailToGiveMonFromBag;
         Task_ClosePartyMenu(taskId);
     }
@@ -9031,7 +9040,7 @@ static void GiveItemToSelectedMon(u8 taskId)
     {
         item = gPartyMenu.bagItem;
         GiveItemToMon(&gParties[B_TRAINER_PLAYER][gPartyMenu.slotId], item);
-        RemoveBagItem(item, 1);
+        // RemoveBagItem(item, 1);
 
         // Visually update cursor and held item sprites
         UpdatePartyMonHeldItemSprite(&gParties[B_TRAINER_PLAYER][gPartyMenu.slotId], &sPartyMenuBoxes[gPartyMenu.slotId]);

@@ -30,7 +30,7 @@
     },
     {
       "local_id": "LOCALID_BATTLE_ARENA_DUO_LEADER_1",
-      "graphics_id": "OBJ_EVENT_GFX_TATE",
+      "graphics_id": "OBJ_EVENT_GFX_VAR_1",
       "x": 5,
       "y": 5,
       "elevation": 3,
@@ -44,7 +44,7 @@
     },
     {
       "local_id": "LOCALID_BATTLE_ARENA_DUO_LEADER_2",
-      "graphics_id": "OBJ_EVENT_GFX_LIZA",
+      "graphics_id": "OBJ_EVENT_GFX_VAR_0",
       "x": 7,
       "y": 5,
       "elevation": 3,

@@ -12,7 +12,6 @@
 #include "constants/battle_palace.h"
 #include "constants/battle_pike.h"
 #include "constants/battle_pyramid.h"
-#include "constants/battle_setup.h"
 #include "constants/battle_special.h"
 #include "constants/battle_tent.h"
 #include "constants/battle_tower.h"
@@ -1749,10 +1748,7 @@ EventScript_PalletTown_PlayersHouse_2F_TurnOnPC::
 	.include "data/scripts/pwt_scripts/hoenn.scr"
 	.include "data/scripts/pwt_scripts/sinnoh.scr"
 	.include "data/scripts/pwt_scripts/unova.scr"
-	
-	@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-	@@ Maps
-	@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+	.include "data/scripts/moveset_scripts/kanto_mons.scr"
 	.include "data/maps/TestingGrounds/scripts.scr"
 	
 	.include "data/maps/TestingGrounds_HouseFoyer/scripts.scr"

@@ -1,0 +1,73 @@
+#ifndef GUARD_TOURNAMENOPPONENT_H
+#define GUARD_TOURNAMENOPPONENT_H
+
+#include "metaprogram.h"
+#include "gba/types.h"
+#include "gba/defines.h"
+
+enum PACKED OpponentID
+{
+    OPPONENT_NONE,
+    // Gen 1
+    OPPONENT_BROCK,
+    OPPONENT_MISTY,
+    OPPONENT_LT_SURGE,
+    OPPONENT_ERIKA,
+    OPPONENT_SABRINA,
+    OPPONENT_KOGA_AND_JANINE,
+    OPPONENT_BLAINE,
+    OPPONENT_GIOVANNI,
+    // Gen 2
+    OPPONENT_FALKNER,
+    OPPONENT_BUGSY,
+    OPPONENT_WHITNEY,
+    OPPONENT_MORTY,
+    OPPONENT_CHUCK,
+    OPPONENT_JASMINE,
+    OPPONENT_PRYCE,
+    OPPONENT_CLAIR,
+    // Gen 3
+    OPPONENT_ROXANNE,
+    OPPONENT_BRAWLY,
+    OPPONENT_WATTSON,
+    OPPONENT_FLANNERY_NUTS,
+    OPPONENT_NORMAN,
+    OPPONENT_WINONA,
+    OPPONENT_TATE_AND_LIZA,
+    OPPONENT_JUAN,
+    // Gen 4
+    OPPONENT_ROARK,
+    OPPONENT_GARDENIA,
+    OPPONENT_MAYLENE,
+    OPPONENT_CRASHER_WAKE,
+    OPPONENT_FANTINA,
+    OPPONENT_BYRON,
+    OPPONENT_CANDICE_NUTS,
+    OPPONENT_VOLKNER,
+    // Gen 5
+    OPPONENT_LENORA,
+    OPPONENT_BURGH,
+    OPPONENT_ELESA,
+    OPPONENT_CLAY,
+    OPPONENT_SKYLA,
+    OPPONENT_BRYCEN,
+    OPPONENT_DRAYDEN,
+    OPPONENT_CHEREN,
+    OPPONENT_ROXIE,
+    OPPONENT_MARLON,
+    OPPONENT_COUNT,
+
+    OPPONENT_FORCE_U16 = MAX_u16,
+};
+
+struct TournamentOpponent
+{
+    const u8 *script;
+    u16 graphicsId[2];
+};
+
+extern const struct TournamentOpponent gTournamentOpponents[OPPONENT_COUNT];
+
+bool32 IsOpponentADuo(enum OpponentID opponentId); // Checks if it have two `graphicsIds`
+
+#endif // GUARD_TOURNAMENOPPONENT_H

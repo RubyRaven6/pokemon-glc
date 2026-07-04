@@ -1,5 +1,7 @@
 script EventScript_PWTBattleBrock{
-    trainerbattle_single(TRAINER_LEADER_BROCK, "I'm Brock!\nMy Pokémon are rock hard!", "Seems like I've gone soft…", EventScript_PWTBattleBrock_Money)
+    msgbox("I'm Brock!\nMy Pokémon are rock hard!")
+    trainerbattle_no_intro(TRAINER_LEADER_BROCK, "Seems like I've gone soft…")
+    call(EventScript_PWTBattleBrock_Money)
     return
 }
 
@@ -14,7 +16,9 @@ script(local) EventScript_PWTBattleBrock_Money {
 }
 
 script EventScript_PWTBattleMisty{
-    trainerbattle_single(TRAINER_LEADER_MISTY, "Hi, I'm Misty!\nIt's time to make a splash!", "I can't believe I wiped out!", EventScript_PWTBattleMisty_Money)
+    msgbox("Hi, I'm Misty!\nIt's time to make a splash!")
+    trainerbattle_no_intro(TRAINER_LEADER_MISTY, "I can't believe I wiped out!")
+    call(EventScript_PWTBattleMisty_Money)
     return
 }
 
@@ -29,7 +33,9 @@ script(local) EventScript_PWTBattleMisty_Money {
 }
 
 script EventScript_PWTBattleLtSurge{
-    trainerbattle_single(TRAINER_LEADER_LT_SURGE, "I'm Lt. Surge, kid!\nYou're boutta be shocked!", "Ugh! I got grounded!", EventScript_PWTBattleLtSurge_Money)
+    msgbox("I'm Lt. Surge, kid!\nYou're boutta be shocked!")
+    trainerbattle_no_intro(TRAINER_LEADER_LT_SURGE, "Ugh! I got grounded!")
+    call(EventScript_PWTBattleLtSurge_Money)
     return
 }
 
@@ -44,7 +50,9 @@ script(local) EventScript_PWTBattleLtSurge_Money {
 }
 
 script EventScript_PWTBattleErika{
-    trainerbattle_single(TRAINER_LEADER_ERIKA, "Hello, my name is Erika.\nI look forward to this noble battle!", "I commend your valor.", EventScript_PWTBattleErika_Money)
+    msgbox("Hello, my name is Erika.\nI look forward to this noble battle!")
+    trainerbattle_no_intro(TRAINER_LEADER_ERIKA, "I commend your valor.")
+    call(EventScript_PWTBattleErika_Money)
     return
 }
 
@@ -59,7 +67,9 @@ script(local) EventScript_PWTBattleErika_Money {
 }
 
 script EventScript_PWTBattleKogaJanine{
-    trainerbattle_single(TRAINER_LEADER_KOGA_AND_JANINE, "We're the shinobi duo of Kanto.\nYou'll never see us coming!", "It can't end here for us!", EventScript_PWTBattleKogaJanine_Money)
+    msgbox("We're the shinobi duo of Kanto.\nYou'll never see us coming!")
+    trainerbattle_no_intro(TRAINER_LEADER_KOGA_AND_JANINE, "It can't end here for us!")
+    call(EventScript_PWTBattleKogaJanine_Money)
     return
 }
 
@@ -74,7 +84,9 @@ script(local) EventScript_PWTBattleKogaJanine_Money {
 }
 
 script EventScript_PWTBattleSabrina{
-    trainerbattle_single(TRAINER_LEADER_SABRINA, "I am Sabrina.\pYou stand before the strongest esper\nin all of Kanto!", "No! How did you psych me out?!", EventScript_PWTBattleSabrina_Money)
+    msgbox("I am Sabrina.\pYou stand before the strongest esper\nin all of Kanto!")
+    trainerbattle_no_intro(TRAINER_LEADER_SABRINA, "No! How did you psych me out?!")
+    call(EventScript_PWTBattleSabrina_Money)
     return
 }
 
@@ -89,7 +101,9 @@ script(local) EventScript_PWTBattleSabrina_Money {
 }
 
 script EventScript_PWTBattleBlaine{
-    trainerbattle_single(TRAINER_LEADER_BLAINE, "HAHAHA! I'm Blaine!\nThe hottest trainer in Kanto!\pYou better have a burn heal!", "HAHA! I got burnt out!", EventScript_PWTBattleBlaine_Money)
+    msgbox("HAHAHA! I'm Blaine!\nThe hottest trainer in Kanto!\pYou better have a burn heal!")
+    trainerbattle_no_intro(TRAINER_LEADER_BLAINE, "HAHA! I got burnt out!")
+    call(EventScript_PWTBattleBlaine_Money)
     return
 }
 
@@ -104,7 +118,9 @@ script(local) EventScript_PWTBattleBlaine_Money {
 }
 
 script EventScript_PWTBattleGiovanni{
-    trainerbattle_single(TRAINER_LEADER_GIOVANNI, "It's time for you to sleep with\nthe fishes!", "No! You were supposed to LOSE!", EventScript_PWTBattleGiovanni_Money)
+    msgbox("It's time for you to sleep with\nthe fishes!")
+    trainerbattle_no_intro(TRAINER_LEADER_GIOVANNI, "No! You were supposed to LOSE!")
+    call(EventScript_PWTBattleGiovanni_Money)
     return
 }
 

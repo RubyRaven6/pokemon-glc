@@ -2,6 +2,7 @@ mapscripts TestingGrounds_HouseFoyer_MapScripts {
     MAP_SCRIPT_ON_TRANSITION {
         setrespawn(HEAL_LOCATION_TESTING_GROUNDS_HOUSE_FOYER)
         special(HealPlayerParty)
+        clearflag(FLAG_DISABLE_SAVING)
     }
     MAP_SCRIPT_ON_FRAME_TABLE [
         VAR_GENERATION_CTL, 0 {
@@ -13,12 +14,14 @@ mapscripts TestingGrounds_HouseFoyer_MapScripts {
                 "Whenever you've unlocked more generations, you can check the books in the corner to select a generation too!\p"
                 "Doing so also randomizes the gym leaders you may face.\p"
                 "Lastly, speak to the NPCs to buy items, and check the computer on the left to change your Pokémon's ability, nature, and tera type.\p"
+                "You can also teach them a bunch of other moves!\p"
                 "Have fun!"
                 ))
             closemessage
             setvar(VAR_GENERATION_CTL, 1)
             callnative(ChooseRandomGymLeader)
             if(!flag(FLAG_SYS_POKEMON_GET)){setflag(FLAG_SYS_POKEMON_GET)}
+            if(!flag(FLAG_SYS_POKEDEX_GET)){setflag(FLAG_SYS_POKEDEX_GET)}
             callnative(GivePlayerUnlockedPokemon)
             callnative(GiveStartingKeyItems)
             special(HealPlayerParty)
@@ -64,8 +67,8 @@ script EventScript_TestingGrounds_HouseFoyer_GenerationSelector {
 }
 
 script EventScript_TestingGrounds_HouseFoyer_ChooseWhatToDoWithPokemon {
-    msgbox(format("Hello! And welcome to the Pokémon Editor.\pYou may choose to change your Pokemon's ability, nature, and tera type."))
-    dynmultichoice(0,0,FALSE, 3, 0, DYN_MULTICHOICE_CB_NONE, "Natures", "Ability", "Tera Type")
+    msgbox(format("Hello! And welcome to the Pokémon Editor.\pYou may choose to change your Pokemon's ability, nature, and tera type.\pYou may also teach move tutor moves."))
+    dynmultichoice(0, 0, FALSE, 4, 0, DYN_MULTICHOICE_CB_NONE, "Natures", "Ability", "Tera Type", "Move Tutor")
     switch(var(VAR_RESULT))
     {
         case 0:
@@ -74,6 +77,8 @@ script EventScript_TestingGrounds_HouseFoyer_ChooseWhatToDoWithPokemon {
             call(Debug_EventScript_SetAbility)
         case 2:
             call(Debug_EventScript_SetTeraType)
+        case 3:
+            call(Common_EventScript_MoveRelearner)
     }
     closemessage
 }
@@ -168,7 +173,7 @@ script EventScript_TestingGrounds_HouseFoyer_TechniquesMarket{
 }
 
 script EventScript_TestingGround_HouseFoyer_EnterTournament {
-    lock
+    lockall
     faceplayer
     msgbox(format("Hi! Will you be entering our Tournament?"), MSGBOX_YESNO)
     if(var(VAR_RESULT) == NO){}
@@ -178,9 +183,10 @@ script EventScript_TestingGround_HouseFoyer_EnterTournament {
         msgbox(format("Come on in into our green room, then!"))
         closemessage
         warp(MAP_TESTING_GROUNDS_GREEN_ROOM, 6, 6)
+        waitstate
     }
     closemessage
-    release
+    releaseall
 }
 
 mart HeldItemMarket {
@@ -230,7 +236,6 @@ mart HeldItemMarket {
     ITEM_EXPERT_BELT
     ITEM_LIGHT_CLAY
     ITEM_LIFE_ORB
-    ITEM_FOCUS_SASH
     ITEM_ZOOM_LENS
     ITEM_METRONOME
     ITEM_IRON_BALL
@@ -257,6 +262,7 @@ mart HeldItemMarket {
     ITEM_PUNCHING_GLOVE
     ITEM_COVERT_CLOAK
     ITEM_LOADED_DICE
+    ITEM_EVIOLITE
 }
 
 mart ConsumableItemMarket {
@@ -270,6 +276,7 @@ mart ConsumableItemMarket {
     ITEM_CELL_BATTERY
     ITEM_LUMINOUS_MOSS
     ITEM_SNOWBALL
+    // Situational Consumables
     ITEM_WHITE_HERB
     ITEM_MENTAL_HERB
     ITEM_POWER_HERB
@@ -285,6 +292,8 @@ mart ConsumableItemMarket {
     ITEM_MIRROR_HERB
     ITEM_EJECT_PACK
     ITEM_THROAT_SPRAY
+    ITEM_FOCUS_SASH
+    // Type Gems
     ITEM_NORMAL_GEM
     ITEM_FIRE_GEM
     ITEM_WATER_GEM

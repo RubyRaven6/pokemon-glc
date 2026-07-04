@@ -10198,13 +10198,7 @@ const struct ItemInfo gItemsInfo[] =
     [ITEM_EVIOLITE] =
     {
         .name = ITEM_NAME("Eviolite"),
-    #if I_PRICE >= GEN_9
-        .price = 50000,
-    #elif I_PRICE >= GEN_7
-        .price = 4000,
-    #else
         .price = 200,
-    #endif
         .holdEffect = HOLD_EFFECT_EVIOLITE,
         .holdEffectParam = 50,
         .description = COMPOUND_STRING(
@@ -10793,7 +10787,7 @@ const struct ItemInfo gItemsInfo[] =
         .name = ITEM_NAME("Figy Berry"),
         .pluralName = ITEM_PLURAL_NAME("Figy Berries"),
         .price = 100,
-        .holdEffect = HOLD_EFFECT_CONFUSE_SPICY,
+        .holdEffect = HOLD_EFFECT_CONFUSE_FLAVOR,
         .holdEffectParam = CONFUSE_BERRY_HEAL_FRACTION,
         .description = sFigyBerryDesc,
         .pocket = POCKET_BERRIES,
@@ -10809,7 +10803,7 @@ const struct ItemInfo gItemsInfo[] =
         .name = ITEM_NAME("Wiki Berry"),
         .pluralName = ITEM_PLURAL_NAME("Wiki Berries"),
         .price = 100,
-        .holdEffect = HOLD_EFFECT_CONFUSE_DRY,
+        .holdEffect = HOLD_EFFECT_CONFUSE_FLAVOR,
         .holdEffectParam = CONFUSE_BERRY_HEAL_FRACTION,
         .description = sFigyBerryDesc,
         .pocket = POCKET_BERRIES,
@@ -10825,7 +10819,7 @@ const struct ItemInfo gItemsInfo[] =
         .name = ITEM_NAME("Mago Berry"),
         .pluralName = ITEM_PLURAL_NAME("Mago Berries"),
         .price = 100,
-        .holdEffect = HOLD_EFFECT_CONFUSE_SWEET,
+        .holdEffect = HOLD_EFFECT_CONFUSE_FLAVOR,
         .holdEffectParam = CONFUSE_BERRY_HEAL_FRACTION,
         .description = sFigyBerryDesc,
         .pocket = POCKET_BERRIES,
@@ -10841,7 +10835,7 @@ const struct ItemInfo gItemsInfo[] =
         .name = ITEM_NAME("Aguav Berry"),
         .pluralName = ITEM_PLURAL_NAME("Aguav Berries"),
         .price = 100,
-        .holdEffect = HOLD_EFFECT_CONFUSE_BITTER,
+        .holdEffect = HOLD_EFFECT_CONFUSE_FLAVOR,
         .holdEffectParam = CONFUSE_BERRY_HEAL_FRACTION,
         .description = sFigyBerryDesc,
         .pocket = POCKET_BERRIES,
@@ -10857,7 +10851,7 @@ const struct ItemInfo gItemsInfo[] =
         .name = ITEM_NAME("Iapapa Berry"),
         .pluralName = ITEM_PLURAL_NAME("Iapapa Berries"),
         .price = 100,
-        .holdEffect = HOLD_EFFECT_CONFUSE_SOUR,
+        .holdEffect = HOLD_EFFECT_CONFUSE_FLAVOR,
         .holdEffectParam = CONFUSE_BERRY_HEAL_FRACTION,
         .description = sFigyBerryDesc,
         .pocket = POCKET_BERRIES,
@@ -12329,7 +12323,7 @@ const struct ItemInfo gItemsInfo[] =
         .shopCriteriaFunc = ShopCriteriaByUnlockedFlag,
     },
 
-    [ITEM_TM_MOUNTING_PRESSURE] =
+    [ITEM_TM_ORBITAL_PULL] =
     {
         .name = ITEM_NAME("TM36"),
         .price = 0,
@@ -12413,7 +12407,7 @@ const struct ItemInfo gItemsInfo[] =
         .shopCriteriaFunc = ShopCriteriaByUnlockedFlag,
     },
 
-    [ITEM_TM_SYNCHRONIZED_SWIM] =
+    [ITEM_TM_SYNCHROSWIM] =
     {
         .name = ITEM_NAME("TM42"),
         .price = 0,
@@ -13147,7 +13141,7 @@ const struct ItemInfo gItemsInfo[] =
         .shopCriteriaFunc = ShopCriteriaByUnlockedFlag,
     },
 
-    [ITEM_HM_CUT] =
+    [ITEM_HM01] =
     {
         .name = ITEM_NAME("HM01"),
         .price = 0,
@@ -13161,7 +13155,7 @@ const struct ItemInfo gItemsInfo[] =
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
 
-    [ITEM_HM_FLY] =
+    [ITEM_HM02] =
     {
         .name = ITEM_NAME("HM02"),
         .price = 0,
@@ -13175,7 +13169,7 @@ const struct ItemInfo gItemsInfo[] =
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
 
-    [ITEM_HM_SURF] =
+    [ITEM_HM03] =
     {
         .name = ITEM_NAME("HM03"),
         .price = 0,
@@ -13189,7 +13183,7 @@ const struct ItemInfo gItemsInfo[] =
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
 
-    [ITEM_HM_STRENGTH] =
+    [ITEM_HM04] =
     {
         .name = ITEM_NAME("HM04"),
         .price = 0,
@@ -13203,7 +13197,7 @@ const struct ItemInfo gItemsInfo[] =
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
 
-    [ITEM_HM_FLASH] =
+    [ITEM_HM05] =
     {
         .name = ITEM_NAME("HM05"),
         .price = 0,
@@ -13217,7 +13211,7 @@ const struct ItemInfo gItemsInfo[] =
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
 
-    [ITEM_HM_ROCK_SMASH] =
+    [ITEM_HM06] =
     {
         .name = ITEM_NAME("HM06"),
         .price = 0,
@@ -13231,7 +13225,7 @@ const struct ItemInfo gItemsInfo[] =
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
 
-    [ITEM_HM_WATERFALL] =
+    [ITEM_HM07] =
     {
         .name = ITEM_NAME("HM07"),
         .price = 0,
@@ -13245,7 +13239,7 @@ const struct ItemInfo gItemsInfo[] =
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
 
-    [ITEM_HM_DIVE] =
+    [ITEM_HM08] =
     {
         .name = ITEM_NAME("HM08"),
         .price = 0,

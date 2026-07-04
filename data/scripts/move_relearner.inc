@@ -7,9 +7,9 @@ Common_EventScript_MoveRelearner::
 	end
 
 Common_EventScript_MoveRelearnerDynMultiChoice::
-	dynmultipush MoveRelearner_Text_LevelUpMoves, 0
-	dynmultipush MoveRelearner_Text_EggMoves, 1
-	dynmultipush MoveRelearner_Text_TMMoves, 2
+	@dynmultipush MoveRelearner_Text_LevelUpMoves, 0
+	@dynmultipush MoveRelearner_Text_EggMoves, 1
+	@dynmultipush MoveRelearner_Text_TMMoves, 2
 	dynmultipush MoveRelearner_Text_TutormoveMoves, 3
 	dynmultipush MoveRelearner_Text_SeeYa, 4
 	dynmultistack 0, 0, FALSE, 5, 0, 0, DYN_MULTICHOICE_CB_NONE
@@ -65,7 +65,8 @@ MoveRelearner_EventScript_TeachMove::
 	getpartysize
 	goto_if_eq VAR_RESULT, 0, MoveRelearner_EventScript_NoPkmn
 	msgbox MoveRelearner_Text_ChoosePkmn, MSGBOX_DEFAULT
-	chooseboxmon SELECT_PC_MON_MOVE_RELEARNER
+	special ChooseMonForMoveRelearner
+	@chooseboxmon SELECT_PC_MON_MOVE_RELEARNER
 	waitstate
 	call_if_eq VAR_0x8004, PARTY_NOTHING_CHOSEN, MoveRelearner_EventScript_AnythingElse
 	special IsSelectedMonEgg
@@ -93,7 +94,7 @@ MoveRelearner_EventScript_CantTeachMoveToPkmn:
 	end
 
 MoveRelearner_EventScript_AnythingElse::
-	message MoveRelearner_Text_AnythingElse
-	waitmessage
+	@message MoveRelearner_Text_AnythingElse
+	@waitmessage
 	goto Common_EventScript_MoveRelearnerDynMultiChoice
 	end

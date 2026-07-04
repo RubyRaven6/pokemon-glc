@@ -7,6 +7,7 @@
 #include "battle_tent.h"
 #include "battle_factory.h"
 #include "bg.h"
+#include "party_menu.h"
 #include "swsh_summary_screen.h"
 #include "contest.h"
 #include "contest_effect.h"
@@ -31,7 +32,6 @@
 #include "mon_markings.h"
 #include "move_relearner.h"
 #include "naming_screen.h"
-#include "party_menu.h"
 #include "palette.h"
 #include "pokeball.h"
 #include "pokemon.h"
@@ -336,7 +336,7 @@ static void PrintButtonIcon(u8, u8, u32, u32);
 static u8 GetButtonTextOffset(u8 buttonType);
 static void PrintTextOnWindowWithFont(u8, const u8 *, u8, u8, u8, u8, u32);
 static void PrintMovesPagePrompt(void);
-static void RefreshRelearnModePrompt(void);
+// static void RefreshRelearnModePrompt(void);
 static void ClearMovesPagePrompt(void);
 static void PrintPagePrompts(void);
 static void PutPageWindowTilemaps(u8);
@@ -507,6 +507,7 @@ static const u8 sText_MemoFateful[]             = _("Met in a fateful encounter\
 static const u8 sText_MemoProbablyMet[]         = _("Seems to have met at {LV_2}. {DYNAMIC 1}{DYNAMIC 3}{DYNAMIC 1}\nLocation: {DYNAMIC 0}{DYNAMIC 4}{DYNAMIC 1}");
 static const u8 sText_MemoMetSomewhere[]        = _("Met somewhere at {LV_2}. {DYNAMIC 1}{DYNAMIC 3}{DYNAMIC 1}");
 static const u8 sText_MemoHatchedSomewhere[]    = _("Hatched from an egg\nsomewhere.");
+static const u8 sText_GiftedByTheFacility[]     = _("A Pokémon given by the\ntournament organizers.");
 
 // Characteristics
 static const u8 sCharacteristic_HP_0[]          = _("Loves to eat");
@@ -2944,7 +2945,7 @@ static void Task_HandleInput(u8 taskId)
             {
                 gMoveRelearnerState++;
                 UpdateMoveRelearnerState(FALSE);
-                RefreshRelearnModePrompt();
+                // RefreshRelearnModePrompt();
                 PlaySE(SE_SELECT);
             }
         }
@@ -2954,7 +2955,7 @@ static void Task_HandleInput(u8 taskId)
             {
                 gMoveRelearnerState--;
                 UpdateMoveRelearnerState(TRUE);
-                RefreshRelearnModePrompt();
+                // RefreshRelearnModePrompt();
                 PlaySE(SE_SELECT);
             }
         }
@@ -4560,10 +4561,11 @@ static void BufferMonEncounter(void)
 
     if (DoesMonOTMatchOwner() == TRUE)
     {
-        if (sum->metLevel == 0)
-            text = (!locationFound) ? sText_MemoHatchedSomewhere : sText_MemoHatched;
-        else
-            text = (!locationFound) ? sText_MemoMetSomewhere : sText_MemoMet;
+        text = sText_GiftedByTheFacility;
+        // if (sum->metLevel == 0)
+        //     text = (!locationFound) ? sText_MemoHatchedSomewhere : sText_MemoHatched;
+        // else
+        //     text = (!locationFound) ? sText_MemoMetSomewhere : sText_MemoMet;
     }
     else if (sum->metLocation == METLOC_FATEFUL_ENCOUNTER)
     {
@@ -6395,7 +6397,7 @@ static void SetPokerusCuredSprite(void)
 {
     struct Pokemon *mon = &sMonSummaryScreen->currentMon;
     if (sMonSummaryScreen->spriteIds[SPRITE_ARR_ID_POKERUS_CURED] == SPRITE_NONE)
-    sMonSummaryScreen->spriteIds[SPRITE_ARR_ID_POKERUS_CURED] = CreateSprite(&sSpriteTemplate_PokerusCuredIcon, 117, 85, 0);
+        sMonSummaryScreen->spriteIds[SPRITE_ARR_ID_POKERUS_CURED] = CreateSprite(&sSpriteTemplate_PokerusCuredIcon, 117, 85, 0);
 
     gSprites[sMonSummaryScreen->spriteIds[SPRITE_ARR_ID_POKERUS_CURED]].invisible = !ShouldPokemonShowCuredPokerus(mon);
 }
@@ -7011,7 +7013,7 @@ static inline bool32 ShouldShowMoveRelearner(void)
          && !InBattleFactory()
          && !InSlateportBattleTent());
 }
-
+/*
 static void RefreshRelearnModePrompt(void)
 {
     FillWindowPixelRect(PSS_LABEL_WINDOW_PROMPT_MOVES, PIXEL_FILL(0), 0, 0, 120, 16);
@@ -7025,7 +7027,7 @@ static void RefreshRelearnModePrompt(void)
     }
     ScheduleBgCopyTilemapToVram(0);
 }
-
+*/
 static void PrintMovesPagePrompt(void)
 {
     FillWindowPixelBuffer(PSS_LABEL_WINDOW_PROMPT_MOVES, PIXEL_FILL(0));

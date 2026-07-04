@@ -28,27 +28,79 @@ Allows the player to easily edit a Pokémon's EVs and IVs.
 ## SWSH User Interfaces by Montblanc
 Looks pretty :)
 
+# Trainer Teams
+Trainer Teams can be found in the following docs:
+- [Kanto Leader Teams](../docs/gameplay/kanto_parties.md)
+
 # Pokémon Changes
 ## General Changes
-- Movesets for all the Pokémon available in the game (and more) can be found in [gen_pglc.h](../../src/data/pokemon/level_up_learnsets/gen_pglc.h).
+- Movesets for all the Pokémon available in the game (and more) can be found in [gen_pglc.h](../src/data/pokemon/level_up_learnsets/gen_pglc.h).
 - New ability *Mettle*, which raises the user's Special Attack after fainting an opponent.
+- Color Change buffed to proc *before* being hit with an attack rather than after.
 
 ## Generation 1
 - **Wigglytuff**: Abilities changed from Cute Charm and Competitive to Fluffy and Battle Armor
 - **Slowbro**: Ability changed from Own Tempo to Unaware
 - **Jolteon**: Gained Ability Unnerve
+- **Dewgong**: Thick Fat Ability replaced with Swift Swim
+- **Nidoqueen**: Replaced Sheer Force with Queenly Majesty. Rebalanced with the following stats:
+
+| Stat            | Value |
+| :----------------| :-----:|
+| HP              | 102   |
+| Attack          | 77    |
+| Defense         | 90    |
+| Special Attack  | 75    |
+| Special Defense | 94    |
+| Speed           | 67    |
 
 ## Generation 2
+- **Magcargo**: Ability Magma Armor replaced with Steam Engine 
+- **Ledian**: Replaced Abilities with Zero to Hero.
+
+| Stat            | Value |
+| :----------------| :-----:|
+| HP              | 85    |
+| Attack          | 125   |
+| Defense         | 63    |
+| Special Attack  | 85    |
+| Special Defense | 110   |
+| Speed           | 125   |
+
 - **Ariados**: Gained Skill Link. Rebalanced with the following stats:
 
 | Stat            | Value |
 | :----------------| :-----:|
-| HP              | 70    |
-| Attack          | 90    |
+| HP              | 76    |
+| Attack          | 92    |
 | Defense         | 60    |
-| Special Attack  | 40    |
+| Special Attack  | 41    |
 | Special Defense | 70    |
-| Speed           | 70    |
+| Speed           | 97    |
+
+## Generation 3
+- **Seviper**: Gained Corrosion.
+- **Delcatty**: Rebalanced to the following stats:
+
+| Stat            | Value |
+| :----------------| :-----:|
+| HP              | 70    |
+| Attack          | 99    |
+| Defense         | 65    |
+| Special Attack  | 88    |
+| Special Defense | 55    |
+| Speed           | 90    |
+
+- **Luvdisc**: Rebalanced to the following stats:
+
+| Stat            | Value |
+| :----------------| :-----:|
+| HP              | 88    |
+| Attack          | 30    |
+| Defense         | 55    |
+| Special Attack  | 40    |
+| Special Defense | 100   |
+| Speed           | 97    |
 
 ## Generation 4
 - **Wormadam**: Each form has been given a new ability:
@@ -62,8 +114,26 @@ Looks pretty :)
 - **Tangrowth**: Replaces Ability Leaf Guard with Grass Pelt
 
 ## Generation 5
+- **Simisage**: Gained Moxie
 - **Leavanny**: Replaced Overcoat with Sharpness
 - **Archeops**: Gained Klutz
+- **Cryogonal**: Gained Snow Warning
+- **Scolipede**: Mega Scolipede's Ability Battle Armor replaced with Weak Armor.
+- **Haxorus**: Replaced Ability Rivarly with Sharpness
+
+## Generation 6
+- **Pyroar**: Gave Pyroar Mettle.
+
+<!---
+## Generation 7
+
+## Generation 8
+
+## Generation 9
+- **Rabsca**: Gave Rabsca Ability Magic Bounce
+- **Spidops**: Gained Ability Color Change.
+
+--->
 
 # Team Credits
 | Position                          | Name                                                    |
@@ -71,12 +141,13 @@ Looks pretty :)
 | Developer                         | Ruby                                                    |
 | Gym Leader<br>Team Designers      | Ruby, Turtleye, Jordan,<br>Kithri, Hedara, Noodle, Iriv |
 | Gym Leader<br>Technique Designers | Ruby, Turtleye, Jordan,<br>Kithri, Hedara               |
-| Pokémon Movesets<br>and Balancing | Ruby                                                    |
+| Pokémon Movesets<br>and Balancing | Ruby, Lemmanade                                         |
 | Scripting and Mapping             | Ruby                                                    |
+| Tournament Logic                  | Ruby, Estellar                                          |
 
 # Credits
-| Credit                | Feature                                |
-| :----------------------| :--------------------------------------:|
+| Credit                | Feature                                   |
+| :----------------------| :-----------------------------------------:|
 | pokeemerald-expansion | RHH and all<br>the Expansion Contributors |
-| Mudskip               | Pokemon GLC Logo                       |
+| Mudskip               | Pokemon GLC Logo                          |
 
