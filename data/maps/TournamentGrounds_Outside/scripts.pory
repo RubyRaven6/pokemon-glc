@@ -3,6 +3,7 @@ mapscripts TournamentGrounds_Outside_MapScripts {
 }
 
 script TournamentGrounds_Outside_EventScript_Sailors {
+    lock
     setspeaker("Sailor1")
     msgbox("Dude… the engine is completely shot.")
     closemessage
@@ -13,5 +14,6 @@ script TournamentGrounds_Outside_EventScript_Sailors {
     closemessage
     applymovement(LOCALID_GROUNDSOUTSIDE_SAILOR_2, moves(face_down, delay_16*2))
     waitmovement(0)
+    release
     end
 }
