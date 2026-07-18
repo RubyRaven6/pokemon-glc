@@ -1,3 +1,29 @@
 mapscripts TournamentGrounds_ArenaLobby_MapScripts {
     
 }
+
+script TournamentGrounds_ArenaLobby_EventScript_Teala {
+    gettimeofday
+    switch(var(VAR_0x8000))
+    {
+        case TIME_MORNING:
+            bufferstring(STR_VAR_1, "morning")
+            break
+        case TIME_DAY:
+            bufferstring(STR_VAR_1, "day")
+            break
+        case TIME_EVENING:
+        case TIME_NIGHT:
+            bufferstring(STR_VAR_1, "evening")
+            break
+    }
+    msgbox(format("Hi! Good {STR_VAR_1}! Will you be entering our tournament?"), MSGBOX_YESNO)
+    if(var(VAR_RESULT) == YES)
+    {
+        message("That's great to hear!\p")
+        waitmessage
+        msgbox(format("Kindly choose which tournament to enter."))
+        
+    }
+    msgbox("Have a nice day!")
+}
