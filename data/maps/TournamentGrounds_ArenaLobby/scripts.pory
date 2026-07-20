@@ -1,8 +1,11 @@
+const TEALA = LOCALID_ARENA_LOBBY_TEALA
+
 mapscripts TournamentGrounds_ArenaLobby_MapScripts {
     
 }
 
 script TournamentGrounds_ArenaLobby_EventScript_Teala {
+    lock
     gettimeofday
     switch(var(VAR_0x8000))
     {
@@ -17,13 +20,76 @@ script TournamentGrounds_ArenaLobby_EventScript_Teala {
             bufferstring(STR_VAR_1, "evening")
             break
     }
-    msgbox(format("Hi! Good {STR_VAR_1}! Will you be entering our tournament?"), MSGBOX_YESNO)
+    setspeaker(SP_NAME_TEALA)
+    msgbox(format("Hi! Good {STR_VAR_1}!\nWill you be entering our tournament?"), MSGBOX_YESNO)
     if(var(VAR_RESULT) == YES)
     {
         message("That's great to hear!\p")
         waitmessage
-        msgbox(format("Kindly choose which tournament to enter."))
-        
+        call(ChooseGenerationScript)
+        msgbox("Please follow me to our Green Room.")
+        waitmessage
+        closemessage
+        applymovement(TEALA, moves(walk_up * 5))
+        applymovement(OBJ_EVENT_ID_PLAYER, moves(walk_up * 5))
+        waitmovement(0)
+        opendoor(11, 4)
+        waitdooranim
+        applymovement(TEALA, moves(walk_up))
+        applymovement(OBJ_EVENT_ID_PLAYER, moves(walk_up * 2))
+        waitmovement(TEALA)
+        removeobject(TEALA)
+        waitmovement(OBJ_EVENT_ID_PLAYER)
+        hideplayer
+        closedoor(11, 4)
+        waitdooranim
+        warp(MAP_TOURNAMENT_GROUNDS_GREEN_ROOM, 3, 7)
+        waitstate
+        release
+        end
     }
+    else {
+        goto(DeclinedJoining)
+    }
+}
+
+script(local) DeclinedJoining {
+    setspeaker(SP_NAME_TEALA)
     msgbox("Have a nice day!")
+    closemessage
+    end
+}
+
+script(local) ChooseGenerationScript
+{
+    msgbox(format("Kindly choose which tournament to enter."))
+    dynmultipush("Kanto", 1)
+    if(flag(FLAG_COMPLETED_KANTO_TOURNAMENT)){dynmultipush("Johto", 2)}
+    if(flag(FLAG_COMPLETED_JOHTO_TOURNAMENT)){dynmultipush("Hoenn", 3)}
+    if(flag(FLAG_COMPLETED_HOENN_TOURNAMENT)){dynmultipush("Sinnoh", 4)}
+    if(flag(FLAG_COMPLETED_SINNOH_TOURNAMENT)){dynmultipush("Unova", 5)}
+    dynmultipush("Cancel", 69) //nice
+    dynmultistack(0, 0, FALSE, 3, FALSE, 0, DYN_MULTICHOICE_CB_NONE)
+
+    switch(var(VAR_RESULT)){
+    case 1:
+        choosegeneration(1)
+        bufferstring(STR_VAR_1, "Kanto")
+    case 2:
+        choosegeneration(2)
+        bufferstring(STR_VAR_1, "Johto")
+    case 3:
+        choosegeneration(3)
+        bufferstring(STR_VAR_1, "Hoenn")
+    case 4:
+        choosegeneration(4)
+        bufferstring(STR_VAR_1, "Sinnoh")
+    case 5:
+        choosegeneration(5)
+        bufferstring(STR_VAR_1, "Unova")
+    default:
+        goto(DeclinedJoining)
+    }
+    msgbox("You've chosen the {STR_VAR_1} tournament.\nIs this correct?",MSGBOX_YESNO)
+    if(var(VAR_RESULT) == NO){call(ChooseGenerationScript)}
 }

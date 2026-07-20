@@ -1,8 +1,8 @@
 {
-  "id": "MAP_TOURNAMENT_GROUNDS_BATTLE_ROOM",
-  "name": "TournamentGrounds_BattleRoom",
-  "layout": "LAYOUT_TOURNAMENT_GROUNDS_BATTLE_ROOM",
-  "music": "MUS_B_DOME_LOBBY",
+  "id": "MAP_TOURNAMENT_GROUNDS_LOUNGE5",
+  "name": "TournamentGrounds_Lounge5",
+  "layout": "LAYOUT_TOURNAMENT_GROUNDS_LOUNGE5",
+  "music": "MUS_B_FRONTIER",
   "region_map_section": "MAPSEC_ABANDONED_SHIP",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
@@ -14,7 +14,15 @@
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": null,
   "object_events": [],
-  "warp_events": [],
+  "warp_events": [
+    {
+      "x": 4,
+      "y": 9,
+      "elevation": 0,
+      "dest_map": "MAP_TOURNAMENT_GROUNDS_OUTSIDE",
+      "dest_warp_id": "8"
+    }
+  ],
   "coord_events": [],
   "bg_events": []
 }

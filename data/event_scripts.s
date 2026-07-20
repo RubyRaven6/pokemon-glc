@@ -1762,3 +1762,11 @@ EventScript_PalletTown_PlayersHouse_2F_TurnOnPC::
 	.include "data/maps/TournamentGrounds_Lounge1/scripts.scr"
 	.include "data/maps/TournamentGrounds_BattleRoom/scripts.scr"
 	.include "data/maps/TournamentGrounds_GreenRoom/scripts.scr"
+
+	.include "data/maps/TournamentGrounds_Lounge2/scripts.scr"
+
+	.include "data/maps/TournamentGrounds_Lounge3/scripts.scr"
+
+	.include "data/maps/TournamentGrounds_Lounge4/scripts.scr"
+
+	.include "data/maps/TournamentGrounds_Lounge5/scripts.scr"

@@ -21,7 +21,11 @@
     "TournamentGrounds_GreenRoom",
     "TournamentGrounds_BattleRoom",
     "TournamentGrounds_Mart",
-    "TournamentGrounds_Lounge1"
+    "TournamentGrounds_Lounge1",
+    "TournamentGrounds_Lounge2",
+    "TournamentGrounds_Lounge3",
+    "TournamentGrounds_Lounge4",
+    "TournamentGrounds_Lounge5"
   ],
   "gMapGroup_VanillaMaps1": [
     "PetalburgCity",

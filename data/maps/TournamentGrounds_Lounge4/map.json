@@ -1,7 +1,7 @@
 {
-  "id": "MAP_TOURNAMENT_GROUNDS_RECEPTION",
-  "name": "TournamentGrounds_Reception",
-  "layout": "LAYOUT_TOURNAMENT_GROUNDS_RECEPTION",
+  "id": "MAP_TOURNAMENT_GROUNDS_LOUNGE4",
+  "name": "TournamentGrounds_Lounge4",
+  "layout": "LAYOUT_TOURNAMENT_GROUNDS_LOUNGE4",
   "music": "MUS_B_FRONTIER",
   "region_map_section": "MAPSEC_BATTLE_FRONTIER",
   "requires_flash": false,
@@ -10,24 +10,17 @@
   "allow_cycling": false,
   "allow_escaping": false,
   "allow_running": false,
-  "show_map_name": false,
+  "show_map_name": true,
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": null,
   "object_events": [],
   "warp_events": [
     {
       "x": 4,
-      "y": 8,
+      "y": 9,
       "elevation": 0,
       "dest_map": "MAP_TOURNAMENT_GROUNDS_OUTSIDE",
-      "dest_warp_id": "0"
-    },
-    {
-      "x": 4,
-      "y": 1,
-      "elevation": 0,
-      "dest_map": "MAP_TOURNAMENT_GROUNDS_OUTSIDE",
-      "dest_warp_id": "1"
+      "dest_warp_id": "7"
     }
   ],
   "coord_events": [],

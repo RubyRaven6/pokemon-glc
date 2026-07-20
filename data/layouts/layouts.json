@@ -9433,6 +9433,46 @@
       "secondary_tileset": "gTileset_BattleDome",
       "border_filepath": "data/layouts/TournamentGrounds_GreenRoom/border.bin",
       "blockdata_filepath": "data/layouts/TournamentGrounds_GreenRoom/map.bin"
+    },
+    {
+      "id": "LAYOUT_TOURNAMENT_GROUNDS_LOUNGE2",
+      "name": "TournamentGrounds_Lounge2_Layout",
+      "width": 9,
+      "height": 10,
+      "primary_tileset": "gTileset_Building",
+      "secondary_tileset": "gTileset_BattleFrontier",
+      "border_filepath": "data/layouts/TournamentGrounds_Lounge2/border.bin",
+      "blockdata_filepath": "data/layouts/TournamentGrounds_Lounge2/map.bin"
+    },
+    {
+      "id": "LAYOUT_TOURNAMENT_GROUNDS_LOUNGE3",
+      "name": "TournamentGrounds_Lounge3_Layout",
+      "width": 9,
+      "height": 10,
+      "primary_tileset": "gTileset_Building",
+      "secondary_tileset": "gTileset_BattleFrontier",
+      "border_filepath": "data/layouts/TournamentGrounds_Lounge3/border.bin",
+      "blockdata_filepath": "data/layouts/TournamentGrounds_Lounge3/map.bin"
+    },
+    {
+      "id": "LAYOUT_TOURNAMENT_GROUNDS_LOUNGE4",
+      "name": "TournamentGrounds_Lounge4_Layout",
+      "width": 9,
+      "height": 10,
+      "primary_tileset": "gTileset_Building",
+      "secondary_tileset": "gTileset_BattleFrontier",
+      "border_filepath": "data/layouts/TournamentGrounds_Lounge4/border.bin",
+      "blockdata_filepath": "data/layouts/TournamentGrounds_Lounge4/map.bin"
+    },
+    {
+      "id": "LAYOUT_TOURNAMENT_GROUNDS_LOUNGE5",
+      "name": "TournamentGrounds_Lounge5_Layout",
+      "width": 9,
+      "height": 10,
+      "primary_tileset": "gTileset_Building",
+      "secondary_tileset": "gTileset_BattleFrontier",
+      "border_filepath": "data/layouts/TournamentGrounds_Lounge5/border.bin",
+      "blockdata_filepath": "data/layouts/TournamentGrounds_Lounge5/map.bin"
     }
   ]
 }

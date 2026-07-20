@@ -2,8 +2,8 @@
   "id": "MAP_TOURNAMENT_GROUNDS_LOUNGE1",
   "name": "TournamentGrounds_Lounge1",
   "layout": "LAYOUT_TOURNAMENT_GROUNDS_LOUNGE1",
-  "music": "MUS_DUMMY",
-  "region_map_section": "MAPSEC_ABANDONED_SHIP",
+  "music": "MUS_B_FRONTIER",
+  "region_map_section": "MAPSEC_BATTLE_FRONTIER",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
   "map_type": "MAP_TYPE_NONE",
@@ -20,14 +20,14 @@
       "y": 7,
       "elevation": 0,
       "dest_map": "MAP_TOURNAMENT_GROUNDS_OUTSIDE",
-      "dest_warp_id": "4"
+      "dest_warp_id": "3"
     },
     {
       "x": 2,
       "y": 7,
       "elevation": 0,
       "dest_map": "MAP_TOURNAMENT_GROUNDS_OUTSIDE",
-      "dest_warp_id": "4"
+      "dest_warp_id": "3"
     }
   ],
   "coord_events": [],
