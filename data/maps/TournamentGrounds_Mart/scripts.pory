@@ -1,0 +1,460 @@
+mapscripts TournamentGrounds_Mart_MapScripts{
+    
+}
+
+script TournamentGrounds_Mart_EventScript_WorriedWoman {
+    lock
+    setspeaker("Worried Woman")
+    msgbox("Why… why do they all look alike?", MSGBOX_DEFAULT)
+    closemessage
+    release
+    end
+}
+
+script TestingGrounds_Mart_EventScript_HeldItemMarket{
+    lock
+    faceplayer
+	msgbox(format("Hi! Would you like to buy some Held Items?"), MSGBOX_YESNO)
+	waitmessage
+    if(var(VAR_RESULT)==YES){
+        closemessage
+        pokemart(HeldItemMarket)
+    }
+	msgbox("Come again soon.")
+    applymovement(VAR_LAST_TALKED, moves(face_original_direction))
+    waitmovement(0)
+	release
+}
+
+script TestingGrounds_Mart_EventScript_ConsumableMarket{
+    lock
+    faceplayer
+	msgbox(format("Hi! Would you like to buy some Consumables?"), MSGBOX_YESNO)
+	waitmessage
+    if(var(VAR_RESULT)==YES){
+        closemessage
+        pokemart(ConsumableItemMarket)
+    }
+	msgbox("Come again soon.")
+    applymovement(VAR_LAST_TALKED, moves(face_original_direction))
+    waitmovement(0)
+	release
+}
+
+script TestingGrounds_Mart_EventScript_MegaStoneMarket{
+    lock
+    faceplayer
+	msgbox(format("Hi! Would you like to buy some Mega Stones?"), MSGBOX_YESNO)
+	waitmessage
+    if(var(VAR_RESULT)==YES){
+        closemessage
+        pokemart(MegaStoneMarket)
+    }
+	msgbox("Come again soon.")
+    applymovement(VAR_LAST_TALKED, moves(face_original_direction))
+    waitmovement(0)
+	release
+}
+
+script TestingGrounds_Mart_EventScript_ZCrystalMarket{
+    lock
+    faceplayer
+	msgbox(format("Hi! Would you like to buy some Z-Crystals?"), MSGBOX_YESNO)
+	waitmessage
+    if(var(VAR_RESULT)==YES){
+        closemessage
+        pokemart(ZCrystalMarket)
+    }
+	msgbox("Come again soon.")
+    applymovement(VAR_LAST_TALKED, moves(face_original_direction))
+    waitmovement(0)
+	release
+}
+
+script TestingGrounds_Mart_EventScript_BerryMarket{
+    lock
+    faceplayer
+	msgbox(format("Hi! Would you like to buy some Berries?"), MSGBOX_YESNO)
+	waitmessage
+    if(var(VAR_RESULT)==YES){
+        closemessage
+        pokemart(BerryMarket)
+    }
+	msgbox("Come again soon.")
+    applymovement(VAR_LAST_TALKED, moves(face_original_direction))
+    waitmovement(0)
+	release
+}
+
+script TestingGrounds_Mart_EventScript_TechniquesMarket{
+    lock
+    faceplayer
+    checkdefeatedleaders
+    if(var(VAR_RESULT) == FALSE){
+        msgbox(format("This shop unlocks once you defeat a gym leader."))
+        closemessage
+    }
+    else {
+        msgbox(format("Hi! Would you like to buy some Techniques?"), MSGBOX_YESNO)
+        if(var(VAR_RESULT) == YES)
+        {
+            msgbox(format("Kindly choose which techniques you'd like to claim."))
+            pokemart(TechniquesMarket)
+        }
+        msgbox("Good luck.")
+    }
+    applymovement(VAR_LAST_TALKED, moves(face_original_direction))
+    waitmovement(0)
+    closemessage
+	release
+}
+
+mart HeldItemMarket {
+    ITEM_SILK_SCARF
+    ITEM_CHARCOAL
+    ITEM_MYSTIC_WATER
+    ITEM_MAGNET
+    ITEM_MIRACLE_SEED
+    ITEM_NEVER_MELT_ICE
+    ITEM_BLACK_BELT
+    ITEM_POISON_BARB
+    ITEM_SOFT_SAND
+    ITEM_SHARP_BEAK
+    ITEM_TWISTED_SPOON
+    ITEM_TWISTEDSPOON
+    ITEM_SILVER_POWDER
+    ITEM_HARD_STONE
+    ITEM_SPELL_TAG
+    ITEM_DRAGON_FANG
+    ITEM_BLACK_GLASSES
+    ITEM_METAL_COAT
+    ITEM_FAIRY_FEATHER
+    // Choice Items
+    ITEM_CHOICE_BAND
+    ITEM_CHOICE_SPECS
+    ITEM_CHOICE_SCARF
+    // Status Orbs
+    ITEM_FLAME_ORB
+    ITEM_TOXIC_ORB
+    // Weather Rocks
+    ITEM_DAMP_ROCK
+    ITEM_HEAT_ROCK
+    ITEM_SMOOTH_ROCK
+    ITEM_ICY_ROCK
+    // Misc. Held Items
+    ITEM_BRIGHT_POWDER
+    ITEM_QUICK_CLAW
+    ITEM_SOOTHE_BELL
+    ITEM_KINGS_ROCK
+    ITEM_FOCUS_BAND
+    ITEM_SCOPE_LENS
+    ITEM_LEFTOVERS
+    ITEM_SHELL_BELL
+    ITEM_WIDE_LENS
+    ITEM_MUSCLE_BAND
+    ITEM_WISE_GLASSES
+    ITEM_EXPERT_BELT
+    ITEM_LIGHT_CLAY
+    ITEM_LIFE_ORB
+    ITEM_ZOOM_LENS
+    ITEM_METRONOME
+    ITEM_IRON_BALL
+    ITEM_LAGGING_TAIL
+    ITEM_DESTINY_KNOT
+    ITEM_BLACK_SLUDGE
+    ITEM_GRIP_CLAW
+    ITEM_STICKY_BARB
+    ITEM_SHED_SHELL
+    ITEM_BIG_ROOT
+    ITEM_RAZOR_CLAW
+    ITEM_RAZOR_FANG
+    ITEM_FLOAT_STONE
+    ITEM_ROCKY_HELMET
+    ITEM_BINDING_BAND
+    ITEM_ASSAULT_VEST
+    ITEM_SAFETY_GOGGLES
+    ITEM_TERRAIN_EXTENDER
+    ITEM_PROTECTIVE_PADS
+    ITEM_HEAVY_DUTY_BOOTS
+    ITEM_UTILITY_UMBRELLA
+    ITEM_ABILITY_SHIELD
+    ITEM_CLEAR_AMULET
+    ITEM_PUNCHING_GLOVE
+    ITEM_COVERT_CLOAK
+    ITEM_LOADED_DICE
+    ITEM_EVIOLITE
+}
+
+mart ConsumableItemMarket {
+    // Terrain Seeds
+    ITEM_ELECTRIC_SEED
+    ITEM_PSYCHIC_SEED
+    ITEM_MISTY_SEED
+    ITEM_GRASSY_SEED
+    // Type-activated Stat Modifiers
+    ITEM_ABSORB_BULB
+    ITEM_CELL_BATTERY
+    ITEM_LUMINOUS_MOSS
+    ITEM_SNOWBALL
+    // Situational Consumables
+    ITEM_WHITE_HERB
+    ITEM_MENTAL_HERB
+    ITEM_POWER_HERB
+    ITEM_AIR_BALLOON
+    ITEM_RED_CARD
+    ITEM_RING_TARGET
+    ITEM_EJECT_BUTTON
+    ITEM_WEAKNESS_POLICY
+    ITEM_ADRENALINE_ORB
+    ITEM_BLUNDER_POLICY
+    ITEM_ROOM_SERVICE
+    ITEM_BOOSTER_ENERGY
+    ITEM_MIRROR_HERB
+    ITEM_EJECT_PACK
+    ITEM_THROAT_SPRAY
+    ITEM_FOCUS_SASH
+    // Type Gems
+    ITEM_NORMAL_GEM
+    ITEM_FIRE_GEM
+    ITEM_WATER_GEM
+    ITEM_ELECTRIC_GEM
+    ITEM_GRASS_GEM
+    ITEM_ICE_GEM
+    ITEM_FIGHTING_GEM
+    ITEM_POISON_GEM
+    ITEM_GROUND_GEM
+    ITEM_FLYING_GEM
+    ITEM_PSYCHIC_GEM
+    ITEM_BUG_GEM
+    ITEM_ROCK_GEM
+    ITEM_GHOST_GEM
+    ITEM_DRAGON_GEM
+    ITEM_DARK_GEM
+    ITEM_STEEL_GEM
+    ITEM_FAIRY_GEM
+}
+
+mart MegaStoneMarket{
+    ITEM_VENUSAURITE
+    ITEM_BLASTOISINITE
+    ITEM_CHARIZARDITE_X
+    ITEM_CHARIZARDITE_Y
+    ITEM_BEEDRILLITE
+    ITEM_PIDGEOTITE
+    ITEM_ALAKAZITE
+    ITEM_SLOWBRONITE
+    ITEM_GENGARITE
+    ITEM_KANGASKHANITE
+    ITEM_PINSIRITE
+    ITEM_GYARADOSITE
+    ITEM_AERODACTYLITE
+    ITEM_AMPHAROSITE
+    ITEM_STEELIXITE
+    ITEM_SCIZORITE
+    ITEM_HERACRONITE
+    ITEM_HOUNDOOMINITE
+    ITEM_TYRANITARITE
+    ITEM_SCEPTILITE
+    ITEM_BLAZIKENITE
+    ITEM_SWAMPERTITE
+    ITEM_GARDEVOIRITE
+    ITEM_SABLENITE
+    ITEM_MAWILITE
+    ITEM_AGGRONITE
+    ITEM_MEDICHAMITE
+    ITEM_MANECTITE
+    ITEM_SHARPEDONITE
+    ITEM_CAMERUPTITE
+    ITEM_ALTARIANITE
+    ITEM_BANETTITE
+    ITEM_ABSOLITE
+    ITEM_GLALITITE
+    ITEM_SALAMENCITE
+    ITEM_METAGROSSITE
+    ITEM_LATIASITE
+    ITEM_LATIOSITE
+    ITEM_LOPUNNITE
+    ITEM_GARCHOMPITE
+    ITEM_LUCARIONITE
+    ITEM_ABOMASITE
+    ITEM_GALLADITE
+    ITEM_AUDINITE
+    ITEM_DIANCITE
+    ITEM_CLEFABLITE
+    ITEM_VICTREEBELITE
+    ITEM_STARMINITE
+    ITEM_DRAGONINITE
+    ITEM_MEGANIUMITE
+    ITEM_FERALIGITE
+    ITEM_SKARMORITE
+    ITEM_FROSLASSITE
+    ITEM_EMBOARITE
+    ITEM_EXCADRITE
+    ITEM_SCOLIPITE
+    ITEM_SCRAFTINITE
+    ITEM_EELEKTROSSITE
+    ITEM_CHANDELURITE
+    ITEM_CHESNAUGHTITE
+    ITEM_DELPHOXITE
+    ITEM_GRENINJITE
+    ITEM_PYROARITE
+    ITEM_FLOETTITE
+    ITEM_MALAMARITE
+    ITEM_BARBARACITE
+    ITEM_DRAGALGITE
+    ITEM_HAWLUCHANITE
+    ITEM_ZYGARDITE
+    ITEM_DRAMPANITE
+    ITEM_FALINKSITE
+    ITEM_HEATRANITE
+    ITEM_DARKRANITE
+    ITEM_ZERAORITE
+    ITEM_CHIMECHITE
+    ITEM_STARAPTITE
+    ITEM_GOLURKITE
+    ITEM_MEOWSTICITE
+    ITEM_CRABOMINITE
+    ITEM_GOLISOPITE
+    ITEM_MAGEARNITE
+    ITEM_SCOVILLAINITE
+    ITEM_BAXCALIBRITE
+    ITEM_TATSUGIRINITE
+    ITEM_GLIMMORANITE
+    ITEM_RAICHUNITE_X
+    ITEM_RAICHUNITE_Y
+    ITEM_ABSOLITE_Z
+    ITEM_GARCHOMPITE_Z
+    ITEM_LUCARIONITE_Z
+}
+
+mart ZCrystalMarket {
+    ITEM_NORMALIUM_Z
+    ITEM_FIRIUM_Z
+    ITEM_WATERIUM_Z
+    ITEM_ELECTRIUM_Z
+    ITEM_GRASSIUM_Z
+    ITEM_ICIUM_Z
+    ITEM_FIGHTINIUM_Z
+    ITEM_POISONIUM_Z
+    ITEM_GROUNDIUM_Z
+    ITEM_FLYINIUM_Z
+    ITEM_PSYCHIUM_Z
+    ITEM_BUGINIUM_Z
+    ITEM_ROCKIUM_Z
+    ITEM_GHOSTIUM_Z
+    ITEM_DRAGONIUM_Z
+    ITEM_DARKINIUM_Z
+    ITEM_STEELIUM_Z
+    ITEM_FAIRIUM_Z
+    ITEM_PIKANIUM_Z
+    ITEM_EEVIUM_Z
+    ITEM_SNORLIUM_Z
+    ITEM_MEWNIUM_Z
+    ITEM_DECIDIUM_Z
+    ITEM_INCINIUM_Z
+    ITEM_PRIMARIUM_Z
+    ITEM_LYCANIUM_Z
+    ITEM_MIMIKIUM_Z
+    ITEM_KOMMONIUM_Z
+    ITEM_TAPUNIUM_Z
+    ITEM_SOLGANIUM_Z
+    ITEM_LUNALIUM_Z
+    ITEM_MARSHADIUM_Z
+    ITEM_ALORAICHIUM_Z
+    ITEM_ULTRANECROZIUM_Z
+}
+
+mart BerryMarket{
+    ITEM_CHERI_BERRY
+    ITEM_CHESTO_BERRY
+    ITEM_PECHA_BERRY
+    ITEM_RAWST_BERRY
+    ITEM_ASPEAR_BERRY
+    ITEM_LEPPA_BERRY
+    ITEM_ORAN_BERRY
+    ITEM_PERSIM_BERRY
+    ITEM_LUM_BERRY
+    ITEM_SITRUS_BERRY
+    ITEM_FIGY_BERRY
+    ITEM_WIKI_BERRY
+    ITEM_MAGO_BERRY
+    ITEM_AGUAV_BERRY
+    ITEM_IAPAPA_BERRY
+    ITEM_CHILAN_BERRY
+    ITEM_OCCA_BERRY
+    ITEM_PASSHO_BERRY
+    ITEM_WACAN_BERRY
+    ITEM_RINDO_BERRY
+    ITEM_YACHE_BERRY
+    ITEM_CHOPLE_BERRY
+    ITEM_KEBIA_BERRY
+    ITEM_SHUCA_BERRY
+    ITEM_COBA_BERRY
+    ITEM_PAYAPA_BERRY
+    ITEM_TANGA_BERRY
+    ITEM_CHARTI_BERRY
+    ITEM_KASIB_BERRY
+    ITEM_HABAN_BERRY
+    ITEM_COLBUR_BERRY
+    ITEM_BABIRI_BERRY
+    ITEM_ROSELI_BERRY
+    ITEM_LIECHI_BERRY
+    ITEM_GANLON_BERRY
+    ITEM_SALAC_BERRY
+    ITEM_PETAYA_BERRY
+    ITEM_APICOT_BERRY
+    ITEM_LANSAT_BERRY
+    ITEM_STARF_BERRY
+    ITEM_ENIGMA_BERRY
+    ITEM_MICLE_BERRY
+    ITEM_CUSTAP_BERRY
+    ITEM_JABOCA_BERRY
+    ITEM_ROWAP_BERRY
+    ITEM_KEE_BERRY
+    ITEM_MARANGA_BERRY
+}
+
+mart TechniquesMarket{
+    ITEM_TM01
+    ITEM_TM02
+    ITEM_TM03
+    ITEM_TM04
+    ITEM_TM05
+    ITEM_TM06
+    ITEM_TM07
+    ITEM_TM08
+    ITEM_TM09
+    ITEM_TM10
+    ITEM_TM11
+    ITEM_TM12
+    ITEM_TM13
+    ITEM_TM14
+    ITEM_TM15
+    ITEM_TM16
+    ITEM_TM17
+    ITEM_TM18
+    ITEM_TM19
+    ITEM_TM20
+    ITEM_TM21
+    ITEM_TM22
+    ITEM_TM23
+    ITEM_TM24
+    ITEM_TM25
+    ITEM_TM26
+    ITEM_TM27
+    ITEM_TM28
+    ITEM_TM29
+    ITEM_TM30
+    ITEM_TM31
+    ITEM_TM32
+    ITEM_TM33
+    ITEM_TM34
+    ITEM_TM35
+    ITEM_TM36
+    ITEM_TM37
+    ITEM_TM38
+    ITEM_TM39
+    ITEM_TM40
+    ITEM_TM41
+    ITEM_TM42
+}

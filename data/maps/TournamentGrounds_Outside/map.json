@@ -1,0 +1,126 @@
+{
+  "id": "MAP_TOURNAMENT_GROUNDS_OUTSIDE",
+  "name": "TournamentGrounds_Outside",
+  "layout": "LAYOUT_TOURNAMENT_GROUNDS_OUTSIDE",
+  "music": "MUS_B_FRONTIER",
+  "region_map_section": "MAPSEC_BATTLE_FRONTIER",
+  "requires_flash": false,
+  "weather": "WEATHER_NONE",
+  "map_type": "MAP_TYPE_NONE",
+  "allow_cycling": false,
+  "allow_escaping": false,
+  "allow_running": false,
+  "show_map_name": true,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "connections": null,
+  "object_events": [
+    {
+      "graphics_id": "OBJ_EVENT_GFX_SS_TIDAL",
+      "x": 19,
+      "y": 69,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_NONE",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "NULL",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_GROUNDSOUTSIDE_SAILOR_2",
+      "graphics_id": "OBJ_EVENT_GFX_SAILOR",
+      "x": 20,
+      "y": 66,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_NONE",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "TournamentGrounds_Outside_EventScript_Sailors",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_GROUNDSOUTSIDE_SAILOR_1",
+      "graphics_id": "OBJ_EVENT_GFX_SAILOR",
+      "x": 19,
+      "y": 66,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_NONE",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "TournamentGrounds_Outside_EventScript_Sailors",
+      "flag": "0"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 26,
+      "y": 64,
+      "elevation": 0,
+      "dest_map": "MAP_TOURNAMENT_GROUNDS_RECEPTION",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 26,
+      "y": 60,
+      "elevation": 0,
+      "dest_map": "MAP_TOURNAMENT_GROUNDS_RECEPTION",
+      "dest_warp_id": "1"
+    },
+    {
+      "x": -3,
+      "y": 18,
+      "elevation": 0,
+      "dest_map": "MAP_TOURNAMENT_GROUNDS_LOUNGE2",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": -4,
+      "y": 18,
+      "elevation": 0,
+      "dest_map": "MAP_TOURNAMENT_GROUNDS_LOUNGE1",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 41,
+      "y": 36,
+      "elevation": 0,
+      "dest_map": "MAP_TOURNAMENT_GROUNDS_MART",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 26,
+      "y": 22,
+      "elevation": 0,
+      "dest_map": "MAP_TOURNAMENT_GROUNDS_ARENA_LOBBY",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": -2,
+      "y": 18,
+      "elevation": 0,
+      "dest_map": "MAP_TOURNAMENT_GROUNDS_LOUNGE3",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": -1,
+      "y": 18,
+      "elevation": 0,
+      "dest_map": "MAP_TOURNAMENT_GROUNDS_LOUNGE4",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 0,
+      "y": 18,
+      "elevation": 0,
+      "dest_map": "MAP_TOURNAMENT_GROUNDS_LOUNGE5",
+      "dest_warp_id": "0"
+    }
+  ],
+  "coord_events": [],
+  "bg_events": []
+}
