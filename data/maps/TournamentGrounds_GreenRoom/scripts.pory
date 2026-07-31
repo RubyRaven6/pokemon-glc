@@ -1,0 +1,8 @@
+mapscripts TournamentGrounds_GreenRoom_MapScripts {
+    MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE [
+        VAR_TEMP_0, 0 {
+            turnobject(LOCALID_PLAYER, DIR_NORTH)
+            setvar(VAR_TEMP_0, 1)
+        }
+    ]
+}

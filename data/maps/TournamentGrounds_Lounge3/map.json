@@ -1,0 +1,28 @@
+{
+  "id": "MAP_TOURNAMENT_GROUNDS_LOUNGE3",
+  "name": "TournamentGrounds_Lounge3",
+  "layout": "LAYOUT_TOURNAMENT_GROUNDS_LOUNGE3",
+  "music": "MUS_B_FRONTIER",
+  "region_map_section": "MAPSEC_BATTLE_FRONTIER",
+  "requires_flash": false,
+  "weather": "WEATHER_NONE",
+  "map_type": "MAP_TYPE_NONE",
+  "allow_cycling": false,
+  "allow_escaping": false,
+  "allow_running": false,
+  "show_map_name": false,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "connections": null,
+  "object_events": [],
+  "warp_events": [
+    {
+      "x": 4,
+      "y": 9,
+      "elevation": 0,
+      "dest_map": "MAP_TOURNAMENT_GROUNDS_OUTSIDE",
+      "dest_warp_id": "6"
+    }
+  ],
+  "coord_events": [],
+  "bg_events": []
+}
