@@ -25,7 +25,7 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "NULL",
+      "script": "TournamentGrounds_Reception_EventScript_Teala",
       "flag": "0"
     },
     {
@@ -59,6 +59,34 @@
       "dest_warp_id": "1"
     }
   ],
-  "coord_events": [],
+  "coord_events": [
+    {
+      "type": "trigger",
+      "x": 3,
+      "y": 6,
+      "elevation": 0,
+      "var": "FLAG_SYS_PLAYER_NAMED",
+      "var_value": "0",
+      "script": "TournamentGrounds_Reception_NameYourself"
+    },
+    {
+      "type": "trigger",
+      "x": 4,
+      "y": 6,
+      "elevation": 0,
+      "var": "FLAG_SYS_PLAYER_NAMED",
+      "var_value": "0",
+      "script": "TournamentGrounds_Reception_NameYourself"
+    },
+    {
+      "type": "trigger",
+      "x": 5,
+      "y": 6,
+      "elevation": 0,
+      "var": "FLAG_SYS_PLAYER_NAMED",
+      "var_value": "0",
+      "script": "TournamentGrounds_Reception_NameYourself"
+    }
+  ],
   "bg_events": []
 }

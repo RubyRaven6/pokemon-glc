@@ -29,6 +29,8 @@
 #include "data.h"
 #include "pokedex.h"
 #include "gpu_regs.h"
+#include "random.h"
+#include "naming_screen.h"
 
 struct PlayerGenState
 {
@@ -213,7 +215,6 @@ static void PlayerGen_SetupCB(void)
         gMain.state++;
         break;
     case 5:
-        // PlayerGen_PrintUiSampleWindowText();
         CreateTask(Task_PlayerGenWaitFadeIn, 0);
         gMain.state++;
         break;
@@ -248,7 +249,7 @@ static void Task_PlayerGenWaitFadeIn(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
-        gTasks[taskId].func = Task_NewGameBirchSpeech_AndYouAre;
+        gTasks[taskId].func = Task_PlayerGenMainInput;
     }
 }
 
