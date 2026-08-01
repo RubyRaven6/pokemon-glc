@@ -31,6 +31,7 @@
 #include "gpu_regs.h"
 #include "random.h"
 #include "naming_screen.h"
+#include "field_weather.h"
 
 struct PlayerGenState
 {
@@ -102,6 +103,26 @@ static const u8 sPlayerGenWindowFontColors[][3] =
     [FONT_WHITE]  = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_WHITE,      TEXT_COLOR_DARK_GRAY},
     [FONT_RED]    = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_RED,        TEXT_COLOR_LIGHT_GRAY},
 };
+
+static const u8 *const sMascPresetNames[] = {
+    COMPOUND_STRING("Brendan"),
+    COMPOUND_STRING("Damien"),
+};
+
+static const u8 *const sFemmePresetNames[] = {
+    COMPOUND_STRING("May"),
+    COMPOUND_STRING("Bridget"),
+};
+
+static const u8 *const sAndroPresetNames[] = {
+    COMPOUND_STRING("Kris"),
+    COMPOUND_STRING("Nimona")
+};
+
+// The number of male vs. female names is assumed to be the same.
+// If they aren't, the smaller of the two sizes will be used and any extra names will be ignored.
+#define NUM_PRESET_NAMES_MF min(ARRAY_COUNT(sMascPresetNames), ARRAY_COUNT(sFemmePresetNames))
+#define NUM_PRESET_NAMES min(NUM_PRESET_NAMES_MF, ARRAY_COUNT(sAndroPresetNames))
 
 // Callbacks for the sample UI
 static void PlayerGen_SetupCB(void);
@@ -399,4 +420,44 @@ static void PlayerGen_FreeResources(void)
     }
     FreeAllWindowBuffers();
     ResetSpriteData();
+}
+
+void PlayerGen_SetDefaultPlayerName(u8 nameId)
+{
+    const u8 *name = 0;
+    u8 i;
+
+    switch(gSaveBlock2Ptr->playerGender)
+    {
+        case GENDER_MASCULINE:
+            name = sMascPresetNames[nameId];
+            break;
+        case GENDER_FEMININE:
+            name = sFemmePresetNames[nameId];
+            break;
+        case GENDER_ANDROGYNOUS:
+            name = sAndroPresetNames[nameId];
+            break;
+    }
+        
+    for (i = 0; i < PLAYER_NAME_LENGTH; i++)
+        gSaveBlock2Ptr->playerName[i] = name[i];
+
+    gSaveBlock2Ptr->playerName[PLAYER_NAME_LENGTH] = EOS;
+}
+
+static void Task_StartRenamingScreen(u8 taskId)
+{
+    if (gPaletteFade.active) return;
+
+    CleanupOverworldWindowsAndTilemaps();
+    PlayerGen_SetDefaultPlayerName(Random() % NUM_PRESET_NAMES);
+    DoNamingScreen(NAMING_SCREEN_PLAYER, gSaveBlock2Ptr->playerName, gSaveBlock2Ptr->playerGender, 0, 0, CB2_ReturnToFieldContinueScript);
+    DestroyTask(taskId);
+}
+
+void PlayerGen_StartNamingScreen(void)
+{
+    FadeScreen(FADE_TO_BLACK, 0);
+    CreateTask(Task_StartRenamingScreen, 1);
 }

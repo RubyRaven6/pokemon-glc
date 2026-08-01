@@ -2306,12 +2306,3 @@ static void Task_NewGameBirchSpeech_ReturnFromNamingScreenShowTextbox(u8 taskId)
 
 #undef tTimer
 */
-
-void PlayerGen_StartNamingScreen(void)
-{
-    if (!gPaletteFade.active)
-    {
-        NewGameBirchSpeech_SetDefaultPlayerName(Random() % NUM_PRESET_NAMES);
-        DoNamingScreen(NAMING_SCREEN_PLAYER, gSaveBlock2Ptr->playerName, gSaveBlock2Ptr->playerGender, 0, 0, CB2_ReturnToField);
-    }
-}

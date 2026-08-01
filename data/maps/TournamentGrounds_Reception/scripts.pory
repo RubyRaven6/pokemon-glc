@@ -37,8 +37,8 @@ script TournamentGrounds_Reception_NameYourself{
 }
 
 script(local) NamingScript {
-    callnative(PlayerGen_StartNamingScreen)
-    delay(1)
+    fadescreen(FADE_TO_BLACK)
+    callnative(PlayerGen_StartNamingScreen, waitstate=TRUE)
     lock
     msgbox("{SPEAKER NAME_TEALA}{PLAYER}!\nIs that correct?", MSGBOX_YESNO)
     if(var(VAR_RESULT)== NO){goto(NamingScript)}
