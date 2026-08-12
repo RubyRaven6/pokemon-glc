@@ -9378,7 +9378,7 @@
       "id": "LAYOUT_TOURNAMENT_GROUNDS_RECEPTION",
       "name": "TournamentGrounds_Reception_Layout",
       "width": 9,
-      "height": 9,
+      "height": 13,
       "primary_tileset": "gTileset_General",
       "secondary_tileset": "gTileset_BattleFrontier",
       "border_filepath": "data/layouts/TournamentGrounds_Reception/border.bin",

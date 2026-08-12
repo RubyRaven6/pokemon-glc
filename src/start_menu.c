@@ -358,9 +358,12 @@ static void BuildNormalStartMenu(void)
     
     //AddStartMenuAction(MENU_ACTION_STAT_EDITOR);
 
-    AddStartMenuAction(MENU_ACTION_PLAYER);
+    if(FlagGet(FLAG_SYS_PLAYER_NAMED))
+        AddStartMenuAction(MENU_ACTION_PLAYER);
+
     if(FlagGet(FLAG_DISABLE_SAVING) == FALSE)
         AddStartMenuAction(MENU_ACTION_SAVE);
+
     AddStartMenuAction(MENU_ACTION_OPTION);
     AddStartMenuAction(MENU_ACTION_EXIT);
 }
@@ -1415,7 +1418,7 @@ static void Task_SaveAfterLinkBattle(u8 taskId)
 static void ShowSaveInfoWindow(void)
 {
     struct WindowTemplate saveInfoWindow = sSaveInfoWindowTemplate;
-    enum Gender gender;
+    enum PlayerGender gender;
     u8 color;
     u32 xOffset;
     u32 yOffset;
@@ -1431,7 +1434,7 @@ static void ShowSaveInfoWindow(void)
     gender = gSaveBlock2Ptr->playerGender;
     color = TEXT_COLOR_RED;  // Red when female, blue when male.
 
-    if (gender == MALE)
+    if (gender == GENDER_MASCULINE)
         color = TEXT_COLOR_BLUE;
 
     // Print region name

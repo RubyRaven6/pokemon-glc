@@ -54,34 +54,34 @@
 /* FLAGS TRACKING DEFEATED STATUS */
 
 /* KANTO LEADERS */
-#define FLAG_KANTO_LEADER_BROCK          0x20 // Unused Flag
-#define FLAG_KANTO_LEADER_MISTY          0x21 // Unused Flag
-#define FLAG_KANTO_LEADER_LT_SURGE       0x22 // Unused Flag
-#define FLAG_KANTO_LEADER_ERIKA          0x23 // Unused Flag
-#define FLAG_KANTO_LEADER_SABRINA        0x24 // Unused Flag
-#define FLAG_KANTO_LEADER_KOGA_JANINE    0x25 // Unused Flag
-#define FLAG_KANTO_LEADER_BLAINE         0x26 // Unused Flag
-#define FLAG_KANTO_LEADER_GIOVANNI       0x27 // Unused Flag
+#define FLAG_KANTO_LEADER_BROCK          0x20
+#define FLAG_KANTO_LEADER_MISTY          0x21
+#define FLAG_KANTO_LEADER_LT_SURGE       0x22
+#define FLAG_KANTO_LEADER_ERIKA          0x23
+#define FLAG_KANTO_LEADER_SABRINA        0x24
+#define FLAG_KANTO_LEADER_KOGA_JANINE    0x25
+#define FLAG_KANTO_LEADER_BLAINE         0x26
+#define FLAG_KANTO_LEADER_GIOVANNI       0x27
 
 /*JOTHTO LEADERS*/
-#define FLAG_JOHTO_LEADER_FALKNER        0x28 // Unused Flag
-#define FLAG_JOHTO_LEADER_BUGSY          0x29 // Unused Flag
-#define FLAG_JOHTO_LEADER_WHITNEY        0x2A // Unused Flag
-#define FLAG_JOHTO_LEADER_MORTY          0x2B // Unused Flag
-#define FLAG_JOHTO_LEADER_CHUCK          0x2C // Unused Flag
-#define FLAG_JOHTO_LEADER_JASMINE        0x2D // Unused Flag
-#define FLAG_JOHTO_LEADER_PRYCE          0x2E // Unused Flag
-#define FLAG_JOHTO_LEADER_CLAIR          0x2F // Unused Flag
+#define FLAG_JOHTO_LEADER_FALKNER        0x28
+#define FLAG_JOHTO_LEADER_BUGSY          0x29
+#define FLAG_JOHTO_LEADER_WHITNEY        0x2A
+#define FLAG_JOHTO_LEADER_MORTY          0x2B
+#define FLAG_JOHTO_LEADER_CHUCK          0x2C
+#define FLAG_JOHTO_LEADER_JASMINE        0x2D
+#define FLAG_JOHTO_LEADER_PRYCE          0x2E
+#define FLAG_JOHTO_LEADER_CLAIR          0x2F
 
 /* HOENN LEADERS */
-#define FLAG_HOENN_LEADER_ROXANNE       0x30 // Unused Flag
-#define FLAG_HOENN_LEADER_BRAWLY        0x31 // Unused Flag
-#define FLAG_HOENN_LEADER_WATTSON       0x32 // Unused Flag
-#define FLAG_HOENN_LEADER_FLANNERY      0x33 // Unused Flag
-#define FLAG_HOENN_LEADER_NORMAN        0x34 // Unused Flag
-#define FLAG_HOENN_LEADER_WINONA        0x35 // Unused Flag
-#define FLAG_HOENN_LEADER_TATE_AND_LIZA 0x36 // Unused Flag
-#define FLAG_HOENN_LEADER_JUAN          0x37 // Unused Flag
+#define FLAG_HOENN_LEADER_ROXANNE       0x30
+#define FLAG_HOENN_LEADER_BRAWLY        0x31
+#define FLAG_HOENN_LEADER_WATTSON       0x32
+#define FLAG_HOENN_LEADER_FLANNERY      0x33
+#define FLAG_HOENN_LEADER_NORMAN        0x34
+#define FLAG_HOENN_LEADER_WINONA        0x35
+#define FLAG_HOENN_LEADER_TATE_AND_LIZA 0x36
+#define FLAG_HOENN_LEADER_JUAN          0x37
 
 /* SINNOH LEADERS */
 #define FLAG_SINNOH_LEADER_ROARK        0x38
@@ -1375,7 +1375,7 @@
 #define FLAG_SYS_POKEMON_GET                         (SYSTEM_FLAGS + 0x0) // FLAG_0x860
 #define FLAG_SYS_POKEDEX_GET                         (SYSTEM_FLAGS + 0x1)
 #define FLAG_SYS_POKENAV_GET                         (SYSTEM_FLAGS + 0x2)
-#define FLAG_UNUSED_0x863                            (SYSTEM_FLAGS + 0x3) // Unused Flag
+#define FLAG_SYS_PLAYER_NAMED                        (SYSTEM_FLAGS + 0x3)
 #define FLAG_SYS_GAME_CLEAR                          (SYSTEM_FLAGS + 0x4)
 #define FLAG_SYS_CHAT_USED                           (SYSTEM_FLAGS + 0x5)
 #define FLAG_UNLOCKED_TRENDY_SAYINGS                 (SYSTEM_FLAGS + 0x6)

@@ -1,3 +1,56 @@
 mapscripts TournamentGrounds_Reception_MapScripts {
     
 }
+
+script TournamentGrounds_Reception_NameYourself{
+    lock
+    setspeaker(SP_NAME_TEALA)
+    msgbox("Oh, hello there!")
+    closemessage
+    getplayerxy(VAR_TEMP_0, VAR_TEMP_1)
+    switch(var(VAR_TEMP_0))
+    {
+        case 3:
+            applymovement(LOCALID_PLAYER, moves(walk_up * 2, walk_left, delay_16))
+        case 4:
+            applymovement(LOCALID_PLAYER, moves(walk_up * 2, walk_left * 2, delay_16))
+        case 5:
+            applymovement(LOCALID_PLAYER, moves(walk_up * 2, walk_left * 3, delay_16))
+    }
+    waitmovement(LOCALID_PLAYER)
+    applymovement(LOCALID_RECEPTION_TEALA,moves(walk_in_place_fast_right, delay_16))
+    setspeaker(SP_NAME_TEALA)
+    msgbox("Welcome to the Global League\nConference! Are you competing?")
+    waitmovement(LOCALID_RECEPTION_TEALA)
+    closemessage
+    applymovement(LOCALID_PLAYER, moves(walk_in_place_left, delay_16 * 2))
+    waitmovement(0)
+    setspeaker(SP_NAME_TEALA)
+    msgbox("I see! What is your name?\n{PAUSE 30}This is for your registration.")
+    closemessage
+    delay(30)
+    call(NamingScript)
+    applymovement(LOCALID_RECEPTION_TEALA, moves(walk_in_place_right, delay_16*2))
+    setspeaker(SP_NAME_TEALA)
+    msgbox("What a lovely name!\pThank you for your registration, and I\nhope you enjoy our facilities!")
+    waitmovement(0)
+    setflag(FLAG_SYS_PLAYER_NAMED)
+    release
+}
+
+script(local) NamingScript {
+    fadescreen(FADE_TO_BLACK)
+    callnative(PlayerGen_StartNamingScreen, waitstate=TRUE)
+    lock
+    msgbox("{SPEAKER NAME_TEALA}{PLAYER}!\nIs that correct?", MSGBOX_YESNO)
+    if(var(VAR_RESULT)== NO){goto(NamingScript)}
+    return
+}
+
+script TournamentGrounds_Reception_EventScript_Teala {
+    lock
+    setspeaker(SP_NAME_TEALA)
+    msgbox("Enjoy your stay!")
+    closemessage
+    release
+}
