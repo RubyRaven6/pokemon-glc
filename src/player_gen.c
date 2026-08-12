@@ -32,6 +32,8 @@
 #include "random.h"
 #include "naming_screen.h"
 #include "field_weather.h"
+#include "trainer_pokemon_sprites.h"
+#include "trainer.h"
 
 struct PlayerGenState
 {
@@ -50,8 +52,15 @@ enum BgIds
 enum WindowIds
 {
     WINDOW_TEXT = 0,
-    WINDOW_COUNT,
 };
+
+#define tPlayerSpriteId data[2]
+#define tTimer data[3]
+#define tIsDoneFadingSprites data[4]
+#define tPlayerGender data[5]
+#define tBrendanSpriteId data[6]
+#define tMaySpriteId data[7]
+#define tKrisSpriteId data[8]
 
 static EWRAM_DATA struct PlayerGenState *sPlayerGenState = NULL;
 static EWRAM_DATA u8 *sBg1TilemapBuffer = NULL;
@@ -72,22 +81,6 @@ static const struct BgTemplate sPlayerGenBgTemplates[] =
     }
 };
 
-static const struct WindowTemplate sPlayerGenWindowTemplates[] =
-{
-    [WINDOW_TEXT] =
-    {
-        .bg = 0,
-        .tilemapLeft = 14,
-        .tilemapTop = 0,
-        .width = 16,
-        .height = 10,
-        .paletteNum = 15,
-        .baseBlock = 1
-    },
-    DUMMY_WIN_TEMPLATE
-};
-
-
 static const struct WindowTemplate sPlayerGenTextWindows[] =
 {
     {
@@ -103,19 +96,10 @@ static const struct WindowTemplate sPlayerGenTextWindows[] =
         .bg = 0,
         .tilemapLeft = 3,
         .tilemapTop = 5,
-        .width = 6,
-        .height = 4,
+        .width = 10,
+        .height = 6,
         .paletteNum = 15,
         .baseBlock = 0x6D
-    },
-    {
-        .bg = 0,
-        .tilemapLeft = 3,
-        .tilemapTop = 2,
-        .width = 9,
-        .height = 10,
-        .paletteNum = 15,
-        .baseBlock = 0x85
     },
     DUMMY_WIN_TEMPLATE
 };
@@ -144,13 +128,13 @@ static const struct MenuAction sMenuActions_Gender[] = {
 };
 
 static const u8 *const sMascPresetNames[] = {
-    COMPOUND_STRING("Brendan"),
     COMPOUND_STRING("Damien"),
+    COMPOUND_STRING("Viktor"),
 };
 
 static const u8 *const sFemmePresetNames[] = {
-    COMPOUND_STRING("May"),
     COMPOUND_STRING("Bridget"),
+    COMPOUND_STRING("Mae"),
 };
 
 static const u8 *const sAndroPresetNames[] = {
@@ -163,19 +147,16 @@ static const u8 *const sAndroPresetNames[] = {
 #define NUM_PRESET_NAMES_MF min(ARRAY_COUNT(sMascPresetNames), ARRAY_COUNT(sFemmePresetNames))
 #define NUM_PRESET_NAMES min(NUM_PRESET_NAMES_MF, ARRAY_COUNT(sAndroPresetNames))
 
-// Callbacks for the sample UI
+// Callbacks for the menu
 static void PlayerGen_SetupCB(void);
 static void PlayerGen_MainCB(void);
 static void PlayerGen_VBlankCB(void);
-static void PlayerGen_ShowGenderMenu(void);
-static void PlayerGen_ClearGenderWindowTilemap(u8 bg, u8 x, u8 y, u8 width, u8 height, u8 unused);
-static void PlayerGen_ClearGenderWindow(u8 windowId, bool8 copyToVram);
+static void PlayerGen_ShowGenderMenu(u32);
 static void PlayerGen_StartFadeInTarget1OutTarget2(u8 taskId, u8 delay);
-static void PlayerGen_ClearWindow(u8 windowId);
+static void PlayerGen_StartFadeOutTarget1InTarget2(u8 taskId, u8 delay);
 static s8 PlayerGen_ProcessGenderMenuInput(void);
-static void DrawMainMenuWindowBorder(const struct WindowTemplate *, u16);
 
-// Sample UI tasks
+// Tasks
 static void Task_PlayerGen_WaitFadeIn(u8 taskId);
 static void Task_PlayerGen_StartPlayerFadeIn(u8 taskId);
 static void Task_PlayerGen_WaitForPlayerFadeIn(u8 taskId);
@@ -184,20 +165,19 @@ static void Task_PlayerGen_WaitToShowGenderMenu(u8 taskId);
 static void Task_PlayerGen_ChooseGender(u8 taskId);
 static void Task_PlayerGen_SlideOutOldGenderSprite(u8 taskId);
 static void Task_PlayerGen_SlideInNewGenderSprite(u8 taskId);
-static void Task_PlayerGen_MainInput(u8 taskId);
 static void Task_PlayerGen_WaitFadeAndBail(u8 taskId);
 static void Task_PlayerGen_WaitFadeAndExitGracefully(u8 taskId);
 static void Task_PlayerGen_FadeInTarget1OutTarget2(u8 taskId);
+static void Task_PlayerGen_FadeOutTarget1InTarget2(u8 taskId);
+static void Task_PlayerGen_Cleanup(u8 taskId);
 
-// Sample UI helper functions
+// Helper functions
 static void PlayerGen_Init(MainCallback callback);
 static void PlayerGen_ResetGpuRegsAndBgs(void);
 static bool8 PlayerGen_InitBgs(void);
 static void PlayerGen_FadeAndBail(void);
 static bool8 PlayerGen_LoadGraphics(void);
 static void PlayerGen_InitWindows(void);
-static void PlayerGen_PrintUiSampleWindowText(void);
-static inline void PlayerGen_PrintMessageBox(const u8 *str);
 static void PlayerGen_FreeResources(void);
 
 void Task_OpenPlayerGen(u8 taskId)
@@ -248,6 +228,17 @@ static void PlayerGen_ResetGpuRegsAndBgs(void)
     SetGpuReg(REG_OFFSET_BLDY, 0);
 }
 
+static u32 CreatePlayerTrainerSprite(enum PlayerGender gender)
+{
+    u32 spriteId = CreateTrainerPicSprite(GetPlayerTrainerPic(gender, VERSION_EMERALD), TRUE, 32, 32, gender, TAG_NONE);
+    if (spriteId != SPRITE_NONE)
+    {
+        gSprites[spriteId].invisible = TRUE;
+    }
+
+    return spriteId;
+}
+
 static void PlayerGen_SetupCB(void)
 {
     switch (gMain.state)
@@ -289,9 +280,14 @@ static void PlayerGen_SetupCB(void)
         gMain.state++;
         break;
     case 5:
-        PlayerGen_PrintUiSampleWindowText();
-        CreateTask(Task_PlayerGen_WaitFadeIn, 0);
         gMain.state++;
+        u32 taskId = CreateTask(Task_PlayerGen_WaitFadeIn, 0);
+        if (taskId != TASK_NONE)
+        {
+            gTasks[taskId].tBrendanSpriteId = CreatePlayerTrainerSprite(GENDER_MASCULINE);
+            gTasks[taskId].tMaySpriteId = CreatePlayerTrainerSprite(GENDER_FEMININE);
+            gTasks[taskId].tKrisSpriteId = CreatePlayerTrainerSprite(GENDER_ANDROGYNOUS);
+        }
         break;
     case 6:
         BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
@@ -320,33 +316,11 @@ static void PlayerGen_VBlankCB(void)
     TransferPlttBuffer();
 }
 
-#define tPlayerSpriteId data[2]
-#define tTimer data[3]
-#define tIsDoneFadingSprites data[4]
-#define tPlayerGender data[5]
-#define tBrendanSpriteId data[6]
-#define tMaySpriteId data[7]
-#define tKrisSpriteId data[8]
-
 static void Task_PlayerGen_WaitFadeIn(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
-        gTasks[taskId].func = Task_PlayerGen_MainInput;
-    }
-}
-
-static void Task_PlayerGen_MainInput(u8 taskId)
-{
-    if (JOY_NEW(B_BUTTON))
-    {
-        PlaySE(SE_PC_OFF);
-        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
         gTasks[taskId].func = Task_PlayerGen_StartPlayerFadeIn;
-    }
-    if (JOY_NEW(A_BUTTON))
-    {
-        PlaySE(SE_SELECT);
     }
 }
 
@@ -358,7 +332,7 @@ static void Task_PlayerGen_StartPlayerFadeIn(u8 taskId)
     }
     else
     {
-        u8 spriteId = gTasks[taskId].tKrisSpriteId;
+        u8 spriteId = gTasks[taskId].tMaySpriteId;
 
         gSprites[spriteId].x = 180;
         gSprites[spriteId].y = 60;
@@ -382,17 +356,26 @@ static void Task_PlayerGen_WaitForPlayerFadeIn(u8 taskId)
 
 static void Task_PlayerGen_BoyOrGirl(u8 taskId)
 {
-    PlayerGen_ClearWindow(0);
-    StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("Choose your presentation."));
-    AddTextPrinterForMessage(TRUE);
-    gTasks[taskId].func = Task_PlayerGen_WaitToShowGenderMenu;
+    if (gTasks[taskId].tTimer)
+    {
+        gTasks[taskId].tTimer--;
+    }
+    else
+    {
+        LoadMessageBoxGfx(0, 0x200, BG_PLTT_ID(15));
+        DrawDialogFrameWithCustomTile(0, FALSE, 0x200);
+        StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("Choose your presentation."));
+        AddTextPrinterForMessage(TRUE);
+        CopyWindowToVram(0, COPYWIN_FULL);
+        gTasks[taskId].func = Task_PlayerGen_WaitToShowGenderMenu;
+    }
 }
 
 static void Task_PlayerGen_WaitToShowGenderMenu(u8 taskId)
 {
     if (!RunTextPrintersAndIsPrinter0Active())
     {
-        PlayerGen_ShowGenderMenu();
+        PlayerGen_ShowGenderMenu(gTasks[taskId].tPlayerGender);
         gTasks[taskId].func = Task_PlayerGen_ChooseGender;
     }
 }
@@ -405,21 +388,11 @@ static void Task_PlayerGen_ChooseGender(u8 taskId)
     switch (gender)
     {
     case GENDER_MASCULINE:
-        PlaySE(SE_SELECT);
-        gSaveBlock2Ptr->playerGender = gender;
-        PlayerGen_ClearGenderWindow(1, 1);
-        gTasks[taskId].func = Task_PlayerGen_WaitFadeAndExitGracefully;
-        break;
     case GENDER_FEMININE:
-        PlaySE(SE_SELECT);
-        gSaveBlock2Ptr->playerGender = gender;
-        PlayerGen_ClearGenderWindow(1, 1);
-        gTasks[taskId].func = Task_PlayerGen_WaitFadeAndExitGracefully;
-        break;
     case GENDER_ANDROGYNOUS:
         PlaySE(SE_SELECT);
         gSaveBlock2Ptr->playerGender = gender;
-        PlayerGen_ClearGenderWindow(1, 1);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
         gTasks[taskId].func = Task_PlayerGen_WaitFadeAndExitGracefully;
         break;
     default: //repeat task if nothing is selected
@@ -430,7 +403,7 @@ static void Task_PlayerGen_ChooseGender(u8 taskId)
     {
         gTasks[taskId].tPlayerGender = gender2;
         gSprites[gTasks[taskId].tPlayerSpriteId].oam.objMode = ST_OAM_OBJ_BLEND;
-        PlayerGen_StartFadeInTarget1OutTarget2(taskId, 0);
+        PlayerGen_StartFadeOutTarget1InTarget2(taskId, 0);
         gTasks[taskId].func = Task_PlayerGen_SlideOutOldGenderSprite;
     }
 }
@@ -448,12 +421,17 @@ static void Task_PlayerGen_SlideOutOldGenderSprite(u8 taskId)
         switch(gTasks[taskId].tPlayerGender)
         {
             case GENDER_MASCULINE:
+                spriteId = gTasks[taskId].tBrendanSpriteId;
+                break;
+            default:
+            case GENDER_FEMININE:
+                spriteId = gTasks[taskId].tMaySpriteId;
+                break;
+            case GENDER_ANDROGYNOUS:
+                spriteId = gTasks[taskId].tKrisSpriteId;
+                break;
         }
-        
-        if (gTasks[taskId].tPlayerGender != MALE)
-            spriteId = gTasks[taskId].tMaySpriteId;
-        else
-            spriteId = gTasks[taskId].tBrendanSpriteId;
+
         gSprites[spriteId].x = DISPLAY_WIDTH;
         gSprites[spriteId].y = 60;
         gSprites[spriteId].invisible = FALSE;
@@ -495,15 +473,13 @@ static void Task_PlayerGen_WaitFadeAndBail(u8 taskId)
 
 static void Task_PlayerGen_WaitFadeAndExitGracefully(u8 taskId)
 {
-    if (!gPaletteFade.active)
-    {
-        // SetMainCallback2(sPlayerGenState->savedCallback);
-        PlayerGen_FreeResources();
-        // DestroyTask(taskId);
-    }
+    if (gPaletteFade.active) return;
+
+    PlayerGen_FreeResources();
     gTasks[taskId].data[0] = 0;
-    gTasks[taskId].func = Task_NewGameNoBirchSpeech;
+    gTasks[taskId].func = Task_PlayerGen_Cleanup;
 }
+
 #define TILEMAP_BUFFER_SIZE (1024 * 2)
 static bool8 PlayerGen_InitBgs(void)
 {
@@ -565,42 +541,15 @@ static bool8 PlayerGen_LoadGraphics(void)
 
 static void PlayerGen_InitWindows(void)
 {
-    InitWindows(sPlayerGenWindowTemplates);
+    InitWindows(sPlayerGenTextWindows);
     DeactivateAllTextPrinters();
     ScheduleBgCopyTilemapToVram(0);
-    FillWindowPixelBuffer(WINDOW_TEXT, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
-    PutWindowTilemap(WINDOW_TEXT);
-    CopyWindowToVram(WINDOW_TEXT, 3);
-}
-
-static const u8 sText_Text1[] = _("Hello, world!");
-static const u8 sText_Text2[] = _("Press {A_BUTTON} to make a sound!");
-
-static void PlayerGen_PrintUiSampleWindowText(void)
-{
-    FillWindowPixelBuffer(WINDOW_TEXT, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
-
-    AddTextPrinterParameterized4(WINDOW_TEXT, FONT_NORMAL, 0, 3, 0, 0,
-        sPlayerGenWindowFontColors[FONT_WHITE], TEXT_SKIP_DRAW, sText_Text1);
-    AddTextPrinterParameterized4(WINDOW_TEXT, FONT_SMALL, 0, 15, 0, 0,
-        sPlayerGenWindowFontColors[FONT_RED], TEXT_SKIP_DRAW, sText_Text2);
-
-    CopyWindowToVram(WINDOW_TEXT, COPYWIN_GFX);
-}
-
-static inline void PlayerGen_PrintMessageBox(const u8 *str)
-{
-    DrawDialogueFrame(WINDOW_TEXT, FALSE);
-    if (str != gStringVar4)
+    for (u32 i = 0; i < ARRAY_COUNT(sPlayerGenTextWindows) - 1; i++)
     {
-        StringExpandPlaceholders(gStringVar4, str);
-        AddTextPrinterParameterized2(WINDOW_TEXT, FONT_NORMAL, gStringVar4, GetPlayerTextSpeedDelay(), NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
+        FillWindowPixelBuffer(i, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
+        PutWindowTilemap(i);
+        CopyWindowToVram(i, 3);
     }
-    else
-    {
-        AddTextPrinterParameterized2(WINDOW_TEXT, FONT_NORMAL, str, GetPlayerTextSpeedDelay(), NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
-    }
-    CopyWindowToVram(WINDOW_TEXT, COPYWIN_FULL);
 }
 
 static void PlayerGen_FreeResources(void)
@@ -634,7 +583,7 @@ void PlayerGen_SetDefaultPlayerName(u8 nameId)
             name = sAndroPresetNames[nameId];
             break;
     }
-        
+
     for (i = 0; i < PLAYER_NAME_LENGTH; i++)
         gSaveBlock2Ptr->playerName[i] = name[i];
 
@@ -657,12 +606,12 @@ void PlayerGen_StartNamingScreen(void)
     CreateTask(Task_StartRenamingScreen, 1);
 }
 
-static void PlayerGen_ShowGenderMenu(void)
+static void PlayerGen_ShowGenderMenu(u32 pos)
 {
-    DrawMainMenuWindowBorder(&sPlayerGenTextWindows[1], 0xF3);
-    FillWindowPixelBuffer(1, PIXEL_FILL(1));
+    LoadUserWindowBorderGfx(1, 0xF3, 2);
+    DrawStdFrameWithCustomTileAndPalette(1, FALSE, 0xF3, 2);
     PrintMenuTable(1, ARRAY_COUNT(sMenuActions_Gender), sMenuActions_Gender);
-    InitMenuInUpperLeftCornerNormal(1, ARRAY_COUNT(sMenuActions_Gender), 0);
+    InitMenuInUpperLeftCornerNormal(1, ARRAY_COUNT(sMenuActions_Gender), pos);
     PutWindowTilemap(1);
     CopyWindowToVram(1, COPYWIN_FULL);
 }
@@ -670,20 +619,6 @@ static void PlayerGen_ShowGenderMenu(void)
 static s8 PlayerGen_ProcessGenderMenuInput(void)
 {
     return Menu_ProcessInputNoWrap();
-}
-
-static void PlayerGen_ClearGenderWindowTilemap(u8 bg, u8 x, u8 y, u8 width, u8 height, u8 unused)
-{
-    FillBgTilemapBufferRect(bg, 0, x + 255, y + 255, width + 2, height + 2, 2);
-}
-
-static void PlayerGen_ClearGenderWindow(u8 windowId, bool8 copyToVram)
-{
-    CallWindowFunction(windowId, PlayerGen_ClearGenderWindowTilemap);
-    FillWindowPixelBuffer(windowId, PIXEL_FILL(1));
-    ClearWindowTilemap(windowId);
-    if (copyToVram == TRUE)
-        CopyWindowToVram(windowId, COPYWIN_FULL);
 }
 
 #undef tPlayerSpriteId
@@ -703,7 +638,7 @@ static void PlayerGen_StartFadeInTarget1OutTarget2(u8 taskId, u8 delay)
 {
     u8 taskId2;
 
-    SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT2_BG1 | BLDCNT_EFFECT_BLEND | BLDCNT_TGT1_OBJ);
+    SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_ALL);
     SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(0, 16));
     SetGpuReg(REG_OFFSET_BLDY, 0);
     gTasks[taskId].tIsDoneFadingSprites = 0;
@@ -717,8 +652,6 @@ static void PlayerGen_StartFadeInTarget1OutTarget2(u8 taskId, u8 delay)
 
 static void Task_PlayerGen_FadeInTarget1OutTarget2(u8 taskId)
 {
-    int alphaCoeff2;
-
     if (gTasks[taskId].tAlphaCoeff1 == 16)
     {
         gTasks[gTasks[taskId].tMainTask].tIsDoneFadingSprites = TRUE;
@@ -733,8 +666,43 @@ static void Task_PlayerGen_FadeInTarget1OutTarget2(u8 taskId)
         gTasks[taskId].tDelayTimer = gTasks[taskId].tDelay;
         gTasks[taskId].tAlphaCoeff1++;
         gTasks[taskId].tAlphaCoeff2--;
-        alphaCoeff2 = gTasks[taskId].tAlphaCoeff2 << 8;
-        SetGpuReg(REG_OFFSET_BLDALPHA, gTasks[taskId].tAlphaCoeff1 + alphaCoeff2);
+        SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND((u8)gTasks[taskId].tAlphaCoeff1, (u8)gTasks[taskId].tAlphaCoeff2));
+    }
+}
+
+static void PlayerGen_StartFadeOutTarget1InTarget2(u8 taskId, u8 delay)
+{
+    u8 taskId2;
+
+    SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_ALL);
+    SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(16, 0));
+    SetGpuReg(REG_OFFSET_BLDY, 0);
+    gTasks[taskId].tIsDoneFadingSprites = 0;
+    taskId2 = CreateTask(Task_PlayerGen_FadeOutTarget1InTarget2, 0);
+    gTasks[taskId2].tMainTask = taskId;
+    gTasks[taskId2].tAlphaCoeff1 = 16;
+    gTasks[taskId2].tAlphaCoeff2 = 0;
+    gTasks[taskId2].tDelay = delay;
+    gTasks[taskId2].tDelayTimer = delay;
+}
+
+static void Task_PlayerGen_FadeOutTarget1InTarget2(u8 taskId)
+{
+    if (gTasks[taskId].tAlphaCoeff1 == 0)
+    {
+        gTasks[gTasks[taskId].tMainTask].tIsDoneFadingSprites = TRUE;
+        DestroyTask(taskId);
+    }
+    else if (gTasks[taskId].tDelayTimer)
+    {
+        gTasks[taskId].tDelayTimer--;
+    }
+    else
+    {
+        gTasks[taskId].tDelayTimer = gTasks[taskId].tDelay;
+        gTasks[taskId].tAlphaCoeff1--;
+        gTasks[taskId].tAlphaCoeff2++;
+        SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND((u8)gTasks[taskId].tAlphaCoeff1, (u8)gTasks[taskId].tAlphaCoeff2));
     }
 }
 
@@ -746,35 +714,13 @@ static void Task_PlayerGen_FadeInTarget1OutTarget2(u8 taskId)
 
 #undef tIsDoneFadingSprites
 
-static void PlayerGen_ClearWindow(u8 windowId)
+static void Task_PlayerGen_Cleanup(u8 taskId)
 {
-    u8 bgColor = GetFontAttribute(FONT_NORMAL, FONTATTR_COLOR_BACKGROUND);
-    u8 maxCharWidth = GetFontAttribute(FONT_NORMAL, FONTATTR_MAX_LETTER_WIDTH);
-    u8 maxCharHeight = GetFontAttribute(FONT_NORMAL, FONTATTR_MAX_LETTER_HEIGHT);
-    u8 winWidth = GetWindowAttribute(windowId, WINDOW_WIDTH);
-    u8 winHeight = GetWindowAttribute(windowId, WINDOW_HEIGHT);
-
-    FillWindowPixelRect(windowId, bgColor, 0, 0, maxCharWidth * winWidth, maxCharHeight * winHeight);
-    CopyWindowToVram(windowId, COPYWIN_GFX);
-}
-
-static void DrawMainMenuWindowBorder(const struct WindowTemplate *template, u16 baseTileNum)
-{
-    u16 r9 = 1 + baseTileNum;
-    u16 r10 = 2 + baseTileNum;
-    u16 sp18 = 3 + baseTileNum;
-    u16 spC = 5 + baseTileNum;
-    u16 sp10 = 6 + baseTileNum;
-    u16 sp14 = 7 + baseTileNum;
-    u16 r6 = 8 + baseTileNum;
-
-    FillBgTilemapBufferRect(template->bg, baseTileNum, template->tilemapLeft - 1, template->tilemapTop - 1, 1, 1, 2);
-    FillBgTilemapBufferRect(template->bg, r9, template->tilemapLeft, template->tilemapTop - 1, template->width, 1, 2);
-    FillBgTilemapBufferRect(template->bg, r10, template->tilemapLeft + template->width, template->tilemapTop - 1, 1, 1, 2);
-    FillBgTilemapBufferRect(template->bg, sp18, template->tilemapLeft - 1, template->tilemapTop, 1, template->height, 2);
-    FillBgTilemapBufferRect(template->bg, spC, template->tilemapLeft + template->width, template->tilemapTop, 1, template->height, 2);
-    FillBgTilemapBufferRect(template->bg, sp10, template->tilemapLeft - 1, template->tilemapTop + template->height, 1, 1, 2);
-    FillBgTilemapBufferRect(template->bg, sp14, template->tilemapLeft, template->tilemapTop + template->height, template->width, 1, 2);
-    FillBgTilemapBufferRect(template->bg, r6, template->tilemapLeft + template->width, template->tilemapTop + template->height, 1, 1, 2);
-    CopyBgTilemapBufferToVram(template->bg);
+    if (!gPaletteFade.active)
+    {
+        FreeAllWindowBuffers();
+        ResetAllPicSprites();
+        SetMainCallback2(CB2_NewGame);
+        DestroyTask(taskId);
+    }
 }
