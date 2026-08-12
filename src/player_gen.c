@@ -167,23 +167,6 @@ static const u8 *const sAndroPresetNames[] = {
 static void PlayerGen_SetupCB(void);
 static void PlayerGen_MainCB(void);
 static void PlayerGen_VBlankCB(void);
-static void PlayerGen_Init(MainCallback callback);
-static void PlayerGen_ResetGpuRegsAndBgs(void);
-static void PlayerGen_FadeAndBail(void);
-static void PlayerGen_InitWindows(void);
-static void PlayerGen_PrintUiSampleWindowText(void);
-static void PlayerGen_FreeResources(void);
-static inline void PlayerGen_PrintMessageBox(const u8 *str);
-static void PlayerGen_Init(MainCallback callback);
-static void PlayerGen_ResetGpuRegsAndBgs(void);
-static void PlayerGen_SetupCB(void);
-static void PlayerGen_MainCB(void);
-static void PlayerGen_VBlankCB(void);
-static void PlayerGen_FadeAndBail(void);
-static void PlayerGen_InitWindows(void);
-static void PlayerGen_PrintUiSampleWindowText(void);
-static inline void PlayerGen_PrintMessageBox(const u8 *str);
-static void PlayerGen_FreeResources(void);
 static void PlayerGen_ShowGenderMenu(void);
 static void PlayerGen_ClearGenderWindowTilemap(u8 bg, u8 x, u8 y, u8 width, u8 height, u8 unused);
 static void PlayerGen_ClearGenderWindow(u8 windowId, bool8 copyToVram);
@@ -207,15 +190,15 @@ static void Task_PlayerGen_WaitFadeAndExitGracefully(u8 taskId);
 static void Task_PlayerGen_FadeInTarget1OutTarget2(u8 taskId);
 
 // Sample UI helper functions
-static void PlayerGen_Init(MainCallback callback);;
-static void PlayerGen_ResetGpuRegsAndBgs(void);;
+static void PlayerGen_Init(MainCallback callback);
+static void PlayerGen_ResetGpuRegsAndBgs(void);
 static bool8 PlayerGen_InitBgs(void);
-static void PlayerGen_FadeAndBail(void);;
+static void PlayerGen_FadeAndBail(void);
 static bool8 PlayerGen_LoadGraphics(void);
-static void PlayerGen_InitWindows(void);;
-static void PlayerGen_PrintUiSampleWindowText(void);;
-static void PlayerGen_FreeResources(void);;
-static inline void PlayerGen_PrintMessageBox(const u8 *str);;
+static void PlayerGen_InitWindows(void);
+static void PlayerGen_PrintUiSampleWindowText(void);
+static inline void PlayerGen_PrintMessageBox(const u8 *str);
+static void PlayerGen_FreeResources(void);
 
 void Task_OpenPlayerGen(u8 taskId)
 {
@@ -306,6 +289,7 @@ static void PlayerGen_SetupCB(void)
         gMain.state++;
         break;
     case 5:
+        PlayerGen_PrintUiSampleWindowText();
         CreateTask(Task_PlayerGen_WaitFadeIn, 0);
         gMain.state++;
         break;
