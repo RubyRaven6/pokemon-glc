@@ -11,15 +11,17 @@ script TournamentGrounds_Reception_NameYourself{
     switch(var(VAR_TEMP_0))
     {
         case 3:
-            applymovement(LOCALID_PLAYER, moves(walk_up * 2, walk_left, delay_16*2))
+            applymovement(LOCALID_PLAYER, moves(walk_up * 2, walk_left, delay_16))
         case 4:
-            applymovement(LOCALID_PLAYER, moves(walk_up * 2, walk_left * 2, delay_16*2))
+            applymovement(LOCALID_PLAYER, moves(walk_up * 2, walk_left * 2, delay_16))
         case 5:
-            applymovement(LOCALID_PLAYER, moves(walk_up * 2, walk_left * 3, delay_16*2))
+            applymovement(LOCALID_PLAYER, moves(walk_up * 2, walk_left * 3, delay_16))
     }
     waitmovement(LOCALID_PLAYER)
+    applymovement(LOCALID_RECEPTION_TEALA,moves(walk_in_place_fast_right, delay_16))
     setspeaker(SP_NAME_TEALA)
     msgbox("Welcome to the Global League\nConference! Are you competing?")
+    waitmovement(LOCALID_RECEPTION_TEALA)
     closemessage
     applymovement(LOCALID_PLAYER, moves(walk_in_place_left, delay_16 * 2))
     waitmovement(0)
