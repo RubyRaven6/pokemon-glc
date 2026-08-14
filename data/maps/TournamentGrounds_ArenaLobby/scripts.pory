@@ -20,6 +20,63 @@ script TournamentGrounds_ArenaLobby_EventScript_Teala {
             bufferstring(STR_VAR_1, "evening")
             break
     }
+    if(flag(FLAG_SYS_POKEMON_GET)){goto(RegularTealaSpiel)}
+    else{goto(RegularTealaSpiel)}
+}
+
+script(local) NewTealaSpiel
+{
+    setspeaker(SP_NAME_TEALA)
+    msgbox(format("Hi! Good {STR_VAR_1}!\nAre you a new challenger?"), MSGBOX_YESNO)
+    if(var(VAR_RESULT) == NO)
+    {
+        message("Umm… okay then.")
+        release
+        end
+    }
+    else
+    {
+        message(
+            "Welcome! I hope you'll have a good time.\p"
+            "My name is Teala, and I'll be giving you a rundown for how our tournament works.\p"
+            "long explanation\p"
+            "As a new challenger, you'll be given Pokémon to reflect the latest regional tournament you face."
+            "Let me give those Pokémon and items to you now!"
+        )
+        waitmessage
+        closemessage
+        setflag(FLAG_SYS_POKEDEX_GET)
+        callnative(GivePlayerUnlockedPokemon)
+        callnative(GiveStartingKeyItems)
+        setspeaker(SP_NAME_TEALA)
+        message(
+            "explanation about how to unlock more Pokémon"
+            "Without any further delay, please follow me to our Green Room!"
+        )
+        waitmessage
+        closemessage
+        applymovement(TEALA, moves(walk_up * 5))
+        applymovement(OBJ_EVENT_ID_PLAYER, moves(walk_up * 5))
+        waitmovement(0)
+        opendoor(11, 4)
+        waitdooranim
+        applymovement(TEALA, moves(walk_up))
+        applymovement(OBJ_EVENT_ID_PLAYER, moves(walk_up * 2))
+        waitmovement(TEALA)
+        removeobject(TEALA)
+        waitmovement(OBJ_EVENT_ID_PLAYER)
+        hideplayer
+        closedoor(11, 4)
+        waitdooranim
+        warp(MAP_TOURNAMENT_GROUNDS_GREEN_ROOM, 3, 7)
+        waitstate
+        release
+        end
+    }
+}
+
+script(local) RegularTealaSpiel
+{
     setspeaker(SP_NAME_TEALA)
     msgbox(format("Hi! Good {STR_VAR_1}!\nWill you be entering our tournament?"), MSGBOX_YESNO)
     if(var(VAR_RESULT) == YES)
