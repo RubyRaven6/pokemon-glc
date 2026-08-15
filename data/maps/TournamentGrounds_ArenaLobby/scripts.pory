@@ -40,8 +40,8 @@ script(local) NewTealaSpiel
             "Welcome! I hope you'll have a good time.\p"
             "My name is Teala, and I'll be giving you a rundown for how our tournament works.\p"
             "long explanation\p"
-            "As a new challenger, you'll be given Pokémon to reflect the latest regional tournament you face."
-            "Let me give those Pokémon and items to you now!"
+            "As a new challenger, you'll be given Pokémon to reflect the latest regional tournament you face."
+            "Let me give those Pokémon and items to you now!"
         )
         waitmessage
         closemessage
@@ -50,7 +50,7 @@ script(local) NewTealaSpiel
         callnative(GiveStartingKeyItems)
         setspeaker(SP_NAME_TEALA)
         message(
-            "explanation about how to unlock more Pokémon"
+            "explanation about how to unlock more Pokémon"
             "Without any further delay, please follow me to our Green Room!"
         )
         waitmessage
