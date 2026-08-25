@@ -1026,4 +1026,48 @@ extern const u8 gBattleAnimSpecial_SubstituteToMon[];
 extern const u8 gBattleAnimSpecial_MonToSubstitute[];
 extern const u8 gBattleAnimSpecial_CriticalCaptureBallThrow[];
 
+// Custom Moves
+extern const u8 gBattleAnimMove_RockHeart[];
+extern const u8 gBattleAnimMove_Riptide[];
+extern const u8 gBattleAnimMove_ArcFault[];
+extern const u8 gBattleAnimMove_Grasspiercer[];
+extern const u8 gBattleAnimMove_PsycheLock[];
+extern const u8 gBattleAnimMove_PoisonedStars[];
+extern const u8 gBattleAnimMove_MagmaticRage[];
+extern const u8 gBattleAnimMove_ShallowGrave[];
+extern const u8 gBattleAnimMove_Sinkhole[];
+extern const u8 gBattleAnimMove_Sunbloom[];
+extern const u8 gBattleAnimMove_AuraFarming[];
+extern const u8 gBattleAnimMove_WakeCrash[];
+extern const u8 gBattleAnimMove_RazzleDazzle[];
+extern const u8 gBattleAnimMove_Steelsurge[];
+extern const u8 gBattleAnimMove_Overexposure[];
+extern const u8 gBattleAnimMove_DryFulmination[];
+extern const u8 gBattleAnimMove_Mineragraphy[];
+extern const u8 gBattleAnimMove_SurfsUp[];
+extern const u8 gBattleAnimMove_Undercurrent[];
+extern const u8 gBattleAnimMove_ThirdDegree[];
+extern const u8 gBattleAnimMove_Inversion[];
+extern const u8 gBattleAnimMove_WingSlicer[];
+extern const u8 gBattleAnimMove_GeminicBlast[];
+extern const u8 gBattleAnimMove_Showstopper[];
+extern const u8 gBattleAnimMove_Research[];
+extern const u8 gBattleAnimMove_Chrysalis[];
+extern const u8 gBattleAnimMove_CastingCall[];
+extern const u8 gBattleAnimMove_MountingPressure[];
+extern const u8 gBattleAnimMove_JetStream[];
+extern const u8 gBattleAnimMove_StuntDouble[];
+extern const u8 gBattleAnimMove_CalamityCleave[];
+extern const u8 gBattleAnimMove_Psidekick[];
+extern const u8 gBattleAnimMove_MoshPit[];
+extern const u8 gBattleAnimMove_Synchroswim[];
+extern const u8 gBattleAnimMove_Windstorm[];
+extern const u8 gBattleAnimMove_Vinsectication[];
+extern const u8 gBattleAnimMove_FussyFuss[];
+extern const u8 gBattleAnimMove_Jinx[];
+extern const u8 gBattleAnimMove_CrashingFist[];
+extern const u8 gBattleAnimMove_HydraulicPress[];
+extern const u8 gBattleAnimMove_IceRink[];
+extern const u8 gBattleAnimMove_StormSacrifice[];
+
 #endif // GUARD_BATTLE_ANIM_SCRIPTS_H

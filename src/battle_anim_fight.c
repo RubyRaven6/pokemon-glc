@@ -259,6 +259,14 @@ const struct SpriteTemplate gArmThrustHandSpriteTemplate =
     .callback = AnimArmThrustHit,
 };
 
+const struct SpriteTemplate gPsycheLockSpriteTemplate =
+{
+    .tileTag = ANIM_TAG_PSYCHE_LOCK,
+    .paletteTag = ANIM_TAG_PSYCHE_LOCK,
+    .oam = &gOamData_AffineOff_ObjNormal_64x64,
+    .callback = AnimStompFoot,
+};
+
 static const union AnimCmd sAnim_RevengeSmallScratch_0[] =
 {
     ANIMCMD_FRAME(0, 4),
@@ -684,7 +692,7 @@ static void AnimStompFoot_Step(struct Sprite *sprite)
 
 static void AnimStompFoot_End(struct Sprite *sprite)
 {
-    sprite->data[0] = 15;
+    sprite->data[0] = (gAnimMoveIndex == MOVE_PSYCHE_LOCK) ? 60 : 15;
 
     sprite->callback = WaitAnimForDuration;
     StoreSpriteCallbackInData6(sprite, DestroyAnimSprite);

@@ -22059,7 +22059,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
             .moveEffect = MOVE_EFFECT_INFATUATION,
             .chance = 30,
         }),
-        .battleAnimScript = gBattleAnimMove_RockThrow,
+        .battleAnimScript = gBattleAnimMove_RockHeart,
     },
 
     [MOVE_RIPTIDE] =
@@ -22077,7 +22077,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .priority = 0,
         .category = DAMAGE_CATEGORY_STATUS,
         .argument = { .damagePercentage = 50 },
-        .battleAnimScript = gBattleAnimMove_Whirlpool,
+        .battleAnimScript = gBattleAnimMove_Riptide,
     },
 
     [MOVE_ARC_FAULT] =
@@ -22100,7 +22100,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .additionalEffects = ADDITIONAL_EFFECTS({
             .moveEffect = MOVE_EFFECT_ELECTRIC_TERRAIN,
         }),
-        .battleAnimScript = gBattleAnimMove_Explosion,
+        .battleAnimScript = gBattleAnimMove_ArcFault,
     },
 
     [MOVE_GRASSPIERCER] =
@@ -22121,7 +22121,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
             .moveEffect = MOVE_EFFECT_GRASSPIERCER,
             .chance = 50,
         }),
-        .battleAnimScript = gBattleAnimMove_NeedleArm,
+        .battleAnimScript = gBattleAnimMove_Grasspiercer,
     },
 
     [MOVE_PSYCHE_LOCK] =
@@ -22139,7 +22139,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .priority = 0,
         .category = DAMAGE_CATEGORY_STATUS,
         .setsStrictEscapePrevention = TRUE,
-        .battleAnimScript = gBattleAnimMove_MeanLook,
+        .battleAnimScript = gBattleAnimMove_PsycheLock,
     },
 
     [MOVE_POISONED_STARS] =
@@ -22162,7 +22162,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
             .moveEffect = MOVE_EFFECT_POISON,
             .chance = 30,
         }),
-        .battleAnimScript = gBattleAnimMove_PoisonSting,
+        .battleAnimScript = gBattleAnimMove_PoisonedStars,
     },
 
     [MOVE_MAGMATIC_RAGE] =
@@ -22183,7 +22183,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
             .moveEffect = MOVE_EFFECT_BURN,
             .chance = 10,
         }),
-        .battleAnimScript = gBattleAnimMove_MagmaStorm,
+        .battleAnimScript = gBattleAnimMove_MagmaticRage,
     },
 
     [MOVE_SHALLOW_GRAVE] =
@@ -22209,7 +22209,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
             .speed = 3,
             .chance = 100,
         }),
-        .battleAnimScript = gBattleAnimMove_SandTomb,
+        .battleAnimScript = gBattleAnimMove_ShallowGrave,
     },
 
     [MOVE_SINKHOLE] =
@@ -22226,7 +22226,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .target = TARGET_SELECTED,
         .priority = 0,
         .category = DAMAGE_CATEGORY_PHYSICAL,
-        .battleAnimScript = gBattleAnimMove_RockTomb,
+        .battleAnimScript = gBattleAnimMove_Sinkhole,
     },
 
     [MOVE_SUNBLOOM] =
@@ -22247,7 +22247,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
             .moveEffect = MOVE_EFFECT_SUNBLOOM,
             .self = TRUE,
         }),
-        .battleAnimScript = gBattleAnimMove_SunnyDay,
+        .battleAnimScript = gBattleAnimMove_Sunbloom,
     },
 
     [MOVE_AURA_FARMING] =
@@ -22264,7 +22264,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .target = TARGET_BOTH,
         .priority = -3,
         .category = DAMAGE_CATEGORY_SPECIAL,
-        .battleAnimScript = gBattleAnimMove_AuraSphere,
+        .battleAnimScript = gBattleAnimMove_AuraFarming,
     },
 
     [MOVE_WAKE_CRASH] =
@@ -22283,7 +22283,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .category = DAMAGE_CATEGORY_PHYSICAL,
         .makesContact = TRUE,
         .argument = { .recoilPercentage = 20 },
-        .battleAnimScript = gBattleAnimMove_AquaJet,
+        .battleAnimScript = gBattleAnimMove_WakeCrash,
     },
 
     [MOVE_RAZZLE_DAZZLE] =
@@ -22300,7 +22300,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .target = TARGET_SELECTED,
         .priority = 0,
         .category = DAMAGE_CATEGORY_SPECIAL,
-        .battleAnimScript = gBattleAnimMove_ShadowBall,
+        .battleAnimScript = gBattleAnimMove_RazzleDazzle,
     },
 
     [MOVE_STEELSURGE] =
@@ -22321,7 +22321,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .ignoresProtect = TRUE,
         .mirrorMoveBanned = TRUE,
         .forcePressure = TRUE,
-        .battleAnimScript = gBattleAnimMove_GMaxSteelsurge,
+        .battleAnimScript = gBattleAnimMove_Steelsurge,
     },
 
     [MOVE_OVEREXPOSURE] =
@@ -22341,7 +22341,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .additionalEffects = ADDITIONAL_EFFECTS({
             .moveEffect = MOVE_EFFECT_OVEREXPOSURE,
         }),
-        .battleAnimScript = gBattleAnimMove_FreezeDry,
+        .battleAnimScript = gBattleAnimMove_Overexposure,
     },
 
     [MOVE_DRY_FULMINATION] =
@@ -22363,7 +22363,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
             .moveEffect = MOVE_EFFECT_BURN,
             .chance = 30,
         }),
-        .battleAnimScript = gBattleAnimMove_Thunder,
+        .battleAnimScript = gBattleAnimMove_DryFulmination,
     },
 
     [MOVE_MINERAGRAPHY] =
@@ -22381,7 +22381,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .priority = 0,
         .category = DAMAGE_CATEGORY_STATUS,
         .snatchAffected = TRUE,
-        .battleAnimScript = gBattleAnimMove_CosmicPower,
+        .battleAnimScript = gBattleAnimMove_Mineragraphy,
     },
 
     [MOVE_SURFS_UP] =
@@ -22400,7 +22400,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .category = DAMAGE_CATEGORY_PHYSICAL,
         .argument = { .type = TYPE_WATER },
         .makesContact = TRUE,
-        .battleAnimScript = gBattleAnimMove_Surf,
+        .battleAnimScript = gBattleAnimMove_SurfsUp,
     },
 
     [MOVE_UNDERCURRENT] =
@@ -22417,7 +22417,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .target = TARGET_SELECTED,
         .priority = 0,
         .category = DAMAGE_CATEGORY_SPECIAL,
-        .battleAnimScript = gBattleAnimMove_Thunderbolt,
+        .battleAnimScript = gBattleAnimMove_Undercurrent,
     },
 
     [MOVE_THIRD_DEGREE] =
@@ -22435,7 +22435,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .priority = 0,
         .category = DAMAGE_CATEGORY_SPECIAL,
         .argument = { .status = STATUS1_BURN },
-        .battleAnimScript = gBattleAnimMove_Flamethrower,
+        .battleAnimScript = gBattleAnimMove_ThirdDegree,
     },
 
     [MOVE_INVERSION] =
@@ -22453,7 +22453,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .priority = 0,
         .category = DAMAGE_CATEGORY_STATUS,
         .mirrorMoveBanned = TRUE,
-        .battleAnimScript = gBattleAnimMove_TrickRoom,
+        .battleAnimScript = gBattleAnimMove_Inversion,
     },
 
     [MOVE_WING_SLICER] =
@@ -22472,7 +22472,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .category = DAMAGE_CATEGORY_PHYSICAL,
         .strikeCount = 2,
         .slicingMove = TRUE,
-        .battleAnimScript = gBattleAnimMove_AerialAce,
+        .battleAnimScript = gBattleAnimMove_WingSlicer,
     },
 
     [MOVE_GEMINIC_BLAST] =
@@ -22494,7 +22494,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
             .moveEffect = MOVE_EFFECT_CONFUSION,
             .chance = 30,
         }),
-        .battleAnimScript = gBattleAnimMove_Psybeam,
+        .battleAnimScript = gBattleAnimMove_GeminicBlast,
     },
 
     [MOVE_SHOWSTOPPER] =
@@ -22511,7 +22511,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .target = TARGET_USER,
         .priority = 2,
         .category = DAMAGE_CATEGORY_STATUS,
-        .battleAnimScript = gBattleAnimMove_FollowMe,
+        .battleAnimScript = gBattleAnimMove_Showstopper,
     },
 
     [MOVE_RESEARCH] =
@@ -22528,7 +22528,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .target = TARGET_USER,
         .priority = 0,
         .category = DAMAGE_CATEGORY_STATUS,
-        .battleAnimScript = gBattleAnimMove_CalmMind,
+        .battleAnimScript = gBattleAnimMove_Research,
     },
 
     [MOVE_CHRYSALIS] =
@@ -22546,7 +22546,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .priority = 4,
         .category = DAMAGE_CATEGORY_STATUS,
         .argument = { .protectMethod = PROTECT_CHRYSALIS },
-        .battleAnimScript = gBattleAnimMove_Protect,
+        .battleAnimScript = gBattleAnimMove_Chrysalis,
     },
 
     [MOVE_CASTING_CALL] =
@@ -22563,7 +22563,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .target = TARGET_USER,
         .priority = 0,
         .category = DAMAGE_CATEGORY_STATUS,
-        .battleAnimScript = gBattleAnimMove_Teleport,
+        .battleAnimScript = gBattleAnimMove_CastingCall,
     },
 
     [MOVE_ORBITAL_PULL] =
@@ -22581,7 +22581,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .priority = 0,
         .category = DAMAGE_CATEGORY_STATUS,
         .argument.twoTurnAttack = { .stringId = STRINGID_PKNMABSORBINGPOWER },
-        .battleAnimScript = gBattleAnimMove_Gravity,
+        .battleAnimScript = gBattleAnimMove_MountingPressure,
     },
 
     [MOVE_JET_STREAM] =
@@ -22598,7 +22598,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .target = TARGET_SELECTED,
         .priority = 0,
         .category = DAMAGE_CATEGORY_PHYSICAL,
-        .battleAnimScript = gBattleAnimMove_AirSlash,
+        .battleAnimScript = gBattleAnimMove_JetStream,
     },
 
     [MOVE_STUNT_DOUBLE] =
@@ -22615,7 +22615,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .target = TARGET_USER,
         .priority = 0,
         .category = DAMAGE_CATEGORY_STATUS,
-        .battleAnimScript = gBattleAnimMove_Substitute,
+        .battleAnimScript = gBattleAnimMove_StuntDouble,
     },
 
     [MOVE_CALAMITY_CLEAVE] =
@@ -22634,7 +22634,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .category = DAMAGE_CATEGORY_PHYSICAL,
         .cantUseTwice = TRUE,
         .slicingMove = TRUE,
-        .battleAnimScript = gBattleAnimMove_Slash,
+        .battleAnimScript = gBattleAnimMove_CalamityCleave,
     },
 
     [MOVE_PSIDEKICK] =
@@ -22651,7 +22651,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .target = TARGET_SELECTED,
         .priority = 0,
         .category = DAMAGE_CATEGORY_PHYSICAL,
-        .battleAnimScript = gBattleAnimMove_DoubleHit,
+        .battleAnimScript = gBattleAnimMove_Psidekick,
     },
 
     [MOVE_MOSH_PIT] =
@@ -22672,7 +22672,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
             .moveEffect = MOVE_EFFECT_POISON,
             .chance = 10,
         }),
-        .battleAnimScript = gBattleAnimMove_BeatUp,
+        .battleAnimScript = gBattleAnimMove_MoshPit,
     },
 
     [MOVE_SYNCHROSWIM] =
@@ -22690,7 +22690,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .priority = 0,
         .category = DAMAGE_CATEGORY_PHYSICAL,
         .strikeCount = 2,
-        .battleAnimScript = gBattleAnimMove_Dive,
+        .battleAnimScript = gBattleAnimMove_Synchroswim,
     },
 
     [MOVE_WINDSTORM] =
@@ -22708,7 +22708,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .priority = 0,
         .category = DAMAGE_CATEGORY_STATUS,
         .argument = { .weatherType = BATTLE_WEATHER_WINDSTORM },
-        .battleAnimScript = gBattleAnimMove_Tailwind,
+        .battleAnimScript = gBattleAnimMove_Windstorm,
     },
 
     [MOVE_VINSECTICATION] =
@@ -22725,7 +22725,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .target = TARGET_SELECTED,
         .priority = 0,
         .category = DAMAGE_CATEGORY_PHYSICAL,
-        .battleAnimScript = gBattleAnimMove_StruggleBug,
+        .battleAnimScript = gBattleAnimMove_Vinsectication,
     },
 
     [MOVE_FUSSY_FUSS] =
@@ -22747,7 +22747,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
             .attack = 1,
             .chance = 100,
         }),
-        .battleAnimScript = gBattleAnimMove_Headbutt,
+        .battleAnimScript = gBattleAnimMove_FussyFuss,
     },
 
     [MOVE_JINX] =
@@ -22765,7 +22765,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .priority = 0,
         .category = DAMAGE_CATEGORY_SPECIAL,
         .ignoresProtect = TRUE,
-        .battleAnimScript = gBattleAnimMove_FutureSight,
+        .battleAnimScript = gBattleAnimMove_Jinx,
     },
 
     [MOVE_CRASHING_FIST] =
@@ -22784,7 +22784,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .category = DAMAGE_CATEGORY_PHYSICAL,
         .makesContact = TRUE,
         .ignoresProtect = TRUE,
-        .battleAnimScript = gBattleAnimMove_Feint,
+        .battleAnimScript = gBattleAnimMove_CrashingFist,
     },
 
     [MOVE_HYDRAULIC_PRESS] =
@@ -22801,7 +22801,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .target = TARGET_SELECTED,
         .priority = 0,
         .category = DAMAGE_CATEGORY_PHYSICAL,
-        .battleAnimScript = gBattleAnimMove_BodyPress,
+        .battleAnimScript = gBattleAnimMove_HydraulicPress,
     },
 
     [MOVE_ICE_RINK] =
@@ -22822,7 +22822,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .ignoresProtect = TRUE,
         .mirrorMoveBanned = TRUE,
         .forcePressure = TRUE,
-        .battleAnimScript = gBattleAnimMove_IceSpinner,
+        .battleAnimScript = gBattleAnimMove_IceRink,
     },
 
     [MOVE_STORM_SACRIFICE] =
@@ -22839,7 +22839,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .target = TARGET_SELECTED,
         .priority = 0,
         .category = DAMAGE_CATEGORY_SPECIAL,
-        .battleAnimScript = gBattleAnimMove_DragonPulse,
+        .battleAnimScript = gBattleAnimMove_StormSacrifice,
     },
 
     // Z-Moves

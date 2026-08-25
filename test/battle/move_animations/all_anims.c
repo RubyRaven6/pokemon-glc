@@ -140,7 +140,8 @@ static bool32 TargetHasToMove(enum Move move) // Opponent needs to hit the playe
      || effect == EFFECT_DISABLE
      || effect == EFFECT_MIMIC
      || effect == EFFECT_SPITE
-     || effect == EFFECT_ENCORE)
+     || effect == EFFECT_ENCORE
+     || effect == EFFECT_AURA_FARMING)
         return TRUE;
     return FALSE;
 }
@@ -296,7 +297,7 @@ static void WhenSingles(enum Move move, struct BattlePokemon *attacker, struct B
     }
     // Effective turn
     TURN {
-        if (effect == EFFECT_REFLECT_DAMAGE)
+        if (effect == EFFECT_REFLECT_DAMAGE || effect == EFFECT_AURA_FARMING)
         {
             bool32 useSpecialMove = GetMoveReflectDamage_DamageCategories(move) == 1u << DAMAGE_CATEGORY_SPECIAL;
             MOVE(defender, useSpecialMove ? MOVE_SWIFT : MOVE_POUND);
@@ -2593,6 +2594,75 @@ SINGLE_BATTLE_TEST("Tera Blast animations work")
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_TERA_CHARGE, player);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_TERA_ACTIVATE, player);
         ANIMATION(ANIM_TYPE_MOVE, move, player);
+    } THEN {
+        FORCE_MOVE_ANIM(FALSE);
+        if (gLoadFail || gSpriteAllocs != 0)
+            DebugPrintf("Move failed: %S (%u)", GetMoveName(move), move);
+        EXPECT_EQ(gLoadFail, FALSE);
+        EXPECT_EQ(gSpriteAllocs, 0);
+    }
+}
+
+SINGLE_BATTLE_TEST("Custom Move animations work")
+{
+    u32 j = MOVE_ROCK_HEART;
+    enum Move move = MOVE_NONE;
+    enum Species species = SPECIES_NONE;
+    u32 k = 0, variation = 0, variationsNumber;
+    u32 friendship = 0, tempFriendship;
+    enum Move tempMove;
+    enum Species tempSpecies;
+    FORCE_MOVE_ANIM(TRUE);
+    for (; j <= ANIM_TEST_END_MOVE; j++) {
+        variationsNumber = GetVariationsNumber(j, FALSE);
+        for (k = 0; k < variationsNumber; k++) {
+            ParametrizeMovesAndSpecies(j, &tempMove, &tempSpecies, k);
+            tempFriendship = ParametrizeFriendship(j, k);
+            PARAMETRIZE { move = tempMove; species = tempSpecies; variation = k; friendship = tempFriendship;}
+        }
+    }
+
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET) {};
+        OPPONENT(SPECIES_WOBBUFFET) { Item(ITEM_FOCUS_SASH); }
+    } WHEN {
+        TURN { MOVE(player, move); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, move, player);
+    } THEN {
+        FORCE_MOVE_ANIM(FALSE);
+        if (gLoadFail || gSpriteAllocs != 0)
+            DebugPrintf("Move failed: %S (%u)", GetMoveName(move), move);
+        EXPECT_EQ(gLoadFail, FALSE);
+        EXPECT_EQ(gSpriteAllocs, 0);
+    }
+}
+
+DOUBLE_BATTLE_TEST("Individual Custom Move test")
+{
+    u32 move;
+    PARAMETRIZE { move = MOVE_SURFS_UP; }
+
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET) {};
+        PLAYER(SPECIES_WYNAUT) { Item(ITEM_FOCUS_SASH); }
+        PLAYER(SPECIES_WOBBUFFET) {};
+        OPPONENT(SPECIES_WOBBUFFET) { Item(ITEM_FOCUS_SASH); }
+        OPPONENT(SPECIES_WYNAUT) { Item(ITEM_FOCUS_SASH); }
+    } WHEN {
+        TURN {
+            if (gMovesInfo[move].effect == EFFECT_AURA_FARMING)
+            {
+                MOVE(opponentLeft, MOVE_POUND, target: playerLeft);
+            }
+            MOVE(playerLeft, move, target: opponentLeft);
+            if (gMovesInfo[move].effect == EFFECT_CASTING_CALL)
+            {
+                SEND_OUT(playerLeft, 2);
+            }
+        }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, move, playerLeft);
     } THEN {
         FORCE_MOVE_ANIM(FALSE);
         if (gLoadFail || gSpriteAllocs != 0)
