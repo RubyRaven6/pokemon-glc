@@ -1354,8 +1354,8 @@ BattleScript_EffectStuntDouble::
 	setvolatile BS_ATTACKER, VOLATILE_STUNT_DOUBLE
 	attackanimation
 	waitanimation
-	healthbarupdate BS_ATTACKER, PASSIVE_HP_UPDATE
-	datahpupdate BS_ATTACKER, PASSIVE_HP_UPDATE
+	healthbarupdate BS_ATTACKER
+	datahpupdate BS_ATTACKER, ASSURANCE_DOUBLE
 BattleScript_StuntDoubleString:
 	pause B_WAIT_TIME_SHORT
 	printfromtable gSubstituteUsedStringIds
@@ -1371,8 +1371,8 @@ BattleScript_ResearchOffensesUp::
 	return
 
 BattleScript_ChrysalisHeal::
-	healthbarupdate BS_EFFECT_BATTLER, PASSIVE_HP_UPDATE
-	datahpupdate BS_EFFECT_BATTLER, PASSIVE_HP_UPDATE
+	healthbarupdate BS_EFFECT_BATTLER
+	datahpupdate BS_EFFECT_BATTLER, ASSURANCE_DOUBLE
 	printstring STRINGID_PKMNREGAINEDHEALTH
 	waitmessage B_WAIT_TIME_LONG
 	return
@@ -1381,8 +1381,8 @@ BattleScript_StuntDoubleExplosion::
 	playanimation BS_SCRIPTING, B_ANIM_SUBSTITUTE_FADE
 	printstring STRINGID_PKMNSUBSTITUTEFADED
 	waitmessage B_WAIT_TIME_LONG
-	healthbarupdate BS_ATTACKER, PASSIVE_HP_UPDATE
-	datahpupdate BS_ATTACKER, PASSIVE_HP_UPDATE
+	healthbarupdate BS_ATTACKER
+	datahpupdate BS_ATTACKER, ASSURANCE_DOUBLE
 	tryfaintmon BS_ATTACKER
 	seteffectprimary BS_EFFECT_BATTLER, BS_ATTACKER, MOVE_EFFECT_FROSTBITE
 	return
@@ -1600,8 +1600,8 @@ BattleScript_MoveAnimation::
 	return
 
 BattleScript_AuraFarmingFaint::
-	healthbarupdate BS_ATTACKER, PASSIVE_HP_UPDATE
-	datahpupdate BS_ATTACKER, PASSIVE_HP_UPDATE
+	healthbarupdate BS_ATTACKER
+	datahpupdate BS_ATTACKER, ASSURANCE_DOUBLE
 	tryfaintmon BS_ATTACKER
 	return
 
@@ -2221,8 +2221,6 @@ BattleScript_EffectMeanLookGen5:
 BattleScript_EffectPsycheLock::
 	attackcanceler
 	jumpifvolatile BS_TARGET, VOLATILE_ESCAPE_PREVENTION, BattleScript_ButItFailed
-	jumpifsubstituteblocks BattleScript_ButItFailed
-	accuracycheck
 	attackanimation
 	waitanimation
 	seteffectprimary BS_ATTACKER, BS_TARGET, MOVE_EFFECT_PREVENT_ESCAPE
