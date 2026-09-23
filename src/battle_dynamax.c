@@ -208,26 +208,6 @@ void UndoDynamax(enum BattlerId battler)
         TryBattleFormChange(battler, FORM_CHANGE_END_BATTLE, GetBattlerAbility(battler));
 }
 
-// Certain moves are blocked by Max Guard that normally ignore protection.
-bool32 IsMoveBlockedByMaxGuard(enum Move move)
-{
-    switch (move)
-    {
-    case MOVE_BLOCK:
-    case MOVE_FLOWER_SHIELD:
-    case MOVE_GEAR_UP:
-    case MOVE_MAGNETIC_FLUX:
-    case MOVE_PHANTOM_FORCE:
-    case MOVE_PSYCH_UP:
-    case MOVE_SHADOW_FORCE:
-    case MOVE_TEATIME:
-    case MOVE_TRANSFORM:
-        return TRUE;
-    default:
-        return FALSE;
-    }
-}
-
 static enum Move GetTypeBasedMaxMove(enum BattlerId battler, enum Type type)
 {
     // Gigantamax check
@@ -260,7 +240,7 @@ static enum Move GetTypeBasedMaxMove(enum BattlerId battler, enum Type type)
 enum Move GetMaxMove(enum BattlerId battler, enum Move baseMove)
 {
     enum Type moveType;
-    SetTypeBeforeUsingMove(baseMove, battler);
+    SetTypeBeforeUsingMove(baseMove, battler, GetBattlerAbility(battler), GetBattlerHoldEffect(battler));
     moveType = GetBattleMoveType(baseMove);
 
     if (baseMove == MOVE_NONE) // for move display
@@ -289,14 +269,14 @@ enum MaxPowerTier
 };
 
 // Gets the base power of a Max Move.
-u32 GetMaxMovePower(enum Move move)
+u32 GetMaxMovePower(enum Move baseMove, enum Move move)
 {
     // G-Max Drum Solo, G-Max Hydrosnipe, and G-Max Fireball always have 160 base power.
     if (MoveHasAdditionalEffect(move, MOVE_EFFECT_FIXED_POWER))
         return 160;
 
     // Exceptions to all other rules below:
-    switch (move)
+    switch (baseMove)
     {
     case MOVE_TRIPLE_KICK:   return 80;
     case MOVE_GEAR_GRIND:    return 100;
@@ -305,11 +285,11 @@ u32 GetMaxMovePower(enum Move move)
     default: break;
     }
 
-    enum MaxPowerTier tier = GetMaxPowerTier(move);
-    enum Type moveType = GetMoveType(move);
+    enum MaxPowerTier tier = GetMaxPowerTier(baseMove);
+    enum Type moveType = GetMoveType(baseMove);
     if (moveType == TYPE_FIGHTING
      || moveType == TYPE_POISON
-     || move == MOVE_MULTI_ATTACK)
+     || baseMove == MOVE_MULTI_ATTACK)
     {
         switch (tier)
         {
