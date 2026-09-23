@@ -146,9 +146,9 @@ Trainer Teams can be found in the following docs:
 | Tournament Logic                  | Ruby, Estellar                                          |
 
 # Credits
-| Credit                | Feature                                   |
-| :----------------------| :-----------------------------------------:|
-| pokeemerald-expansion | RHH and all<br>the Expansion Contributors |
-| Mudskip               | Pokemon GLC Logo                          |
-| EndlessTGX | [Crystal Sprite](https://www.deviantart.com/endlesstgx/art/Crystal-Sprites-704463782) |
+| Credit                | Feature                                                                               |
+| :----------------------| :-------------------------------------------------------------------------------------:|
+| pokeemerald-expansion | RHH and all<br>the Expansion Contributors                                             |
+| Mudskip               | Pokemon GLC Logo                                                                      |
+| EndlessTGX            | [Crystal Sprite](https://www.deviantart.com/endlesstgx/art/Crystal-Sprites-704463782) |
 
