@@ -6204,7 +6204,7 @@ static inline u32 CalcSinkholeBasePower(struct DamageContext *ctx)
 
     if (!IsBattlerGrounded(ctx->battlerDef, ctx->abilities[ctx->battlerDef], ctx->holdEffects[ctx->battlerDef]))
         basePower /= 2;
-    if (ctx->fieldStatuses & STATUS_FIELD_GRAVITY)
+    if (gFieldStatuses & STATUS_FIELD_GRAVITY)
         basePower *= 2;
 
     return basePower;

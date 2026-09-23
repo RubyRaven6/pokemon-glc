@@ -22263,7 +22263,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .category = DAMAGE_CATEGORY_PHYSICAL,
         .additionalEffects = ADDITIONAL_EFFECTS({
             .moveEffect = MOVE_EFFECT_WRAP,
-            .multistring.wrapped = B_MSG_WRAPPED_SAND_TOMB,
+            .argument.wrapped = B_MSG_WRAPPED_SAND_TOMB,
         },
         {
             .moveEffect = MOVE_EFFECT_STAT_MINUS,
