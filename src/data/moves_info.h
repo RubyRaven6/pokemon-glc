@@ -22136,7 +22136,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .pp = 10,
         .target = TARGET_SELECTED,
         .priority = 0,
-        .category = DAMAGE_CATEGORY_STATUS,
+        .category = DAMAGE_CATEGORY_SPECIAL,
         .argument = { .damagePercentage = 50 },
         .battleAnimScript = gBattleAnimMove_Whirlpool,
     },
@@ -22181,6 +22181,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .additionalEffects = ADDITIONAL_EFFECTS({
             .moveEffect = MOVE_EFFECT_GRASSPIERCER,
             .chance = 50,
+            .argument.randomMoveEffects = { MOVE_EFFECT_TOXIC, MOVE_EFFECT_PARALYSIS, MOVE_EFFECT_SLEEP },
         }),
         .battleAnimScript = gBattleAnimMove_NeedleArm,
     },

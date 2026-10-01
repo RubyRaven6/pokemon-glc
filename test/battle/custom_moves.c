@@ -13,7 +13,7 @@ ASSUMPTIONS
     ASSUME(GetMoveType(MOVE_RIPTIDE) == TYPE_WATER);
     ASSUME(GetMoveAccuracy(MOVE_RIPTIDE) == 100);
     ASSUME(GetMoveDamagePercentage(MOVE_RIPTIDE) == 50);
-    ASSUME(GetMoveCategory(MOVE_RIPTIDE) == DAMAGE_CATEGORY_STATUS);
+    ASSUME(GetMoveCategory(MOVE_RIPTIDE) == DAMAGE_CATEGORY_SPECIAL);
 
     ASSUME(IsExplosionMove(MOVE_ARC_FAULT));
     ASSUME(GetMoveType(MOVE_ARC_FAULT) == TYPE_ELECTRIC);
@@ -293,7 +293,7 @@ SINGLE_BATTLE_TEST("Custom Moves - Arc Fault makes the user faint and sets Elect
         TURN { MOVE(player, MOVE_ARC_FAULT); }
     } THEN {
         EXPECT_EQ(player->hp, 0);
-        EXPECT(gFieldStatuses & STATUS_FIELD_ELECTRIC_TERRAIN);
+        EXPECT_EQ(gFieldTimers.terrain, B_TERRAIN_ELECTRIC);
     }
 }
 
@@ -301,15 +301,15 @@ SINGLE_BATTLE_TEST("Custom Moves - Grasspiercer can badly poison, paralyze, or p
 {
     u8 statusAnim;
     u32 rng;
-    PARAMETRIZE { statusAnim = B_ANIM_STATUS_PSN; rng = MOVE_EFFECT_TOXIC; }
-    PARAMETRIZE { statusAnim = B_ANIM_STATUS_PRZ; rng = MOVE_EFFECT_PARALYSIS; }
-    PARAMETRIZE { statusAnim = B_ANIM_STATUS_SLP; rng = MOVE_EFFECT_SLEEP; }
+    PARAMETRIZE { statusAnim = B_ANIM_STATUS_PSN; rng = 0; }
+    PARAMETRIZE { statusAnim = B_ANIM_STATUS_PRZ; rng = 1; }
+    PARAMETRIZE { statusAnim = B_ANIM_STATUS_SLP; rng = 2; }
     PASSES_RANDOMLY(50, 100, RNG_SECONDARY_EFFECT);
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
-        TURN { MOVE(player, MOVE_GRASSPIERCER, WITH_RNG(RNG_DIRE_CLAW, rng)); }
+        TURN { MOVE(player, MOVE_GRASSPIERCER, WITH_RNG(RNG_RANDOM_FROM_LIST, rng)); }
         TURN {}
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_GRASSPIERCER, player);
@@ -1096,7 +1096,7 @@ SINGLE_BATTLE_TEST("Custom Moves - Geminic Blast may confuse on either hit")
         HP_BAR(opponent);
         HP_BAR(opponent);
     } THEN {
-        u32 confusionTurns = opponent->volatiles.confusionTurns;
+        u32 confusionTurns = opponent->volatiles.confusionTimer;
         EXPECT_GT(confusionTurns, 0);
     }
 }
@@ -1405,7 +1405,7 @@ SINGLE_BATTLE_TEST("Custom Moves - Mosh Pit hits once for each healthy party mem
     } WHEN {
         TURN { MOVE(player, MOVE_MOSH_PIT); }
     } SCENE {
-        MESSAGE("The Pokémon was hit 3 time(s)!");
+        MESSAGE("The Pokémon was hit 3 times!");
     }
 }
 
