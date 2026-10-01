@@ -617,22 +617,22 @@ static void Task_MoveRelearner_LearnMove(u8 taskId)
     gTasks[taskId].tState = LearnMove(&sMoveLearnUI, taskId);
 }
 
-static bool32 UpdateMoveRelearnerState(void)
-{
-    u32 state;
-    struct BoxPokemon *boxmon = GetSelectedBoxMonFromPcOrParty();
-    for (u32 i = 1; i < MOVE_RELEARNER_COUNT; i++)
-    {
-        state = (gMoveRelearnerState + i) % MOVE_RELEARNER_COUNT;
-        if (CanBoxMonRelearnMoves(boxmon, state))
-        {
-            gMoveRelearnerState = state;
-            StoreMoveText();
-            return TRUE;
-        }
-    }
-    return FALSE;
-}
+// static bool32 UpdateMoveRelearnerState(void)
+// {
+//     u32 state;
+//     struct BoxPokemon *boxmon = GetSelectedBoxMonFromPcOrParty();
+//     for (u32 i = 1; i < MOVE_RELEARNER_COUNT; i++)
+//     {
+//         state = (gMoveRelearnerState + i) % MOVE_RELEARNER_COUNT;
+//         if (CanBoxMonRelearnMoves(boxmon, state))
+//         {
+//             gMoveRelearnerState = state;
+//             StoreMoveText();
+//             return TRUE;
+//         }
+//     }
+//     return FALSE;
+// }
 
 static void Task_MoveRelearner_HandleInput(u8 taskId)
 {
