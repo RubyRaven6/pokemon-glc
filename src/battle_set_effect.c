@@ -68,6 +68,23 @@ static void HandleSetEffectConfusion(struct BattleCalcValues *cv, struct SetEffe
     }
 }
 
+static void HandleSetEffectInfatuation(struct BattleCalcValues *cv, struct SetEffect *se)
+{
+    if (gBattleMons[se->effectBattler].volatiles.infatuation
+     || cv->abilities[se->effectBattler] == ABILITY_OBLIVIOUS
+     || IsAbilityOnSide(se->effectBattler, ABILITY_AROMA_VEIL)
+     || !AreBattlersOfOppositeGender(cv->battlerAtk, se->effectBattler))
+    {
+        gBattlescriptCurrInstr = se->script;
+    }
+    else
+    {
+        gBattleMons[se->effectBattler].volatiles.infatuation = INFATUATED_WITH(cv->battlerAtk);
+        BattleScriptPush(se->script);
+        gBattlescriptCurrInstr = BattleScript_MoveEffectInfatuation;
+    }
+}
+
 static void HandleSetEffectFlinch(struct BattleCalcValues *cv, struct SetEffect *se)
 {
     if (cv->abilities[se->effectBattler] == ABILITY_INNER_FOCUS)
@@ -290,6 +307,8 @@ static void HandleSetEffectPreventEscape(struct BattleCalcValues *cv, struct Set
         gBattleMons[se->effectBattler].volatiles.escapePrevention = TRUE;
         gBattleMons[se->effectBattler].volatiles.battlerPreventingEscape = cv->battlerAtk;
     }
+    if (MoveSetsStrictEscapePrevention(cv->move))
+        gBattleMons[se->effectBattler].volatiles.strictEscapePrevention = TRUE;
     gBattlescriptCurrInstr = se->script;
 }
 
@@ -947,6 +966,33 @@ static void HandleSetEffectWeather(struct BattleCalcValues *cv, struct SetEffect
     }
 }
 
+static void HandleSetEffectSunbloom(struct BattleCalcValues *cv, struct SetEffect *se)
+{
+    if (TryChangeBattleWeather(cv->battlerAtk, BATTLE_WEATHER_SUN, ABILITY_NONE) == WEATHER_FAILURE_SUCCESS)
+    {
+        if (!IsBattlerAlive(cv->battlerDef) && !(gBattleWeather & B_WEATHER_PRIMAL_ANY))
+            gBattleStruct->weatherDuration = 8;
+        gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_STARTED_SUNLIGHT;
+        BattleScriptPush(se->script);
+        gBattlescriptCurrInstr = BattleScript_MoveEffectSetWeather;
+    }
+}
+
+static void HandleSetEffectOverexposure(struct BattleCalcValues *cv, struct SetEffect *se)
+{
+    if (GetBattlerPartyState(se->effectBattler)->overexposed)
+    {
+        gBattlescriptCurrInstr = se->script;
+    }
+    else
+    {
+        GetBattlerPartyState(se->effectBattler)->overexposed = TRUE;
+        gBattleMons[se->effectBattler].volatiles.overexposure = TRUE;
+        BattleScriptPush(se->script);
+        gBattlescriptCurrInstr = BattleScript_OverexposureMessage;
+    }
+}
+
 static void HandleSetEffectTerrain(struct BattleCalcValues *cv, struct SetEffect *se)
 {
     enum BattleTerrain terrain = B_TERRAIN_NONE;
@@ -1316,9 +1362,11 @@ static void (*const sSetEffectHandlers[])(struct BattleCalcValues *cv, struct Se
     [MOVE_EFFECT_TOXIC] = HandleSetEffectNonVolatile,
     [MOVE_EFFECT_FROSTBITE] = HandleSetEffectNonVolatile,
     [MOVE_EFFECT_CONFUSION] = HandleSetEffectConfusion,
+    [MOVE_EFFECT_INFATUATION] = HandleSetEffectInfatuation,
     [MOVE_EFFECT_FLINCH] = HandleSetEffectFlinch,
     [MOVE_EFFECT_ABSORB] = HandleSetEffectAbsorb,
     [MOVE_EFFECT_RANDOM_FROM_LIST] = HandleSetEffectRandomFromList,
+    [MOVE_EFFECT_GRASSPIERCER] = HandleSetEffectRandomFromList,
     [MOVE_EFFECT_UPROAR] = HandleSetEffectUproar,
     [MOVE_EFFECT_PAYDAY] = HandleSetEffectPayday,
     [MOVE_EFFECT_WRAP] = HandleSetEffectWrap,
@@ -1361,6 +1409,7 @@ static void (*const sSetEffectHandlers[])(struct BattleCalcValues *cv, struct Se
     [MOVE_EFFECT_SEA_OF_FIRE] = HandleSetEffectSeaOfFire,
     [MOVE_EFFECT_SWAMP] = HandleSetEffectSwamp,
     [MOVE_EFFECT_SUN] = HandleSetEffectWeather,
+    [MOVE_EFFECT_SUNBLOOM] = HandleSetEffectSunbloom,
     [MOVE_EFFECT_RAIN] = HandleSetEffectWeather,
     [MOVE_EFFECT_SANDSTORM] = HandleSetEffectWeather,
     [MOVE_EFFECT_HAIL] = HandleSetEffectWeather,
@@ -1394,6 +1443,7 @@ static void (*const sSetEffectHandlers[])(struct BattleCalcValues *cv, struct Se
     [MOVE_EFFECT_STEALTH_ROCK] = HandleSetEffectStealthRock,
     [MOVE_EFFECT_TORMENT_SIDE] = HandleSetEffectTormentSide,
     [MOVE_EFFECT_FIRE_SPIN_SIDE] = HandleSetEffectFireSpinSide,
+    [MOVE_EFFECT_OVEREXPOSURE] = HandleSetEffectOverexposure,
     [MOVE_EFFECT_FIXED_POWER] = HandleSetEffectNone,
     [STAT_CHANGE_EFFECT_PLUS] = HandleSetEffectNone,
     [STAT_CHANGE_EFFECT_MINUS] = HandleSetEffectNone,
@@ -1539,4 +1589,3 @@ static bool32 IsFinalStrikeEffect(enum MoveEffect moveEffect)
         return FALSE;
     }
 }
-

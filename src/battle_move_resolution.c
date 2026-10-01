@@ -3001,6 +3001,38 @@ static enum CancelerResult CancelerSkipFrame(struct BattleCalcValues *cv)
     return CANCELER_RESULT_RUN_SCRIPT_AND_INCREMENT;
 }
 
+static bool32 IsAuraFarmingWaitingToMove(enum BattlerId battler)
+{
+    if (gChosenMoveByBattler[battler] != MOVE_AURA_FARMING)
+        return FALSE;
+
+    for (u32 i = gCurrentTurnActionNumber + 1; i < gBattlersCount; i++)
+    {
+        if (gBattlerByTurnOrder[i] == battler && gActionsByTurnOrder[i] == B_ACTION_USE_MOVE)
+            return TRUE;
+    }
+
+    return FALSE;
+}
+
+static void PrepareAuraFarmingDamage(struct BattleCalcValues *cv, enum BattlerId battler)
+{
+    s32 damage = gBattleStruct->moveDamage[battler];
+
+    if (damage <= 0
+     || IsBattlerAlly(battler, cv->battlerAtk)
+     || !IsAuraFarmingWaitingToMove(battler))
+        return;
+
+    gBattleStruct->auraFarmingDamage[battler] = min(UINT16_MAX, gBattleStruct->auraFarmingDamage[battler] + damage);
+
+    if (damage >= gBattleMons[battler].hp)
+    {
+        gProtectStructs[battler].auraFarmingEndured = TRUE;
+        gBattleStruct->moveDamage[battler] = gBattleMons[battler].hp > 0 ? gBattleMons[battler].hp - 1 : 0;
+    }
+}
+
 static enum CancelerResult CancelerHealthBarUpdate(struct BattleCalcValues *cv)
 {
     for (enum BattlerId battlerDef = 0; battlerDef < gBattlersCount; battlerDef++)
@@ -3016,6 +3048,7 @@ static enum CancelerResult CancelerHealthBarUpdate(struct BattleCalcValues *cv)
          || DoesIceFaceBlockMove(battlerDef, cv->move))
             continue;
 
+        PrepareAuraFarmingDamage(cv, battlerDef);
         s32 dmgUpdate = min(gBattleStruct->moveDamage[battlerDef], 10000);
         BtlController_EmitHealthBarUpdate(battlerDef, B_COMM_TO_CONTROLLER, dmgUpdate);
         MarkBattlerForControllerExec(battlerDef);
@@ -3026,8 +3059,83 @@ static enum CancelerResult CancelerHealthBarUpdate(struct BattleCalcValues *cv)
     return CANCELER_RESULT_RUN_SCRIPT_AND_INCREMENT; // Update health bar
 }
 
+static bool32 TryQueueShowstopperStatDrops(struct BattleCalcValues *cv)
+{
+    u32 selectedStats = 0;
+    u32 queuedStats = 0;
+
+    if (!gProtectStructs[cv->battlerDef].showstopper
+     || IsBattlerAlly(cv->battlerDef, cv->battlerAtk)
+     || !IsBattlerAlive(cv->battlerAtk))
+        return FALSE;
+
+    for (u32 i = 0; i < 2; i++)
+    {
+        u32 eligibleStats = 0;
+        enum Stat stat;
+
+        for (stat = STAT_ATK; stat < NUM_BATTLE_STATS; stat++)
+        {
+            if (!(selectedStats & (1u << stat))
+             && CompareStat(cv->battlerAtk, stat, MIN_STAT_STAGE, CMP_GREATER_THAN, GetBattlerAbility(cv->battlerAtk)))
+                eligibleStats |= 1u << stat;
+        }
+
+        if (eligibleStats == 0)
+            break;
+
+        do
+        {
+            stat = (Random() % (NUM_BATTLE_STATS - 1)) + 1;
+        } while (!(eligibleStats & (1u << stat)));
+
+        selectedStats |= 1u << stat;
+        SetStatChange(cv->battlerAtk, stat, -1);
+        queuedStats++;
+    }
+
+    if (queuedStats == 0)
+        return FALSE;
+
+    gEffectBattler = cv->battlerAtk;
+    BattleScriptCall(BattleScript_ShowstopperStatDrop);
+    return TRUE;
+}
+
+static bool32 TryQueueResearchDefenseBoost(struct BattleCalcValues *cv)
+{
+    if (!gBattleMons[cv->battlerDef].volatiles.research
+     || IsBattlerAlly(cv->battlerDef, cv->battlerAtk))
+        return FALSE;
+
+    gBattleMons[cv->battlerDef].volatiles.research = FALSE;
+    gProtectStructs[cv->battlerDef].researchAttacked = TRUE;
+    gEffectBattler = cv->battlerDef;
+    SetStatChange(cv->battlerDef, STAT_DEF, 2);
+    SetStatChange(cv->battlerDef, STAT_SPDEF, 2);
+    BattleScriptCall(BattleScript_ResearchDefensesUp);
+    return TRUE;
+}
+
+static bool32 TryQueueStuntDoubleExplosion(struct BattleCalcValues *cv)
+{
+    if (!gBattleMons[cv->battlerDef].volatiles.stuntDouble
+     || IsBattlerAlly(cv->battlerDef, cv->battlerAtk)
+     || !IsBattlerAlive(cv->battlerAtk))
+        return FALSE;
+
+    gBattleMons[cv->battlerDef].volatiles.stuntDouble = FALSE;
+    gEffectBattler = cv->battlerDef;
+    gBattleScripting.battler = cv->battlerDef;
+    SetPassiveDamageAmount(cv->battlerAtk, max(1, GetNonDynamaxMaxHP(cv->battlerDef) / 8));
+    BattleScriptCall(BattleScript_StuntDoubleExplosion);
+    return TRUE;
+}
+
 static bool32 TryMoveDamageUpdate(struct BattleCalcValues *cv)
 {
+    bool32 tookDirectDamage = FALSE;
+
     if (DoesSubstituteBlockMove(cv->battlerAtk, cv->battlerDef, cv->move) && gBattleMons[cv->battlerDef].volatiles.substituteHP)
     {
         if (gBattleMons[cv->battlerDef].volatiles.substituteHP >= gBattleStruct->moveDamage[cv->battlerDef])
@@ -3045,6 +3153,8 @@ static bool32 TryMoveDamageUpdate(struct BattleCalcValues *cv)
         if (gBattleMons[cv->battlerDef].volatiles.substituteHP == 0)
         {
             gBattleScripting.battler = cv->battlerDef;
+            if (TryQueueStuntDoubleExplosion(cv))
+                return TRUE;
             BattleScriptCall(BattleScript_SubstituteFade);
             return TRUE;
         }
@@ -3095,7 +3205,10 @@ static bool32 TryMoveDamageUpdate(struct BattleCalcValues *cv)
 
             hpLost = hpBefore - gBattleMons[cv->battlerDef].hp;
             if (hpLost != 0)
+            {
                 gBattleStruct->innardsOutHpLost[cv->battlerDef] += hpLost;
+                tookDirectDamage = TRUE;
+            }
 
             gProtectStructs[cv->battlerDef].assuranceDoubled = TRUE;
             gProtectStructs[cv->battlerDef].revengeDoubled |= 1u << cv->battlerAtk;
@@ -3126,6 +3239,12 @@ static bool32 TryMoveDamageUpdate(struct BattleCalcValues *cv)
 
     GetBattlerPartyState(cv->battlerDef)->timesGotHit++;
     gSpecialStatuses[cv->battlerDef].damagedByAttack = TRUE;
+
+    if (tookDirectDamage && TryQueueShowstopperStatDrops(cv))
+        return TRUE;
+    if (tookDirectDamage && TryQueueResearchDefenseBoost(cv))
+        return TRUE;
+        
     return FALSE;
 }
 
@@ -4561,6 +4680,20 @@ static enum MoveEndResult MoveEndMoveBlock(struct BattleCalcValues *cv)
                 SetStatChange(cv->battlerAtk, STAT_DEF, -1);
                 SetStatChange(cv->battlerAtk, STAT_SPEED, 1);
                 BattleScriptCall(BattleScript_MoveEffectStatChange);
+                gBattleStruct->eventState.moveEndBattler = 0;
+                gBattleScripting.moveendState++;
+                return MOVEEND_RESULT_RUN_SCRIPT;
+            }
+            break;
+        case EFFECT_STORM_SACRIFICE:
+            if (IsBattlerAlive(cv->battlerAtk)
+             && !IsBattlerAlive(battlerDef)
+             && IsBattlerTurnDamaged(battlerDef, EXCLUDING_SUBSTITUTES)
+             && !NoAliveMonsForEitherParty()
+             && TryChangeBattleWeather(cv->battlerAtk, BATTLE_WEATHER_RAIN, ABILITY_NONE) == WEATHER_FAILURE_SUCCESS)
+            {
+                gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_STARTED_RAIN;
+                BattleScriptCall(BattleScript_MoveEffectSetWeather);
                 gBattleStruct->eventState.moveEndBattler = 0;
                 gBattleScripting.moveendState++;
                 return MOVEEND_RESULT_RUN_SCRIPT;

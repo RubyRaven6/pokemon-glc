@@ -346,10 +346,6 @@ static void ResetValuesForCalledMove(void);
 static bool32 CanAbilityShieldActivateForBattler(enum BattlerId battler);
 static void PlayAnimation(enum BattlerId battler, u8 animId, const u16 *argPtr, const u8 *nextInstr);
 static u32 GetPossibleNextTarget(u32 currTarget);
-static bool32 TryQueueShowstopperStatDrops(enum BattlerId damagedBattler, const u8 *nextInstr);
-static bool32 TryQueueResearchDefenseBoost(enum BattlerId damagedBattler, const u8 *nextInstr);
-static bool32 TryQueueStuntDoubleExplosion(enum BattlerId damagedBattler, const u8 *nextInstr);
-
 static void Cmd_attackcanceler(void);
 static void Cmd_printattackstring(void);
 static void Cmd_printselectionstringfromtable(void);
@@ -1195,40 +1191,6 @@ static void Cmd_waitanimation(void)
         gCountAllocs = FALSE;
 #endif
         gBattlescriptCurrInstr = cmd->nextInstr;
-    }
-}
-
-static bool32 IsAuraFarmingWaitingToMove(enum BattlerId battler)
-{
-    if (gChosenMoveByBattler[battler] != MOVE_AURA_FARMING)
-        return FALSE;
-
-    for (u32 i = gCurrentTurnActionNumber + 1; i < gBattlersCount; i++)
-    {
-        if (gBattlerByTurnOrder[i] == battler && gActionsByTurnOrder[i] == B_ACTION_USE_MOVE)
-            return TRUE;
-    }
-
-    return FALSE;
-}
-
-static void PrepareAuraFarmingDamage(enum BattlerId battler)
-{
-    s32 damage = gBattleStruct->moveDamage[battler];
-
-    if (damage <= 0)
-        return;
-    if (IsBattlerAlly(battler, gBattlerAttacker))
-        return;
-    if (!IsAuraFarmingWaitingToMove(battler))
-        return;
-
-    gBattleStruct->auraFarmingDamage[battler] = min(UINT16_MAX, gBattleStruct->auraFarmingDamage[battler] + damage);
-
-    if (damage >= gBattleMons[battler].hp)
-    {
-        gProtectStructs[battler].auraFarmingEndured = TRUE;
-        gBattleStruct->moveDamage[battler] = gBattleMons[battler].hp > 0 ? gBattleMons[battler].hp - 1 : 0;
     }
 }
 
