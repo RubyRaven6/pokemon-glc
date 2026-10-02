@@ -1982,12 +1982,6 @@
 	dynmultichoice 0, 0, TRUE, 3, 0, DYN_MULTICHOICE_CB_NONE \argv
 	.endm
 
-	@ Gets the width of the specified message in the Braille font and sets the result to VAR_0x8004.
-	.macro getbraillestringwidth msg:req
-	.byte SCR_OP_GETBRAILLESTRINGWIDTH
-	.4byte \msg
-	.endm
-
 @ Supplementary
 
 	@ Gets the width of the specified message in the Braille font and sets the result to VAR_0x8004.
