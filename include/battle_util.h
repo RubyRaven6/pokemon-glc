@@ -14,7 +14,6 @@ struct DamageContext
     u32 fixedBasePower:8;
     u32 weather:16;
     u32 unused:2;
-    
 
     enum Move move;
     enum Move chosenMove; // For Trump Card and Me First

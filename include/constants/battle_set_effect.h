@@ -16,7 +16,7 @@ enum __attribute__((packed)) MoveEffect
     MOVE_EFFECT_INFATUATION,
     MOVE_EFFECT_FLINCH,
     MOVE_EFFECT_ABSORB,
-    MOVE_EFFECT_RANDOM_FROM_LIST,
+    MOVE_EFFECT_RANDOM_FROM_LIST, // Uses randomMoveEffects to determine what to select
     MOVE_EFFECT_UPROAR,
     MOVE_EFFECT_PAYDAY,
     MOVE_EFFECT_WRAP,
@@ -103,7 +103,7 @@ enum __attribute__((packed)) MoveEffect
     MOVE_EFFECT_STEALTH_ROCK, // Max Move rocks, not to be confused with rocks set up from Ceasless Edge (same but differ in execution order)
     MOVE_EFFECT_TORMENT_SIDE,
     MOVE_EFFECT_FIRE_SPIN_SIDE,
-    MOVE_EFFECT_FIXED_POWER,
+    MOVE_EFFECT_FIXED_POWER, // This has no real use outside of dmax moves
     // Max move effects end. They can be used for (custom) normal moves.
 
     // For status stat change moves
@@ -139,6 +139,7 @@ enum SetMoveEffectFlags
     EFFECT_PRIMARY    = (1 << 0),
     EFFECT_CERTAIN    = (1 << 1),
     EFFECT_ON_SIDE    = (1 << 2),
+    EFFECT_BYPASS_SHEER_FORCE = (1 << 3),
 };
 
 #endif // GUARD_CONSTANTS_BATTLE_SET_EFFECT_H

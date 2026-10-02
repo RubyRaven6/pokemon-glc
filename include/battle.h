@@ -563,7 +563,7 @@ struct PartyState
     u32 isKnockedOff:1;
     u32 overexposed:1;
     u32 freezeTurns:2;
-    u32 padding:5;
+    u32 padding:3;
     enum Item usedHeldItem;
 };
 

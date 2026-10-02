@@ -2551,11 +2551,17 @@ const struct AbilityInfo gAbilitiesInfo[ABILITIES_COUNT] =
         .description = COMPOUND_STRING("Burns the foe when damaged."),
     },
 
+    [ABILITY_AURA_GUARD] =
+    {
+        .name = _("Aura Guard"),
+        .description = COMPOUND_STRING("Unimplemented."),
+    },
+
+
     /* CUSTOM ABILITIES */
     [ABILITY_METTLE] =
     {
         .name = _("Mettle"),
         .description = COMPOUND_STRING("KOs boost SpA stat."),
         .aiRating = 7,
-    },
 };
