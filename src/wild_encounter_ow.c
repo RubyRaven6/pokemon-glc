@@ -625,14 +625,6 @@ static bool32 StartWildBattleWithOWE_CheckDoubleBattle(struct ObjectEvent *owe, 
     return FALSE;
 }
 
-void SetInstantOWESpawnTimer(void)
-{
-    if (!WE_OW_ENCOUNTERS)
-        return;
-
-    sOWESpawnCountdown = 0;
-}
-
 void SetMinimumOWESpawnTimer(void)
 {
     if (!WE_OW_ENCOUNTERS)
@@ -1130,9 +1122,6 @@ void TryDespawnOWEsCrossingMapConnection(void)
     if (gMapHeader.mapType != MAP_TYPE_CITY && gMapHeader.mapType != MAP_TYPE_TOWN)
         return;
 
-    if (WE_OWE_DESPAWN_SOUND)
-        PlaySE(SE_FLEE);
-        
     DespawnAllOverworldWildEncounters(OWE_GENERATED, 0);
 }
 

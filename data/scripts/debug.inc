@@ -78,6 +78,8 @@ Debug_CheatStartFrlg::
 	givemon SPECIES_BULBASAUR, 20, ITEM_NONE
 	givemon SPECIES_CHARMANDER, 20, ITEM_NONE
 	givemon SPECIES_SQUIRTLE, 20, ITEM_NONE
+	givemon SPECIES_PSYDUCK, 20, ITEM_NONE, move1 = MOVE_SURF, move2 = MOVE_WATERFALL, move3 = MOVE_STRENGTH, move4 = MOVE_ROCK_SMASH
+	givemon SPECIES_FARFETCHD, 20, ITEM_NONE, move1 = MOVE_FLY, move2 = MOVE_CUT, move3 = MOVE_FLASH, move4 = MOVE_FURY_ATTACK
 	clearflag FLAG_HIDE_OAK_IN_HIS_LAB
 	setflag FLAG_HIDE_RIVAL_IN_LAB
 	setvar VAR_MAP_SCENE_PALLET_TOWN_OAK, 1 @ prevents Oak scene when trying to enter Route 1
@@ -842,22 +844,19 @@ Debug_EventScript_FontTest::
 Debug_EventScript_TellTheTime::
 	callnative DebugMenu_CalculateTime
 	msgbox Debug_EventScript_TellTheTime_Text_0, MSGBOX_DEFAULT
-	waitmessage
-	closemessage
+	releaseall
 	end
 
 Debug_EventScript_PrintTimeOfDay::
 	callnative DebugMenu_CalculateTimeOfDay
 	msgbox DebugEventScript_PrintWeekday_Text_0, MSGBOX_DEFAULT
-	waitmessage
-	closemessage
+	releaseall
 	end
 
 Debug_EventScript_FakeRTCNotEnabled::
 	msgbox Debug_EventScript_FakeRTCNotEnabled_Text_0, MSGBOX_DEFAULT
-	waitmessage
-	closemessage
-	return
+	releaseall
+	end
 
 Debug_EventScript_FakeRTCNotEnabled_Text_0:
 	.string "You currently do not have Fake RTC\nenabled. Please enable it in include/\lconfig/overworld.h$"
