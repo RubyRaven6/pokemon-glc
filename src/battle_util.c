@@ -7534,11 +7534,17 @@ static inline uq4_12_t GetGlaiveRushModifier(enum BattlerId battlerDef)
 
 static inline uq4_12_t GetMoveAgainstProtectionModifier(struct DamageContext *ctx)
 {
+    u32 protected = gProtectStructs[ctx->battlerDef].protected;
+
+    if (GetMoveEffect(ctx->move) == EFFECT_CRASHING_FIST
+     && GetProtectType(protected) == PROTECT_TYPE_SINGLE
+     && protected != PROTECT_MAX_GUARD)
+        return UQ_4_12(0.3333);
+
     if (MoveIgnoresProtect(ctx->move))
         return UQ_4_12(1.0);
 
     // Unseen Fist and Piercing Drill
-    u32 protected = gProtectStructs[ctx->battlerDef].protected;
     if (GetProtectType(protected) == PROTECT_TYPE_SINGLE && protected != PROTECT_MAX_GUARD
          && (ctx->abilities[ctx->battlerAtk] == ABILITY_UNSEEN_FIST || ctx->abilities[ctx->battlerAtk] == ABILITY_PIERCING_DRILL)
          && GetConfig(B_UNSEEN_FIST_PIERCING_DRILL) >= GEN_CHAMPIONS)
@@ -8473,7 +8479,7 @@ static inline uq4_12_t CalcTypeEffectivenessMultiplierInternal(struct DamageCont
         modifier = UQ_4_12(1.0);
     }
 
-    if (((ctx->abilities[ctx->battlerDef] == ABILITY_WONDER_GUARD && modifier <= UQ_4_12(1.0) && !isPresentHealing)
+    if (((ctx->abilities[ctx->battlerDef] == ABILITY_WONDER_GUARD && modifier <= UQ_4_12(1.0) && !isPresentHealing && ctx->move != MOVE_JINX)
         || (ctx->abilities[ctx->battlerDef] == ABILITY_TELEPATHY && ctx->battlerDef == GetPartnerBattler(ctx->battlerAtk)))
         && GetMovePower(ctx->move) != 0)
     {

@@ -307,6 +307,8 @@ static void HandleSetEffectPreventEscape(struct BattleCalcValues *cv, struct Set
         gBattleMons[se->effectBattler].volatiles.escapePrevention = TRUE;
         gBattleMons[se->effectBattler].volatiles.battlerPreventingEscape = cv->battlerAtk;
     }
+    if (MoveSetsStrictEscapePrevention(cv->move))
+        gBattleMons[se->effectBattler].volatiles.strictEscapePrevention = TRUE;
     gBattlescriptCurrInstr = se->script;
 }
 
