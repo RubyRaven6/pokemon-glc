@@ -389,7 +389,7 @@ static void ResetTestInventory()
     for (u32 i = 0; i < TEST_ITEM_SLOTS; i++)
     {
         if (DATA.inventory[i].itemId != ITEM_NONE)
-            AddBagItem(DATA.inventory[i].itemId, DATA.inventory[i].quantity);
+            assertf(AddBagItem(DATA.inventory[i].itemId, DATA.inventory[i].quantity), "Could not add item to bag");
     }
 }
 
@@ -422,9 +422,6 @@ static void BattleTest_Run(void *data)
     const struct BattleTest *test = data;
 
     memset(&DATA, 0, sizeof(DATA));
-    // Each parameterized run builds its inventory before StartBattle resets it.
-    // Clear the previous run first so small custom stack limits do not leak
-    // inventory state between otherwise independent test parameters.
     ClearBag();
     InitTestBattlers(test);
     TestInitConfigData();
@@ -2615,6 +2612,13 @@ void Speed_(u32 sourceLine, u32 speed)
     SetMonData(DATA.currentMon, MON_DATA_SPEED, &speed);
     bool32 hyperTrainingFlag = TRUE;
     SetMonData(DATA.currentMon, MON_DATA_HYPER_TRAINED_SPEED, &hyperTrainingFlag);
+    DATA.hasExplicitSpeeds = TRUE;
+    DATA.explicitSpeeds[DATA.battlerParty] |= 1 << DATA.currentPartyIndex;
+}
+
+void NaturalSpeed_(u32 sourceLine)
+{
+    INVALID_IF(!DATA.currentMon, "NaturalSpeed outside of PLAYER/OPPONENT");
     DATA.hasExplicitSpeeds = TRUE;
     DATA.explicitSpeeds[DATA.battlerParty] |= 1 << DATA.currentPartyIndex;
 }

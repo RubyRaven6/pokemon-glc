@@ -1043,6 +1043,7 @@ struct moveWithPP {
 #define SpAttack(spAttack) SpAttack_(__LINE__, spAttack)
 #define SpDefense(spDefense) SpDefense_(__LINE__, spDefense)
 #define Speed(speed) Speed_(__LINE__, speed)
+#define NaturalSpeed() NaturalSpeed_(__LINE__)
 #define HPIV(hpIV) HPIV_(__LINE__, hpIV)
 #define AttackIV(attackIV) AttackIV_(__LINE__, attackIV)
 #define DefenseIV(defenseIV) DefenseIV_(__LINE__, defenseIV)
@@ -1087,6 +1088,7 @@ void Defense_(u32 sourceLine, u32 defense);
 void SpAttack_(u32 sourceLine, u32 spAttack);
 void SpDefense_(u32 sourceLine, u32 spDefense);
 void Speed_(u32 sourceLine, u32 speed);
+void NaturalSpeed_(u32 sourceLine);
 void HPIV_(u32 sourceLine, u32 hpIV);
 void AttackIV_(u32 sourceLine, u32 attackIV);
 void DefenseIV_(u32 sourceLine, u32 defenseIV);

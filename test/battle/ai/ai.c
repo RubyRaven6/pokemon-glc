@@ -145,8 +145,6 @@ AI_SINGLE_BATTLE_TEST("AI prefers moves which deal more damage instead of moves 
         AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT);
         PLAYER(SPECIES_TYPHLOSION) { Ability(abilityDef); }
         PLAYER(SPECIES_WOBBUFFET);
-        // Match the original test's Gen 6+ Nidoqueen Attack while retaining
-        // this project's custom base stats.
         OPPONENT(SPECIES_NIDOQUEEN) { Attack(189); Moves(move1, move2, move3, move4); Ability(abilityAtk); }
     } WHEN {
             switch (turns)

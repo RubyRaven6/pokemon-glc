@@ -426,16 +426,22 @@ DOUBLE_BATTLE_TEST("Assurance doubles in power if Ice Face has been broken by at
     PARAMETRIZE { breakIceFace = TRUE; }
 
     GIVEN {
-        PLAYER(breakIceFace ? SPECIES_EISCUE : SPECIES_EISCUE_NOICE) { Ability(ABILITY_ICE_FACE); MaxHP(999); HP(999); Speed(1); }
-        PLAYER(SPECIES_WOBBUFFET) { Speed(2); }
-        OPPONENT(SPECIES_WOBBUFFET) { Speed(9); }
-        OPPONENT(SPECIES_WOBBUFFET) { Speed(10); }
+        ASSUME(GetMovePriority(MOVE_QUICK_ATTACK) > GetMovePriority(MOVE_ASSURANCE));
+        PLAYER(breakIceFace ? SPECIES_EISCUE : SPECIES_EISCUE_NOICE) { Ability(ABILITY_ICE_FACE); }
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
         if (breakIceFace)
-            TURN { MOVE(opponentRight, MOVE_POUND, target: playerLeft); MOVE(opponentLeft, MOVE_ASSURANCE, target: playerLeft); }
+            TURN { MOVE(opponentRight, MOVE_QUICK_ATTACK, target: playerLeft); MOVE(opponentLeft, MOVE_ASSURANCE, target: playerLeft); }
         else
             TURN { MOVE(opponentRight, MOVE_CELEBRATE); MOVE(opponentLeft, MOVE_ASSURANCE, target: playerLeft); }
     } SCENE {
+        if (breakIceFace)
+        {
+            ANIMATION(ANIM_TYPE_MOVE, MOVE_QUICK_ATTACK, opponentRight);
+            ABILITY_POPUP(playerLeft, ABILITY_ICE_FACE);
+        }
         ANIMATION(ANIM_TYPE_MOVE, MOVE_ASSURANCE, opponentLeft);
         HP_BAR(playerLeft, captureDamage: &results[i].damage);
     } FINALLY {

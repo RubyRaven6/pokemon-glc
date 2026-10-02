@@ -25,13 +25,13 @@ SINGLE_BATTLE_TEST("Grassy Glide's priority increases by 1 when the user is affe
 SINGLE_BATTLE_TEST("Dynamax: Grassy Glide's priority does not increase for the Max Move it becomes")
 {
     GIVEN {
-        PLAYER(SPECIES_TAPU_BULU) { Ability(ABILITY_GRASSY_SURGE); Speed(1); }
-        OPPONENT(SPECIES_WOBBUFFET) { Speed(2); }
+        PLAYER(SPECIES_TAPU_BULU) { Ability(ABILITY_GRASSY_SURGE); NaturalSpeed(); }
+        OPPONENT(SPECIES_PHEROMOSA) { NaturalSpeed(); }
     } WHEN {
-        TURN { MOVE(player, MOVE_GRASSY_GLIDE, gimmick: GIMMICK_DYNAMAX); MOVE(opponent, MOVE_SCRATCH); }
+        TURN { MOVE(opponent, MOVE_SCRATCH); MOVE(player, MOVE_GRASSY_GLIDE, gimmick: GIMMICK_DYNAMAX); }
     } SCENE {
         ABILITY_POPUP(player, ABILITY_GRASSY_SURGE);
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, opponent);
-        HP_BAR(opponent);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_MAX_OVERGROWTH, player);
     }
 }
