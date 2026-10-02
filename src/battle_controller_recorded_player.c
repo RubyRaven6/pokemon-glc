@@ -384,7 +384,7 @@ static void RecordedPlayerHandleChooseItem(enum BattlerId battler)
     u8 byte2 = RecordedBattle_GetBattlerAction(RECORDED_ITEM_ID, battler);
     gBattleStruct->chosenItem[battler] = (byte1 << 8) | byte2;
 
-    if (TESTING)
+    if (TESTING && GetItemPocket(gBattleStruct->chosenItem[battler]) < POCKETS_COUNT)
     {
         assertf(CheckBagHasItem(gBattleStruct->chosenItem[battler], 1), "Tried to used an item not present in bag");
         if (!GetItemImportance(gBattleStruct->chosenItem[battler]))

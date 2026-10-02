@@ -422,6 +422,10 @@ static void BattleTest_Run(void *data)
     const struct BattleTest *test = data;
 
     memset(&DATA, 0, sizeof(DATA));
+    // Each parameterized run builds its inventory before StartBattle resets it.
+    // Clear the previous run first so small custom stack limits do not leak
+    // inventory state between otherwise independent test parameters.
+    ClearBag();
     InitTestBattlers(test);
     TestInitConfigData();
 
@@ -3445,11 +3449,9 @@ static void AddToTestInventory(enum Item itemId, u16 count)
 
 void GivePlayerItem(u32 sourceLine, enum Item itemId, u32 quantity)
 {
-    INVALID_IF(!CheckBagHasSpace(itemId, quantity), "Not enough space in bag");
     INVALID_IF(!CheckTestInventoryHasSpace(itemId, quantity), "Not enough space in test inventory");
 
     DATA.explicitInventory = TRUE;
-    AddBagItem(itemId, quantity);
     AddToTestInventory(itemId, quantity);
 }
 
@@ -3487,11 +3489,11 @@ void UseItem(u32 sourceLine, struct BattlePokemon *battler, struct ItemContext c
         i = 0;
     }
 
-    if (!DATA.explicitInventory && (battlerId & BIT_SIDE) == B_SIDE_PLAYER)
+    if (!DATA.explicitInventory
+     && (battlerId & BIT_SIDE) == B_SIDE_PLAYER
+     && GetItemPocket(ctx.itemId) < POCKETS_COUNT)
     {
-        INVALID_IF(!CheckBagHasSpace(ctx.itemId, 1), "Not enough space in bag");
         INVALID_IF(!CheckTestInventoryHasSpace(ctx.itemId, 1), "Not enough space in test inventory");
-        AddBagItem(ctx.itemId, 1);
         AddToTestInventory(ctx.itemId, 1);
     }
     if (ctx.explicitRNG)

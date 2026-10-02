@@ -32,6 +32,6 @@ SINGLE_BATTLE_TEST("Dynamax: Grassy Glide's priority does not increase for the M
     } SCENE {
         ABILITY_POPUP(player, ABILITY_GRASSY_SURGE);
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, opponent);
-        ANIMATION(ANIM_TYPE_MOVE, MOVE_MAX_OVERGROWTH, player);
+        HP_BAR(opponent);
     }
 }

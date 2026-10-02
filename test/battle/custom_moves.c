@@ -1254,6 +1254,28 @@ AI_DOUBLE_BATTLE_TEST("Custom Moves - AI scores Showstopper as redirection suppo
     }
 }
 
+AI_SINGLE_BATTLE_TEST("Custom Moves - AI scores Research as setup")
+{
+    GIVEN {
+        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT);
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_RESEARCH, MOVE_CELEBRATE); }
+    } WHEN {
+        TURN { SCORE_GT(opponent, MOVE_RESEARCH, MOVE_CELEBRATE); }
+    }
+}
+
+AI_SINGLE_BATTLE_TEST("Custom Moves - AI scores Orbital Pull as setup")
+{
+    GIVEN {
+        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT);
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_ORBITAL_PULL, MOVE_CELEBRATE); }
+    } WHEN {
+        TURN { SCORE_GT(opponent, MOVE_ORBITAL_PULL, MOVE_CELEBRATE); }
+    }
+}
+
 SINGLE_BATTLE_TEST("Custom Moves - Research raises offenses if the user is not attacked")
 {
     GIVEN {

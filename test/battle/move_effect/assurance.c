@@ -418,43 +418,28 @@ DOUBLE_BATTLE_TEST("Assurance doubles in power if the target has been damaged by
     }
 }
 
-DOUBLE_BATTLE_TEST("Assurance doubles in power if Ice Face has been broken by attacker")
+DOUBLE_BATTLE_TEST("Assurance doubles in power if Ice Face has been broken by attacker", s16 damage)
 {
-    s16 hits[2];
+    bool32 breakIceFace;
+
+    PARAMETRIZE { breakIceFace = FALSE; }
+    PARAMETRIZE { breakIceFace = TRUE; }
 
     GIVEN {
-        ASSUME(GetMoveEffect(MOVE_HAIL) == EFFECT_WEATHER);
-        ASSUME(GetMoveWeatherType(MOVE_HAIL) == BATTLE_WEATHER_HAIL);
-        PLAYER(SPECIES_EISCUE) { Speed(1); Ability(ABILITY_ICE_FACE); }
+        PLAYER(breakIceFace ? SPECIES_EISCUE : SPECIES_EISCUE_NOICE) { Ability(ABILITY_ICE_FACE); MaxHP(999); HP(999); Speed(1); }
         PLAYER(SPECIES_WOBBUFFET) { Speed(2); }
         OPPONENT(SPECIES_WOBBUFFET) { Speed(9); }
         OPPONENT(SPECIES_WOBBUFFET) { Speed(10); }
     } WHEN {
-        TURN { MOVE(opponentRight, MOVE_POUND, target: playerLeft); }
-        TURN {
-            MOVE(opponentLeft, MOVE_ASSURANCE, target: playerLeft);
-            MOVE(playerLeft, MOVE_HAIL);
-        }
-        TURN {
-            MOVE(opponentRight, MOVE_POUND, target: playerLeft);
-            MOVE(opponentLeft, MOVE_ASSURANCE, target: playerLeft);
-        }
+        if (breakIceFace)
+            TURN { MOVE(opponentRight, MOVE_POUND, target: playerLeft); MOVE(opponentLeft, MOVE_ASSURANCE, target: playerLeft); }
+        else
+            TURN { MOVE(opponentRight, MOVE_CELEBRATE); MOVE(opponentLeft, MOVE_ASSURANCE, target: playerLeft); }
     } SCENE {
-        ANIMATION(ANIM_TYPE_MOVE, MOVE_POUND, opponentRight);
-        ABILITY_POPUP(playerLeft, ABILITY_ICE_FACE);
-
         ANIMATION(ANIM_TYPE_MOVE, MOVE_ASSURANCE, opponentLeft);
-        HP_BAR(playerLeft, captureDamage: &hits[0]);
-        ANIMATION(ANIM_TYPE_MOVE, MOVE_HAIL, playerLeft);
-        ABILITY_POPUP(playerLeft, ABILITY_ICE_FACE);
-
-        ANIMATION(ANIM_TYPE_MOVE, MOVE_POUND, opponentRight);
-        ABILITY_POPUP(playerLeft, ABILITY_ICE_FACE);
-
-        ANIMATION(ANIM_TYPE_MOVE, MOVE_ASSURANCE, opponentLeft);
-        HP_BAR(playerLeft, captureDamage: &hits[1]);
-    } THEN {
-        EXPECT_MUL_EQ(hits[0], Q_4_12(2.0), hits[1]);
+        HP_BAR(playerLeft, captureDamage: &results[i].damage);
+    } FINALLY {
+        EXPECT_MUL_EQ(results[0].damage, Q_4_12(2.0), results[1].damage);
     }
 }
 

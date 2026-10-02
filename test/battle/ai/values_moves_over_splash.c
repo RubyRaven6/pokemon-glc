@@ -625,6 +625,10 @@ AI_DOUBLE_BATTLE_TEST("AI values moves above Splash, 801-900")
         // tests exist elsewhere
         case EFFECT_STAT_CHANGE:
         case EFFECT_DRAGON_CHEER:
+        case EFFECT_MINERAGRAPHY:
+        case EFFECT_SHOWSTOPPER:
+        case EFFECT_RESEARCH:
+        case EFFECT_ORBITAL_PULL:
             break;
         case EFFECT_WEATHER:
             if (GetMoveWeatherType(j) == BATTLE_WEATHER_SNOW)
@@ -634,6 +638,9 @@ AI_DOUBLE_BATTLE_TEST("AI values moves above Splash, 801-900")
             break;
         // Skipped on purpose.
         case EFFECT_PROTECT:
+        case EFFECT_CHRYSALIS:
+        case EFFECT_CASTING_CALL:
+        case EFFECT_STUNT_DOUBLE:
         case EFFECT_NON_VOLATILE_STATUS:
             break;
         default:

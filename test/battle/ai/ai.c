@@ -142,11 +142,12 @@ AI_SINGLE_BATTLE_TEST("AI prefers moves which deal more damage instead of moves 
         ASSUME(GetMoveCategory(MOVE_SCALD) == DAMAGE_CATEGORY_SPECIAL);
         ASSUME(GetMoveCategory(MOVE_POISON_JAB) == DAMAGE_CATEGORY_PHYSICAL);
         ASSUME(GetMoveCategory(MOVE_WATER_GUN) == DAMAGE_CATEGORY_SPECIAL);
-        ASSUME(GetSpeciesBaseAttack(SPECIES_NIDOQUEEN) == 92); // Gen 5's 82 Base Attack causes the test to fail
         AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT);
         PLAYER(SPECIES_TYPHLOSION) { Ability(abilityDef); }
         PLAYER(SPECIES_WOBBUFFET);
-        OPPONENT(SPECIES_NIDOQUEEN) { Moves(move1, move2, move3, move4); Ability(abilityAtk); }
+        // Match the original test's Gen 6+ Nidoqueen Attack while retaining
+        // this project's custom base stats.
+        OPPONENT(SPECIES_NIDOQUEEN) { Attack(189); Moves(move1, move2, move3, move4); Ability(abilityAtk); }
     } WHEN {
             switch (turns)
             {

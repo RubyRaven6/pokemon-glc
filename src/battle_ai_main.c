@@ -1685,6 +1685,8 @@ static s32 AI_CheckBadMove(enum BattlerId battlerAtk, enum BattlerId battlerDef,
             ADJUST_SCORE(-10);
         break;
     case EFFECT_MINERAGRAPHY:
+    case EFFECT_RESEARCH:
+    case EFFECT_ORBITAL_PULL:
         if (AreBattlersStatsMaxed(battlerAtk))
             ADJUST_SCORE(-10);
         break;
@@ -4455,6 +4457,8 @@ static s32 AI_CalcMoveEffectScore(enum BattlerId battlerAtk, enum BattlerId batt
         ADJUST_SCORE(GetStatChangeScore(battlerAtk, battlerDef, move));
         break;
     case EFFECT_MINERAGRAPHY:
+    case EFFECT_RESEARCH:
+    case EFFECT_ORBITAL_PULL:
         if (!AreBattlersStatsMaxed(battlerAtk))
             ADJUST_SCORE(GOOD_EFFECT);
         break;
