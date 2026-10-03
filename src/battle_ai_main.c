@@ -969,6 +969,7 @@ static void DoAIScoreProcessing(enum BattlerId battlerAtk, enum BattlerId battle
 
     if (gAiThinkingStruct->aiFlags[battlerAtk] & AI_FLAG_CHECK_VIABILITY)
         AI_CompareDamagingMoves(battlerAtk, battlerDef);
+
 }
 
 static struct ChosenAction ChooseMoveOrAction_Singles(enum BattlerId battler)
@@ -1915,6 +1916,18 @@ static s32 AI_CheckBadMove(enum BattlerId battlerAtk, enum BattlerId battlerDef,
             ADJUST_SCORE(-10);
         }
         break;
+    case EFFECT_GIPHANT_CAPTURE:
+    {
+        enum Move lastUsedMove = aiData->lastUsedMove[battlerDef];
+
+        if (lastUsedMove == MOVE_NONE
+         || lastUsedMove == MOVE_UNAVAILABLE
+         || lastUsedMove == MOVE_STRUGGLE
+         || IsMoveGiphantCaptured(battlerDef, lastUsedMove)
+         || DoesPartnerHaveSameMoveEffect(GetPartnerBattler(battlerAtk), battlerDef, move, aiData->partnerMove))
+            ADJUST_SCORE(-10);
+        break;
+    }
     case EFFECT_ENCORE:
         if (GetActiveGimmick(battlerDef) == GIMMICK_DYNAMAX)
             ADJUST_SCORE(-10);
@@ -2400,6 +2413,15 @@ static s32 AI_CheckBadMove(enum BattlerId battlerAtk, enum BattlerId battlerDef,
                     decreased = TRUE;
                 }
                 break;
+            case PROTECT_FROST_BARRIER:
+                if (incomingMove != MOVE_NONE
+                 && incomingMove != MOVE_UNAVAILABLE
+                 && (IsBattleMoveStatus(incomingMove) || GetMoveType(incomingMove) == TYPE_FIRE))
+                {
+                    ADJUST_SCORE(-10);
+                    decreased = TRUE;
+                }
+                break;
             default:
                 break;
             } // move check
@@ -2861,6 +2883,29 @@ static s32 AI_CheckBadMove(enum BattlerId battlerAtk, enum BattlerId battlerDef,
             else if (targetNegativeStages < targetPositiveStages)
                 ADJUST_SCORE(-5); //More stages would be made positive than negative
         }
+        break;
+    case EFFECT_BLOOMING_SHIELD:
+        if (gBattleMons[battlerAtk].volatiles.bloomingTimer != 0)
+            ADJUST_SCORE(-10);
+        break;
+    case EFFECT_INVERSE_CURRENT:
+        if (gBattleMons[battlerDef].status1 & STATUS1_PARALYSIS)
+        {
+            if (CountPositiveStatStages(battlerDef) <= CountNegativeStatStages(battlerDef))
+                ADJUST_SCORE(-10);
+        }
+        else if (CountNegativeStatStages(battlerDef) > CountPositiveStatStages(battlerDef))
+        {
+            ADJUST_SCORE(-5);
+        }
+        break;
+    case EFFECT_FAE_FLIGHT:
+        if (GetActiveGimmick(battlerAtk) == GIMMICK_TERA || gBattleMons[battlerAtk].volatiles.faeFlight)
+            ADJUST_SCORE(-10);
+        break;
+    case EFFECT_METEORIC_WRATH:
+        if (gBattleStruct->meteoricWrathTimer != 0 || GetMoveEffect(aiData->partnerMove) == EFFECT_METEORIC_WRATH)
+            ADJUST_SCORE(-10);
         break;
     case EFFECT_FAIRY_LOCK:
         if ((gFieldStatuses & STATUS_FIELD_FAIRY_LOCK) || PartnerMoveIsSameNoTarget(GetPartnerBattler(battlerAtk), move, aiData->partnerMove))
@@ -3324,6 +3369,28 @@ static s32 AI_DoubleBattle(enum BattlerId battlerAtk, enum BattlerId battlerDef,
             ADJUST_SCORE(GOOD_EFFECT);
         }
         break;
+    case EFFECT_BLOOMING_SHIELD:
+        if (IsTargetingPartner(battlerAtk, battlerDef)
+         && gBattleMons[battlerAtk].statStages[STAT_DEF] < MAX_STAT_STAGE)
+            ADJUST_SCORE(DECENT_EFFECT);
+        break;
+    case EFFECT_FAE_FLIGHT:
+        if (IsTargetingPartner(battlerAtk, battlerDef)
+         && GetActiveGimmick(battlerAtk) != GIMMICK_TERA
+         && !gBattleMons[battlerAtk].volatiles.faeFlight
+         && !CanAIFaintTarget(battlerAtk, GetBattlerLeftFoe(battlerAtk), 1)
+         && !CanAIFaintTarget(battlerAtk, GetBattlerRightFoe(battlerAtk), 1))
+            ADJUST_SCORE(BEST_EFFECT);
+        break;
+    case EFFECT_METEORIC_WRATH:
+        if (IsTargetingPartner(battlerAtk, battlerDef)
+         && gBattleStruct->meteoricWrathTimer == 0
+         && GetMoveEffect(aiData->partnerMove) != EFFECT_METEORIC_WRATH
+         && GetMoveEffect(aiData->partnerMove) != EFFECT_HELPING_HAND
+         && !CanAIFaintTarget(battlerAtk, GetBattlerLeftFoe(battlerAtk), 1)
+         && !CanAIFaintTarget(battlerAtk, GetBattlerRightFoe(battlerAtk), 1))
+            ADJUST_SCORE(PERFECT_EFFECT);
+        break;
     default:
         break;
     } // our effect relative to partner
@@ -3766,6 +3833,13 @@ static s32 AI_DoubleBattle(enum BattlerId battlerAtk, enum BattlerId battlerDef,
                      && (!IsBattlerAlive(GetBattlerRightFoe(battlerAtk)) || ShouldRecover(battlerAtk, GetBattlerRightFoe(battlerAtk), move, 50)))
                         RETURN_SCORE_PLUS(WEAK_EFFECT);
                 }
+                break;
+            case EFFECT_INVERSE_CURRENT:
+                if ((gBattleMons[battlerAtkPartner].status1 & STATUS1_PARALYSIS)
+                 && ShouldCureStatus(battlerAtk, battlerAtkPartner, aiData))
+                    ADJUST_SCORE(GOOD_EFFECT);
+                if (CountNegativeStatStages(battlerAtkPartner) > CountPositiveStatStages(battlerAtkPartner))
+                    ADJUST_SCORE(DECENT_EFFECT);
                 break;
             case EFFECT_SWAGGER:
                 if (gBattleMons[battlerAtkPartner].statStages[STAT_ATK] < MAX_STAT_STAGE
@@ -4751,6 +4825,29 @@ static s32 AI_CalcMoveEffectScore(enum BattlerId battlerAtk, enum BattlerId batt
                 ADJUST_SCORE(GOOD_EFFECT); // Disable move that can kill attacker
         }
         break;
+    case EFFECT_GIPHANT_CAPTURE:
+    {
+        u32 damagingMoves = 0;
+        enum Move *moves = GetMovesArray(battlerDef);
+
+        for (u32 moveIndex = 0; moveIndex < MAX_MON_MOVES; moveIndex++)
+        {
+            if (moves[moveIndex] != MOVE_NONE
+             && moves[moveIndex] != MOVE_UNAVAILABLE
+             && !IsBattleMoveStatus(moves[moveIndex]))
+                damagingMoves++;
+        }
+
+        if (HasChoiceEffect(battlerDef) || damagingMoves <= 1)
+            ADJUST_SCORE(BEST_EFFECT);
+        else if (damagingMoves == 2)
+            ADJUST_SCORE(GOOD_EFFECT);
+        else if (aiData->lastUsedMove[battlerDef] != MOVE_NONE
+              && aiData->lastUsedMove[battlerDef] != MOVE_UNAVAILABLE
+              && CanTargetMoveFaintAi(aiData->lastUsedMove[battlerDef], battlerDef, battlerAtk, 1))
+            ADJUST_SCORE(DECENT_EFFECT);
+        break;
+    }
     case EFFECT_ENCORE:
     {
         if (GetActiveGimmick(battlerDef) == GIMMICK_DYNAMAX)
@@ -4843,6 +4940,25 @@ static s32 AI_CalcMoveEffectScore(enum BattlerId battlerAtk, enum BattlerId batt
             if (IsBattlersFirstTurn(battlerAtk) && incomingMove != MOVE_NONE
               && !IsBattleMoveStatus(incomingMove) && AI_GetBattlerMoveTargetType(battlerDef, incomingMove) != TARGET_USER)
                 ADJUST_SCORE(ProtectChecks(battlerAtk, battlerDef, move, incomingMove));
+            break;
+        case PROTECT_FROST_BARRIER:
+            if (incomingMove != MOVE_NONE
+             && !IsBattleMoveStatus(incomingMove)
+             && GetMoveType(incomingMove) != TYPE_FIRE)
+            {
+                ADJUST_SCORE(ProtectChecks(battlerAtk, battlerDef, move, incomingMove));
+                if (GetMoveCategory(incomingMove) == DAMAGE_CATEGORY_PHYSICAL)
+                    ADJUST_SCORE(DECENT_EFFECT);
+                if (AI_MoveMakesContact(battlerDef, battlerAtk, aiData->abilities[battlerDef], aiData->holdEffects[battlerDef], incomingMove))
+                    ADJUST_SCORE(WEAK_EFFECT);
+            }
+            else if (incomingMove == MOVE_NONE && !HasDamagingMoveOfType(battlerDef, TYPE_FIRE))
+            {
+                if (HasMoveWithCategory(battlerDef, DAMAGE_CATEGORY_PHYSICAL))
+                    ADJUST_SCORE(DECENT_EFFECT);
+                else if (HasDamagingMove(battlerDef))
+                    ADJUST_SCORE(WEAK_EFFECT);
+            }
             break;
         case PROTECT_KINGS_SHIELD:
             if (aiData->abilities[battlerAtk] == ABILITY_STANCE_CHANGE //Special logic for Aegislash
@@ -5505,6 +5621,41 @@ static s32 AI_CalcMoveEffectScore(enum BattlerId battlerAtk, enum BattlerId batt
     case EFFECT_TOPSY_TURVY:
         if (CountPositiveStatStages(battlerDef) > CountNegativeStatStages(battlerDef))
             ADJUST_SCORE(DECENT_EFFECT);
+        break;
+    case EFFECT_BLOOMING_SHIELD:
+        if (gBattleMons[battlerAtk].statStages[STAT_DEF] < MAX_STAT_STAGE)
+        {
+            if (IsWeatherActive(B_WEATHER_RAIN | B_WEATHER_SUN) == WEATHER_ACTIVE)
+                ADJUST_SCORE(BEST_EFFECT);
+            else if (HasMoveWithCategory(battlerDef, DAMAGE_CATEGORY_PHYSICAL))
+                ADJUST_SCORE(DECENT_EFFECT);
+            else
+                ADJUST_SCORE(DECENT_EFFECT);
+        }
+        break;
+    case EFFECT_INVERSE_CURRENT:
+        if (!(gBattleMons[battlerDef].status1 & STATUS1_PARALYSIS))
+            IncreaseParalyzeScore(battlerAtk, battlerDef, move, &score);
+        if (CountPositiveStatStages(battlerDef) > CountNegativeStatStages(battlerDef))
+            ADJUST_SCORE(gBattleMons[battlerDef].status1 & STATUS1_PARALYSIS ? DECENT_EFFECT : GOOD_EFFECT);
+        break;
+    case EFFECT_FAE_FLIGHT:
+        if (!CanAIFaintTarget(battlerAtk, battlerDef, 1))
+        {
+            if (HasDamagingMoveOfType(battlerDef, TYPE_ELECTRIC)
+             || HasDamagingMoveOfType(battlerDef, TYPE_ICE)
+             || HasDamagingMoveOfType(battlerDef, TYPE_POISON)
+             || HasDamagingMoveOfType(battlerDef, TYPE_ROCK)
+             || HasDamagingMoveOfType(battlerDef, TYPE_STEEL))
+                ADJUST_SCORE(AWFUL_EFFECT);
+            else
+                ADJUST_SCORE(BEST_EFFECT);
+        }
+        break;
+    case EFFECT_METEORIC_WRATH:
+        if (!CanAIFaintTarget(battlerAtk, battlerDef, 1)
+         && GetMoveEffect(aiData->partnerMove) != EFFECT_HELPING_HAND)
+            ADJUST_SCORE(PERFECT_EFFECT);
         break;
     case EFFECT_FAIRY_LOCK:
         if (ShouldTrap(battlerAtk, battlerDef, move, DONT_CONSIDER_WRAP_DAMAGE))

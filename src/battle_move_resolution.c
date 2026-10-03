@@ -328,6 +328,18 @@ static enum CancelerResult CancelerFlinch(struct BattleCalcValues *cv)
 
 static enum CancelerResult CancelerDisabled(struct BattleCalcValues *cv)
 {
+    enum Move selectedMove = cv->move;
+    if (GetActiveGimmick(cv->battlerAtk) == GIMMICK_Z_MOVE || GetActiveGimmick(cv->battlerAtk) == GIMMICK_DYNAMAX)
+        selectedMove = gBattleStruct->baseMove;
+
+    if (IsMoveGiphantCaptured(cv->battlerAtk, selectedMove))
+    {
+        gBattleScripting.battler = cv->battlerAtk;
+        CancelMultiTurnMoves(cv->battlerAtk);
+        gBattlescriptCurrInstr = BattleScript_MoveUsedIsDisabled;
+        return CANCELER_RESULT_FAILURE;
+    }
+
     if (GetActiveGimmick(cv->battlerAtk) != GIMMICK_Z_MOVE
      && gBattleMons[cv->battlerAtk].volatiles.disabledMove == cv->move
      && gBattleMons[cv->battlerAtk].volatiles.disabledMove != MOVE_NONE)
@@ -3502,6 +3514,14 @@ static enum MoveEndResult MoveEndProtectLikeEffect(struct BattleCalcValues *cv)
             result = MOVEEND_RESULT_RUN_SCRIPT;
         }
         break;
+    case PROTECT_FROST_BARRIER:
+        if (CanBeFrozen(cv->battlerDef, cv->battlerAtk, cv->abilities[cv->battlerAtk]))
+        {
+            gBattleScripting.moveEffect = MOVE_EFFECT_FROSTBITE;
+            BattleScriptCall(BattleScript_BanefulBunkerEffect);
+            result = MOVEEND_RESULT_RUN_SCRIPT;
+        }
+        break;
     case PROTECT_OBSTRUCT:
         gEffectBattler = gBattlerAttacker;
         SetStatChange(gEffectBattler, STAT_DEF, -2);
@@ -5469,6 +5489,7 @@ static enum MoveEndResult MoveEndClearBits(struct BattleCalcValues *cv)
     TryClearChargeVolatile(moveType);
     gProtectStructs[cv->battlerAtk].shellTrap = FALSE;
     gBattleStruct->battlerState[cv->battlerAtk].ateBoost = FALSE;
+    gBattleStruct->battlerState[cv->battlerAtk].faeFlightBoost = FALSE;
     gBattleScripting.moveEffect = MOVE_EFFECT_NONE;
     gBattleStruct->additionalEffectsCounter = 0;
     gBattleStruct->triAttackBurn = FALSE;

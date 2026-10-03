@@ -2097,6 +2097,8 @@ bool32 IsAllyProtectingFromMove(enum BattlerId battlerAtk, enum Move attackerMov
     case PROTECT_BURNING_BULWARK:
     case PROTECT_CHRYSALIS:
         return TRUE;
+    case PROTECT_FROST_BARRIER:
+        return !IsBattleMoveStatus(attackerMove) && GetBattleMoveType(attackerMove) != TYPE_FIRE;
     case PROTECT_OBSTRUCT:
     case PROTECT_SILK_TRAP:
     case PROTECT_KINGS_SHIELD:
