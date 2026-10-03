@@ -250,6 +250,50 @@ ASSUMPTIONS
     ASSUME(GetMoveAccuracy(MOVE_SYNCHROSWIM) == 100);
     ASSUME(GetMoveCategory(MOVE_SYNCHROSWIM) == DAMAGE_CATEGORY_PHYSICAL);
     ASSUME(GetMoveStrikeCount(MOVE_SYNCHROSWIM) == 2);
+
+    ASSUME(GetMoveEffect(MOVE_GIPHANT_CAPTURE) == EFFECT_GIPHANT_CAPTURE);
+    ASSUME(GetMoveType(MOVE_GIPHANT_CAPTURE) == TYPE_BUG);
+    ASSUME(GetMoveAccuracy(MOVE_GIPHANT_CAPTURE) == 0);
+    ASSUME(GetMovePP(MOVE_GIPHANT_CAPTURE) == 1);
+    ASSUME(GetMoveCategory(MOVE_GIPHANT_CAPTURE) == DAMAGE_CATEGORY_STATUS);
+
+    ASSUME(GetMoveEffect(MOVE_FREE_CLIMB) == EFFECT_HIT_ESCAPE);
+    ASSUME(GetMoveType(MOVE_FREE_CLIMB) == TYPE_ROCK);
+    ASSUME(GetMovePower(MOVE_FREE_CLIMB) == 40);
+    ASSUME(GetMoveAccuracy(MOVE_FREE_CLIMB) == 100);
+    ASSUME(GetMovePP(MOVE_FREE_CLIMB) == 5);
+    ASSUME(GetMoveCategory(MOVE_FREE_CLIMB) == DAMAGE_CATEGORY_PHYSICAL);
+
+    ASSUME(GetMoveEffect(MOVE_CLOTHESLINE) == EFFECT_CLOTHESLINE);
+    ASSUME(GetMoveType(MOVE_CLOTHESLINE) == TYPE_FIGHTING);
+    ASSUME(GetMovePower(MOVE_CLOTHESLINE) == 40);
+    ASSUME(GetMoveAccuracy(MOVE_CLOTHESLINE) == 95);
+    ASSUME(GetMovePP(MOVE_CLOTHESLINE) == 10);
+    ASSUME(GetMoveCategory(MOVE_CLOTHESLINE) == DAMAGE_CATEGORY_PHYSICAL);
+
+    ASSUME(GetMoveEffect(MOVE_BLOOMING_SHIELD) == EFFECT_BLOOMING_SHIELD);
+    ASSUME(GetMoveType(MOVE_BLOOMING_SHIELD) == TYPE_GRASS);
+    ASSUME(GetMovePP(MOVE_BLOOMING_SHIELD) == 5);
+    ASSUME(GetMovePriority(MOVE_BLOOMING_SHIELD) == 4);
+
+    ASSUME(GetMoveEffect(MOVE_INVERSE_CURRENT) == EFFECT_INVERSE_CURRENT);
+    ASSUME(GetMoveType(MOVE_INVERSE_CURRENT) == TYPE_ELECTRIC);
+    ASSUME(GetMovePP(MOVE_INVERSE_CURRENT) == 20);
+
+    ASSUME(GetMoveEffect(MOVE_FAE_FLIGHT) == EFFECT_FAE_FLIGHT);
+    ASSUME(GetMoveType(MOVE_FAE_FLIGHT) == TYPE_FAIRY);
+    ASSUME(GetMovePP(MOVE_FAE_FLIGHT) == 1);
+    ASSUME(GetMovePriority(MOVE_FAE_FLIGHT) == 1);
+
+    ASSUME(GetMoveEffect(MOVE_METEORIC_WRATH) == EFFECT_METEORIC_WRATH);
+    ASSUME(GetMoveType(MOVE_METEORIC_WRATH) == TYPE_PSYCHIC);
+    ASSUME(GetMovePP(MOVE_METEORIC_WRATH) == 1);
+
+    ASSUME(GetMoveEffect(MOVE_FROST_BARRIER) == EFFECT_PROTECT);
+    ASSUME(GetMoveType(MOVE_FROST_BARRIER) == TYPE_ICE);
+    ASSUME(GetMovePP(MOVE_FROST_BARRIER) == 5);
+    ASSUME(GetMovePriority(MOVE_FROST_BARRIER) == 4);
+    ASSUME(GetMoveProtectMethod(MOVE_FROST_BARRIER) == PROTECT_FROST_BARRIER);
 }
 
 SINGLE_BATTLE_TEST("Custom Moves - Rock Heart may infatuate the target")
@@ -1276,6 +1320,172 @@ AI_SINGLE_BATTLE_TEST("Custom Moves - AI scores Orbital Pull as setup")
     }
 }
 
+AI_SINGLE_BATTLE_TEST("Custom Moves - AI scores Giphant Capture against a Choice-locked target")
+{
+    GIVEN {
+        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_OMNISCIENT);
+        PLAYER(SPECIES_WOBBUFFET) { Item(ITEM_CHOICE_BAND); Moves(MOVE_SCRATCH, MOVE_TACKLE, MOVE_POUND, MOVE_CELEBRATE); }
+        OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_GIPHANT_CAPTURE, MOVE_SCRATCH); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_SCRATCH); EXPECT_MOVE(opponent, MOVE_SCRATCH); }
+        TURN { MOVE(player, MOVE_SCRATCH); SCORE_GT(opponent, MOVE_GIPHANT_CAPTURE, MOVE_SCRATCH); }
+    }
+}
+
+AI_SINGLE_BATTLE_TEST("Custom Moves - AI scores Giphant Capture against a target with few attacks")
+{
+    GIVEN {
+        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_OMNISCIENT);
+        PLAYER(SPECIES_WOBBUFFET) { Moves(MOVE_SCRATCH, MOVE_GROWL, MOVE_RECOVER, MOVE_CELEBRATE); }
+        OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_GIPHANT_CAPTURE, MOVE_SCRATCH); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_SCRATCH); EXPECT_MOVE(opponent, MOVE_SCRATCH); }
+        TURN { SCORE_GT(opponent, MOVE_GIPHANT_CAPTURE, MOVE_SCRATCH); }
+    }
+}
+
+AI_SINGLE_BATTLE_TEST("Custom Moves - AI scores Free Climb as a beneficial pivot")
+{
+    PASSES_RANDOMLY(100, 100);
+    GIVEN {
+        ASSUME(GetMoveEffect(MOVE_FREE_CLIMB) == EFFECT_HIT_ESCAPE);
+        ASSUME(GetMoveEffect(MOVE_DRAGON_RAGE) == EFFECT_FIXED_HP_DAMAGE);
+        ASSUME(GetMoveFixedHPDamage(MOVE_DRAGON_RAGE) == 40);
+        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_SMART_MON_CHOICES | AI_FLAG_OMNISCIENT);
+        PLAYER(SPECIES_ZIGZAGOON) { Speed(1); Moves(MOVE_DRAGON_RAGE, MOVE_GROWL); }
+        OPPONENT(SPECIES_TANGELA) { Speed(2); HP(30); MaxHP(100); Ability(ABILITY_REGENERATOR); Moves(MOVE_FREE_CLIMB, MOVE_MAGICAL_LEAF); }
+        OPPONENT(SPECIES_METAGROSS) { Speed(2); Moves(MOVE_METEOR_MASH); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_GROWL); EXPECT_MOVE(opponent, MOVE_FREE_CLIMB); }
+    }
+}
+
+AI_SINGLE_BATTLE_TEST("Custom Moves - AI accounts for Clothesline's boosted power")
+{
+    GIVEN {
+        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT | AI_FLAG_PREFER_HIGHEST_DAMAGE_MOVE | AI_FLAG_OMNISCIENT);
+        PLAYER(SPECIES_WOBBUFFET) { Moves(MOVE_AGILITY, MOVE_CELEBRATE); }
+        OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_CLOTHESLINE, MOVE_ROCK_SMASH, MOVE_SCRATCH); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_AGILITY); EXPECT_MOVES(opponent, MOVE_CLOTHESLINE, MOVE_ROCK_SMASH, MOVE_SCRATCH); }
+        TURN { SCORE_GT(opponent, MOVE_CLOTHESLINE, MOVE_ROCK_SMASH); }
+    }
+}
+
+AI_SINGLE_BATTLE_TEST("Custom Moves - AI prioritizes Blooming Shield in sun")
+{
+    GIVEN {
+        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT);
+        PLAYER(SPECIES_TORKOAL) { Ability(ABILITY_DROUGHT); Moves(MOVE_CELEBRATE); }
+        OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_BLOOMING_SHIELD, MOVE_SCRATCH, MOVE_CELEBRATE); }
+    } WHEN {
+        TURN { SCORE_GT(opponent, MOVE_BLOOMING_SHIELD, MOVE_SCRATCH); }
+    }
+}
+
+AI_SINGLE_BATTLE_TEST("Custom Moves - AI scores Inverse Current against raised stats")
+{
+    GIVEN {
+        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT | AI_FLAG_OMNISCIENT);
+        PLAYER(SPECIES_WOBBUFFET) { Ability(ABILITY_COMPETITIVE); Moves(MOVE_CELEBRATE); }
+        OPPONENT(SPECIES_WOBBUFFET) { Ability(ABILITY_INTIMIDATE); Moves(MOVE_INVERSE_CURRENT, MOVE_SCRATCH, MOVE_CELEBRATE); }
+    } WHEN {
+        TURN { SCORE_GT(opponent, MOVE_INVERSE_CURRENT, MOVE_SCRATCH); }
+    }
+}
+
+AI_DOUBLE_BATTLE_TEST("Custom Moves - AI scores Inverse Current to cure an ally's paralysis")
+{
+    GIVEN {
+        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT | AI_FLAG_DOUBLE_BATTLE);
+        PLAYER(SPECIES_WOBBUFFET);
+        PLAYER(SPECIES_WYNAUT);
+        OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_INVERSE_CURRENT, MOVE_CELEBRATE); }
+        OPPONENT(SPECIES_WYNAUT) { Status1(STATUS1_PARALYSIS); Moves(MOVE_SCRATCH); }
+    } WHEN {
+        TURN { SCORE_GT(opponentLeft, MOVE_INVERSE_CURRENT, MOVE_CELEBRATE, target: opponentRight); }
+    }
+}
+
+AI_SINGLE_BATTLE_TEST("Custom Moves - AI prioritizes Fae Flight without an immediate KO")
+{
+    GIVEN {
+        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT | AI_FLAG_OMNISCIENT);
+        PLAYER(SPECIES_WOBBUFFET) { Moves(MOVE_SCRATCH); }
+        OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_FAE_FLIGHT, MOVE_SCRATCH); }
+    } WHEN {
+        TURN { SCORE_GT(opponent, MOVE_FAE_FLIGHT, MOVE_SCRATCH); }
+    }
+}
+
+AI_SINGLE_BATTLE_TEST("Custom Moves - AI takes an immediate KO instead of using Fae Flight")
+{
+    GIVEN {
+        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT | AI_FLAG_OMNISCIENT);
+        PLAYER(SPECIES_WOBBUFFET) { HP(1); Moves(MOVE_CELEBRATE); }
+        OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_FAE_FLIGHT, MOVE_SCRATCH); }
+    } WHEN {
+        TURN { SCORE_GT(opponent, MOVE_SCRATCH, MOVE_FAE_FLIGHT); }
+    }
+}
+
+AI_SINGLE_BATTLE_TEST("Custom Moves - AI avoids Fae Flight against dangerous coverage")
+{
+    GIVEN {
+        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT | AI_FLAG_OMNISCIENT);
+        PLAYER(SPECIES_WOBBUFFET) { Moves(MOVE_THUNDERBOLT); }
+        OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_FAE_FLIGHT, MOVE_SCRATCH); }
+    } WHEN {
+        TURN { SCORE_GT(opponent, MOVE_SCRATCH, MOVE_FAE_FLIGHT); }
+    }
+}
+
+AI_SINGLE_BATTLE_TEST("Custom Moves - AI prioritizes Meteoric Wrath without an immediate KO")
+{
+    GIVEN {
+        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT | AI_FLAG_OMNISCIENT);
+        PLAYER(SPECIES_WOBBUFFET) { Moves(MOVE_CELEBRATE); }
+        OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_METEORIC_WRATH, MOVE_SCRATCH); }
+    } WHEN {
+        TURN { SCORE_GT(opponent, MOVE_METEORIC_WRATH, MOVE_SCRATCH); }
+    }
+}
+
+AI_SINGLE_BATTLE_TEST("Custom Moves - AI takes an immediate KO instead of using Meteoric Wrath")
+{
+    GIVEN {
+        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT | AI_FLAG_OMNISCIENT);
+        PLAYER(SPECIES_WOBBUFFET) { HP(1); Moves(MOVE_CELEBRATE); }
+        OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_METEORIC_WRATH, MOVE_SCRATCH); }
+    } WHEN {
+        TURN { SCORE_GT(opponent, MOVE_SCRATCH, MOVE_METEORIC_WRATH); }
+    }
+}
+
+AI_SINGLE_BATTLE_TEST("Custom Moves - AI scores Frost Barrier against a physical contact move")
+{
+    PASSES_RANDOMLY(PREDICT_MOVE_CHANCE, 100, RNG_AI_PREDICT_MOVE);
+    GIVEN {
+        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT | AI_FLAG_OMNISCIENT | AI_FLAG_PREDICT_MOVE);
+        PLAYER(SPECIES_WOBBUFFET) { Moves(MOVE_SCRATCH); }
+        OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_FROST_BARRIER, MOVE_SCRATCH); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_SCRATCH); SCORE_GT(opponent, MOVE_FROST_BARRIER, MOVE_SCRATCH); }
+    }
+}
+
+AI_SINGLE_BATTLE_TEST("Custom Moves - AI avoids Frost Barrier against a Fire-type move")
+{
+    PASSES_RANDOMLY(PREDICT_MOVE_CHANCE, 100, RNG_AI_PREDICT_MOVE);
+    GIVEN {
+        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT | AI_FLAG_OMNISCIENT | AI_FLAG_PREDICT_MOVE);
+        PLAYER(SPECIES_WOBBUFFET) { Moves(MOVE_EMBER); }
+        OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_FROST_BARRIER, MOVE_SCRATCH); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_EMBER); SCORE_GT(opponent, MOVE_SCRATCH, MOVE_FROST_BARRIER); }
+    }
+}
+
 SINGLE_BATTLE_TEST("Custom Moves - Research raises offenses if the user is not attacked")
 {
     GIVEN {
@@ -1446,5 +1656,329 @@ DOUBLE_BATTLE_TEST("Custom Moves - Synchroswim is repeated by the user's ally wi
         ANIMATION(ANIM_TYPE_MOVE, MOVE_CELEBRATE, playerRight);
     } THEN {
         EXPECT_LT(opponentLeft->hp, 300);
+    }
+}
+
+SINGLE_BATTLE_TEST("Custom Moves - Giphant Capture seals the target's last move")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET) { Moves(MOVE_CELEBRATE, MOVE_GIPHANT_CAPTURE); Speed(10); }
+        OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_TACKLE); Speed(5); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_CELEBRATE); MOVE(opponent, MOVE_TACKLE); }
+        TURN { MOVE(player, MOVE_GIPHANT_CAPTURE); MOVE(opponent, MOVE_TACKLE); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_GIPHANT_CAPTURE, player);
+        NOT ANIMATION(ANIM_TYPE_MOVE, MOVE_TACKLE, opponent);
+    }
+}
+
+SINGLE_BATTLE_TEST("Custom Moves - Giphant Capture persists when the target switches")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET) { Moves(MOVE_CELEBRATE, MOVE_GIPHANT_CAPTURE); Speed(10); }
+        OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_TACKLE); Speed(5); }
+        OPPONENT(SPECIES_WYNAUT) { Moves(MOVE_CELEBRATE); Speed(5); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_CELEBRATE); MOVE(opponent, MOVE_TACKLE); }
+        TURN { MOVE(player, MOVE_GIPHANT_CAPTURE); MOVE(opponent, MOVE_TACKLE); }
+        TURN { MOVE(player, MOVE_CELEBRATE); SWITCH(opponent, 1); }
+        TURN { MOVE(player, MOVE_CELEBRATE); SWITCH(opponent, 0); }
+        TURN { MOVE(player, MOVE_CELEBRATE); FORCED_MOVE(opponent); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_STRUGGLE, opponent);
+    }
+}
+
+DOUBLE_BATTLE_TEST("Custom Moves - Multiple Giphant Captures remain sealed")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET) { Moves(MOVE_CELEBRATE, MOVE_GIPHANT_CAPTURE); Speed(30); }
+        PLAYER(SPECIES_WYNAUT) { Moves(MOVE_CELEBRATE, MOVE_GIPHANT_CAPTURE); Speed(20); }
+        OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_TACKLE, MOVE_SCRATCH, MOVE_CELEBRATE); Speed(10); }
+        OPPONENT(SPECIES_WYNAUT) { Moves(MOVE_CELEBRATE); Speed(5); }
+    } WHEN {
+        TURN {
+            MOVE(playerLeft, MOVE_CELEBRATE);
+            MOVE(playerRight, MOVE_CELEBRATE);
+            MOVE(opponentLeft, MOVE_TACKLE, target: playerLeft);
+            MOVE(opponentRight, MOVE_CELEBRATE);
+        }
+        TURN {
+            MOVE(playerLeft, MOVE_GIPHANT_CAPTURE, target: opponentLeft);
+            MOVE(playerRight, MOVE_CELEBRATE);
+            MOVE(opponentLeft, MOVE_SCRATCH, target: playerLeft);
+            MOVE(opponentRight, MOVE_CELEBRATE);
+        }
+        TURN {
+            MOVE(playerLeft, MOVE_CELEBRATE);
+            MOVE(playerRight, MOVE_GIPHANT_CAPTURE, target: opponentLeft);
+            MOVE(opponentLeft, MOVE_CELEBRATE);
+            MOVE(opponentRight, MOVE_CELEBRATE);
+        }
+    } THEN {
+        EXPECT(IsMoveGiphantCaptured(GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT), MOVE_TACKLE));
+        EXPECT(IsMoveGiphantCaptured(GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT), MOVE_SCRATCH));
+    }
+}
+
+SINGLE_BATTLE_TEST("Custom Moves - Free Climb deals damage and switches the user")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET);
+        PLAYER(SPECIES_WYNAUT);
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(player, MOVE_FREE_CLIMB); SEND_OUT(player, 1); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_FREE_CLIMB, player);
+        HP_BAR(opponent);
+        SEND_IN_MESSAGE("Wynaut");
+    }
+}
+
+SINGLE_BATTLE_TEST("Custom Moves - Clothesline gains 40 power per positive Speed stage", s16 damage)
+{
+    u32 setupMove;
+    PARAMETRIZE { setupMove = MOVE_CELEBRATE; }
+    PARAMETRIZE { setupMove = MOVE_AGILITY; }
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET) { Attack(100); }
+        OPPONENT(SPECIES_WOBBUFFET) { Defense(100); HP(400); MaxHP(400); }
+    } WHEN {
+        TURN { MOVE(player, setupMove); }
+        TURN { MOVE(player, MOVE_CLOTHESLINE); }
+    } SCENE {
+        HP_BAR(opponent, captureDamage: &results[i].damage);
+    } FINALLY {
+        EXPECT_MUL_EQ(results[0].damage, Q_4_12(3.0), results[1].damage);
+    }
+}
+
+SINGLE_BATTLE_TEST("Custom Moves - Blooming Shield raises Defense in sun and expires after four turns")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET) { Speed(10); }
+        OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_DRAGON_DANCE, MOVE_CELEBRATE); Speed(5); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_SUNNY_DAY); MOVE(opponent, MOVE_CELEBRATE); }
+        TURN { MOVE(player, MOVE_BLOOMING_SHIELD); MOVE(opponent, MOVE_CELEBRATE); }
+        TURN { MOVE(player, MOVE_CELEBRATE); MOVE(opponent, MOVE_CELEBRATE); }
+        TURN { MOVE(player, MOVE_CELEBRATE); MOVE(opponent, MOVE_CELEBRATE); }
+        TURN { MOVE(player, MOVE_CELEBRATE); MOVE(opponent, MOVE_CELEBRATE); }
+    } THEN {
+        EXPECT_EQ(player->statStages[STAT_DEF], DEFAULT_STAT_STAGE + 5);
+        EXPECT(!player->volatiles.bloomingTimer);
+    }
+}
+
+SINGLE_BATTLE_TEST("Custom Moves - Blooming Shield fails while the user is already blooming")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(player, MOVE_BLOOMING_SHIELD); }
+        TURN { MOVE(player, MOVE_BLOOMING_SHIELD); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_BLOOMING_SHIELD, player);
+        NOT ANIMATION(ANIM_TYPE_MOVE, MOVE_BLOOMING_SHIELD, player);
+    }
+}
+
+SINGLE_BATTLE_TEST("Custom Moves - Inverse Current inverts stages and toggles paralysis")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET) { Speed(10); }
+        OPPONENT(SPECIES_WOBBUFFET) { Speed(5); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_CELEBRATE); MOVE(opponent, MOVE_DRAGON_DANCE); }
+        TURN { MOVE(player, MOVE_INVERSE_CURRENT); MOVE(opponent, MOVE_CELEBRATE); }
+    } THEN {
+        EXPECT_EQ(opponent->statStages[STAT_ATK], DEFAULT_STAT_STAGE - 1);
+        EXPECT_EQ(opponent->statStages[STAT_SPEED], DEFAULT_STAT_STAGE - 1);
+        EXPECT(opponent->status1 & STATUS1_PARALYSIS);
+    } WHEN {
+        TURN { MOVE(player, MOVE_INVERSE_CURRENT); MOVE(opponent, MOVE_CELEBRATE); }
+    } THEN {
+        EXPECT_EQ(opponent->statStages[STAT_ATK], DEFAULT_STAT_STAGE + 1);
+        EXPECT_EQ(opponent->status1, STATUS1_NONE);
+    }
+}
+
+SINGLE_BATTLE_TEST("Custom Moves - Fae Flight changes types and prevents Terastallization")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET) { TeraType(TYPE_PSYCHIC); }
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(player, MOVE_FAE_FLIGHT); }
+    } THEN {
+        EXPECT(IS_BATTLER_OF_TYPE(GetBattlerAtPosition(B_POSITION_PLAYER_LEFT), TYPE_FAIRY));
+        EXPECT(IS_BATTLER_OF_TYPE(GetBattlerAtPosition(B_POSITION_PLAYER_LEFT), TYPE_FLYING));
+        EXPECT(!CanTerastallize(GetBattlerAtPosition(B_POSITION_PLAYER_LEFT)));
+    }
+}
+
+SINGLE_BATTLE_TEST("Custom Moves - Fae Flight does not compound its boost with Pixilate", s16 damage)
+{
+    enum Ability ability;
+    PARAMETRIZE { ability = ABILITY_NONE; }
+    PARAMETRIZE { ability = ABILITY_PIXILATE; }
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET) { Ability(ability); Attack(100); }
+        OPPONENT(SPECIES_WOBBUFFET) { Defense(100); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_FAE_FLIGHT); }
+        TURN { MOVE(player, MOVE_TACKLE); }
+    } SCENE {
+        HP_BAR(opponent, captureDamage: &results[i].damage);
+    } FINALLY {
+        EXPECT_EQ(results[0].damage, results[1].damage);
+    }
+}
+
+SINGLE_BATTLE_TEST("Custom Moves - Fae Flight does not boost Weather Ball after weather changes its type", s16 damage)
+{
+    bool32 useFaeFlight;
+    PARAMETRIZE { useFaeFlight = FALSE; }
+    PARAMETRIZE { useFaeFlight = TRUE; }
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET) { SpAttack(100); Speed(10); }
+        OPPONENT(SPECIES_NINETALES) { Ability(ABILITY_DROUGHT); SpDefense(100); Speed(5); }
+    } WHEN {
+        if (useFaeFlight)
+            TURN { MOVE(player, MOVE_FAE_FLIGHT); MOVE(opponent, MOVE_CELEBRATE); }
+        else
+            TURN { MOVE(player, MOVE_CELEBRATE); MOVE(opponent, MOVE_CELEBRATE); }
+        TURN { MOVE(player, MOVE_WEATHER_BALL); MOVE(opponent, MOVE_CELEBRATE); }
+    } SCENE {
+        HP_BAR(opponent, captureDamage: &results[i].damage);
+    } FINALLY {
+        EXPECT_EQ(results[0].damage, results[1].damage);
+    }
+}
+
+SINGLE_BATTLE_TEST("Custom Moves - Fae Flight's type change ends on switch")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET);
+        PLAYER(SPECIES_WYNAUT);
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(player, MOVE_FAE_FLIGHT); }
+        TURN { SWITCH(player, 1); }
+        TURN { SWITCH(player, 0); }
+    } THEN {
+        EXPECT(!IS_BATTLER_OF_TYPE(GetBattlerAtPosition(B_POSITION_PLAYER_LEFT), TYPE_FAIRY));
+        EXPECT(!IS_BATTLER_OF_TYPE(GetBattlerAtPosition(B_POSITION_PLAYER_LEFT), TYPE_FLYING));
+    }
+}
+
+SINGLE_BATTLE_TEST("Custom Moves - Fae Flight fails if the user is Terastallized")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET) { TeraType(TYPE_PSYCHIC); }
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(player, MOVE_CELEBRATE, gimmick: GIMMICK_TERA); }
+        TURN { MOVE(player, MOVE_FAE_FLIGHT); }
+    } SCENE {
+        NOT ANIMATION(ANIM_TYPE_MOVE, MOVE_FAE_FLIGHT, player);
+    }
+}
+
+DOUBLE_BATTLE_TEST("Custom Moves - Meteoric Wrath strikes and KOs every battler after two turns")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET);
+        PLAYER(SPECIES_WYNAUT);
+        OPPONENT(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WYNAUT);
+    } WHEN {
+        TURN { MOVE(playerLeft, MOVE_METEORIC_WRATH); MOVE(playerRight, MOVE_CELEBRATE); MOVE(opponentLeft, MOVE_CELEBRATE); MOVE(opponentRight, MOVE_CELEBRATE); }
+        TURN { MOVE(playerLeft, MOVE_CELEBRATE); MOVE(playerRight, MOVE_CELEBRATE); MOVE(opponentLeft, MOVE_CELEBRATE); MOVE(opponentRight, MOVE_CELEBRATE); }
+        TURN { MOVE(playerLeft, MOVE_CELEBRATE); MOVE(playerRight, MOVE_CELEBRATE); MOVE(opponentLeft, MOVE_CELEBRATE); MOVE(opponentRight, MOVE_CELEBRATE); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_METEORIC_WRATH_IMPACT, playerLeft);
+    } THEN {
+        EXPECT_EQ(playerLeft->hp, 0);
+        EXPECT_EQ(playerRight->hp, 0);
+        EXPECT_EQ(opponentLeft->hp, 0);
+        EXPECT_EQ(opponentRight->hp, 0);
+    }
+}
+
+SINGLE_BATTLE_TEST("Custom Moves - Meteoric Wrath fails while a meteor is en route")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(player, MOVE_METEORIC_WRATH); MOVE(opponent, MOVE_METEORIC_WRATH); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_METEORIC_WRATH, player);
+        NOT ANIMATION(ANIM_TYPE_MOVE, MOVE_METEORIC_WRATH, opponent);
+    }
+}
+
+SINGLE_BATTLE_TEST("Custom Moves - Frost Barrier blocks contact and inflicts frostbite")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(player, MOVE_FROST_BARRIER); MOVE(opponent, MOVE_SCRATCH); }
+    } THEN {
+        EXPECT_EQ(player->hp, player->maxHP);
+        EXPECT(opponent->status1 & STATUS1_FROSTBITE);
+    }
+}
+
+SINGLE_BATTLE_TEST("Custom Moves - Frost Barrier blocks non-contact attacks without inflicting frostbite")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(player, MOVE_FROST_BARRIER); MOVE(opponent, MOVE_PSYCHIC); }
+    } THEN {
+        EXPECT_EQ(player->hp, player->maxHP);
+        EXPECT_EQ(opponent->status1, STATUS1_NONE);
+    }
+}
+
+SINGLE_BATTLE_TEST("Custom Moves - Fire attacks break through Frost Barrier")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(player, MOVE_FROST_BARRIER); MOVE(opponent, MOVE_EMBER); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_EMBER, opponent);
+        HP_BAR(player);
+    }
+}
+
+DOUBLE_BATTLE_TEST("Custom Moves - Fire nullifies Frost Barrier for the rest of the turn")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET) { Speed(20); }
+        PLAYER(SPECIES_WYNAUT) { Speed(15); }
+        OPPONENT(SPECIES_WOBBUFFET) { Speed(10); }
+        OPPONENT(SPECIES_WYNAUT) { Speed(5); }
+    } WHEN {
+        TURN {
+            MOVE(playerLeft, MOVE_FROST_BARRIER);
+            MOVE(playerRight, MOVE_CELEBRATE);
+            MOVE(opponentLeft, MOVE_EMBER, target: playerLeft);
+            MOVE(opponentRight, MOVE_SCRATCH, target: playerLeft);
+        }
+    } SCENE {
+        HP_BAR(playerLeft);
+        HP_BAR(playerLeft);
+    } THEN {
+        EXPECT_EQ(opponentRight->status1, STATUS1_NONE);
     }
 }

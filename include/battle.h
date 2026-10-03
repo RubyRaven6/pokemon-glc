@@ -545,7 +545,8 @@ struct BattlerState
     u16 notOnField:1;
     u16 originalBattlerPartyId:4;
     u16 isFirstTurn:2; // Starts at 2 on switch in and counts down during end turn
-    u16 padding:8;
+    u16 faeFlightBoost:1;
+    u16 padding:7;
     // End of Word
 };
 
@@ -565,6 +566,7 @@ struct PartyState
     u32 freezeTurns:2;
     u32 padding:3;
     enum Item usedHeldItem;
+    enum Move giphantCapturedMoves[MAX_MON_MOVES];
 };
 
 struct EventStates
@@ -594,6 +596,8 @@ struct BattleStruct
     struct PartyState partyState[MAX_BATTLE_TRAINERS][PARTY_SIZE];
     struct EventStates eventState;
     struct FutureSight futureSight[MAX_BATTLERS_COUNT];
+    u8 meteoricWrathTimer;
+    u8 meteoricWrathBattler;
     struct Wish wish[MAX_BATTLERS_COUNT];
     u16 moveTarget[MAX_BATTLERS_COUNT];
     u8 faintCounter[MAX_BATTLE_TRAINERS]; // Supreme Overload / Last Respects

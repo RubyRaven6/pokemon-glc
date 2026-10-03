@@ -301,6 +301,8 @@ enum VolatileFlags
     F(VOLATILE_RESEARCH,                    research,                      (u32, 1)) \
     F(VOLATILE_STUNT_DOUBLE,                stuntDouble,                   (u32, 1)) \
     F(VOLATILE_JET_STREAM_WIND_RIDER,       jetStreamWindRider,            (u32, 1)) \
+    F(VOLATILE_BLOOMING_TIMER,               bloomingTimer,                 (u32, 4)) \
+    F(VOLATILE_FAE_FLIGHT,                   faeFlight,                     (u32, 1)) \
     F(VOLATILE_OCTOLOCK,                    octolock,                      (u32, 1)) \
     F(VOLATILE_CUD_CHEW,                    cudChew,                       (u32, 1)) \
     F(VOLATILE_WEATHER_ABILITY_DONE,        weatherAbilityDone,            (u32, 1)) \

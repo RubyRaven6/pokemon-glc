@@ -10359,6 +10359,98 @@ void BS_SetResearch(void)
     gBattlescriptCurrInstr = cmd->nextInstr;
 }
 
+void BS_SetGiphantCapture(void)
+{
+    NATIVE_ARGS(const u8 *failInstr);
+    enum Move move = gLastMoves[gBattlerTarget];
+    struct PartyState *partyState = GetBattlerPartyState(gBattlerTarget);
+
+    if (move == MOVE_NONE || move == MOVE_UNAVAILABLE || move == MOVE_STRUGGLE)
+    {
+        gBattlescriptCurrInstr = cmd->failInstr;
+        return;
+    }
+
+    for (u32 i = 0; i < MAX_MON_MOVES; i++)
+    {
+        if (partyState->giphantCapturedMoves[i] == move)
+            break;
+        if (partyState->giphantCapturedMoves[i] == MOVE_NONE)
+        {
+            partyState->giphantCapturedMoves[i] = move;
+            break;
+        }
+    }
+    PREPARE_MOVE_BUFFER(gBattleTextBuff1, move);
+    gBattlescriptCurrInstr = cmd->nextInstr;
+}
+
+void BS_SetBloomingShield(void)
+{
+    NATIVE_ARGS(const u8 *failInstr);
+
+    if (gBattleMons[gBattlerAttacker].volatiles.bloomingTimer != 0)
+    {
+        gBattlescriptCurrInstr = cmd->failInstr;
+        return;
+    }
+
+    gBattleMons[gBattlerAttacker].volatiles.bloomingTimer = 4;
+    SetStatChange(gBattlerAttacker, STAT_DEF, 1);
+    gBattlescriptCurrInstr = cmd->nextInstr;
+}
+
+void BS_SetFaeFlight(void)
+{
+    NATIVE_ARGS(const u8 *failInstr);
+
+    if (GetActiveGimmick(gBattlerAttacker) == GIMMICK_TERA
+     || gBattleMons[gBattlerAttacker].volatiles.faeFlight)
+    {
+        gBattlescriptCurrInstr = cmd->failInstr;
+        return;
+    }
+
+    gBattleMons[gBattlerAttacker].types[0] = TYPE_FAIRY;
+    gBattleMons[gBattlerAttacker].types[1] = TYPE_FLYING;
+    gBattleMons[gBattlerAttacker].types[2] = TYPE_MYSTERY;
+    gBattleMons[gBattlerAttacker].volatiles.faeFlight = TRUE;
+    gBattlescriptCurrInstr = cmd->nextInstr;
+}
+
+void BS_SetMeteoricWrath(void)
+{
+    NATIVE_ARGS(const u8 *failInstr);
+
+    if (gBattleStruct->meteoricWrathTimer != 0)
+    {
+        gBattlescriptCurrInstr = cmd->failInstr;
+        return;
+    }
+
+    gBattleStruct->meteoricWrathTimer = 3;
+    gBattleStruct->meteoricWrathBattler = gBattlerAttacker;
+    gBattlescriptCurrInstr = cmd->nextInstr;
+}
+
+void BS_SetMeteoricWrathImpact(void)
+{
+    NATIVE_ARGS();
+
+    if (gEffectBattler < gBattlersCount && IsBattlerPresent(gEffectBattler))
+    {
+        gBattleCommunication[0] = TRUE;
+        gBattlerTarget = gEffectBattler;
+        SetPassiveDamageAmount(gEffectBattler, gBattleMons[gEffectBattler].hp);
+    }
+    else
+    {
+        gBattleCommunication[0] = FALSE;
+    }
+
+    gBattlescriptCurrInstr = cmd->nextInstr;
+}
+
 void BS_SetCastingCallCharge(void)
 {
     NATIVE_ARGS();

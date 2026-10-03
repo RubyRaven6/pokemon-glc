@@ -915,6 +915,13 @@ const u8 *const gBattleStringsTable[STRINGID_COUNT] =
     [STRINGID_S]                                    = COMPOUND_STRING("s"),
     [STRINGID_LOSTSOMEOFITSHP]                      = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX} lost some of its HP!"),
     [STRINGID_BELCHCANTUSE]                         = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX} hasn't eaten any held Berries, so it can't possibly belch!\p"),
+    [STRINGID_GIPHANTCAPTURED]                      = COMPOUND_STRING("{B_DEF_NAME_WITH_PREFIX}'s {B_BUFF1} was captured!"),
+    [STRINGID_BLOOMINGSTARTED]                      = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX} began blooming!"),
+    [STRINGID_BLOOMINGSTRENGTHENED]                 = COMPOUND_STRING("The weather strengthened {B_EFF_NAME_WITH_PREFIX}'s bloom!"),
+    [STRINGID_BLOOMINGENDED]                        = COMPOUND_STRING("{B_EFF_NAME_WITH_PREFIX} stopped blooming!"),
+    [STRINGID_FAEFLIGHT]                            = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX} took flight!"),
+    [STRINGID_METEORAPPROACHING]                    = COMPOUND_STRING("A devastating meteor is approaching!"),
+    [STRINGID_METEORARRIVED]                        = COMPOUND_STRING("The meteor crashed into the battlefield!"),
 };
 
 const u16 gTrainerUsedItemStringIds[] =

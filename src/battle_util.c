@@ -1442,6 +1442,22 @@ static bool32 IsGimmickChosenForAction(enum BattlerId battler, enum Gimmick gimm
          && gBattleStruct->gimmick.usableGimmick[battler] == gimmick;
 }
 
+bool32 IsMoveGiphantCaptured(enum BattlerId battler, enum Move move)
+{
+    struct PartyState *partyState = GetBattlerPartyState(battler);
+
+    if (move == MOVE_NONE)
+        return FALSE;
+
+    for (u32 i = 0; i < MAX_MON_MOVES; i++)
+    {
+        if (partyState->giphantCapturedMoves[i] == move)
+            return TRUE;
+    }
+
+    return FALSE;
+}
+
 u32 TrySetCantSelectMoveBattleScript(enum BattlerId battler)
 {
     u32 limitations = 0;
@@ -1468,6 +1484,13 @@ u32 TrySetCantSelectMoveBattleScript(enum BattlerId battler)
     {
         gBattleScripting.battler = battler;
         if (SetCantSelectScript(battler, gBattleMons[battler].volatiles.disabledMove, BattleScript_SelectingDisabledMoveInPalace, BattleScript_SelectingDisabledMove))
+            limitations++;
+    }
+
+    if (IsMoveGiphantCaptured(battler, move))
+    {
+        gBattleScripting.battler = battler;
+        if (SetCantSelectScript(battler, move, BattleScript_SelectingDisabledMoveInPalace, BattleScript_SelectingDisabledMove))
             limitations++;
     }
 
@@ -1659,7 +1682,9 @@ u32 CheckMoveLimitations(enum BattlerId battler, u8 unusableMoves, u32 check)
         else if (check & MOVE_LIMITATION_PLACEHOLDER && moveEffect == EFFECT_PLACEHOLDER)
             unusableMoves |= 1u << i;
         // Disable
-        else if (check & MOVE_LIMITATION_DISABLED && move == gBattleMons[battler].volatiles.disabledMove)
+        else if (check & MOVE_LIMITATION_DISABLED
+              && (move == gBattleMons[battler].volatiles.disabledMove
+               || IsMoveGiphantCaptured(battler, move)))
             unusableMoves |= 1u << i;
         // Torment
         else if (check & MOVE_LIMITATION_TORMENTED && move == gLastMoves[battler] && gBattleMons[battler].volatiles.torment == TRUE)
@@ -5961,6 +5986,13 @@ bool32 IsBattlerProtected(struct BattleCalcValues *cv)
         isProtected = TRUE;
     else if (gProtectStructs[cv->battlerDef].protected == PROTECT_CHRYSALIS)
         isProtected = TRUE;
+    else if (gProtectStructs[cv->battlerDef].protected == PROTECT_FROST_BARRIER && !IsBattleMoveStatus(cv->move))
+    {
+        if (GetBattleMoveType(cv->move) == TYPE_FIRE)
+            gProtectStructs[cv->battlerDef].protected = PROTECT_NONE;
+        else
+            isProtected = TRUE;
+    }
     else if (gProtectStructs[cv->battlerDef].protected == PROTECT_OBSTRUCT && !IsBattleMoveStatus(cv->move))
         isProtected = TRUE;
     else if (gProtectStructs[cv->battlerDef].protected == PROTECT_SILK_TRAP && !IsBattleMoveStatus(cv->move))
@@ -5991,6 +6023,7 @@ enum ProtectType GetProtectType(enum ProtectMethod method)
     case PROTECT_OBSTRUCT:
     case PROTECT_SILK_TRAP:
     case PROTECT_CHRYSALIS:
+    case PROTECT_FROST_BARRIER:
     case PROTECT_MAX_GUARD:
         return PROTECT_TYPE_SINGLE;
     case PROTECT_WIDE_GUARD:
@@ -6419,6 +6452,11 @@ static inline u32 CalcMoveBasePower(struct DamageContext *ctx)
         if (gBattleMons[battlerAtk].hp <= gBattleMons[battlerAtk].maxHP / 2)
             basePower *= 2;
         break;
+    case EFFECT_CLOTHESLINE:
+        basePower += 40 * max(0, gBattleMons[battlerAtk].statStages[STAT_SPEED] - DEFAULT_STAT_STAGE);
+        basePower += 40 * max(0, gBattleMons[battlerDef].statStages[STAT_SPEED] - DEFAULT_STAT_STAGE);
+        basePower = min(basePower, 200);
+        break;
     case EFFECT_HEAT_CRASH:
         weight = GetBattlerWeight(battlerAtk, ctx->abilities[battlerAtk], ctx->holdEffects[battlerAtk]) / GetBattlerWeight(battlerDef, ctx->abilities[battlerDef], ctx->holdEffects[battlerDef]);
         if (weight >= ARRAY_COUNT(sHeatCrashPowerTable))
@@ -6607,6 +6645,9 @@ static inline u32 CalcMoveBasePowerAfterModifiers(struct DamageContext *ctx)
     uq4_12_t holdEffectModifier;
     uq4_12_t modifier = UQ_4_12(1.0);
     u32 atkSide = GetBattlerSide(battlerAtk);
+
+    if (gBattleStruct->battlerState[battlerAtk].faeFlightBoost)
+        modifier = uq4_12_multiply(modifier, UQ_4_12(1.5));
 
     // move effect
     switch (moveEffect)

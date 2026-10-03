@@ -64,6 +64,37 @@ static bool32 HandleEndTurnResearch(enum BattlerId battler)
     return effect;
 }
 
+static bool32 HandleEndTurnBloomingShield(enum BattlerId battler)
+{
+    bool32 hasWeatherBoost;
+    bool32 expires;
+
+    gBattleStruct->eventState.endTurnBattler++;
+
+    if (!IsBattlerPresent(battler) || gBattleMons[battler].volatiles.bloomingTimer == 0)
+        return FALSE;
+
+    hasWeatherBoost = (GetWeather() & (B_WEATHER_RAIN | B_WEATHER_SUN))
+                   && gBattleMons[battler].statStages[STAT_DEF] < MAX_STAT_STAGE;
+    expires = --gBattleMons[battler].volatiles.bloomingTimer == 0;
+
+    if (!hasWeatherBoost && !expires)
+        return FALSE;
+
+    gEffectBattler = battler;
+    if (hasWeatherBoost)
+    {
+        SetStatChange(battler, STAT_DEF, 1);
+        BattleScriptCall(expires ? BattleScript_BloomingDefenseUpAndEnd : BattleScript_BloomingDefenseUp);
+    }
+    else
+    {
+        BattleScriptCall(BattleScript_BloomingEnded);
+    }
+
+    return TRUE;
+}
+
 static bool32 HandleEndTurnVarious(enum BattlerId battler)
 {
     bool32 effect = FALSE;
@@ -307,6 +338,35 @@ static bool32 HandleEndTurnFutureSight(enum BattlerId battler)
     }
 
     return effect;
+}
+
+static bool32 HandleEndTurnMeteoricWrath(enum BattlerId battler)
+{
+    if (gBattleStruct->meteoricWrathTimer == 0 && gBattleStruct->eventState.endTurnBlock == 0)
+    {
+        gBattleStruct->eventState.endTurnBattler = gBattlersCount;
+        return FALSE;
+    }
+
+    if (gBattleStruct->meteoricWrathTimer > 1)
+    {
+        gBattleStruct->meteoricWrathTimer--;
+        gBattleStruct->eventState.endTurnBattler = gBattlersCount;
+        return FALSE;
+    }
+
+    if (gBattleStruct->eventState.endTurnBlock == 0)
+    {
+        gBattleStruct->meteoricWrathTimer = 0;
+        gBattleStruct->eventState.endTurnBlock = 1;
+        BattleScriptCall(BattleScript_MeteoricWrathArrived);
+        return TRUE;
+    }
+
+    gBattleStruct->eventState.endTurnBattler = gBattlersCount;
+    gBattlerAttacker = gBattleStruct->meteoricWrathBattler;
+    BattleScriptCall(BattleScript_MeteoricWrathImpact);
+    return TRUE;
 }
 
 static bool32 HandleEndTurnWish(enum BattlerId battler)
@@ -1584,12 +1644,14 @@ static bool32 (*const sEndTurnEffectHandlers[])(enum BattlerId battler) =
 {
     [ENDTURN_ORDER] = HandleEndTurnOrder,
     [ENDTURN_RESEARCH] = HandleEndTurnResearch,
+    [ENDTURN_BLOOMING_SHIELD] = HandleEndTurnBloomingShield,
     [ENDTURN_VARIOUS] = HandleEndTurnVarious,
     [ENDTURN_WEATHER] = HandleEndTurnWeather,
     [ENDTURN_WEATHER_DAMAGE] = HandleEndTurnWeatherDamage,
     [ENDTURN_SEND_OUT_REPLACEMENTS_1] = HandleEndTurnSendOutReplacements,
     [ENDTURN_AFFECTION] = HandleEndTurnAffection,
     [ENDTURN_FUTURE_SIGHT] = HandleEndTurnFutureSight,
+    [ENDTURN_METEORIC_WRATH] = HandleEndTurnMeteoricWrath,
     [ENDTURN_WISH] = HandleEndTurnWish,
     [ENDTURN_FIRST_EVENT_BLOCK] = HandleEndTurnFirstEventBlock,
     [ENDTURN_SEND_OUT_REPLACEMENTS_2] = HandleEndTurnSendOutReplacements,

@@ -2022,6 +2022,47 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
         .battleTvScore = 0, // TODO: Assign points
     },
 
+    [EFFECT_GIPHANT_CAPTURE] =
+    {
+        .battleScript = BattleScript_EffectGiphantCapture,
+        .battleTvScore = 0,
+        .encourageEncore = TRUE,
+    },
+
+    [EFFECT_CLOTHESLINE] =
+    {
+        .battleScript = BattleScript_EffectHit,
+        .battleTvScore = 0,
+    },
+
+    [EFFECT_BLOOMING_SHIELD] =
+    {
+        .battleScript = BattleScript_EffectBloomingShield,
+        .battleTvScore = 0,
+        .encourageEncore = TRUE,
+    },
+
+    [EFFECT_INVERSE_CURRENT] =
+    {
+        .battleScript = BattleScript_EffectInverseCurrent,
+        .battleTvScore = 0,
+        .encourageEncore = TRUE,
+    },
+
+    [EFFECT_FAE_FLIGHT] =
+    {
+        .battleScript = BattleScript_EffectFaeFlight,
+        .battleTvScore = 0,
+        .encourageEncore = TRUE,
+    },
+
+    [EFFECT_METEORIC_WRATH] =
+    {
+        .battleScript = BattleScript_EffectMeteoricWrath,
+        .battleTvScore = 0,
+        .encourageEncore = TRUE,
+    },
+
     [EFFECT_SECRET_POWER] =
     {
         .battleScript = BattleScript_EffectHit,
