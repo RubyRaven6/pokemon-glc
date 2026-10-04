@@ -35059,3 +35059,31 @@ gBattleAnimGeneral_ProtectedItself::
 	waitforvisualfinish
 	clearmonbg ANIM_ATTACKER
 	end
+
+gBattleAnimGeneral_MeteoricWrathImpact::
+	fadetobg BG_COSMIC
+	waitbgfadeout
+	createvisualtask AnimTask_StartSlidingBg, 2, 0, 128, 0, -1
+	waitbgfadein
+	playsewithpan SE_FALL, SOUND_PAN_MIDDLE
+	createsprite gMeteoricWrathMeteorSpriteTemplate, ANIM_ATTACKER, 2
+	waitforvisualfinish
+	playsewithpan SE_M_EXPLOSION, SOUND_PAN_MIDDLE
+	createvisualtask AnimTask_ShakeMon2, 5, ANIM_PLAYER_LEFT, 8, 0, 40, 1
+	createvisualtask AnimTask_ShakeMon2, 5, ANIM_PLAYER_RIGHT, 8, 0, 40, 1
+	createvisualtask AnimTask_ShakeMon2, 5, ANIM_OPPONENT_LEFT, 8, 0, 40, 1
+	createvisualtask AnimTask_ShakeMon2, 5, ANIM_OPPONENT_RIGHT, 8, 0, 40, 1
+	shake_battle_platforms x_offset=4, y_offset=2, shakes=20, delay=1
+	createsprite gMeteoricWrathExplosionSpriteTemplate, ANIM_ATTACKER, 3, 0, 0
+	delay 3
+	createsprite gMeteoricWrathExplosionSpriteTemplate, ANIM_ATTACKER, 3, 24, -16
+	createsprite gMeteoricWrathExplosionSpriteTemplate, ANIM_ATTACKER, 3, -24, -16
+	delay 3
+	createsprite gMeteoricWrathExplosionSpriteTemplate, ANIM_ATTACKER, 3, 20, 16
+	createsprite gMeteoricWrathExplosionSpriteTemplate, ANIM_ATTACKER, 3, -20, 16
+	waitforvisualfinish
+	restorebg
+	waitbgfadeout
+	waitbgfadein
+	blendoff
+	end

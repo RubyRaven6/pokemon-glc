@@ -5733,7 +5733,16 @@ enum Type GetDynamicMoveType(struct Pokemon *mon, enum Move move, enum BattlerId
         break;
     }
 
-    if (IsSoundMove(move) && ability == ABILITY_LIQUID_VOICE)
+    if (state == MON_IN_BATTLE
+     && gBattleMons[battler].volatiles.faeFlight
+     && moveType == TYPE_NORMAL
+     && gimmick == GIMMICK_NONE)
+    {
+        gBattleStruct->battlerState[battler].ateBoost = FALSE;
+        gBattleStruct->battlerState[battler].faeFlightBoost = TRUE;
+        return TYPE_FAIRY;
+    }
+    else if (IsSoundMove(move) && ability == ABILITY_LIQUID_VOICE)
     {
         return TYPE_WATER;
     }
@@ -5775,6 +5784,7 @@ void SetTypeBeforeUsingMove(enum Move move, enum BattlerId battler, enum Ability
 
     gBattleStruct->dynamicMoveCategory = DAMAGE_CATEGORY_NONE;
     gBattleStruct->battlerState[battler].ateBoost = FALSE;
+    gBattleStruct->battlerState[battler].faeFlightBoost = FALSE;
     gSpecialStatuses[battler].gemBoost = FALSE;
 
     enum Type moveType = GetDynamicMoveType(

@@ -101,6 +101,8 @@ static void AnimTask_FakeOut_Step2(u8);
 static void AnimTask_HeartsBackground_Step(u8);
 static void AnimTask_ScaryFace_Step(u8);
 static void AnimTask_UproarDistortion_Step(u8);
+static void AnimMeteoricWrathMeteor(struct Sprite *);
+static void AnimMeteoricWrathExplosion(struct Sprite *);
 
 // Unused
 static const struct SpriteTemplate sCirclingFingerSpriteTemplate =
@@ -605,6 +607,47 @@ const struct SpriteTemplate gExplosionSpriteTemplate =
     .anims = gExplosionAnimTable,
     .callback = AnimSpriteOnMonPos,
 };
+
+const struct SpriteTemplate gMeteoricWrathMeteorSpriteTemplate =
+{
+    .tileTag = ANIM_TAG_METEOR,
+    .paletteTag = ANIM_TAG_METEOR,
+    .oam = &gOamData_AffineOff_ObjNormal_64x64,
+    .callback = AnimMeteoricWrathMeteor,
+};
+
+const struct SpriteTemplate gMeteoricWrathExplosionSpriteTemplate =
+{
+    .tileTag = ANIM_TAG_EXPLOSION,
+    .paletteTag = ANIM_TAG_EXPLOSION,
+    .oam = &gOamData_AffineOff_ObjNormal_32x32,
+    .anims = gExplosionAnimTable,
+    .callback = AnimMeteoricWrathExplosion,
+};
+
+static void AnimMeteoricWrathMeteor(struct Sprite *sprite)
+{
+    sprite->x = 40;
+    sprite->y = -32;
+    sprite->hFlip = TRUE;
+    sprite->vFlip = TRUE;
+    sprite->data[0] = 28;
+    sprite->data[1] = sprite->x;
+    sprite->data[2] = 120;
+    sprite->data[3] = sprite->y;
+    sprite->data[4] = 72;
+    InitAnimLinearTranslation(sprite);
+    StoreSpriteCallbackInData6(sprite, DestroyAnimSprite);
+    sprite->callback = AnimTranslateLinear_WithFollowup;
+}
+
+static void AnimMeteoricWrathExplosion(struct Sprite *sprite)
+{
+    sprite->x = 120 + gBattleAnimArgs[0];
+    sprite->y = 72 + gBattleAnimArgs[1];
+    StoreSpriteCallbackInData6(sprite, DestroyAnimSprite);
+    sprite->callback = RunStoredCallbackWhenAnimEnds;
+}
 
 const union AffineAnimCmd gSoftBoiledEggAffineAnimCmds1[] =
 {

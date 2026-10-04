@@ -1313,6 +1313,64 @@ BattleScript_EffectResearch::
 	callnative BS_SetResearch
 	goto BattleScript_MoveEnd
 
+BattleScript_EffectGiphantCapture::
+	attackcanceler
+	callnative BS_SetGiphantCapture
+	.4byte BattleScript_ButItFailed
+	attackanimation
+	waitanimation
+	printstring STRINGID_GIPHANTCAPTURED
+	waitmessage B_WAIT_TIME_LONG
+	goto BattleScript_MoveEnd
+
+BattleScript_EffectBloomingShield::
+	attackcanceler
+	callnative BS_SetBloomingShield
+	.4byte BattleScript_ButItFailed
+	attackanimation
+	waitanimation
+	trybattlerstatchange BS_ATTACKER, STAT_CHANGE_NO_FLAGS
+	printstring STRINGID_BLOOMINGSTARTED
+	waitmessage B_WAIT_TIME_LONG
+	goto BattleScript_MoveEnd
+
+BattleScript_EffectInverseCurrent::
+	attackcanceler
+	attackanimation
+	waitanimation
+	invertstatstages
+	printstring STRINGID_TOPSYTURVYSWITCHEDSTATS
+	waitmessage B_WAIT_TIME_LONG
+	jumpifstatus BS_TARGET, STATUS1_PARALYSIS, BattleScript_InverseCurrentCure
+	seteffectprimary BS_ATTACKER, BS_TARGET, MOVE_EFFECT_PARALYSIS
+	goto BattleScript_MoveEnd
+BattleScript_InverseCurrentCure:
+	curestatus BS_TARGET
+	updatestatusicon BS_TARGET
+	printfromtable gCureStatusStringIds
+	waitmessage B_WAIT_TIME_LONG
+	goto BattleScript_MoveEnd
+
+BattleScript_EffectFaeFlight::
+	attackcanceler
+	callnative BS_SetFaeFlight
+	.4byte BattleScript_ButItFailed
+	attackanimation
+	waitanimation
+	printstring STRINGID_FAEFLIGHT
+	waitmessage B_WAIT_TIME_LONG
+	goto BattleScript_MoveEnd
+
+BattleScript_EffectMeteoricWrath::
+	attackcanceler
+	callnative BS_SetMeteoricWrath
+	.4byte BattleScript_ButItFailed
+	attackanimation
+	waitanimation
+	printstring STRINGID_METEORAPPROACHING
+	waitmessage B_WAIT_TIME_LONG
+	goto BattleScript_MoveEnd
+
 BattleScript_EffectCastingCall::
 	attackcanceler
 	jumpifbattletype BATTLE_TYPE_ARENA, BattleScript_ButItFailed
@@ -1372,6 +1430,71 @@ BattleScript_ResearchDefensesUp::
 
 BattleScript_ResearchOffensesUp::
 	trybattlerstatchange BS_ATTACKER, STAT_CHANGE_NO_FLAGS
+	return
+
+BattleScript_BloomingDefenseUp::
+	trybattlerstatchange BS_EFFECT_BATTLER, STAT_CHANGE_NO_FLAGS
+	printstring STRINGID_BLOOMINGSTRENGTHENED
+	waitmessage B_WAIT_TIME_LONG
+	return
+
+BattleScript_BloomingDefenseUpAndEnd::
+	trybattlerstatchange BS_EFFECT_BATTLER, STAT_CHANGE_NO_FLAGS
+	printstring STRINGID_BLOOMINGSTRENGTHENED
+	waitmessage B_WAIT_TIME_LONG
+	printstring STRINGID_BLOOMINGENDED
+	waitmessage B_WAIT_TIME_LONG
+	return
+
+BattleScript_BloomingEnded::
+	printstring STRINGID_BLOOMINGENDED
+	waitmessage B_WAIT_TIME_LONG
+	return
+
+BattleScript_MeteoricWrathArrived::
+	printstring STRINGID_METEORARRIVED
+	waitmessage B_WAIT_TIME_LONG
+	return
+
+BattleScript_MeteoricWrathImpact::
+	playanimation BS_ATTACKER, B_ANIM_METEORIC_WRATH_IMPACT
+	waitanimation
+	setbyte gEffectBattler, B_BATTLER_0
+	callnative BS_SetMeteoricWrathImpact
+	jumpifbyte CMP_EQUAL, gBattleCommunication, FALSE, BattleScript_MeteoricWrathImpactBattler1
+	healthbarupdate BS_EFFECT_BATTLER
+	datahpupdate BS_EFFECT_BATTLER, ASSURANCE_DOUBLE
+
+BattleScript_MeteoricWrathImpactBattler1:
+	setbyte gEffectBattler, B_BATTLER_1
+	callnative BS_SetMeteoricWrathImpact
+	jumpifbyte CMP_EQUAL, gBattleCommunication, FALSE, BattleScript_MeteoricWrathImpactBattler2
+	healthbarupdate BS_EFFECT_BATTLER
+	datahpupdate BS_EFFECT_BATTLER, ASSURANCE_DOUBLE
+
+BattleScript_MeteoricWrathImpactBattler2:
+	setbyte gEffectBattler, B_BATTLER_2
+	callnative BS_SetMeteoricWrathImpact
+	jumpifbyte CMP_EQUAL, gBattleCommunication, FALSE, BattleScript_MeteoricWrathImpactBattler3
+	healthbarupdate BS_EFFECT_BATTLER
+	datahpupdate BS_EFFECT_BATTLER, ASSURANCE_DOUBLE
+
+BattleScript_MeteoricWrathImpactBattler3:
+	setbyte gEffectBattler, B_BATTLER_3
+	callnative BS_SetMeteoricWrathImpact
+	jumpifbyte CMP_EQUAL, gBattleCommunication, FALSE, BattleScript_MeteoricWrathImpactFaint
+	healthbarupdate BS_EFFECT_BATTLER
+	datahpupdate BS_EFFECT_BATTLER, ASSURANCE_DOUBLE
+
+BattleScript_MeteoricWrathImpactFaint:
+	setbyte gEffectBattler, B_BATTLER_0
+	tryfaintmon BS_EFFECT_BATTLER
+	setbyte gEffectBattler, B_BATTLER_1
+	tryfaintmon BS_EFFECT_BATTLER
+	setbyte gEffectBattler, B_BATTLER_2
+	tryfaintmon BS_EFFECT_BATTLER
+	setbyte gEffectBattler, B_BATTLER_3
+	tryfaintmon BS_EFFECT_BATTLER
 	return
 
 BattleScript_ChrysalisHeal::

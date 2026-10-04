@@ -22769,6 +22769,140 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .battleAnimScript = gBattleAnimMove_Dive,
     },
 
+    [MOVE_GIPHANT_CAPTURE] =
+    {
+        .name = COMPOUND_STRING("Giphant Capture"),
+        .description = COMPOUND_STRING(
+            "Seals the target's last\n"
+            "move for the battle."),
+        .effect = EFFECT_GIPHANT_CAPTURE,
+        .power = 0,
+        .type = TYPE_BUG,
+        .accuracy = 0,
+        .pp = 1,
+        .target = TARGET_SELECTED,
+        .category = DAMAGE_CATEGORY_STATUS,
+        .battleAnimScript = gBattleAnimMove_SpiderWeb,
+    },
+
+    [MOVE_FREE_CLIMB] =
+    {
+        .name = COMPOUND_STRING("Free Climb"),
+        .description = COMPOUND_STRING(
+            "Strikes the target, then\n"
+            "switches the user out."),
+        .effect = EFFECT_HIT_ESCAPE,
+        .power = 40,
+        .type = TYPE_ROCK,
+        .accuracy = 100,
+        .pp = 5,
+        .target = TARGET_SELECTED,
+        .category = DAMAGE_CATEGORY_PHYSICAL,
+        .makesContact = TRUE,
+        .battleAnimScript = gBattleAnimMove_RockClimb,
+    },
+
+    [MOVE_CLOTHESLINE] =
+    {
+        .name = COMPOUND_STRING("Clothesline"),
+        .description = COMPOUND_STRING(
+            "Power rises with both\n"
+            "battlers' Speed boosts."),
+        .effect = EFFECT_CLOTHESLINE,
+        .power = 40,
+        .type = TYPE_FIGHTING,
+        .accuracy = 95,
+        .pp = 10,
+        .target = TARGET_SELECTED,
+        .category = DAMAGE_CATEGORY_PHYSICAL,
+        .makesContact = TRUE,
+        .battleAnimScript = gBattleAnimMove_VitalThrow,
+    },
+
+    [MOVE_BLOOMING_SHIELD] =
+    {
+        .name = COMPOUND_STRING("Blooming Shield"),
+        .description = COMPOUND_STRING(
+            "Raises Defense now and in\n"
+            "sun or rain for 4 turns."),
+        .effect = EFFECT_BLOOMING_SHIELD,
+        .power = 0,
+        .type = TYPE_GRASS,
+        .accuracy = 0,
+        .pp = 5,
+        .target = TARGET_USER,
+        .priority = 4,
+        .category = DAMAGE_CATEGORY_STATUS,
+        .battleAnimScript = gBattleAnimMove_FlowerShield,
+    },
+
+    [MOVE_INVERSE_CURRENT] =
+    {
+        .name = COMPOUND_STRING("Inverse Current"),
+        .description = COMPOUND_STRING(
+            "Inverts stat changes and\n"
+            "toggles paralysis."),
+        .effect = EFFECT_INVERSE_CURRENT,
+        .power = 0,
+        .type = TYPE_ELECTRIC,
+        .accuracy = 0,
+        .pp = 20,
+        .target = TARGET_SELECTED,
+        .category = DAMAGE_CATEGORY_STATUS,
+        .battleAnimScript = gBattleAnimMove_TopsyTurvy,
+    },
+
+    [MOVE_FAE_FLIGHT] =
+    {
+        .name = COMPOUND_STRING("Fae Flight"),
+        .description = COMPOUND_STRING(
+            "Becomes Fairy/Flying and\n"
+            "empowers Normal moves."),
+        .effect = EFFECT_FAE_FLIGHT,
+        .power = 0,
+        .type = TYPE_FAIRY,
+        .accuracy = 0,
+        .pp = 1,
+        .target = TARGET_USER,
+        .priority = 1,
+        .category = DAMAGE_CATEGORY_STATUS,
+        .battleAnimScript = gBattleAnimMove_Moonlight,
+    },
+
+    [MOVE_METEORIC_WRATH] =
+    {
+        .name = COMPOUND_STRING("Meteoric Wrath"),
+        .description = COMPOUND_STRING(
+            "Calls a meteor that KOs all\n"
+            "battlers after 2 turns."),
+        .effect = EFFECT_METEORIC_WRATH,
+        .power = 0,
+        .type = TYPE_PSYCHIC,
+        .accuracy = 0,
+        .pp = 1,
+        .target = TARGET_FIELD,
+        .category = DAMAGE_CATEGORY_STATUS,
+        .battleAnimScript = gBattleAnimMove_CosmicPower,
+    },
+
+    [MOVE_FROST_BARRIER] =
+    {
+        .name = COMPOUND_STRING("Frost Barrier"),
+        .description = COMPOUND_STRING(
+            "Blocks attacks and may\n"
+            "frostbite contact users."),
+        .effect = EFFECT_PROTECT,
+        .power = 0,
+        .type = TYPE_ICE,
+        .accuracy = 0,
+        .pp = 5,
+        .target = TARGET_USER,
+        .priority = 4,
+        .category = DAMAGE_CATEGORY_STATUS,
+        .argument = { .protectMethod = PROTECT_FROST_BARRIER },
+        .battleAnimScript = gBattleAnimMove_Protect,
+    },
+
     [MOVE_WINDSTORM] =
     {
         .name = COMPOUND_STRING("Windstorm"),
