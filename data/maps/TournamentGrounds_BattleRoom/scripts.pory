@@ -1,3 +1,135 @@
-mapscripts TournamentGrounds_BattleRoom_MapScripts {
-    
+mapscripts TournamentGrounds_BattleRoom_MapScripts
+{
+    MAP_SCRIPT_ON_LOAD {
+        callnative(SetupOpponentGfxId)
+    }
+    MAP_SCRIPT_ON_TRANSITION {
+        callnative(CheckForOpponentDuo)
+        if (var(VAR_RESULT) == TRUE) {
+            setflag(FLAG_TEMP_1) // Set when polyamory
+            setvar(VAR_TEMP_0, 2)   
+        }
+        else {
+            setflag(FLAG_TEMP_2) // Set when monogamy
+            setvar(VAR_TEMP_0, 1)
+        }
+    }
+    MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE [
+        VAR_TEMP_3, 0 {
+            turnobject(LOCALID_PLAYER, DIR_NORTH)
+            setvar(VAR_TEMP_3, 1)
+        }
+    ]
+    MAP_SCRIPT_ON_FRAME_TABLE [
+        VAR_TEMP_2, 0: TournamentGrounds_BattleRoom_GymLeaderBattleSetup
+    ]
+}
+
+script TournamentGrounds_BattleRoom_ContestantMovements
+{
+    switch(var(VAR_TEMP_0))
+    {
+        case 2: goto(MovementsWithTwoGymLeaders)
+        case 1: goto(MovementsWithOneGymLeader)
+    }
+}
+
+script TournamentGrounds_BattleRoom_ContestantExits
+{
+    switch(var(VAR_TEMP_0))
+    {
+        case 2: goto(ExitWithTwoGymLeaders)
+        case 1: goto(ExitWithOneGymLeader)
+    }
+}
+
+script(local) MovementsWithTwoGymLeaders
+{
+    applymovement(LOCALID_TOURNAMENT_ARENA_DUO_LEADER_1,DuoLeader1Movements)
+    applymovement(LOCALID_TOURNAMENT_ARENA_DUO_LEADER_2,DuoLeader2Movements)
+    applymovement(LOCALID_PLAYER,moves(walk_up * 3, walk_right * 3))
+    waitmovement(LOCALID_TOURNAMENT_ARENA_DUO_LEADER_1)
+    waitmovement(LOCALID_TOURNAMENT_ARENA_DUO_LEADER_2)
+    waitmovement(LOCALID_PLAYER)
+}
+
+script(local) MovementsWithOneGymLeader
+{
+    applymovement(LOCALID_TOURNAMENT_ARENA_GYM_LEADER, moves(walk_up * 3, walk_left * 3))
+    applymovement(LOCALID_PLAYER,moves(walk_up * 3, walk_right * 3))
+    waitmovement(LOCALID_TOURNAMENT_ARENA_GYM_LEADER)
+    waitmovement(LOCALID_PLAYER)
+}
+
+script(local) ExitWithTwoGymLeaders
+{
+    applymovement(LOCALID_TOURNAMENT_ARENA_DUO_LEADER_1,DuoLeader1Exits)
+    applymovement(LOCALID_TOURNAMENT_ARENA_DUO_LEADER_2,DuoLeader2Exits)
+    applymovement(LOCALID_PLAYER,moves(walk_left * 3, walk_down * 3))
+    waitmovement(LOCALID_TOURNAMENT_ARENA_DUO_LEADER_1)
+    waitmovement(LOCALID_TOURNAMENT_ARENA_DUO_LEADER_2)
+    waitmovement(LOCALID_PLAYER)
+}
+
+script(local) ExitWithOneGymLeader
+{
+    applymovement(LOCALID_TOURNAMENT_ARENA_GYM_LEADER, moves(walk_right * 3, walk_down * 3))
+    applymovement(LOCALID_PLAYER,moves(walk_left * 3, walk_down * 3))
+    waitmovement(LOCALID_TOURNAMENT_ARENA_GYM_LEADER)
+    waitmovement(LOCALID_PLAYER)
+}
+
+movement DuoLeader1Exits {
+    walk_down
+    walk_right * 3
+    walk_down * 3
+}
+
+movement DuoLeader2Exits {
+    delay_16 * 3
+    walk_up
+    walk_right * 3
+    walk_down * 3
+}
+
+movement DuoLeader1Movements {
+    walk_up * 3
+    walk_left * 3
+    walk_up
+    face_left
+}
+
+movement DuoLeader2Movements {
+    delay_16 * 3
+    walk_up * 3
+    walk_left * 3
+    walk_down
+    face_left
+}
+
+script TournamentGrounds_BattleRoom_GymLeaderBattleSetup
+{
+    call(TournamentGrounds_BattleRoom_ContestantMovements)
+    setvar(VAR_LAST_TALKED, LOCALID_TOURNAMENT_ARENA_GYM_LEADER)
+    switch(var(VAR_GYM_LEADER_BATTLE_COUNT))
+    {
+        case 1:
+            call_pwt_script(VAR_GYM_LEADER_1)
+            addvar(VAR_GYM_LEADER_BATTLE_COUNT, 1)
+        case 2:
+            call_pwt_script(VAR_GYM_LEADER_2)
+            addvar(VAR_GYM_LEADER_BATTLE_COUNT, 1)
+        case 3:
+            call_pwt_script(VAR_GYM_LEADER_3)
+            setvar(VAR_GYM_LEADER_BATTLE_COUNT, 1)
+            callnative(ChooseRandomGymLeader)
+    }
+    setspeaker("Commentator")
+    msgbox("Our winner is {PLAYER}!")
+    waitmessage
+    closemessage
+    call(TournamentGrounds_BattleRoom_ContestantExits)
+    warp(MAP_TOURNAMENT_GROUNDS_GREEN_ROOM, 3, 3)
+    waitstate
+    end
 }

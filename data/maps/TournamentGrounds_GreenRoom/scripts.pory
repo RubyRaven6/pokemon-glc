@@ -16,10 +16,6 @@ mapscripts TournamentGrounds_GreenRoom_MapScripts {
 script TournamentGrounds_GreenRoom_EventScript_Teala {
     lockall
     faceplayer
-    
-}
-
-script(local) TournamentGrounds_GreenRoom_ChallengeProceed {
     setspeaker(SP_NAME_TEALA)
     msgbox(format("Are you ready to go to the next round?"), MSGBOX_YESNO)
     if(var(VAR_RESULT) == NO){}
@@ -39,7 +35,7 @@ script(local) TournamentGrounds_GreenRoom_ChallengeProceed {
             setspeaker(SP_NAME_TEALA)
             msgbox(format("Good luck!"))
             closemessage
-            warp(MAP_TESTING_GROUNDS_BATTLE_ARENA, 6, 12)
+            warp(MAP_TOURNAMENT_GROUNDS_BATTLE_ROOM, 4, 9)
             waitstate
         }
     }

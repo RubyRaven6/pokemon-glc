@@ -15,7 +15,7 @@
   "connections": null,
   "object_events": [
     {
-      "local_id": "LOCALID_BATTLE_ARENA_GYM_LEADER",
+      "local_id": "LOCALID_BATTLE_ARENA_GYM_LEADER_TEST",
       "graphics_id": "OBJ_EVENT_GFX_VAR_0",
       "x": 6,
       "y": 5,
@@ -29,7 +29,7 @@
       "flag": "FLAG_TEMP_1"
     },
     {
-      "local_id": "LOCALID_BATTLE_ARENA_DUO_LEADER_1",
+      "local_id": "LOCALID_BATTLE_ARENA_DUO_LEADER_1_TEST",
       "graphics_id": "OBJ_EVENT_GFX_VAR_1",
       "x": 5,
       "y": 5,
@@ -43,7 +43,7 @@
       "flag": "FLAG_TEMP_2"
     },
     {
-      "local_id": "LOCALID_BATTLE_ARENA_DUO_LEADER_2",
+      "local_id": "LOCALID_BATTLE_ARENA_DUO_LEADER_2_TEST",
       "graphics_id": "OBJ_EVENT_GFX_VAR_0",
       "x": 7,
       "y": 5,
