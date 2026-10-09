@@ -1,7 +1,12 @@
 const TEALA = LOCALID_ARENA_LOBBY_TEALA
 
 mapscripts TournamentGrounds_ArenaLobby_MapScripts {
-    
+    MAP_SCRIPT_ON_TRANSITION {
+        setrespawn(HEAL_LOCATION_TOURNAMENT_GROUNDS_ARENA_LOBBY)
+        setvar(VAR_GYM_LEADER_1,0)
+        setvar(VAR_GYM_LEADER_2,0)
+        setvar(VAR_GYM_LEADER_3,0)
+    }
 }
 
 script TournamentGrounds_ArenaLobby_EventScript_Teala {

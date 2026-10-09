@@ -122,7 +122,6 @@ script TournamentGrounds_BattleRoom_GymLeaderBattleSetup
         case 3:
             call_pwt_script(VAR_GYM_LEADER_3)
             setvar(VAR_GYM_LEADER_BATTLE_COUNT, 1)
-            callnative(ChooseRandomGymLeader)
     }
     setspeaker("Commentator")
     msgbox("Our winner is {PLAYER}!")

@@ -1,7 +1,9 @@
 mapscripts TournamentGrounds_GreenRoom_MapScripts {
     MAP_SCRIPT_ON_TRANSITION {
-    special(HealPlayerParty)
-    setflag(FLAG_DISABLE_SAVING)
+        special(HealPlayerParty)
+        setflag(FLAG_DISABLE_SAVING)
+        if(var(VAR_GYM_LEADER_1) == 0 || var(VAR_GYM_LEADER_2) == 0 || var(VAR_GYM_LEADER_3) == 0)
+            {callnative(ChooseRandomGymLeader)}
     }
 
     MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE [
@@ -13,10 +15,25 @@ mapscripts TournamentGrounds_GreenRoom_MapScripts {
 
 }
 
+script(local) BufferNextOpponentName
+{
+    switch(var(VAR_GYM_LEADER_BATTLE_COUNT))
+    {
+        case 1:
+            buffertrainername(STR_VAR_1, VAR_GYM_LEADER_1)
+        case 2:
+            buffertrainername(STR_VAR_1, VAR_GYM_LEADER_2)
+        case 3:
+            buffertrainername(STR_VAR_1, VAR_GYM_LEADER_3)
+    }
+}
+
 script TournamentGrounds_GreenRoom_EventScript_Teala {
     lockall
     faceplayer
     setspeaker(SP_NAME_TEALA)
+    call(BufferNextOpponentName)
+    msgbox(format("Your next opponent will be {STR_VAR_1}."))
     msgbox(format("Are you ready to go to the next round?"), MSGBOX_YESNO)
     if(var(VAR_RESULT) == NO){}
     else
@@ -31,7 +48,6 @@ script TournamentGrounds_GreenRoom_EventScript_Teala {
         }
         else
         {
-            callnative(ChooseRandomGymLeader)
             setspeaker(SP_NAME_TEALA)
             msgbox(format("Good luck!"))
             closemessage

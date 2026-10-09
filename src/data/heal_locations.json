@@ -361,6 +361,12 @@
       "map": "MAP_TESTING_GROUNDS_HOUSE_FOYER",
       "x": 9,
       "y": 4
+    },
+    {
+      "id": "HEAL_LOCATION_TOURNAMENT_GROUNDS_ARENA_LOBBY",
+      "map": "MAP_TOURNAMENT_GROUNDS_ARENA_LOBBY",
+      "x": 11,
+      "y": 11
     }
   ]
 }
