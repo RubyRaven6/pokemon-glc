@@ -1799,6 +1799,23 @@ u8 GetImprisonedMovesCount(enum BattlerId battler, enum Move move)
         }
     }
 
+    if (gBattleMons[battler].volatiles.voltaicPrison)
+    {
+        enum BattlerId prisoner = gBattleMons[battler].volatiles.voltaicPrisonedBy;
+
+        if (prisoner < gBattlersCount && IsBattlerAlive(prisoner))
+        {
+            for (i = 0; i < MAX_MON_MOVES; i++)
+            {
+                if (move == gBattleMons[prisoner].moves[i])
+                {
+                    imprisonedMoves++;
+                    break;
+                }
+            }
+        }
+    }
+
     return imprisonedMoves;
 }
 
@@ -6457,6 +6474,10 @@ static inline u32 CalcMoveBasePower(struct DamageContext *ctx)
         basePower += 40 * max(0, gBattleMons[battlerDef].statStages[STAT_SPEED] - DEFAULT_STAT_STAGE);
         basePower = min(basePower, 200);
         break;
+    case EFFECT_MASTERSTROKE:
+        basePower += 10 * gBattleMons[battlerAtk].volatiles.masterstrokeUses;
+        basePower = min(basePower, 100);
+        break;
     case EFFECT_HEAT_CRASH:
         weight = GetBattlerWeight(battlerAtk, ctx->abilities[battlerAtk], ctx->holdEffects[battlerAtk]) / GetBattlerWeight(battlerDef, ctx->abilities[battlerDef], ctx->holdEffects[battlerDef]);
         if (weight >= ARRAY_COUNT(sHeatCrashPowerTable))
@@ -6704,6 +6725,8 @@ static inline u32 CalcMoveBasePowerAfterModifiers(struct DamageContext *ctx)
         modifier = uq4_12_multiply(modifier, UQ_4_12(2.0));
     if (GetMoveEffect(ctx->chosenMove) == EFFECT_ME_FIRST)
         modifier = uq4_12_multiply(modifier, UQ_4_12(1.5));
+    if (GetMoveEffect(ctx->chosenMove) == EFFECT_DARK_IMITATION)
+        modifier = uq4_12_multiply(modifier, UQ_4_12(1.3));
     if (IsGrassyTerrainAffected(battlerAtk, ctx->abilities[battlerAtk], ctx->holdEffects[battlerAtk], ctx->terrain) && moveType == TYPE_GRASS)
         modifier = uq4_12_multiply(modifier, (B_TERRAIN_TYPE_BOOST >= GEN_8 ? UQ_4_12(1.3) : UQ_4_12(1.5)));
     if (IsMistyTerrainAffected(battlerDef, ctx->abilities[battlerDef], ctx->holdEffects[battlerDef], ctx->terrain) && moveType == TYPE_DRAGON)
@@ -7833,6 +7856,9 @@ static inline uq4_12_t GetOtherModifiers(struct DamageContext *ctx)
     DAMAGE_MULTIPLY_MODIFIER(GetDiveModifier(ctx->move, ctx->battlerDef));
     DAMAGE_MULTIPLY_MODIFIER(GetAirborneModifier(ctx->move, ctx->battlerDef));
     DAMAGE_MULTIPLY_MODIFIER(GetScreensModifier(ctx));
+    if (gBattleMons[ctx->battlerDef].volatiles.deepAnalysisActive
+     && gBattleMons[ctx->battlerDef].volatiles.deepAnalysisTarget == ctx->battlerAtk)
+        DAMAGE_MULTIPLY_MODIFIER(UQ_4_12(0.5));
     DAMAGE_MULTIPLY_MODIFIER(GetCollisionCourseElectroDriftModifier(ctx->move, ctx->typeEffectivenessModifier));
 
     if (unmodifiedAttackerSpeed >= unmodifiedDefenderSpeed)

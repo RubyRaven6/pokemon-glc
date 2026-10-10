@@ -139,7 +139,8 @@ static bool32 TargetHasToMove(enum Move move) // Opponent needs to hit the playe
      || effect == EFFECT_DISABLE
      || effect == EFFECT_MIMIC
      || effect == EFFECT_SPITE
-     || effect == EFFECT_ENCORE)
+     || effect == EFFECT_ENCORE
+     || effect == EFFECT_DARK_IMITATION)
         return TRUE;
     return FALSE;
 }
@@ -260,9 +261,17 @@ static void DoublesWhen(enum Move move, struct BattlePokemon *attacker, struct B
     { // Opponent needs to have its stats buffed
         TURN { MOVE(target, MOVE_SWORDS_DANCE); }
     }
+    else if (effect == EFFECT_DARK_IMITATION)
+    {
+        TURN { MOVE(target, MOVE_POUND, target: attacker); }
+    }
     else if (effect == EFFECT_AURORA_VEIL)
     { // Has to be hailing
         TURN { MOVE(attacker, MOVE_HAIL); }
+    }
+    else if (effect == EFFECT_CANOPY_COVER)
+    {
+        TURN { MOVE(attacker, MOVE_GRASSY_TERRAIN); }
     }
     else if (effect == EFFECT_STEEL_ROLLER)
     { // Needs a terrain
@@ -488,9 +497,17 @@ static void WhenSingles(enum Move move, struct BattlePokemon *attacker, struct B
     { // defender needs to have its stats buffed
         TURN { MOVE(defender, MOVE_SWORDS_DANCE); }
     }
+    else if (effect == EFFECT_DARK_IMITATION)
+    {
+        TURN { MOVE(defender, MOVE_POUND, target: attacker); }
+    }
     else if (effect == EFFECT_AURORA_VEIL)
     { // Has to be hailing
         TURN { MOVE(attacker, MOVE_HAIL); }
+    }
+    else if (effect == EFFECT_CANOPY_COVER)
+    {
+        TURN { MOVE(attacker, MOVE_GRASSY_TERRAIN); }
     }
     else if (effect == EFFECT_STEEL_ROLLER)
     { // Needs a terrain

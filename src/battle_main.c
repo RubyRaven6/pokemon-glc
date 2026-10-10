@@ -2969,6 +2969,7 @@ void SwitchInClearSetData(enum BattlerId battler, struct Volatiles *volatilesCop
             {
                 gBattleMons[i].volatiles.escapePrevention = FALSE;
                 gBattleMons[i].volatiles.strictEscapePrevention = FALSE;
+                gBattleMons[i].volatiles.voltaicPrison = FALSE;
             }
 
             if (gBattleMons[i].volatiles.battlerWithSureHit == battler + 1)
@@ -2983,6 +2984,7 @@ void SwitchInClearSetData(enum BattlerId battler, struct Volatiles *volatilesCop
             {
                 gBattleMons[i].volatiles.escapePrevention = FALSE;
                 gBattleMons[i].volatiles.strictEscapePrevention = FALSE;
+                gBattleMons[i].volatiles.voltaicPrison = FALSE;
             }
         }
     }
@@ -3074,6 +3076,7 @@ void FaintClearSetData(enum BattlerId battler)
         if (gBattleMons[i].volatiles.escapePrevention && gBattleMons[i].volatiles.battlerPreventingEscape == battler)
         {
             gBattleMons[i].volatiles.escapePrevention = FALSE;
+            gBattleMons[i].volatiles.voltaicPrison = FALSE;
         }
     }
 
@@ -4471,6 +4474,10 @@ s32 GetBattleMovePriority(enum BattlerId battler, enum Ability ability, enum Mov
         move = GetUsableZMove(battler, move);
 
     priority = GetMovePriority(move);
+
+    if (move == MOVE_DARK_IMITATION
+     && gBattleMons[battler].hp * 4 < gBattleMons[battler].maxHP)
+        priority++;
 
     // Max Guard check
     if (GetActiveGimmick(battler) == GIMMICK_DYNAMAX && GetMoveCategory(move) == DAMAGE_CATEGORY_STATUS)
