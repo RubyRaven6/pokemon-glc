@@ -1315,8 +1315,9 @@ BattleScript_EffectResearch::
 
 BattleScript_EffectGiphantCapture::
 	attackcanceler
+	callnative BS_CheckTargetHasValidLastMove
+	jumpifbyte CMP_EQUAL, gBattleCommunication, FALSE, BattleScript_ButItFailed
 	callnative BS_SetGiphantCapture
-	.4byte BattleScript_ButItFailed
 	attackanimation
 	waitanimation
 	printstring STRINGID_GIPHANTCAPTURED
@@ -1325,8 +1326,8 @@ BattleScript_EffectGiphantCapture::
 
 BattleScript_EffectBloomingShield::
 	attackcanceler
+	jumpifvolatile BS_ATTACKER, VOLATILE_BLOOMING_TIMER, BattleScript_ButItFailed
 	callnative BS_SetBloomingShield
-	.4byte BattleScript_ButItFailed
 	attackanimation
 	waitanimation
 	trybattlerstatchange BS_ATTACKER, STAT_CHANGE_NO_FLAGS
@@ -1353,8 +1354,10 @@ BattleScript_InverseCurrentCure:
 
 BattleScript_EffectFaeFlight::
 	attackcanceler
+	callnative BS_CheckAttackerTerastallized
+	jumpifbyte CMP_EQUAL, gBattleCommunication, TRUE, BattleScript_ButItFailed
+	jumpifvolatile BS_ATTACKER, VOLATILE_FAE_FLIGHT, BattleScript_ButItFailed
 	callnative BS_SetFaeFlight
-	.4byte BattleScript_ButItFailed
 	attackanimation
 	waitanimation
 	printstring STRINGID_FAEFLIGHT
@@ -1363,8 +1366,9 @@ BattleScript_EffectFaeFlight::
 
 BattleScript_EffectMeteoricWrath::
 	attackcanceler
+	callnative BS_CheckMeteoricWrathActive
+	jumpifbyte CMP_EQUAL, gBattleCommunication, TRUE, BattleScript_ButItFailed
 	callnative BS_SetMeteoricWrath
-	.4byte BattleScript_ButItFailed
 	attackanimation
 	waitanimation
 	printstring STRINGID_METEORAPPROACHING
@@ -1387,8 +1391,9 @@ BattleScript_EffectTrawlingNet::
 
 BattleScript_EffectCanopyCover::
 	attackcanceler
+	jumpifterrain CMP_NOT_EQUAL, B_TERRAIN_GRASSY, BattleScript_ButItFailed
+	jumpifsideaffecting BS_ATTACKER, SIDE_STATUS_AURORA_VEIL, BattleScript_ButItFailed
 	callnative BS_SetCanopyCover
-	.4byte BattleScript_ButItFailed
 	attackanimation
 	waitanimation
 	printstring STRINGID_PKMNAURORAVEIL
@@ -1397,8 +1402,8 @@ BattleScript_EffectCanopyCover::
 
 BattleScript_EffectVoltaicPrison::
 	attackcanceler
+	jumpifvolatile BS_TARGET, VOLATILE_VOLTAIC_PRISON, BattleScript_ButItFailed
 	callnative BS_SetVoltaicPrison
-	.4byte BattleScript_ButItFailed
 	attackanimation
 	waitanimation
 	seteffectprimary BS_ATTACKER, BS_TARGET, MOVE_EFFECT_PARALYSIS
@@ -1418,7 +1423,7 @@ BattleScript_LuaStrikeEffect::
 	trybattlerstatchange BS_EFFECT_BATTLER, STAT_CHANGE_CERTAIN
 BattleScript_LuaStrikeHazardsLoop:
 	callnative BS_ApplyLuaStrikeHazard
-	.4byte BattleScript_LuaStrikeHazardsEnd
+	jumpifbyte CMP_EQUAL, gBattleCommunication, FALSE, BattleScript_LuaStrikeHazardsEnd
 	goto BattleScript_LuaStrikeHazardsLoop
 BattleScript_LuaStrikeHazardsEnd:
 	return

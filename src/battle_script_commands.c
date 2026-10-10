@@ -10361,15 +10361,9 @@ void BS_SetResearch(void)
 
 void BS_SetGiphantCapture(void)
 {
-    NATIVE_ARGS(const u8 *failInstr);
+    NATIVE_ARGS();
     enum Move move = gLastMoves[gBattlerTarget];
     struct PartyState *partyState = GetBattlerPartyState(gBattlerTarget);
-
-    if (move == MOVE_NONE || move == MOVE_UNAVAILABLE || move == MOVE_STRUGGLE)
-    {
-        gBattlescriptCurrInstr = cmd->failInstr;
-        return;
-    }
 
     for (u32 i = 0; i < MAX_MON_MOVES; i++)
     {
@@ -10387,13 +10381,7 @@ void BS_SetGiphantCapture(void)
 
 void BS_SetBloomingShield(void)
 {
-    NATIVE_ARGS(const u8 *failInstr);
-
-    if (gBattleMons[gBattlerAttacker].volatiles.bloomingTimer != 0)
-    {
-        gBattlescriptCurrInstr = cmd->failInstr;
-        return;
-    }
+    NATIVE_ARGS();
 
     gBattleMons[gBattlerAttacker].volatiles.bloomingTimer = 4;
     SetStatChange(gBattlerAttacker, STAT_DEF, 1);
@@ -10402,14 +10390,7 @@ void BS_SetBloomingShield(void)
 
 void BS_SetFaeFlight(void)
 {
-    NATIVE_ARGS(const u8 *failInstr);
-
-    if (GetActiveGimmick(gBattlerAttacker) == GIMMICK_TERA
-     || gBattleMons[gBattlerAttacker].volatiles.faeFlight)
-    {
-        gBattlescriptCurrInstr = cmd->failInstr;
-        return;
-    }
+    NATIVE_ARGS();
 
     gBattleMons[gBattlerAttacker].types[0] = TYPE_FAIRY;
     gBattleMons[gBattlerAttacker].types[1] = TYPE_FLYING;
@@ -10420,13 +10401,7 @@ void BS_SetFaeFlight(void)
 
 void BS_SetMeteoricWrath(void)
 {
-    NATIVE_ARGS(const u8 *failInstr);
-
-    if (gBattleStruct->meteoricWrathTimer != 0)
-    {
-        gBattlescriptCurrInstr = cmd->failInstr;
-        return;
-    }
+    NATIVE_ARGS();
 
     gBattleStruct->meteoricWrathTimer = 3;
     gBattleStruct->meteoricWrathBattler = gBattlerAttacker;
@@ -10464,15 +10439,8 @@ void BS_SetDeepAnalysis(void)
 
 void BS_SetCanopyCover(void)
 {
-    NATIVE_ARGS(const u8 *failInstr);
+    NATIVE_ARGS();
     enum BattleSide side = GetBattlerSide(gBattlerAttacker);
-
-    if (gFieldTimers.terrain != B_TERRAIN_GRASSY
-     || gSideStatuses[side] & SIDE_STATUS_AURORA_VEIL)
-    {
-        gBattlescriptCurrInstr = cmd->failInstr;
-        return;
-    }
 
     gSideStatuses[side] |= SIDE_STATUS_AURORA_VEIL;
     gSideTimers[side].auroraVeilTimer = GetBattlerHoldEffect(gBattlerAttacker) == HOLD_EFFECT_LIGHT_CLAY ? 8 : 5;
@@ -10481,21 +10449,38 @@ void BS_SetCanopyCover(void)
 
 void BS_SetVoltaicPrison(void)
 {
-    NATIVE_ARGS(const u8 *failInstr);
+    NATIVE_ARGS();
     struct Volatiles *volatiles = &gBattleMons[gBattlerTarget].volatiles;
-
-    if (volatiles->voltaicPrison
-     && volatiles->voltaicPrisonedBy == gBattlerAttacker
-     && volatiles->escapePrevention)
-    {
-        gBattlescriptCurrInstr = cmd->failInstr;
-        return;
-    }
 
     volatiles->escapePrevention = TRUE;
     volatiles->battlerPreventingEscape = gBattlerAttacker;
     volatiles->voltaicPrison = TRUE;
     volatiles->voltaicPrisonedBy = gBattlerAttacker;
+    gBattlescriptCurrInstr = cmd->nextInstr;
+}
+
+void BS_CheckTargetHasValidLastMove(void)
+{
+    NATIVE_ARGS();
+    enum Move move = gLastMoves[gBattlerTarget];
+
+    gBattleCommunication[0] = move != MOVE_NONE && move != MOVE_UNAVAILABLE && move != MOVE_STRUGGLE;
+    gBattlescriptCurrInstr = cmd->nextInstr;
+}
+
+void BS_CheckAttackerTerastallized(void)
+{
+    NATIVE_ARGS();
+
+    gBattleCommunication[0] = GetActiveGimmick(gBattlerAttacker) == GIMMICK_TERA;
+    gBattlescriptCurrInstr = cmd->nextInstr;
+}
+
+void BS_CheckMeteoricWrathActive(void)
+{
+    NATIVE_ARGS();
+
+    gBattleCommunication[0] = gBattleStruct->meteoricWrathTimer != 0;
     gBattlescriptCurrInstr = cmd->nextInstr;
 }
 
@@ -10520,13 +10505,14 @@ void BS_SetRoughRidin(void)
 
 void BS_ApplyLuaStrikeHazard(void)
 {
-    NATIVE_ARGS(const u8 *endInstr);
+    NATIVE_ARGS();
     enum Hazards hazard;
 
     if (gBattleStruct->hazardsCounter >= HAZARDS_MAX_COUNT)
     {
         gBattleStruct->hazardsCounter = 0;
-        gBattlescriptCurrInstr = cmd->endInstr;
+        gBattleCommunication[0] = FALSE;
+        gBattlescriptCurrInstr = cmd->nextInstr;
         return;
     }
 
@@ -10534,10 +10520,12 @@ void BS_ApplyLuaStrikeHazard(void)
     if (hazard == HAZARDS_NONE)
     {
         gBattleStruct->hazardsCounter = 0;
-        gBattlescriptCurrInstr = cmd->endInstr;
+        gBattleCommunication[0] = FALSE;
+        gBattlescriptCurrInstr = cmd->nextInstr;
         return;
     }
 
+    gBattleCommunication[0] = TRUE;
     gBattlescriptCurrInstr = cmd->nextInstr;
     TryHazardsOnSwitchIn(gEffectBattler, GetBattlerAbility(gEffectBattler), GetBattlerHoldEffect(gEffectBattler), hazard);
 }
