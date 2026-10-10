@@ -9369,8 +9369,8 @@
       "name": "TournamentGrounds_Outside_Layout",
       "width": 56,
       "height": 78,
-      "primary_tileset": "gTileset_General",
-      "secondary_tileset": "gTileset_BattleFrontierOutsideWest",
+      "primary_tileset": "gTileset_GeneralPorytiles",
+      "secondary_tileset": "gTileset_BattleFrontierOutsideWestPorytiles",
       "border_filepath": "data/layouts/TournamentGrounds_Outside/border.bin",
       "blockdata_filepath": "data/layouts/TournamentGrounds_Outside/map.bin"
     },

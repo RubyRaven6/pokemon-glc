@@ -61,4 +61,8 @@ extern const struct Tileset gTileset_SSAnne;
 extern const struct Tileset gTileset_SeaCottage;
 extern const struct Tileset gTileset_TrainerTower;
 
+//porytiles
+extern const struct Tileset gTileset_GeneralPorytiles;
+extern const struct Tileset gTileset_BattleFrontierOutsideWestPorytiles;
+
 #endif //GUARD_tilesets_H

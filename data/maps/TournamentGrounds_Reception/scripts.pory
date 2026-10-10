@@ -38,6 +38,12 @@ script TournamentGrounds_Reception_NameYourself{
     release
 }
 
+script TournamentGrounds_AsleepAtTheWheel
+{
+    msgbox("He seems to be asleep…", MSGBOX_NPC)
+    closemessage
+}
+
 script(local) NamingScript {
     fadescreen(FADE_TO_BLACK)
     callnative(PlayerGen_StartNamingScreen, waitstate=TRUE)

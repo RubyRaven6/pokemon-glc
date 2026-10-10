@@ -68,3 +68,5 @@ tools/poryscript/poryscript
 __pycache__
 .map_version
 *.scr
+log.txt
+*.ase
