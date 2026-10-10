@@ -149,6 +149,10 @@ static const u16 sDoorNullPalette48[16] = {};
 static const u8 sDoorAnimTiles_TrainerHillRoofElevator[] = INCGFX_U8("graphics/door_anims/trainer_hill_roof_elevator.png", ".4bpp");
 static const u16 sDoorNullPalette49[16] = {};
 
+static const u8 sDoorAnimTiles_BattleDomePorytiles[] = INCGFX_U8("graphics/door_anims/battle_dome_porytiles.png", ".4bpp");
+static const u16 sDoorNullPalette50[16] = {};
+static const u8 sDoorAnimTiles_BattleFrontierSlidingPorytiles[] = INCGFX_U8("graphics/door_anims/battle_frontier_sliding_porytiles.png", ".4bpp");
+static const u16 sDoorNullPalette51[16] = {};
 #if IS_FRLG
 
 static const u8 sDoorAnimTiles_GeneralFrlg[] = INCGFX_U8("graphics/door_anims/general_frlg.png", ".4bpp");
@@ -311,6 +315,9 @@ static const u8 sDoorAnimPalettes_BattleDomePreBattleRoom[] = {9, 9, 7, 7, 7, 7,
 static const u8 sDoorAnimPalettes_BattleTentInterior[] = {9, 9, 9, 9, 9, 9, 9, 9};
 static const u8 sDoorAnimPalettes_TrainerHillLobbyElevator[] = {7, 7, 7, 7, 7, 7, 7, 7};
 static const u8 sDoorAnimPalettes_TrainerHillRoofElevator[] = {9, 9, 7, 7, 7, 7, 7, 7};
+
+static const u8 sDoorAnimPalettes_BattleDomePorytiles[] = {0, 0, 0, 0, 0, 0, 0, 0};
+static const u8 sDoorAnimPalettes_BattleFrontierPorytiles[] = {0, 0, 0, 0, 0, 0, 0, 0};
 
 #if IS_FRLG
 
@@ -774,6 +781,23 @@ static const struct DoorGraphics sDoorAnimGraphicsTable[] =
         .size = DOOR_SIZE_1x2,
         .tiles = sDoorAnimTiles_TrainerHillRoofElevator,
         .palettes = sDoorAnimPalettes_TrainerHillRoofElevator
+    },
+    //porytiles
+    {
+        .metatileNum = METATILE_BattleFrontierOutsideWestPorytiles_Door_ConferenceArena,
+        .tileset = &gTileset_BattleFrontierOutsideWestPorytiles,
+        .sound = DOOR_SOUND_SLIDING,
+        .size = DOOR_SIZE_1x2,
+        .tiles = sDoorAnimTiles_BattleDomePorytiles,
+        .palettes = sDoorAnimPalettes_BattleDomePorytiles
+    },
+    {
+        .metatileNum = METATILE_BattleFrontierOutsideWestPorytiles_Door_Sliding,
+        .tileset = &gTileset_BattleFrontierOutsideWestPorytiles,
+        .sound = DOOR_SOUND_SLIDING,
+        .size = DOOR_SIZE_1x2,
+        .tiles = sDoorAnimTiles_BattleFrontierSlidingPorytiles,
+        .palettes = sDoorAnimPalettes_BattleFrontierPorytiles
     },
 #else
     {
