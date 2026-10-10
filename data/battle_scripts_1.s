@@ -1371,6 +1371,58 @@ BattleScript_EffectMeteoricWrath::
 	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_MoveEnd
 
+BattleScript_EffectDeepAnalysis::
+	attackcanceler
+	callnative BS_SetDeepAnalysis
+	attackanimation
+	waitanimation
+	goto BattleScript_MoveEnd
+
+BattleScript_EffectTrawlingNet::
+	attackcanceler
+	attackanimation
+	waitanimation
+	setadditionaleffects
+	goto BattleScript_MoveEnd
+
+BattleScript_EffectCanopyCover::
+	attackcanceler
+	callnative BS_SetCanopyCover
+	.4byte BattleScript_ButItFailed
+	attackanimation
+	waitanimation
+	printstring STRINGID_PKMNAURORAVEIL
+	waitmessage B_WAIT_TIME_LONG
+	goto BattleScript_MoveEnd
+
+BattleScript_EffectVoltaicPrison::
+	attackcanceler
+	callnative BS_SetVoltaicPrison
+	.4byte BattleScript_ButItFailed
+	attackanimation
+	waitanimation
+	seteffectprimary BS_ATTACKER, BS_TARGET, MOVE_EFFECT_PARALYSIS
+	printstring STRINGID_TARGETCANTESCAPENOW
+	waitmessage B_WAIT_TIME_LONG
+	goto BattleScript_MoveEnd
+
+BattleScript_EffectRoughRidin::
+	attackcanceler
+	callnative BS_SetRoughRidin
+	attackanimation
+	waitanimation
+	trybattlerstatchange BS_ATTACKER, STAT_CHANGE_NO_FLAGS
+	goto BattleScript_MoveEnd
+
+BattleScript_LuaStrikeEffect::
+	trybattlerstatchange BS_EFFECT_BATTLER, STAT_CHANGE_CERTAIN
+BattleScript_LuaStrikeHazardsLoop:
+	callnative BS_ApplyLuaStrikeHazard
+	.4byte BattleScript_LuaStrikeHazardsEnd
+	goto BattleScript_LuaStrikeHazardsLoop
+BattleScript_LuaStrikeHazardsEnd:
+	return
+
 BattleScript_EffectCastingCall::
 	attackcanceler
 	jumpifbattletype BATTLE_TYPE_ARENA, BattleScript_ButItFailed

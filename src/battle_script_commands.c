@@ -10451,6 +10451,97 @@ void BS_SetMeteoricWrathImpact(void)
     gBattlescriptCurrInstr = cmd->nextInstr;
 }
 
+void BS_SetDeepAnalysis(void)
+{
+    NATIVE_ARGS();
+
+    gBattleMons[gBattlerAttacker].volatiles.deepAnalysisActive = TRUE;
+    gBattleMons[gBattlerAttacker].volatiles.deepAnalysisTarget = gBattlerTarget;
+    gBattleMons[gBattlerAttacker].volatiles.deepAnalysisMove = MOVE_NONE;
+    gBattleStruct->battlerState[gBattlerAttacker].deepAnalysisPendingMove = MOVE_NONE;
+    gBattlescriptCurrInstr = cmd->nextInstr;
+}
+
+void BS_SetCanopyCover(void)
+{
+    NATIVE_ARGS(const u8 *failInstr);
+    enum BattleSide side = GetBattlerSide(gBattlerAttacker);
+
+    if (gFieldTimers.terrain != B_TERRAIN_GRASSY
+     || gSideStatuses[side] & SIDE_STATUS_AURORA_VEIL)
+    {
+        gBattlescriptCurrInstr = cmd->failInstr;
+        return;
+    }
+
+    gSideStatuses[side] |= SIDE_STATUS_AURORA_VEIL;
+    gSideTimers[side].auroraVeilTimer = GetBattlerHoldEffect(gBattlerAttacker) == HOLD_EFFECT_LIGHT_CLAY ? 8 : 5;
+    gBattlescriptCurrInstr = cmd->nextInstr;
+}
+
+void BS_SetVoltaicPrison(void)
+{
+    NATIVE_ARGS(const u8 *failInstr);
+    struct Volatiles *volatiles = &gBattleMons[gBattlerTarget].volatiles;
+
+    if (volatiles->voltaicPrison
+     && volatiles->voltaicPrisonedBy == gBattlerAttacker
+     && volatiles->escapePrevention)
+    {
+        gBattlescriptCurrInstr = cmd->failInstr;
+        return;
+    }
+
+    volatiles->escapePrevention = TRUE;
+    volatiles->battlerPreventingEscape = gBattlerAttacker;
+    volatiles->voltaicPrison = TRUE;
+    volatiles->voltaicPrisonedBy = gBattlerAttacker;
+    gBattlescriptCurrInstr = cmd->nextInstr;
+}
+
+void BS_SetRoughRidin(void)
+{
+    NATIVE_ARGS();
+
+    if (gBattleMons[gBattlerAttacker].hp * 4 < gBattleMons[gBattlerAttacker].maxHP)
+    {
+        SetStatChange(gBattlerAttacker, STAT_ATK, 1);
+        SetStatChange(gBattlerAttacker, STAT_DEF, 1);
+        SetStatChange(gBattlerAttacker, STAT_SPATK, 1);
+        SetStatChange(gBattlerAttacker, STAT_SPDEF, 1);
+        SetStatChange(gBattlerAttacker, STAT_SPEED, 1);
+    }
+    else
+    {
+        SetStatChange(gBattlerAttacker, STAT_SPEED, 2);
+    }
+    gBattlescriptCurrInstr = cmd->nextInstr;
+}
+
+void BS_ApplyLuaStrikeHazard(void)
+{
+    NATIVE_ARGS(const u8 *endInstr);
+    enum Hazards hazard;
+
+    if (gBattleStruct->hazardsCounter >= HAZARDS_MAX_COUNT)
+    {
+        gBattleStruct->hazardsCounter = 0;
+        gBattlescriptCurrInstr = cmd->endInstr;
+        return;
+    }
+
+    hazard = gBattleStruct->hazardsQueue[GetBattlerSide(gEffectBattler)][gBattleStruct->hazardsCounter];
+    if (hazard == HAZARDS_NONE)
+    {
+        gBattleStruct->hazardsCounter = 0;
+        gBattlescriptCurrInstr = cmd->endInstr;
+        return;
+    }
+
+    gBattlescriptCurrInstr = cmd->nextInstr;
+    TryHazardsOnSwitchIn(gEffectBattler, GetBattlerAbility(gEffectBattler), GetBattlerHoldEffect(gEffectBattler), hazard);
+}
+
 void BS_SetCastingCallCharge(void)
 {
     NATIVE_ARGS();

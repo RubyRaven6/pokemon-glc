@@ -2063,6 +2063,71 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
         .encourageEncore = TRUE,
     },
 
+    [EFFECT_DEEP_ANALYSIS] =
+    {
+        .battleScript = BattleScript_EffectDeepAnalysis,
+        .battleTvScore = 0,
+        .encourageEncore = TRUE,
+    },
+
+    [EFFECT_TRAWLING_NET] =
+    {
+        .battleScript = BattleScript_EffectTrawlingNet,
+        .battleTvScore = 0,
+        .encourageEncore = TRUE,
+    },
+
+    [EFFECT_INFERNAL_DANCE] =
+    {
+        .battleScript = BattleScript_EffectHit,
+        .battleTvScore = 0,
+    },
+
+    [EFFECT_CANOPY_COVER] =
+    {
+        .battleScript = BattleScript_EffectCanopyCover,
+        .battleTvScore = 0,
+        .encourageEncore = TRUE,
+    },
+
+    [EFFECT_VOLTAIC_PRISON] =
+    {
+        .battleScript = BattleScript_EffectVoltaicPrison,
+        .battleTvScore = 0,
+        .encourageEncore = TRUE,
+    },
+
+    [EFFECT_MASTERSTROKE] =
+    {
+        .battleScript = BattleScript_EffectHit,
+        .battleTvScore = 0,
+    },
+
+    [EFFECT_LUA_STRIKE] =
+    {
+        .battleScript = BattleScript_EffectHit,
+        .battleTvScore = 0,
+    },
+
+    [EFFECT_GEMSHOT] =
+    {
+        .battleScript = BattleScript_EffectHit,
+        .battleTvScore = 0,
+    },
+
+    [EFFECT_DARK_IMITATION] =
+    {
+        .battleScript = BattleScript_EffectHit,
+        .battleTvScore = 0,
+    },
+
+    [EFFECT_ROUGH_RIDIN] =
+    {
+        .battleScript = BattleScript_EffectRoughRidin,
+        .battleTvScore = 0,
+        .encourageEncore = TRUE,
+    },
+
     [EFFECT_SECRET_POWER] =
     {
         .battleScript = BattleScript_EffectHit,

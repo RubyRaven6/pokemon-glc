@@ -579,6 +579,15 @@ static enum CancelerResult CancelerCallSubmove(struct BattleCalcValues *cv)
     case EFFECT_ME_FIRST:
         calledMove = GetMeFirstMove();
         break;
+    case EFFECT_DARK_IMITATION:
+        calledMove = gLastMoves[cv->battlerDef];
+        if (calledMove == MOVE_NONE
+         || calledMove == MOVE_UNAVAILABLE
+         || calledMove == MOVE_STRUGGLE
+         || IsMoveCopycatBanned(calledMove)
+         || IsZMove(calledMove))
+            calledMove = MOVE_NONE;
+        break;
     default:
         noEffect = TRUE;
         break;
@@ -2072,6 +2081,13 @@ static void SetDamageContextValues(struct DamageContext *ctx, struct BattleCalcV
 
 static bool32 IsTargetUnaffectedByMoveEffect(struct BattleCalcValues *cv)
 {
+    if (gBattleMons[cv->battlerDef].volatiles.deepAnalysisMove == cv->move)
+    {
+        gBattleStruct->moveResultFlags[cv->battlerDef] = MOVE_RESULT_NO_EFFECT;
+        BattleScriptCall(BattleScript_ItDoesntAffectScrTarget);
+        return TRUE;
+    }
+
     switch (cv->moveEffect)
     {
     case EFFECT_ENDEAVOR:
@@ -2423,7 +2439,12 @@ static enum CancelerResult CancelerMultihitMoves(struct BattleCalcValues *cv)
     }
     else if (GetMoveStrikeCount(cv->move) > 1)
     {
-        if (GetMoveEffect(cv->move) == EFFECT_WING_SLICER
+        if (GetMoveEffect(cv->move) == EFFECT_GEMSHOT
+         && !IsHazardOnSide(GetBattlerSide(cv->battlerDef), HAZARDS_STEALTH_ROCK))
+        {
+            gMultiHitCounter = 1;
+        }
+        else if (GetMoveEffect(cv->move) == EFFECT_WING_SLICER
          && !IsBattlerFirstBeforeOpponents(cv->battlerAtk))
         {
             gMultiHitCounter = 1;
@@ -3222,6 +3243,9 @@ static bool32 TryMoveDamageUpdate(struct BattleCalcValues *cv)
             {
                 gBattleStruct->innardsOutHpLost[cv->battlerDef] += hpLost;
                 tookDirectDamage = TRUE;
+                if (gBattleMons[cv->battlerDef].volatiles.deepAnalysisActive
+                 && gBattleMons[cv->battlerDef].volatiles.deepAnalysisTarget == cv->battlerAtk)
+                    gBattleStruct->battlerState[cv->battlerDef].deepAnalysisPendingMove = cv->move;
             }
 
             gProtectStructs[cv->battlerDef].assuranceDoubled = TRUE;
@@ -5484,6 +5508,19 @@ static enum MoveEndResult MoveEndClearBits(struct BattleCalcValues *cv)
         TryUpdateEvolutionTracker(IF_USED_MOVE_X_TIMES, 1, originallyUsedMove);
 
     SetSameMoveTurnValues(cv->moveEffect);
+    for (enum BattlerId battler = B_BATTLER_0; battler < gBattlersCount; battler++)
+    {
+        enum Move pendingMove = gBattleStruct->battlerState[battler].deepAnalysisPendingMove;
+
+        if (pendingMove != MOVE_NONE)
+        {
+            gBattleMons[battler].volatiles.deepAnalysisMove = pendingMove;
+            gBattleMons[battler].volatiles.deepAnalysisActive = FALSE;
+            gBattleStruct->battlerState[battler].deepAnalysisPendingMove = MOVE_NONE;
+        }
+    }
+    if (gChosenMove != MOVE_MASTERSTROKE)
+        gBattleMons[cv->battlerAtk].volatiles.masterstrokeUses = 0;
     if (cv->moveEffect == EFFECT_JET_STREAM && !gBattleStruct->unableToUseMove && !IsBattlerUnaffectedByMove(cv->battlerDef))
         gBattleMons[cv->battlerAtk].volatiles.jetStreamWindRider = TRUE;
     TryClearChargeVolatile(moveType);

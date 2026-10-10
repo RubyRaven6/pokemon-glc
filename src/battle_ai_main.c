@@ -55,6 +55,7 @@ static bool32 IsPinchBerryItemEffect(enum HoldEffect holdEffect);
 static bool32 DoesAbilityBenefitFromSunOrRain(enum BattlerId battler, enum Ability ability, u32 weather);
 static void AI_CompareDamagingMoves(enum BattlerId battlerAtk, enum BattlerId battlerDef);
 static u32 GetWindAbilityScore(enum BattlerId battlerAtk, enum BattlerId battlerDef, struct AiLogicData *aiData);
+static s32 AI_CalcAdditionalEffectScore(enum BattlerId battlerAtk, enum BattlerId battlerDef, enum Move move, struct AiLogicData *aiData);
 
 // ewram
 EWRAM_DATA const u8 *gAIScriptPtr = NULL;   // Still used in contests
@@ -1928,6 +1929,32 @@ static s32 AI_CheckBadMove(enum BattlerId battlerAtk, enum BattlerId battlerDef,
             ADJUST_SCORE(-10);
         break;
     }
+    case EFFECT_CANOPY_COVER:
+        if (gFieldTimers.terrain != B_TERRAIN_GRASSY
+         || gSideStatuses[GetBattlerSide(battlerAtk)] & SIDE_STATUS_AURORA_VEIL)
+            ADJUST_SCORE(-10);
+        break;
+    case EFFECT_VOLTAIC_PRISON:
+        if (gBattleMons[battlerDef].volatiles.voltaicPrison
+         && gBattleMons[battlerDef].status1 & STATUS1_PARALYSIS)
+            ADJUST_SCORE(-10);
+        break;
+    case EFFECT_DARK_IMITATION:
+        if (aiData->lastUsedMove[battlerDef] == MOVE_NONE
+         || aiData->lastUsedMove[battlerDef] == MOVE_UNAVAILABLE
+         || aiData->lastUsedMove[battlerDef] == MOVE_STRUGGLE
+         || IsMoveCopycatBanned(aiData->lastUsedMove[battlerDef]))
+            ADJUST_SCORE(-10);
+        break;
+    case EFFECT_ROUGH_RIDIN:
+        if (!BattlerStatCanRise(battlerAtk, aiData->abilities[battlerAtk], STAT_SPEED)
+         && (aiData->hpPercents[battlerAtk] >= 25
+          || (!BattlerStatCanRise(battlerAtk, aiData->abilities[battlerAtk], STAT_ATK)
+           && !BattlerStatCanRise(battlerAtk, aiData->abilities[battlerAtk], STAT_DEF)
+           && !BattlerStatCanRise(battlerAtk, aiData->abilities[battlerAtk], STAT_SPATK)
+           && !BattlerStatCanRise(battlerAtk, aiData->abilities[battlerAtk], STAT_SPDEF))))
+            ADJUST_SCORE(-10);
+        break;
     case EFFECT_ENCORE:
         if (GetActiveGimmick(battlerDef) == GIMMICK_DYNAMAX)
             ADJUST_SCORE(-10);
@@ -4848,6 +4875,75 @@ static s32 AI_CalcMoveEffectScore(enum BattlerId battlerAtk, enum BattlerId batt
             ADJUST_SCORE(DECENT_EFFECT);
         break;
     }
+    case EFFECT_DEEP_ANALYSIS:
+        if (incomingMove != MOVE_NONE
+         && !IsBattleMoveStatus(incomingMove)
+         && AI_GetMoveEffectiveness(incomingMove, battlerDef, battlerAtk) > UQ_4_12(1.0))
+            ADJUST_SCORE(BEST_EFFECT);
+        else if (incomingMove != MOVE_NONE && !IsBattleMoveStatus(incomingMove))
+            ADJUST_SCORE(WEAK_EFFECT);
+        break;
+    case EFFECT_TRAWLING_NET:
+        if (IsDoubleBattle()
+         && !(gFieldStatuses & STATUS_FIELD_TRICK_ROOM)
+         && AI_WhoStrikesFirst(battlerAtk, battlerDef, MOVE_NONE, MOVE_NONE, DONT_CONSIDER_PRIORITY) == AI_IS_SLOWER)
+            ADJUST_SCORE(BEST_EFFECT);
+        else if (gBattleMons[battlerDef].statStages[STAT_SPEED] < DEFAULT_STAT_STAGE)
+            ADJUST_SCORE(DECENT_EFFECT);
+        break;
+    case EFFECT_INFERNAL_DANCE:
+        if (gBattleMons[battlerDef].status1 & STATUS1_BURN)
+            ADJUST_SCORE(BEST_EFFECT);
+        else if (AI_CanBurn(battlerAtk, battlerDef, aiData->abilities[battlerDef], GetPartnerBattler(battlerAtk), move, aiData->partnerMove))
+            ADJUST_SCORE(WEAK_EFFECT);
+        break;
+    case EFFECT_CANOPY_COVER:
+        if (ShouldSetScreen(battlerAtk, battlerDef, EFFECT_AURORA_VEIL))
+        {
+            ADJUST_SCORE(BEST_EFFECT);
+            if (aiData->holdEffects[battlerAtk] == HOLD_EFFECT_LIGHT_CLAY)
+                ADJUST_SCORE(DECENT_EFFECT);
+        }
+        break;
+    case EFFECT_VOLTAIC_PRISON:
+        if (ShouldTrap(battlerAtk, battlerDef, move, DONT_CONSIDER_WRAP_DAMAGE))
+            ADJUST_SCORE(GOOD_EFFECT);
+        if (incomingMove != MOVE_NONE && HasMove(battlerAtk, incomingMove))
+            ADJUST_SCORE(GOOD_EFFECT);
+        if (AI_CanParalyze(battlerAtk, battlerDef, aiData->abilities[battlerDef], move, aiData->partnerMove))
+            ADJUST_SCORE(DECENT_EFFECT);
+        break;
+    case EFFECT_MASTERSTROKE:
+        ADJUST_SCORE(min(gBattleMons[battlerAtk].volatiles.masterstrokeUses + 1, BEST_EFFECT));
+        break;
+    case EFFECT_LUA_STRIKE:
+        if (AreAnyHazardsOnSide(GetBattlerSide(battlerDef))
+         && aiData->holdEffects[battlerDef] != HOLD_EFFECT_HEAVY_DUTY_BOOTS
+         && aiData->holdEffects[battlerDef] != HOLD_EFFECT_COVERT_CLOAK)
+            ADJUST_SCORE(GOOD_EFFECT);
+        break;
+    case EFFECT_GEMSHOT:
+        if (IsHazardOnSide(GetBattlerSide(battlerDef), HAZARDS_STEALTH_ROCK))
+            ADJUST_SCORE(BEST_EFFECT);
+        break;
+    case EFFECT_DARK_IMITATION:
+        if (aiData->lastUsedMove[battlerDef] != MOVE_NONE
+         && aiData->lastUsedMove[battlerDef] != MOVE_UNAVAILABLE
+         && !IsMoveCopycatBanned(aiData->lastUsedMove[battlerDef]))
+        {
+            enum Move copiedMove = aiData->lastUsedMove[battlerDef];
+
+            ADJUST_SCORE(GOOD_EFFECT);
+            ADJUST_SCORE(AI_CalcMoveEffectScore(battlerAtk, battlerDef, copiedMove, aiData));
+            ADJUST_SCORE(AI_CalcAdditionalEffectScore(battlerAtk, battlerDef, copiedMove, aiData));
+        }
+        break;
+    case EFFECT_ROUGH_RIDIN:
+        if (aiData->hpPercents[battlerAtk] < 25)
+            ADJUST_SCORE(BEST_EFFECT);
+        else
+            ADJUST_SCORE(GOOD_EFFECT);
+        break;
     case EFFECT_ENCORE:
     {
         if (GetActiveGimmick(battlerDef) == GIMMICK_DYNAMAX)
