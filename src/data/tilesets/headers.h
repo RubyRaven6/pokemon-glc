@@ -1550,7 +1550,7 @@ const struct Tileset gTileset_GeneralPorytiles =
     .palettes = gTilesetPalettes_GeneralPorytiles,
     .metatiles = gMetatiles_GeneralPorytiles,
     .metatileAttributes = gMetatileAttributes_GeneralPorytiles,
-    .callback = NULL,
+    .callback = InitTilesetAnim_GeneralPorytiles,
 };
 
 const struct Tileset gTileset_BattleFrontierOutsideWestPorytiles =
