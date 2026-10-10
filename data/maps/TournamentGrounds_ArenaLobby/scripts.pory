@@ -3,6 +3,7 @@ const TEALA = LOCALID_ARENA_LOBBY_TEALA
 mapscripts TournamentGrounds_ArenaLobby_MapScripts {
     MAP_SCRIPT_ON_TRANSITION {
         setrespawn(HEAL_LOCATION_TOURNAMENT_GROUNDS_ARENA_LOBBY)
+        setvar(VAR_GYM_LEADER_BATTLE_COUNT, 1)
         setvar(VAR_GYM_LEADER_1,0)
         setvar(VAR_GYM_LEADER_2,0)
         setvar(VAR_GYM_LEADER_3,0)
@@ -61,8 +62,8 @@ script(local) NewTealaSpiel
         callnative(GiveStartingKeyItems)
         setspeaker(SP_NAME_TEALA)
         message(
-            "insert explanation about how to unlock\nmore Pokémon\p"
-            "make your team first from the pc before\nentering\p"
+            "As you progress, you'll be granted more\nPokémon from other regions!\p"
+            "Make sure to build your team from the\nPC on my left, with items from our mart\loutside."
         )
         waitmessage
         closemessage

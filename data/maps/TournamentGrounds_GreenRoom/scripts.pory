@@ -34,26 +34,39 @@ script TournamentGrounds_GreenRoom_EventScript_Teala {
     setspeaker(SP_NAME_TEALA)
     call(BufferNextOpponentName)
     msgbox(format("Your next opponent will be {STR_VAR_1}."))
-    msgbox(format("Are you ready to go to the next round?"), MSGBOX_YESNO)
-    if(var(VAR_RESULT) == NO){}
-    else
+    msgbox("Are you ready to go to the next round?")
+    dynmultichoice(1, 1, FALSE, 3, 0, DYN_MULTICHOICE_CB_NONE, "Yes", "No", "Retire")
+    closemessage
+    switch(var(VAR_RESULT))
     {
-        checkpartyfortech
-        if(var(VAR_RESULT) > 1)
-        {
-            msgbox(format("You have two or more Pokemon with a signature move.\pKindly ensure only one signature move is present in your party."))
+        case 0:
+            checkpartyfortech
+            if(var(VAR_RESULT) > 1)
+            {
+                msgbox(format("You have two or more Pokemon with a signature move.\pKindly ensure only one signature move is present in your party."))
+                closemessage
+                applymovement(LOCALID_PLAYER, moves(walk_down))
+                waitmovement(0)
+            }
+            else
+            {
+                setspeaker(SP_NAME_TEALA)
+                msgbox(format("Good luck!"))
+                closemessage
+                warp(MAP_TOURNAMENT_GROUNDS_BATTLE_ROOM, 4, 9)
+                waitstate
+            }
+        case 1:
+            msgbox("You can speak to me anytime to\ncontinue your challenge.")
             closemessage
-            applymovement(LOCALID_PLAYER, moves(walk_down))
-            waitmovement(0)
-        }
-        else
-        {
-            setspeaker(SP_NAME_TEALA)
-            msgbox(format("Good luck!"))
-            closemessage
-            warp(MAP_TOURNAMENT_GROUNDS_BATTLE_ROOM, 4, 9)
-            waitstate
-        }
+        case 2:
+            msgbox("Are you sure you wish to forfeit your\nchallenge now?",MSGBOX_YESNO)
+            if(var(VAR_RESULT) == NO){}
+            else
+            {
+                warp(MAP_TOURNAMENT_GROUNDS_ARENA_LOBBY, 3, 3)
+            }
+
     }
     releaseall
     end

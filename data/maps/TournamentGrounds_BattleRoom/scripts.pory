@@ -121,14 +121,15 @@ script TournamentGrounds_BattleRoom_GymLeaderBattleSetup
             addvar(VAR_GYM_LEADER_BATTLE_COUNT, 1)
         case 3:
             call_pwt_script(VAR_GYM_LEADER_3)
-            setvar(VAR_GYM_LEADER_BATTLE_COUNT, 1)
+            addvar(VAR_GYM_LEADER_BATTLE_COUNT, 1)
     }
     setspeaker("Commentator")
     msgbox("Our winner is {PLAYER}!")
     waitmessage
     closemessage
     call(TournamentGrounds_BattleRoom_ContestantExits)
-    warp(MAP_TOURNAMENT_GROUNDS_GREEN_ROOM, 3, 3)
+    if(var(VAR_GYM_LEADER_BATTLE_COUNT) < 4){warp(MAP_TOURNAMENT_GROUNDS_GREEN_ROOM, 3, 3)}
+    else{warp(MAP_TOURNAMENT_GROUNDS_ARENA_LOBBY, 11, 11)}
     waitstate
     end
 }
