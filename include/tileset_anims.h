@@ -34,6 +34,7 @@ void InitTilesetAnim_BattlePyramid(void);
 
 //Porytiles
 void InitTilesetAnim_GeneralPorytiles(void);
+void InitTilesetAnim_BattleFrontierOutsideWestPorytiles(void);
 
 // FRLG
 void InitTilesetAnim_General_Frlg(void);

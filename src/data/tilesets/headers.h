@@ -1561,5 +1561,5 @@ const struct Tileset gTileset_BattleFrontierOutsideWestPorytiles =
     .palettes = gTilesetPalettes_BattleFrontierOutsideWestPorytiles,
     .metatiles = gMetatiles_BattleFrontierOutsideWestPorytiles,
     .metatileAttributes = gMetatileAttributes_BattleFrontierOutsideWestPorytiles,
-    .callback = NULL,
+    .callback = InitTilesetAnim_BattleFrontierOutsideWestPorytiles,
 };
