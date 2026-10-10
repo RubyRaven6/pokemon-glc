@@ -84,11 +84,17 @@ EventScript_AccessPokemonBoxLink::
 	goto EventScript_TurnOffPC
 	end
 
-CheckIfPokemonFlagSet::
-	goto_if_unset FLAG_SYS_POKEMON_GET, CheckIfPokemonFlagSet_1
-	return
-
-CheckIfPokemonFlagSet_1:
-	setflag FLAG_SYS_POKEMON_GET
-	return
 `
+script CheckIfPokemonFlagSet
+{
+	goto_if_unset (FLAG_SYS_POKEMON_GET, CheckIfPokemonFlagSet_1)
+	return
+}
+
+script(local) CheckIfPokemonFlagSet_1
+{
+	msgbox(format("Kindly speak to Teala to access\nthe Pokémon Computer."))
+	releaseall
+	closemessage
+	end
+}

@@ -41,7 +41,7 @@ const struct TournamentOpponent gTournamentOpponents[OPPONENT_COUNT] =
     },
     [OPPONENT_KOGA_AND_JANINE] =
     {
-        .graphicsId = OPPONENT_GFX(OBJ_EVENT_GFX_EXPERT_M, OBJ_EVENT_GFX_EXPERT_F),
+        .graphicsId = OPPONENT_GFX(OBJ_EVENT_GFX_EXPERT_M, OBJ_EVENT_GFX_LIZA),
         .script = EventScript_PWTBattleKogaJanine,
     },
     [OPPONENT_BLAINE] =

@@ -1,7 +1,9 @@
 mapscripts TournamentGrounds_GreenRoom_MapScripts {
     MAP_SCRIPT_ON_TRANSITION {
-    special(HealPlayerParty)
-    setflag(FLAG_DISABLE_SAVING)
+        special(HealPlayerParty)
+        setflag(FLAG_DISABLE_SAVING)
+        if(var(VAR_GYM_LEADER_1) == 0 || var(VAR_GYM_LEADER_2) == 0 || var(VAR_GYM_LEADER_3) == 0)
+            {callnative(ChooseRandomGymLeader)}
     }
 
     MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE [
@@ -13,35 +15,58 @@ mapscripts TournamentGrounds_GreenRoom_MapScripts {
 
 }
 
+script(local) BufferNextOpponentName
+{
+    switch(var(VAR_GYM_LEADER_BATTLE_COUNT))
+    {
+        case 1:
+            buffertrainername(STR_VAR_1, VAR_GYM_LEADER_1)
+        case 2:
+            buffertrainername(STR_VAR_1, VAR_GYM_LEADER_2)
+        case 3:
+            buffertrainername(STR_VAR_1, VAR_GYM_LEADER_3)
+    }
+}
+
 script TournamentGrounds_GreenRoom_EventScript_Teala {
     lockall
     faceplayer
-    
-}
-
-script(local) TournamentGrounds_GreenRoom_ChallengeProceed {
     setspeaker(SP_NAME_TEALA)
-    msgbox(format("Are you ready to go to the next round?"), MSGBOX_YESNO)
-    if(var(VAR_RESULT) == NO){}
-    else
+    call(BufferNextOpponentName)
+    msgbox(format("Your next opponent will be {STR_VAR_1}."))
+    msgbox("Are you ready to go to the next round?")
+    dynmultichoice(1, 1, FALSE, 3, 0, DYN_MULTICHOICE_CB_NONE, "Yes", "No", "Retire")
+    closemessage
+    switch(var(VAR_RESULT))
     {
-        checkpartyfortech
-        if(var(VAR_RESULT) > 1)
-        {
-            msgbox(format("You have two or more Pokemon with a signature move.\pKindly ensure only one signature move is present in your party."))
+        case 0:
+            checkpartyfortech
+            if(var(VAR_RESULT) > 1)
+            {
+                msgbox(format("You have two or more Pokemon with a signature move.\pKindly ensure only one signature move is present in your party."))
+                closemessage
+                applymovement(LOCALID_PLAYER, moves(walk_down))
+                waitmovement(0)
+            }
+            else
+            {
+                setspeaker(SP_NAME_TEALA)
+                msgbox(format("Good luck!"))
+                closemessage
+                warp(MAP_TOURNAMENT_GROUNDS_BATTLE_ROOM, 4, 9)
+                waitstate
+            }
+        case 1:
+            msgbox("You can speak to me anytime to\ncontinue your challenge.")
             closemessage
-            applymovement(LOCALID_PLAYER, moves(walk_down))
-            waitmovement(0)
-        }
-        else
-        {
-            callnative(ChooseRandomGymLeader)
-            setspeaker(SP_NAME_TEALA)
-            msgbox(format("Good luck!"))
-            closemessage
-            warp(MAP_TESTING_GROUNDS_BATTLE_ARENA, 6, 12)
-            waitstate
-        }
+        case 2:
+            msgbox("Are you sure you wish to forfeit your\nchallenge now?",MSGBOX_YESNO)
+            if(var(VAR_RESULT) == NO){}
+            else
+            {
+                warp(MAP_TOURNAMENT_GROUNDS_ARENA_LOBBY, 3, 3)
+            }
+
     }
     releaseall
     end

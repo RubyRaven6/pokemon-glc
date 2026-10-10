@@ -1,7 +1,13 @@
 const TEALA = LOCALID_ARENA_LOBBY_TEALA
 
 mapscripts TournamentGrounds_ArenaLobby_MapScripts {
-    
+    MAP_SCRIPT_ON_TRANSITION {
+        setrespawn(HEAL_LOCATION_TOURNAMENT_GROUNDS_ARENA_LOBBY)
+        setvar(VAR_GYM_LEADER_BATTLE_COUNT, 1)
+        setvar(VAR_GYM_LEADER_1,0)
+        setvar(VAR_GYM_LEADER_2,0)
+        setvar(VAR_GYM_LEADER_3,0)
+    }
 }
 
 script TournamentGrounds_ArenaLobby_EventScript_Teala {
@@ -21,7 +27,7 @@ script TournamentGrounds_ArenaLobby_EventScript_Teala {
             break
     }
     if(flag(FLAG_SYS_POKEMON_GET)){goto(RegularTealaSpiel)}
-    else{goto(RegularTealaSpiel)}
+    else{goto(NewTealaSpiel)}
 }
 
 script(local) NewTealaSpiel
@@ -30,7 +36,12 @@ script(local) NewTealaSpiel
     msgbox(format("Hi! Good {STR_VAR_1}!\nAre you a new challenger?"), MSGBOX_YESNO)
     if(var(VAR_RESULT) == NO)
     {
-        message("Umm… okay then.")
+        msgbox("But I don't see you in our records?")
+        closemessage
+        delay(120)
+        setspeaker(SP_NAME_TEALA)
+        msgbox("Umm… okay then.")
+        closemessage
         release
         end
     }
@@ -38,38 +49,27 @@ script(local) NewTealaSpiel
     {
         message(
             "Welcome! I hope you'll have a good time.\p"
-            "My name is Teala, and I'll be giving you a rundown for how our tournament works.\p"
-            "long explanation\p"
-            "As a new challenger, you'll be given Pokémon to reflect the latest regional tournament you face."
-            "Let me give those Pokémon and items to you now!"
+            "My name is Teala, and I'll be giving you a\nrundown for how our tournament works.\p"
+            format("You'll be entering a tournament with three rounds, going up against three Gym Leaders from certains region.\p")
+            format("Whenever you win a tournament, you qualify to enter the tournament for the next region.\p")
+            format("You can build your team however you want before entering, but take note, that will be your team for all three rounds!\p")
+            format("However, you're free to change your Pokémon and their items and so on as you see fit.")
+            "As a new challenger, you'll be given\nPokémon to reflect the first regional\ltournament you'll face.\p"
+            "Let me give those Pokémon and items to\nyou now!\p"
         )
         waitmessage
         closemessage
         setflag(FLAG_SYS_POKEDEX_GET)
+        setflag(FLAG_SYS_POKEMON_GET)
         callnative(GivePlayerUnlockedPokemon)
         callnative(GiveStartingKeyItems)
         setspeaker(SP_NAME_TEALA)
         message(
-            "explanation about how to unlock more Pokémon"
-            "Without any further delay, please follow me to our Green Room!"
+            "As you progress, you'll be granted more\nPokémon from other regions!\p"
+            "Make sure to build your team from the\nPC on my left, with items from our mart\loutside."
         )
         waitmessage
         closemessage
-        applymovement(TEALA, moves(walk_up * 5))
-        applymovement(OBJ_EVENT_ID_PLAYER, moves(walk_up * 5))
-        waitmovement(0)
-        opendoor(11, 4)
-        waitdooranim
-        applymovement(TEALA, moves(walk_up))
-        applymovement(OBJ_EVENT_ID_PLAYER, moves(walk_up * 2))
-        waitmovement(TEALA)
-        removeobject(TEALA)
-        waitmovement(OBJ_EVENT_ID_PLAYER)
-        hideplayer
-        closedoor(11, 4)
-        waitdooranim
-        warp(MAP_TOURNAMENT_GROUNDS_GREEN_ROOM, 3, 7)
-        waitstate
         release
         end
     }
@@ -149,4 +149,16 @@ script(local) ChooseGenerationScript
     }
     msgbox("You've chosen the {STR_VAR_1} tournament.\nIs this correct?",MSGBOX_YESNO)
     if(var(VAR_RESULT) == NO){call(ChooseGenerationScript)}
+}
+
+script TournamentGrounds_ArenaLobby_EventScript_InteriorDesigner
+{
+    lock
+    faceplayer
+    setspeaker("Artist")
+    msgbox("This interior design is atrocious,\ndarling.")
+    msgbox("But alas… it's out of my hands now.")
+    applymovement(LOCALID_ARENA_LOBBY_DISGRUNTLED_ARTIST, moves(face_original_direction))
+    release
+    end
 }
