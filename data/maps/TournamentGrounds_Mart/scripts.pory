@@ -91,7 +91,7 @@ script TestingGrounds_Mart_EventScript_TechniquesMarket{
     faceplayer
     checkdefeatedleaders
     if(var(VAR_RESULT) == FALSE){
-        msgbox(format("This shop unlocks once you defeat a gym leader."))
+        msgbox(format("This shop unlocks once you defeat a gym leader in the third round."))
         closemessage
     }
     else {

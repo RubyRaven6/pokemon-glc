@@ -52,6 +52,7 @@ script(local) NewTealaSpiel
             "My name is Teala, and I'll be giving you a\nrundown for how our tournament works.\p"
             format("You'll be entering a tournament with three rounds, going up against three Gym Leaders from certains region.\p")
             format("Whenever you win a tournament, you qualify to enter the tournament for the next region.\p")
+            format("You even get the chance to buy the technique your opponent in the final round used!\pIf you win, of course.\p")
             format("You can build your team however you want before entering, but take note, that will be your team for all three rounds!\p")
             format("However, you're free to change your Pokémon and their items and so on as you see fit.")
             "As a new challenger, you'll be given\nPokémon to reflect the first regional\ltournament you'll face.\p"
