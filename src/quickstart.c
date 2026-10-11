@@ -50,7 +50,7 @@ static const struct SpriteTemplate sQuickstartHudTemplate = {
 
 static const struct CompressedSpriteSheet sSpriteSheet_QuickstartHud = {
     .data = gQuickstartHudGfx,
-    .size = 0x200,
+    .size = 0x400,
     .tag = TAG_SKIP_INTRO
 };
 static const struct SpritePalette sSpritePalette_QuickstartHud = {
