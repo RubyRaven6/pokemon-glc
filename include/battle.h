@@ -548,6 +548,7 @@ struct BattlerState
     u16 faeFlightBoost:1;
     u16 padding:7;
     // End of Word
+    enum Move deepAnalysisPendingMove;
 };
 
 struct PartyState

@@ -22903,6 +22903,217 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .battleAnimScript = gBattleAnimMove_Protect,
     },
 
+    [MOVE_DEEP_ANALYSIS] =
+    {
+        .name = COMPOUND_STRING("Deep Analysis"),
+        .description = COMPOUND_STRING(
+            "Studies a foe, weakening\n"
+            "then nullifying one move."),
+        .effect = EFFECT_DEEP_ANALYSIS,
+        .power = 0,
+        .type = TYPE_NORMAL,
+        .accuracy = 0,
+        .pp = 5,
+        .target = TARGET_SELECTED,
+        .category = DAMAGE_CATEGORY_STATUS,
+        .ignoresSubstitute = TRUE,
+        .battleAnimScript = gBattleAnimMove_MindReader,
+    },
+
+    [MOVE_TRAWLING_NET] =
+    {
+        .name = COMPOUND_STRING("Trawling Net"),
+        .description = COMPOUND_STRING(
+            "Slows both foes and may\n"
+            "lower their offenses."),
+        .effect = EFFECT_TRAWLING_NET,
+        .power = 0,
+        .type = TYPE_WATER,
+        .accuracy = 0,
+        .pp = 10,
+        .target = TARGET_BOTH,
+        .category = DAMAGE_CATEGORY_STATUS,
+        .additionalEffects = ADDITIONAL_EFFECTS({
+            .moveEffect = MOVE_EFFECT_TRAWLING_NET,
+        }),
+        .battleAnimScript = gBattleAnimMove_StringShot,
+    },
+
+    [MOVE_INFERNAL_DANCE] =
+    {
+        .name = COMPOUND_STRING("Infernal Dance"),
+        .description = COMPOUND_STRING(
+            "Burns foes or surrounds\n"
+            "burned foes with fire."),
+        .effect = EFFECT_INFERNAL_DANCE,
+        .power = 80,
+        .type = TYPE_FIRE,
+        .accuracy = 100,
+        .pp = 15,
+        .target = TARGET_SELECTED,
+        .category = DAMAGE_CATEGORY_PHYSICAL,
+        .danceMove = TRUE,
+        .additionalEffects = ADDITIONAL_EFFECTS(
+            {
+                .moveEffect = MOVE_EFFECT_INFERNAL_DANCE,
+            },
+            {
+                .moveEffect = MOVE_EFFECT_BURN,
+                .chance = 30,
+            }),
+        .battleAnimScript = gBattleAnimMove_FieryDance,
+    },
+
+    [MOVE_CANOPY_COVER] =
+    {
+        .name = COMPOUND_STRING("Canopy Cover"),
+        .description = COMPOUND_STRING(
+            "Weakens attacks while\n"
+            "Grassy Terrain is active."),
+        .effect = EFFECT_CANOPY_COVER,
+        .power = 0,
+        .type = TYPE_GRASS,
+        .accuracy = 0,
+        .pp = 20,
+        .target = TARGET_USER,
+        .category = DAMAGE_CATEGORY_STATUS,
+        .snatchAffected = TRUE,
+        .ignoresProtect = TRUE,
+        .battleAnimScript = gBattleAnimMove_AuroraVeil,
+    },
+
+    [MOVE_VOLTAIC_PRISON] =
+    {
+        .name = COMPOUND_STRING("Voltaic Prison"),
+        .description = COMPOUND_STRING(
+            "Paralyzes, traps, and seals\n"
+            "moves shared with the user."),
+        .effect = EFFECT_VOLTAIC_PRISON,
+        .power = 0,
+        .type = TYPE_ELECTRIC,
+        .accuracy = 100,
+        .pp = 1,
+        .target = TARGET_SELECTED,
+        .category = DAMAGE_CATEGORY_STATUS,
+        .battleAnimScript = gBattleAnimMove_ThunderCage,
+    },
+
+    [MOVE_PHANTASMAL_PLAY] =
+    {
+        .name = COMPOUND_STRING("Phantasmal Play"),
+        .description = COMPOUND_STRING(
+            "Usually moves last, then\n"
+            "switches the user out."),
+        .effect = EFFECT_HIT_ESCAPE,
+        .power = 85,
+        .type = TYPE_GHOST,
+        .accuracy = 100,
+        .pp = 10,
+        .target = TARGET_SELECTED,
+        .priority = -1,
+        .category = DAMAGE_CATEGORY_PHYSICAL,
+        .makesContact = TRUE,
+        .battleAnimScript = gBattleAnimMove_PhantomForce,
+    },
+
+    [MOVE_MASTERSTROKE] =
+    {
+        .name = COMPOUND_STRING("Masterstroke"),
+        .description = COMPOUND_STRING(
+            "Repeated use raises more\n"
+            "stats and gains power."),
+        .effect = EFFECT_MASTERSTROKE,
+        .power = 50,
+        .type = TYPE_FAIRY,
+        .accuracy = 100,
+        .pp = 10,
+        .target = TARGET_SELECTED,
+        .category = DAMAGE_CATEGORY_SPECIAL,
+        .additionalEffects = ADDITIONAL_EFFECTS({
+            .moveEffect = MOVE_EFFECT_MASTERSTROKE,
+            .chance = 100,
+            .self = TRUE,
+        }),
+        .battleAnimScript = gBattleAnimMove_DazzlingGleam,
+    },
+
+    [MOVE_LUA_STRIKE] =
+    {
+        .name = COMPOUND_STRING("Lua Strike"),
+        .description = COMPOUND_STRING(
+            "Pushes the foe back onto\n"
+            "its entry hazards."),
+        .effect = EFFECT_LUA_STRIKE,
+        .power = 55,
+        .type = TYPE_FIGHTING,
+        .accuracy = 100,
+        .pp = 10,
+        .target = TARGET_SELECTED,
+        .category = DAMAGE_CATEGORY_PHYSICAL,
+        .makesContact = TRUE,
+        .additionalEffects = ADDITIONAL_EFFECTS({
+            .moveEffect = MOVE_EFFECT_LUA_STRIKE,
+            .chance = 100,
+        }),
+        .battleAnimScript = gBattleAnimMove_ForcePalm,
+    },
+
+    [MOVE_GEMSHOT] =
+    {
+        .name = COMPOUND_STRING("Gemshot"),
+        .description = COMPOUND_STRING(
+            "Hits both foes twice if\n"
+            "pointed stones surround them."),
+        .effect = EFFECT_GEMSHOT,
+        .power = 45,
+        .type = TYPE_ROCK,
+        .accuracy = 95,
+        .pp = 10,
+        .target = TARGET_BOTH,
+        .category = DAMAGE_CATEGORY_SPECIAL,
+        .strikeCount = 2,
+        .battleAnimScript = gBattleAnimMove_PowerGem,
+    },
+
+    [MOVE_DARK_IMITATION] =
+    {
+        .name = COMPOUND_STRING("Dark Imitation"),
+        .description = COMPOUND_STRING(
+            "Copies the target's move\n"
+            "with greater power."),
+        .effect = EFFECT_DARK_IMITATION,
+        .power = 0,
+        .type = TYPE_DARK,
+        .accuracy = 0,
+        .pp = 10,
+        .target = TARGET_SELECTED,
+        .category = DAMAGE_CATEGORY_STATUS,
+        .ignoresSubstitute = TRUE,
+        .metronomeBanned = TRUE,
+        .copycatBanned = TRUE,
+        .sleepTalkBanned = TRUE,
+        .instructBanned = TRUE,
+        .battleAnimScript = gBattleAnimMove_Copycat,
+    },
+
+    [MOVE_ROUGH_RIDIN] =
+    {
+        .name = COMPOUND_STRING("Rough Ridin'"),
+        .description = COMPOUND_STRING(
+            "Sharply raises Speed, or\n"
+            "all stats when in danger."),
+        .effect = EFFECT_ROUGH_RIDIN,
+        .power = 0,
+        .type = TYPE_GROUND,
+        .accuracy = 0,
+        .pp = 5,
+        .target = TARGET_USER,
+        .category = DAMAGE_CATEGORY_STATUS,
+        .snatchAffected = TRUE,
+        .ignoresProtect = TRUE,
+        .battleAnimScript = gBattleAnimMove_Agility,
+    },
+
     [MOVE_WINDSTORM] =
     {
         .name = COMPOUND_STRING("Windstorm"),

@@ -1002,6 +1002,63 @@ static void HandleSetEffectOverexposure(struct BattleCalcValues *cv, struct SetE
     }
 }
 
+static void HandleSetEffectTrawlingNet(struct BattleCalcValues *cv, struct SetEffect *se)
+{
+    bool32 alreadySlowed = gBattleMons[se->effectBattler].statStages[STAT_SPEED] < DEFAULT_STAT_STAGE;
+
+    SetStatChange(se->effectBattler, STAT_SPEED, -1);
+    if (alreadySlowed)
+    {
+        SetStatChange(se->effectBattler, STAT_ATK, -1);
+        SetStatChange(se->effectBattler, STAT_SPATK, -1);
+    }
+
+    BattleScriptPush(se->script);
+    gBattlescriptCurrInstr = BattleScript_MoveEffectStatChange;
+}
+
+static void HandleSetEffectInfernalDance(struct BattleCalcValues *cv, struct SetEffect *se)
+{
+    if (gBattleMons[se->effectBattler].status1 & STATUS1_BURN)
+        HandleSetEffectSeaOfFire(cv, se);
+    else
+        gBattlescriptCurrInstr = se->script;
+}
+
+static void HandleSetEffectMasterstroke(struct BattleCalcValues *cv, struct SetEffect *se)
+{
+    enum Stat stats[5];
+    u32 statCount = 0;
+    u32 boosts = min(gBattleMons[cv->battlerAtk].volatiles.masterstrokeUses + 1, 5);
+
+    for (enum Stat stat = STAT_ATK; stat <= STAT_SPEED; stat++)
+    {
+        if (gBattleMons[cv->battlerAtk].statStages[stat] < MAX_STAT_STAGE)
+            stats[statCount++] = stat;
+    }
+
+    for (u32 i = 0; i < boosts && statCount != 0; i++)
+    {
+        u32 chosen = RandomUniform(RNG_RANDOM_FROM_LIST, 0, statCount - 1);
+        SetStatChange(cv->battlerAtk, stats[chosen], 1);
+        stats[chosen] = stats[--statCount];
+    }
+
+    if (gBattleMons[cv->battlerAtk].volatiles.masterstrokeUses < 5)
+        gBattleMons[cv->battlerAtk].volatiles.masterstrokeUses++;
+
+    BattleScriptPush(se->script);
+    gBattlescriptCurrInstr = BattleScript_MoveEffectStatChange;
+}
+
+static void HandleSetEffectLuaStrike(struct BattleCalcValues *cv, struct SetEffect *se)
+{
+    SetStatChange(se->effectBattler, STAT_SPEED, -1);
+    gBattleStruct->hazardsCounter = 0;
+    BattleScriptPush(se->script);
+    gBattlescriptCurrInstr = BattleScript_LuaStrikeEffect;
+}
+
 static void HandleSetEffectTerrain(struct BattleCalcValues *cv, struct SetEffect *se)
 {
     enum BattleTerrain terrain = B_TERRAIN_NONE;
@@ -1457,6 +1514,10 @@ static void (*const sSetEffectHandlers[])(struct BattleCalcValues *cv, struct Se
     [MOVE_EFFECT_TORMENT_SIDE] = HandleSetEffectTormentSide,
     [MOVE_EFFECT_FIRE_SPIN_SIDE] = HandleSetEffectFireSpinSide,
     [MOVE_EFFECT_OVEREXPOSURE] = HandleSetEffectOverexposure,
+    [MOVE_EFFECT_TRAWLING_NET] = HandleSetEffectTrawlingNet,
+    [MOVE_EFFECT_INFERNAL_DANCE] = HandleSetEffectInfernalDance,
+    [MOVE_EFFECT_MASTERSTROKE] = HandleSetEffectMasterstroke,
+    [MOVE_EFFECT_LUA_STRIKE] = HandleSetEffectLuaStrike,
     [MOVE_EFFECT_FIXED_POWER] = HandleSetEffectNone,
     [STAT_CHANGE_EFFECT_PLUS] = HandleSetEffectNone,
     [STAT_CHANGE_EFFECT_MINUS] = HandleSetEffectNone,

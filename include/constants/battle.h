@@ -303,6 +303,12 @@ enum VolatileFlags
     F(VOLATILE_JET_STREAM_WIND_RIDER,       jetStreamWindRider,            (u32, 1)) \
     F(VOLATILE_BLOOMING_TIMER,               bloomingTimer,                 (u32, 4)) \
     F(VOLATILE_FAE_FLIGHT,                   faeFlight,                     (u32, 1)) \
+    F(VOLATILE_DEEP_ANALYSIS_ACTIVE,         deepAnalysisActive,            (u32, 1)) \
+    F(VOLATILE_DEEP_ANALYSIS_TARGET,         deepAnalysisTarget,            (enum BattlerId, MAX_BITS(MAX_BATTLERS_COUNT))) \
+    F(VOLATILE_DEEP_ANALYSIS_MOVE,           deepAnalysisMove,              (enum Move, MOVES_COUNT_ALL)) \
+    F(VOLATILE_VOLTAIC_PRISON,               voltaicPrison,                 (u32, 1)) \
+    F(VOLATILE_VOLTAIC_PRISONED_BY,          voltaicPrisonedBy,             (enum BattlerId, MAX_BITS(MAX_BATTLERS_COUNT))) \
+    F(VOLATILE_MASTERSTROKE_USES,            masterstrokeUses,              (u32, 5)) \
     F(VOLATILE_OCTOLOCK,                    octolock,                      (u32, 1)) \
     F(VOLATILE_CUD_CHEW,                    cudChew,                       (u32, 1)) \
     F(VOLATILE_WEATHER_ABILITY_DONE,        weatherAbilityDone,            (u32, 1)) \

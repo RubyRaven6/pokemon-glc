@@ -63,6 +63,10 @@ enum __attribute__((packed)) MoveEffect
     MOVE_EFFECT_SWAMP,
     MOVE_EFFECT_SUNBLOOM,
     MOVE_EFFECT_OVEREXPOSURE,
+    MOVE_EFFECT_TRAWLING_NET,
+    MOVE_EFFECT_INFERNAL_DANCE,
+    MOVE_EFFECT_MASTERSTROKE,
+    MOVE_EFFECT_LUA_STRIKE,
 
     // Max move effects happen earlier in the execution chain.
     // For example stealth rock from G-Max Stonesurge is set up before abilities but from Stone Axe after.
