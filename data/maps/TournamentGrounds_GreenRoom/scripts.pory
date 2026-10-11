@@ -64,7 +64,8 @@ script TournamentGrounds_GreenRoom_EventScript_Teala {
             if(var(VAR_RESULT) == NO){}
             else
             {
-                warp(MAP_TOURNAMENT_GROUNDS_ARENA_LOBBY, 3, 3)
+                warp(MAP_TOURNAMENT_GROUNDS_ARENA_LOBBY, 11, 11)
+                waitstate
             }
 
     }
