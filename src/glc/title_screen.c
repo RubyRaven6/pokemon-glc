@@ -35,6 +35,7 @@ enum TitleScreenSpriteTags
 enum TitleScreenSubspriteIds
 {
     TS_SUBSPRITE_GAME_TITLE,
+    TS_SUBSPRITE_PRESS_START,
 };
 
 enum TitleScreenAnimatedSequences
@@ -44,6 +45,20 @@ enum TitleScreenAnimatedSequences
     TS_ANIM_GLOW_LETTERS,
     TS_ANIM_FINISH,
 };
+
+#define TS_GAME_TITLE_X      112
+#define TS_GAME_TITLE_Y      58
+
+#define TS_LOGO_SHINE_X      -24 + 32 // don't remove the 32, they're for offsetting. the other x/y coords doesnt have them bc they use subsprites
+#define TS_LOGO_SHINE_Y        0 + 32 // ditto
+
+#define TS_PRESS_START_X     72
+#define TS_PRESS_START_Y     144
+
+#define TS_SILHOUETTE_MAX_COEFF     16
+#define TS_SILHOUETTE_MIN_COEFF     13
+
+#define TS_MAX_GLOWING_LETTERS      3
 
 #define tAnimatedSequence_State             data[0]
 
@@ -66,6 +81,7 @@ static void Task_TitleScreen_WaitInput(u8);
 static void Task_TitleScreen_Exit(u8);
 
 static void SpriteCB_TitleScreen_PkmnShine(struct Sprite *);
+static void SpriteCB_TitleScreen_PressStart(struct Sprite *);
 
 static bool32 AnimatedSequence_ShinePkmnLogo(struct Task *);
 static bool32 AnimatedSequence_ShowSilhouette(struct Task *);
@@ -75,6 +91,8 @@ static void TitleScreenInit_Backgrounds(void);
 static void TitleScreenInit_Graphics(void);
 static void TitleScreenInit_Sprites(void);
 
+static void TitleScreenHelper_CreateGameTitleSprite(void);
+static void TitleScreenHelper_CreatePressStartSprite(void);
 static void TitleScreenHelper_TintSpecificColor(u32, u32, u32);
 
 static const struct BgTemplate sTitleScreen_BgTemplates[NUM_TS_BACKGROUNDS] =
@@ -134,6 +152,23 @@ static const struct SpriteTemplate sTitleScreen_PkmnShineSpriteTemplate =
     .callback = SpriteCB_TitleScreen_PkmnShine
 };
 
+static const struct SpriteTemplate sTitleScreen_PressStartSpriteTemplate =
+{
+    .tileTag = TAG_NONE,
+    .paletteTag = PALTAG_TS_MAIN,
+    .oam = &(const struct OamData){
+        .shape = SPRITE_SHAPE(32x16),
+        .size = SPRITE_SIZE(32x16)
+    },
+    .images = &(const struct SpriteFrameImage){
+        .data = (const u8[])INCGFX_U8("graphics/glc/title_screen/press_start.png", ".4bpp", "-mwidth 4 -mheight 2"),
+        .relativeFrames = TRUE,
+        .size = (96 * 16) / 2
+    },
+    .anims = sTitleScreen_StaticFrameAnims,
+    .callback = SpriteCB_TitleScreen_PressStart
+};
+
 #define SUBSPRITE_ENTRY(_x, _y, _dim, _tile, ...) { _x, _y, SPRITE_SHAPE(_dim), SPRITE_SIZE(_dim), _tile, __VA_ARGS__ }
 #define SUBSPRITE_TABLE(subsprite) { ARRAY_COUNT(subsprite), subsprite }
 
@@ -142,9 +177,15 @@ static const struct Subsprite sTitleScreen_GameTitleSubsprites[] =
     SUBSPRITE_ENTRY(0, 0, 64x32, 0), SUBSPRITE_ENTRY(64, 0, 64x32, 32)
 };
 
+static const struct Subsprite sTitleScreen_PressStartSubsprites[] =
+{
+    SUBSPRITE_ENTRY(0, 0, 32x16, 0), SUBSPRITE_ENTRY(32, 0, 32x16, 8), SUBSPRITE_ENTRY(64, 0, 32x16, 16)
+};
+
 static const struct SubspriteTable sTitleScreen_SubspritesTable[] =
 {
-    [TS_SUBSPRITE_GAME_TITLE] = SUBSPRITE_TABLE(sTitleScreen_GameTitleSubsprites),
+    [TS_SUBSPRITE_GAME_TITLE]   = SUBSPRITE_TABLE(sTitleScreen_GameTitleSubsprites),
+    [TS_SUBSPRITE_PRESS_START]  = SUBSPRITE_TABLE(sTitleScreen_PressStartSubsprites),
 };
 
 static bool32 (*const sTitleScreen_AnimatedSequenceFunctions[])(struct Task *) =
@@ -291,6 +332,14 @@ static void SpriteCB_TitleScreen_PkmnShine(struct Sprite *sprite)
     sprite->x2 += 16;
 }
 
+static void SpriteCB_TitleScreen_PressStart(struct Sprite *sprite)
+{
+    sprite->invisible = FindTaskIdByFunc(Task_TitleScreen_WaitInput) == TASK_NONE
+                     && sprite->y2 != 0;
+    if (sprite->invisible) return;
+    if (sprite->y2) sprite->y2 -= 2;
+}
+
 static bool32 AnimatedSequence_ShinePkmnLogo(struct Task *task)
 {
     if (!task->tAnimatedSequence_TotalShines)
@@ -302,7 +351,7 @@ static bool32 AnimatedSequence_ShinePkmnLogo(struct Task *task)
     u32 spriteId = task->tAnimatedSequence_ShineSpriteId;
     if (spriteId == SPRITE_NONE)
     {
-        spriteId = CreateSprite(&sTitleScreen_PkmnShineSpriteTemplate, -24 + 32, 0 + 32, 0);
+        spriteId = CreateSprite(&sTitleScreen_PkmnShineSpriteTemplate, TS_LOGO_SHINE_X, TS_LOGO_SHINE_Y, 0);
         task->tAnimatedSequence_ShineSpriteId = spriteId;
     }
 
@@ -313,7 +362,7 @@ static bool32 AnimatedSequence_ShowSilhouette(struct Task *task)
 {
     if (!task->tAnimatedSequence_BeginPalFade)
     {
-        BeginNormalPaletteFade(PALETTES_ALL ^ ((1 << 1) | (0x10000 << IndexOfSpritePaletteTag(PALTAG_TS_MAIN))), 16, 16, 13, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL ^ ((1 << 1) | (0x10000 << IndexOfSpritePaletteTag(PALTAG_TS_MAIN))), 16, TS_SILHOUETTE_MAX_COEFF, TS_SILHOUETTE_MIN_COEFF, RGB_BLACK);
         task->tAnimatedSequence_BeginPalFade = TRUE;
     }
 
@@ -322,7 +371,7 @@ static bool32 AnimatedSequence_ShowSilhouette(struct Task *task)
 
 static bool32 AnimatedSequence_GlowGameTitleLetters(struct Task *task)
 {
-    if (task->tAnimatedSequence_CurrLetter > 3)
+    if (task->tAnimatedSequence_CurrLetter > TS_MAX_GLOWING_LETTERS)
         return TRUE;
 
     if (--task->tAnimatedSequence_Delay > 0)
@@ -398,11 +447,27 @@ static void TitleScreenInit_Graphics(void)
 
 static void TitleScreenInit_Sprites(void)
 {
-    u32 spriteId = CreateSprite(&sTitleScreen_GameTitleSpriteTemplate, 112, 58, 0);
+    TitleScreenHelper_CreateGameTitleSprite();
+    TitleScreenHelper_CreatePressStartSprite();
+}
+
+static void TitleScreenHelper_CreateGameTitleSprite(void)
+{
+    u32 spriteId = CreateSprite(&sTitleScreen_GameTitleSpriteTemplate, TS_GAME_TITLE_X, TS_GAME_TITLE_Y, 0);
     if (spriteId == SPRITE_NONE)
         return;
 
     SetSubspriteTables(&gSprites[spriteId], &sTitleScreen_SubspritesTable[TS_SUBSPRITE_GAME_TITLE]);
+}
+
+static void TitleScreenHelper_CreatePressStartSprite(void)
+{
+    u32 spriteId = CreateSprite(&sTitleScreen_PressStartSpriteTemplate, TS_PRESS_START_X, TS_PRESS_START_Y, 0);
+    if (spriteId == SPRITE_NONE)
+        return;
+
+    gSprites[spriteId].y2 = 16;
+    SetSubspriteTables(&gSprites[spriteId], &sTitleScreen_SubspritesTable[TS_SUBSPRITE_PRESS_START]);
 }
 
 static void TitleScreenHelper_TintSpecificColor(u32 palOffset, u32 coeff, u32 color)
