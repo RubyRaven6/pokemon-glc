@@ -4323,17 +4323,7 @@ Cry_Genesect::
 .if P_FAMILY_CHESPIN == TRUE
 	.align 2
 Cry_Chespin::
-.if TESTING == FALSE
-	.incbin "sound/direct_sound_samples/cries/chespin.bin"
-.endif
-
-	.align 2
 Cry_Quilladin::
-.if TESTING == FALSE
-	.incbin "sound/direct_sound_samples/cries/quilladin.bin"
-.endif
-
-	.align 2
 Cry_Chesnaught::
 .if TESTING == FALSE
 	.incbin "sound/direct_sound_samples/cries/chesnaught.bin"
@@ -4351,17 +4341,7 @@ Cry_ChesnaughtMega::
 .if P_FAMILY_FENNEKIN == TRUE
 	.align 2
 Cry_Fennekin::
-.if TESTING == FALSE
-	.incbin "sound/direct_sound_samples/cries/fennekin.bin"
-.endif
-
-	.align 2
 Cry_Braixen::
-.if TESTING == FALSE
-	.incbin "sound/direct_sound_samples/cries/braixen.bin"
-.endif
-
-	.align 2
 Cry_Delphox::
 .if TESTING == FALSE
 	.incbin "sound/direct_sound_samples/cries/delphox.bin"
@@ -4379,17 +4359,7 @@ Cry_DelphoxMega::
 .if P_FAMILY_FROAKIE == TRUE
 	.align 2
 Cry_Froakie::
-.if TESTING == FALSE
-	.incbin "sound/direct_sound_samples/cries/froakie.bin"
-.endif
-
-	.align 2
 Cry_Frogadier::
-.if TESTING == FALSE
-	.incbin "sound/direct_sound_samples/cries/frogadier.bin"
-.endif
-
-	.align 2
 Cry_Greninja::
 .if TESTING == FALSE
 	.incbin "sound/direct_sound_samples/cries/greninja.bin"
@@ -4407,11 +4377,6 @@ Cry_GreninjaMega::
 .if P_FAMILY_BUNNELBY == TRUE
 	.align 2
 Cry_Bunnelby::
-.if TESTING == FALSE
-	.incbin "sound/direct_sound_samples/cries/bunnelby.bin"
-.endif
-
-	.align 2
 Cry_Diggersby::
 .if TESTING == FALSE
 	.incbin "sound/direct_sound_samples/cries/diggersby.bin"
@@ -4421,17 +4386,7 @@ Cry_Diggersby::
 .if P_FAMILY_FLETCHLING == TRUE
 	.align 2
 Cry_Fletchling::
-.if TESTING == FALSE
-	.incbin "sound/direct_sound_samples/cries/fletchling.bin"
-.endif
-
-	.align 2
 Cry_Fletchinder::
-.if TESTING == FALSE
-	.incbin "sound/direct_sound_samples/cries/fletchinder.bin"
-.endif
-
-	.align 2
 Cry_Talonflame::
 .if TESTING == FALSE
 	.incbin "sound/direct_sound_samples/cries/talonflame.bin"
@@ -4441,17 +4396,7 @@ Cry_Talonflame::
 .if P_FAMILY_SCATTERBUG == TRUE
 	.align 2
 Cry_Scatterbug::
-.if TESTING == FALSE
-	.incbin "sound/direct_sound_samples/cries/scatterbug.bin"
-.endif
-
-	.align 2
 Cry_Spewpa::
-.if TESTING == FALSE
-	.incbin "sound/direct_sound_samples/cries/spewpa.bin"
-.endif
-
-	.align 2
 Cry_Vivillon::
 .if TESTING == FALSE
 	.incbin "sound/direct_sound_samples/cries/vivillon.bin"
@@ -4461,11 +4406,6 @@ Cry_Vivillon::
 .if P_FAMILY_LITLEO == TRUE
 	.align 2
 Cry_Litleo::
-.if TESTING == FALSE
-	.incbin "sound/direct_sound_samples/cries/litleo.bin"
-.endif
-
-	.align 2
 Cry_Pyroar::
 .if TESTING == FALSE
 	.incbin "sound/direct_sound_samples/cries/pyroar.bin"
@@ -4483,17 +4423,7 @@ Cry_PyroarMega::
 .if P_FAMILY_FLABEBE == TRUE
 	.align 2
 Cry_Flabebe::
-.if TESTING == FALSE
-	.incbin "sound/direct_sound_samples/cries/flabebe.bin"
-.endif
-
-	.align 2
 Cry_Floette::
-.if TESTING == FALSE
-	.incbin "sound/direct_sound_samples/cries/floette.bin"
-.endif
-
-	.align 2
 Cry_FloetteEternal::
 .if TESTING == FALSE
 	.incbin "sound/direct_sound_samples/cries/floette_eternal.bin"
@@ -4517,11 +4447,6 @@ Cry_Florges::
 .if P_FAMILY_SKIDDO == TRUE
 	.align 2
 Cry_Skiddo::
-.if TESTING == FALSE
-	.incbin "sound/direct_sound_samples/cries/skiddo.bin"
-.endif
-
-	.align 2
 Cry_Gogoat::
 .if TESTING == FALSE
 	.incbin "sound/direct_sound_samples/cries/gogoat.bin"
@@ -4531,11 +4456,6 @@ Cry_Gogoat::
 .if P_FAMILY_PANCHAM == TRUE
 	.align 2
 Cry_Pancham::
-.if TESTING == FALSE
-	.incbin "sound/direct_sound_samples/cries/pancham.bin"
-.endif
-
-	.align 2
 Cry_Pangoro::
 .if TESTING == FALSE
 	.incbin "sound/direct_sound_samples/cries/pangoro.bin"
@@ -4553,11 +4473,6 @@ Cry_Furfrou::
 .if P_FAMILY_ESPURR == TRUE
 	.align 2
 Cry_Espurr::
-.if TESTING == FALSE
-	.incbin "sound/direct_sound_samples/cries/espurr.bin"
-.endif
-
-	.align 2
 Cry_Meowstic::
 .if TESTING == FALSE
 	.incbin "sound/direct_sound_samples/cries/meowstic.bin"
@@ -4575,17 +4490,7 @@ Cry_MeowsticMega::
 .if P_FAMILY_HONEDGE == TRUE
 	.align 2
 Cry_Honedge::
-.if TESTING == FALSE
-	.incbin "sound/direct_sound_samples/cries/honedge.bin"
-.endif
-
-	.align 2
 Cry_Doublade::
-.if TESTING == FALSE
-	.incbin "sound/direct_sound_samples/cries/doublade.bin"
-.endif
-
-	.align 2
 Cry_Aegislash::
 .if TESTING == FALSE
 	.incbin "sound/direct_sound_samples/cries/aegislash.bin"
@@ -4595,11 +4500,6 @@ Cry_Aegislash::
 .if P_FAMILY_SPRITZEE == TRUE
 	.align 2
 Cry_Spritzee::
-.if TESTING == FALSE
-	.incbin "sound/direct_sound_samples/cries/spritzee.bin"
-.endif
-
-	.align 2
 Cry_Aromatisse::
 .if TESTING == FALSE
 	.incbin "sound/direct_sound_samples/cries/aromatisse.bin"
@@ -4609,11 +4509,6 @@ Cry_Aromatisse::
 .if P_FAMILY_SWIRLIX == TRUE
 	.align 2
 Cry_Swirlix::
-.if TESTING == FALSE
-	.incbin "sound/direct_sound_samples/cries/swirlix.bin"
-.endif
-
-	.align 2
 Cry_Slurpuff::
 .if TESTING == FALSE
 	.incbin "sound/direct_sound_samples/cries/slurpuff.bin"
@@ -4623,11 +4518,6 @@ Cry_Slurpuff::
 .if P_FAMILY_INKAY == TRUE
 	.align 2
 Cry_Inkay::
-.if TESTING == FALSE
-	.incbin "sound/direct_sound_samples/cries/inkay.bin"
-.endif
-
-	.align 2
 Cry_Malamar::
 .if TESTING == FALSE
 	.incbin "sound/direct_sound_samples/cries/malamar.bin"
@@ -4645,11 +4535,6 @@ Cry_MalamarMega::
 .if P_FAMILY_BINACLE == TRUE
 	.align 2
 Cry_Binacle::
-.if TESTING == FALSE
-	.incbin "sound/direct_sound_samples/cries/binacle.bin"
-.endif
-
-	.align 2
 Cry_Barbaracle::
 .if TESTING == FALSE
 	.incbin "sound/direct_sound_samples/cries/barbaracle.bin"
@@ -4667,11 +4552,6 @@ Cry_BarbaracleMega::
 .if P_FAMILY_SKRELP == TRUE
 	.align 2
 Cry_Skrelp::
-.if TESTING == FALSE
-	.incbin "sound/direct_sound_samples/cries/skrelp.bin"
-.endif
-
-	.align 2
 Cry_Dragalge::
 .if TESTING == FALSE
 	.incbin "sound/direct_sound_samples/cries/dragalge.bin"
@@ -4689,11 +4569,6 @@ Cry_DragalgeMega::
 .if P_FAMILY_CLAUNCHER == TRUE
 	.align 2
 Cry_Clauncher::
-.if TESTING == FALSE
-	.incbin "sound/direct_sound_samples/cries/clauncher.bin"
-.endif
-
-	.align 2
 Cry_Clawitzer::
 .if TESTING == FALSE
 	.incbin "sound/direct_sound_samples/cries/clawitzer.bin"
@@ -4703,11 +4578,6 @@ Cry_Clawitzer::
 .if P_FAMILY_HELIOPTILE == TRUE
 	.align 2
 Cry_Helioptile::
-.if TESTING == FALSE
-	.incbin "sound/direct_sound_samples/cries/helioptile.bin"
-.endif
-
-	.align 2
 Cry_Heliolisk::
 .if TESTING == FALSE
 	.incbin "sound/direct_sound_samples/cries/heliolisk.bin"
@@ -4717,11 +4587,6 @@ Cry_Heliolisk::
 .if P_FAMILY_TYRUNT == TRUE
 	.align 2
 Cry_Tyrunt::
-.if TESTING == FALSE
-	.incbin "sound/direct_sound_samples/cries/tyrunt.bin"
-.endif
-
-	.align 2
 Cry_Tyrantrum::
 .if TESTING == FALSE
 	.incbin "sound/direct_sound_samples/cries/tyrantrum.bin"
@@ -4731,11 +4596,6 @@ Cry_Tyrantrum::
 .if P_FAMILY_AMAURA == TRUE
 	.align 2
 Cry_Amaura::
-.if TESTING == FALSE
-	.incbin "sound/direct_sound_samples/cries/amaura.bin"
-.endif
-
-	.align 2
 Cry_Aurorus::
 .if TESTING == FALSE
 	.incbin "sound/direct_sound_samples/cries/aurorus.bin"
@@ -4777,17 +4637,7 @@ Cry_Carbink::
 .if P_FAMILY_GOOMY == TRUE
 	.align 2
 Cry_Goomy::
-.if TESTING == FALSE
-	.incbin "sound/direct_sound_samples/cries/goomy.bin"
-.endif
-
-	.align 2
 Cry_Sliggoo::
-.if TESTING == FALSE
-	.incbin "sound/direct_sound_samples/cries/sliggoo.bin"
-.endif
-
-	.align 2
 Cry_Goodra::
 .if TESTING == FALSE
 	.incbin "sound/direct_sound_samples/cries/goodra.bin"
@@ -4805,11 +4655,6 @@ Cry_Klefki::
 .if P_FAMILY_PHANTUMP == TRUE
 	.align 2
 Cry_Phantump::
-.if TESTING == FALSE
-	.incbin "sound/direct_sound_samples/cries/phantump.bin"
-.endif
-
-	.align 2
 Cry_Trevenant::
 .if TESTING == FALSE
 	.incbin "sound/direct_sound_samples/cries/trevenant.bin"
@@ -4819,23 +4664,8 @@ Cry_Trevenant::
 .if P_FAMILY_PUMPKABOO == TRUE
 	.align 2
 Cry_Pumpkaboo::
-.if TESTING == FALSE
-	.incbin "sound/direct_sound_samples/cries/pumpkaboo.bin"
-.endif
-
-	.align 2
 Cry_PumpkabooSuper::
-.if TESTING == FALSE
-	.incbin "sound/direct_sound_samples/cries/pumpkaboo_super.bin"
-.endif
-
-	.align 2
 Cry_Gourgeist::
-.if TESTING == FALSE
-	.incbin "sound/direct_sound_samples/cries/gourgeist.bin"
-.endif
-
-	.align 2
 Cry_GourgeistSuper::
 .if TESTING == FALSE
 	.incbin "sound/direct_sound_samples/cries/gourgeist_super.bin"
@@ -4845,11 +4675,6 @@ Cry_GourgeistSuper::
 .if P_FAMILY_BERGMITE == TRUE
 	.align 2
 Cry_Bergmite::
-.if TESTING == FALSE
-	.incbin "sound/direct_sound_samples/cries/bergmite.bin"
-.endif
-
-	.align 2
 Cry_Avalugg::
 .if TESTING == FALSE
 	.incbin "sound/direct_sound_samples/cries/avalugg.bin"
@@ -4859,11 +4684,6 @@ Cry_Avalugg::
 .if P_FAMILY_NOIBAT == TRUE
 	.align 2
 Cry_Noibat::
-.if TESTING == FALSE
-	.incbin "sound/direct_sound_samples/cries/noibat.bin"
-.endif
-
-	.align 2
 Cry_Noivern::
 .if TESTING == FALSE
 	.incbin "sound/direct_sound_samples/cries/noivern.bin"
@@ -4955,17 +4775,7 @@ Cry_Volcanion::
 .if P_FAMILY_ROWLET == TRUE
 	.align 2
 Cry_Rowlet::
-.if TESTING == FALSE
-	.incbin "sound/direct_sound_samples/cries/rowlet.bin"
-.endif
-
-	.align 2
 Cry_Dartrix::
-.if TESTING == FALSE
-	.incbin "sound/direct_sound_samples/cries/dartrix.bin"
-.endif
-
-	.align 2
 Cry_Decidueye::
 .if TESTING == FALSE
 	.incbin "sound/direct_sound_samples/cries/decidueye.bin"
@@ -4975,17 +4785,7 @@ Cry_Decidueye::
 .if P_FAMILY_LITTEN == TRUE
 	.align 2
 Cry_Litten::
-.if TESTING == FALSE
-	.incbin "sound/direct_sound_samples/cries/litten.bin"
-.endif
-
-	.align 2
 Cry_Torracat::
-.if TESTING == FALSE
-	.incbin "sound/direct_sound_samples/cries/torracat.bin"
-.endif
-
-	.align 2
 Cry_Incineroar::
 .if TESTING == FALSE
 	.incbin "sound/direct_sound_samples/cries/incineroar.bin"
@@ -4995,17 +4795,7 @@ Cry_Incineroar::
 .if P_FAMILY_POPPLIO == TRUE
 	.align 2
 Cry_Popplio::
-.if TESTING == FALSE
-	.incbin "sound/direct_sound_samples/cries/popplio.bin"
-.endif
-
-	.align 2
 Cry_Brionne::
-.if TESTING == FALSE
-	.incbin "sound/direct_sound_samples/cries/brionne.bin"
-.endif
-
-	.align 2
 Cry_Primarina::
 .if TESTING == FALSE
 	.incbin "sound/direct_sound_samples/cries/primarina.bin"
@@ -5015,17 +4805,7 @@ Cry_Primarina::
 .if P_FAMILY_PIKIPEK == TRUE
 	.align 2
 Cry_Pikipek::
-.if TESTING == FALSE
-	.incbin "sound/direct_sound_samples/cries/pikipek.bin"
-.endif
-
-	.align 2
 Cry_Trumbeak::
-.if TESTING == FALSE
-	.incbin "sound/direct_sound_samples/cries/trumbeak.bin"
-.endif
-
-	.align 2
 Cry_Toucannon::
 .if TESTING == FALSE
 	.incbin "sound/direct_sound_samples/cries/toucannon.bin"
@@ -5035,11 +4815,6 @@ Cry_Toucannon::
 .if P_FAMILY_YUNGOOS == TRUE
 	.align 2
 Cry_Yungoos::
-.if TESTING == FALSE
-	.incbin "sound/direct_sound_samples/cries/yungoos.bin"
-.endif
-
-	.align 2
 Cry_Gumshoos::
 .if TESTING == FALSE
 	.incbin "sound/direct_sound_samples/cries/gumshoos.bin"
@@ -5049,17 +4824,7 @@ Cry_Gumshoos::
 .if P_FAMILY_GRUBBIN == TRUE
 	.align 2
 Cry_Grubbin::
-.if TESTING == FALSE
-	.incbin "sound/direct_sound_samples/cries/grubbin.bin"
-.endif
-
-	.align 2
 Cry_Charjabug::
-.if TESTING == FALSE
-	.incbin "sound/direct_sound_samples/cries/charjabug.bin"
-.endif
-
-	.align 2
 Cry_Vikavolt::
 .if TESTING == FALSE
 	.incbin "sound/direct_sound_samples/cries/vikavolt.bin"
@@ -5069,11 +4834,6 @@ Cry_Vikavolt::
 .if P_FAMILY_CRABRAWLER == TRUE
 	.align 2
 Cry_Crabrawler::
-.if TESTING == FALSE
-	.incbin "sound/direct_sound_samples/cries/crabrawler.bin"
-.endif
-
-	.align 2
 Cry_Crabominable::
 .if TESTING == FALSE
 	.incbin "sound/direct_sound_samples/cries/crabominable.bin"
@@ -5117,11 +4877,6 @@ Cry_OricorioSensu::
 .if P_FAMILY_CUTIEFLY == TRUE
 	.align 2
 Cry_Cutiefly::
-.if TESTING == FALSE
-	.incbin "sound/direct_sound_samples/cries/cutiefly.bin"
-.endif
-
-	.align 2
 Cry_Ribombee::
 .if TESTING == FALSE
 	.incbin "sound/direct_sound_samples/cries/ribombee.bin"
@@ -5131,11 +4886,6 @@ Cry_Ribombee::
 .if P_FAMILY_ROCKRUFF == TRUE
 	.align 2
 Cry_Rockruff::
-.if TESTING == FALSE
-	.incbin "sound/direct_sound_samples/cries/rockruff.bin"
-.endif
-
-	.align 2
 Cry_LycanrocMidday::
 .if TESTING == FALSE
 	.incbin "sound/direct_sound_samples/cries/lycanroc_midday.bin"
@@ -5171,11 +4921,6 @@ Cry_WishiwashiSchool::
 .if P_FAMILY_MAREANIE == TRUE
 	.align 2
 Cry_Mareanie::
-.if TESTING == FALSE
-	.incbin "sound/direct_sound_samples/cries/mareanie.bin"
-.endif
-
-	.align 2
 Cry_Toxapex::
 .if TESTING == FALSE
 	.incbin "sound/direct_sound_samples/cries/toxapex.bin"
@@ -5185,11 +4930,6 @@ Cry_Toxapex::
 .if P_FAMILY_MUDBRAY == TRUE
 	.align 2
 Cry_Mudbray::
-.if TESTING == FALSE
-	.incbin "sound/direct_sound_samples/cries/mudbray.bin"
-.endif
-
-	.align 2
 Cry_Mudsdale::
 .if TESTING == FALSE
 	.incbin "sound/direct_sound_samples/cries/mudsdale.bin"
@@ -5199,11 +4939,6 @@ Cry_Mudsdale::
 .if P_FAMILY_DEWPIDER == TRUE
 	.align 2
 Cry_Dewpider::
-.if TESTING == FALSE
-	.incbin "sound/direct_sound_samples/cries/dewpider.bin"
-.endif
-
-	.align 2
 Cry_Araquanid::
 .if TESTING == FALSE
 	.incbin "sound/direct_sound_samples/cries/araquanid.bin"
@@ -5213,11 +4948,6 @@ Cry_Araquanid::
 .if P_FAMILY_FOMANTIS == TRUE
 	.align 2
 Cry_Fomantis::
-.if TESTING == FALSE
-	.incbin "sound/direct_sound_samples/cries/fomantis.bin"
-.endif
-
-	.align 2
 Cry_Lurantis::
 .if TESTING == FALSE
 	.incbin "sound/direct_sound_samples/cries/lurantis.bin"
@@ -5227,11 +4957,6 @@ Cry_Lurantis::
 .if P_FAMILY_MORELULL == TRUE
 	.align 2
 Cry_Morelull::
-.if TESTING == FALSE
-	.incbin "sound/direct_sound_samples/cries/morelull.bin"
-.endif
-
-	.align 2
 Cry_Shiinotic::
 .if TESTING == FALSE
 	.incbin "sound/direct_sound_samples/cries/shiinotic.bin"
@@ -5241,11 +4966,6 @@ Cry_Shiinotic::
 .if P_FAMILY_SALANDIT == TRUE
 	.align 2
 Cry_Salandit::
-.if TESTING == FALSE
-	.incbin "sound/direct_sound_samples/cries/salandit.bin"
-.endif
-
-	.align 2
 Cry_Salazzle::
 .if TESTING == FALSE
 	.incbin "sound/direct_sound_samples/cries/salazzle.bin"
@@ -5255,11 +4975,6 @@ Cry_Salazzle::
 .if P_FAMILY_STUFFUL == TRUE
 	.align 2
 Cry_Stufful::
-.if TESTING == FALSE
-	.incbin "sound/direct_sound_samples/cries/stufful.bin"
-.endif
-
-	.align 2
 Cry_Bewear::
 .if TESTING == FALSE
 	.incbin "sound/direct_sound_samples/cries/bewear.bin"
@@ -5269,17 +4984,7 @@ Cry_Bewear::
 .if P_FAMILY_BOUNSWEET == TRUE
 	.align 2
 Cry_Bounsweet::
-.if TESTING == FALSE
-	.incbin "sound/direct_sound_samples/cries/bounsweet.bin"
-.endif
-
-	.align 2
 Cry_Steenee::
-.if TESTING == FALSE
-	.incbin "sound/direct_sound_samples/cries/steenee.bin"
-.endif
-
-	.align 2
 Cry_Tsareena::
 .if TESTING == FALSE
 	.incbin "sound/direct_sound_samples/cries/tsareena.bin"
@@ -5313,11 +5018,6 @@ Cry_Passimian::
 .if P_FAMILY_WIMPOD == TRUE
 	.align 2
 Cry_Wimpod::
-.if TESTING == FALSE
-	.incbin "sound/direct_sound_samples/cries/wimpod.bin"
-.endif
-
-	.align 2
 Cry_Golisopod::
 .if TESTING == FALSE
 	.incbin "sound/direct_sound_samples/cries/golisopod.bin"
@@ -5335,11 +5035,6 @@ Cry_GolisopodMega::
 .if P_FAMILY_SANDYGAST == TRUE
 	.align 2
 Cry_Sandygast::
-.if TESTING == FALSE
-	.incbin "sound/direct_sound_samples/cries/sandygast.bin"
-.endif
-
-	.align 2
 Cry_Palossand::
 .if TESTING == FALSE
 	.incbin "sound/direct_sound_samples/cries/palossand.bin"
@@ -5443,17 +5138,7 @@ Cry_Dhelmise::
 .if P_FAMILY_JANGMO_O == TRUE
 	.align 2
 Cry_JangmoO::
-.if TESTING == FALSE
-	.incbin "sound/direct_sound_samples/cries/jangmo_o.bin"
-.endif
-
-	.align 2
 Cry_HakamoO::
-.if TESTING == FALSE
-	.incbin "sound/direct_sound_samples/cries/hakamo_o.bin"
-.endif
-
-	.align 2
 Cry_KommoO::
 .if TESTING == FALSE
 	.incbin "sound/direct_sound_samples/cries/kommo_o.bin"
@@ -5632,11 +5317,6 @@ Cry_Marshadow::
 .if P_FAMILY_POIPOLE == TRUE
 	.align 2
 Cry_Poipole::
-.if TESTING == FALSE
-	.incbin "sound/direct_sound_samples/cries/poipole.bin"
-.endif
-
-	.align 2
 Cry_Naganadel::
 .if TESTING == FALSE
 	.incbin "sound/direct_sound_samples/cries/naganadel.bin"
@@ -5678,11 +5358,6 @@ Cry_ZeraoraMega::
 .if P_FAMILY_MELTAN == TRUE
 	.align 2
 Cry_Meltan::
-.if TESTING == FALSE
-	.incbin "sound/direct_sound_samples/cries/meltan.bin"
-.endif
-
-	.align 2
 Cry_Melmetal::
 .if TESTING == FALSE
 	.incbin "sound/direct_sound_samples/cries/melmetal.bin"
@@ -5692,17 +5367,7 @@ Cry_Melmetal::
 .if P_FAMILY_GROOKEY == TRUE
 	.align 2
 Cry_Grookey::
-.if TESTING == FALSE
-	.incbin "sound/direct_sound_samples/cries/grookey.bin"
-.endif
-
-	.align 2
 Cry_Thwackey::
-.if TESTING == FALSE
-	.incbin "sound/direct_sound_samples/cries/thwackey.bin"
-.endif
-
-	.align 2
 Cry_Rillaboom::
 .if TESTING == FALSE
 	.incbin "sound/direct_sound_samples/cries/rillaboom.bin"
@@ -5712,17 +5377,7 @@ Cry_Rillaboom::
 .if P_FAMILY_SCORBUNNY == TRUE
 	.align 2
 Cry_Scorbunny::
-.if TESTING == FALSE
-	.incbin "sound/direct_sound_samples/cries/scorbunny.bin"
-.endif
-
-	.align 2
 Cry_Raboot::
-.if TESTING == FALSE
-	.incbin "sound/direct_sound_samples/cries/raboot.bin"
-.endif
-
-	.align 2
 Cry_Cinderace::
 .if TESTING == FALSE
 	.incbin "sound/direct_sound_samples/cries/cinderace.bin"
@@ -5732,17 +5387,7 @@ Cry_Cinderace::
 .if P_FAMILY_SOBBLE == TRUE
 	.align 2
 Cry_Sobble::
-.if TESTING == FALSE
-	.incbin "sound/direct_sound_samples/cries/sobble.bin"
-.endif
-
-	.align 2
 Cry_Drizzile::
-.if TESTING == FALSE
-	.incbin "sound/direct_sound_samples/cries/drizzile.bin"
-.endif
-
-	.align 2
 Cry_Inteleon::
 .if TESTING == FALSE
 	.incbin "sound/direct_sound_samples/cries/inteleon.bin"
@@ -5752,11 +5397,6 @@ Cry_Inteleon::
 .if P_FAMILY_SKWOVET == TRUE
 	.align 2
 Cry_Skwovet::
-.if TESTING == FALSE
-	.incbin "sound/direct_sound_samples/cries/skwovet.bin"
-.endif
-
-	.align 2
 Cry_Greedent::
 .if TESTING == FALSE
 	.incbin "sound/direct_sound_samples/cries/greedent.bin"
@@ -5766,17 +5406,7 @@ Cry_Greedent::
 .if P_FAMILY_ROOKIDEE == TRUE
 	.align 2
 Cry_Rookidee::
-.if TESTING == FALSE
-	.incbin "sound/direct_sound_samples/cries/rookidee.bin"
-.endif
-
-	.align 2
 Cry_Corvisquire::
-.if TESTING == FALSE
-	.incbin "sound/direct_sound_samples/cries/corvisquire.bin"
-.endif
-
-	.align 2
 Cry_Corviknight::
 .if TESTING == FALSE
 	.incbin "sound/direct_sound_samples/cries/corviknight.bin"
@@ -5786,17 +5416,7 @@ Cry_Corviknight::
 .if P_FAMILY_BLIPBUG == TRUE
 	.align 2
 Cry_Blipbug::
-.if TESTING == FALSE
-	.incbin "sound/direct_sound_samples/cries/blipbug.bin"
-.endif
-
-	.align 2
 Cry_Dottler::
-.if TESTING == FALSE
-	.incbin "sound/direct_sound_samples/cries/dottler.bin"
-.endif
-
-	.align 2
 Cry_Orbeetle::
 .if TESTING == FALSE
 	.incbin "sound/direct_sound_samples/cries/orbeetle.bin"
@@ -5806,11 +5426,6 @@ Cry_Orbeetle::
 .if P_FAMILY_NICKIT == TRUE
 	.align 2
 Cry_Nickit::
-.if TESTING == FALSE
-	.incbin "sound/direct_sound_samples/cries/nickit.bin"
-.endif
-
-	.align 2
 Cry_Thievul::
 .if TESTING == FALSE
 	.incbin "sound/direct_sound_samples/cries/thievul.bin"
@@ -5820,11 +5435,6 @@ Cry_Thievul::
 .if P_FAMILY_GOSSIFLEUR == TRUE
 	.align 2
 Cry_Gossifleur::
-.if TESTING == FALSE
-	.incbin "sound/direct_sound_samples/cries/gossifleur.bin"
-.endif
-
-	.align 2
 Cry_Eldegoss::
 .if TESTING == FALSE
 	.incbin "sound/direct_sound_samples/cries/eldegoss.bin"
@@ -5834,11 +5444,6 @@ Cry_Eldegoss::
 .if P_FAMILY_WOOLOO == TRUE
 	.align 2
 Cry_Wooloo::
-.if TESTING == FALSE
-	.incbin "sound/direct_sound_samples/cries/wooloo.bin"
-.endif
-
-	.align 2
 Cry_Dubwool::
 .if TESTING == FALSE
 	.incbin "sound/direct_sound_samples/cries/dubwool.bin"
@@ -5848,11 +5453,6 @@ Cry_Dubwool::
 .if P_FAMILY_CHEWTLE == TRUE
 	.align 2
 Cry_Chewtle::
-.if TESTING == FALSE
-	.incbin "sound/direct_sound_samples/cries/chewtle.bin"
-.endif
-
-	.align 2
 Cry_Drednaw::
 .if TESTING == FALSE
 	.incbin "sound/direct_sound_samples/cries/drednaw.bin"
@@ -5862,11 +5462,6 @@ Cry_Drednaw::
 .if P_FAMILY_YAMPER == TRUE
 	.align 2
 Cry_Yamper::
-.if TESTING == FALSE
-	.incbin "sound/direct_sound_samples/cries/yamper.bin"
-.endif
-
-	.align 2
 Cry_Boltund::
 .if TESTING == FALSE
 	.incbin "sound/direct_sound_samples/cries/boltund.bin"
@@ -5876,17 +5471,7 @@ Cry_Boltund::
 .if P_FAMILY_ROLYCOLY == TRUE
 	.align 2
 Cry_Rolycoly::
-.if TESTING == FALSE
-	.incbin "sound/direct_sound_samples/cries/rolycoly.bin"
-.endif
-
-	.align 2
 Cry_Carkol::
-.if TESTING == FALSE
-	.incbin "sound/direct_sound_samples/cries/carkol.bin"
-.endif
-
-	.align 2
 Cry_Coalossal::
 .if TESTING == FALSE
 	.incbin "sound/direct_sound_samples/cries/coalossal.bin"
@@ -5896,17 +5481,7 @@ Cry_Coalossal::
 .if P_FAMILY_APPLIN == TRUE
 	.align 2
 Cry_Applin::
-.if TESTING == FALSE
-	.incbin "sound/direct_sound_samples/cries/applin.bin"
-.endif
-
-	.align 2
 Cry_Flapple::
-.if TESTING == FALSE
-	.incbin "sound/direct_sound_samples/cries/flapple.bin"
-.endif
-
-	.align 2
 Cry_Appletun::
 .if TESTING == FALSE
 	.incbin "sound/direct_sound_samples/cries/appletun.bin"
@@ -5915,11 +5490,6 @@ Cry_Appletun::
 .if P_GEN_9_CROSS_EVOS == TRUE
 	.align 2
 Cry_Dipplin::
-.if TESTING == FALSE
-	.incbin "sound/direct_sound_samples/cries/dipplin.bin"
-.endif
-
-	.align 2
 Cry_Hydrapple::
 .if TESTING == FALSE
 	.incbin "sound/direct_sound_samples/cries/hydrapple.bin"
@@ -5930,11 +5500,6 @@ Cry_Hydrapple::
 .if P_FAMILY_SILICOBRA == TRUE
 	.align 2
 Cry_Silicobra::
-.if TESTING == FALSE
-	.incbin "sound/direct_sound_samples/cries/silicobra.bin"
-.endif
-
-	.align 2
 Cry_Sandaconda::
 .if TESTING == FALSE
 	.incbin "sound/direct_sound_samples/cries/sandaconda.bin"
@@ -5958,11 +5523,6 @@ Cry_CramorantGulping::
 .if P_FAMILY_ARROKUDA == TRUE
 	.align 2
 Cry_Arrokuda::
-.if TESTING == FALSE
-	.incbin "sound/direct_sound_samples/cries/arrokuda.bin"
-.endif
-
-	.align 2
 Cry_Barraskewda::
 .if TESTING == FALSE
 	.incbin "sound/direct_sound_samples/cries/barraskewda.bin"
@@ -5972,11 +5532,6 @@ Cry_Barraskewda::
 .if P_FAMILY_TOXEL == TRUE
 	.align 2
 Cry_Toxel::
-.if TESTING == FALSE
-	.incbin "sound/direct_sound_samples/cries/toxel.bin"
-.endif
-
-	.align 2
 Cry_ToxtricityAmped::
 .if TESTING == FALSE
 	.incbin "sound/direct_sound_samples/cries/toxtricity_amped.bin"
@@ -5992,11 +5547,6 @@ Cry_ToxtricityLowKey::
 .if P_FAMILY_SIZZLIPEDE == TRUE
 	.align 2
 Cry_Sizzlipede::
-.if TESTING == FALSE
-	.incbin "sound/direct_sound_samples/cries/sizzlipede.bin"
-.endif
-
-	.align 2
 Cry_Centiskorch::
 .if TESTING == FALSE
 	.incbin "sound/direct_sound_samples/cries/centiskorch.bin"
@@ -6006,11 +5556,6 @@ Cry_Centiskorch::
 .if P_FAMILY_CLOBBOPUS == TRUE
 	.align 2
 Cry_Clobbopus::
-.if TESTING == FALSE
-	.incbin "sound/direct_sound_samples/cries/clobbopus.bin"
-.endif
-
-	.align 2
 Cry_Grapploct::
 .if TESTING == FALSE
 	.incbin "sound/direct_sound_samples/cries/grapploct.bin"
@@ -6020,11 +5565,6 @@ Cry_Grapploct::
 .if P_FAMILY_SINISTEA == TRUE
 	.align 2
 Cry_Sinistea::
-.if TESTING == FALSE
-	.incbin "sound/direct_sound_samples/cries/sinistea.bin"
-.endif
-
-	.align 2
 Cry_Polteageist::
 .if TESTING == FALSE
 	.incbin "sound/direct_sound_samples/cries/polteageist.bin"
@@ -6034,17 +5574,7 @@ Cry_Polteageist::
 .if P_FAMILY_HATENNA == TRUE
 	.align 2
 Cry_Hatenna::
-.if TESTING == FALSE
-	.incbin "sound/direct_sound_samples/cries/hatenna.bin"
-.endif
-
-	.align 2
 Cry_Hattrem::
-.if TESTING == FALSE
-	.incbin "sound/direct_sound_samples/cries/hattrem.bin"
-.endif
-
-	.align 2
 Cry_Hatterene::
 .if TESTING == FALSE
 	.incbin "sound/direct_sound_samples/cries/hatterene.bin"
@@ -6054,17 +5584,7 @@ Cry_Hatterene::
 .if P_FAMILY_IMPIDIMP == TRUE
 	.align 2
 Cry_Impidimp::
-.if TESTING == FALSE
-	.incbin "sound/direct_sound_samples/cries/impidimp.bin"
-.endif
-
-	.align 2
 Cry_Morgrem::
-.if TESTING == FALSE
-	.incbin "sound/direct_sound_samples/cries/morgrem.bin"
-.endif
-
-	.align 2
 Cry_Grimmsnarl::
 .if TESTING == FALSE
 	.incbin "sound/direct_sound_samples/cries/grimmsnarl.bin"
@@ -6074,11 +5594,6 @@ Cry_Grimmsnarl::
 .if P_FAMILY_MILCERY == TRUE
 	.align 2
 Cry_Milcery::
-.if TESTING == FALSE
-	.incbin "sound/direct_sound_samples/cries/milcery.bin"
-.endif
-
-	.align 2
 Cry_Alcremie::
 .if TESTING == FALSE
 	.incbin "sound/direct_sound_samples/cries/alcremie.bin"
@@ -6112,11 +5627,6 @@ Cry_Pincurchin::
 .if P_FAMILY_SNOM == TRUE
 	.align 2
 Cry_Snom::
-.if TESTING == FALSE
-	.incbin "sound/direct_sound_samples/cries/snom.bin"
-.endif
-
-	.align 2
 Cry_Frosmoth::
 .if TESTING == FALSE
 	.incbin "sound/direct_sound_samples/cries/frosmoth.bin"
@@ -6176,11 +5686,6 @@ Cry_MorpekoHangry::
 .if P_FAMILY_CUFANT == TRUE
 	.align 2
 Cry_Cufant::
-.if TESTING == FALSE
-	.incbin "sound/direct_sound_samples/cries/cufant.bin"
-.endif
-
-	.align 2
 Cry_Copperajah::
 .if TESTING == FALSE
 	.incbin "sound/direct_sound_samples/cries/copperajah.bin"
@@ -6236,17 +5741,7 @@ Cry_Archaludon::
 .if P_FAMILY_DREEPY == TRUE
 	.align 2
 Cry_Dreepy::
-.if TESTING == FALSE
-	.incbin "sound/direct_sound_samples/cries/dreepy.bin"
-.endif
-
-	.align 2
 Cry_Drakloak::
-.if TESTING == FALSE
-	.incbin "sound/direct_sound_samples/cries/drakloak.bin"
-.endif
-
-	.align 2
 Cry_Dragapult::
 .if TESTING == FALSE
 	.incbin "sound/direct_sound_samples/cries/dragapult.bin"
@@ -6298,11 +5793,6 @@ Cry_EternatusEternamax::
 .if P_FAMILY_KUBFU == TRUE
 	.align 2
 Cry_Kubfu::
-.if TESTING == FALSE
-	.incbin "sound/direct_sound_samples/cries/kubfu.bin"
-.endif
-
-	.align 2
 Cry_UrshifuSingleStrike::
 .if TESTING == FALSE
 	.incbin "sound/direct_sound_samples/cries/urshifu_single_strike.bin"
@@ -6395,17 +5885,7 @@ Cry_EnamorusTherian::
 .if P_FAMILY_SPRIGATITO == TRUE
 	.align 2
 Cry_Sprigatito::
-.if TESTING == FALSE
-	.incbin "sound/direct_sound_samples/cries/sprigatito.bin"
-.endif
-
-	.align 2
 Cry_Floragato::
-.if TESTING == FALSE
-	.incbin "sound/direct_sound_samples/cries/floragato.bin"
-.endif
-
-	.align 2
 Cry_Meowscarada::
 .if TESTING == FALSE
 	.incbin "sound/direct_sound_samples/cries/meowscarada.bin"
@@ -6415,17 +5895,7 @@ Cry_Meowscarada::
 .if P_FAMILY_FUECOCO == TRUE
 	.align 2
 Cry_Fuecoco::
-.if TESTING == FALSE
-	.incbin "sound/direct_sound_samples/cries/fuecoco.bin"
-.endif
-
-	.align 2
 Cry_Crocalor::
-.if TESTING == FALSE
-	.incbin "sound/direct_sound_samples/cries/crocalor.bin"
-.endif
-
-	.align 2
 Cry_Skeledirge::
 .if TESTING == FALSE
 	.incbin "sound/direct_sound_samples/cries/skeledirge.bin"
@@ -6435,17 +5905,7 @@ Cry_Skeledirge::
 .if P_FAMILY_QUAXLY == TRUE
 	.align 2
 Cry_Quaxly::
-.if TESTING == FALSE
-	.incbin "sound/direct_sound_samples/cries/quaxly.bin"
-.endif
-
-	.align 2
 Cry_Quaxwell::
-.if TESTING == FALSE
-	.incbin "sound/direct_sound_samples/cries/quaxwell.bin"
-.endif
-
-	.align 2
 Cry_Quaquaval::
 .if TESTING == FALSE
 	.incbin "sound/direct_sound_samples/cries/quaquaval.bin"
@@ -6455,17 +5915,7 @@ Cry_Quaquaval::
 .if P_FAMILY_LECHONK == TRUE
 	.align 2
 Cry_Lechonk::
-.if TESTING == FALSE
-	.incbin "sound/direct_sound_samples/cries/lechonk.bin"
-.endif
-
-	.align 2
 Cry_OinkologneM::
-.if TESTING == FALSE
-	.incbin "sound/direct_sound_samples/cries/oinkologne_m.bin"
-.endif
-
-	.align 2
 Cry_OinkologneF::
 .if TESTING == FALSE
 	.incbin "sound/direct_sound_samples/cries/oinkologne_f.bin"
@@ -6475,11 +5925,6 @@ Cry_OinkologneF::
 .if P_FAMILY_TAROUNTULA == TRUE
 	.align 2
 Cry_Tarountula::
-.if TESTING == FALSE
-	.incbin "sound/direct_sound_samples/cries/tarountula.bin"
-.endif
-
-	.align 2
 Cry_Spidops::
 .if TESTING == FALSE
 	.incbin "sound/direct_sound_samples/cries/spidops.bin"
@@ -6489,11 +5934,6 @@ Cry_Spidops::
 .if P_FAMILY_NYMBLE == TRUE
 	.align 2
 Cry_Nymble::
-.if TESTING == FALSE
-	.incbin "sound/direct_sound_samples/cries/nymble.bin"
-.endif
-
-	.align 2
 Cry_Lokix::
 .if TESTING == FALSE
 	.incbin "sound/direct_sound_samples/cries/lokix.bin"
@@ -6503,17 +5943,7 @@ Cry_Lokix::
 .if P_FAMILY_PAWMI == TRUE
 	.align 2
 Cry_Pawmi::
-.if TESTING == FALSE
-	.incbin "sound/direct_sound_samples/cries/pawmi.bin"
-.endif
-
-	.align 2
 Cry_Pawmo::
-.if TESTING == FALSE
-	.incbin "sound/direct_sound_samples/cries/pawmo.bin"
-.endif
-
-	.align 2
 Cry_Pawmot::
 .if TESTING == FALSE
 	.incbin "sound/direct_sound_samples/cries/pawmot.bin"
@@ -6523,11 +5953,6 @@ Cry_Pawmot::
 .if P_FAMILY_TANDEMAUS == TRUE
 	.align 2
 Cry_Tandemaus::
-.if TESTING == FALSE
-	.incbin "sound/direct_sound_samples/cries/tandemaus.bin"
-.endif
-
-	.align 2
 Cry_MausholdThree::
 .if TESTING == FALSE
 	.incbin "sound/direct_sound_samples/cries/maushold_three.bin"
@@ -6543,11 +5968,6 @@ Cry_MausholdFour::
 .if P_FAMILY_FIDOUGH == TRUE
 	.align 2
 Cry_Fidough::
-.if TESTING == FALSE
-	.incbin "sound/direct_sound_samples/cries/fidough.bin"
-.endif
-
-	.align 2
 Cry_Dachsbun::
 .if TESTING == FALSE
 	.incbin "sound/direct_sound_samples/cries/dachsbun.bin"
@@ -6557,17 +5977,7 @@ Cry_Dachsbun::
 .if P_FAMILY_SMOLIV == TRUE
 	.align 2
 Cry_Smoliv::
-.if TESTING == FALSE
-	.incbin "sound/direct_sound_samples/cries/smoliv.bin"
-.endif
-
-	.align 2
 Cry_Dolliv::
-.if TESTING == FALSE
-	.incbin "sound/direct_sound_samples/cries/dolliv.bin"
-.endif
-
-	.align 2
 Cry_Arboliva::
 .if TESTING == FALSE
 	.incbin "sound/direct_sound_samples/cries/arboliva.bin"
@@ -6585,17 +5995,7 @@ Cry_Squawkabilly::
 .if P_FAMILY_NACLI == TRUE
 	.align 2
 Cry_Nacli::
-.if TESTING == FALSE
-	.incbin "sound/direct_sound_samples/cries/nacli.bin"
-.endif
-
-	.align 2
 Cry_Naclstack::
-.if TESTING == FALSE
-	.incbin "sound/direct_sound_samples/cries/naclstack.bin"
-.endif
-
-	.align 2
 Cry_Garganacl::
 .if TESTING == FALSE
 	.incbin "sound/direct_sound_samples/cries/garganacl.bin"
@@ -6605,11 +6005,6 @@ Cry_Garganacl::
 .if P_FAMILY_CHARCADET == TRUE
 	.align 2
 Cry_Charcadet::
-.if TESTING == FALSE
-	.incbin "sound/direct_sound_samples/cries/charcadet.bin"
-.endif
-
-	.align 2
 Cry_Armarouge::
 .if TESTING == FALSE
 	.incbin "sound/direct_sound_samples/cries/armarouge.bin"
@@ -6625,11 +6020,6 @@ Cry_Ceruledge::
 .if P_FAMILY_TADBULB == TRUE
 	.align 2
 Cry_Tadbulb::
-.if TESTING == FALSE
-	.incbin "sound/direct_sound_samples/cries/tadbulb.bin"
-.endif
-
-	.align 2
 Cry_Bellibolt::
 .if TESTING == FALSE
 	.incbin "sound/direct_sound_samples/cries/bellibolt.bin"
@@ -6639,11 +6029,6 @@ Cry_Bellibolt::
 .if P_FAMILY_WATTREL == TRUE
 	.align 2
 Cry_Wattrel::
-.if TESTING == FALSE
-	.incbin "sound/direct_sound_samples/cries/wattrel.bin"
-.endif
-
-	.align 2
 Cry_Kilowattrel::
 .if TESTING == FALSE
 	.incbin "sound/direct_sound_samples/cries/kilowattrel.bin"
@@ -6653,11 +6038,6 @@ Cry_Kilowattrel::
 .if P_FAMILY_MASCHIFF == TRUE
 	.align 2
 Cry_Maschiff::
-.if TESTING == FALSE
-	.incbin "sound/direct_sound_samples/cries/maschiff.bin"
-.endif
-
-	.align 2
 Cry_Mabosstiff::
 .if TESTING == FALSE
 	.incbin "sound/direct_sound_samples/cries/mabosstiff.bin"
@@ -6667,11 +6047,6 @@ Cry_Mabosstiff::
 .if P_FAMILY_SHROODLE == TRUE
 	.align 2
 Cry_Shroodle::
-.if TESTING == FALSE
-	.incbin "sound/direct_sound_samples/cries/shroodle.bin"
-.endif
-
-	.align 2
 Cry_Grafaiai::
 .if TESTING == FALSE
 	.incbin "sound/direct_sound_samples/cries/grafaiai.bin"
@@ -6681,11 +6056,6 @@ Cry_Grafaiai::
 .if P_FAMILY_BRAMBLIN == TRUE
 	.align 2
 Cry_Bramblin::
-.if TESTING == FALSE
-	.incbin "sound/direct_sound_samples/cries/bramblin.bin"
-.endif
-
-	.align 2
 Cry_Brambleghast::
 .if TESTING == FALSE
 	.incbin "sound/direct_sound_samples/cries/brambleghast.bin"
@@ -6695,11 +6065,6 @@ Cry_Brambleghast::
 .if P_FAMILY_TOEDSCOOL == TRUE
 	.align 2
 Cry_Toedscool::
-.if TESTING == FALSE
-	.incbin "sound/direct_sound_samples/cries/toedscool.bin"
-.endif
-
-	.align 2
 Cry_Toedscruel::
 .if TESTING == FALSE
 	.incbin "sound/direct_sound_samples/cries/toedscruel.bin"
@@ -6717,11 +6082,6 @@ Cry_Klawf::
 .if P_FAMILY_CAPSAKID == TRUE
 	.align 2
 Cry_Capsakid::
-.if TESTING == FALSE
-	.incbin "sound/direct_sound_samples/cries/capsakid.bin"
-.endif
-
-	.align 2
 Cry_Scovillain::
 .if TESTING == FALSE
 	.incbin "sound/direct_sound_samples/cries/scovillain.bin"
@@ -6739,11 +6099,6 @@ Cry_ScovillainMega::
 .if P_FAMILY_RELLOR == TRUE
 	.align 2
 Cry_Rellor::
-.if TESTING == FALSE
-	.incbin "sound/direct_sound_samples/cries/rellor.bin"
-.endif
-
-	.align 2
 Cry_Rabsca::
 .if TESTING == FALSE
 	.incbin "sound/direct_sound_samples/cries/rabsca.bin"
@@ -6753,11 +6108,6 @@ Cry_Rabsca::
 .if P_FAMILY_FLITTLE == TRUE
 	.align 2
 Cry_Flittle::
-.if TESTING == FALSE
-	.incbin "sound/direct_sound_samples/cries/flittle.bin"
-.endif
-
-	.align 2
 Cry_Espathra::
 .if TESTING == FALSE
 	.incbin "sound/direct_sound_samples/cries/espathra.bin"
@@ -6767,17 +6117,7 @@ Cry_Espathra::
 .if P_FAMILY_TINKATINK == TRUE
 	.align 2
 Cry_Tinkatink::
-.if TESTING == FALSE
-	.incbin "sound/direct_sound_samples/cries/tinkatink.bin"
-.endif
-
-	.align 2
 Cry_Tinkatuff::
-.if TESTING == FALSE
-	.incbin "sound/direct_sound_samples/cries/tinkatuff.bin"
-.endif
-
-	.align 2
 Cry_Tinkaton::
 .if TESTING == FALSE
 	.incbin "sound/direct_sound_samples/cries/tinkaton.bin"
@@ -6787,11 +6127,6 @@ Cry_Tinkaton::
 .if P_FAMILY_WIGLETT == TRUE
 	.align 2
 Cry_Wiglett::
-.if TESTING == FALSE
-	.incbin "sound/direct_sound_samples/cries/wiglett.bin"
-.endif
-
-	.align 2
 Cry_Wugtrio::
 .if TESTING == FALSE
 	.incbin "sound/direct_sound_samples/cries/wugtrio.bin"
@@ -6809,11 +6144,6 @@ Cry_Bombirdier::
 .if P_FAMILY_FINIZEN == TRUE
 	.align 2
 Cry_Finizen::
-.if TESTING == FALSE
-	.incbin "sound/direct_sound_samples/cries/finizen.bin"
-.endif
-
-	.align 2
 Cry_PalafinHero::
 .if TESTING == FALSE
 	.incbin "sound/direct_sound_samples/cries/palafin_hero.bin"
@@ -6823,11 +6153,6 @@ Cry_PalafinHero::
 .if P_FAMILY_VAROOM == TRUE
 	.align 2
 Cry_Varoom::
-.if TESTING == FALSE
-	.incbin "sound/direct_sound_samples/cries/varoom.bin"
-.endif
-
-	.align 2
 Cry_Revavroom::
 .if TESTING == FALSE
 	.incbin "sound/direct_sound_samples/cries/revavroom.bin"
@@ -6853,11 +6178,6 @@ Cry_Orthworm::
 .if P_FAMILY_GLIMMET == TRUE
 	.align 2
 Cry_Glimmet::
-.if TESTING == FALSE
-	.incbin "sound/direct_sound_samples/cries/glimmet.bin"
-.endif
-
-	.align 2
 Cry_Glimmora::
 .if TESTING == FALSE
 	.incbin "sound/direct_sound_samples/cries/glimmora.bin"
@@ -6875,11 +6195,6 @@ Cry_GlimmoraMega::
 .if P_FAMILY_GREAVARD == TRUE
 	.align 2
 Cry_Greavard::
-.if TESTING == FALSE
-	.incbin "sound/direct_sound_samples/cries/greavard.bin"
-.endif
-
-	.align 2
 Cry_Houndstone::
 .if TESTING == FALSE
 	.incbin "sound/direct_sound_samples/cries/houndstone.bin"
@@ -6897,11 +6212,6 @@ Cry_Flamigo::
 .if P_FAMILY_CETODDLE == TRUE
 	.align 2
 Cry_Cetoddle::
-.if TESTING == FALSE
-	.incbin "sound/direct_sound_samples/cries/cetoddle.bin"
-.endif
-
-	.align 2
 Cry_Cetitan::
 .if TESTING == FALSE
 	.incbin "sound/direct_sound_samples/cries/cetitan.bin"
@@ -7051,17 +6361,7 @@ Cry_IronThorns::
 .if P_FAMILY_FRIGIBAX == TRUE
 	.align 2
 Cry_Frigibax::
-.if TESTING == FALSE
-	.incbin "sound/direct_sound_samples/cries/frigibax.bin"
-.endif
-
-	.align 2
 Cry_Arctibax::
-.if TESTING == FALSE
-	.incbin "sound/direct_sound_samples/cries/arctibax.bin"
-.endif
-
-	.align 2
 Cry_Baxcalibur::
 .if TESTING == FALSE
 	.incbin "sound/direct_sound_samples/cries/baxcalibur.bin"
@@ -7179,11 +6479,6 @@ Cry_IronLeaves::
 .if P_FAMILY_POLTCHAGEIST == TRUE
 	.align 2
 Cry_Poltchageist::
-.if TESTING == FALSE
-	.incbin "sound/direct_sound_samples/cries/poltchageist.bin"
-.endif
-
-	.align 2
 Cry_Sinistcha::
 .if TESTING == FALSE
 	.incbin "sound/direct_sound_samples/cries/sinistcha.bin"
