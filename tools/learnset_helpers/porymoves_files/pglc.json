@@ -415,6 +415,29 @@
     "EggMoves": [],
     "TutorMoves": []
   },
+  "GOLBAT" : {
+    "LevelMoves": [
+      {
+        "Level": 0,
+        "Move": "MOVE_SPLASH"
+      }
+    ],
+    "PreEvoMoves": [],
+    "TMMoves": [
+      "MOVE_POISONED_STARS",
+      "MOVE_WINDSTORM",
+      "MOVE_VINSECTICATION",
+      "MOVE_JINX",
+      "MOVE_WING_SLICER",
+      "MOVE_GEMINIC_BLAST",
+      "MOVE_RESEARCH",
+      "MOVE_JET_STREAM",
+      "MOVE_PSIDEKICK",
+      "MOVE_MOSH_PIT"
+    ],
+    "EggMoves": [],
+    "TutorMoves": []
+  },
   "VILEPLUME" : {
     "LevelMoves": [
       {
@@ -967,6 +990,28 @@
     "EggMoves": [],
     "TutorMoves": []
   },
+  "ONIX" : {
+    "LevelMoves": [
+      {
+        "Level": 0,
+        "Move": "MOVE_SPLASH"
+      }
+    ],
+    "PreEvoMoves": [],
+    "TMMoves": [
+      "MOVE_ROCK_HEART",
+      "MOVE_SHALLOW_GRAVE",
+      "MOVE_HYDRAULIC_PRESS",
+      "MOVE_MINERAGRAPHY",
+      "MOVE_SINKHOLE",
+      "MOVE_SUNBLOOM",
+      "MOVE_STEELSURGE",
+      "MOVE_RESEARCH",
+      "MOVE_CALAMITY_CLEAVE"
+    ],
+    "EggMoves": [],
+    "TutorMoves": []
+  },
   "HYPNO" : {
     "LevelMoves": [
       {
@@ -1120,6 +1165,32 @@
     "EggMoves": [],
     "TutorMoves": []
   },
+  "LICKITUNG" : {
+    "LevelMoves": [
+      {
+        "Level": 0,
+        "Move": "MOVE_SPLASH"
+      }
+    ],
+    "PreEvoMoves": [],
+    "TMMoves": [
+      "MOVE_ROCK_HEART",
+      "MOVE_SHALLOW_GRAVE",
+      "MOVE_FUSSY_FUSS",
+      "MOVE_JINX",
+      "MOVE_CRASHING_FIST",
+      "MOVE_SURFS_UP",
+      "MOVE_GEMINIC_BLAST",
+      "MOVE_AURA_FARMING",
+      "MOVE_WAKE_CRASH",
+      "MOVE_RAZZLE_DAZZLE",
+      "MOVE_RESEARCH",
+      "MOVE_CALAMITY_CLEAVE",
+      "MOVE_PSIDEKICK"
+    ],
+    "EggMoves": [],
+    "TutorMoves": []
+  },
   "WEEZING" : {
     "LevelMoves": [
       {
@@ -1212,6 +1283,32 @@
     "EggMoves": [],
     "TutorMoves": []
   },
+  "SEADRA" : {
+    "LevelMoves": [
+      {
+        "Level": 0,
+        "Move": "MOVE_SPLASH"
+      }
+    ],
+    "PreEvoMoves": [],
+    "TMMoves": [
+      "MOVE_CRASHING_FIST",
+      "MOVE_ICE_RINK",
+      "MOVE_STORM_SACRIFICE",
+      "MOVE_SURFS_UP",
+      "MOVE_GEMINIC_BLAST",
+      "MOVE_SHOWSTOPPER",
+      "MOVE_AURA_FARMING",
+      "MOVE_WAKE_CRASH",
+      "MOVE_RESEARCH",
+      "MOVE_JET_STREAM",
+      "MOVE_STUNT_DOUBLE",
+      "MOVE_CALAMITY_CLEAVE",
+      "MOVE_SYNCHROSWIM"
+    ],
+    "EggMoves": [],
+    "TutorMoves": []
+  },
   "SEAKING" : {
   "LevelMoves": [
     {
@@ -1281,6 +1378,28 @@
       "MOVE_RESEARCH",
       "MOVE_CHRYSALIS",
       "MOVE_CASTING_CALL",
+      "MOVE_PSIDEKICK"
+    ],
+    "EggMoves": [],
+    "TutorMoves": []
+  },
+  "SCYTHER" : {
+    "LevelMoves": [
+      {
+        "Level": 0,
+        "Move": "MOVE_SPLASH"
+      }
+    ],
+    "PreEvoMoves": [],
+    "TMMoves": [
+      "MOVE_POISONED_STARS",
+      "MOVE_VINSECTICATION",
+      "MOVE_MINERAGRAPHY",
+      "MOVE_WING_SLICER",
+      "MOVE_AURA_FARMING",
+      "MOVE_STEELSURGE",
+      "MOVE_RESEARCH",
+      "MOVE_CHRYSALIS",
       "MOVE_PSIDEKICK"
     ],
     "EggMoves": [],
