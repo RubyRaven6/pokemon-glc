@@ -22,6 +22,7 @@
 #include "gpu_regs.h"
 #include "trig.h"
 #include "graphics.h"
+#include "glc/title_screen.h"
 #include "constants/rgb.h"
 #include "constants/songs.h"
 
@@ -563,6 +564,9 @@ static void VBlankCB(void)
 
 void CB2_InitTitleScreen(void)
 {
+    SetMainCallback2(CB2_InitGLCTitleScreen);
+    return;
+
     if (IS_FRLG)
     {
         CB2_InitTitleScreenFrlg();
