@@ -1419,6 +1419,98 @@ BattleScript_EffectRoughRidin::
 	trybattlerstatchange BS_ATTACKER, STAT_CHANGE_NO_FLAGS
 	goto BattleScript_MoveEnd
 
+BattleScript_EffectFertilize::
+	attackcanceler
+	jumpifbattletype BATTLE_TYPE_ARENA, BattleScript_ButItFailed
+	jumpifcommanderactive BS_ATTACKER, BattleScript_ButItFailed
+	jumpifcantswitch SWITCH_IGNORE_ESCAPE_PREVENTION | BS_ATTACKER, BattleScript_ButItFailed
+	attackanimation
+	waitanimation
+	returntoball BS_ATTACKER, FALSE
+	switchoutabilities BS_ATTACKER
+	openpartyscreen BS_ATTACKER, BattleScript_ButItFailed
+	waitstate
+	switchhandleorder BS_ATTACKER, 2
+	getswitchedmondata BS_ATTACKER
+	switchindataupdate BS_ATTACKER
+	hpthresholds BS_ATTACKER
+	trytoclearprimalweather
+	flushtextbox
+	printstring STRINGID_SWITCHINMON
+	switchinanim BS_ATTACKER, FALSE, TRUE
+	waitstate
+	switchineffects BS_ATTACKER
+	switchinevents
+	callnative BS_SetFertilizeBoost
+	trybattlerstatchange BS_ATTACKER, STAT_CHANGE_NO_FLAGS
+	goto BattleScript_MoveEnd
+
+BattleScript_EffectMaskOff::
+	attackcanceler
+	attackanimation
+	waitanimation
+	savetarget
+	setbyte gBattlerTarget, 0
+BattleScript_MaskOffLoop:
+	jumpifbyteequal gBattlerTarget, gBattlerAttacker, BattleScript_MaskOffIncrement
+	jumpifabsent BS_TARGET, BattleScript_MaskOffIncrement
+	callnative BS_SetMaskOffDrop
+	trybattlerstatchange BS_TARGET, STAT_CHANGE_NO_FLAGS
+BattleScript_MaskOffIncrement:
+	addbyte gBattlerTarget, 1
+	jumpifbytenotequal gBattlerTarget, gBattlersCount, BattleScript_MaskOffLoop
+	restoretarget
+	goto BattleScript_MoveEnd
+
+BattleScript_EffectDraconicPeak::
+	attackcanceler
+	jumpifvolatile BS_ATTACKER, VOLATILE_PERISH_SONG, BattleScript_ButItFailed
+	callnative BS_SetDraconicPeak
+	attackanimation
+	waitanimation
+	trybattlerstatchange BS_ATTACKER, STAT_CHANGE_NO_FLAGS
+	goto BattleScript_MoveEnd
+
+BattleScript_DraconicPeakContinues::
+	printstring STRINGID_DRACONICPEAKCONTINUES
+	waitmessage B_WAIT_TIME_LONG
+	trybattlerstatchange BS_ATTACKER, STAT_CHANGE_NO_FLAGS
+	return
+
+BattleScript_DraconicPeakTakesLife::
+	printstring STRINGID_DRACONICPEAKENDS
+	waitmessage B_WAIT_TIME_LONG
+	healthbarupdate BS_ATTACKER
+	datahpupdate BS_ATTACKER, ASSURANCE_DOUBLE
+	tryfaintmon BS_ATTACKER
+	return
+
+BattleScript_FreshCatchForceSwitch::
+	jumpifcommanderactive BS_TARGET, BattleScript_FreshCatchForceSwitchFailed
+	jumpifability BS_TARGET, ABILITY_GUARD_DOG, BattleScript_FreshCatchForceSwitchFailed
+	jumpifability BS_TARGET, ABILITY_SUCTION_CUPS, BattleScript_AbilityPreventsPhasingOut
+	jumpifvolatile BS_TARGET, VOLATILE_ROOT, BattleScript_PrintMonIsRooted
+	jumpiftargetdynamaxed BattleScript_RoarBlockedByDynamax
+	jumpifbattletype BATTLE_TYPE_ARENA, BattleScript_FreshCatchForceSwitchFailed
+	forcerandomswitch BattleScript_FreshCatchForceSwitchFailed
+BattleScript_FreshCatchForceSwitchFailed:
+	setmoveresultflags MOVE_RESULT_FAILED
+	goto BattleScript_MoveEnd
+
+BattleScript_FreshCatchSuccessSwitch::
+	call BattleScript_RoarSuccessRet
+	getswitchedmondata BS_TARGET
+	switchindataupdate BS_TARGET
+	trytoclearprimalweather
+	flushtextbox
+	switchinanim BS_TARGET, FALSE, FALSE
+	waitstate
+	printstring STRINGID_PKMNWASDRAGGEDOUT
+	switchineffects BS_TARGET
+	switchinevents
+	setbyte sSWITCH_CASE, B_SWITCH_NORMAL
+	return
+
 BattleScript_LuaStrikeEffect::
 	trybattlerstatchange BS_EFFECT_BATTLER, STAT_CHANGE_CERTAIN
 BattleScript_LuaStrikeHazardsLoop:

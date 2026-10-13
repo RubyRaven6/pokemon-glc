@@ -1327,7 +1327,9 @@ static s32 AI_CheckBadMove(enum BattlerId battlerAtk, enum BattlerId battlerDef,
     if (!IsSemiInvulnerable(battlerDef, CHECK_ALL)
      && predictedMove != MOVE_NONE
      && predictedMove != MOVE_UNAVAILABLE
-     && (GetMoveEffect(predictedMove) == EFFECT_SEMI_INVULNERABLE || GetMoveEffect(predictedMove) == EFFECT_SKY_DROP)
+     && (GetMoveEffect(predictedMove) == EFFECT_SEMI_INVULNERABLE
+      || GetMoveEffect(predictedMove) == EFFECT_SKY_DROP
+      || GetMoveEffect(predictedMove) == EFFECT_POLAR_PLUNGE)
      && AI_IsSlower(battlerAtk, battlerDef, move, predictedMove, CONSIDER_PRIORITY)
      && moveEffect != EFFECT_SEMI_INVULNERABLE
      && aiData->holdEffects[battlerDef] != HOLD_EFFECT_POWER_HERB)
@@ -1953,6 +1955,29 @@ static s32 AI_CheckBadMove(enum BattlerId battlerAtk, enum BattlerId battlerDef,
            && !BattlerStatCanRise(battlerAtk, aiData->abilities[battlerAtk], STAT_DEF)
            && !BattlerStatCanRise(battlerAtk, aiData->abilities[battlerAtk], STAT_SPATK)
            && !BattlerStatCanRise(battlerAtk, aiData->abilities[battlerAtk], STAT_SPDEF))))
+            ADJUST_SCORE(-10);
+        break;
+    case EFFECT_FERTILIZE:
+        if (CountUsablePartyMons(battlerAtk) == 0)
+            ADJUST_SCORE(-10);
+        break;
+    case EFFECT_FRESH_CATCH:
+        if (CountUsablePartyMons(battlerDef) == 0
+         || aiData->abilities[battlerDef] == ABILITY_SUCTION_CUPS
+         || aiData->abilities[battlerDef] == ABILITY_GUARD_DOG
+         || gBattleMons[battlerDef].volatiles.root
+         || GetActiveGimmick(battlerDef) == GIMMICK_DYNAMAX)
+            ADJUST_SCORE(-10);
+        break;
+    case EFFECT_MASK_OFF:
+        if (!CanLowerStat(battlerAtk, battlerDef, aiData, STAT_ATK))
+            ADJUST_SCORE(-10);
+        break;
+    case EFFECT_DRACONIC_PEAK:
+        if (gBattleMons[battlerAtk].volatiles.perishSong
+         || (!BattlerStatCanRise(battlerAtk, aiData->abilities[battlerAtk], STAT_ATK)
+          && !BattlerStatCanRise(battlerAtk, aiData->abilities[battlerAtk], STAT_SPATK)
+          && !BattlerStatCanRise(battlerAtk, aiData->abilities[battlerAtk], STAT_SPEED)))
             ADJUST_SCORE(-10);
         break;
     case EFFECT_ENCORE:
@@ -3044,6 +3069,11 @@ static s32 AI_CheckBadMove(enum BattlerId battlerAtk, enum BattlerId battlerDef,
         if (BattlerWillFaintFromWeather(battlerAtk, aiData->abilities[battlerAtk])
         ||  DoesSubstituteBlockMove(battlerAtk, battlerDef, move)
         ||  GetBattlerWeight(battlerDef, aiData->abilities[battlerDef], aiData->holdEffects[battlerDef]) >= 2000) //200.0 kg
+            ADJUST_SCORE(-10);
+        break;
+    case EFFECT_POLAR_PLUNGE:
+        if (BattlerWillFaintFromWeather(battlerAtk, aiData->abilities[battlerAtk])
+         || DoesSubstituteBlockMove(battlerAtk, battlerDef, move))
             ADJUST_SCORE(-10);
         break;
     case EFFECT_REVIVAL_BLESSING:
@@ -4943,6 +4973,43 @@ static s32 AI_CalcMoveEffectScore(enum BattlerId battlerAtk, enum BattlerId batt
             ADJUST_SCORE(BEST_EFFECT);
         else
             ADJUST_SCORE(GOOD_EFFECT);
+        break;
+    case EFFECT_FERTILIZE:
+    {
+        u32 conditions = 0;
+
+        if (AI_GetWeather() & B_WEATHER_SUN)
+            conditions++;
+        if (gFieldTimers.terrain == B_TERRAIN_GRASSY)
+            conditions++;
+        if (conditions == 2)
+            ADJUST_SCORE(BEST_EFFECT);
+        else if (conditions == 1)
+            ADJUST_SCORE(GOOD_EFFECT);
+        else if (aiData->shouldSwitch & (1u << battlerAtk))
+            ADJUST_SCORE(DECENT_EFFECT);
+        break;
+    }
+    case EFFECT_FRESH_CATCH:
+        score += AI_TryToClearStats(battlerAtk, battlerDef, moveTargetsBothOpponents);
+        if (AnyStatIsRaised(battlerDef))
+            ADJUST_SCORE(GOOD_EFFECT);
+        break;
+    case EFFECT_MASK_OFF:
+        if (gBattleMons[battlerDef].statStages[STAT_ATK] > DEFAULT_STAT_STAGE)
+            ADJUST_SCORE(BEST_EFFECT);
+        else if (HasMoveWithCategory(battlerDef, DAMAGE_CATEGORY_PHYSICAL))
+            ADJUST_SCORE(GOOD_EFFECT);
+        break;
+    case EFFECT_POLAR_PLUNGE:
+        if (GetBattlerWeight(battlerAtk, aiData->abilities[battlerAtk], aiData->holdEffects[battlerAtk])
+          > GetBattlerWeight(battlerDef, aiData->abilities[battlerDef], aiData->holdEffects[battlerDef]))
+            ADJUST_SCORE(BEST_EFFECT);
+        break;
+    case EFFECT_DRACONIC_PEAK:
+        ADJUST_SCORE(BEST_EFFECT);
+        if (CountUsablePartyMons(battlerAtk) == 0)
+            ADJUST_SCORE(-BEST_EFFECT);
         break;
     case EFFECT_ENCORE:
     {

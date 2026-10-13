@@ -6478,6 +6478,20 @@ static inline u32 CalcMoveBasePower(struct DamageContext *ctx)
         basePower += 10 * gBattleMons[battlerAtk].volatiles.masterstrokeUses;
         basePower = min(basePower, 100);
         break;
+    case EFFECT_POLISHED_STRIKE:
+        if (GetBattlerTotalSpeedStat(battlerAtk, ctx->abilities[battlerAtk], ctx->holdEffects[battlerAtk])
+          > GetBattlerTotalSpeedStat(battlerDef, ctx->abilities[battlerDef], ctx->holdEffects[battlerDef]))
+            basePower *= 2;
+        break;
+    case EFFECT_POLAR_PLUNGE:
+        if (GetBattlerWeight(battlerAtk, ctx->abilities[battlerAtk], ctx->holdEffects[battlerAtk])
+          > GetBattlerWeight(battlerDef, ctx->abilities[battlerDef], ctx->holdEffects[battlerDef]))
+            basePower *= 2;
+        break;
+    case EFFECT_ANGSTY_SCREAM:
+        if (gBattleMons[battlerAtk].hp * 2 < gBattleMons[battlerAtk].maxHP || gBattleMons[battlerAtk].status1 != STATUS1_NONE)
+            basePower *= 2;
+        break;
     case EFFECT_HEAT_CRASH:
         weight = GetBattlerWeight(battlerAtk, ctx->abilities[battlerAtk], ctx->holdEffects[battlerAtk]) / GetBattlerWeight(battlerDef, ctx->abilities[battlerDef], ctx->holdEffects[battlerDef]);
         if (weight >= ARRAY_COUNT(sHeatCrashPowerTable))
@@ -10859,8 +10873,25 @@ bool32 IsSemiInvulnerable(enum BattlerId battler, enum SemiInvulnerableExclusion
     return gBattleMons[battler].volatiles.semiInvulnerable != STATE_NONE;
 }
 
+static bool32 IsBattlerInPolarPlunge(enum BattlerId battler)
+{
+    if (gBattleMons[battler].volatiles.skyDropTarget != 0 && gLockedMoves[battler] == MOVE_POLAR_PLUNGE)
+        return TRUE;
+
+    for (enum BattlerId holder = 0; holder < gBattlersCount; holder++)
+    {
+        if (gBattleMons[holder].volatiles.skyDropTarget == battler + 1 && gLockedMoves[holder] == MOVE_POLAR_PLUNGE)
+            return TRUE;
+    }
+
+    return FALSE;
+}
+
 static bool32 CanBreakThroughSemiInvulnerablityInternal(enum BattlerId battlerAtk, enum BattlerId battlerDef, enum Ability abilityAtk, enum Ability abilityDef, enum Move move, enum SemiInvulnerableState state)
 {
+    if ((state == STATE_SKY_DROP_ATTACKER || state == STATE_SKY_DROP_TARGET) && IsBattlerInPolarPlunge(battlerDef))
+        return move == MOVE_EARTHQUAKE || move == MOVE_MAGNITUDE;
+
     if (state != STATE_COMMANDER)
     {
         if (CanMoveSkipAccuracyCheck(battlerAtk, move))
@@ -10905,6 +10936,9 @@ bool32 BreaksThroughSemiInvulnerableState(enum BattlerId battlerAtk, enum Battle
 
 bool32 IsBattlerOnAir(enum BattlerId battler)
 {
+    if (IsBattlerInPolarPlunge(battler))
+        return FALSE;
+
     switch (gBattleMons[battler].volatiles.semiInvulnerable)
     {
     case STATE_ON_AIR:

@@ -2119,6 +2119,7 @@ bool32 IsMoveRedirectionPrevented(enum BattlerId battlerAtk, enum Move move, enu
 
     enum BattleMoveEffects effect = GetMoveEffect(move);
     if (effect == EFFECT_SKY_DROP
+      || effect == EFFECT_POLAR_PLUNGE
       || effect == EFFECT_SNIPE_SHOT
       || atkAbility == ABILITY_PROPELLER_TAIL
       || atkAbility == ABILITY_STALWART)

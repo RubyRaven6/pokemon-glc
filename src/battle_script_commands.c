@@ -5613,7 +5613,10 @@ static void Cmd_forcerandomswitch(void)
             for (enum BattlerId battler = 0; battler < gBattlersCount; battler++)
                 gBattleMons[battler].volatiles.tryEjectPack = FALSE; // Disable Eject Pack activations
             gBattleStruct->battlerPartyIndexes[gBattlerTarget] = gBattlerPartyIndexes[gBattlerTarget];
-            gBattlescriptCurrInstr = BattleScript_RoarSuccessSwitch;
+            if (gCurrentMove == MOVE_FRESH_CATCH && gBattleScripting.switchCase != B_SWITCH_RED_CARD)
+                gBattlescriptCurrInstr = BattleScript_FreshCatchSuccessSwitch;
+            else
+                gBattlescriptCurrInstr = BattleScript_RoarSuccessSwitch;
             gProtectStructs[gBattlerTarget].forcedSwitch = TRUE;
             gBattleStruct->monToSwitchIntoId[gBattlerTarget] = validMons[RandomUniform(RNG_FORCE_RANDOM_SWITCH, 0, validMonsCount - 1)];
             if (!IsMultiBattle())
@@ -7690,7 +7693,9 @@ bool32 IsSubstituteProtected(enum BattlerId battlerAtk, enum BattlerId battlerDe
         return FALSE;
     else if (GetConfig(B_INFILTRATOR_SUBSTITUTE) < GEN_6)
         return TRUE;
-    else if (GetMoveEffect(move) == EFFECT_TRANSFORM || GetMoveEffect(move) == EFFECT_SKY_DROP)
+    else if (GetMoveEffect(move) == EFFECT_TRANSFORM
+          || GetMoveEffect(move) == EFFECT_SKY_DROP
+          || GetMoveEffect(move) == EFFECT_POLAR_PLUNGE)
         return TRUE;
     else if (IsAbilityAndRecord(battlerAtk, abilityAtk, ABILITY_INFILTRATOR))
         return FALSE;
@@ -10500,6 +10505,41 @@ void BS_SetRoughRidin(void)
     {
         SetStatChange(gBattlerAttacker, STAT_SPEED, 2);
     }
+    gBattlescriptCurrInstr = cmd->nextInstr;
+}
+
+void BS_SetFertilizeBoost(void)
+{
+    NATIVE_ARGS();
+    u32 stages = 1;
+
+    if (GetWeather() & B_WEATHER_SUN)
+        stages++;
+    if (gFieldTimers.terrain == B_TERRAIN_GRASSY)
+        stages++;
+    SetStatChange(gBattlerAttacker, STAT_ATK, stages);
+    SetStatChange(gBattlerAttacker, STAT_SPATK, stages);
+    gBattlescriptCurrInstr = cmd->nextInstr;
+}
+
+void BS_SetMaskOffDrop(void)
+{
+    NATIVE_ARGS();
+
+    SetStatChange(gBattlerTarget, STAT_ATK, -3);
+    gBattlescriptCurrInstr = cmd->nextInstr;
+}
+
+void BS_SetDraconicPeak(void)
+{
+    NATIVE_ARGS();
+
+    SetStatChange(gBattlerAttacker, STAT_ATK, 1);
+    SetStatChange(gBattlerAttacker, STAT_SPATK, 1);
+    SetStatChange(gBattlerAttacker, STAT_SPEED, 1);
+    gBattleMons[gBattlerAttacker].volatiles.perishSong = TRUE;
+    gBattleMons[gBattlerAttacker].volatiles.perishSongTimer = 3;
+    gBattleMons[gBattlerAttacker].volatiles.draconicPeak = TRUE;
     gBattlescriptCurrInstr = cmd->nextInstr;
 }
 

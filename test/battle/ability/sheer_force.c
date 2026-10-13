@@ -416,6 +416,8 @@ static inline bool32 IgnoreMoveForSheerForceBoost(enum Move move)
         case MOVE_UPPER_HAND:    //  Bugged?
         case MOVE_GLITZY_GLOW:   //  Light Screen Move Effect seems to be bugged
         case MOVE_PAYBACK:
+        case MOVE_FRESH_CATCH:
+        case MOVE_POLISHED_STRIKE:
             return TRUE;
         default:
             return FALSE;
@@ -464,6 +466,7 @@ static inline bool32 IsMoveSheerForceBoosted(enum Move move)
         case MOVE_FLASH_CANNON:
         case MOVE_FOCUS_BLAST:
         case MOVE_FORCE_PALM:
+        case MOVE_FIREFLY:
         case MOVE_FUSSY_FUSS:
         case MOVE_GUNK_SHOT:
         case MOVE_HEADBUTT:
@@ -483,6 +486,7 @@ static inline bool32 IsMoveSheerForceBoosted(enum Move move)
         case MOVE_LUA_STRIKE:
         case MOVE_MASTERSTROKE:
         case MOVE_METAL_CLAW:
+        case MOVE_CHI_BLOCKER:
         case MOVE_MUD_BOMB:
         case MOVE_MUDDY_WATER:
         case MOVE_MUD_SHOT:
@@ -490,6 +494,7 @@ static inline bool32 IsMoveSheerForceBoosted(enum Move move)
         case MOVE_MYSTICAL_FIRE:
         case MOVE_PLAY_ROUGH:
         case MOVE_POISONED_STARS:
+        case MOVE_POLAR_PLUNGE:
         case MOVE_POISON_FANG:
         case MOVE_POISON_JAB:
         case MOVE_POISON_STING:
@@ -702,6 +707,7 @@ DOUBLE_BATTLE_TEST("Sheer Force only boosts the damage of moves it's supposed to
             case EFFECT_SEMI_INVULNERABLE:
             case EFFECT_SOLAR_BEAM:
             case EFFECT_SKY_DROP:
+            case EFFECT_POLAR_PLUNGE:
                 TURN { SKIP_TURN(playerLeft); SKIP_TURN(opponentLeft); }
                 TURN {}
                 break;
@@ -790,6 +796,7 @@ DOUBLE_BATTLE_TEST("Sheer Force only boosts the damage of moves it's supposed to
             case EFFECT_SEMI_INVULNERABLE:
             case EFFECT_SOLAR_BEAM:
             case EFFECT_SKY_DROP:
+            case EFFECT_POLAR_PLUNGE:
                 TURN { SKIP_TURN(playerLeft); SKIP_TURN(opponentLeft); }
                 TURN {}
                 break;
@@ -878,6 +885,7 @@ DOUBLE_BATTLE_TEST("Sheer Force only boosts the damage of moves it's supposed to
             case EFFECT_SEMI_INVULNERABLE:
             case EFFECT_SOLAR_BEAM:
             case EFFECT_SKY_DROP:
+            case EFFECT_POLAR_PLUNGE:
                 TURN { SKIP_TURN(playerLeft); SKIP_TURN(opponentLeft); }
                 TURN {}
                 break;
@@ -966,6 +974,7 @@ DOUBLE_BATTLE_TEST("Sheer Force only boosts the damage of moves it's supposed to
             case EFFECT_SEMI_INVULNERABLE:
             case EFFECT_SOLAR_BEAM:
             case EFFECT_SKY_DROP:
+            case EFFECT_POLAR_PLUNGE:
                 TURN { SKIP_TURN(playerLeft); SKIP_TURN(opponentLeft); }
                 TURN {}
                 break;
@@ -1054,6 +1063,7 @@ DOUBLE_BATTLE_TEST("Sheer Force only boosts the damage of moves it's supposed to
             case EFFECT_SEMI_INVULNERABLE:
             case EFFECT_SOLAR_BEAM:
             case EFFECT_SKY_DROP:
+            case EFFECT_POLAR_PLUNGE:
                 TURN { SKIP_TURN(playerLeft); SKIP_TURN(opponentLeft); }
                 TURN {}
                 break;
@@ -1142,6 +1152,7 @@ DOUBLE_BATTLE_TEST("Sheer Force only boosts the damage of moves it's supposed to
             case EFFECT_SEMI_INVULNERABLE:
             case EFFECT_SOLAR_BEAM:
             case EFFECT_SKY_DROP:
+            case EFFECT_POLAR_PLUNGE:
                 TURN { SKIP_TURN(playerLeft); SKIP_TURN(opponentLeft); }
                 TURN {}
                 break;
@@ -1230,6 +1241,7 @@ DOUBLE_BATTLE_TEST("Sheer Force only boosts the damage of moves it's supposed to
             case EFFECT_SEMI_INVULNERABLE:
             case EFFECT_SOLAR_BEAM:
             case EFFECT_SKY_DROP:
+            case EFFECT_POLAR_PLUNGE:
                 TURN { SKIP_TURN(playerLeft); SKIP_TURN(opponentLeft); }
                 TURN {}
                 break;
@@ -1318,6 +1330,7 @@ DOUBLE_BATTLE_TEST("Sheer Force only boosts the damage of moves it's supposed to
             case EFFECT_SEMI_INVULNERABLE:
             case EFFECT_SOLAR_BEAM:
             case EFFECT_SKY_DROP:
+            case EFFECT_POLAR_PLUNGE:
                 TURN { SKIP_TURN(playerLeft); SKIP_TURN(opponentLeft); }
                 TURN {}
                 break;
@@ -1407,6 +1420,7 @@ DOUBLE_BATTLE_TEST("Sheer Force only boosts the damage of moves it's supposed to
             case EFFECT_SEMI_INVULNERABLE:
             case EFFECT_SOLAR_BEAM:
             case EFFECT_SKY_DROP:
+            case EFFECT_POLAR_PLUNGE:
                 TURN { SKIP_TURN(playerLeft); SKIP_TURN(opponentLeft); }
                 TURN {}
                 break;

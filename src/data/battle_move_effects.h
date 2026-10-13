@@ -2128,6 +2128,53 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
         .encourageEncore = TRUE,
     },
 
+    [EFFECT_FERTILIZE] =
+    {
+        .battleScript = BattleScript_EffectFertilize,
+        .battleTvScore = 0,
+        .encourageEncore = TRUE,
+    },
+
+    [EFFECT_FRESH_CATCH] =
+    {
+        .battleScript = BattleScript_EffectHit,
+        .battleTvScore = 0,
+    },
+
+    [EFFECT_MASK_OFF] =
+    {
+        .battleScript = BattleScript_EffectMaskOff,
+        .battleTvScore = 0,
+        .encourageEncore = TRUE,
+    },
+
+    [EFFECT_POLISHED_STRIKE] =
+    {
+        .battleScript = BattleScript_EffectHit,
+        .battleTvScore = 0,
+    },
+
+    [EFFECT_POLAR_PLUNGE] =
+    {
+        .battleScript = BattleScript_EffectHit,
+        .battleTvScore = 0,
+        .twoTurnEffect = TRUE,
+        .semiInvulnerableEffect = TRUE,
+    },
+
+    [EFFECT_ANGSTY_SCREAM] =
+    {
+        .battleScript = BattleScript_EffectHit,
+        .battleTvScore = 0,
+    },
+
+    [EFFECT_DRACONIC_PEAK] =
+    {
+        .battleScript = BattleScript_EffectDraconicPeak,
+        .battleTvScore = 0,
+        .encourageEncore = TRUE,
+    },
+
     [EFFECT_SECRET_POWER] =
     {
         .battleScript = BattleScript_EffectHit,
