@@ -922,7 +922,7 @@ const u8 *const gBattleStringsTable[STRINGID_COUNT] =
     [STRINGID_FAEFLIGHT]                            = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX} took flight!"),
     [STRINGID_METEORAPPROACHING]                    = COMPOUND_STRING("A devastating meteor is approaching!"),
     [STRINGID_METEORARRIVED]                        = COMPOUND_STRING("The meteor crashed into the battlefield!"),
-    [STRINGID_DRACONICPEAKCONTINUES]                = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX} continues to rise in fame!\nIt will burn out in {B_BUFF1} turn{B_BUFF2}!"),
+    [STRINGID_DRACONICPEAKCONTINUES]                = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}\ncontinues to rise in fame!\pIt will burn out in {B_BUFF1} turn{B_BUFF2}!"),
     [STRINGID_DRACONICPEAKENDS]                     = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}'s star stopped shining!"),
 };
 
