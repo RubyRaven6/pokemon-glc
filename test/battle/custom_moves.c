@@ -345,6 +345,53 @@ ASSUMPTIONS
     ASSUME(GetMoveEffect(MOVE_ROUGH_RIDIN) == EFFECT_ROUGH_RIDIN);
     ASSUME(GetMoveType(MOVE_ROUGH_RIDIN) == TYPE_GROUND);
     ASSUME(GetMovePP(MOVE_ROUGH_RIDIN) == 5);
+
+    ASSUME(GetMoveEffect(MOVE_FERTILIZE) == EFFECT_FERTILIZE);
+    ASSUME(GetMoveType(MOVE_FERTILIZE) == TYPE_GRASS);
+    ASSUME(GetMovePP(MOVE_FERTILIZE) == 5);
+
+    ASSUME(GetMoveEffect(MOVE_FRESH_CATCH) == EFFECT_FRESH_CATCH);
+    ASSUME(GetMoveType(MOVE_FRESH_CATCH) == TYPE_WATER);
+    ASSUME(GetMovePower(MOVE_FRESH_CATCH) == 70);
+    ASSUME(GetMoveAccuracy(MOVE_FRESH_CATCH) == 100);
+    ASSUME(GetMovePP(MOVE_FRESH_CATCH) == 10);
+    ASSUME(GetMovePriority(MOVE_FRESH_CATCH) == -2);
+
+    ASSUME(GetMoveEffect(MOVE_FIREFLY) == EFFECT_TRIPLE_KICK);
+    ASSUME(GetMoveType(MOVE_FIREFLY) == TYPE_FIRE);
+    ASSUME(GetMoveStrikeCount(MOVE_FIREFLY) == 3);
+    ASSUME(MoveHasAdditionalEffectWithChance(MOVE_FIREFLY, MOVE_EFFECT_BURN, 30));
+
+    ASSUME(GetMoveEffect(MOVE_CHI_BLOCKER) == EFFECT_SUPER_EFFECTIVE_ON_ARG);
+    ASSUME(GetMoveType(MOVE_CHI_BLOCKER) == TYPE_FIGHTING);
+    ASSUME(GetMoveArgType(MOVE_CHI_BLOCKER) == TYPE_PSYCHIC);
+
+    ASSUME(GetMoveEffect(MOVE_MASK_OFF) == EFFECT_MASK_OFF);
+    ASSUME(GetMoveType(MOVE_MASK_OFF) == TYPE_DARK);
+    ASSUME(GetMovePP(MOVE_MASK_OFF) == 5);
+
+    ASSUME(GetMoveEffect(MOVE_SEELIE_SUMMONS) == EFFECT_RECOIL);
+    ASSUME(GetMoveType(MOVE_SEELIE_SUMMONS) == TYPE_FAIRY);
+    ASSUME(GetMovePower(MOVE_SEELIE_SUMMONS) == 120);
+    ASSUME(GetMoveRecoil(MOVE_SEELIE_SUMMONS) == 33);
+
+    ASSUME(GetMoveEffect(MOVE_POLISHED_STRIKE) == EFFECT_POLISHED_STRIKE);
+    ASSUME(GetMoveType(MOVE_POLISHED_STRIKE) == TYPE_ROCK);
+    ASSUME(GetMovePower(MOVE_POLISHED_STRIKE) == 70);
+
+    ASSUME(GetMoveEffect(MOVE_POLAR_PLUNGE) == EFFECT_POLAR_PLUNGE);
+    ASSUME(GetMoveType(MOVE_POLAR_PLUNGE) == TYPE_ICE);
+    ASSUME(GetMovePower(MOVE_POLAR_PLUNGE) == 40);
+
+    ASSUME(GetMoveEffect(MOVE_ANGSTY_SCREAM) == EFFECT_ANGSTY_SCREAM);
+    ASSUME(GetMoveType(MOVE_ANGSTY_SCREAM) == TYPE_DARK);
+    ASSUME(GetMovePower(MOVE_ANGSTY_SCREAM) == 60);
+    ASSUME(IsSoundMove(MOVE_ANGSTY_SCREAM));
+    ASSUME(MoveIgnoresSubstitute(MOVE_ANGSTY_SCREAM));
+
+    ASSUME(GetMoveEffect(MOVE_DRACONIC_PEAK) == EFFECT_DRACONIC_PEAK);
+    ASSUME(GetMoveType(MOVE_DRACONIC_PEAK) == TYPE_DRAGON);
+    ASSUME(GetMovePP(MOVE_DRACONIC_PEAK) == 1);
 }
 
 SINGLE_BATTLE_TEST("Custom Moves - Rock Heart may infatuate the target")
@@ -2531,5 +2578,401 @@ AI_SINGLE_BATTLE_TEST("Custom Moves - AI prioritizes Rough Ridin in danger")
         OPPONENT(SPECIES_WOBBUFFET) { MaxHP(400); HP(99); Moves(MOVE_ROUGH_RIDIN, MOVE_CELEBRATE); }
     } WHEN {
         TURN { SCORE_GT(opponent, MOVE_ROUGH_RIDIN, MOVE_CELEBRATE); }
+    }
+}
+
+SINGLE_BATTLE_TEST("Custom Moves - Fertilize gives its full boost in sun and Grassy Terrain")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET) { Moves(MOVE_FERTILIZE); }
+        PLAYER(SPECIES_RILLABOOM) { Ability(ABILITY_GRASSY_SURGE); }
+        OPPONENT(SPECIES_TORKOAL) { Ability(ABILITY_DROUGHT); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_FERTILIZE); SEND_OUT(player, 1); MOVE(opponent, MOVE_CELEBRATE); }
+    } THEN {
+        EXPECT_EQ(player->species, SPECIES_RILLABOOM);
+        EXPECT_EQ(player->statStages[STAT_ATK], DEFAULT_STAT_STAGE + 3);
+        EXPECT_EQ(player->statStages[STAT_SPATK], DEFAULT_STAT_STAGE + 3);
+    }
+}
+
+SINGLE_BATTLE_TEST("Custom Moves - Fresh Catch switches the target before dealing damage")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET) { Speed(100); }
+        OPPONENT(SPECIES_WOBBUFFET) { MaxHP(500); HP(500); Speed(10); }
+        OPPONENT(SPECIES_WYNAUT) { MaxHP(500); HP(500); Speed(5); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_FRESH_CATCH); MOVE(opponent, MOVE_CELEBRATE); }
+    } SCENE {
+        MESSAGE("The opposing Wynaut was dragged out!");
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_FRESH_CATCH, player);
+        HP_BAR(opponent);
+    } THEN {
+        EXPECT_EQ(opponent->species, SPECIES_WYNAUT);
+        EXPECT_LT(opponent->hp, opponent->maxHP);
+    }
+}
+
+SINGLE_BATTLE_TEST("Custom Moves - Protect stops Fresh Catch before the forced switch")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET) { MaxHP(500); HP(500); Moves(MOVE_PROTECT); }
+        OPPONENT(SPECIES_WYNAUT);
+    } WHEN {
+        TURN { MOVE(player, MOVE_FRESH_CATCH); MOVE(opponent, MOVE_PROTECT); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_PROTECT, opponent);
+        NONE_OF {
+            ANIMATION(ANIM_TYPE_MOVE, MOVE_FRESH_CATCH, player);
+            HP_BAR(opponent);
+        }
+    } THEN {
+        EXPECT_EQ(opponent->species, SPECIES_WOBBUFFET);
+        EXPECT_EQ(opponent->hp, opponent->maxHP);
+    }
+}
+
+SINGLE_BATTLE_TEST("Custom Moves - Firefly burns on an eligible hit")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET) { MaxHP(1000); HP(1000); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_FIREFLY, WITH_RNG(RNG_SECONDARY_EFFECT + 1, 0)); }
+    } THEN {
+        EXPECT(opponent->status1 & STATUS1_BURN);
+    }
+}
+
+SINGLE_BATTLE_TEST("Custom Moves - Chi Blocker is super effective against Psychic types")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(player, MOVE_CHI_BLOCKER); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_CHI_BLOCKER, player);
+        HP_BAR(opponent);
+        MESSAGE("It's super effective!");
+    }
+}
+
+DOUBLE_BATTLE_TEST("Custom Moves - Mask Off lowers every other battler's Attack by three stages")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET);
+        PLAYER(SPECIES_WYNAUT);
+        OPPONENT(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WYNAUT);
+    } WHEN {
+        TURN { MOVE(playerLeft, MOVE_MASK_OFF); }
+    } THEN {
+        EXPECT_EQ(playerLeft->statStages[STAT_ATK], DEFAULT_STAT_STAGE);
+        EXPECT_EQ(playerRight->statStages[STAT_ATK], DEFAULT_STAT_STAGE - 3);
+        EXPECT_EQ(opponentLeft->statStages[STAT_ATK], DEFAULT_STAT_STAGE - 3);
+        EXPECT_EQ(opponentRight->statStages[STAT_ATK], DEFAULT_STAT_STAGE - 3);
+    }
+}
+
+SINGLE_BATTLE_TEST("Custom Moves - Seelie Summons causes one third recoil")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET) { MaxHP(600); HP(600); SpAttack(100); }
+        OPPONENT(SPECIES_WOBBUFFET) { MaxHP(1000); HP(1000); SpDefense(100); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_SEELIE_SUMMONS, WITH_RNG(RNG_DAMAGE_MODIFIER, 0)); }
+    } SCENE {
+        HP_BAR(opponent);
+        HP_BAR(player);
+    } THEN {
+        EXPECT_LT(player->hp, player->maxHP);
+    }
+}
+
+SINGLE_BATTLE_TEST("Custom Moves - Polished Strike doubles in power when the user is faster", s16 damage)
+{
+    u32 fast;
+
+    PARAMETRIZE { fast = FALSE; }
+    PARAMETRIZE { fast = TRUE; }
+
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET) { Attack(100); Speed(fast ? 100 : 10); }
+        OPPONENT(SPECIES_WOBBUFFET) { Defense(100); MaxHP(1000); HP(1000); Speed(50); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_POLISHED_STRIKE, WITH_RNG(RNG_DAMAGE_MODIFIER, 0)); }
+    } SCENE {
+        HP_BAR(opponent, captureDamage: &results[i].damage);
+    } FINALLY {
+        EXPECT_MUL_EQ(results[0].damage, Q_4_12(2.0), results[1].damage);
+    }
+}
+
+SINGLE_BATTLE_TEST("Custom Moves - Polar Plunge strikes on the second turn and inflicts frostbite")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(player, MOVE_POLAR_PLUNGE); MOVE(opponent, MOVE_TACKLE); }
+        TURN { SKIP_TURN(player); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_POLAR_PLUNGE, player);
+        NOT ANIMATION(ANIM_TYPE_MOVE, MOVE_TACKLE, opponent);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_POLAR_PLUNGE, player);
+        HP_BAR(opponent);
+    } THEN {
+        EXPECT(opponent->status1 & STATUS1_FROSTBITE);
+    }
+}
+
+SINGLE_BATTLE_TEST("Custom Moves - Polar Plunge doubles in power against a lighter target", s16 damage)
+{
+    u32 lighter;
+
+    PARAMETRIZE { lighter = FALSE; }
+    PARAMETRIZE { lighter = TRUE; }
+
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET) { Attack(100); }
+        OPPONENT(SPECIES_WOBBUFFET) { Item(lighter ? ITEM_FLOAT_STONE : ITEM_NONE); Defense(100); MaxHP(1000); HP(1000); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_POLAR_PLUNGE); }
+        TURN { SKIP_TURN(player); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_POLAR_PLUNGE, player);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_POLAR_PLUNGE, player);
+        HP_BAR(opponent, captureDamage: &results[i].damage);
+    } FINALLY {
+        EXPECT_MUL_EQ(results[0].damage, Q_4_12(2.0), results[1].damage);
+    }
+}
+
+DOUBLE_BATTLE_TEST("Custom Moves - only Earthquake and Magnitude hit Polar Plunge battlers underground")
+{
+    enum Move move;
+    bool32 hits;
+
+    PARAMETRIZE { move = MOVE_SCRATCH; hits = FALSE; }
+    PARAMETRIZE { move = MOVE_EARTHQUAKE; hits = TRUE; }
+    PARAMETRIZE { move = MOVE_MAGNITUDE; hits = TRUE; }
+
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET) { MaxHP(1000); HP(1000); Speed(100); }
+        PLAYER(SPECIES_WYNAUT) { MaxHP(1000); HP(1000); Speed(1); }
+        OPPONENT(SPECIES_WOBBUFFET) { MaxHP(1000); HP(1000); Speed(5); }
+        OPPONENT(SPECIES_WYNAUT) { MaxHP(1000); HP(1000); Speed(50); }
+    } WHEN {
+        TURN { MOVE(playerLeft, MOVE_POLAR_PLUNGE, target: opponentLeft); MOVE(opponentRight, move, target: playerLeft); }
+    } THEN {
+        if (hits) {
+            EXPECT_LT(playerLeft->hp, playerLeft->maxHP);
+            EXPECT_LT(opponentLeft->hp, opponentLeft->maxHP);
+        } else {
+            EXPECT_EQ(playerLeft->hp, playerLeft->maxHP);
+            EXPECT_EQ(opponentLeft->hp, opponentLeft->maxHP);
+        }
+    }
+}
+
+SINGLE_BATTLE_TEST("Custom Moves - Angsty Scream doubles below half HP", s16 damage)
+{
+    u32 lowHp;
+
+    PARAMETRIZE { lowHp = FALSE; }
+    PARAMETRIZE { lowHp = TRUE; }
+
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET) { MaxHP(400); HP(lowHp ? 199 : 400); SpAttack(100); }
+        OPPONENT(SPECIES_WOBBUFFET) { MaxHP(1000); HP(1000); SpDefense(100); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_ANGSTY_SCREAM, WITH_RNG(RNG_DAMAGE_MODIFIER, 0)); }
+    } SCENE {
+        HP_BAR(opponent, captureDamage: &results[i].damage);
+    } FINALLY {
+        EXPECT_GE(results[1].damage, results[0].damage * 2 - 5);
+        EXPECT_LE(results[1].damage, results[0].damage * 2 + 1);
+    }
+}
+
+SINGLE_BATTLE_TEST("Custom Moves - Angsty Scream bypasses Substitute")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET) { Speed(10); }
+        OPPONENT(SPECIES_WOBBUFFET) { MaxHP(1000); HP(1000); Speed(100); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_ANGSTY_SCREAM); MOVE(opponent, MOVE_SUBSTITUTE); }
+    } THEN {
+        EXPECT_LT(opponent->hp, 750);
+        EXPECT_GT((u32)opponent->volatiles.substituteHP, 0);
+    }
+}
+
+SINGLE_BATTLE_TEST("Custom Moves - Draconic Peak does not boost again on the turn it is used")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(player, MOVE_DRACONIC_PEAK); }
+    } SCENE {
+        NONE_OF { MESSAGE("Wobbuffet continues to rise in fame! It will burn out in 3 turns!"); }
+    } THEN {
+        EXPECT_EQ(player->statStages[STAT_ATK], DEFAULT_STAT_STAGE + 1);
+        EXPECT_EQ(player->statStages[STAT_SPATK], DEFAULT_STAT_STAGE + 1);
+        EXPECT_EQ(player->statStages[STAT_SPEED], DEFAULT_STAT_STAGE + 1);
+    }
+}
+
+SINGLE_BATTLE_TEST("Custom Moves - Draconic Peak boosts at the end of the next two turns")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(player, MOVE_DRACONIC_PEAK); }
+        TURN {}
+        TURN {}
+    } SCENE {
+        MESSAGE("Wobbuffet continues to rise in fame! It will burn out in 2 turns!");
+        MESSAGE("Wobbuffet continues to rise in fame! It will burn out in 1 turn!");
+    } THEN {
+        EXPECT_EQ(player->statStages[STAT_ATK], DEFAULT_STAT_STAGE + 3);
+        EXPECT_EQ(player->statStages[STAT_SPATK], DEFAULT_STAT_STAGE + 3);
+        EXPECT_EQ(player->statStages[STAT_SPEED], DEFAULT_STAT_STAGE + 3);
+    }
+}
+
+SINGLE_BATTLE_TEST("Custom Moves - Draconic Peak's user burns out after three turns")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET);
+        PLAYER(SPECIES_WYNAUT);
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(player, MOVE_DRACONIC_PEAK); }
+        TURN {}
+        TURN {}
+        TURN { SEND_OUT(player, 1); }
+    } SCENE {
+        MESSAGE("Wobbuffet's star stopped shining!");
+    } THEN {
+        EXPECT_EQ(player->species, SPECIES_WYNAUT);
+    }
+}
+
+AI_SINGLE_BATTLE_TEST("Custom Moves - AI prioritizes Fertilize in sun")
+{
+    GIVEN {
+        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY);
+        PLAYER(SPECIES_TORKOAL) { Ability(ABILITY_DROUGHT); }
+        OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_FERTILIZE, MOVE_CELEBRATE); }
+        OPPONENT(SPECIES_WYNAUT);
+    } WHEN {
+        TURN { SCORE_GT(opponent, MOVE_FERTILIZE, MOVE_CELEBRATE); }
+    }
+}
+
+AI_SINGLE_BATTLE_TEST("Custom Moves - AI prioritizes Fresh Catch against a boosted target")
+{
+    GIVEN {
+        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY);
+        PLAYER(SPECIES_WOBBUFFET) { Ability(ABILITY_COMPETITIVE); }
+        PLAYER(SPECIES_WYNAUT);
+        OPPONENT(SPECIES_WOBBUFFET) { Ability(ABILITY_INTIMIDATE); Moves(MOVE_FRESH_CATCH, MOVE_CELEBRATE); }
+    } WHEN {
+        TURN { SCORE_GT(opponent, MOVE_FRESH_CATCH, MOVE_CELEBRATE); }
+    }
+}
+
+AI_SINGLE_BATTLE_TEST("Custom Moves - AI prioritizes Mask Off against a physical attacker")
+{
+    GIVEN {
+        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY);
+        PLAYER(SPECIES_WOBBUFFET) { Moves(MOVE_TACKLE); }
+        OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_MASK_OFF, MOVE_CELEBRATE); }
+    } WHEN {
+        TURN { SCORE_GT(opponent, MOVE_MASK_OFF, MOVE_CELEBRATE); }
+    }
+}
+
+AI_SINGLE_BATTLE_TEST("Custom Moves - AI values Polar Plunge against a lighter target")
+{
+    GIVEN {
+        AI_FLAGS(AI_FLAG_CHECK_VIABILITY);
+        PLAYER(SPECIES_CATERPIE) { MaxHP(1000); HP(1000); }
+        OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_POLAR_PLUNGE, MOVE_TACKLE); }
+    } WHEN {
+        TURN { SCORE_GT(opponent, MOVE_POLAR_PLUNGE, MOVE_TACKLE); }
+    }
+}
+
+AI_SINGLE_BATTLE_TEST("Custom Moves - AI prioritizes Draconic Peak when it can switch later")
+{
+    GIVEN {
+        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY);
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_DRACONIC_PEAK, MOVE_CELEBRATE); }
+        OPPONENT(SPECIES_WYNAUT);
+    } WHEN {
+        TURN { SCORE_GT(opponent, MOVE_DRACONIC_PEAK, MOVE_CELEBRATE); }
+    }
+}
+
+AI_SINGLE_BATTLE_TEST("Custom Moves - AI values Firefly's escalating hits")
+{
+    GIVEN {
+        AI_FLAGS(AI_FLAG_CHECK_VIABILITY | AI_FLAG_PREFER_HIGHEST_DAMAGE_MOVE);
+        PLAYER(SPECIES_VENUSAUR) { MaxHP(1000); HP(1000); }
+        OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_FIREFLY, MOVE_FIRE_PUNCH); }
+    } WHEN {
+        TURN { SCORE_GT(opponent, MOVE_FIREFLY, MOVE_FIRE_PUNCH); }
+    }
+}
+
+AI_SINGLE_BATTLE_TEST("Custom Moves - AI values Chi Blocker against Psychic targets")
+{
+    GIVEN {
+        AI_FLAGS(AI_FLAG_CHECK_VIABILITY | AI_FLAG_PREFER_HIGHEST_DAMAGE_MOVE);
+        PLAYER(SPECIES_ALAKAZAM) { MaxHP(1000); HP(1000); }
+        OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_CHI_BLOCKER, MOVE_BRICK_BREAK); }
+    } WHEN {
+        TURN { SCORE_GT(opponent, MOVE_CHI_BLOCKER, MOVE_BRICK_BREAK); }
+    }
+}
+
+AI_SINGLE_BATTLE_TEST("Custom Moves - AI values Seelie Summons as a strong attack")
+{
+    GIVEN {
+        AI_FLAGS(AI_FLAG_CHECK_VIABILITY | AI_FLAG_PREFER_HIGHEST_DAMAGE_MOVE);
+        PLAYER(SPECIES_DRAGONITE) { MaxHP(1000); HP(1000); }
+        OPPONENT(SPECIES_WOBBUFFET) { MaxHP(1000); HP(1000); Moves(MOVE_SEELIE_SUMMONS, MOVE_MOONBLAST); }
+    } WHEN {
+        TURN { SCORE_GT(opponent, MOVE_SEELIE_SUMMONS, MOVE_MOONBLAST); }
+    }
+}
+
+AI_SINGLE_BATTLE_TEST("Custom Moves - AI values Polished Strike while faster")
+{
+    GIVEN {
+        AI_FLAGS(AI_FLAG_CHECK_VIABILITY | AI_FLAG_PREFER_HIGHEST_DAMAGE_MOVE);
+        PLAYER(SPECIES_CATERPIE) { MaxHP(1000); HP(1000); Speed(50); }
+        OPPONENT(SPECIES_WOBBUFFET) { Speed(100); Moves(MOVE_POLISHED_STRIKE, MOVE_ROCK_SLIDE); }
+    } WHEN {
+        TURN { SCORE_GT(opponent, MOVE_POLISHED_STRIKE, MOVE_ROCK_SLIDE); }
+    }
+}
+
+AI_SINGLE_BATTLE_TEST("Custom Moves - AI values Angsty Scream while in danger")
+{
+    GIVEN {
+        AI_FLAGS(AI_FLAG_CHECK_VIABILITY | AI_FLAG_PREFER_HIGHEST_DAMAGE_MOVE);
+        PLAYER(SPECIES_WOBBUFFET) { MaxHP(1000); HP(1000); }
+        OPPONENT(SPECIES_WOBBUFFET) { MaxHP(100); HP(49); Moves(MOVE_ANGSTY_SCREAM, MOVE_DARK_PULSE); }
+    } WHEN {
+        TURN { SCORE_GT(opponent, MOVE_ANGSTY_SCREAM, MOVE_DARK_PULSE); }
     }
 }

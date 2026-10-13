@@ -686,7 +686,7 @@ static bool32 ShouldSwitchIfOpponentChargingOrInvulnerable(struct SwitchAiContex
     // First turn of Fly/Dive/Bounce/Sky Drop: move is selected this turn but user is not yet semi-invulnerable.
     // Opponent is already semi-invulnerable.
     if (!(IsTwoTurnNotSemiInvulnerableMove(switchContext->opposingBattler, switchContext->incomingMove)
-        || ((effect == EFFECT_SEMI_INVULNERABLE || effect == EFFECT_SKY_DROP) && !IsSemiInvulnerable(switchContext->opposingBattler, CHECK_ALL))
+        || ((effect == EFFECT_SEMI_INVULNERABLE || effect == EFFECT_SKY_DROP || effect == EFFECT_POLAR_PLUNGE) && !IsSemiInvulnerable(switchContext->opposingBattler, CHECK_ALL))
         || IsSemiInvulnerable(switchContext->opposingBattler, CHECK_ALL)))
     {
         return FALSE;

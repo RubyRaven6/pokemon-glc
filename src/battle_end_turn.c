@@ -1091,14 +1091,45 @@ static bool32 HandleEndTurnPerishSong(enum BattlerId battler)
         {
             gBattleMons[battler].volatiles.perishSong = FALSE;
             SetPassiveDamageAmount(battler, gBattleMons[battler].hp);
-            BattleScriptCall(BattleScript_PerishSongTakesLife);
+            if (gBattleMons[battler].volatiles.draconicPeak)
+            {
+                gBattleMons[battler].volatiles.draconicPeak = FALSE;
+                gBattlerAttacker = battler;
+                BattleScriptCall(BattleScript_DraconicPeakTakesLife);
+            }
+            else
+            {
+                BattleScriptCall(BattleScript_PerishSongTakesLife);
+            }
+            effect = TRUE;
+        }
+        else if (gBattleMons[battler].volatiles.draconicPeak)
+        {
+            gBattleMons[battler].volatiles.perishSongTimer--;
+            if (gBattleMons[battler].volatiles.perishSongTimer < 2)
+            {
+                if (gBattleMons[battler].volatiles.perishSongTimer == 0)
+                {
+                    PREPARE_STRING_BUFFER(gBattleTextBuff2, STRINGID_EMPTYSTRING3);
+                }
+                else
+                {
+                    PREPARE_STRING_BUFFER(gBattleTextBuff2, STRINGID_S);
+                }
+                gBattlerAttacker = battler;
+                SetStatChange(battler, STAT_ATK, 1);
+                SetStatChange(battler, STAT_SPATK, 1);
+                SetStatChange(battler, STAT_SPEED, 1);
+                BattleScriptCall(BattleScript_DraconicPeakContinues);
+                effect = TRUE;
+            }
         }
         else
         {
             gBattleMons[battler].volatiles.perishSongTimer--;
             BattleScriptCall(BattleScript_PerishSongCountGoesDown);
+            effect = TRUE;
         }
-        effect = TRUE;
     }
 
     return effect;

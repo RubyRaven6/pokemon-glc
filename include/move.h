@@ -632,7 +632,7 @@ static inline u32 GetTwoTurnMoveSemiInvulnerability(enum Move moveId)
 {
     moveId = SanitizeMoveId(moveId);
     enum BattleMoveEffects effect = gMovesInfo[moveId].effect;
-    assertf(effect == EFFECT_SEMI_INVULNERABLE || effect == EFFECT_SKY_DROP, "not a two-turn move with status: %S", gMovesInfo[moveId].name);
+    assertf(effect == EFFECT_SEMI_INVULNERABLE || effect == EFFECT_SKY_DROP || effect == EFFECT_POLAR_PLUNGE, "not a two-turn move with status: %S", gMovesInfo[moveId].name);
     return gMovesInfo[moveId].argument.twoTurnAttack.state;
 }
 

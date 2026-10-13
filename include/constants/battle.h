@@ -309,6 +309,7 @@ enum VolatileFlags
     F(VOLATILE_VOLTAIC_PRISON,               voltaicPrison,                 (u32, 1)) \
     F(VOLATILE_VOLTAIC_PRISONED_BY,          voltaicPrisonedBy,             (enum BattlerId, MAX_BITS(MAX_BATTLERS_COUNT))) \
     F(VOLATILE_MASTERSTROKE_USES,            masterstrokeUses,              (u32, 5)) \
+    F(VOLATILE_DRACONIC_PEAK,                draconicPeak,                  (u32, 1), V_BATON_PASSABLE) \
     F(VOLATILE_OCTOLOCK,                    octolock,                      (u32, 1)) \
     F(VOLATILE_CUD_CHEW,                    cudChew,                       (u32, 1)) \
     F(VOLATILE_WEATHER_ABILITY_DONE,        weatherAbilityDone,            (u32, 1)) \

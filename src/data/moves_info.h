@@ -23114,6 +23114,191 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .battleAnimScript = gBattleAnimMove_Agility,
     },
 
+    [MOVE_FERTILIZE] =
+    {
+        .name = COMPOUND_STRING("Fertilize"),
+        .description = COMPOUND_STRING(
+            "Switches out and empowers\n"
+            "the replacement's offenses."),
+        .effect = EFFECT_FERTILIZE,
+        .power = 0,
+        .type = TYPE_GRASS,
+        .accuracy = 0,
+        .pp = 5,
+        .target = TARGET_USER,
+        .category = DAMAGE_CATEGORY_STATUS,
+        .battleAnimScript = gBattleAnimMove_BatonPass,
+    },
+
+    [MOVE_FRESH_CATCH] =
+    {
+        .name = COMPOUND_STRING("Fresh Catch"),
+        .description = COMPOUND_STRING(
+            "Drags out a new foe, then\n"
+            "strikes the replacement."),
+        .effect = EFFECT_FRESH_CATCH,
+        .power = 70,
+        .type = TYPE_WATER,
+        .accuracy = 100,
+        .pp = 10,
+        .target = TARGET_SELECTED,
+        .priority = -2,
+        .category = DAMAGE_CATEGORY_PHYSICAL,
+        .battleAnimScript = gBattleAnimMove_FlipTurn,
+    },
+
+    [MOVE_FIREFLY] =
+    {
+        .name = COMPOUND_STRING("Firefly"),
+        .description = COMPOUND_STRING(
+            "Hits three times with rising\n"
+            "power. Each hit may burn."),
+        .effect = EFFECT_TRIPLE_KICK,
+        .power = 20,
+        .type = TYPE_FIRE,
+        .accuracy = 90,
+        .pp = 10,
+        .target = TARGET_SELECTED,
+        .category = DAMAGE_CATEGORY_PHYSICAL,
+        .makesContact = TRUE,
+        .strikeCount = 3,
+        .additionalEffects = ADDITIONAL_EFFECTS({
+            .moveEffect = MOVE_EFFECT_BURN,
+            .chance = 30,
+        }),
+        .battleAnimScript = gBattleAnimMove_TripleAxel,
+    },
+
+    [MOVE_CHI_BLOCKER] =
+    {
+        .name = COMPOUND_STRING("Chi Blocker"),
+        .description = COMPOUND_STRING(
+            "Super effective on Psychic-\n"
+            "types. May cause frostbite."),
+        .effect = EFFECT_SUPER_EFFECTIVE_ON_ARG,
+        .power = 70,
+        .type = TYPE_FIGHTING,
+        .accuracy = 100,
+        .pp = 20,
+        .target = TARGET_SELECTED,
+        .category = DAMAGE_CATEGORY_PHYSICAL,
+        .argument = { .type = TYPE_PSYCHIC },
+        .makesContact = TRUE,
+        .additionalEffects = ADDITIONAL_EFFECTS({
+            .moveEffect = MOVE_EFFECT_FREEZE_OR_FROSTBITE,
+            .chance = 10,
+        }),
+        .battleAnimScript = gBattleAnimMove_BrickBreak,
+    },
+
+    [MOVE_MASK_OFF] =
+    {
+        .name = COMPOUND_STRING("Mask Off"),
+        .description = COMPOUND_STRING(
+            "Drastically lowers every\n"
+            "other battler's Attack."),
+        .effect = EFFECT_MASK_OFF,
+        .power = 0,
+        .type = TYPE_DARK,
+        .accuracy = 0,
+        .pp = 5,
+        .target = TARGET_ALL_BATTLERS,
+        .category = DAMAGE_CATEGORY_STATUS,
+        .battleAnimScript = gBattleAnimMove_ScaryFace,
+    },
+
+    [MOVE_SEELIE_SUMMONS] =
+    {
+        .name = COMPOUND_STRING("Seelie Summons"),
+        .description = COMPOUND_STRING(
+            "A powerful fairy attack that\n"
+            "also hurts the user."),
+        .effect = EFFECT_RECOIL,
+        .power = 120,
+        .type = TYPE_FAIRY,
+        .accuracy = 100,
+        .pp = 5,
+        .target = TARGET_SELECTED,
+        .category = DAMAGE_CATEGORY_SPECIAL,
+        .argument = { .recoilPercentage = 33 },
+        .battleAnimScript = gBattleAnimMove_Moonblast,
+    },
+
+    [MOVE_POLISHED_STRIKE] =
+    {
+        .name = COMPOUND_STRING("Polished Strike"),
+        .description = COMPOUND_STRING(
+            "Power doubles if the user\n"
+            "is faster than the target."),
+        .effect = EFFECT_POLISHED_STRIKE,
+        .power = 70,
+        .type = TYPE_ROCK,
+        .accuracy = 100,
+        .pp = 10,
+        .target = TARGET_SELECTED,
+        .category = DAMAGE_CATEGORY_PHYSICAL,
+        .makesContact = TRUE,
+        .battleAnimScript = gBattleAnimMove_RockSlide,
+    },
+
+    [MOVE_POLAR_PLUNGE] =
+    {
+        .name = COMPOUND_STRING("Polar Plunge"),
+        .description = COMPOUND_STRING(
+            "Buries the foe in snow, then\n"
+            "strikes and causes frostbite."),
+        .effect = EFFECT_POLAR_PLUNGE,
+        .power = 40,
+        .type = TYPE_ICE,
+        .accuracy = 100,
+        .pp = 10,
+        .target = TARGET_SELECTED,
+        .category = DAMAGE_CATEGORY_PHYSICAL,
+        .makesContact = TRUE,
+        .sleepTalkBanned = TRUE,
+        .instructBanned = TRUE,
+        .argument.twoTurnAttack = { .stringId = STRINGID_PKMNDUGHOLE, .state = STATE_UNDERGROUND },
+        .additionalEffects = ADDITIONAL_EFFECTS({
+            .moveEffect = MOVE_EFFECT_FROSTBITE,
+            .chance = 100,
+        }),
+        .battleAnimScript = gBattleAnimMove_Dig,
+    },
+
+    [MOVE_ANGSTY_SCREAM] =
+    {
+        .name = COMPOUND_STRING("Angsty Scream"),
+        .description = COMPOUND_STRING(
+            "Power doubles in danger or\n"
+            "while suffering a status."),
+        .effect = EFFECT_ANGSTY_SCREAM,
+        .power = 60,
+        .type = TYPE_DARK,
+        .accuracy = 100,
+        .pp = 10,
+        .target = TARGET_SELECTED,
+        .category = DAMAGE_CATEGORY_SPECIAL,
+        .soundMove = TRUE,
+        .ignoresSubstitute = TRUE,
+        .battleAnimScript = gBattleAnimMove_Snarl,
+    },
+
+    [MOVE_DRACONIC_PEAK] =
+    {
+        .name = COMPOUND_STRING("Draconic Peak"),
+        .description = COMPOUND_STRING(
+            "Raises three stats, but the\n"
+            "user soon meets its end."),
+        .effect = EFFECT_DRACONIC_PEAK,
+        .power = 0,
+        .type = TYPE_DRAGON,
+        .accuracy = 0,
+        .pp = 1,
+        .target = TARGET_USER,
+        .category = DAMAGE_CATEGORY_STATUS,
+        .battleAnimScript = gBattleAnimMove_DragonDance,
+    },
+
     [MOVE_WINDSTORM] =
     {
         .name = COMPOUND_STRING("Windstorm"),

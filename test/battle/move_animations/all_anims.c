@@ -152,6 +152,7 @@ static bool32 AttackerHasToSwitch(enum Move move) // User needs to send out a di
      || effect == EFFECT_TELEPORT
      || effect == EFFECT_BATON_PASS
      || effect == EFFECT_CASTING_CALL
+     || effect == EFFECT_FERTILIZE
      || effect == EFFECT_MEMENTO
      || effect == EFFECT_HEALING_WISH
      || effect == EFFECT_LUNAR_DANCE

@@ -91,6 +91,15 @@ static enum CancelerResult CancelerSkyDrop(struct BattleCalcValues *cv)
     return CANCELER_RESULT_SUCCESS;
 }
 
+static enum CancelerResult CancelerFreshCatch(struct BattleCalcValues *cv)
+{
+    if (cv->moveEffect != EFFECT_FRESH_CATCH)
+        return CANCELER_RESULT_SUCCESS;
+
+    BattleScriptCall(BattleScript_FreshCatchForceSwitch);
+    return CANCELER_RESULT_RUN_SCRIPT_AND_INCREMENT;
+}
+
 static enum CancelerResult CancelerRecharge(struct BattleCalcValues *cv)
 {
     if (gBattleMons[cv->battlerAtk].volatiles.rechargeTimer > 0)
@@ -842,6 +851,7 @@ bool32 IsAffectedByFollowMe(enum BattlerId battlerAtk, enum BattleSide defSide, 
         || (!IsBattlerAlive(gSideTimers[defSide].followmeTarget) && !IsSmartTargetMoveConsecutiveHit(battlerAtk, move))
         || effect == EFFECT_SNIPE_SHOT
         || effect == EFFECT_SKY_DROP
+        || effect == EFFECT_POLAR_PLUNGE
         || IsAbilityAndRecord(battlerAtk, ability, ABILITY_PROPELLER_TAIL)
         || IsAbilityAndRecord(battlerAtk, ability, ABILITY_STALWART))
         return FALSE;
@@ -1819,7 +1829,8 @@ static enum CancelerResult HandleSkyDropResult(struct BattleCalcValues *cv)
         gBattlescriptCurrInstr = BattleScript_ButItFailed;
         return CANCELER_RESULT_FAILURE;
     }
-    else if (GetBattlerWeight(cv->battlerDef, cv->abilities[cv->battlerDef], cv->holdEffects[cv->battlerDef]) >= 2000)
+    else if (cv->moveEffect == EFFECT_SKY_DROP
+          && GetBattlerWeight(cv->battlerDef, cv->abilities[cv->battlerDef], cv->holdEffects[cv->battlerDef]) >= 2000)
     {
         gBattlescriptCurrInstr = BattleScript_SkyDropTargetTooHeavy;
         return CANCELER_RESULT_FAILURE;
@@ -1853,7 +1864,7 @@ static enum CancelerResult CancelerCharging(struct BattleCalcValues *cv)
     {
         result = CANCELER_RESULT_SUCCESS;
     }
-    else if (cv->moveEffect == EFFECT_SKY_DROP)
+    else if (cv->moveEffect == EFFECT_SKY_DROP || cv->moveEffect == EFFECT_POLAR_PLUNGE)
     {
         result = HandleSkyDropResult(cv);
     }
@@ -3357,6 +3368,7 @@ static enum CancelerResult (*const sMoveSuccessOrderCancelers[])(struct BattleCa
     [CANCELER_MULTIHIT_MOVES] = CancelerMultihitMoves,
     [CANCELER_SUBSTITUTE] = CancelerSubstitute,
     [CANCELER_ACCURACY_CHECK] = CancelerAccuracyCheck,
+    [CANCELER_FRESH_CATCH] = CancelerFreshCatch,
     [CANCELER_COLOR_CHANGE] = CancelerColorChange,
     [CANCELER_PRE_ATTACK_MOVE_EFFECT] = CancelerPreAttackMoveEffect,
     [CANCELER_DAMAGE_CALC] = CancelerDamageCalc,
