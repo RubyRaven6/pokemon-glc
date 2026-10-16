@@ -825,6 +825,12 @@ static bool32 ShouldCheckTargetMoveFailure(enum BattlerId battlerAtk, enum Battl
     if ((moveTarget != TARGET_FIELD && moveTarget != TARGET_OPPONENTS_FIELD) && !IsBattlerAlive(battlerDef))
         return skipFailure;
 
+    if (move == MOVE_COLLAB_STREAM
+     && IsBattlerAlly(battlerAtk, battlerDef)
+     && gChosenActionByBattler[battlerDef] == B_ACTION_USE_MOVE
+     && gChosenMoveByBattler[battlerDef] == MOVE_COLLAB_STREAM)
+        return skipFailure;
+
     return sShouldCheckTargetMoveFailure[moveTarget](battlerAtk, battlerDef);
 }
 #undef checkFailure
@@ -4770,6 +4776,55 @@ static enum MoveEndResult MoveEndMoveBlock(struct BattleCalcValues *cv)
                     return MOVEEND_RESULT_RUN_SCRIPT;
                 }
             }
+            break;
+        case EFFECT_SOAPBERRY_SHOCK:
+            if (!IsHazardOnSide(side, HAZARDS_STICKY_WEB)
+             && !IsBattlerAlive(battlerDef)
+             && IsBattlerTurnDamaged(battlerDef, EXCLUDING_SUBSTITUTES))
+            {
+                BattleScriptCall(BattleScript_MoveEffectStickyWeb);
+                gBattleStruct->eventState.moveEndBattler = 0;
+                gBattleScripting.moveendState++;
+                return MOVEEND_RESULT_RUN_SCRIPT;
+            }
+            break;
+        case EFFECT_PIERCING_VINE:
+            if (gSpecialStatuses[battlerDef].criticalHit
+             && gSideTimers[side].spikesAmount < 3
+             && IsBattlerTurnDamaged(battlerDef, INCLUDING_SUBSTITUTES)
+             && IsBattlerAlive(cv->battlerAtk))
+            {
+                if (gBattleStruct->isSkyBattle)
+                {
+                    gBattleStruct->eventState.moveEndBattler = 0;
+                    gBattleScripting.moveendState++;
+                    return MOVEEND_RESULT_CONTINUE;
+                }
+
+                gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_SPIKESSCATTERED;
+                BattleScriptCall(BattleScript_MoveEffectSpikes);
+                gBattleStruct->eventState.moveEndBattler = 0;
+                gBattleScripting.moveendState++;
+                return MOVEEND_RESULT_RUN_SCRIPT;
+            }
+            break;
+        case EFFECT_SURFACE_BREACH:
+            if (gBattleWeather == BATTLE_WEATHER_NONE
+             && IsBattlerTurnDamaged(battlerDef, INCLUDING_SUBSTITUTES)
+             && IsBattlerAlive(cv->battlerAtk)
+             && TryChangeBattleWeather(cv->battlerAtk, BATTLE_WEATHER_RAIN, ABILITY_NONE) == WEATHER_FAILURE_SUCCESS)
+            {
+                gBattleStruct->weatherDuration = 2;
+                gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_STARTED_RAIN;
+                BattleScriptCall(BattleScript_MoveEffectSetWeather);
+                gBattleStruct->eventState.moveEndBattler = 0;
+                gBattleScripting.moveendState++;
+                return MOVEEND_RESULT_RUN_SCRIPT;
+            }
+            break;
+        case EFFECT_SUMMIT_DROP:
+            if (!gBattleStruct->unableToUseMove && IsBattlerAlive(cv->battlerAtk))
+                gBattleMons[cv->battlerAtk].volatiles.summitDrop = TRUE;
             break;
         case EFFECT_SCALE_SHOT:
             if (IsBattlerAlive(cv->battlerAtk)

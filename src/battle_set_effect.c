@@ -595,6 +595,33 @@ static void HandleSetEffectRound(struct BattleCalcValues *cv, struct SetEffect *
     gBattlescriptCurrInstr = se->script;
 }
 
+static void HandleSetEffectCollabStream(struct BattleCalcValues *cv, struct SetEffect *se)
+{
+    if (IsDoubleBattle())
+    {
+        enum BattlerId partner = GetPartnerBattler(cv->battlerAtk);
+
+        if (IsBattlerAlive(partner)
+         && !HasBattlerActedThisTurn(partner)
+         && gChosenActionByBattler[partner] == B_ACTION_USE_MOVE
+         && gChosenMoveByBattler[partner] == MOVE_COLLAB_STREAM)
+        {
+            u32 attackerIndex = GetBattlerTurnOrderNum(cv->battlerAtk);
+            u32 partnerIndex = GetBattlerTurnOrderNum(partner);
+
+            if (partnerIndex > attackerIndex + 1)
+            {
+                for (u32 i = partnerIndex; i > attackerIndex + 1; i--)
+                    gBattlerByTurnOrder[i] = gBattlerByTurnOrder[i - 1];
+                gBattlerByTurnOrder[attackerIndex + 1] = partner;
+            }
+            gProtectStructs[partner].quash = TRUE;
+        }
+    }
+
+    gBattlescriptCurrInstr = se->script;
+}
+
 static void HandleSetEffectSyrupBomb(struct BattleCalcValues *cv, struct SetEffect *se)
 {
     if (!gBattleMons[se->effectBattler].volatiles.syrupBomb)
@@ -1461,6 +1488,7 @@ static void (*const sSetEffectHandlers[])(struct BattleCalcValues *cv, struct Se
     [MOVE_EFFECT_RECOIL_HP_25] = HandleSetEffectRecoilHp25,
     [MOVE_EFFECT_TRAP_BOTH] = HandleSetEffectTrapBoth,
     [MOVE_EFFECT_ROUND] = HandleSetEffectRound,
+    [MOVE_EFFECT_COLLAB_STREAM] = HandleSetEffectCollabStream,
     [MOVE_EFFECT_SYRUP_BOMB] = HandleSetEffectSyrupBomb,
     [MOVE_EFFECT_FLORAL_HEALING] = HandleSetEffectNone,
     [MOVE_EFFECT_SECRET_POWER] = HandleSetEffectSecretPower,

@@ -41,6 +41,34 @@ static bool32 HandleEndTurnOrder(enum BattlerId battler)
     return effect;
 }
 
+static bool32 HandleEndTurnSummitDrop(enum BattlerId battler)
+{
+    enum BattlerId target;
+
+    gBattleStruct->eventState.endTurnBattler++;
+
+    if (!gBattleMons[battler].volatiles.summitDrop)
+        return FALSE;
+
+    gBattleMons[battler].volatiles.summitDrop = FALSE;
+    if (!IsBattlerAlive(battler))
+        return FALSE;
+
+    target = GetBattlerLeftFoe(battler);
+    if (!IsBattlerAlive(target))
+        target = GetBattlerRightFoe(battler);
+    if (!IsBattlerAlive(target))
+        return FALSE;
+
+    gBattlerAttacker = battler;
+    gBattlerTarget = target;
+    gSpecialStatuses[battler].backUpTarget = gBattleStruct->moveTarget[battler] + 1;
+    gBattleStruct->moveTarget[battler] = target;
+    gCalledMove = MOVE_SUMMIT_DROP_FOLLOW_UP;
+    BattleScriptExecute(BattleScript_SummitDropFollowUp);
+    return TRUE;
+}
+
 static bool32 HandleEndTurnResearch(enum BattlerId battler)
 {
     bool32 effect = FALSE;
@@ -1674,6 +1702,7 @@ static bool32 HandleEndTurnDynamax(enum BattlerId battler)
 static bool32 (*const sEndTurnEffectHandlers[])(enum BattlerId battler) =
 {
     [ENDTURN_ORDER] = HandleEndTurnOrder,
+    [ENDTURN_SUMMIT_DROP] = HandleEndTurnSummitDrop,
     [ENDTURN_RESEARCH] = HandleEndTurnResearch,
     [ENDTURN_BLOOMING_SHIELD] = HandleEndTurnBloomingShield,
     [ENDTURN_VARIOUS] = HandleEndTurnVarious,

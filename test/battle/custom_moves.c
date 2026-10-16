@@ -392,6 +392,63 @@ ASSUMPTIONS
     ASSUME(GetMoveEffect(MOVE_DRACONIC_PEAK) == EFFECT_DRACONIC_PEAK);
     ASSUME(GetMoveType(MOVE_DRACONIC_PEAK) == TYPE_DRAGON);
     ASSUME(GetMovePP(MOVE_DRACONIC_PEAK) == 1);
+
+    ASSUME(GetMoveEffect(MOVE_SOAPBERRY_SHOCK) == EFFECT_SOAPBERRY_SHOCK);
+    ASSUME(GetMoveType(MOVE_SOAPBERRY_SHOCK) == TYPE_BUG);
+    ASSUME(GetMovePower(MOVE_SOAPBERRY_SHOCK) == 75);
+    ASSUME(GetMoveAccuracy(MOVE_SOAPBERRY_SHOCK) == 100);
+    ASSUME(GetMovePP(MOVE_SOAPBERRY_SHOCK) == 10);
+    ASSUME(GetMoveCategory(MOVE_SOAPBERRY_SHOCK) == DAMAGE_CATEGORY_PHYSICAL);
+    ASSUME_MOVE_EFFECT_STAT_CHANGE(MOVE_SOAPBERRY_SHOCK, speed: -1);
+
+    ASSUME(GetMoveEffect(MOVE_PIERCING_VINE) == EFFECT_PIERCING_VINE);
+    ASSUME(GetMoveType(MOVE_PIERCING_VINE) == TYPE_GRASS);
+    ASSUME(GetMovePower(MOVE_PIERCING_VINE) == 70);
+    ASSUME(GetMoveAccuracy(MOVE_PIERCING_VINE) == 100);
+    ASSUME(GetMovePP(MOVE_PIERCING_VINE) == 20);
+    ASSUME(GetMoveCriticalHitStage(MOVE_PIERCING_VINE) == 1);
+
+    ASSUME(GetMoveEffect(MOVE_COLLAB_STREAM) == EFFECT_COLLAB_STREAM);
+    ASSUME(GetMoveType(MOVE_COLLAB_STREAM) == TYPE_ELECTRIC);
+    ASSUME(GetMovePower(MOVE_COLLAB_STREAM) == 60);
+    ASSUME(GetMoveAccuracy(MOVE_COLLAB_STREAM) == 100);
+    ASSUME(GetMovePP(MOVE_COLLAB_STREAM) == 10);
+    ASSUME(GetMoveTarget(MOVE_COLLAB_STREAM) == TARGET_FOES_AND_ALLY);
+
+    ASSUME(GetMoveEffect(MOVE_SURFACE_BREACH) == EFFECT_SURFACE_BREACH);
+    ASSUME(GetMoveType(MOVE_SURFACE_BREACH) == TYPE_WATER);
+    ASSUME(GetMovePower(MOVE_SURFACE_BREACH) == 100);
+    ASSUME(GetMoveAccuracy(MOVE_SURFACE_BREACH) == 95);
+    ASSUME(GetMovePP(MOVE_SURFACE_BREACH) == 10);
+
+    ASSUME(GetMoveEffect(MOVE_SIMPLIFY) == EFFECT_SOAK);
+    ASSUME(GetMoveType(MOVE_SIMPLIFY) == TYPE_NORMAL);
+    ASSUME(GetMoveArgType(MOVE_SIMPLIFY) == TYPE_NORMAL);
+    ASSUME(GetMovePP(MOVE_SIMPLIFY) == 10);
+    ASSUME(MoveIgnoresSubstitute(MOVE_SIMPLIFY));
+    ASSUME(!MoveIgnoresProtect(MOVE_SIMPLIFY));
+
+    ASSUME(GetMoveEffect(MOVE_GHASTLY_DISS) == EFFECT_GHASTLY_DISS);
+    ASSUME(GetMoveType(MOVE_GHASTLY_DISS) == TYPE_GHOST);
+    ASSUME(GetMoveAccuracy(MOVE_GHASTLY_DISS) == 100);
+    ASSUME(GetMovePP(MOVE_GHASTLY_DISS) == 10);
+    ASSUME(GetMoveTarget(MOVE_GHASTLY_DISS) == TARGET_BOTH);
+
+    ASSUME(GetMoveEffect(MOVE_GLAMOUR_FLASH) == EFFECT_GLAMOUR_FLASH);
+    ASSUME(GetMoveType(MOVE_GLAMOUR_FLASH) == TYPE_PSYCHIC);
+    ASSUME(GetMovePower(MOVE_GLAMOUR_FLASH) == 60);
+    ASSUME(GetMoveAccuracy(MOVE_GLAMOUR_FLASH) == 100);
+    ASSUME(GetMovePP(MOVE_GLAMOUR_FLASH) == 10);
+
+    ASSUME(GetMoveEffect(MOVE_SUMMIT_DROP) == EFFECT_SUMMIT_DROP);
+    ASSUME(GetMoveType(MOVE_SUMMIT_DROP) == TYPE_ICE);
+    ASSUME(GetMovePower(MOVE_SUMMIT_DROP) == 40);
+    ASSUME(GetMoveAccuracy(MOVE_SUMMIT_DROP) == 100);
+    ASSUME(GetMovePP(MOVE_SUMMIT_DROP) == 5);
+    ASSUME(GetMoveEffect(MOVE_SUMMIT_DROP_FOLLOW_UP) == EFFECT_REVENGE);
+    ASSUME(GetMoveType(MOVE_SUMMIT_DROP_FOLLOW_UP) == TYPE_ICE);
+    ASSUME(GetMovePower(MOVE_SUMMIT_DROP_FOLLOW_UP) == 60);
+    ASSUME(GetMoveTarget(MOVE_SUMMIT_DROP_FOLLOW_UP) == TARGET_BOTH);
 }
 
 SINGLE_BATTLE_TEST("Custom Moves - Rock Heart may infatuate the target")
@@ -2974,5 +3031,476 @@ AI_SINGLE_BATTLE_TEST("Custom Moves - AI values Angsty Scream while in danger")
         OPPONENT(SPECIES_WOBBUFFET) { MaxHP(100); HP(49); Moves(MOVE_ANGSTY_SCREAM, MOVE_DARK_PULSE); }
     } WHEN {
         TURN { SCORE_GT(opponent, MOVE_ANGSTY_SCREAM, MOVE_DARK_PULSE); }
+    }
+}
+
+SINGLE_BATTLE_TEST("Custom Moves - Draconic Peak prevents normal switching")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET);
+        PLAYER(SPECIES_WYNAUT);
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(player, MOVE_DRACONIC_PEAK); }
+    } THEN {
+        EXPECT(player->volatiles.escapePrevention);
+        EXPECT(!CanBattlerEscape(player - gBattleMons));
+    }
+}
+
+SINGLE_BATTLE_TEST("Custom Moves - Draconic Peak permits move-driven switching")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET) { Moves(MOVE_DRACONIC_PEAK, MOVE_U_TURN); }
+        PLAYER(SPECIES_WYNAUT);
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(player, MOVE_DRACONIC_PEAK); }
+        TURN { MOVE(player, MOVE_U_TURN); SEND_OUT(player, 1); }
+    } THEN {
+        EXPECT_EQ(player->species, SPECIES_WYNAUT);
+    }
+}
+
+SINGLE_BATTLE_TEST("Custom Moves - Draconic Peak permits item-driven switching")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET) { Item(ITEM_EJECT_BUTTON); MaxHP(500); HP(500); Speed(100); }
+        PLAYER(SPECIES_WYNAUT) { Speed(50); }
+        OPPONENT(SPECIES_WOBBUFFET) { Speed(1); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_DRACONIC_PEAK); MOVE(opponent, MOVE_CELEBRATE); }
+        TURN { MOVE(player, MOVE_CELEBRATE); MOVE(opponent, MOVE_SCRATCH); SEND_OUT(player, 1); }
+    } THEN {
+        EXPECT_EQ(player->species, SPECIES_WYNAUT);
+    }
+}
+
+SINGLE_BATTLE_TEST("Custom Moves - Draconic Peak permits ability-driven switching")
+{
+    GIVEN {
+        PLAYER(SPECIES_WIMPOD) { Ability(ABILITY_WIMP_OUT); MaxHP(100); HP(60); Speed(100); }
+        PLAYER(SPECIES_WYNAUT) { Speed(50); }
+        OPPONENT(SPECIES_WOBBUFFET) { Speed(1); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_DRACONIC_PEAK); MOVE(opponent, MOVE_CELEBRATE); }
+        TURN { MOVE(player, MOVE_CELEBRATE); MOVE(opponent, MOVE_DRAGON_RAGE); SEND_OUT(player, 1); }
+    } THEN {
+        EXPECT_EQ(player->species, SPECIES_WYNAUT);
+    }
+}
+
+SINGLE_BATTLE_TEST("Custom Moves - Soapberry Shock lowers Speed on hit")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET) { MaxHP(1000); HP(1000); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_SOAPBERRY_SHOCK); }
+    } THEN {
+        EXPECT_EQ(opponent->statStages[STAT_SPEED], DEFAULT_STAT_STAGE - 1);
+    }
+}
+
+SINGLE_BATTLE_TEST("Custom Moves - Soapberry Shock sets Sticky Web after a knockout")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET) { HP(1); }
+        OPPONENT(SPECIES_WYNAUT);
+    } WHEN {
+        TURN { MOVE(player, MOVE_SOAPBERRY_SHOCK); SEND_OUT(opponent, 1); }
+    } THEN {
+        EXPECT(IsHazardOnSide(B_SIDE_OPPONENT, HAZARDS_STICKY_WEB));
+    }
+}
+
+SINGLE_BATTLE_TEST("Custom Moves - Piercing Vine sets Spikes on a critical hit")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET) { MaxHP(1000); HP(1000); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_PIERCING_VINE, criticalHit: TRUE); }
+    } SCENE {
+        MESSAGE("A critical hit!");
+        MESSAGE("Spikes were scattered on the ground all around the opposing side!");
+    } THEN {
+        EXPECT(gSideTimers[B_SIDE_OPPONENT].spikesAmount == 1);
+    }
+}
+
+DOUBLE_BATTLE_TEST("Custom Moves - Collab Stream hits its ally unless the ally also uses it")
+{
+    bool32 collaborates;
+
+    PARAMETRIZE { collaborates = FALSE; }
+    PARAMETRIZE { collaborates = TRUE; }
+
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET) { Speed(100); }
+        PLAYER(SPECIES_WYNAUT) { MaxHP(1000); HP(1000); Speed(50); }
+        OPPONENT(SPECIES_WOBBUFFET) { MaxHP(1000); HP(1000); Speed(75); }
+        OPPONENT(SPECIES_WYNAUT) { MaxHP(1000); HP(1000); Speed(25); }
+    } WHEN {
+        TURN {
+            MOVE(playerLeft, MOVE_COLLAB_STREAM);
+            MOVE(playerRight, collaborates ? MOVE_COLLAB_STREAM : MOVE_CELEBRATE);
+            MOVE(opponentLeft, MOVE_CELEBRATE);
+            MOVE(opponentRight, MOVE_CELEBRATE);
+        }
+    } THEN {
+        if (collaborates)
+            EXPECT_EQ(playerRight->hp, playerRight->maxHP);
+        else
+            EXPECT_LT(playerRight->hp, playerRight->maxHP);
+    }
+}
+
+DOUBLE_BATTLE_TEST("Custom Moves - allied Collab Streams double in power and act consecutively", s16 damage)
+{
+    bool32 collaborates;
+
+    PARAMETRIZE { collaborates = FALSE; }
+    PARAMETRIZE { collaborates = TRUE; }
+
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET) { Speed(100); SpAttack(100); }
+        PLAYER(SPECIES_WYNAUT) { Speed(50); SpAttack(100); }
+        OPPONENT(SPECIES_WOBBUFFET) { MaxHP(5000); HP(5000); Speed(75); SpDefense(100); }
+        OPPONENT(SPECIES_WYNAUT) { MaxHP(5000); HP(5000); Speed(25); SpDefense(100); }
+    } WHEN {
+        TURN {
+            MOVE(playerLeft, MOVE_COLLAB_STREAM, WITH_RNG(RNG_DAMAGE_MODIFIER, 0));
+            MOVE(playerRight, collaborates ? MOVE_COLLAB_STREAM : MOVE_CELEBRATE, WITH_RNG(RNG_DAMAGE_MODIFIER, 0));
+            MOVE(opponentLeft, MOVE_CELEBRATE);
+            MOVE(opponentRight, MOVE_CELEBRATE);
+        }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_COLLAB_STREAM, playerLeft);
+        HP_BAR(opponentLeft, captureDamage: &results[i].damage);
+        if (collaborates) {
+            ANIMATION(ANIM_TYPE_MOVE, MOVE_COLLAB_STREAM, playerRight);
+            ANIMATION(ANIM_TYPE_MOVE, MOVE_CELEBRATE, opponentLeft);
+        }
+    } FINALLY {
+        EXPECT_GE(results[1].damage, results[0].damage * 2 - 5);
+        EXPECT_LE(results[1].damage, results[0].damage * 2 + 1);
+    }
+}
+
+SINGLE_BATTLE_TEST("Custom Moves - Surface Breach creates rain for the current and following turn")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET) { MaxHP(1000); HP(1000); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_SURFACE_BREACH); }
+        TURN { MOVE(player, MOVE_CELEBRATE); }
+    } SCENE {
+        MESSAGE("It started to rain!");
+        MESSAGE("Rain continues to fall.");
+        MESSAGE("The rain stopped.");
+    } THEN {
+        EXPECT_EQ(gBattleWeather, B_WEATHER_NONE);
+    }
+}
+
+SINGLE_BATTLE_TEST("Custom Moves - Surface Breach does not replace existing weather")
+{
+    GIVEN {
+        PLAYER(SPECIES_TORKOAL) { Ability(ABILITY_DROUGHT); }
+        OPPONENT(SPECIES_WOBBUFFET) { MaxHP(1000); HP(1000); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_SURFACE_BREACH); }
+    } THEN {
+        EXPECT(gBattleWeather & B_WEATHER_SUN);
+        EXPECT(!(gBattleWeather & B_WEATHER_RAIN));
+    }
+}
+
+SINGLE_BATTLE_TEST("Custom Moves - Simplify changes a Ghost type to pure Normal through Substitute")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET) { Speed(1); }
+        OPPONENT(SPECIES_GENGAR) { Speed(100); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_SIMPLIFY); MOVE(opponent, MOVE_SUBSTITUTE); }
+    } THEN {
+        EXPECT_EQ(opponent->types[0], TYPE_NORMAL);
+        EXPECT_EQ(opponent->types[1], TYPE_NORMAL);
+    }
+}
+
+SINGLE_BATTLE_TEST("Custom Moves - Simplify is blocked by protection")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET) { Speed(1); }
+        OPPONENT(SPECIES_GENGAR) { Speed(100); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_SIMPLIFY); MOVE(opponent, MOVE_PROTECT); }
+    } THEN {
+        EXPECT_NE(opponent->types[0], TYPE_NORMAL);
+    }
+}
+
+SINGLE_BATTLE_TEST("Custom Moves - Simplify gains priority against a dual-type target")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET) { Speed(1); }
+        OPPONENT(SPECIES_GENGAR) { Speed(100); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_SIMPLIFY); MOVE(opponent, MOVE_CELEBRATE); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SIMPLIFY, player);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_CELEBRATE, opponent);
+    }
+}
+
+SINGLE_BATTLE_TEST("Custom Moves - Simplify fails against a Terastallized target")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_GENGAR) { TeraType(TYPE_GHOST); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_SIMPLIFY); MOVE(opponent, MOVE_CELEBRATE, gimmick: GIMMICK_TERA); }
+    } SCENE {
+        MESSAGE("But it failed!");
+    } THEN {
+        EXPECT_EQ(opponent->types[0], TYPE_GHOST);
+    }
+}
+
+DOUBLE_BATTLE_TEST("Custom Moves - Ghastly Diss sharply lowers two random core stats of both opponents")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET) { Speed(100); }
+        PLAYER(SPECIES_WYNAUT) { Speed(75); }
+        OPPONENT(SPECIES_WOBBUFFET) { Speed(50); }
+        OPPONENT(SPECIES_WYNAUT) { Speed(25); }
+    } WHEN {
+        TURN { MOVE(playerLeft, MOVE_GHASTLY_DISS, WITH_RNG(RNG_RANDOM_FROM_LIST, 0)); }
+    } THEN {
+        EXPECT_EQ(opponentLeft->statStages[STAT_ATK], DEFAULT_STAT_STAGE - 2);
+        EXPECT_EQ(opponentLeft->statStages[STAT_DEF], DEFAULT_STAT_STAGE - 2);
+        EXPECT_EQ(opponentRight->statStages[STAT_ATK], DEFAULT_STAT_STAGE - 2);
+        EXPECT_EQ(opponentRight->statStages[STAT_DEF], DEFAULT_STAT_STAGE - 2);
+    }
+}
+
+SINGLE_BATTLE_TEST("Custom Moves - Ghastly Diss knocks out a target lowered in every core stat")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET) { MaxHP(5000); HP(5000); Speed(100); }
+        OPPONENT(SPECIES_WOBBUFFET) { Attack(1); SpAttack(1); Speed(1); Moves(MOVE_CLOSE_COMBAT, MOVE_LEAF_STORM, MOVE_HAMMER_ARM, MOVE_SUPERPOWER); }
+        OPPONENT(SPECIES_WYNAUT) { Speed(1); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_CELEBRATE); MOVE(opponent, MOVE_CLOSE_COMBAT); }
+        TURN { MOVE(player, MOVE_CELEBRATE); MOVE(opponent, MOVE_LEAF_STORM); }
+        TURN { MOVE(player, MOVE_CELEBRATE); MOVE(opponent, MOVE_HAMMER_ARM); }
+        TURN { MOVE(player, MOVE_CELEBRATE); MOVE(opponent, MOVE_SUPERPOWER); }
+        TURN { MOVE(player, MOVE_GHASTLY_DISS, WITH_RNG(RNG_RANDOM_FROM_LIST, 0)); MOVE(opponent, MOVE_CLOSE_COMBAT); SEND_OUT(opponent, 1); }
+    } THEN {
+        EXPECT_EQ(opponent->species, SPECIES_WYNAUT);
+    }
+}
+
+SINGLE_BATTLE_TEST("Custom Moves - Glamour Flash gains power from the user's total stat-stage advantage", s16 damage)
+{
+    bool32 advantage;
+
+    PARAMETRIZE { advantage = FALSE; }
+    PARAMETRIZE { advantage = TRUE; }
+
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET) { SpAttack(100); }
+        OPPONENT(SPECIES_WOBBUFFET) { MaxHP(5000); HP(5000); SpAttack(1); SpDefense(100); }
+    } WHEN {
+        TURN { MOVE(player, advantage ? MOVE_SWORDS_DANCE : MOVE_CELEBRATE); MOVE(opponent, advantage ? MOVE_OVERHEAT : MOVE_CELEBRATE); }
+        TURN { MOVE(player, MOVE_GLAMOUR_FLASH, WITH_RNG(RNG_DAMAGE_MODIFIER, 0)); }
+    } SCENE {
+        HP_BAR(opponent, captureDamage: &results[i].damage);
+    } FINALLY {
+        EXPECT_GT(results[1].damage, results[0].damage * 2);
+        EXPECT_LT(results[1].damage, results[0].damage * 5 / 2);
+    }
+}
+
+SINGLE_BATTLE_TEST("Custom Moves - Glamour Flash does not lose power from a stat-stage disadvantage", s16 damage)
+{
+    bool32 disadvantage;
+
+    PARAMETRIZE { disadvantage = FALSE; }
+    PARAMETRIZE { disadvantage = TRUE; }
+
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET) { SpAttack(100); }
+        OPPONENT(SPECIES_WOBBUFFET) { MaxHP(5000); HP(5000); SpDefense(100); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_CELEBRATE); MOVE(opponent, disadvantage ? MOVE_SWORDS_DANCE : MOVE_CELEBRATE); }
+        TURN { MOVE(player, MOVE_GLAMOUR_FLASH, WITH_RNG(RNG_DAMAGE_MODIFIER, 0)); }
+    } SCENE {
+        HP_BAR(opponent, captureDamage: &results[i].damage);
+    } FINALLY {
+        EXPECT_EQ(results[1].damage, results[0].damage);
+    }
+}
+
+AI_SINGLE_BATTLE_TEST("Custom Moves - AI values Soapberry Shock's Sticky Web after a knockout")
+{
+    GIVEN {
+        AI_FLAGS(AI_FLAG_CHECK_VIABILITY);
+        PLAYER(SPECIES_WOBBUFFET) { Level(1); MaxHP(100); HP(100); Defense(1); }
+        PLAYER(SPECIES_WYNAUT);
+        OPPONENT(SPECIES_WOBBUFFET) { Level(100); Attack(500); Moves(MOVE_SOAPBERRY_SHOCK, MOVE_X_SCISSOR); }
+    } WHEN {
+        TURN { SCORE_GT(opponent, MOVE_SOAPBERRY_SHOCK, MOVE_X_SCISSOR); }
+    }
+}
+
+AI_SINGLE_BATTLE_TEST("Custom Moves - AI values Piercing Vine while Spikes can be added")
+{
+    GIVEN {
+        AI_FLAGS(AI_FLAG_CHECK_VIABILITY);
+        PLAYER(SPECIES_WOBBUFFET);
+        PLAYER(SPECIES_WYNAUT);
+        OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_PIERCING_VINE, MOVE_LEAF_BLADE); }
+    } WHEN {
+        TURN { SCORE_GT(opponent, MOVE_PIERCING_VINE, MOVE_LEAF_BLADE); }
+    }
+}
+
+AI_DOUBLE_BATTLE_TEST("Custom Moves - AI values allied Collab Streams")
+{
+    GIVEN {
+        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_DOUBLE_BATTLE);
+        PLAYER(SPECIES_WOBBUFFET);
+        PLAYER(SPECIES_WYNAUT);
+        OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_COLLAB_STREAM, MOVE_THUNDERBOLT); }
+        OPPONENT(SPECIES_WYNAUT) { Moves(MOVE_COLLAB_STREAM, MOVE_THUNDERBOLT); }
+    } WHEN {
+        TURN {
+            SCORE_GT(opponentLeft, MOVE_COLLAB_STREAM, MOVE_THUNDERBOLT, target: playerLeft);
+            SCORE_GT(opponentRight, MOVE_COLLAB_STREAM, MOVE_THUNDERBOLT, target: playerLeft);
+        }
+    }
+}
+
+AI_SINGLE_BATTLE_TEST("Custom Moves - AI values Surface Breach under clear skies")
+{
+    GIVEN {
+        AI_FLAGS(AI_FLAG_CHECK_VIABILITY);
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_SURFACE_BREACH, MOVE_LIQUIDATION); }
+    } WHEN {
+        TURN { SCORE_GT(opponent, MOVE_SURFACE_BREACH, MOVE_LIQUIDATION); }
+    }
+}
+
+AI_SINGLE_BATTLE_TEST("Custom Moves - AI avoids Simplify against a Terastallized target")
+{
+    GIVEN {
+        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY);
+        PLAYER(SPECIES_GENGAR) { TeraType(TYPE_GHOST); }
+        OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_SIMPLIFY, MOVE_DARK_PULSE); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_CELEBRATE, gimmick: GIMMICK_TERA); }
+        TURN { SCORE_LT(opponent, MOVE_SIMPLIFY, MOVE_DARK_PULSE); }
+    }
+}
+
+AI_SINGLE_BATTLE_TEST("Custom Moves - AI values Ghastly Diss as disruption")
+{
+    GIVEN {
+        AI_FLAGS(AI_FLAG_CHECK_VIABILITY);
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_GHASTLY_DISS, MOVE_CELEBRATE); }
+    } WHEN {
+        TURN { SCORE_GT(opponent, MOVE_GHASTLY_DISS, MOVE_CELEBRATE); }
+    }
+}
+
+SINGLE_BATTLE_TEST("Custom Moves - Summit Drop follows up with Avalanche at the end of the turn", s16 damage)
+{
+    bool32 damaged;
+
+    PARAMETRIZE { damaged = FALSE; }
+    PARAMETRIZE { damaged = TRUE; }
+
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET) { Attack(100); MaxHP(1000); HP(1000); Speed(100); }
+        OPPONENT(SPECIES_WOBBUFFET) { Defense(100); MaxHP(5000); HP(5000); Speed(50); }
+    } WHEN {
+        TURN {
+            MOVE(player, MOVE_SUMMIT_DROP, WITH_RNG(RNG_DAMAGE_MODIFIER, 0));
+            MOVE(opponent, damaged ? MOVE_SCRATCH : MOVE_CELEBRATE);
+        }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SUMMIT_DROP, player);
+        HP_BAR(opponent);
+        if (damaged) {
+            ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, opponent);
+            HP_BAR(player);
+        }
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SUMMIT_DROP_FOLLOW_UP, player);
+        HP_BAR(opponent, captureDamage: &results[i].damage);
+    } FINALLY {
+        EXPECT_GE(results[1].damage, results[0].damage * 2 - 5);
+        EXPECT_LE(results[1].damage, results[0].damage * 2 + 1);
+    }
+}
+
+DOUBLE_BATTLE_TEST("Custom Moves - Summit Drop's Avalanche hits both opponents")
+{
+    s16 damage[2];
+
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET) { Attack(100); Speed(100); }
+        PLAYER(SPECIES_WYNAUT) { Speed(75); }
+        OPPONENT(SPECIES_WOBBUFFET) { Defense(100); MaxHP(5000); HP(5000); Speed(50); }
+        OPPONENT(SPECIES_WYNAUT) { Defense(100); MaxHP(5000); HP(5000); Speed(25); }
+    } WHEN {
+        TURN {
+            MOVE(playerLeft, MOVE_SUMMIT_DROP, target: opponentLeft);
+            MOVE(playerRight, MOVE_CELEBRATE);
+            MOVE(opponentLeft, MOVE_CELEBRATE);
+            MOVE(opponentRight, MOVE_SCRATCH, target: playerLeft);
+        }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SUMMIT_DROP, playerLeft);
+        HP_BAR(opponentLeft);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, opponentRight);
+        HP_BAR(playerLeft);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SUMMIT_DROP_FOLLOW_UP, playerLeft);
+        HP_BAR(opponentLeft, captureDamage: &damage[0]);
+        HP_BAR(opponentRight, captureDamage: &damage[1]);
+    } THEN {
+        EXPECT_GT(damage[1], damage[0]);
+    }
+}
+
+SINGLE_BATTLE_TEST("Custom Moves - Summit Drop does not follow up if the user faints")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET) { HP(1); Speed(100); }
+        PLAYER(SPECIES_WYNAUT) { Speed(50); }
+        OPPONENT(SPECIES_WOBBUFFET) { Speed(1); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_SUMMIT_DROP); MOVE(opponent, MOVE_SCRATCH); SEND_OUT(player, 1); }
+    } SCENE {
+        NOT ANIMATION(ANIM_TYPE_MOVE, MOVE_SUMMIT_DROP_FOLLOW_UP, player);
+    } THEN {
+        EXPECT_EQ(player->species, SPECIES_WYNAUT);
+    }
+}
+
+AI_SINGLE_BATTLE_TEST("Custom Moves - AI values Summit Drop's follow-up")
+{
+    GIVEN {
+        AI_FLAGS(AI_FLAG_CHECK_VIABILITY);
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_SUMMIT_DROP, MOVE_ICE_PUNCH); }
+    } WHEN {
+        TURN { SCORE_GT(opponent, MOVE_SUMMIT_DROP, MOVE_ICE_PUNCH); }
     }
 }

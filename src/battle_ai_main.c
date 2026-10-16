@@ -2890,7 +2890,8 @@ static s32 AI_CheckBadMove(enum BattlerId battlerAtk, enum BattlerId battlerDef,
 
         GetBattlerTypes(battlerDef, FALSE, types);
         if (PartnerMoveIsSameAsAttacker(GetPartnerBattler(battlerAtk), battlerDef, move, aiData->partnerMove)
-            || (types[0] == typeArg && types[1] == typeArg && types[2] == TYPE_MYSTERY))
+         || GetActiveGimmick(battlerDef) == GIMMICK_TERA
+         || (types[0] == typeArg && types[1] == typeArg && types[2] == TYPE_MYSTERY))
             ADJUST_SCORE(-10);    // target is already water-only
         break;
     }
@@ -3338,6 +3339,12 @@ static s32 AI_DoubleBattle(enum BattlerId battlerAtk, enum BattlerId battlerDef,
         }
     case EFFECT_ROUND:
         if (ShouldUseRound(battlerAtk, EFFECT_ROUND))
+        {
+            ADJUST_SCORE(BEST_EFFECT);
+        }
+        break;
+    case EFFECT_COLLAB_STREAM:
+        if (ShouldUseRound(battlerAtk, EFFECT_COLLAB_STREAM))
         {
             ADJUST_SCORE(BEST_EFFECT);
         }
@@ -5011,6 +5018,45 @@ static s32 AI_CalcMoveEffectScore(enum BattlerId battlerAtk, enum BattlerId batt
         if (CountUsablePartyMons(battlerAtk) == 0)
             ADJUST_SCORE(-BEST_EFFECT);
         break;
+    case EFFECT_SOAPBERRY_SHOCK:
+        if (!IsHazardOnSide(GetBattlerSide(battlerDef), HAZARDS_STICKY_WEB)
+         && CountUsablePartyMons(battlerDef) != 0
+         && CanTargetMoveFaintAi(move, battlerAtk, battlerDef, 1))
+            ADJUST_SCORE(GOOD_EFFECT);
+        break;
+    case EFFECT_PIERCING_VINE:
+        if (gSideTimers[GetBattlerSide(battlerDef)].spikesAmount < 3
+         && CountUsablePartyMons(battlerDef) != 0)
+            ADJUST_SCORE(DECENT_EFFECT);
+        break;
+    case EFFECT_SURFACE_BREACH:
+        if (gBattleWeather == BATTLE_WEATHER_NONE)
+            ADJUST_SCORE(DECENT_EFFECT);
+        break;
+    case EFFECT_GHASTLY_DISS:
+    {
+        bool32 allCoreStatsLowered = TRUE;
+
+        for (enum Stat stat = STAT_ATK; stat <= STAT_SPDEF; stat++)
+        {
+            if (gBattleMons[battlerDef].statStages[stat] >= DEFAULT_STAT_STAGE)
+            {
+                allCoreStatsLowered = FALSE;
+                break;
+            }
+        }
+
+        if (allCoreStatsLowered)
+            ADJUST_SCORE(BEST_EFFECT);
+        else if (IsDoubleBattle())
+            ADJUST_SCORE(GOOD_EFFECT);
+        else
+            ADJUST_SCORE(DECENT_EFFECT);
+        break;
+    }
+    case EFFECT_SUMMIT_DROP:
+        ADJUST_SCORE(GOOD_EFFECT);
+        break;
     case EFFECT_ENCORE:
     {
         if (GetActiveGimmick(battlerDef) == GIMMICK_DYNAMAX)
@@ -5763,10 +5809,17 @@ static s32 AI_CalcMoveEffectScore(enum BattlerId battlerAtk, enum BattlerId batt
             ADJUST_SCORE(DECENT_EFFECT);
         break;
     case EFFECT_SOAK:
-        if (HasMoveWithType(battlerAtk, TYPE_ELECTRIC) || HasMoveWithType(battlerAtk, TYPE_GRASS)
-        || HasMoveWithType(GetPartnerBattler(battlerAtk), TYPE_ELECTRIC) || HasMoveWithType(GetPartnerBattler(battlerAtk), TYPE_GRASS)
-        || (HasBattlerSideMoveWithEffect(battlerAtk, EFFECT_SUPER_EFFECTIVE_ON_ARG) && GetMoveArgType(move) == TYPE_WATER) )
-            ADJUST_SCORE(DECENT_EFFECT); // Get some super effective moves
+        if (GetMoveArgType(move) == TYPE_WATER)
+        {
+            if (HasMoveWithType(battlerAtk, TYPE_ELECTRIC) || HasMoveWithType(battlerAtk, TYPE_GRASS)
+             || HasMoveWithType(GetPartnerBattler(battlerAtk), TYPE_ELECTRIC) || HasMoveWithType(GetPartnerBattler(battlerAtk), TYPE_GRASS)
+             || HasBattlerSideMoveWithEffect(battlerAtk, EFFECT_SUPER_EFFECTIVE_ON_ARG))
+                ADJUST_SCORE(DECENT_EFFECT);
+        }
+        else if (GetMoveArgType(move) == TYPE_NORMAL)
+        {
+            ADJUST_SCORE(WEAK_EFFECT);
+        }
         break;
     case EFFECT_THIRD_TYPE:
         if (aiData->abilities[battlerDef] == ABILITY_WONDER_GUARD)
