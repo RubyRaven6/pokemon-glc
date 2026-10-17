@@ -48,4 +48,4 @@ Each time a player defeats a gym leader in the finals, they gain the signature m
 The Gym Leaders, and Kahunas will use Pokémon across Generation 1 to 9, while the Champions will only use Pokémon from their home reigon, or any regionals of said Pokémon.
 
 ## Music
-The music will feature tracks from the origina Pokémon World Tournament in Black 2 and White 2, remixed for the GBA.
+The music will feature original tracks made in the same spirit as the original songs made for the Pokémon World Tournament, remixing different motifs and melodies associated with their original regions.
