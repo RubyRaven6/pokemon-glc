@@ -4,8 +4,9 @@
 
 // These tests are very heavy computationally. Only use them to review animation PRs.
 
-#define ANIM_TEST_START_MOVE 1              //  First move to test
-#define ANIM_TEST_END_MOVE   MOVES_COUNT-1  //  Last move to test
+#define ANIM_TEST_START_MOVE    1                   //  First move to test
+#define ANIM_TEST_END_MOVE      MOVES_COUNT_GEN9-1  //  Last move to test (mainline)
+#define ANIM_TEST_CUSTOM_MOVE   MOVES_PGLC          //  Last move to test (PGLC)
 
 static void ParametrizeMovesAndSpecies(u32 j, enum Move *pMove, enum Species *pSpecies, u32 variation)
 {
@@ -161,8 +162,7 @@ static bool32 AttackerHasToSwitch(enum Move move) // User needs to send out a di
      || effect == EFFECT_FINAL_GAMBIT
      || effect == EFFECT_PARTING_SHOT
      || effect == EFFECT_SHED_TAIL
-     || effect == EFFECT_WEATHER_AND_SWITCH
-     || effect == EFFECT_FRESH_CATCH)
+     || effect == EFFECT_WEATHER_AND_SWITCH)
         return TRUE;
     return FALSE;
 }
@@ -2743,7 +2743,7 @@ DOUBLE_BATTLE_TEST("Custom Move animations work")
     struct BattlePokemon *ignore1 = playerRight;
     struct BattlePokemon *ignore2 = opponentRight;
     FORCE_MOVE_ANIM(TRUE);
-    for (; j <= ANIM_TEST_END_MOVE; j += 4) {
+    for (; j < ANIM_TEST_CUSTOM_MOVE; j += 1) {
         variationsNumber = GetVariationsNumber(j, TRUE);
         for (k = 0; k < variationsNumber; k++) {
             ParametrizeMovesAndSpecies(j, &tempMove, &tempSpecies, k);
