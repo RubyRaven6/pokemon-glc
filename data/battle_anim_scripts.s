@@ -7714,7 +7714,6 @@ gBattleAnimMove_FairyLock::
 	createvisualtask AnimTask_VoltTackleBolt, 5, 6
 	createvisualtask AnimTask_VoltTackleBolt, 5, 53
 	waitforvisualfinish
-	
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG, 1, 8, 0, RGB(31, 24, 26)
 	waitforvisualfinish
 	clearmonbg ANIM_ATK_PARTNER
