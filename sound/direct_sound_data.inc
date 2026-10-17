@@ -6867,3 +6867,135 @@ DirectSoundWaveData_sd90_classical_whistle::
 	.align 2
 DirectSoundWaveData_sd90_enhanced_delay_shaku::
 	.incbin "sound/direct_sound_samples/sd90_enhanced_delay_shaku.bin"
+
+    .align 2
+DirectSoundWaveData_dp_ridecymbal::
+    .incbin "sound/direct_sound_samples/dp_ridecymbal.bin"
+    
+    .align 2
+DirectSoundWaveData_dp_synthkick::
+    .incbin "sound/direct_sound_samples/dp_synthkick.bin"
+    
+    .align 2
+DirectSoundWaveData_dp_bassdr2_16::
+    .incbin "sound/direct_sound_samples/dp_bassdr2_16.bin"
+    
+    .align 2
+DirectSoundWaveData_hg_135tom::
+    .incbin "sound/direct_sound_samples/hg_135tom.bin"
+    
+    .align 2
+DirectSoundWaveData_hg_137tom::
+    .incbin "sound/direct_sound_samples/hg_137tom.bin"
+    
+    .align 2
+DirectSoundWaveData_hg_138tom::
+    .incbin "sound/direct_sound_samples/hg_138tom.bin"
+    
+    .align 2
+DirectSoundWaveData_hg_136tom::
+    .incbin "sound/direct_sound_samples/hg_136tom.bin"
+    
+    .align 2
+DirectSoundWaveData_dp_053clap::
+    .incbin "sound/direct_sound_samples/dp_053clap.bin"
+    
+    .align 2
+DirectSoundWaveData_hg_hoohclap::
+    .incbin "sound/direct_sound_samples/hg_hoohclap.bin"
+    
+    .align 2
+DirectSoundWaveData_dp_synthsnare::
+    .incbin "sound/direct_sound_samples/dp_synthsnare.bin"
+    
+    .align 2
+DirectSoundWaveData_dp_093snare::
+    .incbin "sound/direct_sound_samples/dp_093snare.bin"
+    
+    .align 2
+DirectSoundWaveData_dp_sne2_loop::
+    .incbin "sound/direct_sound_samples/dp_sne2_loop.bin"
+    
+    .align 2
+DirectSoundWaveData_dp_rim1_roop::
+    .incbin "sound/direct_sound_samples/dp_rim1_roop.bin"
+    
+    .align 2
+DirectSoundWaveData_hg_033orccym::
+    .incbin "sound/direct_sound_samples/hg_033orccym.bin"
+    
+    .align 2
+DirectSoundWaveData_hg_022china::
+    .incbin "sound/direct_sound_samples/hg_022china.bin"
+    
+    .align 2
+DirectSoundWaveData_hg_032crash::
+    .incbin "sound/direct_sound_samples/hg_032crash.bin"
+    
+    .align 2
+DirectSoundWaveData_hg_114splash::
+    .incbin "sound/direct_sound_samples/hg_114splash.bin"
+    
+    .align 2
+DirectSoundWaveData_hg_062chh::
+    .incbin "sound/direct_sound_samples/hg_062chh.bin"
+    
+    .align 2
+DirectSoundWaveData_hg_063ohh::
+    .incbin "sound/direct_sound_samples/hg_063ohh.bin"
+    
+    .align 2
+DirectSoundWaveData_hg_031cowbl::
+    .incbin "sound/direct_sound_samples/hg_031cowbl.bin"
+    
+    .align 2
+DirectSoundWaveData_dp_tambourine_16::
+    .incbin "sound/direct_sound_samples/dp_tambourine_16.bin"
+    
+    .align 2
+DirectSoundWaveData_dp_castanet_22::
+    .incbin "sound/direct_sound_samples/dp_castanet_22.bin"
+    
+    .align 2
+DirectSoundWaveData_dp_ridecap::
+    .incbin "sound/direct_sound_samples/dp_ridecap.bin"
+    
+    .align 2
+DirectSoundWaveData_dp_808snare_16::
+    .incbin "sound/direct_sound_samples/dp_808snare_16.bin"
+    
+    .align 2
+DirectSoundWaveData_dp_016bongo::
+    .incbin "sound/direct_sound_samples/dp_016bongo.bin"
+    
+    .align 2
+DirectSoundWaveData_dp_060conga::
+    .incbin "sound/direct_sound_samples/dp_060conga.bin"
+    
+    .align 2
+DirectSoundWaveData_dp_mute_conga_16::
+    .incbin "sound/direct_sound_samples/dp_mute_conga_16.bin"
+    
+    .align 2
+DirectSoundWaveData_dp_triangle_16::
+    .incbin "sound/direct_sound_samples/dp_triangle_16.bin"
+    
+    .align 2
+DirectSoundWaveData_hg_130jdrumh::
+    .incbin "sound/direct_sound_samples/hg_130jdrumh.bin"
+    
+    .align 2
+DirectSoundWaveData_dp_handclup1::
+    .incbin "sound/direct_sound_samples/dp_handclup1.bin"
+    
+    .align 2
+DirectSoundWaveData_dp_bassdr1::
+    .incbin "sound/direct_sound_samples/dp_bassdr1.bin"
+    
+    .align 2
+DirectSoundWaveData_dp_closed_hihat_16::
+    .incbin "sound/direct_sound_samples/dp_closed_hihat_16.bin"
+    
+    .align 2
+DirectSoundWaveData_dp_open_hihat_16::
+    .incbin "sound/direct_sound_samples/dp_open_hihat_16.bin"
