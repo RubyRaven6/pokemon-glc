@@ -76,6 +76,15 @@ const struct SpriteTemplate gFireSpreadSpriteTemplate =
     .callback = AnimFireSpread,
 };
 
+const struct SpriteTemplate gFlowerSpreadSpriteTemplate =
+{
+    .tileTag = ANIM_TAG_FLOWER,
+    .paletteTag = ANIM_TAG_FLOWER,
+    .oam = &gOamData_AffineOff_ObjNormal_16x16,
+    .anims = gPetalDanceBigFlowerAnimTable,
+    .callback = AnimFireSpread,
+};
+
 static const union AnimCmd sAnim_LargeFlame[] =
 {
     ANIMCMD_FRAME(0, 3),

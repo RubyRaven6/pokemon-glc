@@ -801,6 +801,9 @@ const u16 gBattleAnimSpritePal_TatsugiriDroopy[] = INCGFX_U16("graphics/battle_a
 const u32 gBattleAnimSpriteGfx_TatsugiriStretchy[] = INCGFX_U32("graphics/battle_anims/sprites/tatsugiri_stretchy.png", ".4bpp.smol");
 const u16 gBattleAnimSpritePal_TatsugiriStretchy[] = INCGFX_U16("graphics/battle_anims/sprites/tatsugiri_stretchy.png", ".gbapal");
 
+const u32 gBattleAnimSpriteGfx_PsycheLock[] = INCGFX_U32("graphics/battle_anims/sprites/custom/psyche_lock.png", ".4bpp.smol");
+const u16 gBattleAnimSpritePal_PsycheLock[] = INCGFX_U16("graphics/battle_anims/sprites/custom/psyche_lock.png", ".gbapal");
+
 // Contest
 const u32 gJPContestGfx1[] = INCGFX_U32("graphics/contest/japanese/composite_1.4bpp", ".smol");
 const u16 gJPContestPal[] = INCGFX_U16("graphics/contest/japanese/palette.pal", ".gbapal");
@@ -1321,6 +1324,9 @@ const u32 gBattleAnimSpriteGfx_SaltParticle[] = INCGFX_U32("graphics/battle_anim
 const u16 gBattleAnimSpritePal_SaltParticle[] = INCGFX_U16("graphics/battle_anims/sprites/salt_particle.png", ".gbapal");
 
 const u16 gBattleAnimUnusedPal_Unknown2[] = INCGFX_U16("graphics/battle_anims/unused/unknown_2.pal", ".gbapal");
+
+const u32 gBattleAnimSpriteGfx_RockHeart[] = INCGFX_U32("graphics/battle_anims/sprites/rock_heart.png", ".4bpp.smol");
+const u16 gBattleAnimSpritePal_RockHeart[] = INCGFX_U16("graphics/battle_anims/sprites/rock_heart.png", ".gbapal");
 
 #include "data/graphics/trainers.h"
 
