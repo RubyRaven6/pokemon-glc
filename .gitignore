@@ -70,3 +70,4 @@ __pycache__
 *.scr
 log.txt
 *.ase
+.porydaw/
