@@ -427,8 +427,9 @@
 #define ANIM_TAG_SAFARI_BAIT                (ANIM_SPRITES_START + 412)
 
 #define ANIM_TAG_PSYCHE_LOCK                (ANIM_SPRITES_START + 413)
+#define ANIM_TAG_ROCK_HEART                 (ANIM_SPRITES_START + 414)
 
-#define ANIM_TAG_COUNT                      GET_TRUE_SPRITE_INDEX(ANIM_TAG_PSYCHE_LOCK + 1)
+#define ANIM_TAG_COUNT                      GET_TRUE_SPRITE_INDEX(ANIM_TAG_ROCK_HEART + 1)
 
 // battlers
 enum AnimBattler

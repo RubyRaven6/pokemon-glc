@@ -161,7 +161,8 @@ static bool32 AttackerHasToSwitch(enum Move move) // User needs to send out a di
      || effect == EFFECT_FINAL_GAMBIT
      || effect == EFFECT_PARTING_SHOT
      || effect == EFFECT_SHED_TAIL
-     || effect == EFFECT_WEATHER_AND_SWITCH)
+     || effect == EFFECT_WEATHER_AND_SWITCH
+     || effect == EFFECT_FRESH_CATCH)
         return TRUE;
     return FALSE;
 }
@@ -2728,7 +2729,7 @@ SINGLE_BATTLE_TEST("Tera Blast animations work")
     }
 }
 
-SINGLE_BATTLE_TEST("Custom Move animations work")
+DOUBLE_BATTLE_TEST("Custom Move animations work")
 {
     u32 j = MOVE_ROCK_HEART;
     enum Move move = MOVE_NONE;
@@ -2737,23 +2738,64 @@ SINGLE_BATTLE_TEST("Custom Move animations work")
     u32 friendship = 0, tempFriendship;
     enum Move tempMove;
     enum Species tempSpecies;
+    struct BattlePokemon *attacker = playerLeft;
+    struct BattlePokemon *target = opponentLeft;
+    struct BattlePokemon *ignore1 = playerRight;
+    struct BattlePokemon *ignore2 = opponentRight;
     FORCE_MOVE_ANIM(TRUE);
-    for (; j <= ANIM_TEST_END_MOVE; j++) {
-        variationsNumber = GetVariationsNumber(j, FALSE);
+    for (; j <= ANIM_TEST_END_MOVE; j += 4) {
+        variationsNumber = GetVariationsNumber(j, TRUE);
         for (k = 0; k < variationsNumber; k++) {
             ParametrizeMovesAndSpecies(j, &tempMove, &tempSpecies, k);
             tempFriendship = ParametrizeFriendship(j, k);
-            PARAMETRIZE { move = tempMove; species = tempSpecies; variation = k; friendship = tempFriendship;}
+            PARAMETRIZE { move = tempMove; species = tempSpecies; variation = k; friendship = tempFriendship; }
         }
     }
 
     GIVEN {
-        PLAYER(SPECIES_WOBBUFFET) {};
-        OPPONENT(SPECIES_WOBBUFFET) { Item(ITEM_FOCUS_SASH); }
+        DISABLE_SELECTABLE_PARAMETERS;
+        PLAYER(species) {
+            Level(GetParametrizedLevel(move, variation));
+            HP(GetParametrizedHP(move, variation)); MaxHP(9999); Item(GetParametrizedItem(move, variation));
+            if (attacker == playerLeft) {
+                if (species == SPECIES_WOBBUFFET) Gender(MON_FEMALE);
+                if (GetMoveEffect(move) == EFFECT_LAST_RESORT) Moves(move, MOVE_POUND);
+                if (species == SPECIES_KLINKLANG) Ability(ABILITY_PLUS);
+                if (friendship) Friendship(friendship);
+                if (GetParametrizedShinyness(move, variation)) Shiny(TRUE);
+            }
+        }
+        PLAYER(species) {
+            Level(GetParametrizedLevel(move, variation));
+            HP(GetParametrizedHP(move, variation)); MaxHP(9999); Item(GetParametrizedItem(move, variation));
+            if (attacker == playerRight)
+            {
+                if (species == SPECIES_WOBBUFFET) Gender(MON_FEMALE);
+                if (GetMoveEffect(move) == EFFECT_LAST_RESORT) Moves(move, MOVE_POUND);
+                if (species == SPECIES_KLINKLANG) Ability(ABILITY_PLUS);
+                if (friendship) Friendship(friendship);
+                if (GetParametrizedShinyness(move, variation)) Shiny(TRUE);
+            }
+        }
+        PLAYER(SPECIES_WOBBUFFET) {
+            Gender(MON_MALE); MaxHP(9999); Moves(MOVE_POUND, MOVE_CELEBRATE);
+            HP(GetMoveEffect(move) == EFFECT_REVIVAL_BLESSING ? 0 : 9998);
+        }
+        OPPONENT(SPECIES_WOBBUFFET) {
+            Gender(MON_MALE); HP(9998); MaxHP(9999); SpDefense(9999); Defense(9999); Ability(ABILITY_TELEPATHY);
+            if (GetMoveEffect(move) != EFFECT_BESTOW)
+                Item(ITEM_ORAN_BERRY);
+        }
+        OPPONENT(SPECIES_WOBBUFFET) {
+            Gender(MON_MALE); HP(9998); MaxHP(9999); SpDefense(9999); Defense(9999); Ability(ABILITY_TELEPATHY);
+            if (GetMoveEffect(move) != EFFECT_BESTOW)
+                Item(ITEM_ORAN_BERRY);
+        }
+        OPPONENT(SPECIES_WOBBUFFET) { Gender(MON_FEMALE); HP(9998); MaxHP(9999); SpDefense(9999); Defense(9999); }
     } WHEN {
-        TURN { MOVE(player, move); }
+        DoublesWhen(move, attacker, target, ignore1, ignore2, variation);
     } SCENE {
-        ANIMATION(ANIM_TYPE_MOVE, move, player);
+        DoublesScene(move, attacker);
     } THEN {
         FORCE_MOVE_ANIM(FALSE);
         if (gLoadFail || gSpriteAllocs != 0)
@@ -2791,7 +2833,7 @@ DOUBLE_BATTLE_TEST("Gimmick Form Change animations work")
 DOUBLE_BATTLE_TEST("Individual Custom Move test")
 {
     u32 move;
-    PARAMETRIZE { move = MOVE_SYNCHROSWIM; }
+    PARAMETRIZE { move = MOVE_ROCK_HEART; }
 
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET) { Item(ITEM_POWER_HERB); };

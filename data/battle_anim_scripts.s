@@ -35054,7 +35054,7 @@ gBattleAnimGeneral_DynamaxGrowth:: @ PORTED FROM CFRU
 
 gBattleAnimMove_RockHeart::
 	loopsewithpan SE_M_CHARM, SOUND_PAN_ATTACKER, 12, 3
-	call CreateRedHeart
+	call CreateRockHeart
 	waitforvisualfinish
 	playsewithpan SE_M_ROCK_THROW, SOUND_PAN_TARGET
 	createsprite gRockFragmentSpriteTemplate, ANIM_ATTACKER, 2, 0, 0, 20, 24, 14, 2
@@ -35068,6 +35068,12 @@ gBattleAnimMove_RockHeart::
 	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 0, 3, 7, 1
 	waitforvisualfinish
 	end
+
+CreateRockHeart:
+	createvisualtask AnimTask_SwayMon, 5, 0, 12, 4096, 4, ANIM_ATTACKER
+	delay 15
+	createsprite gRockHeartProjectileSpriteTemplate, ANIM_TARGET, 3, 20, -8
+	return
 
 gBattleAnimMove_Riptide::
 	playsewithpan SE_M_HEADBUTT, SOUND_PAN_ATTACKER

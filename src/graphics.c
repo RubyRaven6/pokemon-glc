@@ -1325,6 +1325,9 @@ const u16 gBattleAnimSpritePal_SaltParticle[] = INCGFX_U16("graphics/battle_anim
 
 const u16 gBattleAnimUnusedPal_Unknown2[] = INCGFX_U16("graphics/battle_anims/unused/unknown_2.pal", ".gbapal");
 
+const u32 gBattleAnimSpriteGfx_RockHeart[] = INCGFX_U32("graphics/battle_anims/sprites/rock_heart.png", ".4bpp.smol");
+const u16 gBattleAnimSpritePal_RockHeart[] = INCGFX_U16("graphics/battle_anims/sprites/rock_heart.png", ".gbapal");
+
 #include "data/graphics/trainers.h"
 
 const u32 gBattleVSFrame_Gfx[] = INCGFX_U32("graphics/battle_transitions/vs_frame.png", ".4bpp.smol", "-num_tiles 16 -Wnum_tiles");
