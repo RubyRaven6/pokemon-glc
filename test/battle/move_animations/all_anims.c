@@ -2791,7 +2791,7 @@ DOUBLE_BATTLE_TEST("Gimmick Form Change animations work")
 DOUBLE_BATTLE_TEST("Individual Custom Move test")
 {
     u32 move;
-    PARAMETRIZE { move = MOVE_ORBITAL_PULL; }
+    PARAMETRIZE { move = MOVE_SYNCHROSWIM; }
 
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET) { Item(ITEM_POWER_HERB); };
