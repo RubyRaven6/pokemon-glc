@@ -2064,6 +2064,7 @@ extern const u32 gBattleAnimSpriteGfx_SubstituteBack[];
 extern const u16 gBattleAnimSpritePal_Substitute[];
 extern const u32 gHealthboxSinglesPlayerGfx[];
 extern const u32 gHealthboxSinglesOpponentGfx[];
+extern const u32 gHealthboxSinglesOpponentLargeGfx[];
 extern const u32 gHealthboxDoublesPlayerGfx[];
 extern const u32 gHealthboxDoublesOpponentGfx[];
 extern const u32 gHealthboxSafariGfx[];
@@ -3388,6 +3389,7 @@ extern const u16 gFrontierFactoryMenu_Pal[];
 // Object event pals
 extern const u16 gObjectEventPal_Brendan[];
 extern const u16 gObjectEventPal_May[];
+extern const u16 gObjectEventPal_Kris[];
 extern const u16 gObjectEventPal_RubySapphireBrendan[];
 extern const u16 gObjectEventPal_RubySapphireMay[];
 

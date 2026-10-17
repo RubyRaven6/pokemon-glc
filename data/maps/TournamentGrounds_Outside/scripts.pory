@@ -1,0 +1,21 @@
+mapscripts TournamentGrounds_Outside_MapScripts {
+    
+}
+
+script TournamentGrounds_Outside_EventScript_Sailors {
+    lock
+    applymovement(LOCALID_GROUNDSOUTSIDE_SAILOR_1, moves(walk_in_place_fast_down, delay_16*2))
+    setspeaker("Sailor1")
+    msgbox("Dude… the engine is completely shot.")
+    waitmovement(0)
+    closemessage
+    applymovement(LOCALID_GROUNDSOUTSIDE_SAILOR_2, moves(walk_in_place_fast_left, delay_16*2))
+    waitmovement(0)
+    setspeaker("Sailor2")
+    msgbox("Let's not tell anyone yet.\pI'm sure we can fix it before we need to\nleave.")
+    closemessage
+    applymovement(LOCALID_GROUNDSOUTSIDE_SAILOR_2, moves(face_down, walk_in_place_fast_down, delay_16*2))
+    waitmovement(0)
+    release
+    end
+}

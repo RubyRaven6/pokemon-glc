@@ -11,6 +11,7 @@
 #include "intro.h"
 #include "intro_frlg.h"
 #include "m4a.h"
+#include "title_screen.h"
 #include "expansion_intro.h"
 #include "constants/rgb.h"
 #include "constants/songs.h"
@@ -276,6 +277,8 @@ void Task_HandleExpansionIntro(u8 taskId)
             ResetSpriteData();
             FreeAllSpritePalettes();
             DestroyTask(taskId);
+            SetMainCallback2(CB2_InitTitleScreen);
+            return;
             if (IS_FRLG)
             {
                 SetMainCallback2(CB2_SetUpIntroFrlg);

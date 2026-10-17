@@ -289,13 +289,6 @@ static void RemoveSaveInfoWindow(void);
 static void HideStartMenuWindow(void);
 static void HideStartMenuDebug(void);
 
-void SetDexPokemonPokenavFlags(void) // unused
-{
-    FlagSet(FLAG_SYS_POKEDEX_GET);
-    FlagSet(FLAG_SYS_POKEMON_GET);
-    FlagSet(FLAG_SYS_POKENAV_GET);
-}
-
 static void BuildStartMenuActions(void)
 {
     sNumStartMenuActions = 0;
@@ -358,9 +351,12 @@ static void BuildNormalStartMenu(void)
     
     //AddStartMenuAction(MENU_ACTION_STAT_EDITOR);
 
-    AddStartMenuAction(MENU_ACTION_PLAYER);
+    if(FlagGet(FLAG_SYS_PLAYER_NAMED))
+        AddStartMenuAction(MENU_ACTION_PLAYER);
+
     if(FlagGet(FLAG_DISABLE_SAVING) == FALSE)
         AddStartMenuAction(MENU_ACTION_SAVE);
+
     AddStartMenuAction(MENU_ACTION_OPTION);
     AddStartMenuAction(MENU_ACTION_EXIT);
 }
@@ -1292,7 +1288,7 @@ static bool32 InitSaveWindowAfterLinkBattle(u8 *state)
         SetVBlankCallback(NULL);
         ScanlineEffect_Stop();
         DmaClear16(3, PLTT, PLTT_SIZE);
-        DmaFillLarge16(3, 0, (void *)VRAM, VRAM_SIZE, 0x1000);
+        DmaClearLarge16(3, (void *)VRAM, VRAM_SIZE, 0x1000);
         break;
     case 1:
         ResetSpriteData();
@@ -1415,7 +1411,7 @@ static void Task_SaveAfterLinkBattle(u8 taskId)
 static void ShowSaveInfoWindow(void)
 {
     struct WindowTemplate saveInfoWindow = sSaveInfoWindowTemplate;
-    enum Gender gender;
+    enum PlayerGender gender;
     u8 color;
     u32 xOffset;
     u32 yOffset;
@@ -1431,7 +1427,7 @@ static void ShowSaveInfoWindow(void)
     gender = gSaveBlock2Ptr->playerGender;
     color = TEXT_COLOR_RED;  // Red when female, blue when male.
 
-    if (gender == MALE)
+    if (gender == GENDER_MASCULINE)
         color = TEXT_COLOR_BLUE;
 
     // Print region name

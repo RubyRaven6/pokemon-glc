@@ -968,8 +968,6 @@ extern const u8 gBattleAnimGeneral_LeechSeedDrain[];
 extern const u8 gBattleAnimGeneral_MonHit[];
 extern const u8 gBattleAnimGeneral_ItemSteal[];
 extern const u8 gBattleAnimGeneral_SnatchMove[];
-extern const u8 gBattleAnimGeneral_FutureSightHit[];
-extern const u8 gBattleAnimGeneral_DoomDesireHit[];
 extern const u8 gBattleAnimGeneral_FocusPunchSetUp[];
 extern const u8 gBattleAnimGeneral_IngrainHeal[];
 extern const u8 gBattleAnimGeneral_WishHeal[];
@@ -1015,6 +1013,7 @@ extern const u8 gBattleAnimGeneral_SilphScoped[];
 extern const u8 gBattleAnimGeneral_SafariRockThrow[];
 extern const u8 gBattleAnimGeneral_SafariReaction[];
 extern const u8 gBattleAnimGeneral_HeldItemBerry[];
+extern const u8 gBattleAnimGeneral_MeteoricWrathImpact[];
 
 // special animations
 extern const u8 gBattleAnimSpecial_LevelUp[];
@@ -1025,6 +1024,7 @@ extern const u8 gBattleAnimSpecial_BallThrowWithTrainer[];
 extern const u8 gBattleAnimSpecial_SubstituteToMon[];
 extern const u8 gBattleAnimSpecial_MonToSubstitute[];
 extern const u8 gBattleAnimSpecial_CriticalCaptureBallThrow[];
+extern const u8 gBattleAnimGeneral_ProtectedItself[];
 
 // Custom Moves
 extern const u8 gBattleAnimMove_RockHeart[];
@@ -1054,7 +1054,7 @@ extern const u8 gBattleAnimMove_Showstopper[];
 extern const u8 gBattleAnimMove_Research[];
 extern const u8 gBattleAnimMove_Chrysalis[];
 extern const u8 gBattleAnimMove_CastingCall[];
-extern const u8 gBattleAnimMove_MountingPressure[];
+extern const u8 gBattleAnimMove_OrbitalPull[];
 extern const u8 gBattleAnimMove_JetStream[];
 extern const u8 gBattleAnimMove_StuntDouble[];
 extern const u8 gBattleAnimMove_CalamityCleave[];

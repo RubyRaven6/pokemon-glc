@@ -65,12 +65,6 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
         .encourageEncore = TRUE,
     },
 
-    [EFFECT_ABSORB] =
-    {
-        .battleScript = BattleScript_EffectHit,
-        .battleTvScore = 4,
-    },
-
     [EFFECT_TERRAIN_BOOST] =
     {
         .battleScript = BattleScript_EffectHit,
@@ -79,7 +73,7 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
 
     [EFFECT_DREAM_EATER] =
     {
-        .battleScript = BattleScript_EffectDreamEater,
+        .battleScript = BattleScript_EffectHit,
         .battleTvScore = 5,
         .encourageEncore = TRUE,
     },
@@ -515,7 +509,7 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
 
     [EFFECT_PRESENT] =
     {
-        .battleScript = BattleScript_EffectPresent,
+        .battleScript = BattleScript_EffectHit,
         .battleTvScore = 1,
         .battleFactoryStyle = FACTORY_STYLE_UNPREDICTABLE,
     },
@@ -1251,27 +1245,9 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
         .battleTvScore = 0, // TODO: Assign points
     },
 
-    [EFFECT_MISTY_TERRAIN] =
+    [EFFECT_TERRAIN] =
     {
-        .battleScript = BattleScript_EffectMistyTerrain,
-        .battleTvScore = 0, // TODO: Assign points
-    },
-
-    [EFFECT_GRASSY_TERRAIN] =
-    {
-        .battleScript = BattleScript_EffectGrassyTerrain,
-        .battleTvScore = 0, // TODO: Assign points
-    },
-
-    [EFFECT_ELECTRIC_TERRAIN] =
-    {
-        .battleScript = BattleScript_EffectElectricTerrain,
-        .battleTvScore = 0, // TODO: Assign points
-    },
-
-    [EFFECT_PSYCHIC_TERRAIN] =
-    {
-        .battleScript = BattleScript_EffectPsychicTerrain,
+        .battleScript = BattleScript_EffectTerrain,
         .battleTvScore = 0, // TODO: Assign points
     },
 
@@ -1704,7 +1680,7 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
 
     [EFFECT_SHELL_TRAP] =
     {
-        .battleScript = BattleScript_EffectShellTrap,
+        .battleScript = BattleScript_EffectHit,
         .battleTvScore = 0, // TODO: Assign points
     },
 
@@ -2044,5 +2020,207 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
     {
         .battleScript = BattleScript_EffectHit,
         .battleTvScore = 0, // TODO: Assign points
+    },
+
+    [EFFECT_GIPHANT_CAPTURE] =
+    {
+        .battleScript = BattleScript_EffectGiphantCapture,
+        .battleTvScore = 0,
+        .encourageEncore = TRUE,
+    },
+
+    [EFFECT_CLOTHESLINE] =
+    {
+        .battleScript = BattleScript_EffectHit,
+        .battleTvScore = 0,
+    },
+
+    [EFFECT_BLOOMING_SHIELD] =
+    {
+        .battleScript = BattleScript_EffectBloomingShield,
+        .battleTvScore = 0,
+        .encourageEncore = TRUE,
+    },
+
+    [EFFECT_INVERSE_CURRENT] =
+    {
+        .battleScript = BattleScript_EffectInverseCurrent,
+        .battleTvScore = 0,
+        .encourageEncore = TRUE,
+    },
+
+    [EFFECT_FAE_FLIGHT] =
+    {
+        .battleScript = BattleScript_EffectFaeFlight,
+        .battleTvScore = 0,
+        .encourageEncore = TRUE,
+    },
+
+    [EFFECT_METEORIC_WRATH] =
+    {
+        .battleScript = BattleScript_EffectMeteoricWrath,
+        .battleTvScore = 0,
+        .encourageEncore = TRUE,
+    },
+
+    [EFFECT_DEEP_ANALYSIS] =
+    {
+        .battleScript = BattleScript_EffectDeepAnalysis,
+        .battleTvScore = 0,
+        .encourageEncore = TRUE,
+    },
+
+    [EFFECT_TRAWLING_NET] =
+    {
+        .battleScript = BattleScript_EffectTrawlingNet,
+        .battleTvScore = 0,
+        .encourageEncore = TRUE,
+    },
+
+    [EFFECT_INFERNAL_DANCE] =
+    {
+        .battleScript = BattleScript_EffectHit,
+        .battleTvScore = 0,
+    },
+
+    [EFFECT_CANOPY_COVER] =
+    {
+        .battleScript = BattleScript_EffectCanopyCover,
+        .battleTvScore = 0,
+        .encourageEncore = TRUE,
+    },
+
+    [EFFECT_VOLTAIC_PRISON] =
+    {
+        .battleScript = BattleScript_EffectVoltaicPrison,
+        .battleTvScore = 0,
+        .encourageEncore = TRUE,
+    },
+
+    [EFFECT_MASTERSTROKE] =
+    {
+        .battleScript = BattleScript_EffectHit,
+        .battleTvScore = 0,
+    },
+
+    [EFFECT_LUA_STRIKE] =
+    {
+        .battleScript = BattleScript_EffectHit,
+        .battleTvScore = 0,
+    },
+
+    [EFFECT_GEMSHOT] =
+    {
+        .battleScript = BattleScript_EffectHit,
+        .battleTvScore = 0,
+    },
+
+    [EFFECT_DARK_IMITATION] =
+    {
+        .battleScript = BattleScript_EffectHit,
+        .battleTvScore = 0,
+    },
+
+    [EFFECT_ROUGH_RIDIN] =
+    {
+        .battleScript = BattleScript_EffectRoughRidin,
+        .battleTvScore = 0,
+        .encourageEncore = TRUE,
+    },
+
+    [EFFECT_FERTILIZE] =
+    {
+        .battleScript = BattleScript_EffectFertilize,
+        .battleTvScore = 0,
+        .encourageEncore = TRUE,
+    },
+
+    [EFFECT_FRESH_CATCH] =
+    {
+        .battleScript = BattleScript_EffectHit,
+        .battleTvScore = 0,
+    },
+
+    [EFFECT_MASK_OFF] =
+    {
+        .battleScript = BattleScript_EffectMaskOff,
+        .battleTvScore = 0,
+        .encourageEncore = TRUE,
+    },
+
+    [EFFECT_POLISHED_STRIKE] =
+    {
+        .battleScript = BattleScript_EffectHit,
+        .battleTvScore = 0,
+    },
+
+    [EFFECT_POLAR_PLUNGE] =
+    {
+        .battleScript = BattleScript_EffectHit,
+        .battleTvScore = 0,
+        .twoTurnEffect = TRUE,
+        .semiInvulnerableEffect = TRUE,
+    },
+
+    [EFFECT_ANGSTY_SCREAM] =
+    {
+        .battleScript = BattleScript_EffectHit,
+        .battleTvScore = 0,
+    },
+
+    [EFFECT_DRACONIC_PEAK] =
+    {
+        .battleScript = BattleScript_EffectDraconicPeak,
+        .battleTvScore = 0,
+        .encourageEncore = TRUE,
+    },
+
+    [EFFECT_SOAPBERRY_SHOCK] =
+    {
+        .battleScript = BattleScript_EffectHit,
+        .battleTvScore = 0,
+    },
+
+    [EFFECT_PIERCING_VINE] =
+    {
+        .battleScript = BattleScript_EffectHit,
+        .battleTvScore = 0,
+    },
+
+    [EFFECT_COLLAB_STREAM] =
+    {
+        .battleScript = BattleScript_EffectHit,
+        .battleTvScore = 0,
+    },
+
+    [EFFECT_SURFACE_BREACH] =
+    {
+        .battleScript = BattleScript_EffectHit,
+        .battleTvScore = 0,
+    },
+
+    [EFFECT_GHASTLY_DISS] =
+    {
+        .battleScript = BattleScript_EffectGhastlyDiss,
+        .battleTvScore = 0,
+        .encourageEncore = TRUE,
+    },
+
+    [EFFECT_GLAMOUR_FLASH] =
+    {
+        .battleScript = BattleScript_EffectHit,
+        .battleTvScore = 0,
+    },
+
+    [EFFECT_SUMMIT_DROP] =
+    {
+        .battleScript = BattleScript_EffectHit,
+        .battleTvScore = 0,
+    },
+
+    [EFFECT_SECRET_POWER] =
+    {
+        .battleScript = BattleScript_EffectHit,
+        .battleTvScore = 1,
     },
 };

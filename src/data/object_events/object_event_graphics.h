@@ -1,5 +1,3 @@
-const u32 gObjectEventPic_BrendanNormalRunning[] = INCBIN_U32("graphics/object_events/pics/people/brendan/walking.4bpp", "graphics/object_events/pics/people/brendan/running.4bpp");
-const u16 gObjectEventPal_Brendan[] = INCGFX_U16("graphics/object_events/palettes/brendan.pal", ".gbapal");
 const u32 gObjectEventPic_RubySapphireBrendanNormal[] = INCGFX_U32("graphics/object_events/pics/people/ruby_sapphire_brendan/walking.png", ".4bpp", "-mwidth 2 -mheight 4");
 const u32 gObjectEventPic_RubySapphireBrendanRunning[] = INCGFX_U32("graphics/object_events/pics/people/ruby_sapphire_brendan/running.png", ".4bpp", "-mwidth 2 -mheight 4");
 const u16 gObjectEventPal_RubySapphireBrendan[] = INCGFX_U16("graphics/object_events/palettes/ruby_sapphire_brendan.pal", ".gbapal");
@@ -18,8 +16,14 @@ const u16 gObjectEventPal_Null12[16] = {};
 const u16 gObjectEventPal_Null13[16] = {};
 const u16 gObjectEventPal_Null14[16] = {};
 const u16 gObjectEventPal_Null15[16] = {};
-const u16 gObjectEventPal_BrendanReflection[] = INCGFX_U16("graphics/object_events/palettes/brendan_reflection.pal", ".gbapal");
 const u16 gObjectEventPal_BridgeReflection[] = INCGFX_U16("graphics/object_events/palettes/bridge_reflection.pal", ".gbapal");
+const u16 gObjectEventPal_PlayerUnderwater[] = INCGFX_U16("graphics/object_events/palettes/player_underwater.pal", ".gbapal");
+const u16 gObjectEventPal_Brendan[] = INCGFX_U16("graphics/object_events/palettes/brendan.pal", ".gbapal");
+const u16 gObjectEventPal_May[] = INCGFX_U16("graphics/object_events/palettes/may.pal", ".gbapal");
+const u16 gObjectEventPal_Kris[] = INCGFX_U16("graphics/object_events/palettes/kris.pal", ".gbapal");
+
+const u32 gObjectEventPic_BrendanNormalRunning[] = INCBIN_U32("graphics/object_events/pics/people/brendan/walking.4bpp", "graphics/object_events/pics/people/brendan/running.4bpp");
+const u16 gObjectEventPal_BrendanReflection[] = INCGFX_U16("graphics/object_events/palettes/brendan_reflection.pal", ".gbapal");
 const u32 gObjectEventPic_BrendanFieldMove[] = INCGFX_U32("graphics/object_events/pics/people/brendan/field_move.png", ".4bpp", "-mwidth 4 -mheight 4");
 const u32 gObjectEventPic_BrendanSurfing[] = INCGFX_U32("graphics/object_events/pics/people/brendan/surfing.png", ".4bpp", "-mwidth 4 -mheight 4");
 const u32 gObjectEventPic_BrendanMachBike[] = INCGFX_U32("graphics/object_events/pics/people/brendan/mach_bike.png", ".4bpp", "-mwidth 4 -mheight 4");
@@ -27,37 +31,42 @@ const u32 gObjectEventPic_BrendanAcroBike[] = INCGFX_U32("graphics/object_events
 const u32 gObjectEventPic_BrendanFishing[] = INCGFX_U32("graphics/object_events/pics/people/brendan/fishing.png", ".4bpp", "-mwidth 4 -mheight 4");
 const u32 gObjectEventPic_BrendanWatering[] = INCGFX_U32("graphics/object_events/pics/people/brendan/watering.png", ".4bpp", "-mwidth 4 -mheight 4");
 const u32 gObjectEventPic_BrendanDecorating[] = INCGFX_U32("graphics/object_events/pics/people/brendan/decorating.png", ".4bpp");
-const u32 gObjectEventPic_MayDecorating[] = INCGFX_U32("graphics/object_events/pics/people/may/decorating.png", ".4bpp");
 const u32 gObjectEventPic_BrendanUnderwater[] = INCGFX_U32("graphics/object_events/pics/people/brendan/underwater.png", ".4bpp", "-mwidth 4 -mheight 4");
-const u32 gObjectEventPic_MayUnderwater[] = INCGFX_U32("graphics/object_events/pics/people/may/underwater.png", ".4bpp", "-mwidth 4 -mheight 4");
-const u16 gObjectEventPal_PlayerUnderwater[] = INCGFX_U16("graphics/object_events/palettes/player_underwater.pal", ".gbapal");
+
 const u32 gObjectEventPic_MayNormalRunning[] = INCBIN_U32("graphics/object_events/pics/people/may/walking.4bpp", "graphics/object_events/pics/people/may/running.4bpp");
-const u16 gObjectEventPal_May[] = INCGFX_U16("graphics/object_events/palettes/may.pal", ".gbapal");
 const u16 gObjectEventPal_MayReflection[] = INCGFX_U16("graphics/object_events/palettes/may_reflection.pal", ".gbapal");
+const u32 gObjectEventPic_MayFieldMove[] = INCGFX_U32("graphics/object_events/pics/people/may/field_move.png", ".4bpp", "-mwidth 4 -mheight 4");
+const u32 gObjectEventPic_MaySurfing[] = INCGFX_U32("graphics/object_events/pics/people/may/surfing.png", ".4bpp", "-mwidth 4 -mheight 4");
+const u32 gObjectEventPic_MayMachBike[] = INCGFX_U32("graphics/object_events/pics/people/may/mach_bike.png", ".4bpp", "-mwidth 4 -mheight 4");
+const u32 gObjectEventPic_MayAcroBike[] = INCGFX_U32("graphics/object_events/pics/people/may/acro_bike.png", ".4bpp", "-mwidth 4 -mheight 4");
+const u32 gObjectEventPic_MayFishing[] = INCGFX_U32("graphics/object_events/pics/people/may/fishing.png", ".4bpp", "-mwidth 4 -mheight 4");
+const u32 gObjectEventPic_MayWatering[] = INCGFX_U32("graphics/object_events/pics/people/may/watering.png", ".4bpp", "-mwidth 4 -mheight 4");
+const u32 gObjectEventPic_MayDecorating[] = INCGFX_U32("graphics/object_events/pics/people/may/decorating.png", ".4bpp");
+const u32 gObjectEventPic_MayUnderwater[] = INCGFX_U32("graphics/object_events/pics/people/may/underwater.png", ".4bpp", "-mwidth 4 -mheight 4");
+
 const u32 gObjectEventPic_RubySapphireMayNormal[] = INCGFX_U32("graphics/object_events/pics/people/ruby_sapphire_may/walking.png", ".4bpp", "-mwidth 2 -mheight 4");
 const u32 gObjectEventPic_RubySapphireMayRunning[] = INCGFX_U32("graphics/object_events/pics/people/ruby_sapphire_may/running.png", ".4bpp", "-mwidth 2 -mheight 4");
 const u16 gObjectEventPal_RubySapphireMay[] = INCGFX_U16("graphics/object_events/palettes/ruby_sapphire_may.pal", ".gbapal");
+
 const u16 gUnusedObjectEventPalette[] = INCGFX_U16("graphics/object_events/palettes/unused_palette.pal", ".gbapal");
-const u16 gObjectEventPal_Null16[16] = {};
-const u16 gObjectEventPal_Null17[16] = {};
-const u16 gObjectEventPal_Null18[16] = {};
-const u16 gObjectEventPal_Null19[16] = {};
-const u16 gObjectEventPal_Null20[16] = {};
-const u16 gObjectEventPal_Null21[16] = {};
-const u16 gObjectEventPal_Null22[16] = {};
-const u16 gObjectEventPal_Null23[16] = {};
+
+const u32 gObjectEventPic_KrisNormalRunning[] = INCBIN_U32("graphics/object_events/pics/people/kris/walking.4bpp", "graphics/object_events/pics/people/kris/running.4bpp");
+const u16 gObjectEventPal_KrisReflection[] = INCGFX_U16("graphics/object_events/palettes/may_reflection.pal", ".gbapal");
+const u32 gObjectEventPic_KrisFieldMove[] = INCGFX_U32("graphics/object_events/pics/people/kris/field_move.png", ".4bpp", "-mwidth 4 -mheight 4");
+const u32 gObjectEventPic_KrisSurfing[] = INCGFX_U32("graphics/object_events/pics/people/kris/surfing.png", ".4bpp", "-mwidth 4 -mheight 4");
+const u32 gObjectEventPic_KrisMachBike[] = INCGFX_U32("graphics/object_events/pics/people/kris/mach_bike.png", ".4bpp", "-mwidth 4 -mheight 4");
+const u32 gObjectEventPic_KrisAcroBike[] = INCGFX_U32("graphics/object_events/pics/people/kris/acro_bike.png", ".4bpp", "-mwidth 4 -mheight 4");
+const u32 gObjectEventPic_KrisFishing[] = INCGFX_U32("graphics/object_events/pics/people/kris/fishing.png", ".4bpp", "-mwidth 4 -mheight 4");
+const u32 gObjectEventPic_KrisWatering[] = INCGFX_U32("graphics/object_events/pics/people/kris/watering.png", ".4bpp", "-mwidth 4 -mheight 4");
+const u32 gObjectEventPic_KrisDecorating[] = INCGFX_U32("graphics/object_events/pics/people/kris/decorating.png", ".4bpp");
+const u32 gObjectEventPic_KrisUnderwater[] = INCGFX_U32("graphics/object_events/pics/people/kris/underwater.png", ".4bpp", "-mwidth 4 -mheight 4");
+
 const u16 gObjectEventPal_Null24[16] = {};
 const u16 gObjectEventPal_Null25[16] = {};
 const u16 gObjectEventPal_Null26[16] = {};
 const u16 gObjectEventPal_Null27[16] = {};
 const u16 gObjectEventPal_Null28[16] = {};
 const u16 gObjectEventPal_Null29[16] = {};
-const u32 gObjectEventPic_MayMachBike[] = INCGFX_U32("graphics/object_events/pics/people/may/mach_bike.png", ".4bpp", "-mwidth 4 -mheight 4");
-const u32 gObjectEventPic_MayAcroBike[] = INCGFX_U32("graphics/object_events/pics/people/may/acro_bike.png", ".4bpp", "-mwidth 4 -mheight 4");
-const u32 gObjectEventPic_MaySurfing[] = INCGFX_U32("graphics/object_events/pics/people/may/surfing.png", ".4bpp", "-mwidth 4 -mheight 4");
-const u32 gObjectEventPic_MayFieldMove[] = INCGFX_U32("graphics/object_events/pics/people/may/field_move.png", ".4bpp", "-mwidth 4 -mheight 4");
-const u32 gObjectEventPic_MayFishing[] = INCGFX_U32("graphics/object_events/pics/people/may/fishing.png", ".4bpp", "-mwidth 4 -mheight 4");
-const u32 gObjectEventPic_MayWatering[] = INCGFX_U32("graphics/object_events/pics/people/may/watering.png", ".4bpp", "-mwidth 4 -mheight 4");
 const u16 gObjectEventPal_Npc1[] = INCGFX_U16("graphics/object_events/palettes/npc_1.pal", ".gbapal");
 const u16 gObjectEventPal_Npc2[] = INCGFX_U16("graphics/object_events/palettes/npc_2.pal", ".gbapal");
 const u16 gObjectEventPal_Npc3[] = INCGFX_U16("graphics/object_events/palettes/npc_3.pal", ".gbapal");
@@ -419,9 +428,7 @@ const u32 gObjectEventPic_MoonBall[] = INCGFX_U32("graphics/object_events/pics/m
 const u32 gObjectEventPic_SportBall[] = INCGFX_U32("graphics/object_events/pics/misc/ball_sport.png", ".4bpp", "-mwidth 2 -mheight 4");
 const u32 gObjectEventPic_DreamBall[] = INCGFX_U32("graphics/object_events/pics/misc/ball_dream.png", ".4bpp", "-mwidth 2 -mheight 4");
 const u32 gObjectEventPic_BeastBall[] = INCGFX_U32("graphics/object_events/pics/misc/ball_beast.png", ".4bpp", "-mwidth 2 -mheight 4");
-#ifdef ITEM_STRANGE_BALL
 const u32 gObjectEventPic_StrangeBall[] = INCGFX_U32("graphics/object_events/pics/misc/ball_strange.png", ".4bpp", "-mwidth 2 -mheight 4");
-#endif //ITEM_STRANGE_BALL
 #endif //OW_FOLLOWERS_POKEBALLS
 
 #if OW_FOLLOWERS_POKEBALLS
@@ -458,9 +465,7 @@ const u16 gObjectEventPal_DreamBall[] = INCGFX_U16("graphics/object_events/pics/
 // Gen VII
 const u16 gObjectEventPal_BeastBall[] = INCGFX_U16("graphics/object_events/pics/misc/ball_beast.png", ".gbapal");
 // Gen VIII
-#ifdef ITEM_STRANGE_BALL
 const u16 gObjectEventPal_StrangeBall[] = INCGFX_U16("graphics/object_events/pics/misc/ball_strange.png", ".gbapal");
-#endif //ITEM_STRANGE_BALL
 #endif //OW_FOLLOWERS_POKEBALLS
 
 const u32 gFieldEffectObjectPic_CaveDust[] = INCGFX_U32("graphics/field_effects/pics/cave_dust.png", ".4bpp");
@@ -535,7 +540,7 @@ const u16 gObjectEventPic_CamperFrlg[] = INCGFX_U16("graphics/object_events/pics
 const u16 gObjectEventPic_PicnickerFrlg[] = INCGFX_U16("graphics/object_events/pics/people/picnicker_frlg.png", ".4bpp", "-mwidth 2 -mheight 4");
 const u16 gObjectEventPic_CooltrainerM[] = INCGFX_U16("graphics/object_events/pics/people/cooltrainer_m.png", ".4bpp", "-mwidth 2 -mheight 4");
 const u16 gObjectEventPic_CooltrainerF[] = INCGFX_U16("graphics/object_events/pics/people/cooltrainer_f.png", ".4bpp", "-mwidth 2 -mheight 4");
-const u16 gObjectEventPic_PokeManiacFrlg[] = INCGFX_U16("graphics/object_events/pics/people/poke_maniac_frlg.png", ".4bpp");
+const u16 gObjectEventPic_PokeManiacFrlg[] = INCGFX_U16("graphics/object_events/pics/people/poke_maniac_frlg.png", ".4bpp", "-mwidth 2 -mheight 4");
 const u16 gObjectEventPic_Channeler[] = INCGFX_U16("graphics/object_events/pics/people/channeler.png", ".4bpp", "-mwidth 2 -mheight 4");
 const u16 gObjectEventPic_RocketF[] = INCGFX_U16("graphics/object_events/pics/people/rocket_f.png", ".4bpp", "-mwidth 2 -mheight 4");
 const u16 gObjectEventPic_SwimmerMWater[] = INCGFX_U16("graphics/object_events/pics/people/swimmer_m_water.png", ".4bpp", "-mwidth 2 -mheight 4");

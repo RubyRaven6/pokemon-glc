@@ -644,7 +644,7 @@ SINGLE_BATTLE_TEST("Dynamax: Sitrus Berries heal based on a Pokemon's non-Dynama
     } WHEN {
         TURN { MOVE(opponent, MOVE_FLING); MOVE(player, MOVE_SCRATCH, gimmick: dynamax); }
     } SCENE {
-        MESSAGE("Wobbuffet restored its health using its Sitrus Berry!");
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_HELD_ITEM_BERRY, player);
         HP_BAR(player, captureDamage: &results[i].damage);
     } FINALLY {
         EXPECT_EQ(results[0].damage, results[1].damage);
@@ -930,7 +930,7 @@ SINGLE_BATTLE_TEST("Dynamax: G-Max Stonesurge sets up Stealth Rocks")
     } SCENE {
         // turn 1
         MESSAGE("Drednaw used G-Max Stonesurge!");
-        MESSAGE("Pointed stones float in the air around the opposing team!");
+        MESSAGE("Pointed stones float in the air on the opposing side!");
         // turn 2
         MESSAGE("Pointed stones dug into the opposing Wobbuffet!");
     }
@@ -1803,6 +1803,73 @@ DOUBLE_BATTLE_TEST("Dynamax: G-Max Volt Crash paralyzes other opponent even if i
         ANIMATION(ANIM_TYPE_STATUS, B_ANIM_STATUS_PRZ, opponentRight);
         MESSAGE("The opposing Wynaut is paralyzed, so it may be unable to move!");
         STATUS_ICON(opponentRight, paralysis: TRUE);
+    }
+}
+
+SINGLE_BATTLE_TEST("Dynamax: Max Move power is based on the base move", s16 damage)
+{
+    u32 move;
+
+    PARAMETRIZE { move = MOVE_SCRATCH; }
+    PARAMETRIZE { move = MOVE_MEGA_KICK; }
+
+    GIVEN {
+        ASSUME(GetMovePower(MOVE_SCRATCH) == 40);
+        ASSUME(GetMovePower(MOVE_MEGA_KICK) == 120);
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(player, move, gimmick: GIMMICK_DYNAMAX); }
+    } SCENE {
+        HP_BAR(opponent, captureDamage: &results[i].damage);
+    } FINALLY {
+        EXPECT_GT(results[1].damage, results[0].damage);
+    }
+}
+
+SINGLE_BATTLE_TEST("Dynamax: Gravity does not prevent Max Guard derived from a Gravity-banned status move")
+{
+    enum Move move;
+
+    PARAMETRIZE { move = MOVE_SPLASH; }
+    PARAMETRIZE { move = MOVE_MAGNET_RISE; }
+    PARAMETRIZE { move = MOVE_TELEKINESIS; }
+
+    GIVEN {
+        ASSUME(GetMoveEffect(MOVE_GRAVITY) == EFFECT_GRAVITY);
+        ASSUME(IsMoveGravityBanned(move));
+        PLAYER(SPECIES_WOBBUFFET) { Speed(1); Moves(move, MOVE_SCRATCH); }
+        OPPONENT(SPECIES_WOBBUFFET) { Speed(2); Moves(MOVE_GRAVITY, MOVE_CELEBRATE); }
+    } WHEN {
+        TURN { MOVE(opponent, MOVE_GRAVITY); MOVE(player, MOVE_SCRATCH); }
+        TURN { MOVE(player, move, gimmick: GIMMICK_DYNAMAX); MOVE(opponent, MOVE_CELEBRATE); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_GRAVITY, opponent);
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_DYNAMAX_GROWTH, player);
+        MESSAGE("Wobbuffet used Max Guard!");
+    }
+}
+
+SINGLE_BATTLE_TEST("Dynamax: Gravity does not prevent a Max Move derived from a Gravity-banned damaging move")
+{
+    enum Move move;
+
+    PARAMETRIZE { move = MOVE_FLY; }
+    PARAMETRIZE { move = MOVE_BOUNCE; }
+    PARAMETRIZE { move = MOVE_HIGH_JUMP_KICK; }
+
+    GIVEN {
+        ASSUME(GetMoveEffect(MOVE_GRAVITY) == EFFECT_GRAVITY);
+        ASSUME(IsMoveGravityBanned(move));
+        PLAYER(SPECIES_WOBBUFFET) { Speed(1); Moves(move, MOVE_SCRATCH); }
+        OPPONENT(SPECIES_WOBBUFFET) { Speed(2); Moves(MOVE_GRAVITY, MOVE_CELEBRATE); }
+    } WHEN {
+        TURN { MOVE(opponent, MOVE_GRAVITY); MOVE(player, MOVE_SCRATCH); }
+        TURN { MOVE(player, move, gimmick: GIMMICK_DYNAMAX); MOVE(opponent, MOVE_CELEBRATE); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_GRAVITY, opponent);
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_DYNAMAX_GROWTH, player);
+        HP_BAR(opponent);
     }
 }
 

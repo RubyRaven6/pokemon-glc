@@ -625,14 +625,6 @@ static bool32 StartWildBattleWithOWE_CheckDoubleBattle(struct ObjectEvent *owe, 
     return FALSE;
 }
 
-void SetInstantOWESpawnTimer(void)
-{
-    if (!WE_OW_ENCOUNTERS)
-        return;
-
-    sOWESpawnCountdown = 0;
-}
-
 void SetMinimumOWESpawnTimer(void)
 {
     if (!WE_OW_ENCOUNTERS)
@@ -906,7 +898,7 @@ static bool32 CheckCanLoadOWE_Palette(enum Species speciesId, bool32 isFemale, b
     u32 numFreePalSlots = CountFreePaletteSlots();
     u32 tag = speciesId + OBJ_EVENT_MON + (isShiny ? OBJ_EVENT_MON_SHINY : 0);
 
-#if P_GENDER_DIFFERENCES
+#if P_GENDER_DIFFERENCES && OW_POKEMON_OBJECT_EVENTS
     if (isFemale && gSpeciesInfo[speciesId].overworldShinyPaletteFemale != NULL)
         tag += OBJ_EVENT_MON_FEMALE;
 #endif
@@ -1130,9 +1122,6 @@ void TryDespawnOWEsCrossingMapConnection(void)
     if (gMapHeader.mapType != MAP_TYPE_CITY && gMapHeader.mapType != MAP_TYPE_TOWN)
         return;
 
-    if (WE_OWE_DESPAWN_SOUND)
-        PlaySE(SE_FLEE);
-        
     DespawnAllOverworldWildEncounters(OWE_GENERATED, 0);
 }
 

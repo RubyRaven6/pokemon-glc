@@ -23,6 +23,7 @@ SINGLE_BATTLE_TEST("Sheer Force doesn't boost Magnitude", s16 damage)
         EXPECT_NE(results[0].damage, 0);
     }
 }
+
 SINGLE_BATTLE_TEST("Sheer Force doesn't boost Eruption", s16 damage)
 {
     enum Ability ability = ABILITY_NONE;
@@ -40,6 +41,7 @@ SINGLE_BATTLE_TEST("Sheer Force doesn't boost Eruption", s16 damage)
         EXPECT_NE(results[0].damage, 0);
     }
 }
+
 SINGLE_BATTLE_TEST("Sheer Force doesn't boost Water Spout", s16 damage)
 {
     enum Ability ability = ABILITY_NONE;
@@ -57,6 +59,7 @@ SINGLE_BATTLE_TEST("Sheer Force doesn't boost Water Spout", s16 damage)
         EXPECT_NE(results[0].damage, 0);
     }
 }
+
 SINGLE_BATTLE_TEST("Sheer Force doesn't boost Present", s16 damage)
 {
     enum Ability ability = ABILITY_NONE;
@@ -76,6 +79,7 @@ SINGLE_BATTLE_TEST("Sheer Force doesn't boost Present", s16 damage)
         EXPECT_NE(results[0].damage, 0);
     }
 }
+
 SINGLE_BATTLE_TEST("Sheer Force doesn't boost Psywave", s16 damage)
 {
     enum Ability ability = ABILITY_NONE;
@@ -93,6 +97,7 @@ SINGLE_BATTLE_TEST("Sheer Force doesn't boost Psywave", s16 damage)
         EXPECT_NE(results[0].damage, 0);
     }
 }
+
 SINGLE_BATTLE_TEST("Sheer Force doesn't boost Round", s16 damage)
 {
     enum Ability ability = ABILITY_NONE;
@@ -110,6 +115,7 @@ SINGLE_BATTLE_TEST("Sheer Force doesn't boost Round", s16 damage)
         EXPECT_NE(results[0].damage, 0);
     }
 }
+
 SINGLE_BATTLE_TEST("Sheer Force doesn't boost Gyro Ball", s16 damage)
 {
     enum Ability ability = ABILITY_NONE;
@@ -127,6 +133,7 @@ SINGLE_BATTLE_TEST("Sheer Force doesn't boost Gyro Ball", s16 damage)
         EXPECT_NE(results[0].damage, 0);
     }
 }
+
 SINGLE_BATTLE_TEST("Sheer Force doesn't boost Electro Ball", s16 damage)
 {
     enum Ability ability = ABILITY_NONE;
@@ -144,6 +151,7 @@ SINGLE_BATTLE_TEST("Sheer Force doesn't boost Electro Ball", s16 damage)
         EXPECT_NE(results[0].damage, 0);
     }
 }
+
 SINGLE_BATTLE_TEST("Sheer Force doesn't boost Dragon Energy", s16 damage)
 {
     enum Ability ability = ABILITY_NONE;
@@ -161,6 +169,7 @@ SINGLE_BATTLE_TEST("Sheer Force doesn't boost Dragon Energy", s16 damage)
         EXPECT_NE(results[0].damage, 0);
     }
 }
+
 SINGLE_BATTLE_TEST("Sheer Force doesn't boost Belch", s16 damage)
 {
     enum Ability ability = ABILITY_NONE;
@@ -178,6 +187,7 @@ SINGLE_BATTLE_TEST("Sheer Force doesn't boost Belch", s16 damage)
         EXPECT_NE(results[0].damage, 0);
     }
 }
+
 SINGLE_BATTLE_TEST("Sheer Force doesn't boost Shell Trap", s16 damage)
 {
     enum Ability ability = ABILITY_NONE;
@@ -195,6 +205,7 @@ SINGLE_BATTLE_TEST("Sheer Force doesn't boost Shell Trap", s16 damage)
         EXPECT_NE(results[0].damage, 0);
     }
 }
+
 SINGLE_BATTLE_TEST("Sheer Force doesn't boost Burn Up", s16 damage)
 {
     enum Ability ability = ABILITY_NONE;
@@ -212,6 +223,7 @@ SINGLE_BATTLE_TEST("Sheer Force doesn't boost Burn Up", s16 damage)
         EXPECT_NE(results[0].damage, 0);
     }
 }
+
 SINGLE_BATTLE_TEST("Sheer Force doesn't boost Double Shock", s16 damage)
 {
     enum Move move = MOVE_NONE;
@@ -229,6 +241,7 @@ SINGLE_BATTLE_TEST("Sheer Force doesn't boost Double Shock", s16 damage)
         EXPECT_NE(results[0].damage, 0);
     }
 }
+
 SINGLE_BATTLE_TEST("Sheer Force doesn't boost Steel Roller", s16 damage)
 {
     enum Ability ability = ABILITY_NONE;
@@ -246,6 +259,7 @@ SINGLE_BATTLE_TEST("Sheer Force doesn't boost Steel Roller", s16 damage)
         EXPECT_NE(results[0].damage, 0);
     }
 }
+
 SINGLE_BATTLE_TEST("Sheer Force doesn't boost Synchronoise", s16 damage)
 {
     enum Ability ability = ABILITY_NONE;
@@ -263,6 +277,7 @@ SINGLE_BATTLE_TEST("Sheer Force doesn't boost Synchronoise", s16 damage)
         EXPECT_NE(results[0].damage, 0);
     }
 }
+
 SINGLE_BATTLE_TEST("Sheer Force doesn't boost Aura Wheel", s16 damage)
 {
     enum Move move = MOVE_NONE;
@@ -280,6 +295,7 @@ SINGLE_BATTLE_TEST("Sheer Force doesn't boost Aura Wheel", s16 damage)
         EXPECT_NE(results[0].damage, 0);
     }
 }
+
 SINGLE_BATTLE_TEST("Sheer Force doesn't boost Hyperspace Fury", s16 damage)
 {
     enum Move move = MOVE_NONE;
@@ -297,6 +313,7 @@ SINGLE_BATTLE_TEST("Sheer Force doesn't boost Hyperspace Fury", s16 damage)
         EXPECT_NE(results[0].damage, 0);
     }
 }
+
 SINGLE_BATTLE_TEST("Sheer Force doesn't boost Bolt Beak", s16 damage)
 {
     enum Ability ability = ABILITY_NONE;
@@ -314,6 +331,7 @@ SINGLE_BATTLE_TEST("Sheer Force doesn't boost Bolt Beak", s16 damage)
         EXPECT_NE(results[0].damage, 0);
     }
 }
+
 SINGLE_BATTLE_TEST("Sheer Force doesn't boost Fishious Rend", s16 damage)
 {
     enum Ability ability = ABILITY_NONE;
@@ -331,6 +349,7 @@ SINGLE_BATTLE_TEST("Sheer Force doesn't boost Fishious Rend", s16 damage)
         EXPECT_NE(results[0].damage, 0);
     }
 }
+
 SINGLE_BATTLE_TEST("Sheer Force doesn't boost Comeuppance", s16 damage)
 {
     enum Ability ability = ABILITY_NONE;
@@ -348,6 +367,7 @@ SINGLE_BATTLE_TEST("Sheer Force doesn't boost Comeuppance", s16 damage)
         EXPECT_NE(results[0].damage, 0);
     }
 }
+
 SINGLE_BATTLE_TEST("Sheer Force doesn't boost Payback", s16 damage)
 {
     enum Ability ability = ABILITY_NONE;
@@ -396,6 +416,9 @@ static inline bool32 IgnoreMoveForSheerForceBoost(enum Move move)
         case MOVE_UPPER_HAND:    //  Bugged?
         case MOVE_GLITZY_GLOW:   //  Light Screen Move Effect seems to be bugged
         case MOVE_PAYBACK:
+        case MOVE_FRESH_CATCH:
+        case MOVE_POLISHED_STRIKE:
+        case MOVE_SURFACE_BREACH:
             return TRUE;
         default:
             return FALSE;
@@ -444,6 +467,7 @@ static inline bool32 IsMoveSheerForceBoosted(enum Move move)
         case MOVE_FLASH_CANNON:
         case MOVE_FOCUS_BLAST:
         case MOVE_FORCE_PALM:
+        case MOVE_FIREFLY:
         case MOVE_FUSSY_FUSS:
         case MOVE_GUNK_SHOT:
         case MOVE_HEADBUTT:
@@ -454,12 +478,16 @@ static inline bool32 IsMoveSheerForceBoosted(enum Move move)
         case MOVE_ICE_PUNCH:
         case MOVE_ICICLE_CRASH:
         case MOVE_ICY_WIND:
+        case MOVE_INFERNAL_DANCE:
         case MOVE_IRON_HEAD:
         case MOVE_IRON_TAIL:
         case MOVE_LAVA_PLUME:
         case MOVE_LIQUIDATION:
         case MOVE_LOW_SWEEP:
+        case MOVE_LUA_STRIKE:
+        case MOVE_MASTERSTROKE:
         case MOVE_METAL_CLAW:
+        case MOVE_CHI_BLOCKER:
         case MOVE_MUD_BOMB:
         case MOVE_MUDDY_WATER:
         case MOVE_MUD_SHOT:
@@ -467,6 +495,7 @@ static inline bool32 IsMoveSheerForceBoosted(enum Move move)
         case MOVE_MYSTICAL_FIRE:
         case MOVE_PLAY_ROUGH:
         case MOVE_POISONED_STARS:
+        case MOVE_POLAR_PLUNGE:
         case MOVE_POISON_FANG:
         case MOVE_POISON_JAB:
         case MOVE_POISON_STING:
@@ -488,6 +517,7 @@ static inline bool32 IsMoveSheerForceBoosted(enum Move move)
         case MOVE_SHADOW_BALL:
         case MOVE_SIGNAL_BEAM:
         case MOVE_SHALLOW_GRAVE:
+        case MOVE_SOAPBERRY_SHOCK:
         case MOVE_SKY_ATTACK:
         case MOVE_SLUDGE_BOMB:
         case MOVE_SLUDGE_WAVE:
@@ -545,7 +575,9 @@ static inline bool32 IsMoveSheerForceBoosted(enum Move move)
         case MOVE_FIERY_WRATH:
         case MOVE_FREEZING_GLARE:
         case MOVE_FIRE_LASH:
+        #if B_UPDATED_MOVE_DATA < GEN_CHAMPIONS
         case MOVE_FREEZE_DRY:
+        #endif
         case MOVE_FREEZE_SHOCK:
         case MOVE_GENESIS_SUPERNOVA:
         case MOVE_GLACIATE:
@@ -677,6 +709,7 @@ DOUBLE_BATTLE_TEST("Sheer Force only boosts the damage of moves it's supposed to
             case EFFECT_SEMI_INVULNERABLE:
             case EFFECT_SOLAR_BEAM:
             case EFFECT_SKY_DROP:
+            case EFFECT_POLAR_PLUNGE:
                 TURN { SKIP_TURN(playerLeft); SKIP_TURN(opponentLeft); }
                 TURN {}
                 break;
@@ -765,6 +798,7 @@ DOUBLE_BATTLE_TEST("Sheer Force only boosts the damage of moves it's supposed to
             case EFFECT_SEMI_INVULNERABLE:
             case EFFECT_SOLAR_BEAM:
             case EFFECT_SKY_DROP:
+            case EFFECT_POLAR_PLUNGE:
                 TURN { SKIP_TURN(playerLeft); SKIP_TURN(opponentLeft); }
                 TURN {}
                 break;
@@ -853,6 +887,7 @@ DOUBLE_BATTLE_TEST("Sheer Force only boosts the damage of moves it's supposed to
             case EFFECT_SEMI_INVULNERABLE:
             case EFFECT_SOLAR_BEAM:
             case EFFECT_SKY_DROP:
+            case EFFECT_POLAR_PLUNGE:
                 TURN { SKIP_TURN(playerLeft); SKIP_TURN(opponentLeft); }
                 TURN {}
                 break;
@@ -941,6 +976,7 @@ DOUBLE_BATTLE_TEST("Sheer Force only boosts the damage of moves it's supposed to
             case EFFECT_SEMI_INVULNERABLE:
             case EFFECT_SOLAR_BEAM:
             case EFFECT_SKY_DROP:
+            case EFFECT_POLAR_PLUNGE:
                 TURN { SKIP_TURN(playerLeft); SKIP_TURN(opponentLeft); }
                 TURN {}
                 break;
@@ -1029,6 +1065,7 @@ DOUBLE_BATTLE_TEST("Sheer Force only boosts the damage of moves it's supposed to
             case EFFECT_SEMI_INVULNERABLE:
             case EFFECT_SOLAR_BEAM:
             case EFFECT_SKY_DROP:
+            case EFFECT_POLAR_PLUNGE:
                 TURN { SKIP_TURN(playerLeft); SKIP_TURN(opponentLeft); }
                 TURN {}
                 break;
@@ -1117,6 +1154,7 @@ DOUBLE_BATTLE_TEST("Sheer Force only boosts the damage of moves it's supposed to
             case EFFECT_SEMI_INVULNERABLE:
             case EFFECT_SOLAR_BEAM:
             case EFFECT_SKY_DROP:
+            case EFFECT_POLAR_PLUNGE:
                 TURN { SKIP_TURN(playerLeft); SKIP_TURN(opponentLeft); }
                 TURN {}
                 break;
@@ -1205,6 +1243,7 @@ DOUBLE_BATTLE_TEST("Sheer Force only boosts the damage of moves it's supposed to
             case EFFECT_SEMI_INVULNERABLE:
             case EFFECT_SOLAR_BEAM:
             case EFFECT_SKY_DROP:
+            case EFFECT_POLAR_PLUNGE:
                 TURN { SKIP_TURN(playerLeft); SKIP_TURN(opponentLeft); }
                 TURN {}
                 break;
@@ -1293,6 +1332,7 @@ DOUBLE_BATTLE_TEST("Sheer Force only boosts the damage of moves it's supposed to
             case EFFECT_SEMI_INVULNERABLE:
             case EFFECT_SOLAR_BEAM:
             case EFFECT_SKY_DROP:
+            case EFFECT_POLAR_PLUNGE:
                 TURN { SKIP_TURN(playerLeft); SKIP_TURN(opponentLeft); }
                 TURN {}
                 break;
@@ -1382,6 +1422,7 @@ DOUBLE_BATTLE_TEST("Sheer Force only boosts the damage of moves it's supposed to
             case EFFECT_SEMI_INVULNERABLE:
             case EFFECT_SOLAR_BEAM:
             case EFFECT_SKY_DROP:
+            case EFFECT_POLAR_PLUNGE:
                 TURN { SKIP_TURN(playerLeft); SKIP_TURN(opponentLeft); }
                 TURN {}
                 break;
@@ -1435,5 +1476,19 @@ AI_SINGLE_BATTLE_TEST("AI sees Sheer Force skips additional effects")
         OPPONENT(SPECIES_DRUDDIGON) { Ability(ability); Moves(MOVE_POWER_UP_PUNCH, move); }
     } WHEN {
         TURN { EXPECT_MOVE(opponent, expectedMove); }
+    }
+}
+
+SINGLE_BATTLE_TEST("Sheer Force doesn't activate Shell Bell")
+{
+    GIVEN {
+        PLAYER(SPECIES_TAUROS) { Ability(ABILITY_SHEER_FORCE); Item(ITEM_SHELL_BELL); HP(1); }
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(player, MOVE_EARTH_POWER); }
+    } SCENE {
+        NONE_OF {
+            HP_BAR(player);
+        }
     }
 }

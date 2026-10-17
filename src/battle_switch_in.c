@@ -11,7 +11,6 @@
 #include "constants/moves.h"
 
 static bool32 FirstEventBlockEvents(struct BattleCalcValues *calcValues);
-static bool32 TryHazardsOnSwitchIn(enum BattlerId battler, enum Ability ability, enum HoldEffect holdEffect, enum Hazards hazardType);
 static bool32 SecondEventBlockEvents(struct BattleCalcValues *calcValues);
 
 bool32 DoSwitchInEvents(void)
@@ -143,7 +142,7 @@ bool32 DoSwitchInEvents(void)
         while (gBattleStruct->switchInBattlerCounter < gBattlersCount)
         {
             enum BattlerId battler = gBattlersByRawSpeed[gBattleStruct->switchInBattlerCounter++];
-            if (AbilityBattleEffects(ABILITYEFFECT_OPPORTUNIST, battler, calcValues.abilities[battler], 0, TRUE))
+            if (AbilityBattleEffects(ABILITYEFFECT_OPPORTUNIST, battler, calcValues.abilities[battler], MOVE_NONE, TRUE))
                 return TRUE;
         }
         gBattleStruct->switchInBattlerCounter = 0;
@@ -250,7 +249,7 @@ static bool32 FirstEventBlockEvents(struct BattleCalcValues *calcValues)
         {
             gBattleStruct->eventState.battlerSwitchIn++;
         }
-        else if (EmergencyExitCanBeTriggered(battler))
+        else if (EmergencyExitCanBeTriggered(battler, calcValues->abilities[battler]))
         {
             gBattleScripting.battler = gBattlerAbility = battler;
             gBattleStruct->battlerState[battler].forcedSwitch = FALSE;
@@ -304,7 +303,7 @@ static void SetDmgHazardsBattlescript(enum BattlerId battler, u8 multistringId)
     BattleScriptCall(BattleScript_DmgHazardsOnBattler);
 }
 
-static bool32 TryHazardsOnSwitchIn(enum BattlerId battler, enum Ability ability, enum HoldEffect holdEffect, enum Hazards hazardType)
+bool32 TryHazardsOnSwitchIn(enum BattlerId battler, enum Ability ability, enum HoldEffect holdEffect, enum Hazards hazardType)
 {
     bool32 effect = FALSE;
     enum BattleSide side = GetBattlerSide(battler);

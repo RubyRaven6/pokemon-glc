@@ -110,7 +110,6 @@ static void SetDefaultOptions(void)
 
 static void ClearPokedexFlags(void)
 {
-    gUnusedPokedexU8 = 0;
     memset(&gSaveBlock1Ptr->dexCaught, 0, sizeof(gSaveBlock1Ptr->dexCaught));
     memset(&gSaveBlock1Ptr->dexSeen, 0, sizeof(gSaveBlock1Ptr->dexSeen));
 }
@@ -141,7 +140,7 @@ static void WarpToTruck(void)
     if (IS_FRLG)
         SetWarpDestination(MAP_GROUP(MAP_PALLET_TOWN_PLAYERS_HOUSE_2F), MAP_NUM(MAP_PALLET_TOWN_PLAYERS_HOUSE_2F), WARP_ID_NONE, 6, 6);
     else
-        SetWarpDestination(MAP_GROUP(MAP_TESTING_GROUNDS), MAP_NUM(MAP_TESTING_GROUNDS), WARP_ID_NONE, 4, 5);
+        SetWarpDestination(MAP_GROUP(MAP_TOURNAMENT_GROUNDS_OUTSIDE), MAP_NUM(MAP_TOURNAMENT_GROUNDS_OUTSIDE), WARP_ID_NONE, 22, 66);
     WarpIntoMap();
 }
 
