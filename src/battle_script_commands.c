@@ -4190,7 +4190,9 @@ static void Cmd_hidepartystatussummary(void)
 
 static void ResetValuesForCalledMove(void)
 {
-    if (gBattlerByTurnOrder[gCurrentTurnActionNumber] != gBattlerAttacker)
+    if (gCurrentMove == MOVE_SUMMIT_DROP_FOLLOW_UP)
+        gBattleStruct->eventState.atkCanceler = CANCELER_TARGET_FAILURE;
+    else if (gBattlerByTurnOrder[gCurrentTurnActionNumber] != gBattlerAttacker)
         gBattleStruct->eventState.atkCanceler = 0;
     else
         gBattleStruct->eventState.atkCanceler = CANCELER_VOLATILE_BLOCKED;
@@ -10540,6 +10542,43 @@ void BS_SetDraconicPeak(void)
     gBattleMons[gBattlerAttacker].volatiles.perishSong = TRUE;
     gBattleMons[gBattlerAttacker].volatiles.perishSongTimer = 3;
     gBattleMons[gBattlerAttacker].volatiles.draconicPeak = TRUE;
+    gBattleMons[gBattlerAttacker].volatiles.escapePrevention = TRUE;
+    gBattleMons[gBattlerAttacker].volatiles.battlerPreventingEscape = gBattlerAttacker;
+    gBattlescriptCurrInstr = cmd->nextInstr;
+}
+
+void BS_SetGhastlyDissDrops(void)
+{
+    NATIVE_ARGS();
+    static const enum Stat sGhastlyDissStats[] = {STAT_ATK, STAT_DEF, STAT_SPATK, STAT_SPDEF, STAT_SPEED};
+    u32 firstIndex = RandomUniform(RNG_RANDOM_FROM_LIST, 0, ARRAY_COUNT(sGhastlyDissStats) - 1);
+    u32 secondIndex = RandomUniform(RNG_RANDOM_FROM_LIST, 0, ARRAY_COUNT(sGhastlyDissStats) - 2);
+
+    if (secondIndex >= firstIndex)
+        secondIndex++;
+
+    SetStatChange(gBattlerTarget, sGhastlyDissStats[firstIndex], -2);
+    SetStatChange(gBattlerTarget, sGhastlyDissStats[secondIndex], -2);
+    gBattlescriptCurrInstr = cmd->nextInstr;
+}
+
+void BS_CheckGhastlyDissKO(void)
+{
+    NATIVE_ARGS();
+    bool32 allStatsLowered = TRUE;
+
+    for (enum Stat stat = STAT_ATK; stat <= STAT_SPDEF; stat++)
+    {
+        if (gBattleMons[gBattlerTarget].statStages[stat] >= DEFAULT_STAT_STAGE)
+        {
+            allStatsLowered = FALSE;
+            break;
+        }
+    }
+
+    gBattleCommunication[0] = allStatsLowered;
+    if (allStatsLowered)
+        SetPassiveDamageAmount(gBattlerTarget, gBattleMons[gBattlerTarget].hp);
     gBattlescriptCurrInstr = cmd->nextInstr;
 }
 

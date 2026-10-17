@@ -418,6 +418,7 @@ static inline bool32 IgnoreMoveForSheerForceBoost(enum Move move)
         case MOVE_PAYBACK:
         case MOVE_FRESH_CATCH:
         case MOVE_POLISHED_STRIKE:
+        case MOVE_SURFACE_BREACH:
             return TRUE;
         default:
             return FALSE;
@@ -516,6 +517,7 @@ static inline bool32 IsMoveSheerForceBoosted(enum Move move)
         case MOVE_SHADOW_BALL:
         case MOVE_SIGNAL_BEAM:
         case MOVE_SHALLOW_GRAVE:
+        case MOVE_SOAPBERRY_SHOCK:
         case MOVE_SKY_ATTACK:
         case MOVE_SLUDGE_BOMB:
         case MOVE_SLUDGE_WAVE:

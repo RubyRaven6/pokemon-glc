@@ -503,6 +503,13 @@ BattleScript_MoveEffectSpikes::
 BattleScript_MoveEffectSpikesRet:
 	return
 
+BattleScript_MoveEffectStickyWeb::
+	setstickyweb BattleScript_MoveEffectStickyWebRet
+	printstring STRINGID_STICKYWEBUSED
+	waitmessage B_WAIT_TIME_LONG
+BattleScript_MoveEffectStickyWebRet:
+	return
+
 BattleScript_EffectTeatime::
 	attackcanceler
 	checkteatimetargets BattleScript_ButItFailed
@@ -1470,6 +1477,22 @@ BattleScript_EffectDraconicPeak::
 	waitanimation
 	trybattlerstatchange BS_ATTACKER, STAT_CHANGE_NO_FLAGS
 	goto BattleScript_MoveEnd
+
+BattleScript_EffectGhastlyDiss::
+	attackcanceler
+	attackanimation
+	waitanimation
+	callnative BS_SetGhastlyDissDrops
+	trybattlerstatchange BS_TARGET, STAT_CHANGE_NO_FLAGS
+	callnative BS_CheckGhastlyDissKO
+	jumpifbyte CMP_EQUAL, gBattleCommunication, FALSE, BattleScript_MoveEnd
+	healthbarupdate BS_TARGET
+	datahpupdate BS_TARGET, ASSURANCE_DOUBLE
+	tryfaintmon BS_TARGET
+	goto BattleScript_MoveEnd
+
+BattleScript_SummitDropFollowUp::
+	jumptocalledmove TRUE
 
 BattleScript_DraconicPeakContinues::
 	printstring STRINGID_DRACONICPEAKCONTINUES

@@ -4479,6 +4479,20 @@ s32 GetBattleMovePriority(enum BattlerId battler, enum Ability ability, enum Mov
      && gBattleMons[battler].hp * 4 < gBattleMons[battler].maxHP)
         priority++;
 
+    if (move == MOVE_SIMPLIFY)
+    {
+        enum BattlerId target = gBattleStruct->moveTarget[battler];
+        enum Type types[3];
+
+        if (target < gBattlersCount && IsBattlerAlive(target))
+        {
+            GetBattlerTypes(target, FALSE, types);
+            if (types[0] != types[1]
+             || (types[2] != TYPE_MYSTERY && types[2] != types[0] && types[2] != types[1]))
+                priority++;
+        }
+    }
+
     // Max Guard check
     if (GetActiveGimmick(battler) == GIMMICK_DYNAMAX && GetMoveCategory(move) == DAMAGE_CATEGORY_STATUS)
         return GetMovePriority(MOVE_MAX_GUARD);

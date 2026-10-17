@@ -6492,6 +6492,27 @@ static inline u32 CalcMoveBasePower(struct DamageContext *ctx)
         if (gBattleMons[battlerAtk].hp * 2 < gBattleMons[battlerAtk].maxHP || gBattleMons[battlerAtk].status1 != STATUS1_NONE)
             basePower *= 2;
         break;
+    case EFFECT_COLLAB_STREAM:
+    {
+        enum BattlerId partner = GetPartnerBattler(battlerAtk);
+
+        if (IsDoubleBattle()
+         && IsBattlerAlive(partner)
+         && gChosenActionByBattler[partner] == B_ACTION_USE_MOVE
+         && gChosenMoveByBattler[partner] == MOVE_COLLAB_STREAM)
+            basePower *= 2;
+        break;
+    }
+    case EFFECT_GLAMOUR_FLASH:
+    {
+        s32 stageDifference = 0;
+
+        for (enum Stat stat = STAT_ATK; stat < NUM_BATTLE_STATS; stat++)
+            stageDifference += gBattleMons[battlerAtk].statStages[stat] - gBattleMons[battlerDef].statStages[stat];
+        if (stageDifference > 0)
+            basePower += 20 * stageDifference;
+        break;
+    }
     case EFFECT_HEAT_CRASH:
         weight = GetBattlerWeight(battlerAtk, ctx->abilities[battlerAtk], ctx->holdEffects[battlerAtk]) / GetBattlerWeight(battlerDef, ctx->abilities[battlerDef], ctx->holdEffects[battlerDef]);
         if (weight >= ARRAY_COUNT(sHeatCrashPowerTable))

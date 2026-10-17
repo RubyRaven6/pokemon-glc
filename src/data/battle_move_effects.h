@@ -2175,6 +2175,49 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
         .encourageEncore = TRUE,
     },
 
+    [EFFECT_SOAPBERRY_SHOCK] =
+    {
+        .battleScript = BattleScript_EffectHit,
+        .battleTvScore = 0,
+    },
+
+    [EFFECT_PIERCING_VINE] =
+    {
+        .battleScript = BattleScript_EffectHit,
+        .battleTvScore = 0,
+    },
+
+    [EFFECT_COLLAB_STREAM] =
+    {
+        .battleScript = BattleScript_EffectHit,
+        .battleTvScore = 0,
+    },
+
+    [EFFECT_SURFACE_BREACH] =
+    {
+        .battleScript = BattleScript_EffectHit,
+        .battleTvScore = 0,
+    },
+
+    [EFFECT_GHASTLY_DISS] =
+    {
+        .battleScript = BattleScript_EffectGhastlyDiss,
+        .battleTvScore = 0,
+        .encourageEncore = TRUE,
+    },
+
+    [EFFECT_GLAMOUR_FLASH] =
+    {
+        .battleScript = BattleScript_EffectHit,
+        .battleTvScore = 0,
+    },
+
+    [EFFECT_SUMMIT_DROP] =
+    {
+        .battleScript = BattleScript_EffectHit,
+        .battleTvScore = 0,
+    },
+
     [EFFECT_SECRET_POWER] =
     {
         .battleScript = BattleScript_EffectHit,

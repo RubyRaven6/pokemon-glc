@@ -23299,6 +23299,168 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .battleAnimScript = gBattleAnimMove_DragonDance,
     },
 
+    [MOVE_SOAPBERRY_SHOCK] =
+    {
+        .name = COMPOUND_STRING("Soapberry Shock"),
+        .description = COMPOUND_STRING(
+            "Lowers Speed and leaves a\n"
+            "Sticky Web after a KO."),
+        .effect = EFFECT_SOAPBERRY_SHOCK,
+        .power = 75,
+        .type = TYPE_BUG,
+        .accuracy = 100,
+        .pp = 10,
+        .target = TARGET_SELECTED,
+        .category = DAMAGE_CATEGORY_PHYSICAL,
+        .makesContact = TRUE,
+        .additionalEffects = ADDITIONAL_EFFECTS({
+            .moveEffect = MOVE_EFFECT_STAT_MINUS,
+            .speed = 1,
+            .chance = 100,
+        }),
+        .battleAnimScript = gBattleAnimMove_Lunge,
+    },
+
+    [MOVE_PIERCING_VINE] =
+    {
+        .name = COMPOUND_STRING("Piercing Vine"),
+        .description = COMPOUND_STRING(
+            "High critical-hit ratio. A\n"
+            "critical hit scatters Spikes."),
+        .effect = EFFECT_PIERCING_VINE,
+        .power = 70,
+        .type = TYPE_GRASS,
+        .accuracy = 100,
+        .pp = 20,
+        .target = TARGET_SELECTED,
+        .category = DAMAGE_CATEGORY_PHYSICAL,
+        .makesContact = TRUE,
+        .criticalHitStage = 1,
+        .battleAnimScript = gBattleAnimMove_VineWhip,
+    },
+
+    [MOVE_COLLAB_STREAM] =
+    {
+        .name = COMPOUND_STRING("Collab Stream"),
+        .description = COMPOUND_STRING(
+            "Allies collaborate to double\n"
+            "its power and act together."),
+        .effect = EFFECT_COLLAB_STREAM,
+        .power = 60,
+        .type = TYPE_ELECTRIC,
+        .accuracy = 100,
+        .pp = 10,
+        .target = TARGET_FOES_AND_ALLY,
+        .category = DAMAGE_CATEGORY_SPECIAL,
+        .additionalEffects = ADDITIONAL_EFFECTS({
+            .moveEffect = MOVE_EFFECT_COLLAB_STREAM,
+        }),
+        .battleAnimScript = gBattleAnimMove_Discharge,
+    },
+
+    [MOVE_SURFACE_BREACH] =
+    {
+        .name = COMPOUND_STRING("Surface Breach"),
+        .description = COMPOUND_STRING(
+            "A powerful breach that brings\n"
+            "brief rain if skies are clear."),
+        .effect = EFFECT_SURFACE_BREACH,
+        .power = 100,
+        .type = TYPE_WATER,
+        .accuracy = 95,
+        .pp = 10,
+        .target = TARGET_SELECTED,
+        .category = DAMAGE_CATEGORY_PHYSICAL,
+        .makesContact = TRUE,
+        .battleAnimScript = gBattleAnimMove_Liquidation,
+    },
+
+    [MOVE_SIMPLIFY] =
+    {
+        .name = COMPOUND_STRING("Simplify"),
+        .description = COMPOUND_STRING(
+            "Changes the target into a pure\n"
+            "Normal type."),
+        .effect = EFFECT_SOAK,
+        .power = 0,
+        .type = TYPE_NORMAL,
+        .accuracy = 0,
+        .pp = 10,
+        .target = TARGET_SELECTED,
+        .category = DAMAGE_CATEGORY_STATUS,
+        .argument = { .type = TYPE_NORMAL },
+        .magicCoatAffected = TRUE,
+        .ignoresSubstitute = TRUE,
+        .battleAnimScript = gBattleAnimMove_Soak,
+    },
+
+    [MOVE_GHASTLY_DISS] =
+    {
+        .name = COMPOUND_STRING("Ghastly Diss"),
+        .description = COMPOUND_STRING(
+            "Sharply lowers two random stats\n"
+            "of both opposing Pokemon."),
+        .effect = EFFECT_GHASTLY_DISS,
+        .power = 0,
+        .type = TYPE_GHOST,
+        .accuracy = 100,
+        .pp = 10,
+        .target = TARGET_BOTH,
+        .category = DAMAGE_CATEGORY_STATUS,
+        .battleAnimScript = gBattleAnimMove_Snarl,
+    },
+
+    [MOVE_GLAMOUR_FLASH] =
+    {
+        .name = COMPOUND_STRING("Glamour Flash"),
+        .description = COMPOUND_STRING(
+            "Power rises with the user's\n"
+            "total stat-stage advantage."),
+        .effect = EFFECT_GLAMOUR_FLASH,
+        .power = 60,
+        .type = TYPE_PSYCHIC,
+        .accuracy = 100,
+        .pp = 10,
+        .target = TARGET_SELECTED,
+        .category = DAMAGE_CATEGORY_SPECIAL,
+        .battleAnimScript = gBattleAnimMove_Psyshock,
+    },
+
+    [MOVE_SUMMIT_DROP] =
+    {
+        .name = COMPOUND_STRING("Summit Drop"),
+        .description = COMPOUND_STRING(
+            "Strikes now, then unleashes\n"
+            "an Avalanche at turn's end."),
+        .effect = EFFECT_SUMMIT_DROP,
+        .power = 40,
+        .type = TYPE_ICE,
+        .accuracy = 100,
+        .pp = 5,
+        .target = TARGET_SELECTED,
+        .category = DAMAGE_CATEGORY_PHYSICAL,
+        .battleAnimScript = gBattleAnimMove_Avalanche,
+    },
+
+    [MOVE_SUMMIT_DROP_FOLLOW_UP] =
+    {
+        .name = COMPOUND_STRING("Summit Drop"),
+        .description = COMPOUND_STRING(
+            "An Avalanche that strikes\n"
+            "both opposing Pokemon."),
+        .effect = EFFECT_REVENGE,
+        .power = 60,
+        .type = TYPE_ICE,
+        .accuracy = 100,
+        .pp = 1,
+        .target = TARGET_BOTH,
+        .category = DAMAGE_CATEGORY_PHYSICAL,
+        .makesContact = TRUE,
+        .mirrorMoveBanned = TRUE,
+        .metronomeBanned = TRUE,
+        .battleAnimScript = gBattleAnimMove_Avalanche,
+    },
+
     [MOVE_WINDSTORM] =
     {
         .name = COMPOUND_STRING("Windstorm"),
