@@ -906,6 +906,14 @@ const struct SpriteTemplate gRedHeartRisingSpriteTemplate =
     .callback = AnimRedHeartRising,
 };
 
+const struct SpriteTemplate gRockHeartProjectileSpriteTemplate =
+{
+    .tileTag = ANIM_TAG_ROCK_HEART,
+    .paletteTag = ANIM_TAG_ROCK_HEART,
+    .oam = &gOamData_AffineOff_ObjNormal_16x16,
+    .callback = AnimRedHeartProjectile,
+};
+
 // New struct that's just a copy of 'gMagentaHeartSpriteTemplate', without need to make new anim tags
 const struct SpriteTemplate gRedHeartCharmSpriteTemplate =
 {

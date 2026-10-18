@@ -2890,6 +2890,15 @@ const struct SpriteTemplate gChainBindingSpriteTemplate =
     .callback = AnimConstrictBinding,
 };
 
+const struct SpriteTemplate gFlowerSunbloomSpriteTemplate =
+{
+    .tileTag = ANIM_TAG_FLOWER,
+    .paletteTag = ANIM_TAG_FLOWER,
+    .oam = &gOamData_AffineOff_ObjNormal_16x16,
+    .anims = gPetalDanceBigFlowerAnimTable,
+    .callback = AnimNeedleArmSpike,
+};
+
 // functions
 // args[0] - initial x offset
 // args[1] - initial y offset

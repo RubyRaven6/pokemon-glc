@@ -113,6 +113,14 @@ const struct SpriteTemplate gFlyingSandCrescentSpriteTemplate =
     .callback = AnimFlyingSandCrescent,
 };
 
+const struct SpriteTemplate gWindstormCrescentSpriteTemplate =
+{
+    .tileTag = ANIM_TAG_GUST,
+    .paletteTag = ANIM_TAG_GUST,
+    .oam = &gOamData_AffineNormal_ObjNormal_32x64,
+    .callback = AnimWindstormCrescent,
+};
+
 static const struct Subsprite sFlyingSandSubsprites[] =
 {
     {.x = -16, .y = 0, .shape = SPRITE_SHAPE(32x16), .size = SPRITE_SIZE(32x16), .tileOffset = 0, .priority = 1},
@@ -610,6 +618,50 @@ void AnimFlyingSandCrescent(struct Sprite *sprite)
 
         sprite->y = gBattleAnimArgs[0];
         SetSubspriteTables(sprite, sFlyingSandSubspriteTable);
+        sprite->sVelocityX = gBattleAnimArgs[1];
+        sprite->sVelocityY = gBattleAnimArgs[2];
+        sprite->sState++;
+    }
+    else
+    {
+        sprite->sFractionalX += sprite->sVelocityX;
+        sprite->sFractionalY += sprite->sVelocityY;
+        sprite->x2 += (sprite->sFractionalX >> 8);
+        sprite->y2 += (sprite->sFractionalY >> 8);
+        sprite->sFractionalX &= 0xFF;
+        sprite->sFractionalY &= 0xFF;
+
+        if (sprite->data[5] == 0)
+        {
+            if (sprite->x + sprite->x2 > DISPLAY_WIDTH + 32)
+            {
+                sprite->callback = DestroyAnimSprite;
+            }
+        }
+        else if (sprite->x + sprite->x2 < -32)
+        {
+            sprite->callback = DestroyAnimSprite;
+        }
+    }
+}
+
+void AnimWindstormCrescent(struct Sprite *sprite)
+{
+    if (sprite->sState == 0)
+    {
+        if (gBattleAnimArgs[3] != 0 && !IsOnPlayerSide(gBattleAnimAttacker))
+        {
+            sprite->x = DISPLAY_WIDTH + 64;
+            gBattleAnimArgs[1] = -gBattleAnimArgs[1];
+            sprite->sMirroredX = 1;
+            sprite->oam.matrixNum = ST_OAM_HFLIP;
+        }
+        else
+        {
+            sprite->x = -64;
+        }
+
+        sprite->y = gBattleAnimArgs[0];
         sprite->sVelocityX = gBattleAnimArgs[1];
         sprite->sVelocityY = gBattleAnimArgs[2];
         sprite->sState++;

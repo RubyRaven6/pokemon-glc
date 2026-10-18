@@ -6556,6 +6556,14 @@ const struct SpriteTemplate gIceShardSpriteTemplate =
     .affineAnims = sSpriteAffineAnimTable_Flutterby,
     .callback = SpriteCB_MaxFlutterby,
 };
+const struct SpriteTemplate gIceShardSpiralSpriteTemplate =
+{
+    .tileTag = ANIM_TAG_ICE_CRYSTALS,
+    .paletteTag = ANIM_TAG_ICE_CRYSTALS,
+    .oam = &gOamData_AffineDouble_ObjBlend_8x8,
+    .anims = gAnims_IceCrystalSmall,
+    .callback = AnimFireSpiralOutward,
+};
 
 const struct SpriteTemplate gSpinningVineSpriteTemplate =
 {
@@ -6791,6 +6799,31 @@ const struct SpriteTemplate gFreezyFrostRisingSpearSpriteTemplate =
     .tileTag = ANIM_TAG_ICICLE_SPEAR,
     .paletteTag = ANIM_TAG_ICICLE_SPEAR,
     .oam = &gOamData_AffineOff_ObjNormal_32x32,
+    .callback = SpriteCB_GeyserTarget,
+};
+const struct SpriteTemplate gCrashingFistFistSpriteTemplate =
+{
+    .tileTag = ANIM_TAG_HANDS_AND_FEET,
+    .paletteTag = ANIM_TAG_HANDS_AND_FEET,
+    .oam = &gOamData_AffineOff_ObjNormal_32x32,
+    .anims = gAnims_HandsAndFeet,
+    .callback = AnimSuperpowerFireball,
+};
+const struct SpriteTemplate gHydraulicPressTemplate =
+{
+    .tileTag = ANIM_TAG_STEAMROLLER,
+    .paletteTag = ANIM_TAG_STEAMROLLER,
+    .oam = &gOamData_AffineOff_ObjNormal_64x64,
+    .callback = AnimStompFoot
+};
+
+const struct SpriteTemplate gMagmaticRageGeyserSpriteTemplate =
+{
+    .tileTag = ANIM_TAG_SMALL_EMBER,
+    .paletteTag = ANIM_TAG_SMALL_EMBER,
+    .oam = &gOamData_AffineOff_ObjNormal_32x32,
+    .anims = gAnims_BasicFire,
+    .affineAnims = gSpriteAffineAnimTable_PrimalSymbol,
     .callback = SpriteCB_GeyserTarget,
 };
 
@@ -8119,6 +8152,16 @@ static void AnimTask_WaitAffineAnim(u8 taskId)
 
     if (!RunAffineAnimFromTaskData(task))
         DestroyAnimVisualTask(taskId);
+}
+
+void AnimTask_SquishAnimBattler(u8 taskId)
+{
+    struct Task* task = &gTasks[taskId];
+    enum AnimBattler animBattler = gBattleAnimArgs[0];
+    u8 spriteId = GetAnimBattlerSpriteId(animBattler);
+
+    PrepareAffineAnimInTaskData(task, spriteId, sSquishTargetAffineAnimCmds);
+    task->func = AnimTask_WaitAffineAnim;
 }
 
 void AnimTask_SquishTarget(u8 taskId)

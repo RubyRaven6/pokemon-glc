@@ -1191,6 +1191,7 @@ void AnimTask_VoltTackleBolt(u8 taskId)
         switch(gAnimMoveIndex)
         {
         case MOVE_FAIRY_LOCK:
+        case MOVE_PSYCHE_LOCK:
             template = &gFairyLockChainsSpriteTemplate;
             break;
         case MOVE_COLLISION_COURSE:
@@ -1277,10 +1278,17 @@ void AnimTask_VoltTackleBolt(u8 taskId)
 static bool8 CreateVoltTackleBolt(struct Task *task, u8 taskId)
 {
     u32 spriteId;
+    u32 duration = 12;
     switch (gAnimMoveIndex)
     {
     case MOVE_FAIRY_LOCK:
+        
         spriteId = CreateSpriteUnchecked(&gFairyLockChainsSpriteTemplate, task->data[3], task->data[5] + 10, 35);
+        duration = 25;
+        break;
+    case MOVE_PSYCHE_LOCK:
+        spriteId = CreateSpriteUnchecked(&gFairyLockChainsSpriteTemplate, task->data[3], task->data[5] + 10, 35);
+        duration = 40;
         break;
     case MOVE_COLLISION_COURSE:
         spriteId = CreateSpriteUnchecked(&gCollisionCourseSpriteTemplate, task->data[3], task->data[5], 35);
@@ -1295,7 +1303,7 @@ static bool8 CreateVoltTackleBolt(struct Task *task, u8 taskId)
     {
         gSprites[spriteId].data[6] = taskId;
         gSprites[spriteId].data[7] = 7;
-        gSprites[spriteId].data[1] = (gAnimMoveIndex == MOVE_FAIRY_LOCK) ? 25 : 12; // How long the chains / bolts stay on screen.
+        gSprites[spriteId].data[1] = duration; // How long the chains / bolts stay on screen.
         gSprites[spriteId].data[2] = doDestroyOamMatrix; // Whether to destroy the Oam Matrix.
         task->data[7]++;
     }
