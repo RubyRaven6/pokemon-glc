@@ -12533,11 +12533,13 @@ const struct ItemInfo gItemsInfo[] =
         .shopCriteriaFunc = ShopCriteriaByUnlockedFlag,
     },
 
-    [ITEM_TM51] =
+    [ITEM_TM_DEEP_ANALYSIS] =
     {
         .name = ITEM_NAME("TM51"),
         .price = 0,
-        .description = sQuestionMarksDesc, // Todo
+        .description = COMPOUND_STRING(
+            "Gym Leader\n's"
+            "signature move."),
         .importance = I_REUSABLE_TMS,
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
@@ -12545,11 +12547,13 @@ const struct ItemInfo gItemsInfo[] =
         .shopCriteriaFunc = ShopCriteriaByUnlockedFlag,
     },
 
-    [ITEM_TM52] =
+    [ITEM_TM_TRAWLING_NET] =
     {
         .name = ITEM_NAME("TM52"),
         .price = 0,
-        .description = sQuestionMarksDesc, // Todo
+        .description = COMPOUND_STRING(
+            "Gym Leader\n's"
+            "signature move."),
         .importance = I_REUSABLE_TMS,
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
@@ -12557,11 +12561,13 @@ const struct ItemInfo gItemsInfo[] =
         .shopCriteriaFunc = ShopCriteriaByUnlockedFlag,
     },
 
-    [ITEM_TM53] =
+    [ITEM_TM_INFERNAL_DANCE] =
     {
         .name = ITEM_NAME("TM53"),
         .price = 0,
-        .description = sQuestionMarksDesc, // Todo
+        .description = COMPOUND_STRING(
+            "Gym Leader\n's"
+            "signature move."),
         .importance = I_REUSABLE_TMS,
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
@@ -12569,11 +12575,13 @@ const struct ItemInfo gItemsInfo[] =
         .shopCriteriaFunc = ShopCriteriaByUnlockedFlag,
     },
 
-    [ITEM_TM54] =
+    [ITEM_TM_CANOPY_COVER] =
     {
         .name = ITEM_NAME("TM54"),
         .price = 0,
-        .description = sQuestionMarksDesc, // Todo
+        .description = COMPOUND_STRING(
+            "Gym Leader\n's"
+            "signature move."),
         .importance = I_REUSABLE_TMS,
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
@@ -12581,11 +12589,13 @@ const struct ItemInfo gItemsInfo[] =
         .shopCriteriaFunc = ShopCriteriaByUnlockedFlag,
     },
 
-    [ITEM_TM55] =
+    [ITEM_TM_VOLTAIC_PRISON] =
     {
         .name = ITEM_NAME("TM55"),
         .price = 0,
-        .description = sQuestionMarksDesc, // Todo
+        .description = COMPOUND_STRING(
+            "Gym Leader\n's"
+            "signature move."),
         .importance = I_REUSABLE_TMS,
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
@@ -12593,11 +12603,13 @@ const struct ItemInfo gItemsInfo[] =
         .shopCriteriaFunc = ShopCriteriaByUnlockedFlag,
     },
 
-    [ITEM_TM56] =
+    [ITEM_TM_PHANTASMAL_PLAY] =
     {
         .name = ITEM_NAME("TM56"),
         .price = 0,
-        .description = sQuestionMarksDesc, // Todo
+        .description = COMPOUND_STRING(
+            "Gym Leader\n's"
+            "signature move."),
         .importance = I_REUSABLE_TMS,
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
@@ -12605,11 +12617,13 @@ const struct ItemInfo gItemsInfo[] =
         .shopCriteriaFunc = ShopCriteriaByUnlockedFlag,
     },
 
-    [ITEM_TM57] =
+    [ITEM_TM_MASTERSTROKE] =
     {
         .name = ITEM_NAME("TM57"),
         .price = 0,
-        .description = sQuestionMarksDesc, // Todo
+        .description = COMPOUND_STRING(
+            "Gym Leader\n's"
+            "signature move."),
         .importance = I_REUSABLE_TMS,
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
@@ -12617,11 +12631,13 @@ const struct ItemInfo gItemsInfo[] =
         .shopCriteriaFunc = ShopCriteriaByUnlockedFlag,
     },
 
-    [ITEM_TM58] =
+    [ITEM_TM_LUA_STRIKE] =
     {
         .name = ITEM_NAME("TM58"),
         .price = 0,
-        .description = sQuestionMarksDesc, // Todo
+        .description = COMPOUND_STRING(
+            "Gym Leader\n's"
+            "signature move."),
         .importance = I_REUSABLE_TMS,
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
@@ -12629,11 +12645,13 @@ const struct ItemInfo gItemsInfo[] =
         .shopCriteriaFunc = ShopCriteriaByUnlockedFlag,
     },
 
-    [ITEM_TM59] =
+    [ITEM_TM_GEMSHOT] =
     {
         .name = ITEM_NAME("TM59"),
         .price = 0,
-        .description = sQuestionMarksDesc, // Todo
+        .description = COMPOUND_STRING(
+            "Gym Leader\n's"
+            "signature move."),
         .importance = I_REUSABLE_TMS,
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
@@ -12641,11 +12659,13 @@ const struct ItemInfo gItemsInfo[] =
         .shopCriteriaFunc = ShopCriteriaByUnlockedFlag,
     },
 
-    [ITEM_TM60] =
+    [ITEM_TM_DARK_IMITATION] =
     {
         .name = ITEM_NAME("TM60"),
         .price = 0,
-        .description = sQuestionMarksDesc, // Todo
+        .description = COMPOUND_STRING(
+            "Gym Leader\n's"
+            "signature move."),
         .importance = I_REUSABLE_TMS,
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
@@ -12653,11 +12673,13 @@ const struct ItemInfo gItemsInfo[] =
         .shopCriteriaFunc = ShopCriteriaByUnlockedFlag,
     },
 
-    [ITEM_TM61] =
+    [ITEM_TM_ROUGH_RIDIN] =
     {
         .name = ITEM_NAME("TM61"),
         .price = 0,
-        .description = sQuestionMarksDesc, // Todo
+        .description = COMPOUND_STRING(
+            "Gym Leader\n's"
+            "signature move."),
         .importance = I_REUSABLE_TMS,
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
@@ -12665,11 +12687,13 @@ const struct ItemInfo gItemsInfo[] =
         .shopCriteriaFunc = ShopCriteriaByUnlockedFlag,
     },
 
-    [ITEM_TM62] =
+    [ITEM_TM_FERTILIZE] =
     {
         .name = ITEM_NAME("TM62"),
         .price = 0,
-        .description = sQuestionMarksDesc, // Todo
+        .description = COMPOUND_STRING(
+            "Gym Leader\n's"
+            "signature move."),
         .importance = I_REUSABLE_TMS,
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
@@ -12677,11 +12701,13 @@ const struct ItemInfo gItemsInfo[] =
         .shopCriteriaFunc = ShopCriteriaByUnlockedFlag,
     },
 
-    [ITEM_TM63] =
+    [ITEM_TM_FRESH_CATCH] =
     {
         .name = ITEM_NAME("TM63"),
         .price = 0,
-        .description = sQuestionMarksDesc, // Todo
+        .description = COMPOUND_STRING(
+            "Gym Leader\n's"
+            "signature move."),
         .importance = I_REUSABLE_TMS,
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
@@ -12689,11 +12715,13 @@ const struct ItemInfo gItemsInfo[] =
         .shopCriteriaFunc = ShopCriteriaByUnlockedFlag,
     },
 
-    [ITEM_TM64] =
+    [ITEM_TM_FIREFLY] =
     {
         .name = ITEM_NAME("TM64"),
         .price = 0,
-        .description = sQuestionMarksDesc, // Todo
+        .description = COMPOUND_STRING(
+            "Gym Leader\n's"
+            "signature move."),
         .importance = I_REUSABLE_TMS,
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
@@ -12701,11 +12729,13 @@ const struct ItemInfo gItemsInfo[] =
         .shopCriteriaFunc = ShopCriteriaByUnlockedFlag,
     },
 
-    [ITEM_TM65] =
+    [ITEM_TM_CHI_BLOCKER] =
     {
         .name = ITEM_NAME("TM65"),
         .price = 0,
-        .description = sQuestionMarksDesc, // Todo
+        .description = COMPOUND_STRING(
+            "Gym Leader\n's"
+            "signature move."),
         .importance = I_REUSABLE_TMS,
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
@@ -12713,11 +12743,13 @@ const struct ItemInfo gItemsInfo[] =
         .shopCriteriaFunc = ShopCriteriaByUnlockedFlag,
     },
 
-    [ITEM_TM66] =
+    [ITEM_TM_MASK_OFF] =
     {
         .name = ITEM_NAME("TM66"),
         .price = 0,
-        .description = sQuestionMarksDesc, // Todo
+        .description = COMPOUND_STRING(
+            "Gym Leader\n's"
+            "signature move."),
         .importance = I_REUSABLE_TMS,
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
@@ -12725,11 +12757,13 @@ const struct ItemInfo gItemsInfo[] =
         .shopCriteriaFunc = ShopCriteriaByUnlockedFlag,
     },
 
-    [ITEM_TM67] =
+    [ITEM_TM_SEELIE_SUMMONS] =
     {
         .name = ITEM_NAME("TM67"),
         .price = 0,
-        .description = sQuestionMarksDesc, // Todo
+        .description = COMPOUND_STRING(
+            "Gym Leader\n's"
+            "signature move."),
         .importance = I_REUSABLE_TMS,
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
@@ -12737,11 +12771,13 @@ const struct ItemInfo gItemsInfo[] =
         .shopCriteriaFunc = ShopCriteriaByUnlockedFlag,
     },
 
-    [ITEM_TM68] =
+    [ITEM_TM_POLISHED_STRIKE] =
     {
         .name = ITEM_NAME("TM68"),
         .price = 0,
-        .description = sQuestionMarksDesc, // Todo
+        .description = COMPOUND_STRING(
+            "Gym Leader\n's"
+            "signature move."),
         .importance = I_REUSABLE_TMS,
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
@@ -12749,11 +12785,13 @@ const struct ItemInfo gItemsInfo[] =
         .shopCriteriaFunc = ShopCriteriaByUnlockedFlag,
     },
 
-    [ITEM_TM69] =
+    [ITEM_TM_POLAR_PLUNGE] =
     {
         .name = ITEM_NAME("TM69"),
         .price = 0,
-        .description = sQuestionMarksDesc, // Todo
+        .description = COMPOUND_STRING(
+            "Gym Leader\n's"
+            "signature move."),
         .importance = I_REUSABLE_TMS,
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
@@ -12761,11 +12799,13 @@ const struct ItemInfo gItemsInfo[] =
         .shopCriteriaFunc = ShopCriteriaByUnlockedFlag,
     },
 
-    [ITEM_TM70] =
+    [ITEM_TM_ANGSTY_SCREAM] =
     {
         .name = ITEM_NAME("TM70"),
         .price = 0,
-        .description = sQuestionMarksDesc, // Todo
+        .description = COMPOUND_STRING(
+            "Gym Leader\n's"
+            "signature move."),
         .importance = I_REUSABLE_TMS,
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
@@ -12773,11 +12813,13 @@ const struct ItemInfo gItemsInfo[] =
         .shopCriteriaFunc = ShopCriteriaByUnlockedFlag,
     },
 
-    [ITEM_TM71] =
+    [ITEM_TM_DRACONIC_PEAK] =
     {
         .name = ITEM_NAME("TM71"),
         .price = 0,
-        .description = sQuestionMarksDesc, // Todo
+        .description = COMPOUND_STRING(
+            "Gym Leader\n's"
+            "signature move."),
         .importance = I_REUSABLE_TMS,
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
@@ -12785,11 +12827,13 @@ const struct ItemInfo gItemsInfo[] =
         .shopCriteriaFunc = ShopCriteriaByUnlockedFlag,
     },
 
-    [ITEM_TM72] =
+    [ITEM_TM_SOAPBERRY_SHOCK] =
     {
         .name = ITEM_NAME("TM72"),
         .price = 0,
-        .description = sQuestionMarksDesc, // Todo
+        .description = COMPOUND_STRING(
+            "Gym Leader\n's"
+            "signature move."),
         .importance = I_REUSABLE_TMS,
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
@@ -12797,11 +12841,13 @@ const struct ItemInfo gItemsInfo[] =
         .shopCriteriaFunc = ShopCriteriaByUnlockedFlag,
     },
 
-    [ITEM_TM73] =
+    [ITEM_TM_PIERCING_VINE] =
     {
         .name = ITEM_NAME("TM73"),
         .price = 0,
-        .description = sQuestionMarksDesc, // Todo
+        .description = COMPOUND_STRING(
+            "Gym Leader\n's"
+            "signature move."),
         .importance = I_REUSABLE_TMS,
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
@@ -12809,11 +12855,13 @@ const struct ItemInfo gItemsInfo[] =
         .shopCriteriaFunc = ShopCriteriaByUnlockedFlag,
     },
 
-    [ITEM_TM74] =
+    [ITEM_TM_COLLAB_STREAM] =
     {
         .name = ITEM_NAME("TM74"),
         .price = 0,
-        .description = sQuestionMarksDesc, // Todo
+        .description = COMPOUND_STRING(
+            "Gym Leader\n's"
+            "signature move."),
         .importance = I_REUSABLE_TMS,
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
@@ -12821,11 +12869,13 @@ const struct ItemInfo gItemsInfo[] =
         .shopCriteriaFunc = ShopCriteriaByUnlockedFlag,
     },
 
-    [ITEM_TM75] =
+    [ITEM_TM_SURFACE_BREACH] =
     {
         .name = ITEM_NAME("TM75"),
         .price = 0,
-        .description = sQuestionMarksDesc, // Todo
+        .description = COMPOUND_STRING(
+            "Gym Leader\n's"
+            "signature move."),
         .importance = I_REUSABLE_TMS,
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
@@ -12833,11 +12883,13 @@ const struct ItemInfo gItemsInfo[] =
         .shopCriteriaFunc = ShopCriteriaByUnlockedFlag,
     },
 
-    [ITEM_TM76] =
+    [ITEM_TM_SIMPLIFY] =
     {
         .name = ITEM_NAME("TM76"),
         .price = 0,
-        .description = sQuestionMarksDesc, // Todo
+        .description = COMPOUND_STRING(
+            "Gym Leader\n's"
+            "signature move."),
         .importance = I_REUSABLE_TMS,
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
@@ -12845,11 +12897,13 @@ const struct ItemInfo gItemsInfo[] =
         .shopCriteriaFunc = ShopCriteriaByUnlockedFlag,
     },
 
-    [ITEM_TM77] =
+    [ITEM_TM_GHASTLY_DISS] =
     {
         .name = ITEM_NAME("TM77"),
         .price = 0,
-        .description = sQuestionMarksDesc, // Todo
+        .description = COMPOUND_STRING(
+            "Gym Leader\n's"
+            "signature move."),
         .importance = I_REUSABLE_TMS,
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
@@ -12857,11 +12911,13 @@ const struct ItemInfo gItemsInfo[] =
         .shopCriteriaFunc = ShopCriteriaByUnlockedFlag,
     },
 
-    [ITEM_TM78] =
+    [ITEM_TM_GLAMOUR_FLASH] =
     {
         .name = ITEM_NAME("TM78"),
         .price = 0,
-        .description = sQuestionMarksDesc, // Todo
+        .description = COMPOUND_STRING(
+            "Gym Leader\n's"
+            "signature move."),
         .importance = I_REUSABLE_TMS,
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
@@ -12869,11 +12925,13 @@ const struct ItemInfo gItemsInfo[] =
         .shopCriteriaFunc = ShopCriteriaByUnlockedFlag,
     },
 
-    [ITEM_TM79] =
+    [ITEM_TM_SUMMIT_DROP] =
     {
         .name = ITEM_NAME("TM79"),
         .price = 0,
-        .description = sQuestionMarksDesc, // Todo
+        .description = COMPOUND_STRING(
+            "Gym Leader\n's"
+            "signature move."),
         .importance = I_REUSABLE_TMS,
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
