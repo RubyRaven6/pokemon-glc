@@ -806,11 +806,12 @@ SINGLE_BATTLE_TEST("Custom Moves - Wake Crash applies 20 percent recoil")
 
 SINGLE_BATTLE_TEST("Custom Moves - Razzle Dazzle doubles on consecutive use up to 300 BP")
 {
-    s16 damage[4];
+    s16 damage[5];
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET) { SpAttack(50); }
-        OPPONENT(SPECIES_WOBBUFFET) { HP(9999); MaxHP(9999); SpDefense(50); }
+        OPPONENT(SPECIES_SNORUNT) { HP(9999); MaxHP(9999); SpDefense(50); }
     } WHEN {
+        TURN { MOVE(player, MOVE_RAZZLE_DAZZLE, WITH_RNG(RNG_DAMAGE_MODIFIER, 0)); }
         TURN { MOVE(player, MOVE_RAZZLE_DAZZLE, WITH_RNG(RNG_DAMAGE_MODIFIER, 0)); }
         TURN { MOVE(player, MOVE_RAZZLE_DAZZLE, WITH_RNG(RNG_DAMAGE_MODIFIER, 0)); }
         TURN { MOVE(player, MOVE_RAZZLE_DAZZLE, WITH_RNG(RNG_DAMAGE_MODIFIER, 0)); }
@@ -824,10 +825,41 @@ SINGLE_BATTLE_TEST("Custom Moves - Razzle Dazzle doubles on consecutive use up t
         HP_BAR(opponent, captureDamage: &damage[2]);
         ANIMATION(ANIM_TYPE_MOVE, MOVE_RAZZLE_DAZZLE, player);
         HP_BAR(opponent, captureDamage: &damage[3]);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_RAZZLE_DAZZLE, player);
+        HP_BAR(opponent, captureDamage: &damage[4]);
     } THEN {
-        EXPECT_GT(damage[1], damage[0]);
-        EXPECT_GT(damage[2], damage[1]);
-        EXPECT_EQ(damage[3], damage[2]);
+        EXPECT_MUL_EQ(damage[0], UQ_4_12(2.0), damage[1]);
+        EXPECT_MUL_EQ(damage[1], UQ_4_12(2.0), damage[2]);
+        EXPECT_MUL_EQ(damage[2], UQ_4_12(1.5), damage[3]);
+        EXPECT_EQ(damage[4], damage[3]);
+    }
+}
+
+SINGLE_BATTLE_TEST("Custom Moves - Razzle Dazzle and Fury Cutter do not share consecutive-use bonuses")
+{
+    enum Move move, otherMove;
+    s16 damage[2];
+    PARAMETRIZE { move = MOVE_RAZZLE_DAZZLE; otherMove = MOVE_FURY_CUTTER; }
+    PARAMETRIZE { move = MOVE_FURY_CUTTER; otherMove = MOVE_RAZZLE_DAZZLE; }
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET) { MaxHP(9999); HP(9999); }
+    } WHEN {
+        TURN { MOVE(player, move); }
+        TURN { MOVE(player, otherMove); }
+        TURN { MOVE(player, otherMove); }
+        TURN { MOVE(player, move); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, move, player);
+        HP_BAR(opponent, captureDamage: &damage[0]);
+        ANIMATION(ANIM_TYPE_MOVE, otherMove, player);
+        HP_BAR(opponent);
+        ANIMATION(ANIM_TYPE_MOVE, otherMove, player);
+        HP_BAR(opponent);
+        ANIMATION(ANIM_TYPE_MOVE, move, player);
+        HP_BAR(opponent, captureDamage: &damage[1]);
+    } THEN {
+        EXPECT_EQ(damage[0], damage[1]);
     }
 }
 
@@ -2264,24 +2296,28 @@ SINGLE_BATTLE_TEST("Custom Moves - Phantasmal Play switches the user out after a
     }
 }
 
-SINGLE_BATTLE_TEST("Custom Moves - Masterstroke boosts more stats with consecutive uses")
+SINGLE_BATTLE_TEST("Custom Moves - Masterstroke boosts up to five different core stats with consecutive uses")
 {
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET);
-        OPPONENT(SPECIES_WOBBUFFET) { MaxHP(1000); HP(1000); }
+        OPPONENT(SPECIES_WOBBUFFET) { MaxHP(9999); HP(9999); }
     } WHEN {
         TURN { MOVE(player, MOVE_MASTERSTROKE); }
         TURN { MOVE(player, MOVE_MASTERSTROKE); }
         TURN { MOVE(player, MOVE_MASTERSTROKE); }
+        TURN { MOVE(player, MOVE_MASTERSTROKE); }
+        TURN { MOVE(player, MOVE_MASTERSTROKE); }
     } THEN {
-        EXPECT_EQ((u32)player->volatiles.masterstrokeUses, 3);
+        EXPECT_EQ((u32)player->volatiles.masterstrokeUses, 5);
         EXPECT_EQ(
             player->statStages[STAT_ATK]
           + player->statStages[STAT_DEF]
           + player->statStages[STAT_SPATK]
           + player->statStages[STAT_SPDEF]
           + player->statStages[STAT_SPEED],
-            DEFAULT_STAT_STAGE * 5 + 6);
+            DEFAULT_STAT_STAGE * 5 + 15);
+        EXPECT_GT(player->statStages[STAT_SPATK], DEFAULT_STAT_STAGE);
+        EXPECT_GT(player->statStages[STAT_SPDEF], DEFAULT_STAT_STAGE);
     }
 }
 

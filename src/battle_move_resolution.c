@@ -1066,9 +1066,12 @@ static enum CancelerResult CancelerPPDeduction(struct BattleCalcValues *cv)
              ppToDeduct++;
     }
 
-    // For item Metronome, echoed voice
+    // Forgor to make sure we don't accidentally carry over the counter from separate moves since Fury Cutter and Razzle Dazzle 
     if (cv->move != gLastResultingMoves[cv->battlerAtk] || gBattleStruct->unableToUseMove)
+    {
         gBattleMons[cv->battlerAtk].volatiles.metronomeItemCounter = 0;
+        gBattleMons[cv->battlerAtk].volatiles.furyCutterCounter = 0;
+    }
 
     if (gBattleMons[cv->battlerAtk].pp[movePosition] > ppToDeduct)
         gBattleMons[cv->battlerAtk].pp[movePosition] -= ppToDeduct;
@@ -6307,7 +6310,7 @@ static void SetSameMoveTurnValues(enum BattleMoveEffects moveEffect)
         break;
     case EFFECT_RAZZLE_DAZZLE:
         if (increment)
-            gBattleMons[gBattlerAttacker].volatiles.furyCutterCounter = min(gBattleMons[gBattlerAttacker].volatiles.furyCutterCounter + 1, 2);
+            gBattleMons[gBattlerAttacker].volatiles.furyCutterCounter = min(gBattleMons[gBattlerAttacker].volatiles.furyCutterCounter + 1, 3);
         else
             gBattleMons[gBattlerAttacker].volatiles.furyCutterCounter = 0;
         break;

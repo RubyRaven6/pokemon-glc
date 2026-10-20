@@ -1058,7 +1058,7 @@ static void HandleSetEffectMasterstroke(struct BattleCalcValues *cv, struct SetE
     u32 statCount = 0;
     u32 boosts = min(gBattleMons[cv->battlerAtk].volatiles.masterstrokeUses + 1, 5);
 
-    for (enum Stat stat = STAT_ATK; stat <= STAT_SPEED; stat++)
+    for (enum Stat stat = STAT_ATK; stat <= STAT_SPDEF; stat++)
     {
         if (gBattleMons[cv->battlerAtk].statStages[stat] < MAX_STAT_STAGE)
             stats[statCount++] = stat;

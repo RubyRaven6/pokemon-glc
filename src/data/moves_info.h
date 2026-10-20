@@ -23174,7 +23174,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .name = COMPOUND_STRING("Chi Blocker"),
         .description = COMPOUND_STRING(
             "Super effective on Psychic-\n"
-            "types. May cause frostbite."),
+            "types."),
         .effect = EFFECT_SUPER_EFFECTIVE_ON_ARG,
         .power = 70,
         .type = TYPE_FIGHTING,
@@ -23184,10 +23184,6 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .category = DAMAGE_CATEGORY_PHYSICAL,
         .argument = { .type = TYPE_PSYCHIC },
         .makesContact = TRUE,
-        .additionalEffects = ADDITIONAL_EFFECTS({
-            .moveEffect = MOVE_EFFECT_FREEZE_OR_FROSTBITE,
-            .chance = 10,
-        }),
         .battleAnimScript = gBattleAnimMove_BrickBreak,
     },
 
