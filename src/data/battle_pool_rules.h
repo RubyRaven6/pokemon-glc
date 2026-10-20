@@ -26,6 +26,7 @@ const struct PoolRules gPoolRulesetsList[] = {
         .zCrystalClause = B_POOL_RULE_Z_CRYSTAL_CLAUSE,
         .tagMaxMembers[POOL_TAG_LEAD] = 1,
         .tagMaxMembers[POOL_TAG_ACE] = 1,
+        .tagRequired[POOL_TAG_SPECIAL_PICK] = TRUE,
     },
     [POOL_RULESET_DOUBLES] = {
         .speciesClause = B_POOL_RULE_SPECIES_CLAUSE,
@@ -36,6 +37,7 @@ const struct PoolRules gPoolRulesetsList[] = {
         .zCrystalClause = B_POOL_RULE_Z_CRYSTAL_CLAUSE,
         .tagMaxMembers[POOL_TAG_LEAD] = 2,
         .tagMaxMembers[POOL_TAG_ACE] = 2,
+        .tagRequired[POOL_TAG_SPECIAL_PICK] = TRUE,
     },
     [POOL_RULESET_WEATHER_SINGLES] = {
         .speciesClause = B_POOL_RULE_SPECIES_CLAUSE,
@@ -50,6 +52,7 @@ const struct PoolRules gPoolRulesetsList[] = {
         .tagRequired[POOL_TAG_WEATHER_SETTER] = TRUE,
         .tagMaxMembers[POOL_TAG_WEATHER_ABUSER] = POOL_MEMBER_COUNT_UNLIMITED,
         .tagRequired[POOL_TAG_WEATHER_ABUSER] = TRUE,
+        .tagRequired[POOL_TAG_SPECIAL_PICK] = TRUE,
     },
     [POOL_RULESET_WEATHER_DOUBLES] = {
         .speciesClause = B_POOL_RULE_SPECIES_CLAUSE,
@@ -64,6 +67,7 @@ const struct PoolRules gPoolRulesetsList[] = {
         .tagRequired[POOL_TAG_WEATHER_SETTER] = TRUE,
         .tagMaxMembers[POOL_TAG_WEATHER_ABUSER] = POOL_MEMBER_COUNT_UNLIMITED,
         .tagRequired[POOL_TAG_WEATHER_ABUSER] = TRUE,
+        .tagRequired[POOL_TAG_SPECIAL_PICK] = TRUE,
     },
     [POOL_RULESET_SUPPORT_DOUBLES] = {
         .speciesClause = B_POOL_RULE_SPECIES_CLAUSE,
@@ -76,5 +80,6 @@ const struct PoolRules gPoolRulesetsList[] = {
         .tagMaxMembers[POOL_TAG_ACE] = 2,
         .tagMaxMembers[POOL_TAG_SUPPORT] = 1,
         .tagRequired[POOL_TAG_SUPPORT] = TRUE,
+        .tagRequired[POOL_TAG_SPECIAL_PICK] = TRUE,
     },
 };

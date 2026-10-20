@@ -57,15 +57,17 @@
 #define TRAINER_LEADER_ROXIE                    41
 #define TRAINER_LEADER_MARLON                   42
 
-/**/
-#define TRAINER_SHELLY_SEAFLOOR_CAVERN          43
-#define TRAINER_ARCHIE                          44
-#define TRAINER_LEAH                            45
-#define TRAINER_DAISY                           46
-#define TRAINER_ROSE_1                          47
-#define TRAINER_FELIX                           48
-#define TRAINER_VIOLET                          49
-#define TRAINER_ROSE_2                          50
+/*KALOS LEADERS*/
+#define TRAINER_LEADER_VIOLA                    43
+#define TRAINER_LEADER_GRANT                    44
+#define TRAINER_LEADER_KORRINA                  45
+#define TRAINER_LEADER_RAMOS                    46
+#define TRAINER_LEADER_CLEMONT                  47
+#define TRAINER_LEADER_VALERIE                  48
+#define TRAINER_LEADER_OLYMPIA                  49
+#define TRAINER_LEADER_WULFRIC                  50
+
+/*ALOLA KAHUNAS*/
 #define TRAINER_ROSE_3                          51
 #define TRAINER_ROSE_4                          52
 #define TRAINER_ROSE_5                          53

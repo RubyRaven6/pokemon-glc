@@ -447,7 +447,7 @@
 #define B_POOL_SETTING_CONSISTENT_RNG       FALSE    // If set to TRUE, the same Trainer will always generate the same pool on the same save file.
 #define B_POOL_SETTING_USE_FIXED_SEED       FALSE    // If set to TRUE, RNG will use the fixed seed defined in B_POOL_SETTING_FIXED_SEED.
 #define B_POOL_SETTING_FIXED_SEED           0x1D4127 // "Random" number. Unless a mistake was made, it's へだら in the Emerald charmap, which should spell he-da-ra.
-#define B_POOL_RULE_SPECIES_CLAUSE          FALSE    // Only pick a single Pokémon of a unique National Pokédex number.
+#define B_POOL_RULE_SPECIES_CLAUSE          TRUE     // Only pick a single Pokémon of a unique National Pokédex number.
 #define B_POOL_RULE_EXCLUDE_FORMS           FALSE    // Exclude different forms from Species Clause.
 #define B_POOL_RULE_ITEM_CLAUSE             FALSE    // Only allow each item to be picked once.
 #define B_POOL_RULES_USE_ITEM_EXCLUSIONS    FALSE    // Exclude items listed in poolItemClauseExclusions.

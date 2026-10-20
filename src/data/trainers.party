@@ -4607,150 +4607,842 @@ Quiet Nature
 - Aura Sphere
 - Protect
 
-=== TRAINER_SHELLY_SEAFLOOR_CAVERN ===
-Name: SHELLY
-Class: Aqua Admin
-Pic: Aqua Admin F
+=== TRAINER_LEADER_VIOLA ===
+Name: Viola
+Class: Leader
+Pic: Lass
 Gender: Female
-Music: Aqua
+Music: Elite Four
 Double Battle: No
-AI: Basic Trainer
+AI: Good Trainer / Prediction / Assumptions / Ace Pokemon
+Pool Rules: Basic
+Pool Pick Functions: Default
+Party Size: 6
 
-Sharpedo
-Level: 37
-IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
+Masquerain @ Focus Sash
+Ability: Intimidate
+Level: 100
+EVs: 63 HP / 2 SpD / 63 Spe
+Tags: Lead
+Timid Nature
+- Sticky Web
+- Struggle Bug
+- Bug Buzz
+- Air Slash
 
-Mightyena
-Level: 37
-IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
+Slurpuff @ Sitrus Berry
+Ability: Unburden
+Level: 100
+EVs: 63 HP / 63 SpA / 2 Spe
+Tags: Lead
+Modest Nature
+- Sticky Web
+- Dazzling Gleam
+- Thunderbolt
+- Flamethrower
 
-=== TRAINER_ARCHIE ===
-Name: ARCHIE
-Class: Aqua Leader
-Pic: Aqua Leader Archie
+Pheromosa @ Choice Specs
+Ability: Beast Boost
+Level: 100
+EVs: 2 HP / 63 SpA / 63 Spe 
+Modest Nature
+- Bug Buzz
+- Focus Blast
+- Ice Beam
+
+Pheromosa @ Choice Band
+Ability: Beast Boost
+Level: 100
+EVs: 2 HP / 63 Atk / 63 Spe
+Adamant Nature
+- U-Turn
+- Close Combat
+- Poison Jab
+- Throat Chop
+
+Accelgor @ Focus Sash
+Ability: Unburden
+Level: 100
+EVs: 2 HP / 63 SpA / 63 Spe
+Tags: Support
+Modest Nature
+- Giphant Capture
+- Bug Buzz
+- Focus Blast
+- Sludge Bomb
+
+Araquanid @ Leftovers
+Ability: Water Bubble
+Level: 100
+EVs: 63 HP / 63 Atk / 2 Spe
+Adamant Nature
+- Liquidation
+- Leech Life
+- Sticky Web
+- Aqua Ring
+
+Vivillon @ Life Orb
+Ability: Compound Eyes
+Level: 100
+EVs: 2 HP / 63 SpA / 63 Spe
+Timid Nature
+- Sleep Powder
+- Hurricane
+- Bug Buzz
+
+Araquanid @ Choice Band
+Ability: Water Bubble
+Level: 100
+EVs: 63 HP / 63 Atk / 2 Spe
+Adamant Nature
+- Liquidation
+- U-Turn
+
+Heracross @ Heracronite
+Ability: Swarm
+Level: 100
+EVs: 63 HP / 63 Atk / 2 Def
+Tags: Ace
+Adamant Nature
+- Rock Blast
+- Pin Missile
+- Bullet Seed
+- Close Combat
+
+=== TRAINER_LEADER_GRANT ===
+Name: Grant
+Class: Leader
+Pic: Hiker
 Gender: Male
-Music: Aqua
-Items: Super Potion / Super Potion
+Music: Elite Four
 Double Battle: No
-AI: Basic Trainer
+AI: Good Trainer / Prediction / Assumptions / Ace Pokemon
+Pool Rules: Basic
+Pool Pick Functions: Default
+Party Size: 6
 
-Mightyena
-Level: 41
-IVs: 18 HP / 18 Atk / 18 Def / 18 SpA / 18 SpD / 18 Spe
-
-Crobat
-Level: 41
-IVs: 18 HP / 18 Atk / 18 Def / 18 SpA / 18 SpD / 18 Spe
-
-Sharpedo
-Level: 43
-IVs: 18 HP / 18 Atk / 18 Def / 18 SpA / 18 SpD / 18 Spe
-
-=== TRAINER_LEAH ===
-Name: LEAH
-Class: Hex Maniac
-Pic: Hex Maniac
-Gender: Female
-Music: Suspicious
-Double Battle: No
-AI: Check Bad Move
-
-Spoink
-Level: 31
-IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
-
-=== TRAINER_DAISY ===
-Name: DAISY
-Class: Aroma Lady
-Pic: Aroma Lady
-Gender: Female
-Music: Female
-Double Battle: No
-AI: Check Bad Move
-
-Shroomish
-Level: 14
-IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
-
-Roselia
-Level: 14
-IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
-
-=== TRAINER_ROSE_1 ===
-Name: ROSE
-Class: Aroma Lady
-Pic: Aroma Lady
-Gender: Female
-Music: Female
-Double Battle: No
-AI: Check Bad Move
-
-Roselia
-Level: 14
-IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
-
-Shroomish
-Level: 14
-IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
-
-Roselia
-Level: 14
-IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
-
-=== TRAINER_FELIX ===
-Name: FELIX
-Class: Cooltrainer
-Pic: Cooltrainer M
-Gender: Male
-Music: Cool
-Items: Full Restore
-Double Battle: No
-AI: Basic Trainer
-
-Medicham
-Level: 43
-IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
-- Psychic
-
-Claydol
-Level: 43
-IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
-- Skill Swap
+Gigalith @ Smooth Rock
+Ability: Sand Stream
+Level: 100
+EVs: 63 HP / 63 Atk / 2 SpD
+Tags: Lead
+Adamant Nature
+- Free Climb
 - Earthquake
+- Stone Edge
+- Body Press
 
-=== TRAINER_VIOLET ===
-Name: VIOLET
-Class: Aroma Lady
+Druddigon @ Life Orb
+Ability: Sheer Force
+Level: 100
+EVs: 63 HP / 63 Atk / 2 SpD
+Adamant Nature
+- Iron Head
+- Crunch
+- Dragon Rush
+- Free Climb
+
+Gliscor @ Bright Powder
+Ability: Sand Veil
+Level: 100
+EVs: 2 HP / 63 Atk / 63 Spe
+Jolly Nature
+- Free Climb
+- Earthquake
+- Crabhammer
+- Dual Wingbeat
+
+Bouffalant @ Safety Goggles
+Ability: Sap Sipper
+Level: 100
+EVs: 2 HP / 63 Atk / 63 Def
+Adamant Nature
+- Free Climb
+- Head Charge
+- Megahorn
+- Stomping Tantrum
+
+Aurorus @ Throat Spray
+Ability: Refrigerate
+Level: 100
+EVs: 63 HP / 63 SpA / 2 Spe
+Tags: Special Pick
+Modest Nature
+- Hyper Voice
+- Freeze-Dry
+- Weather Ball
+- Earth Power
+
+Tyrantrum @ Choice Band
+Ability: Rock Head
+Level: 100
+EVs: 63 HP / 63 Atk / 2 Spe
+Tags: Special Pick
+Tera Type: Rock
+Adamant Nature
+- Head Smash
+
+Tyrantrum @ Choice Scarf
+Ability: Rock Head
+Level: 100
+EVs: 2 HP / 63 Atk / 63 Spe
+Tags: Special Pick
+Tera Type: Rock
+Jolly Nature
+- Head Smash
+
+Aurorus @ Choice Specs
+Ability: Refrigerate
+Level: 100
+EVs: 63 HP / 63 SpA / 2 Spe
+Tags: Special Pick
+Modest Nature
+- Hyper Beam
+- Dark Pulse
+- Freeze-Dry
+
+Ferrothorn @ Rocky Helmet
+Ability: Iron Barbs
+Level: 100
+EVs: 63 HP / 63 Atk / 2 Def
+Relaxed Nature
+- Free Climb
+- Power Whip
+- Leech Seed
+- Gyro Ball
+
+=== TRAINER_LEADER_KORRINA ===
+Name: Korrina
+Class: Leader
+Pic: Battle Girl
+Gender: Female
+Music: Elite Four
+Double Battle: No
+AI: Good Trainer / Prediction / Assumptions / Ace Pokemon
+Pool Rules: Basic
+Pool Pick Functions: Default
+Party Size: 6
+
+Hawlucha @ Expert Belt
+Ability: Mold Breaker
+Level: 100
+EVs: 63 Atk / 63 Spe / 2 HP
+Tags: Lead
+Adamant Nature
+- Agility
+- Clothesline
+- Sky Attack
+- U-Turn
+
+Kommo-o @ Throat Spray
+Ability: Overcoat
+Level: 100
+EVs: 63 HP / 63 Atk / 2 SpD
+Adamant Nature
+- Clangorous Soul
+- Clothesline
+- Drain Punch
+- Substitute
+
+Infernape @ Fire Gem
+Ability: Blaze
+Level: 100
+EVs: 63 Atk / 63 Spe / 2 HP
+Jolly Nature
+- Flame Charge
+- Clothesline
+- Knock Off
+- U-Turn
+
+Heracross @ Coba Berry
+Ability: Swarm
+Level: 100
+EVs: 63 HP / 63 Atk / 2 Def
+Adamant Nature
+- Trailblaze
+- Clothesline
+- Megahorn
+- Bulk Up
+
+Scrafty @ Eject Pack
+Ability: Intimidate
+Level: 100
+EVs: 63 HP / 63 Atk / 2 SpD
+Adamant Nature
+- Dragon Dance
+- Clothesline
+- Drain Punch
+- Sucker Punch
+
+Sneasler @ Fighting Gem
+Ability: Unburden
+Level: 100
+EVs: 63 Atk / 63 Spe / 2 SpD
+Jolly Nature
+- Agility
+- Dire Claw
+- Clothesline
+- U-Turn
+
+Hitmontop @ Black Belt
+Ability: Technician
+Level: 100
+EVs: 63 Atk / 63 Spe / 2 Def
+Adamant Nature
+- Fake Out
+- Triple Axel
+- Thief
+- Close Combat
+
+Bewear @ Sitrus Berry
+Ability: Fluffy
+Level: 100
+EVs: 63 HP / 63 Atk / 2 Def
+Adamant Nature
+- Drain Punch
+- Bulk Up
+- Knock Off
+- Iron Head
+
+Lucario @ Lucarionite-Z
+Ability: Inner Focus
+Level: 100
+EVs: 63 SpA / 63 Spe / 2 HP
+Tags: Ace
+Modest Nature
+- Nasty Plot
+- Aura Sphere
+- Flash Cannon
+- Dark Pulse
+
+=== TRAINER_LEADER_RAMOS ===
+Name: Korrina
+Class: Leader
+Pic: Battle Girl
+Gender: Female
+Music: Elite Four
+Double Battle: No
+AI: Good Trainer / Prediction / Assumptions / Ace Pokemon
+Pool Rules: Basic
+Pool Pick Functions: Default
+Party Size: 6
+
+Jumpluff @ Damp Rock
+Ability: Infiltrator
+Level: 100
+EVs: 63 Spe / 63 HP / 2 Atk
+Tags: Lead
+Jolly Nature
+- Rain Dance
+- U-Turn
+- Seed Bomb
+- Sleep Powder
+
+Hydrapple @ White Herb
+Ability: Regenerator
+Level: 100
+EVs: 63 Def / 63 SpA / 2 HP
+Modest Nature
+- Draco Meteor
+- Leaf Storm
+- Blooming Shield
+- Body Press
+
+Ludicolo @ Life Orb
+Ability: Swift Swim
+Level: 100
+EVs: 63 SpA / 63 Spe / 2 SpD
+Modest Nature
+- Ice Beam
+- Weather Ball
+- Giga Drain
+- Focus Blast
+
+Ludicolo @ Coba Berry
+Ability: Rain Dish
+Level: 100
+EVs: 63 SpA / 63 Spe / 2 SpD
+Timid Nature
+- Rain Dance
+- Blooming Shield
+- Giga Drain
+- Hydro Pump
+
+Gogoat @ Terrain Extender
+Ability: Grass Pelt
+Level: 100
+EVs: 63 Atk / 63 SpD / 2 HP
+Adamant Nature
+- Grassy Terrain
+- Grassy Glide
+- Horn Leech
+- Blooming Shield
+
+Decidueye @ Choice Scarf
+Ability: Overgrow
+Level: 100
+EVs: 63 Spe / 63 SpA / 2 HP
+Mild Nature
+- Hurricane
+- Shadow Ball
+- Leaf Storm
+- U-Turn
+
+Chesnaught @ Leftovers
+Ability: Bulletproof
+Level: 100
+EVs: 63 HP / 63 Def / 2 Atk
+Impish Nature
+- Blooming Shield
+- Body Press
+- Spiky Shield
+- Wood Hammer
+
+Rotom-Mow @ Choice Specs
+Ability: Levitate
+Level: 100
+EVs: 63 SpA / 63 Spe / 2 HP
+Timid Nature
+- Thunder
+- Leaf Storm
+- Volt Switch
+- Trick
+
+Victreebel @ Victreebelite
+Ability: Gluttony
+Level: 100
+EVs: 63 HP / 63 SpA / 2 Spe
+Tags: Ace
+Modest Nature
+- Sludge Wave
+- Leaf Storm
+- Blooming Shield
+- Giga Drain
+
+=== TRAINER_LEADER_CLEMONT ===
+Name: Clement
+Class: Leader
+Pic: Bug Maniac
+Gender: Male
+Music: Elite Four
+Double Battle: Yes
+AI: Good Trainer / Prediction / Assumptions / Ace Pokemon
+Pool Rules: Basic
+Pool Pick Functions: Default
+Party Size: 6
+
+Emolga @ Focus Sash
+Ability: Static
+Level: 100
+EVs: 63 Spe / 63 SpA / 2 HP
+Tags: Lead
+Timid Nature
+- Tailwind
+- Inverse Current
+- Volt Switch
+- Helping Hand
+
+Iron Hands @ Assault Vest
+Ability: Quark Drive
+Level: 100
+EVs: 63 Atk / 63 SpD / 2 Def
+Tags: Lead
+Adamant Nature
+- Supercell Slam
+- Close Combat
+- Ice Punch
+- Fake Out
+
+Lanturn @ Expert Belt
+Ability: Water Absorb
+Level: 100
+EVs: 63 Def / 63 SpA / 2 HP
+Modest Nature
+- Inverse Current
+- Scald
+- Ice Beam
+- Protect
+
+Rotom-Heat @ White Herb
+Ability: Levitate
+Level: 100
+EVs: 63 Spe / 63 SpA / 2 HP
+Timid Nature
+- Volt Switch
+- Discharge
+- Overheat
+- Inverse Current
+
+Raging Bolt @ Booster Energy
+Ability: Quark Drive
+Level: 100
+EVs: 63 SpA / 63 HP / 2 Def
+Modest Nature
+- Draco Meteor
+- Thunderclap
+- Volt Switch
+- Protect
+
+Electrode-Hisui @ Life Orb
+Ability: Aftermath
+Level: 100
+EVs: 63 Spe / 63 SpA / 2 HP
+Modest Nature
+- Leaf Storm
+- Discharge
+- Inverse Current
+- Reflect
+
+Heliolisk @ Throat Spray
+Ability: Dry Skin
+Level: 100
+EVs: 63 SpA / 63 Spe / 2 HP
+Timid Nature
+- Thunderbolt
+- Hyper Voice
+- Grass Knot
+- Protect
+
+Magneton @ Eviolite
+Ability: Analytic
+Level: 100
+EVs: 63 HP / 63 SpA / 2Def
+Modest Nature
+- Inverse Current
+- Flash Cannon
+- Discharge
+- Protect
+
+Eelektross @ Eelektrossite
+Ability: Eelevate
+Level: 100
+EVs: 63 Atk / 63 HP / 2 Spe
+Tags: Ace
+Adamant Nature
+- Close Combat
+- Knock Off
+- Supercell Slam
+- Liquidation
+
+=== TRAINER_LEADER_VALERIE ===
+Name: Valerie
+Class: Leader
 Pic: Aroma Lady
 Gender: Female
-Music: Female
-Double Battle: No
-AI: Check Bad Move
+Music: Elite Four
+Double Battle: Yes
+AI: Good Trainer / Prediction / Assumptions / Ace Pokemon
+Pool Rules: Basic
+Pool Pick Functions: Default
+Party Size: 6
 
-Roselia
-Level: 26
-IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+Butterfree @ Leftovers
+Ability: Compound Eyes
+Level: 100
+EVs: 63 Spe / 63 SpD / 2 HP
+Tags: Lead
+Bold Nature
+- Tailwind
+- Sleep Powder
+- Stun Spore
+- Double Team
 
-Gloom
-Level: 26
-IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+Mawile @ Mawilite
+Ability: Intimidate
+Level: 100
+EVs: 63 HP / 63 Atk / 2 Def
+Tags: Lead
+Adamant Nature
+- Swords Dance
+- Play Rough
+- Knock Off
+- Sucker Punch
 
-=== TRAINER_ROSE_2 ===
-Name: ROSE
-Class: Aroma Lady
-Pic: Aroma Lady
+Flutter Mane @ Choice Specs
+Ability: Protosynthesis
+Level: 100
+EVs: 63 Spe / 63 SpA / 2 HP
+Tera Type: Fairy
+Modest Nature
+- Moonblast
+- Shadow Ball
+- Tera Blast
+- Psyshock
+
+Tinkaton @ Life Orb
+Ability: Mold Breaker
+Level: 100
+EVs: 63 Spe / 63 Atk / 2 HP
+Jolly Nature
+- Gigaton Hammer
+- Play Rough
+- Swords Dance
+- Knock Off
+
+Diancie @ Hard Stone
+Ability: Clear Body
+Level: 100
+EVs: 63 Spe / 63 SpA / 2 HP
+Tera Type: Steel
+Modest Nature
+- Diamond Storm
+- Tera Blast
+- Earth Power
+- Moonblast
+
+Clefable @ Rocky Helmet
+Ability: Magic Guard
+Level: 100
+EVs: 63 HP / 63 SpA / 2 Spe
+Calm Nature
+- Moonblast
+- Calm Mind
+- Moonlight
+- Thunder Wave
+
+Ribombee @ Silver Powder
+Ability: Compound Eyes
+Level: 100
+EVs: 63 Spe / 63 SpA / 2 HP
+Modest Nature
+- Dazzling Gleam
+- Silver Wind
+- Nasty Plot
+- Pollen Puff
+
+Sylveon @ Choice Specs
+Ability: Pixilate
+Level: 100
+EVs: 63 HP / 63 SpA / 2 Spe
+Tags: Ace
+Tera Type: Psychic
+Modest Nature
+- Hyper Voice
+- Tera Blast
+- Wish
+- Yawn
+
+Purugly @ Silk Scarf
+Ability: Defiant
+Level: 100
+EVs: 63 Atk / 63 Spe / 2 HP
+Tags: Ace
+Jolly Nature
+- Fae Flight
+- Last Resort
+
+=== TRAINER_LEADER_OLYMPIA ===
+Name: Olympia
+Class: Leader
+Pic: Beauty
 Gender: Female
-Music: Female
-Double Battle: No
-AI: Check Bad Move
+Music: Elite Four
+Double Battle: Yes
+AI: Good Trainer / Prediction / Assumptions / Ace Pokemon
+Pool Rules: Basic
+Pool Pick Functions: Default
+Party Size: 6
 
-Shroomish
-Level: 26
-IVs: 1 HP / 1 Atk / 1 Def / 1 SpA / 1 SpD / 1 Spe
+Claydol @ Passho Berry
+Ability: Levitate
+Level: 100
+EVs: 63 Def / 63 HP / 2 Atk
+Tags: Lead
+Impish Nature
+- Trick Room
+- Psychic Terrain
+- Earthquake
+- Meteoric Wrath
 
-Roselia
-Level: 26
-IVs: 1 HP / 1 Atk / 1 Def / 1 SpA / 1 SpD / 1 Spe
+Sigilyph @ Light Clay
+Ability: Magic Guard
+Level: 100
+EVs: 63 Spe / 63 HP / 2 SpD
+Tags: Lead
+Timid Nature
+- Meteoric Wrath
+- Light Screen
+- Reflect
+- Air Slash
+
+Slowking @ Leftovers
+Ability: Regenerator
+Level: 100
+EVs: 63HP / 16 Def / 49 SpA
+Bold Nature
+- Psychic
+- Scald
+- Calm Mind
+- Protect
+
+Indeedee-M @ Choice Specs
+Ability: Psychic Surge
+Level: 100
+EVs: 63 SpA / 63HP / 2 Def
+Tags: Support
+Modest Nature
+- Expanding Force
+- Encore
+- Trick
+- Healing Wish
+
+Hatterene @ Psychic Seed
+Ability: Magic Bounce
+Level: 100
+EVs: 63 HP / 63SpA / 2 SpD
+Quiet Nature
+- Meteoric Wrath
+- Expanding Force
+- Dazzling Gleam
+- Protect
+
+Gothitelle @ Colbur Berry
+Ability: Shadow Tag
+Level: 100
+EVs: 63 HP / 63 Def / 2 SpD
+Bold Nature
+- Meteoric Wrath
+- Protect
+- Taunt
+- Heal Pulse
+
+Starmie @ Life Orb
+Ability: Natural Cure
+Level: 100
+EVs: 63 SpA / 63 Spe / 2 HP
+Timid Nature
+- Light Screen
+- Hydro Pump
+- Thunderbolt
+- Ice Beam
+
+Beheeyem @ Twisted Spoon
+Ability: Analytic
+Level: 100
+EVs: 63 HP / 63 SpA / 2Def
+Modest Nature
+- Reflect
+- Meteoric Wrath
+- Expanding Force
+- Trick Room
+
+Meowstic (F) @ Meowsticite
+Ability: Trace
+Level: 100
+EVs: 63 Spe / 63 SpA / 2 HP
+Tags: Ace
+Timid Nature
+- Fake Out
+- Expanding Force
+- Protect
+- Thunderbolt
+
+=== TRAINER_LEADER_WULFRIC ===
+Name: Wulfric
+Class: Leader
+Pic: Gentleman
+Gender: Female
+Music: Elite Four
+Double Battle: Yes
+AI: Good Trainer / Prediction / Assumptions / Ace Pokemon
+Pool Rules: Basic
+Pool Pick Functions: Default
+Party Size: 6
+
+Abomasnow @ Leftovers
+Ability: Snow Warning
+Level: 100
+EVs: 63 SpA / 63 Spe / 2 HP
+Tags: Lead
+Timid Nature
+- Wood Hammer
+- Blizzard
+- Earthquake
+- Ice Shard
+
+Sandslash-Alola @ Never Melt Ice
+Ability: Slush Rush
+Level: 100
+EVs: 63 Spe / 63 Atk / 2 HP
+Tags: Lead
+Jolly Nature
+- Frost Barrier
+- Hone Claws
+- Knock Off
+- Stealth Rock
+
+Walrein @ Leftovers
+Ability: Thick Fat
+Level: 100
+EVs: 63 HP / 63 SpA / 2 Atk
+Relaxed Nature
+- Surf
+- Ice Beam
+- Body Slam
+- Yawn
+
+Feraligatr @ Feraligite
+Ability: Sheer Force
+Level: 100
+EVs: 63 Atk / 63 Spe / 2 HP
+Adamant Nature
+- Crunch
+- Waterfall
+- Body Slam
+- Breaking Swipe
+
+Dondozo @ Leftovers
+Ability: Oblivious
+Level: 100
+EVs: 63 HP / 63 Atk / 2 HP
+Adamant Nature
+- Rest
+- Curse
+- Waterfall
+- Sleep Talk
+
+Iron Bundle @ Booster Energy
+Ability: Quark Drive
+Level: 100
+EVs: 63 SpA / 63 Spe / 2 HP
+Tera Type: Ice
+Modest Nature
+- Freeze-Dry
+- Hydro Pump
+- Flip Turn
+- Tera Blast
+
+Arctovish @ Leftovers
+Ability: Ice Body
+Level: 100
+EVs: 63 HP / 63 Atk / 2 Spe
+Adamant Nature
+- Fishious Rend
+- Iron Defense
+- Frost Barrier
+- Psychic Fangs
+
+Crabominable @ Black Belt
+Ability: Iron Fist
+Level: 100
+EVs: 63 Atk / 63 Spe / 2 HP
+Tags: Ace
+Adamant Nature
+- Bulk Up
+- Ice Hammer
+- Drain Punch
+- Surging Strikes
+
+Avalugg-Hisui @ Leftovers
+Ability: Sturdy
+Level: 100
+EVs: 63 HP / 63 Atk / 2 Def
+Tags: Ace
+Adamant Nature
+- Frost Barrier
+- Stone Edge
+- Mountain Gale
+- Body Press
 
 === TRAINER_ROSE_3 ===
 Name: ROSE
