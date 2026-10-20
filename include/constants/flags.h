@@ -106,14 +106,14 @@
 #define FLAG_UNOVA_LEADER_MARLON        0x49
 
 /* KALOS LEADERS */
-#define FLAG_UNUSED_0x04A    0x4A // Unused Flag
-#define FLAG_UNUSED_0x04B    0x4B // Unused Flag
-#define FLAG_UNUSED_0x04C    0x4C // Unused Flag
-#define FLAG_UNUSED_0x04D    0x4D // Unused Flag
-#define FLAG_UNUSED_0x04E    0x4E // Unused Flag
-#define FLAG_UNUSED_0x04F    0x4F // Unused Flag
-#define FLAG_UNUSED_0x493    0x493 // Unused Flag
-#define FLAG_UNUSED_0x494    0x494 // Unused Flag
+#define FLAG_KALOS_LEADER_VIOLA               0x4A
+#define FLAG_KALOS_LEADER_GRANT               0x4B
+#define FLAG_KALOS_LEADER_KORRINA             0x4C
+#define FLAG_KALOS_LEADER_RAMOS               0x4D
+#define FLAG_KALOS_LEADER_CLEMONT             0x4E
+#define FLAG_KALOS_LEADER_VALERIE             0x4F
+#define FLAG_KALOS_LEADER_OLYMPIA             0x493
+#define FLAG_KALOS_LEADER_WULFRIC             0x494
 
 /* ALOLA LEADERS */
 #define FLAG_UNUSED_0x495    0x495 // Unused Flag
@@ -169,7 +169,7 @@
 #define FLAG_COMPLETED_ROSTER_HOENN     0x4BF // Unused Flag
 #define FLAG_COMPLETED_ROSTER_SINNOH    0x4C0 // Unused Flag
 #define FLAG_COMPLETED_ROSTER_UNOVA     0x4C1 // Unused Flag
-#define FLAG_UNUSED_0x4C2    0x4C2 // Unused Flag
+#define FLAG_COMPLETED_ROSTER_KALOS     0x4C2 // Unused Flag
 #define FLAG_UNUSED_0x4C3    0x4C3 // Unused Flag
 #define FLAG_UNUSED_0x4C4    0x4C4 // Unused Flag
 #define FLAG_UNUSED_0x4C5    0x4C5 // Unused Flag
@@ -181,7 +181,7 @@
 #define FLAG_COMPLETED_HOENN_TOURNAMENT    0x4C9 // Unused Flag
 #define FLAG_COMPLETED_SINNOH_TOURNAMENT   0x4CA // Unused Flag
 #define FLAG_COMPLETED_UNOVA_TOURNAMENT    0x4CB // Unused Flag
-#define FLAG_UNUSED_0x4CC    0x4CC // Unused Flag
+#define FLAG_COMPLETED_KALOS_TOURNAMENT    0x4CC // Unused Flag
 #define FLAG_UNUSED_0x4CD    0x4CD // Unused Flag
 #define FLAG_UNUSED_0x4CE    0x4CE // Unused Flag
 #define FLAG_UNUSED_0x4CF    0x4CF // Unused Flag

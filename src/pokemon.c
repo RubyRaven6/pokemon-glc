@@ -6421,6 +6421,7 @@ void GivePlayerUnlockedPokemon(void)
         FLAG_COMPLETED_ROSTER_HOENN,
         FLAG_COMPLETED_ROSTER_SINNOH,
         FLAG_COMPLETED_ROSTER_UNOVA,
+        FLAG_COMPLETED_ROSTER_KALOS,
     };
 
     gen = 1;

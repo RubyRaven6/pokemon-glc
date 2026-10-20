@@ -1,0 +1,135 @@
+script EventScript_PWTBattleViola{
+    msgbox("I'm Brock!\nMy Pokémon are rock hard!")
+    trainerbattle_no_intro(TRAINER_LEADER_VIOLA, "Seems like I've gone soft…")
+    call(EventScript_PWTBattleViola_Money)
+    return
+}
+
+script(local) EventScript_PWTBattleViola_Money {
+    if(var(VAR_GYM_LEADER_3) == TRAINER_LEADER_VIOLA){
+        setflag(FLAG_KALOS_LEADER_VIOLA)
+        addmoney(500)
+        if(!flag(FLAG_COMPLETED_KALOS_TOURNAMENT)){setflag(FLAG_COMPLETED_KALOS_TOURNAMENT)}
+    } else {
+        addmoney(250)
+    }
+}
+
+script EventScript_PWTBattleGrant{
+    msgbox("Hi, I'm Misty!\nIt's time to make a splash!")
+    trainerbattle_no_intro(TRAINER_LEADER_GRANT, "I can't believe I wiped out!")
+    call(EventScript_PWTBattleGrant_Money)
+    return
+}
+
+script(local) EventScript_PWTBattleGrant_Money {
+    if(var(VAR_GYM_LEADER_3) == TRAINER_LEADER_GRANT){
+        setflag(FLAG_KALOS_LEADER_GRANT)
+        addmoney(500)
+        if(!flag(FLAG_COMPLETED_KALOS_TOURNAMENT)){setflag(FLAG_COMPLETED_KALOS_TOURNAMENT)}
+    } else {
+        addmoney(250)
+    }
+}
+
+script EventScript_PWTBattleKorrina{
+    msgbox("I'm Lt. Surge, kid!\nYou're boutta be shocked!")
+    trainerbattle_no_intro(TRAINER_LEADER_KORRINA, "Ugh! I got grounded!")
+    call(EventScript_PWTBattleKorrina_Money)
+    return
+}
+
+script(local) EventScript_PWTBattleKorrina_Money {
+    if(var(VAR_GYM_LEADER_3) == TRAINER_LEADER_KORRINA){
+        setflag(FLAG_KALOS_LEADER_KORRINA)
+        addmoney(500)
+        if(!flag(FLAG_COMPLETED_KALOS_TOURNAMENT)){setflag(FLAG_COMPLETED_KALOS_TOURNAMENT)}
+    } else {
+        addmoney(250)
+    }
+}
+
+script EventScript_PWTBattleRamos{
+    msgbox("Hello, my name is Erika.\nI look forward to this noble battle!")
+    trainerbattle_no_intro(TRAINER_LEADER_RAMOS, "I commend your valor.")
+    call(EventScript_PWTBattleRamos_Money)
+    return
+}
+
+script(local) EventScript_PWTBattleRamos_Money {
+    if(var(VAR_GYM_LEADER_3) == TRAINER_LEADER_RAMOS){
+        setflag(FLAG_KALOS_LEADER_RAMOS)
+        addmoney(500)
+        if(!flag(FLAG_COMPLETED_KALOS_TOURNAMENT)){setflag(FLAG_COMPLETED_KALOS_TOURNAMENT)}
+    } else {
+        addmoney(250)
+    }
+}
+
+script EventScript_PWTBattleClemont{
+    msgbox("We're the shinobi duo of Kanto.\nYou'll never see us coming!")
+    trainerbattle_no_intro(TRAINER_LEADER_CLEMONT, "It can't end here for us!")
+    call(EventScript_PWTBattleClemont_Money)
+    return
+}
+
+script(local) EventScript_PWTBattleClemont_Money {
+    if(var(VAR_GYM_LEADER_3) == TRAINER_LEADER_CLEMONT){
+        setflag(FLAG_KALOS_LEADER_CLEMONT)
+        addmoney(500)
+        if(!flag(FLAG_COMPLETED_KALOS_TOURNAMENT)){setflag(FLAG_COMPLETED_KALOS_TOURNAMENT)}
+    } else {
+        addmoney(250)
+    }
+}
+
+script EventScript_PWTBattleValerie{
+    msgbox("I am Sabrina.\pYou stand before the strongest esper\nin all of Kanto!")
+    trainerbattle_no_intro(TRAINER_LEADER_VALERIE, "No! How did you psych me out?!")
+    call(EventScript_PWTBattleValerie_Money)
+    return
+}
+
+script(local) EventScript_PWTBattleValerie_Money {
+    if(var(VAR_GYM_LEADER_3) == TRAINER_LEADER_VALERIE){
+        setflag(FLAG_KALOS_LEADER_VALERIE)
+        addmoney(500)
+        if(!flag(FLAG_COMPLETED_KALOS_TOURNAMENT)){setflag(FLAG_COMPLETED_KALOS_TOURNAMENT)}
+    } else {
+        addmoney(250)
+    }
+}
+
+script EventScript_PWTBattleOlympia{
+    msgbox("HAHAHA! I'm Blaine!\nThe hottest trainer in Kanto!\pYou better have a burn heal!")
+    trainerbattle_no_intro(TRAINER_LEADER_OLYMPIA, "HAHA! I got burnt out!")
+    call(EventScript_PWTBattleOlympia_Money)
+    return
+}
+
+script(local) EventScript_PWTBattleOlympia_Money {
+    if(var(VAR_GYM_LEADER_3) == TRAINER_LEADER_OLYMPIA){
+        setflag(FLAG_KALOS_LEADER_OLYMPIA)
+        addmoney(500)
+        if(!flag(FLAG_COMPLETED_KALOS_TOURNAMENT)){setflag(FLAG_COMPLETED_KALOS_TOURNAMENT)}
+    } else {
+        addmoney(250)
+    }
+}
+
+script EventScript_PWTBattleWulfric{
+    msgbox("It's time for you to sleep with\nthe fishes!")
+    trainerbattle_no_intro(TRAINER_LEADER_WULFRIC, "No! You were supposed to LOSE!")
+    call(EventScript_PWTBattleWulfric_Money)
+    return
+}
+
+script(local) EventScript_PWTBattleWulfric_Money {
+    if(var(VAR_GYM_LEADER_3) == TRAINER_LEADER_WULFRIC){
+        setflag(FLAG_KALOS_LEADER_WULFRIC)
+        addmoney(500)
+        if(!flag(FLAG_COMPLETED_KALOS_TOURNAMENT)){setflag(FLAG_COMPLETED_KALOS_TOURNAMENT)}
+    } else {
+        addmoney(250)
+    }
+}

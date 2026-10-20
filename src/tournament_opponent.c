@@ -228,6 +228,46 @@ const struct TournamentOpponent gTournamentOpponents[OPPONENT_COUNT] =
         .graphicsId = OPPONENT_GFX(OBJ_EVENT_GFX_BRENDAN_NORMAL),
         .script = EventScript_PWTBattleMarlon,
     },
+    [OPPONENT_VIOLA] =
+    {
+        .graphicsId = OPPONENT_GFX(OBJ_EVENT_GFX_BRENDAN_NORMAL),
+        .script = EventScript_PWTBattleViola,
+    },
+    [OPPONENT_GRANT] =
+    {
+        .graphicsId = OPPONENT_GFX(OBJ_EVENT_GFX_BRENDAN_NORMAL),
+        .script = EventScript_PWTBattleGrant,
+    },
+    [OPPONENT_KORRINA] =
+    {
+        .graphicsId = OPPONENT_GFX(OBJ_EVENT_GFX_BRENDAN_NORMAL),
+        .script = EventScript_PWTBattleKorrina,
+    },
+    [OPPONENT_RAMOS] =
+    {
+        .graphicsId = OPPONENT_GFX(OBJ_EVENT_GFX_BRENDAN_NORMAL),
+        .script = EventScript_PWTBattleRamos,
+    },
+    [OPPONENT_CLEMONT] =
+    {
+        .graphicsId = OPPONENT_GFX(OBJ_EVENT_GFX_BRENDAN_NORMAL),
+        .script = EventScript_PWTBattleClemont,
+    },
+    [OPPONENT_VALERIE] =
+    {
+        .graphicsId = OPPONENT_GFX(OBJ_EVENT_GFX_BRENDAN_NORMAL),
+        .script = EventScript_PWTBattleValerie,
+    },
+    [OPPONENT_OLYMPIA] =
+    {
+        .graphicsId = OPPONENT_GFX(OBJ_EVENT_GFX_BRENDAN_NORMAL),
+        .script = EventScript_PWTBattleOlympia,
+    },
+    [OPPONENT_WULFRIC] =
+    {
+        .graphicsId = OPPONENT_GFX(OBJ_EVENT_GFX_BRENDAN_NORMAL),
+        .script = EventScript_PWTBattleWulfric,
+    },
 };
 
 bool32 IsOpponentADuo(enum OpponentID opponentId)

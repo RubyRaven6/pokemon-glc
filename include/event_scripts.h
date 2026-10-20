@@ -853,4 +853,13 @@ extern const u8 EventScript_PWTBattleCheren[];
 extern const u8 EventScript_PWTBattleRoxie[];
 extern const u8 EventScript_PWTBattleMarlon[];
 
+extern const u8 EventScript_PWTBattleViola[];
+extern const u8 EventScript_PWTBattleGrant[];
+extern const u8 EventScript_PWTBattleKorrina[];
+extern const u8 EventScript_PWTBattleRamos[];
+extern const u8 EventScript_PWTBattleClemont[];
+extern const u8 EventScript_PWTBattleValerie[];
+extern const u8 EventScript_PWTBattleOlympia[];
+extern const u8 EventScript_PWTBattleWulfric[];
+
 #endif // GUARD_EVENT_SCRIPTS_H

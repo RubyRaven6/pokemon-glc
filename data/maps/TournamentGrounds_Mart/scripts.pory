@@ -457,4 +457,12 @@ mart TechniquesMarket{
     ITEM_TM40
     ITEM_TM41
     ITEM_TM42
+    ITEM_TM43
+    ITEM_TM44
+    ITEM_TM45
+    ITEM_TM46
+    ITEM_TM47
+    ITEM_TM48
+    ITEM_TM49
+    ITEM_TM50
 }

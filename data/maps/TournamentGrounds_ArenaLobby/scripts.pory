@@ -126,6 +126,7 @@ script(local) ChooseGenerationScript
     if(flag(FLAG_COMPLETED_JOHTO_TOURNAMENT)){dynmultipush("Hoenn", 3)}
     if(flag(FLAG_COMPLETED_HOENN_TOURNAMENT)){dynmultipush("Sinnoh", 4)}
     if(flag(FLAG_COMPLETED_SINNOH_TOURNAMENT)){dynmultipush("Unova", 5)}
+    if(flag(FLAG_COMPLETED_UNOVA_TOURNAMENT)){dynmultipush("Kalos", 6)}
     dynmultipush("Cancel", 69) //nice
     dynmultistack(0, 0, FALSE, 3, FALSE, 0, DYN_MULTICHOICE_CB_NONE)
 
@@ -145,6 +146,9 @@ script(local) ChooseGenerationScript
     case 5:
         choosegeneration(5)
         bufferstring(STR_VAR_1, "Unova")
+    case 6:
+        choosegeneration(6)
+        bufferstring(STR_VAR_1, "Kalos")
     default:
         goto(DeclinedJoining)
     }

@@ -10,6 +10,7 @@ enum TrainerRoster
     ROSTER_GEN3_GYM_LEADERS,
     ROSTER_GEN4_GYM_LEADERS,
     ROSTER_GEN5_GYM_LEADERS,
+    ROSTER_GEN6_GYM_LEADERS,
 };
 
 void ChooseRandomGymLeader(void);

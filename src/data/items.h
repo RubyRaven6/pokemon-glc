@@ -12421,14 +12421,13 @@ const struct ItemInfo gItemsInfo[] =
         .shopCriteriaFunc = ShopCriteriaByUnlockedFlag,
     },
 
-    [ITEM_TM_SECRET_POWER] =
+    [ITEM_TM_GIPHANT_CAPTURE] =
     {
         .name = ITEM_NAME("TM43"),
         .price = 0,
         .description = COMPOUND_STRING(
-            "Adds an effect to\n"
-            "attack depending\n"
-            "on the location."),
+            "Gym Leader\nViola's"
+            "signature move."),
         .importance = I_REUSABLE_TMS,
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
@@ -12436,14 +12435,13 @@ const struct ItemInfo gItemsInfo[] =
         .shopCriteriaFunc = ShopCriteriaByUnlockedFlag,
     },
 
-    [ITEM_TM_REST] =
+    [ITEM_TM_FREE_CLIMB] =
     {
         .name = ITEM_NAME("TM44"),
         .price = 0,
         .description = COMPOUND_STRING(
-            "The user sleeps for\n"
-            "2 turns to restore\n"
-            "health and status."),
+            "Gym Leader\nGrant's"
+            "signature move."),
         .importance = I_REUSABLE_TMS,
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
@@ -12451,14 +12449,13 @@ const struct ItemInfo gItemsInfo[] =
         .shopCriteriaFunc = ShopCriteriaByUnlockedFlag,
     },
 
-    [ITEM_TM_ATTRACT] =
+    [ITEM_TM_CLOTHESLINE] =
     {
         .name = ITEM_NAME("TM45"),
         .price = 0,
         .description = COMPOUND_STRING(
-            "Makes it tough to\n"
-            "attack a foe of the\n"
-            "opposite gender."),
+            "Gym Leader\nKorrina's"
+            "signature move."),
         .importance = I_REUSABLE_TMS,
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
@@ -12466,14 +12463,13 @@ const struct ItemInfo gItemsInfo[] =
         .shopCriteriaFunc = ShopCriteriaByUnlockedFlag,
     },
 
-    [ITEM_TM_THIEF] =
+    [ITEM_TM_BLOOMING_SHIELD] =
     {
         .name = ITEM_NAME("TM46"),
         .price = 0,
         .description = COMPOUND_STRING(
-            "While attacking,\n"
-            "it may steal the\n"
-            "foe's held item."),
+            "Gym Leader\nRamos'"
+            "signature move."),
         .importance = I_REUSABLE_TMS,
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
@@ -12481,14 +12477,13 @@ const struct ItemInfo gItemsInfo[] =
         .shopCriteriaFunc = ShopCriteriaByUnlockedFlag,
     },
 
-    [ITEM_TM_STEEL_WING] =
+    [ITEM_TM_INVERSE_CURRENT] =
     {
         .name = ITEM_NAME("TM47"),
         .price = 0,
         .description = COMPOUND_STRING(
-            "Spreads hard-\n"
-            "edged wings and\n"
-            "slams into the foe."),
+            "Gym Leader\nClement's"
+            "signature move."),
         .importance = I_REUSABLE_TMS,
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
@@ -12496,14 +12491,13 @@ const struct ItemInfo gItemsInfo[] =
         .shopCriteriaFunc = ShopCriteriaByUnlockedFlag,
     },
 
-    [ITEM_TM_SKILL_SWAP] =
+    [ITEM_TM_FAE_FLIGHT] =
     {
         .name = ITEM_NAME("TM48"),
         .price = 0,
         .description = COMPOUND_STRING(
-            "Switches abilities\n"
-            "with the foe on the\n"
-            "turn this is used."),
+            "Gym Leader\nValerie's"
+            "signature move."),
         .importance = I_REUSABLE_TMS,
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
@@ -12511,14 +12505,13 @@ const struct ItemInfo gItemsInfo[] =
         .shopCriteriaFunc = ShopCriteriaByUnlockedFlag,
     },
 
-    [ITEM_TM_SNATCH] =
+    [ITEM_TM_METEORIC_WRATH] =
     {
         .name = ITEM_NAME("TM49"),
         .price = 0,
         .description = COMPOUND_STRING(
-            "Steals the effects\n"
-            "of the move the foe\n"
-            "is trying to use."),
+            "Gym Leader\nOlympia's"
+            "signature move."),
         .importance = I_REUSABLE_TMS,
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
@@ -12526,14 +12519,13 @@ const struct ItemInfo gItemsInfo[] =
         .shopCriteriaFunc = ShopCriteriaByUnlockedFlag,
     },
 
-    [ITEM_TM_OVERHEAT] =
+    [ITEM_TM_FROST_BARRIER] =
     {
         .name = ITEM_NAME("TM50"),
         .price = 0,
         .description = COMPOUND_STRING(
-            "Enables full-power\n"
-            "attack, but sharply\n"
-            "lowers Sp. Atk."),
+            "Gym Leader\nWulfric's"
+            "signature move."),
         .importance = I_REUSABLE_TMS,
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,

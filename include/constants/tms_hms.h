@@ -44,14 +44,14 @@
     F(PSIDEKICK) \
     F(MOSH_PIT) \
     F(SYNCHROSWIM) \
-    F(SECRET_POWER) \
-    F(REST) \
-    F(ATTRACT) \
-    F(THIEF) \
-    F(STEEL_WING) \
-    F(SKILL_SWAP) \
-    F(SNATCH) \
-    F(OVERHEAT)
+    F(GIPHANT_CAPTURE) \
+    F(FREE_CLIMB) \
+    F(CLOTHESLINE) \
+    F(BLOOMING_SHIELD) \
+    F(INVERSE_CURRENT) \
+    F(FAE_FLIGHT) \
+    F(METEORIC_WRATH) \
+    F(FROST_BARRIER)
 
 #define FOREACH_HM(F) \
     F(NONE) \
