@@ -62,6 +62,7 @@ static void AnimFlyingParticle(struct Sprite *);
 static void AnimFlyingParticle_Step(struct Sprite *);
 static void AnimSlidingHit(struct Sprite *);
 static void AnimWhipHit(struct Sprite *);
+static void AnimWhipHitFlipped(struct Sprite *);
 static void AnimFlickeringPunch(struct Sprite *);
 static void AnimAirCutterSlice(struct Sprite *);
 static void AnimSlice_Step(struct Sprite *);
@@ -1302,6 +1303,15 @@ const struct SpriteTemplate gVineWhipSpriteTemplate =
     .oam = &gOamData_AffineOff_ObjNormal_32x32,
     .anims = sAnims_Whip,
     .callback = AnimWhipHit,
+};
+
+const struct SpriteTemplate gVineWhipSpriteFlippedTemplate =
+{
+    .tileTag = ANIM_TAG_WHIP_HIT,
+    .paletteTag = ANIM_TAG_WHIP_HIT,
+    .oam = &gOamData_AffineOff_ObjNormal_32x32,
+    .anims = sAnims_Whip,
+    .callback = AnimWhipHitFlipped,
 };
 
 static const union AnimCmd sAnim_SlidingHit[] =
@@ -5094,6 +5104,18 @@ static void AnimWhipHit(struct Sprite *sprite)
     CMD_ARGS(unk0, unk1);
 
     if (IsOnPlayerSide(gBattleAnimAttacker))
+        StartSpriteAnim(sprite, 1);
+
+    sprite->callback = AnimWhipHit_WaitEnd;
+    SetAnimSpriteInitialXOffset(sprite, cmd->unk0);
+    sprite->y += cmd->unk1;
+}
+
+static void AnimWhipHitFlipped(struct Sprite *sprite)
+{
+    CMD_ARGS(unk0, unk1);
+
+    if (!IsOnPlayerSide(gBattleAnimAttacker))
         StartSpriteAnim(sprite, 1);
 
     sprite->callback = AnimWhipHit_WaitEnd;

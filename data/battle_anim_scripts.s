@@ -36504,13 +36504,71 @@ gBattleAnimGeneral_MeteoricWrathImpact::
 	end
 
 gBattleAnimMove_GiphantCapture::
+	end @ will probably port over Hedara's anim at some point
+
 gBattleAnimMove_FreeClimb::
+	createvisualtask AnimTask_BlendParticle, 5, ANIM_TAG_HYDRO_PUMP, 0, 13, 13, RGB(31, 15, 0)
+	delay 8
+	playsewithpan SE_M_VITAL_THROW, SOUND_PAN_ATTACKER
+	waitforvisualfinish
+	monbg ANIM_DEF_PARTNER
+	splitbgprio ANIM_TARGET
+	setalpha 12, 8
+	createvisualtask AnimTask_Rollout, 2, 1
+	delay 32
+	invisible ANIM_ATTACKER
+	createsprite gSpriteTemplate_FlipTurnThere, ANIM_TARGET, 2, 0, 0, 42
+	waitforvisualfinish
+	createvisualtask AnimTask_ShakeTargetBasedOnMovePowerOrDmg, 2, 0, 1, 30, 1, 0
+	createsprite gSpriteTemplate_FlipTurnBack, ANIM_ATTACKER, 3, 0, -15, -16, 36
+	create_basic_hitsplat_sprite ANIM_TARGET, 3, x=-15, y=8, relative_to=ANIM_TARGET, animation=1
+	playsewithpan SE_M_VITAL_THROW2, SOUND_PAN_TARGET
+	delay 1
+	playsewithpan SE_M_VITAL_THROW2, SOUND_PAN_TARGET
+	create_basic_hitsplat_sprite ANIM_TARGET, 3, x=-5, y=-12, relative_to=ANIM_TARGET, animation=1
+	delay 1
+	playsewithpan SE_M_VITAL_THROW2, SOUND_PAN_TARGET
+	create_basic_hitsplat_sprite ANIM_TARGET, 3, x=0, y=-32, relative_to=ANIM_TARGET, animation=1
+	delay 1
+	playsewithpan SE_M_VITAL_THROW2, SOUND_PAN_TARGET
+	create_basic_hitsplat_sprite ANIM_TARGET, 3, x=5, y=-52, relative_to=ANIM_TARGET, animation=1
+	createsprite gSlideMonToOffsetSpriteTemplate, ANIM_TARGET, 2, ANIM_TARGET, -25, 16, 1, 4
+	delay 4
+	createvisualtask AnimTask_ShakeMonInPlace, 2, ANIM_TARGET, 0, 3, 6, 1
+	delay 30
+	visible ANIM_ATTACKER
+	createsprite gSlideMonToOriginalPosSpriteTemplate, ANIM_ATTACKER, 2, 0, 0, 6
+	delay 4
+	createsprite gSlideMonToOriginalPosSpriteTemplate, ANIM_ATTACKER, 2, 1, 0, 6
+	clearmonbg ANIM_DEF_PARTNER
+	blendoff
+	end
+
 gBattleAnimMove_Clothesline::
 gBattleAnimMove_BloomingShield::
 gBattleAnimMove_InverseCurrent::
 gBattleAnimMove_FaeFlight::
 gBattleAnimMove_MeteoricWrath::
+	end
+
 gBattleAnimMove_FrostBarrier::
+	fadetobg BG_ICE
+	waitbgfadeout
+	playsewithpan SE_M_ICY_WIND, SOUND_PAN_MIDDLE
+	waitbgfadein
+	call IceCrystalEffectShort
+	simple_palette_blend selector=F_PAL_TARGET, delay=5, initial_blend_y=7, target_blend_y=0, color=RGB(0, 20, 31)
+	delay 20
+	waitplaysewithpan SE_M_REFLECT, SOUND_PAN_ATTACKER 16
+	createvisualtask AnimTask_BlendParticle, 5, ANIM_TAG_PROTECT, 0, 13, 13, RGB(0, 10, 27)
+	createsprite gProtectSpriteTemplate, ANIM_ATTACKER, 2, 24, 0, 90
+	waitforvisualfinish
+	clearmonbg ANIM_DEF_PARTNER
+	blendoff
+	restorebg
+	waitbgfadein
+	end
+
 gBattleAnimMove_DeepAnalysis::
 gBattleAnimMove_TrawlingNet::
 gBattleAnimMove_InfernalDance::
@@ -36533,7 +36591,47 @@ gBattleAnimMove_PolarPlunge::
 gBattleAnimMove_AngstyScream::
 gBattleAnimMove_DraconicPeak::
 gBattleAnimMove_SoapberryShock::
+	end
+
 gBattleAnimMove_PiercingVine::
+	playsewithpan SE_M_SCRATCH, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_TARGET, 2, 0, 6, 1
+	createsprite gVineWhipSpriteTemplate, ANIM_TARGET, 2, 0, 0
+	waitforvisualfinish
+	playsewithpan SE_M_SCRATCH, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_TARGET, 2, 0, 6, 1
+	createsprite gVineWhipSpriteFlippedTemplate, ANIM_TARGET, 2, 0, 0
+	waitforvisualfinish
+	playsewithpan SE_M_SCRATCH, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_TARGET, 2, 0, 6, 1
+	createsprite gVineWhipSpriteTemplate, ANIM_TARGET, 2, 0, 0
+	waitforvisualfinish
+	playsewithpan SE_M_SCRATCH, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_TARGET, 2, 0, 6, 1
+	createsprite gVineWhipSpriteFlippedTemplate, ANIM_TARGET, 2, 0, 0
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG, 4, 0, 16, RGB_GREEN
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, (F_PAL_ATTACKER | F_PAL_TARGET), 0, 0, 16, RGB_BLACK @;Fully to to, Black
+	playsewithpan SE_M_RAZOR_WIND, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_TARGET, 2, 0, 6, 1
+	createsprite gVineWhipSpriteTemplate, ANIM_TARGET, 2, 0, 0
+	delay 16
+	playsewithpan SE_M_RAZOR_WIND, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_TARGET, 2, 0, 6, 1
+	createsprite gVineWhipSpriteFlippedTemplate, ANIM_TARGET, 2, 0, 0
+	delay 16
+	playsewithpan SE_M_RAZOR_WIND, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_TARGET, 2, 0, 6, 1
+	createsprite gVineWhipSpriteTemplate, ANIM_TARGET, 2, 0, 0
+	delay 16
+	playsewithpan SE_M_RAZOR_WIND, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_TARGET, 2, 0, 6, 1
+	createsprite gVineWhipSpriteFlippedTemplate, ANIM_TARGET, 2, 0, 0
+	waitforvisualfinish
+	createvisualtask AnimTask_AllBattlersVisible, 10,
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, (F_PAL_BG | F_PAL_BATTLERS_2), 1, 16, 0, RGB_WHITE @;From White
+	end
+
 gBattleAnimMove_CollabStream::
 gBattleAnimMove_SurfaceBreach::
 gBattleAnimMove_Simplify::
