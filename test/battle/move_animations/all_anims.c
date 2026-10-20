@@ -2833,7 +2833,7 @@ DOUBLE_BATTLE_TEST("Gimmick Form Change animations work")
 DOUBLE_BATTLE_TEST("Individual Custom Move test")
 {
     u32 move;
-    PARAMETRIZE { move = MOVE_ROCK_HEART; }
+    PARAMETRIZE { move = MOVE_PIERCING_VINE; }
 
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET) { Item(ITEM_POWER_HERB); };
@@ -2848,7 +2848,8 @@ DOUBLE_BATTLE_TEST("Individual Custom Move test")
                 MOVE(opponentLeft, MOVE_POUND, target: playerLeft);
             }
             MOVE(playerLeft, move, target: opponentLeft);
-            if (gMovesInfo[move].effect == EFFECT_CASTING_CALL)
+            if (gMovesInfo[move].effect == EFFECT_CASTING_CALL
+                || gMovesInfo[move].effect == EFFECT_HIT_ESCAPE)
             {
                 SEND_OUT(playerLeft, 2);
             }
